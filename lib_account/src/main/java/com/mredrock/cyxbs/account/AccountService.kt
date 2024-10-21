@@ -44,6 +44,7 @@ internal class AccountService : IAccountService {
     private val mUserInfoEncryption = UserInfoEncryption()
 
     private var user: UserInfo? = null
+
     @Volatile
     private var tokenWrapper: TokenWrapper? = null
     private var isTouristMode = false
@@ -63,7 +64,7 @@ internal class AccountService : IAccountService {
 
     private fun bind(tokenWrapper: TokenWrapper) {
         //如果接口出问题，token or refreshToken为空就不要他被覆盖，以免出现未知的问题
-        if(tokenWrapper.isEmptyData()){
+        if (tokenWrapper.isEmptyData()) {
             return
         }
         this.tokenWrapper = tokenWrapper
@@ -77,7 +78,7 @@ internal class AccountService : IAccountService {
         //每次刷新的时候拿token请求一次个人信息，覆盖原来的
         ApiGenerator.getCommonApiService(ApiService::class)
             .getUserInfo("Bearer ${tokenWrapper.token}")
-            .enqueue(object: Callback<ApiWrapper<UserInfo>> {
+            .enqueue(object : Callback<ApiWrapper<UserInfo>> {
                 override fun onResponse(
                     call: Call<ApiWrapper<UserInfo>>,
                     response: Response<ApiWrapper<UserInfo>>
@@ -85,7 +86,10 @@ internal class AccountService : IAccountService {
                     val userInfo = response.body()?.data //如果为空就不更新
                     userInfo?.let {
                         defaultSp.edit {
-                            putString(SP_KEY_USER_INFO, mUserInfoEncryption.encrypt(Gson().toJson(userInfo)))
+                            putString(
+                                SP_KEY_USER_INFO,
+                                mUserInfoEncryption.encrypt(Gson().toJson(userInfo))
+                            )
                         }
                         this@AccountService.user = userInfo
                         // 通知 StuNum 更新
@@ -129,7 +133,7 @@ internal class AccountService : IAccountService {
         override fun refreshInfo() {
             tokenWrapper?.let { bind(it) }
         }
-        
+
         // 发送学号给下游
         fun emitStuNum(stuNum: String?) {
             val value = Value(
@@ -138,14 +142,14 @@ internal class AccountService : IAccountService {
             stuNumState.onNext(value)
             stuNumEvent.onNext(value)
         }
-    
+
         private val stuNumState = BehaviorSubject.create<Value<String>>()
         private val stuNumEvent = PublishSubject.create<Value<String>>()
-    
+
         override fun observeStuNumState(): Observable<Value<String>> {
             return stuNumState.distinctUntilChanged()
         }
-    
+
         override fun observeStuNumEvent(): Observable<Value<String>> {
             return stuNumEvent.distinctUntilChanged()
         }
@@ -174,13 +178,14 @@ internal class AccountService : IAccountService {
     }
 
     inner class UserStateService : IUserStateService {
-        
+
         private val userStateState = BehaviorSubject.create<IUserStateService.UserState>()
         private val userStateEvent = PublishSubject.create<IUserStateService.UserState>()
-    
+
         override fun observeUserStateState(): Observable<IUserStateService.UserState> {
             return userStateState.distinctUntilChanged()
         }
+
         override fun observeUserStateEvent(): Observable<IUserStateService.UserState> {
             return userStateEvent.distinctUntilChanged()
         }
@@ -232,10 +237,12 @@ internal class AccountService : IAccountService {
             }
             notifyAllStateListeners(state)
         }
+
         override fun refresh() {
-            val refreshToken = tokenWrapper?.refreshToken ?: error("refreshToken初始值为空，请尝试重新登录")
+            val refreshToken =
+                tokenWrapper?.refreshToken ?: error("refreshToken初始值为空，请尝试重新登录")
             val response = ApiGenerator.getCommonApiService(ApiService::class)
-                .refresh(RefreshParams(refreshToken),mUserService.getStuNum()).execute()
+                .refresh(RefreshParams(refreshToken), mUserService.getStuNum()).execute()
             val body = response.body()
             if (body != null) {
                 // 根据后端标准返回文档：https://redrock.feishu.cn/wiki/wikcnB9p6U45ZJZmxwTEu8QXvye
@@ -302,7 +309,15 @@ internal class AccountService : IAccountService {
             if (response.code() == 400) {
                 // 22年 后端有 "student info fail" 和 "sign in failed" 两种状态，但我们直接给学号或者密码错误即可
                 // 该异常已与下游约定，不可更改！！！
-                throw IllegalStateException("authentication error")
+                //请求失败目前分两种 40004为次数过多，20004为账号密码错误，返回值需json解析
+                val errorBody = response.errorBody()?.string()
+                if (errorBody != null) {
+                    val errorMsg = Gson().fromJson(errorBody, ErrorMsg::class.java)
+                    when(errorMsg.status){
+                        40004->throw IllegalStateException("tried too many times")
+                        else->throw IllegalStateException("authentication error")
+                    }
+                }
             }
             if (response.body() == null) {
                 throw HttpException(response)
@@ -382,26 +397,26 @@ internal class AccountService : IAccountService {
             }
         }
     }
-    
+
     companion object {
         // 是否是游客模式
         const val SP_IS_TOURIST = "is_tourist"
-    
+
         //UserToken信息存储key
         const val SP_KEY_USER_V2 = "cyxbsmobile_user_v2"
-    
+
         //User信息存储key
         const val SP_KEY_USER_INFO = "cyxbsmobile_user_info"
-    
+
         //token失效时间
         const val SP_KEY_TOKEN_EXPIRED = "user_token_expired_time"
-    
+
         //token 后端规定token2h过期，客户端规定1h55分过期，以防错误，时间戳
         const val SP_TOKEN_TIME = 6900000
-    
+
         //refreshToken失效时间
         const val SP_KEY_REFRESH_TOKEN_EXPIRED = "user_refresh_token_expired_time"
-    
+
         //refreshToken 后端规定45天过期，客户端规定44天过期，以防错误，时间戳
         const val SP_REFRESH_DAY = 3801600000
     }
