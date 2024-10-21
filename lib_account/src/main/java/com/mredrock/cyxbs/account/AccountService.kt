@@ -310,6 +310,9 @@ internal class AccountService : IAccountService {
                         40004 -> throw IllegalStateException("tried too many times")
                         20004 -> throw IllegalStateException("authentication error")
                     }
+                    when (errorMsg.errcode){
+                        10010 -> throw IllegalStateException("Internet error")
+                    }
                 }
                 throw IllegalStateException("authentication error")
             }

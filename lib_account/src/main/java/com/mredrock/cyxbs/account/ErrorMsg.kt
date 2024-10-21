@@ -7,5 +7,7 @@ package com.mredrock.cyxbs.account
  */
 data class ErrorMsg(
     val data: String,
-    val status: Int
+    val status: Int,
+    val errcode: Int,
+    val errmessage: String
 )
