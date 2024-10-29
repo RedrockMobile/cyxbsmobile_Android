@@ -302,6 +302,18 @@ internal class AccountService : IAccountService {
             if (response.code() == 400) {
                 // 22年 后端有 "student info fail" 和 "sign in failed" 两种状态，但我们直接给学号或者密码错误即可
                 // 该异常已与下游约定，不可更改！！！
+                //请求失败目前分两种 40004为次数过多，20004为账号密码错误，返回值需json解析
+                val errorBody = response.errorBody()?.string()
+                val errorMsg:ErrorMsg? = Gson().fromJson(errorBody, ErrorMsg::class.java)
+                if (errorMsg != null) {
+                    when (errorMsg.status) {
+                        40004 -> throw IllegalStateException("tried too many times")
+                        20004 -> throw IllegalStateException("authentication error")
+                    }
+                    when (errorMsg.errcode){
+                        10010 -> throw IllegalStateException("Internet error")
+                    }
+                }
                 throw IllegalStateException("authentication error")
             }
             if (response.body() == null) {

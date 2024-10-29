@@ -60,7 +60,11 @@ class LoginViewModel : BaseViewModel() {
         when (it) {
           is IOException -> toast("网络中断，请检查您的网络状态") // Retrofit 对于网络无法连接将抛出 IOException
           is HttpException -> toast("登录服务暂时不可用")
-          is IllegalStateException -> toast("登录失败：学号或者密码错误,请检查输入")
+          is IllegalStateException -> when (it.message) {
+            "tried too many times"-> toast("登录过于频繁，请15分钟后再试")
+            "authentication error"-> toast("登录失败：学号或者密码错误,请检查输入")
+            "Internet error"-> toast("尚未注册，账号是学号，初始密码是统一验证码后六位")
+          }
           else -> {
             toast(it.message)
           }
