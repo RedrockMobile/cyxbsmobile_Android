@@ -10,7 +10,7 @@ const val SP_BUILDING_HEAD_KEY = "select_building_head_position"
 const val SP_BUILDING_FOOT_KEY = "select_building_foot_position"
 const val SP_ROOM_KEY = "select_room_position"
 
-val BUILDING_NAMES_HEADER = listOf("知行苑", "兴业苑", "四海苑", "宁静苑", "明理苑")
+val BUILDING_NAMES_HEADER = listOf("知行苑", "兴业苑", "四海苑", "宁静苑", "明理苑", "明志苑")
 val BUILDING_NAMES = mapOf(
         "知行苑" to listOf(
                 "1舍(01栋)",
@@ -52,5 +52,8 @@ val BUILDING_NAMES = mapOf(
                 "6舍(29栋)",
                 "7舍(30栋)",
                 "8舍(31栋)",
-                "9舍(39栋)")
+                "9舍(39栋)"),
+        "明志苑" to listOf("1舍(45栋)",
+                "2舍(46栋)",
+                "3舍(47栋)")
 )
