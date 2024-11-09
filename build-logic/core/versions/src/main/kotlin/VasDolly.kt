@@ -20,7 +20,7 @@ import org.gradle.kotlin.dsl.dependencies
 * 其中版本号统一写在 build-logic 的 settings.gradle.kts 中
 * */
 val Project.vasDollyVersion: String
-  get() = libsVersion("vasDolly").requiredVersion
+  get() = libsVersion("vasdolly").requiredVersion
 
 // 内部使用，只给 AppProject 配置，单模块调试时不需要
 fun Project.dependVasDolly() {

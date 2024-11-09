@@ -1,5 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
+// 开启模块的简化依赖方式，例如：module.course.api.course
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     includeBuild(".")
     repositories {
@@ -44,3 +47,5 @@ include(":core:app")
 include(":plugin")
 include(":plugin:cache")
 include(":plugin:checker")
+// 项目模块插件
+include(":manager")

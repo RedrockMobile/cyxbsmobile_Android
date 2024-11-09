@@ -41,6 +41,7 @@ open class BaseApp : Application() {
      *
      * 但都重置系统了，可以不用管这么多
      */
+    @SuppressLint("HardwareIds")
     fun getAndroidID(): String {
       return Settings.Secure.getString(baseApp.contentResolver, Settings.Secure.ANDROID_ID)
     }
@@ -82,12 +83,12 @@ open class BaseApp : Application() {
   }
   
   //隐私策略同意了
-  fun privacyAgree(){
+  fun privacyAgree() {
     mInitialManager.privacyAgree()
   }
   
   //没同意
-  fun privacyDenied(){
+  fun privacyDenied() {
     mInitialManager.privacyDenied()
   }
   

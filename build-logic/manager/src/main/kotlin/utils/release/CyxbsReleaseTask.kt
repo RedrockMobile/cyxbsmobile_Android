@@ -1,6 +1,6 @@
-package task
+package utils.release
 
-import config.Config
+import utils.config.Config
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -9,8 +9,8 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import task.net.ReleaseData
-import task.net.TaskService
+import utils.release.net.ReleaseData
+import utils.release.net.TaskService
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -58,11 +58,11 @@ open class CyxbsReleaseTask : DefaultTask() {
 
     private val netService = retrofit.create(TaskService::class.java)
 
-    var taskApkFile: File? = null // 由外界任务执行者设置
+    var getApkFile: (() -> File?)? = null // 由外界任务执行者设置
 
     @TaskAction
     fun taskAction() {
-        val apk = taskApkFile ?: throw RuntimeException(
+        val apk = getApkFile?.invoke() ?: throw RuntimeException(
             "获取apk失败！请检查是否修改了腾讯打包工具的配置，请全局搜索 ChannelConfigExtension")
         val lastVersion = getUpdateContent()
         //忘记改updateContent和versionName的情况

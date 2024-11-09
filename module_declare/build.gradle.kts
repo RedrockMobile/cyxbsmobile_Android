@@ -15,7 +15,7 @@ dependMaterialDialog()
 useDataBinding()
 useARouter()
 dependencies {
-    implementation(Android.appcompat)
-    implementation(Android.constraintlayout)
-    implementation(Android.material)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.material)
 }
