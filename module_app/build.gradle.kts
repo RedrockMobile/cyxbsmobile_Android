@@ -13,7 +13,9 @@ useAutoService()
 dependencies {
   // module_main 模块去依赖了其他模块，所以这里只依赖 module_main
   implementation(projects.moduleMain)
+
   implementation(libs.bundles.projectBase)
+
   implementation(libs.umeng)
   implementation(libs.umeng.asms)
   implementation(libs.umeng.push)

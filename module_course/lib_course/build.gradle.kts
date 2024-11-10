@@ -1,22 +1,16 @@
 plugins {
-  id("module-manager")
+  id("manager.library")
 }
 
-
-dependLibBase()
-dependLibUtils()
-dependLibConfig()
-
-dependApiCourse()
-
-dependNetwork()
-dependRxjava()
-
 dependencies {
-  implementation(libs.androidx.core.ktx)
-  implementation(libs.androidx.constraintlayout)
-  implementation(libs.androidx.viewpager2)
-  implementation(libs.androidx.fragment.ktx)
-  implementation(libs.androidx.cardview)
-  api(libs.netlayout)
+  implementation(projects.libBase)
+  implementation(projects.libConfig)
+  implementation(projects.libUtils)
+  implementation(projects.moduleCourse.apiCourse)
+
+  implementation(libs.bundles.projectBase)
+  implementation(libs.bundles.views)
+  implementation(libs.bundles.network)
+
+  api(libs.netLayout)
 }

@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.os.*
-import com.google.gson.Gson
+import com.mredrock.cyxbs.lib.utils.extensions.GsonDefault
 import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.extensions.getSp
 import com.mredrock.cyxbs.lib.utils.extensions.toast
@@ -81,7 +81,7 @@ object CyxbsCrashMonitor : Thread.UncaughtExceptionHandler {
         val reason = sp.getString("reason", "")
         if (stackInfo != null && stackInfo != "" && reason != null && reason != "") {
             //因为异常重启上报一次异常，因为重启之前来不及上传异常应用进程已经结束了
-            val e = Gson().fromJson(stackInfo, Throwable::class.java)
+            val e = GsonDefault.fromJson(stackInfo, Throwable::class.java)
             crashReport?.invoke(e)
             LogLocal.log(
                 tag = "CrashMonitor",

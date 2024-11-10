@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    android:background="@color/common_white_background"
+    android:background="@color/config_white_black"
     tools:context=".pages.RollerViewActivity">
 
     <include android:id="@+id/discover_web_tb"
@@ -16,5 +16,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/discover_web_tb"
-        android:background="@color/common_white_background" />
+        android:background="@color/config_white_black" />
 </RelativeLayout>

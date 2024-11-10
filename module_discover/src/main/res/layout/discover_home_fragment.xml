@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
-    tools:background="@color/common_window_background"
+    tools:background="@color/config_window_background"
     tools:ignore="ContentDescription">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/common_window_background">
+        android:background="@color/config_window_background">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_day"
@@ -35,7 +35,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="3dp"
             android:text="@string/discover"
-            android:textColor="@color/common_level_two_font_color"
+            android:textColor="@color/config_level_two_font_color"
             android:textSize="26sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_marginEnd="15dp"
-            android:textColor="@color/common_level_two_font_color"
+            android:textColor="@color/config_level_two_font_color"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/fl_discover_home_jwnews"
             app:layout_constraintEnd_toEndOf="parent"

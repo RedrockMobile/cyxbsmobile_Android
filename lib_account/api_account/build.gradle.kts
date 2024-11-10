@@ -3,6 +3,6 @@ plugins {
 }
 
 dependencies {
-  implementation(libs.rxjava3)
+  implementation(libs.rxjava)
   implementation(libs.arouter)
 }

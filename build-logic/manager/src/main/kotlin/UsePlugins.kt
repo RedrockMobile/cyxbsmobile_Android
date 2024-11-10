@@ -73,3 +73,32 @@ fun Project.useAutoService(isNeedKapt: Boolean = !name.startsWith("api_")) {
   }
 }
 
+/**
+ * 使用 Room，已默认支持与 Kt 协程一起使用
+ * @param rxjava 依赖 room-rxjava
+ * @param paging 依赖 room-paging
+ */
+fun Project.useRoom(
+  rxjava: Boolean = false,
+  paging: Boolean = false,
+) {
+  // ksp 按需引入
+  apply(plugin = "com.google.devtools.ksp")
+  extensions.configure<KspExtension> {
+    arg("room.schemaLocation", "${project.projectDir}/schemas") // room 的架构导出目录
+    // https://developer.android.com/jetpack/androidx/releases/room#compiler-options
+    // 启用 Gradle 增量注释处理器
+    arg("room.incremental", "true")
+  }
+  dependencies {
+    "implementation"(libsEx.`androidx-room`)
+    "implementation"(libsEx.`androidx-room-ktx`)
+    "ksp"(libsEx.`androidx-room-compiler`)
+    if (rxjava) {
+      "implementation"(libsEx.`androidx-room-rxjava`)
+    }
+    if (paging) {
+      "implementation"(libsEx.`androidx-room-paging`)
+    }
+  }
+}

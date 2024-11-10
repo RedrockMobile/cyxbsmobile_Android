@@ -9,11 +9,17 @@ useARouter(false) // lib_utils 模块不包含实现类，不需要处理注解
 dependencies {
   implementation(projects.apiInit)
   implementation(projects.libConfig)
+  implementation(projects.libAccount.apiAccount)
 
   implementation(libs.bundles.projectBase)
+  implementation(libs.bundles.views)
   implementation(libs.bundles.network)
   implementation(libs.glide)
   implementation(libs.rxpermissions)
+  implementation(libs.okhttp.logging.interceptor)
+  implementation(libs.retrofit.converter.gson)
+  implementation(libs.retrofit.converter.kotlinxSerialization)
+  implementation(libs.retrofit.adapter.rxjava)
 
   //阿里云httpdns依赖
   //https://help.aliyun.com/document_detail/434554.html?spm=a2c4g.435252.0.0.1da95979yyEzm3

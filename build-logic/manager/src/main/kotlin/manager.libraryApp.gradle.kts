@@ -20,6 +20,7 @@ val isAllowDebugModule = !project.gradle.startParameter.taskNames.any {
 } && !name.startsWith("api_") // api 模块不开启
 
 if (!isAllowDebugModule) {
+  println("${project.name} 的单模块调试被取消！")
   apply(plugin = "manager.library")
 } else {
   apply(plugin = "manager.application")

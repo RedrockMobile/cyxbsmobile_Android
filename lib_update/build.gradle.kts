@@ -11,5 +11,4 @@ dependencies {
   implementation(libs.bundles.network)
   implementation(libs.dialog)
   implementation(libs.rxpermissions)
-  implementation(libs.retrofit.converter.gson)
 }

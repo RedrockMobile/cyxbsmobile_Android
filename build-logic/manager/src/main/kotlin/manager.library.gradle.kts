@@ -24,6 +24,7 @@ android {
   }
   lint {
     abortOnError = false // 编译遇到错误不退出，可以一次检查多个错误，并且已执行的 task 下次执行会直接走缓存
+    targetSdk = libsEx.versions.`android-targetSdk`.requiredVersion.toInt()
   }
   // 命名规范设置，因为多模块相同资源名在打包时会合并，所以必须强制开启
   resourcePrefix = project.name.substringAfter("_")

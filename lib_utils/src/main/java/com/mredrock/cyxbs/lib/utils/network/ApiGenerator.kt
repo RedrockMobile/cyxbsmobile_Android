@@ -10,12 +10,14 @@ import com.google.gson.reflect.TypeToken
 import com.mredrock.cyxbs.api.account.IAccountService
 import com.mredrock.cyxbs.lib.utils.BuildConfig
 import com.mredrock.cyxbs.lib.utils.UtilsApplicationWrapper
+import com.mredrock.cyxbs.lib.utils.extensions.JsonDefault
 import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import com.mredrock.cyxbs.lib.utils.service.impl
 import com.mredrock.cyxbs.lib.utils.utils.LogLocal
 import com.mredrock.cyxbs.lib.utils.utils.LogUtils
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -23,6 +25,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import java.util.ServiceLoader
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.locks.ReentrantLock
@@ -142,14 +145,6 @@ object ApiGenerator {
         return commonRetrofit.create(clazz)
     }
 
-    fun createSelfRetrofit(
-        tokenNeeded: Boolean,
-        retrofitConfig: ((Retrofit.Builder) -> Retrofit.Builder)? = null,
-        okHttpClientConfig: ((OkHttpClient.Builder) -> OkHttpClient.Builder)? = null
-    ): Retrofit {
-        return createSelfRetrofit(retrofitConfig, okHttpClientConfig, tokenNeeded)
-    }
-
     /**
      * 通过此方法对得到单独的 Retrofit
      * @param retrofitConfig 配置Retrofit.Builder，已配置有
@@ -228,6 +223,8 @@ object ApiGenerator {
             }
         }))
             .addConverterFactory(GsonConverterFactory.create())
+            // https://github.com/square/retrofit/tree/trunk/retrofit-converters/kotlinx-serialization
+            .addConverterFactory(JsonDefault.asConverterFactory("application/json; charset=UTF8".toMediaType()))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.createSynchronous())
     }
 

@@ -1,4 +1,4 @@
-package com.mredrock.cyxbs.common.component
+package com.mredrock.cyxbs.discover.utils
 
 import android.graphics.Rect
 import android.view.View
