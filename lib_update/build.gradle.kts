@@ -1,18 +1,15 @@
 plugins {
-    id("module-manager")
-}
-
-
-dependMaterialDialog()
-dependNetwork()
-dependRxPermissions()
-dependRxjava()
-
-dependLibUtils()
-
-dependencies {
-    implementation(Network.`converter-gson`)
-    implementation(Network.`adapter-rxjava3`)
+  id("manager.library")
 }
 
 useARouter()
+
+dependencies {
+  implementation(projects.libUtils)
+  implementation(projects.libUpdate.apiUpdate)
+
+  implementation(libs.bundles.network)
+  implementation(libs.dialog)
+  implementation(libs.rxpermissions)
+  implementation(libs.retrofit.converter.gson)
+}
