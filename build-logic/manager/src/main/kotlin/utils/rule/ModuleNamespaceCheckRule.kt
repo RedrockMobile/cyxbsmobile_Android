@@ -9,7 +9,7 @@ import java.io.File
  * @author 985892345
  * 2022/12/20 17:42
  */
-object ModuleNamespaceCheckRule : ICheckRule {
+object ModuleNamespaceCheckRule : AndroidProjectChecker.ICheckRule {
   
   // TODO 这里面是用于兼容特殊模块的，请不要私自添加 ！！！
   private val specialModuleNameSpaceMap = mapOf(
@@ -46,7 +46,7 @@ object ModuleNamespaceCheckRule : ICheckRule {
     }
   }
   
-  override fun onConfigBefore(project: Project) {
+  override fun onConfig(project: Project) {
     val namespace = getCorrectNamespace(project)
     val file = project.projectDir
       .resolve("src")
@@ -67,8 +67,5 @@ object ModuleNamespaceCheckRule : ICheckRule {
       """.trimIndent()
       throw RuntimeException("${project.name} 模块包名错误！" + rule)
     }
-  }
-  
-  override fun onConfigAfter(project: Project) {
   }
 }

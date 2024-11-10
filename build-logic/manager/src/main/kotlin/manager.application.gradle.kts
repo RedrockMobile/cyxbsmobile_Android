@@ -1,10 +1,13 @@
 import utils.rule.ModuleNamespaceCheckRule
 import utils.config.Config
+import utils.rule.AndroidProjectChecker
 
 plugins {
   id("com.android.application")
   kotlin("android")
 }
+
+AndroidProjectChecker.config(project) // 项目检查工具
 
 android {
   namespace = ModuleNamespaceCheckRule.getCorrectNamespace(project)
