@@ -1,19 +1,16 @@
 plugins {
-    id("module-debug")
-}
-
-dependLibBase()
-dependLibUtils()
-dependLibConfig()
-dependApiInit()
-
-dependBugly()
-
-dependencies {
-    // 这里面写只有自己模块才会用到的依赖
-    implementation(libs.androidx.constraintlayout)
-    // https://mvnrepository.com/artifact/com.google.code.gson/gson
-    implementation("com.google.code.gson:gson:2.10.1")//用于序列化Throwable
+  id("manager.libraryApp")
 }
 
 useARouter()
+
+dependencies {
+  implementation(projects.apiInit)
+  implementation(projects.libBase)
+  implementation(projects.libUtils)
+  implementation(projects.libConfig)
+
+  // 这里面写只有自己模块才会用到的依赖
+  implementation(libs.androidx.constraintlayout)
+  implementation(libs.gson)// 用于序列化Throwable
+}
