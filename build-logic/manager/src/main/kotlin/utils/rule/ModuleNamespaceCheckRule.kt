@@ -63,6 +63,7 @@ object ModuleNamespaceCheckRule : AndroidProjectChecker.ICheckRule {
           一级模块以 com.mredrock.cyxbs.[module|lib|api].xxx 包名命名。如：api_course 为 com.mredrock.cyxbs.api.course
           
         你当前 ${project.name} 模块的包名应该改为：$namespace
+        ${project.projectDir}
         
       """.trimIndent()
       throw RuntimeException("${project.name} 模块包名错误！" + rule)

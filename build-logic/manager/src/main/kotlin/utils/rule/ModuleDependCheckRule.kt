@@ -12,11 +12,13 @@ import org.gradle.api.artifacts.ProjectDependency
 object ModuleDependCheckRule : AndroidProjectChecker.ICheckRule {
 
   override fun onConfig(project: Project) {
-    project.configurations.all {
-      if (name == "implementation" || name == "api") {
-        dependencies.forEach { dependency ->
-          if (dependency is ProjectDependency) {
-            checkProjectDependency(project, dependency.dependencyProject)
+    project.afterEvaluate {
+      configurations.all {
+        if (name == "implementation" || name == "api") {
+          dependencies.forEach { dependency ->
+            if (dependency is ProjectDependency) {
+              checkProjectDependency(project, dependency.dependencyProject)
+            }
           }
         }
       }
@@ -35,7 +37,8 @@ object ModuleDependCheckRule : AndroidProjectChecker.ICheckRule {
     val apiProject = subprojects.find { it.name.startsWith("api") }
     if (apiProject != null) {
       throw IllegalStateException("${root.path} 模块依赖配置有误，不应该依赖 ${dependency.path} 模块，" +
-          "而应该依赖其 api 模块: ${apiProject.path}")
+          "而应该依赖其 api 模块: ${apiProject.path}\n" +
+          "${root.projectDir.resolve("build.gradle.kts")}")
     }
   }
 }

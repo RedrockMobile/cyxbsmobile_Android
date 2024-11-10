@@ -206,7 +206,7 @@ ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop" }         
 rxpermissions = { module = "com.github.tbruyelle:rxpermissions", version.ref = "rxpermissions" }        # 权限申请
 
 ####################################### 公有依赖，大部分模块使用 #######################################
-arouter-api = { module = "com.alibaba:arouter-api", version.ref = "arouter" }
+arouter = { module = "com.alibaba:arouter-api", version.ref = "arouter" }
 arouter-compiler = { module = "com.github.JailedBird:ArouterKspCompiler", version.ref = "arouter-ksp" }
 autoService = { module = "com.google.auto.service:auto-service-annotations", version.ref = "autoService" }
 autoService-compiler = { module = "com.google.auto.service:auto-service", version.ref = "autoService" }
@@ -254,13 +254,13 @@ projectBase = [
     "kotlinx-coroutines-android",
     "kotlinx-coroutines-rx3",
     "kotlinx-collections",
-    "kotlinx-serialization", # 序列化别忘了单独引入 kotlin-serialization 插件
+    "kotlinx-serialization", # 想要序列化还需要引入 kotlin-serialization 插件
     # rxjava 所有模块都需要
     "rxjava3",
     "rxjava3-android",
     "rxjava3-kotlin",
     # 路由及服务提供所有模块都需要
-    "arouter-api",
+    "arouter",
     "autoService"
 ]
 

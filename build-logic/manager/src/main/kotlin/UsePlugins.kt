@@ -14,10 +14,10 @@ import org.gradle.kotlin.dsl.dependencies
  * - 为了按需引入 kapt
  * - 部分 lib 模块只使用依赖，不包含注解
  *
- * @param isNeedProcessAnnotation 是否需要处理注解，对于非实现模块是不需要处理注解的，比如 api 模块
+ * @param isNeedKsp 是否需要处理注解，对于非实现模块是不需要处理注解的，比如 api 模块
  */
-fun Project.useARouter(isNeedProcessAnnotation: Boolean = !name.startsWith("api_")) {
-  if (isNeedProcessAnnotation) {
+fun Project.useARouter(isNeedKsp: Boolean = !name.startsWith("api_")) {
+  if (isNeedKsp) {
     // kapt 按需引入
     apply(plugin = "com.google.devtools.ksp")
     extensions.configure<KspExtension> {
@@ -28,16 +28,16 @@ fun Project.useARouter(isNeedProcessAnnotation: Boolean = !name.startsWith("api_
     }
   }
   dependencies {
-    "implementation"(libsEx.`arouter-api`)
+    "implementation"(libsEx.`arouter`)
   }
 }
 
 /**
  * 使用 DataBinding
- * @param isOnlyDepend 是否只依赖而不开启 DataBinding，默认开启 DataBinding
+ * @param isNeedKapt 是否只依赖而不开启 DataBinding，默认开启 DataBinding
  */
-fun Project.useDataBinding(isOnlyDepend: Boolean = false) {
-  if (!isOnlyDepend) {
+fun Project.useDataBinding(isNeedKapt: Boolean = !name.startsWith("api_")) {
+  if (isNeedKapt) {
     // kapt 按需引入
     apply(plugin = "org.jetbrains.kotlin.kapt")
     extensions.configure(CommonExtension::class.java) {
@@ -59,13 +59,17 @@ fun Project.useDataBinding(isOnlyDepend: Boolean = false) {
  * 使用 AutoService
  * todo 感觉可以切换为我的 KtProvider https://github.com/985892345/KtProvider
  */
-fun Project.dependAutoService() {
-  // kapt 按需引入
-  apply(plugin = "org.jetbrains.kotlin.kapt")
+fun Project.useAutoService(isNeedKapt: Boolean = !name.startsWith("api_")) {
+  if (isNeedKapt) {
+    // kapt 按需引入
+    apply(plugin = "org.jetbrains.kotlin.kapt")
+    dependencies {
+      "kapt"(libsEx.`autoService-compiler`)
+    }
+  }
   dependencies {
     // 谷歌官方的一种动态加载库 https://github.com/google/auto/tree/main/service
     "compileOnly"(libsEx.autoService)
-    "kapt"(libsEx.`autoService-compiler`)
   }
 }
 

@@ -70,6 +70,7 @@ android {
   }
   buildFeatures {
     dataBinding = true // application 模块必须开启 databinding，因为编译期需要关联其他模块的 databinding
+    buildConfig = true
   }
 }
 

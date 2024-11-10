@@ -4,5 +4,5 @@ plugins {
 
 dependencies {
   implementation(libs.rxjava3)
-  implementation(libs.arouter.api)
+  implementation(libs.arouter)
 }

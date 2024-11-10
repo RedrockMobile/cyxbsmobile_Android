@@ -27,4 +27,7 @@ android {
   }
   // 命名规范设置，因为多模块相同资源名在打包时会合并，所以必须强制开启
   resourcePrefix = project.name.substringAfter("_")
+  buildFeatures {
+    buildConfig = true
+  }
 }
