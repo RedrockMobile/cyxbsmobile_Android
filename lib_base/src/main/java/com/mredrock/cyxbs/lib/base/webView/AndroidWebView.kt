@@ -1,8 +1,7 @@
-package com.mredrock.cyxbs.common.webView
+package com.mredrock.cyxbs.lib.base.webView
 
 import android.os.Handler
 import androidx.annotation.Keep
-import com.mredrock.cyxbs.common.webView.IAndroidWebView
 
 
 /**

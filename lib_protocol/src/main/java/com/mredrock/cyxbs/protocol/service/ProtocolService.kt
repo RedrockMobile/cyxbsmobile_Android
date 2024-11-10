@@ -6,7 +6,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.mredrock.cyxbs.api.protocol.PROTOCOL_SERVICE
 import com.mredrock.cyxbs.api.protocol.api.IProtocolService
-import com.mredrock.cyxbs.common.BaseApp
+import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.protocol.activity.LegalNoticeActivity
 import com.mredrock.cyxbs.protocol.activity.WebContainerActivity
 import com.mredrock.cyxbs.protocol.bean.UriBean
@@ -37,7 +37,7 @@ class ProtocolService : IProtocolService {
                 for (mutableEntry in queryMap) {
                     build.withString(mutableEntry.key, mutableEntry.value)
                 }
-                build.navigation(BaseApp.appContext)
+                build.navigation(appContext)
             }
             "http", "https" -> {
                 context?.let { WebContainerActivity.loadWebPage(it, uri) }

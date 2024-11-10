@@ -14,6 +14,7 @@ dependLibConfig()
 dependLibUtils()
 
 dependLibCommon() // TODO common 模块不再使用，新模块请依赖 base 和 utils 模块
+dependLibBase()
 
 dependencies {
     // TODO 使用 官方的 ShapeableImageView 来实现圆角图片

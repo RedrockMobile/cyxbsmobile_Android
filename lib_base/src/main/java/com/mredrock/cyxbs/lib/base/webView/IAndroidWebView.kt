@@ -1,12 +1,12 @@
-package com.mredrock.cyxbs.common.webView
+package com.mredrock.cyxbs.lib.base.webView
 
 import android.os.Handler
 import android.os.Message
 import android.webkit.JavascriptInterface
 import com.alibaba.android.arouter.launcher.ARouter
 import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.common.BaseApp
-import com.mredrock.cyxbs.common.service.ServiceManager
+import com.mredrock.cyxbs.lib.utils.extensions.appContext
+import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 
 /**
  * 新增的AndroidWebView直接继承这个类
@@ -87,6 +87,6 @@ abstract class IAndroidWebView(
 
     @JavascriptInterface
     open fun isDark(): Boolean {
-        return BaseApp.appContext.applicationContext.resources.configuration.uiMode == 0x21
+        return appContext.applicationContext.resources.configuration.uiMode == 0x21
     }
 }

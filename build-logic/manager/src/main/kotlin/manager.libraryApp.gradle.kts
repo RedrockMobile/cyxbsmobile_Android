@@ -19,7 +19,7 @@ val isAllowDebugModule = !project.gradle.startParameter.taskNames.any {
       || it == "cyxbsRelease"
 } && !name.startsWith("api_") // api 模块不开启
 
-if (isAllowDebugModule) {
+if (!isAllowDebugModule) {
   apply(plugin = "manager.library")
 } else {
   apply(plugin = "manager.application")

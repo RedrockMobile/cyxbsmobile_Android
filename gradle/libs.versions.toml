@@ -123,6 +123,10 @@ rxjava3-android = "3.0.2"
 rxjava3-kotlin = "3.0.1"
 # https://github.com/tbruyelle/RxPermissions
 rxpermissions = "0.12" # 作者 20 年已停止维护
+# https://github.com/square/leakcanary
+leakcanary = "2.13"
+# https://www.wanandroid.com/blog/show/2526
+pandora = "androidx_v2.1.0"
 
 [libraries]
 ####################################################################################################
@@ -204,6 +208,8 @@ bugly-crash-native = { module = "com.tencent.bugly:nativecrashreport", version.r
 lPhotoPicker = { module = "com.github.limuyang2:LPhotoPicker", version.ref = "lPhotoPicker" }           # 本地图片选择
 ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop" }                                 # 图片裁剪
 rxpermissions = { module = "com.github.tbruyelle:rxpermissions", version.ref = "rxpermissions" }        # 权限申请
+leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" }   # 内存泄漏
+pandora = { module = "com.github.whataa:pandora", version.ref = "pandora" }         # 很牛逼的 debug 检测工具，debug 模式下摇一摇手机或者按三次手机中间顶部区域触发
 
 ####################################### 公有依赖，大部分模块使用 #######################################
 arouter = { module = "com.alibaba:arouter-api", version.ref = "arouter" }

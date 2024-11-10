@@ -1,14 +1,11 @@
-package com.mredrock.cyxbs.common.webView
+package com.mredrock.cyxbs.lib.base.webView
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.webkit.WebSettings
 import android.webkit.WebView
-import android.widget.Toast
-import com.mredrock.cyxbs.common.BaseApp
-import com.mredrock.cyxbs.common.component.CyxbsToast
-import com.mredrock.cyxbs.common.utils.LogUtils
+import com.mredrock.cyxbs.lib.utils.extensions.toast
 
 /**
  * 传入的实现类应该继承 IAndroidWebView,如果仅使用这个自定义类的话，生命周期回调是没有效果的
@@ -32,7 +29,7 @@ class LiteJsWebView : WebView {
             },
             toast = {
                 //弹toast
-                CyxbsToast.makeText(BaseApp.appContext, it, Toast.LENGTH_SHORT).show()
+                it.toast()
             }
         )
     ) {
@@ -40,7 +37,6 @@ class LiteJsWebView : WebView {
         this.settings.apply {
             //支持js
             javaScriptEnabled = true
-            LogUtils.d("wzt","!!!!!!!")
             //支持 DOM 缓存
             domStorageEnabled = true
             //将图片调整到适合webView的大小

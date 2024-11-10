@@ -26,12 +26,12 @@ import com.mredrock.cyxbs.common.ui.BaseActivity
 import com.mredrock.cyxbs.common.utils.extensions.loadBitmap
 import com.mredrock.cyxbs.common.utils.extensions.onTouch
 import com.mredrock.cyxbs.common.utils.extensions.startActivity
-import com.mredrock.cyxbs.common.webView.IAndroidWebView
-import com.mredrock.cyxbs.common.webView.LiteJsWebView
-import com.mredrock.cyxbs.common.webView.WebViewBaseCallBack
 import com.mredrock.cyxbs.discover.R
 import com.mredrock.cyxbs.discover.network.RollerViewInfo
 import com.mredrock.cyxbs.discover.pages.discover.webView.WebViewFactory
+import com.mredrock.cyxbs.lib.base.webView.IAndroidWebView
+import com.mredrock.cyxbs.lib.base.webView.LiteJsWebView
+import com.mredrock.cyxbs.lib.base.webView.WebViewBaseCallBack
 import com.mredrock.cyxbs.lib.utils.extensions.doPermissionAction
 import com.mredrock.cyxbs.lib.utils.extensions.saveImage
 import com.mredrock.cyxbs.lib.utils.extensions.toast
