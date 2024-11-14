@@ -297,10 +297,6 @@ views = [
     "androidx-swiperefreshlayout",
     "material",
     "flexbox",
-    "lottie",
-    "photoView",
-    "dialog",
-    "wheelPicker",
 ]
 
 network = [

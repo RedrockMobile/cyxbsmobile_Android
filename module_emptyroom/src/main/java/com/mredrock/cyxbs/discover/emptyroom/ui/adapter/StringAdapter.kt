@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
-import com.mredrock.cyxbs.common.utils.extensions.dp2px
-import com.mredrock.cyxbs.common.utils.extensions.getScreenWidth
 import com.mredrock.cyxbs.discover.emptyroom.ui.widget.MultiSelector
+import com.mredrock.cyxbs.lib.utils.extensions.dp2px
+import com.mredrock.cyxbs.lib.utils.extensions.screenWidth
 
 /**
  * Created by Cynthia on 2018/9/19
@@ -22,7 +22,7 @@ class StringAdapter(selector: MultiSelector,private var mLayoutWrapper: LayoutWr
         val itemView = LayoutInflater.from(parent.context)
                 .inflate(mLayoutWrapper.layoutId, parent, false)
         if(isFillUp){
-            itemView.layoutParams.width = (parent.context.getScreenWidth()-parent.context.dp2px(28f)) / itemNumber
+            itemView.layoutParams.width = (screenWidth -28f.dp2px) / itemNumber
         }
         return TextViewViewHolder(itemView, mLayoutWrapper.textViewId)
     }

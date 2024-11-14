@@ -1,6 +1,6 @@
 package com.mredrock.cyxbs.discover.emptyroom.network
 
-import com.mredrock.cyxbs.common.bean.RedrockApiWrapper
+import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
 
@@ -15,6 +15,6 @@ interface ApiService {
         @Field("sectionNum") section: String,
         @Field("buildNum") buildNum: String,
         @Field("week") week: String
-    ): Observable<RedrockApiWrapper<List<String>>>
+    ): Observable<ApiWrapper<List<String>>>
 
 }

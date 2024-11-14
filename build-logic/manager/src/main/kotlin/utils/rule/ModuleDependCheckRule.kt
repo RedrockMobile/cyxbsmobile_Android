@@ -11,7 +11,18 @@ import org.gradle.api.artifacts.ProjectDependency
  */
 object ModuleDependCheckRule : AndroidProjectChecker.ICheckRule {
 
+  // TODO 用于特殊情况时忽略 api 模块检查，正常情况下就应该依赖 api 模块而不是实现模块
+  // 以下模块在依赖其他模块时忽略检查
+  private val ignoreRootProjectPaths = setOf<String>(
+    ":module_main"
+  )
+
+  // 以下模块在被依赖时忽略检查
+  private val ignoreDependencyProjectPaths = setOf<String>(
+  )
+
   override fun onConfig(project: Project) {
+    if (ignoreRootProjectPaths.contains(project.path)) return
     project.afterEvaluate {
       configurations.all {
         if (name == "implementation" || name == "api") {
@@ -25,14 +36,9 @@ object ModuleDependCheckRule : AndroidProjectChecker.ICheckRule {
     }
   }
 
-  // TODO 用于特殊情况时忽略 api 模块检查，正常情况下就应该依赖 api 模块而不是实现模块
-  private val ignoreProjectNames = setOf<String>(
-
-  )
-
   private fun checkProjectDependency(root: Project, dependency: Project) {
     if (dependency.name.startsWith("api")) return
-    if (ignoreProjectNames.contains(dependency.name)) return
+    if (ignoreDependencyProjectPaths.contains(dependency.path)) return
     val subprojects = dependency.subprojects
     val apiProject = subprojects.find { it.name.startsWith("api") }
     if (apiProject != null) {
