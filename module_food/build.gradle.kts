@@ -8,7 +8,7 @@ dependencies {
   implementation(projects.libBase)
   implementation(projects.libConfig)
   implementation(projects.libUtils)
-  implementation(projects.moduleSport.apiSport)
+  implementation(projects.moduleStore.apiStore)
 
   implementation(libs.bundles.projectBase)
   implementation(libs.bundles.views)

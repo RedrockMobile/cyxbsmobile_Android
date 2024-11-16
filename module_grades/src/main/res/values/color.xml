@@ -1,4 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--    考试成绩-->
+    <color name="grades_gpa_rv_list_round_corner_background">#88E8F1FC
+    </color>
+    <color name="grades_item_cardView_bg">#E8F1FC</color>
+    <color name="common_grades_activity_tl_white">#FFFFFF</color>
+    <color name="common_grades_activity_back_grey">#D3D3D3</color>
+    <color name="common_grades_fragment_back_white">#F6F6F6</color>
+    <color name="common_grades_fragment_text_color_black">#333333</color>
+    <color name="common_grades_fragment_text_color_black2">#666666</color>
+    <color name="common_grades_fragment_text_color_black3">#A12A4E84</color>
+    <color name="common_grades_fragment_item_back_grey">#E4E4E4</color>
+    <color name="common_grades_item_divide">#15315B</color>
+    <color name="grades_item_day_remain">#3A39D3</color>
+    <color name="common_grades_bottom_sheet_shadow">#205369BC</color>
+
+    <color name="grades_gpa_normal_font_color">#15315B</color>
+
+
+    <color name="grades_gpa_line_color">#2921D1</color>
+    <color name="grades_gpa_dash_color">#2915315B</color>
+    <color name="grades_gpa_text_color">#A415315B</color>
+    <color name="common_grades_gpa_circle_inside_color">#FFFFFFFF</color>
+    <color name="common_grades_gpa_gradient_bottom_color">#66FFFFFF</color>
+    <color name="common_grades_gpa_gradient_top_color">#44A19EFF</color>
+    <color name="grades_gpa_child_bottom_line">#162A4E84</color>
+
+    <color name="gradle_toolbar_bg">#F8F9FC</color>
+
 </resources>

@@ -43,6 +43,9 @@
 
     <!--主页面的整体灰色背景-->
     <color name="config_window_background">#F2F3F8</color>
+    <!--    整体淡灰二级背景-->
+    <color name="config_secondary_window_background">#F8F9FC</color>
+    <color name="config_chosen_background">#E5EAF2</color>
 
     <!--分割线颜色-->
     <color name="config_default_divide_line_color">#19f8f9fc</color>
@@ -51,5 +54,8 @@
     <color name="config_button_gradient_start_color">#4841E2</color>
     <!--    按钮渐变终止颜色-->
     <color name="config_button_gradient_end_color">#5D5DF7</color>
+
+    <!--可上拉下拉标识小块背景-->
+    <color name="config_table_drag_indicator_block_color">#E2EDFB</color>
 
 </resources>

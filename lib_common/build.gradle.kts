@@ -45,5 +45,6 @@ dependencies {
   implementation(libs.glide)
   implementation(libs.rxpermissions)
   implementation(libs.lPhotoPicker)
+  implementation(libs.photoView)
 }
 

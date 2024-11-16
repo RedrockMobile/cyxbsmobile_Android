@@ -37,8 +37,12 @@ object ApiGenerator {
      * @param tokenNeeded 是否需要添加token请求
      */
     fun createSelfRetrofit(
+        tokenNeeded: Boolean,
         retrofitConfig: ((Retrofit.Builder) -> Retrofit.Builder)? = null,
-        okHttpClientConfig: ((OkHttpClient.Builder) -> OkHttpClient.Builder)? = null,
-        tokenNeeded: Boolean
-    ): Retrofit=ApiGenerator.createSelfRetrofit(retrofitConfig, okHttpClientConfig, tokenNeeded)
+        okHttpClientConfig: ((OkHttpClient.Builder) -> OkHttpClient.Builder)? = null
+    ): Retrofit=ApiGenerator.createSelfRetrofit(
+      tokenNeeded = tokenNeeded,
+      retrofitConfig = retrofitConfig,
+      okHttpClientConfig = okHttpClientConfig
+    )
 }

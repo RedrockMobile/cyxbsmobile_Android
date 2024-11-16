@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.mredrock.cyxbs.common.component.DashGapLine
+    <com.mredrock.cyxbs.discover.grades.widget.DashGapLine
         android:id="@+id/iv_exam_circle"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -35,7 +35,7 @@
         android:layout_marginStart="20dp"
         android:drawablePadding="5dp"
         android:text=""
-        android:textColor="@color/common_level_two_font_color"
+        android:textColor="@color/config_level_two_font_color"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@id/gl_exam_guideline"
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
-        android:textColor="@color/common_grades_item_day_remain"
+        android:textColor="@color/grades_item_day_remain"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_exam_day_of_week"
         app:layout_constraintRight_toLeftOf="@id/gl_exam_end_guideline"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="13dp"
             android:layout_marginTop="15dp"
-            android:textColor="@color/common_level_two_font_color"
+            android:textColor="@color/config_level_two_font_color"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/tv_exam_kind"
@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="18dp"
-            android:textColor="@color/common_level_two_font_color"
+            android:textColor="@color/config_level_two_font_color"
             android:textSize="13sp"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_exam_name"
             app:layout_constraintEnd_toEndOf="parent"

@@ -43,10 +43,16 @@
 
     <!--主页面的整体灰色背景-->
     <color name="config_window_background">#000000</color>
+    <!--    整体淡灰二级背景-->
+    <color name="config_secondary_window_background">#1D1D1D</color>
+    <color name="config_chosen_background">#1D1D1D</color>
 
     <!--    按钮渐变起始颜色-->
     <color name="config_button_gradient_start_color">#4841E2</color>
     <!--    按钮渐变终止颜色-->
     <color name="config_button_gradient_end_color">#4841E2</color>
+
+    <!--可上拉下拉标识小块背景-->
+    <color name="config_table_drag_indicator_block_color">#000000</color>
 
 </resources>

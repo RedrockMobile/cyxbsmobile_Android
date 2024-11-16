@@ -1,10 +1,10 @@
 package com.mredrock.cyxbs.discover.grades.network
 
-import com.mredrock.cyxbs.common.bean.RedrockApiStatus
-import com.mredrock.cyxbs.common.bean.RedrockApiWrapper
 import com.mredrock.cyxbs.discover.grades.bean.Exam
 import com.mredrock.cyxbs.discover.grades.bean.Status
 import com.mredrock.cyxbs.discover.grades.bean.analyze.GPAStatus
+import com.mredrock.cyxbs.lib.utils.network.ApiStatus
+import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
 
@@ -21,14 +21,14 @@ interface ApiService {
      */
     @FormUrlEncoded
     @POST("/magipoke-jwzx/examSchedule")
-    fun getExam(@Field("stuNum") stuNum: String): Observable<RedrockApiWrapper<List<Exam>>>
+    fun getExam(@Field("stuNum") stuNum: String): Observable<ApiWrapper<List<Exam>>>
 
     /**
      * 获取补考信息
      */
     @FormUrlEncoded
     @POST("/magipoke-jwzx/examReexam")
-    fun getReExam(@Field("stuNum") stu: String): Observable<RedrockApiWrapper<List<Exam>>>
+    fun getReExam(@Field("stuNum") stu: String): Observable<ApiWrapper<List<Exam>>>
 
     @GET("/magipoke/gpa")
     fun getAnalyzeData(): Observable<GPAStatus>
@@ -42,6 +42,6 @@ interface ApiService {
     fun getExamGrades(@Field("stuNum") stuNum: String, @Field("inNum") inNum: String)
 
     @GET("/magipoke-jwzx/nowStatus")
-    fun getNowStatus(): Observable<RedrockApiWrapper<Status>>
+    fun getNowStatus(): Observable<ApiWrapper<Status>>
 
 }

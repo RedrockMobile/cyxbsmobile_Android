@@ -45,16 +45,17 @@ class MyVpIndicatorView @JvmOverloads constructor(
         return if (allDotNumber > 0 ) allDotNumber else 1
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    private val activePaint = Paint().apply {
+        color = activeDotColor
+    }
+
+    private val inActivePaint = Paint().apply {
+        color = inActiveDotColor
+    }
+
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        if (canvas == null) return
         //定义点所需要的空间
-        val activePaint = Paint().apply {
-            color = activeDotColor
-        }
-        val inActivePaint = Paint().apply {
-            color = inActiveDotColor
-        }
         val contextWidth = allDotNumber * (2 * dotRadius) + (allDotNumber - 1) * dotSpace
         var startX: Float = ((width.toFloat() - contextWidth) / 2)   //第一个圆点左边
         var startY = (height.toFloat() - dotRadius * 2) / 2   //圆点的上边边

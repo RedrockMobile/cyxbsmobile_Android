@@ -8,6 +8,7 @@ import android.webkit.WebSettings
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -19,9 +20,9 @@ import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mredrock.cyxbs.api.account.IAccountService
 import com.mredrock.cyxbs.api.account.IUserService
-import com.mredrock.cyxbs.common.config.DISCOVER_GRADES
-import com.mredrock.cyxbs.common.service.ServiceManager
-import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
+import com.mredrock.cyxbs.config.route.DISCOVER_GRADES
+import com.mredrock.cyxbs.config.route.LOGIN_BIND_IDS
+import com.mredrock.cyxbs.config.view.JToolbar
 import com.mredrock.cyxbs.discover.grades.R
 import com.mredrock.cyxbs.discover.grades.bean.Exam
 import com.mredrock.cyxbs.discover.grades.bean.analyze.isSuccessful
@@ -29,10 +30,14 @@ import com.mredrock.cyxbs.discover.grades.ui.adapter.ExamAdapter
 import com.mredrock.cyxbs.discover.grades.ui.fragment.GPAFragment
 import com.mredrock.cyxbs.discover.grades.ui.fragment.NoDataFragment
 import com.mredrock.cyxbs.discover.grades.ui.viewModel.ContainerViewModel
+import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.utils.extensions.gone
 import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.lib.utils.extensions.visible
 import com.mredrock.cyxbs.lib.base.webView.LiteJsWebView
+import com.mredrock.cyxbs.lib.utils.extensions.pressToZoomOut
+import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import de.hdodenhof.circleimageview.CircleImageView
 
 
@@ -43,7 +48,9 @@ import de.hdodenhof.circleimageview.CircleImageView
  */
 
 @Route(path = DISCOVER_GRADES)
-class ContainerActivity : BaseViewModelActivity<ContainerViewModel>() {
+class ContainerActivity : BaseActivity() {
+
+    private val viewModel by viewModels<ContainerViewModel>()
 
     private val user: IUserService by lazy {
         ServiceManager(IAccountService::class).getUserService()
@@ -60,6 +67,7 @@ class ContainerActivity : BaseViewModelActivity<ContainerViewModel>() {
     private val mWvExamMain by R.id.wv_exam_main.view<LiteJsWebView>()
     private val mLlGradesHeader by R.id.ll_grades_header.view<LinearLayout>()
     private val mIvGradesAvatar by R.id.iv_grades_avatar.view<CircleImageView>()
+    private val common_toolbar by R.id.toolbar.view<JToolbar>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,12 +76,13 @@ class ContainerActivity : BaseViewModelActivity<ContainerViewModel>() {
             setBackgroundColor(
                 ContextCompat.getColor(
                     this@ContainerActivity,
-                    com.mredrock.cyxbs.common.R.color.common_mine_sign_store_bg
+                    R.color.gradle_toolbar_bg,
                 )
             )
-            initWithSplitLine(
-                "考试与成绩",
-                false
+            init(
+                activity = this@ContainerActivity,
+                title = "考试与成绩",
+                withSplitLine = false,
             )
             setTitleLocationAtLeft(true)
         }

@@ -3,3 +3,7 @@ plugins {
 }
 
 useARouter()
+
+dependencies {
+  implementation(libs.kotlinx.coroutines)
+}

@@ -157,9 +157,9 @@ object ApiGenerator {
      * @param tokenNeeded 是否需要添加token请求
      */
     fun createSelfRetrofit(
+        tokenNeeded: Boolean,
         retrofitConfig: ((Retrofit.Builder) -> Retrofit.Builder)? = null,
-        okHttpClientConfig: ((OkHttpClient.Builder) -> OkHttpClient.Builder)? = null,
-        tokenNeeded: Boolean
+        okHttpClientConfig: ((OkHttpClient.Builder) -> OkHttpClient.Builder)? = null
     ): Retrofit {
         return Retrofit.Builder()
             //对传入的retrofitConfig配置
