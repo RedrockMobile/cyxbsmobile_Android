@@ -6,7 +6,6 @@ import com.mredrock.cyxbs.BuildConfig
 import com.mredrock.cyxbs.init.InitialManager
 import com.mredrock.cyxbs.init.InitialService
 import com.mredrock.cyxbs.lib.base.utils.Umeng
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.extensions.unsafeSubscribeBy
 import com.mredrock.cyxbs.lib.utils.utils.LogUtils
 import com.tencent.vasdolly.helper.ChannelReaderUtil
@@ -43,14 +42,14 @@ class UmengInitialService : InitialService {
             UMConfigure.setLogEnabled(true)
         }
         //预初始化 等待隐私策略同意后才进行真正的初始化
-        UMConfigure.preInit(appContext, BuildConfig.UM_APP_KEY, getChannel(manager.application))
+        UMConfigure.preInit(manager.application, BuildConfig.UM_APP_KEY, getChannel(manager.application))
         //自动埋点 Activity，Umeng 这个手动埋点不好设置埋点 Fragment，因为它只允许 onPageStart()，onPageEnd() 成对调用
         MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO)
         Umeng.umengListener = {
             if (it.map != null) {
-                MobclickAgent.onEventObject(appContext, it.eventId, it.map)
+                MobclickAgent.onEventObject(manager.application, it.eventId, it.map)
             } else {
-                MobclickAgent.onEvent(appContext, it.eventId)
+                MobclickAgent.onEvent(manager.application, it.eventId)
             }
         }
     }

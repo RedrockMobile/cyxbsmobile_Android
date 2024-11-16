@@ -10,9 +10,13 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 }
 
 dependencies {
+  implementation(projects.plugin.checker)
+
   implementation(libs.android.gradlePlugin)
   implementation(libs.kotlin.gradlePlugin)
   implementation(libs.ksp.gradlePlugin)
+
+
   implementation(libs.retrofit)
   implementation(libs.retrofit.converter.gson)
   implementation(libs.okhttp)

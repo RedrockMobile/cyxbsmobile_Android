@@ -1,5 +1,4 @@
-import utils.rule.AndroidProjectChecker
-import utils.rule.ModuleNamespaceCheckRule
+import rule.ModuleNamespaceCheckRule
 
 plugins {
   id("com.android.library")

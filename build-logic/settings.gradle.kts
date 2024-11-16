@@ -34,18 +34,10 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "build-logic"
-//核心插件模块
-include(":core")
-include(":core:api")
-include(":core:base")
-include(":core:module")
-include(":core:library")
-include(":core:manager")
-include(":core:versions")
-include(":core:app")
+// 项目模块插件
+include(":manager")
 //其他业务插件
 include(":plugin")
 include(":plugin:cache")
 include(":plugin:checker")
-// 项目模块插件
-include(":manager")
+

@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application
-        android:name=".CySophixApplication"
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/app_ic_launcher"
         android:label="@string/app_app_name"

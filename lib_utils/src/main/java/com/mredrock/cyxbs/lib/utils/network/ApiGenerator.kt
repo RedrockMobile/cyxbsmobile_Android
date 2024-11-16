@@ -203,7 +203,6 @@ object ApiGenerator {
                         .build()
                 )
             })
-            dns(OkHttpDns.INSTANCE)
             addInterceptor(logging)
             //这里是在debug模式下方便开发人员简单确认 http 错误码 和 url(magipoke开始切的)
             if (BuildConfig.DEBUG) {

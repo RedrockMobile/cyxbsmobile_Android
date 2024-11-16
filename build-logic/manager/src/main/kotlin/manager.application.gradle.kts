@@ -1,6 +1,5 @@
-import utils.rule.ModuleNamespaceCheckRule
 import utils.config.Config
-import utils.rule.AndroidProjectChecker
+import rule.ModuleNamespaceCheckRule
 
 plugins {
   id("com.android.application")
@@ -29,7 +28,7 @@ android {
       proguardFiles(
         getDefaultProguardFile("proguard-android-optimize.txt"),
         rootDir.resolve("build-logic")
-          .resolve("core")
+          .resolve("manager")
           .resolve("proguard-rules.pro")
       )
 
@@ -42,7 +41,7 @@ android {
       proguardFiles(
         getDefaultProguardFile("proguard-android-optimize.txt"),
         rootDir.resolve("build-logic")
-          .resolve("core")
+          .resolve("manager")
           .resolve("proguard-rules.pro")
       )
 

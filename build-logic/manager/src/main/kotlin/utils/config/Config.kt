@@ -24,6 +24,7 @@ object Config {
     2.偶现课表数据异常修复
     3.修正了一些问题，提升了性能
   """.trimIndent()
+
   val resourcesExclude = listOf(
     "LICENSE.txt",
     "META-INF/DEPENDENCIES",

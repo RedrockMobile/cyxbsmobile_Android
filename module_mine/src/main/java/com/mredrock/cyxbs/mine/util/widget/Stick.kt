@@ -45,12 +45,12 @@ class Stick : View {
     }
 
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas?.drawColor(Color.parseColor("#E1E6F0"))
+        canvas.drawColor(Color.parseColor("#E1E6F0"))
 
         color.strokeWidth = height.toFloat()
-        canvas?.drawLine(0f, height.toFloat() / 2, progress * width.toFloat(), height.toFloat() / 2, color)
+        canvas.drawLine(0f, height.toFloat() / 2, progress * width.toFloat(), height.toFloat() / 2, color)
 
     }
 

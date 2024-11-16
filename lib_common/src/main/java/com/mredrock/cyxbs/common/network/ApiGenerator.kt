@@ -2,10 +2,7 @@ package com.mredrock.cyxbs.common.network
 
 import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 /**
@@ -20,8 +17,6 @@ object ApiGenerator {
 
     fun <T> getApiService(clazz: Class<T>) =
         ApiGenerator.getApiService(clazz)
-
-    fun <T> getApiService(retrofit: Retrofit, clazz: Class<T>) = retrofit.create(clazz)
 
     fun <T> getCommonApiService(clazz: Class<T>) =
         ApiGenerator.getCommonApiService(clazz)

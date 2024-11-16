@@ -12,7 +12,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.common.service.ServiceManager
 import com.mredrock.cyxbs.config.route.DISCOVER_ELECTRICITY_FEED
 import com.mredrock.cyxbs.config.sp.defaultSp
 import com.mredrock.cyxbs.electricity.R
@@ -25,6 +24,7 @@ import com.mredrock.cyxbs.lib.utils.extensions.dp2px
 import com.mredrock.cyxbs.lib.utils.extensions.gone
 import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
