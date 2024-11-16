@@ -20,8 +20,8 @@ class DefaultPageInterceptor: IInterceptor {
     DISCOVER_NEWS,
     DISCOVER_NEWS_ITEM,
     //体育打卡
-    DISCOVER_SPORT,
-    DISCOVER_SPORT_FEED,
+//    DISCOVER_SPORT,
+//    DISCOVER_SPORT_FEED,
     //空教室
 //    DISCOVER_EMPTY_ROOM,
     //我的考试

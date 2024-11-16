@@ -31,6 +31,6 @@ interface SportDetailApiService {
     /**
      * 获取体育打卡详情页面数据
      */
-    @GET("/magipoke/sunSport")
+    @GET("/magipoke-sport/sport")
     fun getSportDetailData(): Single<ApiWrapper<SportDetailBean>>
 }

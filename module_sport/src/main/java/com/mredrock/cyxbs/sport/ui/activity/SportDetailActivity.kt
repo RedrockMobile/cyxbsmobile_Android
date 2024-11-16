@@ -6,19 +6,18 @@ import androidx.core.view.postDelayed
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
-import com.mredrock.cyxbs.config.route.DISCOVER_SPORT
-import com.mredrock.cyxbs.config.route.LOGIN_BIND_IDS
-import com.mredrock.cyxbs.lib.base.ui.BaseBindActivity
-import com.mredrock.cyxbs.lib.utils.extensions.*
 import com.mredrock.cyxbs.config.config.SchoolCalendar
+import com.mredrock.cyxbs.config.route.DISCOVER_SPORT
+import com.mredrock.cyxbs.lib.base.ui.BaseBindActivity
+import com.mredrock.cyxbs.lib.utils.extensions.gone
+import com.mredrock.cyxbs.lib.utils.extensions.setOnDoubleClickListener
+import com.mredrock.cyxbs.lib.utils.extensions.visible
 import com.mredrock.cyxbs.sport.R
 import com.mredrock.cyxbs.sport.databinding.SportActivitySportDetailBinding
 import com.mredrock.cyxbs.sport.model.SportDetailBean
 import com.mredrock.cyxbs.sport.ui.adapter.SportRvAdapter
 import com.mredrock.cyxbs.sport.ui.viewmodel.SportDetailViewModel
-import com.mredrock.cyxbs.sport.util.sSpIdsIsBind
-import java.util.*
+import java.util.Calendar
 import kotlin.random.Random
 
 /**
@@ -45,11 +44,6 @@ class SportDetailActivity : BaseBindActivity<SportActivitySportDetailBinding>() 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (!sSpIdsIsBind) {
-            "请先绑定教务在线才能继续使用哦~".toast()
-            ARouter.getInstance().build(LOGIN_BIND_IDS).navigation()
-            finish()
-        }
         //初始化
         init()
         //设置右上角的时间
