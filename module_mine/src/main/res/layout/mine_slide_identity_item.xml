@@ -33,7 +33,7 @@
             android:layout_toRightOf="@id/iv_item_setting"
             android:gravity="bottom"
             android:text="设置"
-            android:textColor="@color/common_grades_activity_tl_white" />
+            android:textColor="@android:color/white" />
         </RelativeLayout>
     </FrameLayout>
 
@@ -58,7 +58,7 @@
             android:layout_marginLeft="7dp"
             android:layout_toRightOf="@id/iv_item_delete"
             android:text="删除"
-            android:textColor="@color/common_grades_activity_tl_white" />
+            android:textColor="@android:color/white" />
     </RelativeLayout>
 
     <androidx.cardview.widget.CardView
@@ -67,7 +67,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:background="@color/common_grades_activity_tl_white"
+        android:background="@android:color/white"
         app:cardElevation="3dp">
 
 

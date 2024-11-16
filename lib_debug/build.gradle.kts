@@ -2,8 +2,9 @@ plugins {
   id("manager.library")
 }
 
-dependencies {
+useAutoService()
 
+dependencies {
   implementation(projects.apiInit)
   implementation(projects.libBase)
   implementation(projects.libUtils)

@@ -15,7 +15,6 @@ import com.mredrock.cyxbs.config.route.DISCOVER_EMPTY_ROOM
 import com.mredrock.cyxbs.config.route.DISCOVER_GRADES
 import com.mredrock.cyxbs.config.sp.defaultSp
 import com.mredrock.cyxbs.discover.R
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.logger.event.ClickEvent
 import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import java.lang.ref.SoftReference

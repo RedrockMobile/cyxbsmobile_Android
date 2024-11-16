@@ -3,6 +3,7 @@ plugins {
 }
 
 useARouter()
+useAutoService()
 
 dependencies {
   implementation(projects.apiInit)

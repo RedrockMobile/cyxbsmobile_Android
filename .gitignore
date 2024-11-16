@@ -20,5 +20,6 @@ secret.gradle
 **/lint-baseline.xml
 **/modules
 maven
+.kotlin
 
 

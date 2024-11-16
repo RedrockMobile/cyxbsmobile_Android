@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:alpha="0.65"
-            android:textColor="@color/common_menu_font_color_found"
+            android:textColor="@color/discover_menu_font_color_found"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -122,7 +122,7 @@
                 android:layout_marginEnd="13dp"
                 android:layout_marginBottom="2dp"
                 android:text="@string/discover_news_jwzx"
-                android:textColor="@color/common_discover_academic_online_colors"
+                android:textColor="@color/discover_academic_online_colors"
                 android:textSize="11sp"
                 tools:ignore="SmallSp" />
         </FrameLayout>

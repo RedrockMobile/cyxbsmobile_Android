@@ -4,6 +4,7 @@ plugins {
 
 useARouter()
 useDataBinding()
+useAutoService()
 
 dependencies {
   implementation(projects.apiInit)

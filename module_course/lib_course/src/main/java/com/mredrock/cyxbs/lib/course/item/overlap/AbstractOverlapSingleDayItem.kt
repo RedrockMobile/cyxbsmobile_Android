@@ -210,7 +210,7 @@ abstract class AbstractOverlapSingleDayItem : IOverlapItem, OverlapHelper.IOverl
     val diffSize = mChildInParent.size - mFreeAreaMap.size()
     // 移除掉多的子 View
     repeat(diffSize) {
-      val view = mChildInParent.removeLast()
+      val view = mChildInParent.removeAt(mChildInParent.lastIndex)
       mNetLayout.removeView(view)
       mChildInFree.add(view)
     }

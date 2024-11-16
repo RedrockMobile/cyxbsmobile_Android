@@ -1,7 +1,6 @@
 package com.mredrock.cyxbs.lib.utils
 
 import android.app.Application
-import android.util.Log
 import com.google.auto.service.AutoService
 import com.mredrock.cyxbs.init.InitialManager
 import com.mredrock.cyxbs.init.InitialService
@@ -22,7 +21,6 @@ class UtilsApplicationWrapper : InitialService {
   }
   
   override fun onAllProcess(manager: InitialManager) {
-    Log.d("ggg", "onAllProcess")
     application = manager.application
   }
 }

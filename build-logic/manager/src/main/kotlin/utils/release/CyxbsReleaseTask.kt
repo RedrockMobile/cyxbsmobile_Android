@@ -137,19 +137,6 @@ open class CyxbsReleaseTask : DefaultTask() {
         return response.body()!!
     }
 
-//    /**
-//     * 获取腾讯多渠道打包文件
-//     */
-//    private fun getApkFile(): File? {
-//        return project.extensions.getByType(ChannelConfigExtension::class)
-//            .let { extension ->
-//                extension.outputDir.listFiles()?.singleOrNull {
-//                    it.name.matches(
-//                        Regex("掌上重邮-${Config.versionName}-official-release-\\d+-\\d+\\.apk"))
-//                }
-//            }
-//    }
-
     /**
      * https://leetcode.cn/problems/compare-version-numbers/description/
      * 时间复杂度: O(n+m)

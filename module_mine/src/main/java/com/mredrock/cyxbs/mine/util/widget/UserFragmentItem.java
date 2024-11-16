@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.mredrock.cyxbs.common.component.JCardViewPlus;
+import com.mredrock.cyxbs.config.view.JCardViewPlus;
 import com.mredrock.cyxbs.mine.R;
 
 

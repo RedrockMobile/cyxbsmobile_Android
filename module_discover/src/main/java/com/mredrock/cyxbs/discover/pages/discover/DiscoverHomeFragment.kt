@@ -219,7 +219,7 @@ class DiscoverHomeFragment : BaseFragment() {
             maxLines = 1
             overScrollMode = OVER_SCROLL_IF_CONTENT_SCROLLS
 
-            setTextColor(ContextCompat.getColor(context, R.color.common_menu_font_color_found))
+            setTextColor(ContextCompat.getColor(context, R.color.discover_menu_font_color_found))
             textSize = 15f
             setOnSingleClickListener {
                 ARouter.getInstance().build(DISCOVER_NEWS_ITEM).withString("id", id).navigation()

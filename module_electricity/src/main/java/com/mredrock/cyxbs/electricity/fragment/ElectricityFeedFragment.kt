@@ -129,12 +129,12 @@ class ElectricityFeedFragment : BaseFragment() {
                 tv_electricity_feed_fee.text =
                     SpannableStringBuilder(elecInf.getEleCost().toDouble().run {
                         if (this < 0) {
-                            "0"
+                            "0.0"
                         } else {
                             this.toString()
                         }
                     }.plus("元")).apply {
-                        setSpan(36.dp2px, 0, this.length - 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+                        setSpan(AbsoluteSizeSpan(36.dp2px), 0, this.length - 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
                         setSpan(
                             AbsoluteSizeSpan(13.dp2px),
                             this.length - 1,

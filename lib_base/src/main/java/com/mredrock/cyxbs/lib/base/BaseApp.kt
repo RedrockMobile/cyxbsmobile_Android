@@ -6,13 +6,11 @@ import android.app.Application
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import androidx.annotation.CallSuper
 import com.alibaba.android.arouter.launcher.ARouter
 import com.mredrock.cyxbs.lib.base.utils.InitialManagerImpl
 import com.mredrock.cyxbs.lib.utils.utils.impl.ActivityLifecycleCallbacksImpl
 import java.lang.ref.WeakReference
-import java.util.*
 
 /**
  * ...
@@ -79,7 +77,6 @@ open class BaseApp : Application() {
   }
   
   private fun initInitialService() {
-    Log.d("ggg", "initInitialService")
     mInitialManager = InitialManagerImpl(this)
     mInitialManager.init()
   }

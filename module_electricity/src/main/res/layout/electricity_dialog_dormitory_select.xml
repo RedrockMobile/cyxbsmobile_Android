@@ -55,7 +55,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="17dp"
         android:alpha="0.1"
-        android:background="@color/levelFourFontColor"
+        android:background="@color/config_level_four_font_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_dormitory_num" />
@@ -100,7 +100,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
         android:alpha="0.1"
-        android:background="@color/levelFourFontColor"
+        android:background="@color/config_level_four_font_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wp_dormitory_head" />
