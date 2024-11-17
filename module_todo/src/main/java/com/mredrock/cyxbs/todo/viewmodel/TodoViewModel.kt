@@ -9,7 +9,6 @@ import com.mredrock.cyxbs.lib.utils.network.mapOrInterceptException
 import com.mredrock.cyxbs.todo.model.bean.DelPushWrapper
 import com.mredrock.cyxbs.todo.model.bean.RemindMode.Companion.generateDefaultRemindMode
 import com.mredrock.cyxbs.todo.model.bean.Todo
-import com.mredrock.cyxbs.todo.model.bean.TodoListGetWrapper
 import com.mredrock.cyxbs.todo.model.bean.TodoListPushWrapper
 import com.mredrock.cyxbs.todo.model.bean.TodoListSyncTimeWrapper
 import com.mredrock.cyxbs.todo.model.bean.TodoPinData
@@ -28,8 +27,6 @@ class TodoViewModel : BaseViewModel() {
 
     private val _allTodo = MutableLiveData<TodoListSyncTimeWrapper>()
     val allTodo: LiveData<TodoListSyncTimeWrapper> get() = _allTodo
-    private val _changedTodo = MutableLiveData<TodoListGetWrapper>()
-    val changedTodo: LiveData<TodoListGetWrapper> get() = _changedTodo
     private val _categoryTodoStudy = MutableLiveData<TodoListSyncTimeWrapper>()
     val categoryTodoStudy: LiveData<TodoListSyncTimeWrapper> get() = _categoryTodoStudy
     private val _categoryTodoLife = MutableLiveData<TodoListSyncTimeWrapper>()
@@ -51,13 +48,19 @@ class TodoViewModel : BaseViewModel() {
         _isChanged.value = state
     }
 
-    fun judgeChange(todoAfterChange: Todo) {
-        _isChanged.value = todoAfterChange != rawTodo
-    }
-
     init {
         _isChanged.value = false
-        getAllTodo()
+        syncTodo()
+    }
+
+    private fun syncTodo() {
+        if (isLocalModify()){
+            //当本地有修改，则同步本地
+            syncWithLocal()
+        }else{
+            //如果本地没有修改，则直接同步远端
+            getAllTodo()
+        }
     }
 
     /**
@@ -95,14 +98,15 @@ class TodoViewModel : BaseViewModel() {
             }
             .safeSubscribeBy {
                 /**
-                 * 由于是老接口，故在这里设置一个更新时间戳，用来添加新手教程，防止一些老用户没有出现新手教程
+                 * 由于是老接口，这里设置一个sp用于判断是否是第一次使用，添加新手教程
                  */
-                if ((it.todoArray.isNullOrEmpty() && it.syncTime == 0L) || it.syncTime < 1726843099) {
+                if ((it.todoArray.isNullOrEmpty() && it.syncTime == 0L) || isFirstUse()) {
                     val todoList = listOf(
                         Todo(1, "长按可以拖动我哟", "", 0, generateDefaultRemindMode(), System.currentTimeMillis(), "", "", 0, 0),
                         Todo(2, "左滑可置顶或者删除", "", 0, generateDefaultRemindMode(), System.currentTimeMillis(), "", "", 0, 0),
                         Todo(3, "点击查看代办详情", "", 0, generateDefaultRemindMode(), System.currentTimeMillis(), "", "", 0, 0)
                     )
+                    setOldUse()
                     val syncTime = getLastSyncTime()
                     val firstPush = if (syncTime == 0L) 1 else 0
                     pushTodo(
@@ -136,7 +140,7 @@ class TodoViewModel : BaseViewModel() {
                     it.syncTime.apply {
                         setLastSyncTime(this)
                     }
-                    syncTodo(todos)
+                    syncWithRemote(todos)
                 }
 
             }
@@ -161,13 +165,13 @@ class TodoViewModel : BaseViewModel() {
             .safeSubscribeBy {
                 getAllTodo()
                 viewModelScope.launch(Dispatchers.IO) {
-                    setLastModifyTime(it.syncTime)
                     TodoDatabase.instance.todoDao().insertAll(pushWrapper.todoList)
                 }
                 TodoWidget.sendAddTodoBroadcast(appContext)
                 _isPushed.postValue(true)
                 it.syncTime.apply {
                     setLastSyncTime(this)
+                    setLastModifyTime(this)
                 }
             }
     }
@@ -299,52 +303,19 @@ class TodoViewModel : BaseViewModel() {
         }
     }
 
-    /**
-     * 同步远端与本地数据
-     */
-    fun syncTodo(todoList: List<Todo>) {
-        if (getLastModifyTime() == getLastSyncTime()) {
-            return
-        }
-        // 本地数据为空，直接同步远端
-        if (getLastModifyTime() == 0L && getLastSyncTime() != 0L) {
-            syncWithRemote(todoList)
-            return
-        }
-
-        // 如果远端数据为空，直接同步本地数据
-        if (getLastSyncTime() == 0L) {
-            syncWithLocal()
-            return
-        }
-
-        // 检查同步时间
-        val syncTime = getLastSyncTime()
-        val modifyTime = getLastModifyTime()
-
-        // 根据时间戳决定同步方向
-        if (modifyTime > syncTime) {
-            syncRemoteFromLocal(syncTime)
-        } else {
-            if (allTodo.value?.todoArray?.isNotEmpty() == true) {
-                syncLocalFromRemote()
-            }
-        }
-
-        getAllTodo()
-    }
-
     private fun syncWithRemote(todoList: List<Todo>) {
-        setLastModifyTime(getLastSyncTime())
-        viewModelScope.launch(Dispatchers.IO) {
-            TodoDatabase.instance.todoDao().apply {
-                deleteAll()
-                insertAll(todoList)
+        if (!isLocalModify()){
+            setLastModifyTime(getLastSyncTime())
+            viewModelScope.launch(Dispatchers.IO) {
+                TodoDatabase.instance.todoDao().apply {
+                    deleteAll()
+                    insertAll(todoList)
+                }
             }
         }
     }
-
     private fun syncWithLocal() {
+        setLastSyncTime(getLastModifyTime())
         viewModelScope.launch(Dispatchers.IO) {
             TodoDatabase.instance.todoDao().apply {
                 queryAll()?.let {
@@ -355,33 +326,20 @@ class TodoViewModel : BaseViewModel() {
         }
     }
 
-    private fun syncRemoteFromLocal(syncTime: Long) {
-        viewModelScope.launch(Dispatchers.IO) {
-            TodoDatabase.instance.todoDao().apply {
-                queryAll()?.let {
-                    pushTodo(TodoListPushWrapper(it, getLastModifyTime(), 1, 0))
-                }
+    // 是否是首次使用
+    private fun isFirstUse(): Boolean =
+        appContext.getSp("newUser").getBoolean("TODO_NEW_USE", true)
 
-                // 得到本地数据库中被删除的元素
-                val deletedIds = allTodo.value?.todoArray
-                    ?.filterNot { it in queryAll()!! }
-                    ?.map { it.todoId }
-                    ?.toLongArray() ?: longArrayOf()
-
-                if (deletedIds.isNotEmpty()) {
-                    delTodo(DelPushWrapper(deletedIds.toList(), syncTime))
-                }
-            }
+    private fun setOldUse() {
+        appContext.getSp("newUser").edit().apply {
+            putBoolean("TODO_NEW_USE", false)
+            commit()
         }
     }
 
-    private fun syncLocalFromRemote() {
-        viewModelScope.launch(Dispatchers.IO) {
-            TodoDatabase.instance.todoDao().apply {
-                deleteAll()
-                allTodo.value?.todoArray?.let { insertAll(it) }
-            }
-        }
+    // 是否是本地修改
+    private fun isLocalModify(): Boolean{
+        return getLastModifyTime() - getLastSyncTime() > 1000L
     }
 
 }

@@ -54,7 +54,7 @@ interface TodoApiService {
     @GET("/magipoke-todo/sync-time")
     fun getLastSyncTime(
         @Query("sync_time")
-        sync_time: Long
+        syncTime: Long
     ): Single<ApiWrapper<SyncTime>>
 
     /**
