@@ -67,12 +67,10 @@
             android:layout_marginBottom="41dp"
             android:fontFamily="@font/impact"
             android:gravity="bottom"
-            android:text="null"
+            android:text="X"
             android:textColor="@color/sport_feed_text_color"
             android:textSize="40sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/sport_tv_feed_other_need"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sport_fl_feed_header"
             tools:ignore="HardcodedText" />
@@ -106,12 +104,12 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/impact"
             android:gravity="center"
-            android:text="null"
+            android:text="Y"
             android:textColor="@color/sport_feed_text_color"
             android:textSize="40sp"
             app:layout_constraintBottom_toBottomOf="@+id/sport_tv_feed_run_need"
-            app:layout_constraintEnd_toStartOf="@+id/sport_tv_feed_award"
-            app:layout_constraintStart_toEndOf="@+id/sport_tv_feed_run_need"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/sport_tv_feed_run_need"
             tools:ignore="HardcodedText" />
 
@@ -145,12 +143,11 @@
             android:layout_marginEnd="53dp"
             android:fontFamily="@font/impact"
             android:gravity="center"
-            android:text="null"
+            android:text="Z"
             android:textColor="@color/sport_feed_text_color"
             android:textSize="40sp"
             app:layout_constraintBottom_toBottomOf="@+id/sport_tv_feed_other_need"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/sport_tv_feed_other_need"
             app:layout_constraintTop_toTopOf="@+id/sport_tv_feed_other_need"
             tools:ignore="HardcodedText" />
 

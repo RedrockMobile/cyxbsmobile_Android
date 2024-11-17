@@ -1,7 +1,6 @@
 package com.mredrock.cyxbs.discover.grades.ui.main
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
@@ -16,7 +15,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mredrock.cyxbs.api.account.IAccountService
@@ -24,17 +22,17 @@ import com.mredrock.cyxbs.api.account.IUserService
 import com.mredrock.cyxbs.common.config.DISCOVER_GRADES
 import com.mredrock.cyxbs.common.service.ServiceManager
 import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
-import com.mredrock.cyxbs.common.utils.extensions.pressToZoomOut
-import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.common.webView.LiteJsWebView
-import com.mredrock.cyxbs.config.route.LOGIN_BIND_IDS
 import com.mredrock.cyxbs.discover.grades.R
 import com.mredrock.cyxbs.discover.grades.bean.Exam
 import com.mredrock.cyxbs.discover.grades.bean.analyze.isSuccessful
 import com.mredrock.cyxbs.discover.grades.ui.adapter.ExamAdapter
 import com.mredrock.cyxbs.discover.grades.ui.fragment.GPAFragment
-import com.mredrock.cyxbs.discover.grades.ui.fragment.NoBindFragment
+import com.mredrock.cyxbs.discover.grades.ui.fragment.NoDataFragment
 import com.mredrock.cyxbs.discover.grades.ui.viewModel.ContainerViewModel
+import com.mredrock.cyxbs.lib.utils.extensions.gone
+import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.mredrock.cyxbs.lib.utils.extensions.visible
 import de.hdodenhof.circleimageview.CircleImageView
 
 
@@ -54,7 +52,7 @@ class ContainerActivity : BaseViewModelActivity<ContainerViewModel>() {
     private val data = mutableListOf<Exam>()
 
 
-    private val mTvGradesNoBind by R.id.tv_grades_no_bind.view<TextView>()
+    private val mTvGradesRefresh by R.id.tv_grades_no_refresh.view<TextView>()
     private val mRvExamMain by R.id.rv_exam_main.view<RecyclerView>()
     private val mTvGradesStuNum by R.id.tv_grades_stuNum.view<TextView>()
     private val parent by R.id.fl_grades_bottom_sheet.view<FrameLayout>()
@@ -89,44 +87,20 @@ class ContainerActivity : BaseViewModelActivity<ContainerViewModel>() {
         initExam()
         initBottomSheet()
         initObserver()
-        viewModel.isContainerActivity()
-        viewModel.getAnalyzeData()
-    }
-
-    override fun onNewIntent(intent: Intent) {
-        super.onNewIntent(intent)
-        initExam()
-        initBottomSheet()
-        initObserver()
-        viewModel.isContainerActivity()
-        viewModel.getAnalyzeData()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        initBottomSheet()
-        initObserver()
         viewModel.getAnalyzeData()
     }
 
     private fun initObserver() {
         viewModel.analyzeData.observe {
             if (it.isSuccessful) {
-                mTvGradesNoBind.text = "已绑定"
+                mTvGradesRefresh.gone()
                 replaceFragment(GPAFragment())
             } else {
-                // 未绑定
-                mTvGradesNoBind.text = getString(R.string.grades_no_bind_stdNum)
-                replaceFragment(NoBindFragment())
-            }
-        }
-        // 监听isBinding的变化 改变按钮点击事件
-        viewModel.isBinding.observe {
-            if (!it) {
-                // 当前未绑定账号，点击前往绑定账号界面
-                mTvGradesNoBind.setOnSingleClickListener { v ->
-                    v.pressToZoomOut()
-                    ARouter.getInstance().build(LOGIN_BIND_IDS).navigation()
+                mTvGradesRefresh.visible()
+                mTvGradesRefresh.text = getString(R.string.grades_no_data_stdNum)
+                replaceFragment(NoDataFragment())
+                mTvGradesRefresh.setOnSingleClickListener {
+                    viewModel.getAnalyzeData() // 刷新数据
                 }
             }
         }

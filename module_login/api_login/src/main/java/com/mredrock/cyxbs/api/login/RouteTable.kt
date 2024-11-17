@@ -8,5 +8,3 @@ package com.mredrock.cyxbs.api.login
  */
 
 const val LOGIN_SERVICE = "/login/service"
-
-const val LOGIN_BIND_SERVICE = "/login/bind/service"

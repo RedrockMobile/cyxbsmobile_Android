@@ -2,24 +2,20 @@ package com.mredrock.cyxbs.sport.ui.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.core.view.postDelayed
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
-import com.mredrock.cyxbs.config.route.DISCOVER_SPORT
-import com.mredrock.cyxbs.config.route.LOGIN_BIND_IDS
-import com.mredrock.cyxbs.lib.base.ui.BaseBindActivity
-import com.mredrock.cyxbs.lib.utils.extensions.*
 import com.mredrock.cyxbs.config.config.SchoolCalendar
+import com.mredrock.cyxbs.config.route.DISCOVER_SPORT
+import com.mredrock.cyxbs.lib.base.ui.BaseBindActivity
+import com.mredrock.cyxbs.lib.utils.extensions.gone
+import com.mredrock.cyxbs.lib.utils.extensions.setOnDoubleClickListener
+import com.mredrock.cyxbs.lib.utils.extensions.visible
 import com.mredrock.cyxbs.sport.R
 import com.mredrock.cyxbs.sport.databinding.SportActivitySportDetailBinding
 import com.mredrock.cyxbs.sport.model.SportDetailBean
 import com.mredrock.cyxbs.sport.ui.adapter.SportRvAdapter
-import com.mredrock.cyxbs.sport.ui.viewmodel.SportDetailViewModel
-import com.mredrock.cyxbs.sport.util.sSpIdsIsBind
-import java.util.*
-import kotlin.random.Random
+import com.mredrock.cyxbs.sport.model.SportDetailRepository
+import java.util.Calendar
 
 /**
  * @author : why
@@ -45,44 +41,33 @@ class SportDetailActivity : BaseBindActivity<SportActivitySportDetailBinding>() 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (!sSpIdsIsBind) {
-            "请先绑定教务在线才能继续使用哦~".toast()
-            ARouter.getInstance().build(LOGIN_BIND_IDS).navigation()
-            finish()
-        }
         //初始化
         init()
         //设置右上角的时间
         setTime()
         //获取ViewModel
-        val vm = ViewModelProvider(this).get(SportDetailViewModel::class.java)
         binding.run {
             //设置刷新监听
-            if (!mIsHoliday) {
-                //未放假则正常刷新
-                sportSrlDetailList.setOnRefreshListener {
-                    // 应产品要求，该刷新作为摆设，因为每次刷新都是登录一次教务在线，容易被冻结账号
-                    sportSrlDetailList.postDelayed(Random.nextLong(300, 800)) {
-                        sportSrlDetailList.finishRefresh()
-                    }
-                }
-            } else {
+            if (mIsHoliday) {
                 //放假则直接结束刷新
                 sportSrlDetailList.setEnableRefresh(false)
-            }
-        }
-        //出错时结束刷新并设置提示图片和文字
-        vm.isError.observe(this) {
-            //若不处于放假中则显示错误页面
-            if (it && !mIsHoliday) {
-                showError()
+            } else {
+                sportSrlDetailList.setEnableRefresh(true)
+                sportSrlDetailList.setOnRefreshListener {
+                    SportDetailRepository.refresh() // 刷新新数据
+                }
             }
         }
         //添加数据
-        vm.sportData.observe(this) { bean ->
-            loadData(bean)
-            //设置刷新完成
+        SportDetailRepository.sportData.observe { result ->
             binding.sportSrlDetailList.finishRefresh()
+            result.onSuccess {
+                loadData(it)
+            }.onFailure {
+                if (!mIsHoliday) {
+                    showError()
+                }
+            }
         }
     }
 

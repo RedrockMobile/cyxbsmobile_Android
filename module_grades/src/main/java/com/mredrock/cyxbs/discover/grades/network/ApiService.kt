@@ -30,9 +30,6 @@ interface ApiService {
     @POST("/magipoke-jwzx/examReexam")
     fun getReExam(@Field("stuNum") stu: String): Observable<RedrockApiWrapper<List<Exam>>>
 
-    @POST("/magipoke/ids/unbind")
-    fun unbindIds(): Observable<RedrockApiStatus>
-
     @GET("/magipoke/gpa")
     fun getAnalyzeData(): Observable<GPAStatus>
 

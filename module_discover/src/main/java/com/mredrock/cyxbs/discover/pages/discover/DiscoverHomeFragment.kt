@@ -25,6 +25,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
 import com.mredrock.cyxbs.api.account.IAccountService
 import com.mredrock.cyxbs.api.electricity.IElectricityService
+import com.mredrock.cyxbs.api.sport.ISportService
 import com.mredrock.cyxbs.api.todo.ITodoService
 import com.mredrock.cyxbs.common.component.CyxbsToast
 import com.mredrock.cyxbs.common.component.SpacesHorizontalItemDecoration
@@ -290,12 +291,10 @@ class DiscoverHomeFragment : BaseViewModelFragment<DiscoverHomeViewModel>() {
     }
 
     private fun initFeeds() {
-        /**
-         * TODO 关闭服务 feed
-         */
-//        addFeedFragment(ISportService::class.impl.getSportFeed())
+        addFeedFragment(ISportService::class.impl.getSportFeed())
         addFeedFragment(ServiceManager(ITodoService::class).getTodoFeed())
         addFeedFragment(ServiceManager(IElectricityService::class).getElectricityFeed())
+        // 临时关闭服务，待后续网校使用正规渠道拿到数据后再开启
 //        addFeedFragment(ServiceManager(IVolunteerService::class).getVolunteerFeed())
         //处理手机屏幕过长导致feed无法填充满下方的情况
         ll_discover_feeds.post {
