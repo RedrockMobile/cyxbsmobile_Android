@@ -25,6 +25,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
 import com.mredrock.cyxbs.api.account.IAccountService
 import com.mredrock.cyxbs.api.electricity.IElectricityService
+import com.mredrock.cyxbs.api.sport.ISportService
 import com.mredrock.cyxbs.api.todo.ITodoService
 import com.mredrock.cyxbs.common.component.CyxbsToast
 import com.mredrock.cyxbs.common.component.SpacesHorizontalItemDecoration
@@ -293,7 +294,7 @@ class DiscoverHomeFragment : BaseViewModelFragment<DiscoverHomeViewModel>() {
         /**
          * TODO 关闭服务 feed
          */
-//        addFeedFragment(ISportService::class.impl.getSportFeed())
+        addFeedFragment(ISportService::class.impl.getSportFeed())
         addFeedFragment(ServiceManager(ITodoService::class).getTodoFeed())
         addFeedFragment(ServiceManager(IElectricityService::class).getElectricityFeed())
 //        addFeedFragment(ServiceManager(IVolunteerService::class).getVolunteerFeed())
