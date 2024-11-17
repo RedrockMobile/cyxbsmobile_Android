@@ -82,7 +82,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/tv_grades_no_bind"
+                android:id="@+id/tv_grades_no_refresh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/grades_exam_shape_round"

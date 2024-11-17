@@ -19,11 +19,6 @@ class DefaultPageInterceptor: IInterceptor {
     //教务在线信息
     DISCOVER_NEWS,
     DISCOVER_NEWS_ITEM,
-    //体育打卡
-//    DISCOVER_SPORT,
-//    DISCOVER_SPORT_FEED,
-    //空教室
-//    DISCOVER_EMPTY_ROOM,
     //我的考试
     DISCOVER_GRADES,
     //志愿服务

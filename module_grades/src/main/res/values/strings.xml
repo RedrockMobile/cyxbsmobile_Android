@@ -11,8 +11,8 @@
     <string name="grades_bottom_sheet_bind_success">绑定成功</string>
     <string name="grades_bottom_sheet_bind_wrong">账号或密码错误</string>
     <string name="grades_bottom_sheet_bind_fail">绑定失败</string>
-    <string name="grades_no_bind_stdNum" tools:ignore="ExtraTranslation">未绑定</string>
-    <string name="grades_no_bind_text">你还没有绑定哦</string>
+    <string name="grades_no_data_stdNum" tools:ignore="ExtraTranslation">刷新</string>
+    <string name="grades_no_data_text">数据请求失败了 QAQ</string>
     <!--gpa-->
     <string name="grades_bottom_sheet_title">学分成绩</string>
     <string name="grades_bottom_sheet_gpa">平均绩点</string>

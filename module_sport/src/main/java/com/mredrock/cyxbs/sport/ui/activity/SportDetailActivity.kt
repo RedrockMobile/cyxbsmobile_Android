@@ -2,7 +2,6 @@ package com.mredrock.cyxbs.sport.ui.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.mredrock.cyxbs.config.config.SchoolCalendar
@@ -15,7 +14,7 @@ import com.mredrock.cyxbs.sport.R
 import com.mredrock.cyxbs.sport.databinding.SportActivitySportDetailBinding
 import com.mredrock.cyxbs.sport.model.SportDetailBean
 import com.mredrock.cyxbs.sport.ui.adapter.SportRvAdapter
-import com.mredrock.cyxbs.sport.ui.viewmodel.SportDetailViewModel
+import com.mredrock.cyxbs.sport.model.SportDetailRepository
 import java.util.Calendar
 
 /**
@@ -47,26 +46,28 @@ class SportDetailActivity : BaseBindActivity<SportActivitySportDetailBinding>() 
         //设置右上角的时间
         setTime()
         //获取ViewModel
-        val vm = ViewModelProvider(this).get(SportDetailViewModel::class.java)
         binding.run {
             //设置刷新监听
             if (mIsHoliday) {
                 //放假则直接结束刷新
                 sportSrlDetailList.setEnableRefresh(false)
-            }
-        }
-        //出错时结束刷新并设置提示图片和文字
-        vm.isError.observe(this) {
-            //若不处于放假中则显示错误页面
-            if (it && !mIsHoliday) {
-                showError()
+            } else {
+                sportSrlDetailList.setEnableRefresh(true)
+                sportSrlDetailList.setOnRefreshListener {
+                    SportDetailRepository.refresh() // 刷新新数据
+                }
             }
         }
         //添加数据
-        vm.sportData.observe(this) { bean ->
-            loadData(bean)
-            //设置刷新完成
+        SportDetailRepository.sportData.observe { result ->
             binding.sportSrlDetailList.finishRefresh()
+            result.onSuccess {
+                loadData(it)
+            }.onFailure {
+                if (!mIsHoliday) {
+                    showError()
+                }
+            }
         }
     }
 
