@@ -12,52 +12,46 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import android.widget.ViewFlipper
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.bumptech.glide.Glide
 import com.mredrock.cyxbs.api.account.IAccountService
 import com.mredrock.cyxbs.api.electricity.IElectricityService
 import com.mredrock.cyxbs.api.sport.ISportService
 import com.mredrock.cyxbs.api.todo.ITodoService
-import com.mredrock.cyxbs.common.component.CyxbsToast
-import com.mredrock.cyxbs.common.component.SpacesHorizontalItemDecoration
-import com.mredrock.cyxbs.common.config.DISCOVER_ENTRY
-import com.mredrock.cyxbs.common.config.DISCOVER_NEWS
-import com.mredrock.cyxbs.common.config.DISCOVER_NEWS_ITEM
-import com.mredrock.cyxbs.common.config.MINE_CHECK_IN
-import com.mredrock.cyxbs.common.config.NOTIFICATION_HOME
-import com.mredrock.cyxbs.common.service.ServiceManager
-import com.mredrock.cyxbs.common.service.impl
-import com.mredrock.cyxbs.common.ui.BaseViewModelFragment
-import com.mredrock.cyxbs.common.utils.Num2CN
-import com.mredrock.cyxbs.common.utils.SchoolCalendar
-import com.mredrock.cyxbs.common.utils.extensions.doIfLogin
-import com.mredrock.cyxbs.common.utils.extensions.dp2px
+import com.mredrock.cyxbs.discover.utils.SpacesHorizontalItemDecoration
+import com.mredrock.cyxbs.config.config.SchoolCalendar
+import com.mredrock.cyxbs.config.route.DISCOVER_ENTRY
+import com.mredrock.cyxbs.config.route.DISCOVER_NEWS
+import com.mredrock.cyxbs.config.route.DISCOVER_NEWS_ITEM
+import com.mredrock.cyxbs.config.route.MINE_CHECK_IN
+import com.mredrock.cyxbs.config.route.NOTIFICATION_HOME
 import com.mredrock.cyxbs.discover.R
-import com.mredrock.cyxbs.discover.pages.RollerViewActivity
 import com.mredrock.cyxbs.discover.pages.discover.adapter.DiscoverMoreFunctionRvAdapter
+import com.mredrock.cyxbs.discover.pages.discover.adapter.RollerViewInfoAdapter
 import com.mredrock.cyxbs.discover.utils.IS_SWITCH1_SELECT
 import com.mredrock.cyxbs.discover.utils.MoreFunctionProvider
 import com.mredrock.cyxbs.discover.utils.NotificationSp
 import com.mredrock.cyxbs.discover.widget.IndicatorView
-import com.mredrock.cyxbs.lib.utils.extensions.dp2pxF
+import com.mredrock.cyxbs.lib.base.operations.doIfLogin
+import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.mredrock.cyxbs.lib.utils.extensions.dp2px
 import com.mredrock.cyxbs.lib.utils.extensions.gone
 import com.mredrock.cyxbs.lib.utils.extensions.processLifecycleScope
 import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.lib.utils.extensions.visible
 import com.mredrock.cyxbs.lib.utils.logger.TrackingUtils
-import com.mredrock.cyxbs.lib.utils.logger.event.ClickEvent
+import com.mredrock.cyxbs.lib.utils.service.ServiceManager
+import com.mredrock.cyxbs.lib.utils.service.impl
+import com.mredrock.cyxbs.lib.utils.utils.get.Num2CN
 import com.ndhzs.slideshow.SlideShow
-import com.ndhzs.slideshow.adapter.ImageViewAdapter
-import com.ndhzs.slideshow.adapter.setImgAdapter
 import com.ndhzs.slideshow.viewpager.transformer.ScaleInTransformer
 import kotlinx.coroutines.launch
 import java.util.Calendar
@@ -69,7 +63,9 @@ import java.util.Calendar
  */
 
 @Route(path = DISCOVER_ENTRY)
-class DiscoverHomeFragment : BaseViewModelFragment<DiscoverHomeViewModel>() {
+class DiscoverHomeFragment : BaseFragment() {
+
+    private val viewModel by viewModels<DiscoverHomeViewModel>()
 
     private val fl_discover_home_jwnews by R.id.fl_discover_home_jwnews.view<FrameLayout>()
     private val tv_day by R.id.tv_day.view<AppCompatTextView>()
@@ -97,7 +93,7 @@ class DiscoverHomeFragment : BaseViewModelFragment<DiscoverHomeViewModel>() {
         initBanner()
         initHasUnread()
         view.findViewById<View>(R.id.iv_check_in).setOnSingleClickListener {
-            context?.doIfLogin("签到") {
+            doIfLogin("签到") {
                 ARouter.getInstance().build(MINE_CHECK_IN).navigation()
             }
         }
@@ -134,7 +130,7 @@ class DiscoverHomeFragment : BaseViewModelFragment<DiscoverHomeViewModel>() {
     private fun initHasUnread() {
         //将msg View设置为没有消息的状态
         iv_discover_msg.setBackgroundResource(R.drawable.discover_ic_home_msg)
-        activity?.doIfLogin {
+        doIfLogin {
             iv_discover_msg.setOnClickListener {
                 ARouter.getInstance().build(NOTIFICATION_HOME).navigation()
             }
@@ -187,30 +183,9 @@ class DiscoverHomeFragment : BaseViewModelFragment<DiscoverHomeViewModel>() {
                 .setAutoSlideTime(1200, 6000)
                 .setTimeInterpolator(DecelerateInterpolator())
                 .apply { offscreenPageLimit = 1 }
-                .setImgAdapter(
-                    ImageViewAdapter.Builder(list, 8.dp2pxF)
-                        .onCreate {
-                            view.scaleType = ImageView.ScaleType.CENTER_CROP
-                            view.setOnSingleClickListener {
-                                if (IAccountService::class.impl.getVerifyService().isLogin()) {
-                                    // banner位的点击埋点
-                                    processLifecycleScope.launch {
-                                        TrackingUtils.trackClickEvent(ClickEvent.CLICK_YLC_BANNER_ENTRY)
-                                    }
-                                }
-
-                                if (data.picture_goto_url.startsWith("http")) {
-                                    RollerViewActivity.startRollerViewActivity(data, requireContext())
-                                }
-                            }
-                        }.onBind {
-                            Glide.with(this@DiscoverHomeFragment)
-                                .load(data.picture_url)
-                                .placeholder(R.drawable.discover_ic_cyxbsv6)
-                                .error(R.drawable.discover_ic_cyxbsv6)
-                                .into(view)
-                        }
-                )
+                .setAdapter(RollerViewInfoAdapter(list))
+            // setImgAdapter 不可用，其中 ImageViewAdapter.Builder 类型推断在 Kt2 上有问题
+            // 所以使用普通 adapter 代替
         }
     }
 
@@ -244,7 +219,7 @@ class DiscoverHomeFragment : BaseViewModelFragment<DiscoverHomeViewModel>() {
             maxLines = 1
             overScrollMode = OVER_SCROLL_IF_CONTENT_SCROLLS
 
-            setTextColor(ContextCompat.getColor(context, com.mredrock.cyxbs.common.R.color.common_menu_font_color_found))
+            setTextColor(ContextCompat.getColor(context, R.color.discover_menu_font_color_found))
             textSize = 15f
             setOnSingleClickListener {
                 ARouter.getInstance().build(DISCOVER_NEWS_ITEM).withString("id", id).navigation()
@@ -258,13 +233,13 @@ class DiscoverHomeFragment : BaseViewModelFragment<DiscoverHomeViewModel>() {
         val picUrls = functions.map { it.resource }
         val texts = functions.map { getString(it.title) }
         rv_discover_more_function.apply {
-            SpacesHorizontalItemDecoration(context.dp2px(50F)).attach(this)
+            SpacesHorizontalItemDecoration(50F.dp2px).attach(this)
             layoutManager = LinearLayoutManager(context).apply {
                 orientation = LinearLayoutManager.HORIZONTAL
             }
             adapter = DiscoverMoreFunctionRvAdapter(picUrls, texts) {
                 if (it == functions.size - 1) {
-                    CyxbsToast.makeText(requireContext(), R.string.discover_more_function_notice_text, Toast.LENGTH_SHORT).show()
+                    getString(R.string.discover_more_function_notice_text).toast()
                 } else {
                     if (IAccountService::class.impl.getVerifyService().isLogin()) {
                         // 发现首页横排按钮点击埋点

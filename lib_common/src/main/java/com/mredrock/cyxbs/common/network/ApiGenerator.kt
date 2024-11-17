@@ -2,10 +2,7 @@ package com.mredrock.cyxbs.common.network
 
 import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 /**
@@ -21,8 +18,6 @@ object ApiGenerator {
     fun <T> getApiService(clazz: Class<T>) =
         ApiGenerator.getApiService(clazz)
 
-    fun <T> getApiService(retrofit: Retrofit, clazz: Class<T>) = retrofit.create(clazz)
-
     fun <T> getCommonApiService(clazz: Class<T>) =
         ApiGenerator.getCommonApiService(clazz)
     /**
@@ -37,8 +32,12 @@ object ApiGenerator {
      * @param tokenNeeded 是否需要添加token请求
      */
     fun createSelfRetrofit(
+        tokenNeeded: Boolean,
         retrofitConfig: ((Retrofit.Builder) -> Retrofit.Builder)? = null,
-        okHttpClientConfig: ((OkHttpClient.Builder) -> OkHttpClient.Builder)? = null,
-        tokenNeeded: Boolean
-    ): Retrofit=ApiGenerator.createSelfRetrofit(retrofitConfig, okHttpClientConfig, tokenNeeded)
+        okHttpClientConfig: ((OkHttpClient.Builder) -> OkHttpClient.Builder)? = null
+    ): Retrofit=ApiGenerator.createSelfRetrofit(
+      tokenNeeded = tokenNeeded,
+      retrofitConfig = retrofitConfig,
+      okHttpClientConfig = okHttpClientConfig
+    )
 }

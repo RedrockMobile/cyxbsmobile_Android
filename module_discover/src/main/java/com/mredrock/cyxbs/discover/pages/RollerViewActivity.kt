@@ -17,24 +17,20 @@ import android.view.MotionEvent
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.mredrock.cyxbs.common.BuildConfig
-import com.mredrock.cyxbs.common.component.CyxbsToast
-import com.mredrock.cyxbs.common.config.DIR_PHOTO
-import com.mredrock.cyxbs.common.ui.BaseActivity
-import com.mredrock.cyxbs.common.utils.extensions.loadBitmap
-import com.mredrock.cyxbs.common.utils.extensions.onTouch
-import com.mredrock.cyxbs.common.utils.extensions.startActivity
-import com.mredrock.cyxbs.common.webView.IAndroidWebView
-import com.mredrock.cyxbs.common.webView.LiteJsWebView
-import com.mredrock.cyxbs.common.webView.WebViewBaseCallBack
+import com.mredrock.cyxbs.config.dir.DIR_PHOTO
+import com.mredrock.cyxbs.config.view.JToolbar
+import com.mredrock.cyxbs.discover.BuildConfig
 import com.mredrock.cyxbs.discover.R
 import com.mredrock.cyxbs.discover.network.RollerViewInfo
 import com.mredrock.cyxbs.discover.pages.discover.webView.WebViewFactory
+import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.mredrock.cyxbs.lib.base.webView.IAndroidWebView
+import com.mredrock.cyxbs.lib.base.webView.LiteJsWebView
+import com.mredrock.cyxbs.lib.base.webView.WebViewBaseCallBack
 import com.mredrock.cyxbs.lib.utils.extensions.doPermissionAction
+import com.mredrock.cyxbs.lib.utils.extensions.loadBitmap
 import com.mredrock.cyxbs.lib.utils.extensions.saveImage
-import com.mredrock.cyxbs.lib.utils.extensions.toast
 
 
 class RollerViewActivity : BaseActivity() {
@@ -59,8 +55,9 @@ class RollerViewActivity : BaseActivity() {
     private var sensorEventListeners: ArrayList<SensorEventListener>? = null
     
     private val discover_web_view by R.id.discover_web_view.view<LiteJsWebView>()
+    private val common_toolbar by com.mredrock.cyxbs.config.R.id.toolbar.view<JToolbar>()
 
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint("SetJavaScriptEnabled", "ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -80,7 +77,7 @@ class RollerViewActivity : BaseActivity() {
                     }
                 },
                 {
-                    CyxbsToast.makeText(this, it, Toast.LENGTH_SHORT).show()
+                    it.toast()
                 }).produce()
         }
 
@@ -144,7 +141,7 @@ class RollerViewActivity : BaseActivity() {
             true
         }
         //这里为什么要用onTouch，因为clickListener收不到，需要提示用户超链接需要长按进入
-        discover_web_view.onTouch { view, motionEvent ->
+        discover_web_view.setOnTouchListener { view, motionEvent ->
             when(motionEvent.action){
                 MotionEvent.ACTION_DOWN ->{
                     val result = (view as WebView).hitTestResult
@@ -155,7 +152,7 @@ class RollerViewActivity : BaseActivity() {
                     }
                 }
             }
-
+            false
         }
     }
 
@@ -287,9 +284,10 @@ class RollerViewActivity : BaseActivity() {
 
     companion object {
         fun startRollerViewActivity(info: RollerViewInfo, context: Context) {
-            context.startActivity<RollerViewActivity>(
-                "URL" to info.picture_goto_url,
-                "Key" to info.keyword
+            context.startActivity(
+                Intent(context,RollerViewActivity::class.java)
+                    .putExtra("URL", info.picture_goto_url)
+                    .putExtra("Key", info.keyword)
             )
         }
     }

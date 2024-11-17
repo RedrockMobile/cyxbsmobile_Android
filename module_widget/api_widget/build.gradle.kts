@@ -1,9 +1,10 @@
 plugins {
-    id("module-manager")
+  id("manager.library")
 }
 
-
-dependApiCourse()
-dependApiAffair()
-
 useARouter()
+
+dependencies {
+  implementation(projects.moduleCourse.apiCourse)
+  implementation(projects.moduleAffair.apiAffair)
+}

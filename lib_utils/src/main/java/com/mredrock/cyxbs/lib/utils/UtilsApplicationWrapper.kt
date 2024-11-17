@@ -15,6 +15,7 @@ import com.mredrock.cyxbs.init.InitialService
 class UtilsApplicationWrapper : InitialService {
   
   companion object {
+    // 如果遇到未初始化，请使用 BaseApp.baseApp，这里因为依赖关系，只能这样注入
     internal lateinit var application: Application
       private set
   }

@@ -139,6 +139,7 @@ abstract class ContainerImpl : AbstractCourseBaseFragment(), ICourseContainer {
               if (view != null) {
                 if (view.isAttachedToWindow) {
                   // 只对还显示在屏幕内的 view 开启动画
+                  // 在移除前开启动画，父 View 会临时保存进 mDisappearingChildren 直到动画结束
                   startExitAnimation(view)
                 }
               }

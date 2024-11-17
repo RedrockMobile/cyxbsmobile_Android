@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.common.utils.extensions.pressToZoomOut
 import com.mredrock.cyxbs.discover.R
-import com.mredrock.cyxbs.common.utils.extensions.*
+import com.mredrock.cyxbs.lib.utils.extensions.pressToZoomOut
+import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
 
 
 /**

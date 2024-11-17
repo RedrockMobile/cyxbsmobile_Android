@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true"
     tools:context=".activity.WebContainerActivity">
 
-    <com.mredrock.cyxbs.common.webView.LiteJsWebView
+    <com.mredrock.cyxbs.lib.base.webView.LiteJsWebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

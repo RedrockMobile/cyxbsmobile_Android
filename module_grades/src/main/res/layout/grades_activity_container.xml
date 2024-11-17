@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/common_mine_sign_store_bg">
+    android:background="@color/gradle_toolbar_bg">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,11 +17,11 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/common_mine_sign_store_bg"
+            android:background="@color/gradle_toolbar_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/common_ic_back"
+            app:navigationIcon="@drawable/config_ic_back"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <FrameLayout
@@ -40,7 +40,7 @@
                 android:layout_height="match_parent"
                 android:visibility="visible" />
 
-            <com.mredrock.cyxbs.common.webView.LiteJsWebView
+            <com.mredrock.cyxbs.lib.base.webView.LiteJsWebView
                 android:id="@+id/wv_exam_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

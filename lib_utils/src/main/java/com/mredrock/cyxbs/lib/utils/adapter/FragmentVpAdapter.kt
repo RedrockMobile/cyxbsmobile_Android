@@ -49,7 +49,7 @@ open class FragmentVpAdapter private constructor(
   
   open fun add(fragment: Class<out Fragment>): FragmentVpAdapter {
     // 官方源码中在恢复 Fragment 时就是调用的这个反射方法，该方法应该不是很耗性能 :)
-    mFragments.add { fragment.newInstance() }
+    mFragments.add { fragment.getDeclaredConstructor().newInstance() }
     return this
   }
   

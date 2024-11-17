@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/common_window_background"
+    android:background="@color/config_window_background"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.mredrock.cyxbs.discover.emptyroom.ui.EmptyRoomActivity">
@@ -53,11 +53,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.mredrock.cyxbs.common.component.JCardViewPlus
+        <com.mredrock.cyxbs.config.view.JCardViewPlus
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:shadowColor="@color/common_secondary_window_background"
-            app:cardBackgroundColor="@color/common_secondary_window_background"
+            app:shadowColor="@color/config_secondary_window_background"
+            app:cardBackgroundColor="@color/config_secondary_window_background"
             app:cardCornerRadiusUpperLeft="16dp"
             app:cardCornerRadiusUpperRight="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -91,12 +91,12 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.3" />
 
-        <com.mredrock.cyxbs.common.component.JCardViewPlus
+        <com.mredrock.cyxbs.config.view.JCardViewPlus
             android:id="@+id/jc_building"
             android:layout_width="match_parent"
             android:layout_height="105dp"
-            app:shadowColor="@color/common_white_background"
-            app:cardBackgroundColor="@color/common_white_background"
+            app:shadowColor="@color/config_white_black"
+            app:cardBackgroundColor="@color/config_white_black"
             app:cardCornerRadiusUpperLeft="16dp"
             app:cardCornerRadiusUpperRight="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -125,7 +125,7 @@
             android:autoSizeTextType="uniform"
             app:tabBackground="@android:color/transparent"
             app:tabRippleColor="@android:color/transparent"
-            app:tabTextColor="@color/common_level_one_font_color"
+            app:tabTextColor="@color/config_level_one_font_color"
             style="@style/emptyroom_custom"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>

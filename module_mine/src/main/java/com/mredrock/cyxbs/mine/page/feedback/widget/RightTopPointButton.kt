@@ -52,16 +52,16 @@ class RightTopPointButton @JvmOverloads constructor(
         }
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         if (pointVisible){
             drawPoint(canvas)
         }
     }
 
-    private fun drawPoint(canvas: Canvas?) {
+    private fun drawPoint(canvas: Canvas) {
         val x: Float = width.toFloat()
-        canvas?.drawCircle(x - pointSize, pointSize, pointSize, paint)
+        canvas.drawCircle(x - pointSize, pointSize, pointSize, paint)
     }
 
 

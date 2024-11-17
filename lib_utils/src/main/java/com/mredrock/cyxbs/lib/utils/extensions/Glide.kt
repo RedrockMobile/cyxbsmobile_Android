@@ -13,8 +13,6 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.mredrock.cyxbs.config.R
 import com.mredrock.cyxbs.lib.utils.network.getBaseUrl
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlin.coroutines.resume
 
 /**
  * ...

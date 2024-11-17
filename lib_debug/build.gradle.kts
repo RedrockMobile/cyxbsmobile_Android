@@ -1,23 +1,22 @@
 plugins {
-  id("module-manager")
+  id("manager.library")
 }
 
-
-dependLibBase()
-dependLibUtils()
-dependLibConfig()
-
-dependApiInit()
-dependApiCrash()
-dependApiAccount()
+useAutoService()
 
 dependencies {
-  
+  implementation(projects.apiInit)
+  implementation(projects.libBase)
+  implementation(projects.libUtils)
+  implementation(projects.libConfig)
+  implementation(projects.libCrash.apiCrash)
+  implementation(projects.libAccount.apiAccount)
+
   // 依赖 LeakCanary，检查内存泄漏 https://github.com/square/leakcanary
-  implementation("com.squareup.leakcanary:leakcanary-android:2.10")
+  implementation(libs.leakcanary)
   
   /**
-   * 很牛逼的检测工具，debug 模式下摇一摇手机或者按三次手机中间顶部区域触发
+   * 很牛逼的 debug 检测工具，debug 模式下摇一摇手机或者按三次手机中间顶部区域触发
    *
    * 支持功能：
    * 1、网络请求监听
@@ -34,5 +33,5 @@ dependencies {
    * 3、Pandora 已停止维护，可以使用 doKit 进行代替
    * (doKit 在之前引入过，但因为不兼容AGP版本所以后面删除了，如果想再次引入，可参考 23/7/16 时“移除 doKit” 的 commit)
    */
-  implementation("com.github.whataa:pandora:androidx_v2.1.0")
+  implementation(libs.pandora)
 }

@@ -69,10 +69,8 @@ class CheckLineView @JvmOverloads constructor(
 
 
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas ?: return
-
         when (curAnimeProcess) {
             in 0f..100f -> {
                 drawLeftArc(curAnimeProcess, canvas)

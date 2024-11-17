@@ -1,9 +1,9 @@
 plugins {
-  id("module-manager")
+  id("manager.library")
 }
 
-
-dependRxjava()
-
-
 useARouter()
+
+dependencies {
+  implementation(libs.rxjava)
+}

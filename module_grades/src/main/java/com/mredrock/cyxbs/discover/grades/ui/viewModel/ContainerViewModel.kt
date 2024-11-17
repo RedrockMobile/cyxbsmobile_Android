@@ -7,15 +7,16 @@ package com.mredrock.cyxbs.discover.grades.ui.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mredrock.cyxbs.common.network.ApiGenerator
-import com.mredrock.cyxbs.common.utils.extensions.*
-import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
 import com.mredrock.cyxbs.discover.grades.R
 import com.mredrock.cyxbs.discover.grades.bean.Exam
 import com.mredrock.cyxbs.discover.grades.bean.Status
 import com.mredrock.cyxbs.discover.grades.bean.analyze.GPAStatus
+import com.mredrock.cyxbs.discover.grades.bean.analyze.isSuccessful
 import com.mredrock.cyxbs.discover.grades.network.ApiService
-import com.mredrock.cyxbs.lib.utils.extensions.unsafeSubscribeBy
+import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.mredrock.cyxbs.lib.utils.extensions.setSchedulers
+import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
+import com.mredrock.cyxbs.lib.utils.network.mapOrInterceptException
 import io.reactivex.rxjava3.core.Observable
 
 class ContainerViewModel : BaseViewModel() {
@@ -31,14 +32,12 @@ class ContainerViewModel : BaseViewModel() {
 
         Observable.merge(exam, reExam)
             .setSchedulers()
-            .mapOrThrowApiException()
-            .doOnErrorWithDefaultErrorHandler {
-                toastEvent.value = R.string.grades_no_exam_history
-                false
+            .mapOrInterceptException {
+                toast(R.string.grades_no_exam_history)
             }
-            .unsafeSubscribeBy {
+            .safeSubscribeBy {
                 examData.value = it
-            }.lifeCycle()
+            }
 
     }
 
@@ -52,16 +51,18 @@ class ContainerViewModel : BaseViewModel() {
             .doOnError {
                 toast("加载绩点失败")
             }
-            .unsafeSubscribeBy {
-                _analyzeData.postValue(it)
-            }.lifeCycle()
+            .safeSubscribeBy {
+                if (it.isSuccessful) {
+                    _analyzeData.postValue(it)
+                }
+            }
     }
 
     //获取当前采取的成绩展示方案
     fun getStatus() {
         apiService.getNowStatus()
             .setSchedulers()
-            .unsafeSubscribeBy {
+            .safeSubscribeBy {
                 it.data.let { status ->
                     nowStatus.postValue(status)
                 }

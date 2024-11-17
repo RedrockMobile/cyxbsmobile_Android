@@ -1,6 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
-
+// 开启模块的简化依赖方式，例如：module.course.api.course
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 /*
 * 这里每次新建模块都会 include，把它们删掉，因为已经默认 include 了

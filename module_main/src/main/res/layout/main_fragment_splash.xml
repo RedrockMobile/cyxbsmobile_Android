@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        tools:src="@drawable/main_ic_bg_splash_big"
+        tools:src="@drawable/config_ic_bg_splash_big"
         tools:ignore="ContentDescription" />
 
 </FrameLayout>

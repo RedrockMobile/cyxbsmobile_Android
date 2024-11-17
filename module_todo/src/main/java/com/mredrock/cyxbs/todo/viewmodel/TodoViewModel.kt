@@ -379,7 +379,7 @@ class TodoViewModel : BaseViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             TodoDatabase.instance.todoDao().apply {
                 deleteAll()
-                insertAll(allTodo.value?.todoArray)
+                allTodo.value?.todoArray?.let { insertAll(it) }
             }
         }
     }

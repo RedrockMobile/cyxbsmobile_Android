@@ -1,19 +1,19 @@
 plugins {
-    id("module-manager")
+  id("manager.library")
 }
 
-
-dependWheelPicker()
-dependLibBase()
-dependLibConfig()
-dependLibUtils()
-dependApiStore()
-//使用ARouter
 useARouter()
+useRoom()
 
-dependRoom()
+dependencies {
+  implementation(projects.libBase)
+  implementation(projects.libConfig)
+  implementation(projects.libUtils)
+  implementation(projects.moduleTodo.apiTodo)
+  implementation(projects.moduleStore.apiStore)
 
-//网络请求的库，有retrofit，okp，gson
-dependNetwork()
-//rxJava
-dependRxjava()
+  implementation(libs.bundles.projectBase)
+  implementation(libs.bundles.views)
+  implementation(libs.bundles.network)
+  implementation(libs.wheelPicker)
+}

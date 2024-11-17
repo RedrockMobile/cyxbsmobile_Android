@@ -2,15 +2,13 @@ package com.mredrock.cyxbs.electricity.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mredrock.cyxbs.common.bean.isSuccessful
-import com.mredrock.cyxbs.common.network.ApiGenerator
-import com.mredrock.cyxbs.common.network.exception.RedrockApiException
-import com.mredrock.cyxbs.common.utils.extensions.unsafeSubscribeBy
-import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
-import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
-import com.mredrock.cyxbs.common.viewmodel.event.SingleLiveEvent
 import com.mredrock.cyxbs.electricity.bean.ElecInf
 import com.mredrock.cyxbs.electricity.network.ApiService
+import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.mredrock.cyxbs.lib.utils.extensions.setSchedulers
+import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
+import com.mredrock.cyxbs.lib.utils.network.throwApiExceptionIfFail
+import kotlinx.coroutines.flow.MutableSharedFlow
 
 /**
  * Author: Hosigus
@@ -19,44 +17,44 @@ import com.mredrock.cyxbs.electricity.network.ApiService
  */
 class ChargeViewModel : BaseViewModel() {
     val chargeInfo: LiveData<ElecInf> = MutableLiveData()
-    val loadFailed = SingleLiveEvent<Boolean>()
+    val loadFailed = MutableSharedFlow<Boolean>()
+
     private val service: ApiService by lazy {
         ApiGenerator.getApiService(ApiService::class.java)
     }
 
     fun getCharge(building: String, room: String) {
         service.getElectricityInfo(building, room)
-                .map {
-                    if (it.isSuccessful) {
-                        it.elecInf
-                    } else {
-                        throw RedrockApiException(it.info, it.status)
-                    }
-                }
-                .setSchedulers()
-                .unsafeSubscribeBy {
-                    (chargeInfo as MutableLiveData).value = it
-                }.lifeCycle()
+            .throwApiExceptionIfFail()
+            .map {
+                it.elecInf
+            }
+            .setSchedulers()
+            .safeSubscribeBy {
+                (chargeInfo as MutableLiveData).value = it
+            }
     }
 
     fun preGetCharge() {
         service.getElectricityInfo()
-                .map {
-                    if (it.isSuccessful) {
-                        it.elecInf
-                    } else {
-                        throw RedrockApiException(it.info, it.status)
+            .throwApiExceptionIfFail()
+            .map {
+                it.elecInf
+            }
+            .setSchedulers()
+            .doOnError {
+                launch {
+                    loadFailed.emit(true)
+                }
+            }
+            .safeSubscribeBy {
+                if (it == null) {
+                    launch {
+                        loadFailed.emit(true)
                     }
                 }
-                .setSchedulers()
-                .doOnError {
-                    loadFailed.value = true
-                }
-                .unsafeSubscribeBy {
-                    if (it == null) loadFailed.value = true
-                    (chargeInfo as MutableLiveData).value = it
-                }
-                .lifeCycle()
+                (chargeInfo as MutableLiveData).value = it
+            }
     }
 
 }

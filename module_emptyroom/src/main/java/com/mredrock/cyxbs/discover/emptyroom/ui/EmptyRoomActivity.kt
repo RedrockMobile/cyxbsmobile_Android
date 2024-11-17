@@ -10,6 +10,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.Px
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -17,14 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayout
-import com.mredrock.cyxbs.common.component.CyxbsToast
-import com.mredrock.cyxbs.common.config.DISCOVER_EMPTY_ROOM
-import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
-import com.mredrock.cyxbs.common.utils.LogUtils
-import com.mredrock.cyxbs.common.utils.SchoolCalendar
-import com.mredrock.cyxbs.common.utils.extensions.dip
-import com.mredrock.cyxbs.common.utils.extensions.gone
-import com.mredrock.cyxbs.common.utils.extensions.visible
+import com.mredrock.cyxbs.config.config.SchoolCalendar
 import com.mredrock.cyxbs.discover.emptyroom.R
 import com.mredrock.cyxbs.discover.emptyroom.ui.adapter.EmptyRoomResultAdapter
 import com.mredrock.cyxbs.discover.emptyroom.ui.adapter.StringAdapter
@@ -37,11 +31,18 @@ import com.mredrock.cyxbs.discover.emptyroom.viewmodel.EmptyRoomViewModel.Compan
 import com.mredrock.cyxbs.discover.emptyroom.viewmodel.EmptyRoomViewModel.Companion.FINISH
 import com.mredrock.cyxbs.discover.emptyroom.viewmodel.EmptyRoomViewModel.Companion.LOADING
 import java.util.*
-import com.mredrock.cyxbs.common.utils.extensions.*
+import com.mredrock.cyxbs.config.route.DISCOVER_EMPTY_ROOM
+import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.mredrock.cyxbs.lib.utils.extensions.dp2px
+import com.mredrock.cyxbs.lib.utils.extensions.gone
+import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.mredrock.cyxbs.lib.utils.extensions.visible
 
 
 @Route(path = DISCOVER_EMPTY_ROOM)
-class EmptyRoomActivity : BaseViewModelActivity<EmptyRoomViewModel>(), OnItemSelectedChangeListener {
+class EmptyRoomActivity : BaseActivity(), OnItemSelectedChangeListener {
+
+    private val viewModel by viewModels<EmptyRoomViewModel>()
 
     private val weekdayApi = intArrayOf(1, 2, 3, 4, 5, 6, 7)
     private val buildingApi = intArrayOf(2, 3, 4, 5, 8)
@@ -111,8 +112,8 @@ class EmptyRoomActivity : BaseViewModelActivity<EmptyRoomViewModel>(), OnItemSel
                     textView.gravity = Gravity.CENTER
 //                    textView.setPadding(dip(15),dip(3),dip(15),dip(3))
 //                    textView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)
-                    textView.height = this@EmptyRoomActivity.dip(26)
-                    textView.width = this@EmptyRoomActivity.dip(59)
+                    textView.height = 26.dp2px
+                    textView.width = 59.dp2px
                     p0.customView = textView
                     onItemSelectedChange()
                 }
@@ -156,7 +157,7 @@ class EmptyRoomActivity : BaseViewModelActivity<EmptyRoomViewModel>(), OnItemSel
                 ERROR -> {
                     mIvQuerying.gone()
                     mRvResult.gone()
-                    CyxbsToast.makeText(this, "抱歉，数据获取失败", Toast.LENGTH_SHORT).show()
+                    "抱歉，数据获取失败".toast()
                 }
             }
         })
@@ -180,15 +181,15 @@ class EmptyRoomActivity : BaseViewModelActivity<EmptyRoomViewModel>(), OnItemSel
 
     private fun initSelectors() {
         initSelector(mMultiSelectorWeek, weekApi, 0, 0)
-        initSelector(mMultiSelectorWeekday, weekdayApi, SchoolCalendar().dayOfWeek - 1, 1)
-        initSelector(mMultiSelectorSection, sectionApi, -1, 3, middle = dip(1))
+        initSelector(mMultiSelectorWeekday, weekdayApi, (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + 5) % 7, 1)
+        initSelector(mMultiSelectorSection, sectionApi, -1, 3, middle = 1.dp2px)
         mMultiSelectorSection.setMinSelectedNum(1)
     }
 
     private fun initSelector(selector: MultiSelector, values: IntArray, defaultSelected: Int, tag: Int, isFullUp: Boolean = false, itemNumber: Int = 0, canScroll: Boolean = true, @Px head: Int = 0, @Px middle: Int = 0, @Px tail: Int = 0) {
         val initializer = ViewInitializer.Builder(this)
                 .horizontalLinearLayoutManager(canScroll)
-                .gap(dip(head), dip(middle), dip(tail))
+                .gap(head.dp2px, middle.dp2px, tail.dp2px)
                 .stringAdapter(selector, object : StringAdapter.LayoutWrapper() {
                     override val layoutId: Int
                         get() = R.layout.emptyroom_recycle_item_query_option
@@ -204,12 +205,12 @@ class EmptyRoomActivity : BaseViewModelActivity<EmptyRoomViewModel>(), OnItemSel
                             textView.setTextColor(ContextCompat.getColor(this@EmptyRoomActivity, R.color.emptyroom_selected))
                             textView.paint.isFakeBoldText = true
                         } else {
-                            textView.setTextColor(ContextCompat.getColor(this@EmptyRoomActivity, com.mredrock.cyxbs.common.R.color.common_level_two_font_color))
+                            textView.setTextColor(ContextCompat.getColor(this@EmptyRoomActivity, com.mredrock.cyxbs.config.R.color.config_level_two_font_color))
                             textView.paint.isFakeBoldText = false
                         }
                         textView.gravity = Gravity.CENTER
                         textView.background = drawable
-                        textView.height = dip(26)
+                        textView.height = 26.dp2px
                     }
                 }, isFullUp, itemNumber).build()
         selector.apply {
@@ -238,7 +239,6 @@ class EmptyRoomActivity : BaseViewModelActivity<EmptyRoomViewModel>(), OnItemSel
 
     private fun query() {
         val week = mMultiSelectorWeek.getSelectedValues()[0]
-        LogUtils.d("LJXiao","week $week")
         val weekday = mMultiSelectorWeekday.getSelectedValues()[0]
         val building = buildingApi[buildingPosition]
         val section = mMultiSelectorSection.getSelectedValues()

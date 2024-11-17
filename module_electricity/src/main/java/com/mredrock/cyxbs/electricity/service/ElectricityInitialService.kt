@@ -1,14 +1,17 @@
 package com.mredrock.cyxbs.electricity.service
 
 import android.annotation.SuppressLint
+import androidx.core.content.edit
 import com.google.auto.service.AutoService
 import com.mredrock.cyxbs.api.account.IAccountService
 import com.mredrock.cyxbs.api.account.IUserStateService
-import com.mredrock.cyxbs.common.service.impl
-import com.mredrock.cyxbs.common.utils.extensions.defaultSharedPreferences
-import com.mredrock.cyxbs.common.utils.extensions.editor
+import com.mredrock.cyxbs.config.sp.defaultSp
+import com.mredrock.cyxbs.electricity.config.SP_BUILDING_FOOT_KEY
+import com.mredrock.cyxbs.electricity.config.SP_BUILDING_HEAD_KEY
+import com.mredrock.cyxbs.electricity.config.SP_ROOM_KEY
 import com.mredrock.cyxbs.init.InitialManager
 import com.mredrock.cyxbs.init.InitialService
+import com.mredrock.cyxbs.lib.utils.service.impl
 
 /**
  * .
@@ -27,10 +30,10 @@ class ElectricityInitialService : InitialService {
             .subscribe {
                 if (it == IUserStateService.UserState.NOT_LOGIN) {
                     // 移植的旧的逻辑
-                    manager.application.defaultSharedPreferences.editor {
-                        remove("select_building_head_position")
-                        remove("select_building_foot_position")
-                        remove("select_room_position")
+                    defaultSp.edit {
+                        remove(SP_BUILDING_HEAD_KEY)
+                        remove(SP_BUILDING_FOOT_KEY)
+                        remove(SP_ROOM_KEY)
                     }
                 }
             }

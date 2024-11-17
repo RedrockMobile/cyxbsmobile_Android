@@ -1,5 +1,9 @@
 plugins {
-  id("module-manager")
+  id("manager.library")
 }
 
 useARouter()
+
+dependencies {
+  implementation(libs.kotlinx.coroutines)
+}

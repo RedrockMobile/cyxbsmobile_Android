@@ -1,6 +1,5 @@
 package com.mredrock.cyxbs.discover.network
 
-import com.mredrock.cyxbs.common.bean.RedrockApiWrapper
 import com.mredrock.cyxbs.discover.API_ROLLER_VIEW
 import com.mredrock.cyxbs.discover.bean.ItineraryMsgBean
 import com.mredrock.cyxbs.discover.bean.NewsListItem
@@ -19,16 +18,16 @@ import retrofit2.http.Query
 interface ApiServices {
 
     @GET(API_ROLLER_VIEW)
-    fun getRollerViewInfo(): Observable<RedrockApiWrapper<List<RollerViewInfo>>>
+    fun getRollerViewInfo(): Observable<ApiWrapper<List<RollerViewInfo>>>
 
     @GET("/magipoke-jwzx/jwNews/list")
-    fun getNewsList(@Query("page") page: Int): Observable<RedrockApiWrapper<List<NewsListItem>>>
+    fun getNewsList(@Query("page") page: Int): Observable<ApiWrapper<List<NewsListItem>>>
 
     /**
      * 是否有未读信息
      */
     @GET("/message-system/user/msgHasRead")
-    fun getHashUnreadMsg() : Observable<RedrockApiWrapper<UnreadData>>
+    fun getHashUnreadMsg() : Observable<ApiWrapper<UnreadData>>
 
     // 获取notification模块中的活动通知消息
     @GET("/magipoke-ufield/message/list/")

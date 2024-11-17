@@ -29,7 +29,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="@string/grades_no_data_text"
-            android:textColor="@color/common_level_two_font_color"
+            android:textColor="@color/config_level_two_font_color"
             android:textSize="12sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

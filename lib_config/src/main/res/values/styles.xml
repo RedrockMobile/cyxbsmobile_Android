@@ -18,6 +18,11 @@
         <item name="md_color_button_text">@color/config_level_two_font_color</item>
     </style>
 
+    <!--    闪屏页,用于系统在创建app进程之前显示的预览图片-->
+    <style name="SplashTheme" parent="ConfigAppTheme" tools:ignore="ResourceName">
+        <item name="android:windowBackground">@drawable/config_ic_bg_splash_big</item>
+    </style>
+
     <style name="ConfigAppTheme.FullScreen" parent="ConfigAppTheme">
         <item name="android:windowFullscreen">true</item>
     </style>

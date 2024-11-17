@@ -1,23 +1,21 @@
 plugins {
-    id("module-debug")
+  id("manager.libraryApp")
 }
 
-
-dependApiAccount()
-
-dependPhotoView()
-dependGlide()
-dependRxjava()
-dependNetwork()
-
-dependLibBase()
-dependLibUtils()
-dependLibConfig()
+useARouter()
+useDataBinding()
 
 dependencies {
-    // 20 级郭祥瑞封装的 Banner 库，如果有问题，欢迎来联系 👀
-    implementation("io.github.985892345:SlideShow:2.0.1")
-}
+  implementation(projects.libBase)
+  implementation(projects.libConfig)
+  implementation(projects.libUtils)
+  implementation(projects.libAccount.apiAccount)
+  implementation(projects.moduleStore.apiStore)
 
-useDataBinding()
-useARouter()
+  implementation(libs.bundles.projectBase)
+  implementation(libs.bundles.views)
+  implementation(libs.bundles.network)
+  implementation(libs.glide)
+  implementation(libs.photoView)
+  implementation(libs.slideShow)
+}

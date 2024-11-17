@@ -1,24 +1,23 @@
 plugins {
-    id("module-manager")
+  id("manager.library")
 }
 
-
-dependGlide(true)
-dependRxjava()
-dependNetwork()
-dependLPhotoPicker()
-
-dependLibCommon() // TODO common 模块不再使用，新模块请依赖 base 和 utils 模块
-dependLibUtils()
+useARouter()
+useDataBinding()
+useGlide() // TODO 待清理 glide 的 kapt 后改为直接依赖 glide
 
 dependencies {
-    /*
-    * 这里只添加确认模块独用库，添加请之前全局搜索，是否已经依赖
-    * 公用库请不要添加到这里
-    * */
-    // TODO 这个是之前强神从 implementation 改成 compileOnly 的，但很奇怪的是能跑起来，应该是存在间接依赖
-    compileOnly("com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0")
-}
+  implementation(projects.libCommon) // TODO common 模块不再使用，新模块请依赖 base 和 utils 模块
+  implementation(projects.libBase)
+  implementation(projects.libConfig)
+  implementation(projects.libUtils)
 
-useDataBinding()
-useARouter()
+  implementation(libs.bundles.projectBase)
+  implementation(libs.bundles.views)
+  implementation(libs.bundles.network)
+  implementation(libs.lPhotoPicker)
+  implementation(libs.glide)
+
+  // TODO 这个是之前强神从 implementation 改成 compileOnly 的，但很奇怪的是能跑起来，应该是存在间接依赖
+  compileOnly("com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0")
+}

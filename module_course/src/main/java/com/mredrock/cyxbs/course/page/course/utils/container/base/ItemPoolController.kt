@@ -60,9 +60,7 @@ abstract class ItemPoolController<Item, Data : Any>(
               val data = item.data
               if (mOldDataMap.remove(data) != null) {
                 // 移除成功说明是通过其他方式移除的
-                if (item.onRecycle()) {
-                  mRecyclePool.add(item)
-                }
+                // 此时我们无法保证 item 是允许被回收的，所以就不进行回收操作
                 removeDataFromOldList(data) // 这里是通过其他方式删除的
               }
               if (view != null) {
@@ -107,12 +105,10 @@ abstract class ItemPoolController<Item, Data : Any>(
     val item = mOldDataMap[oldData]
     if (item != null) {
       mOldDataMap.remove(oldData)
-      if (item.onRecycle()) {
-        mRecyclePool.add(item)
-      }
-      // removeItem(item) 需要放在 mOldDataMap.remove() 和 mFreePool.add() 后
+      // removeItem(item) 需要放在 mOldDataMap.remove() 后
       // 因为在 onItemRemovedAfter() 回调中会再次 remove() 和 add()
       removeItem(item)
+      putRecycleItem(item)
     }
   }
   
@@ -124,6 +120,14 @@ abstract class ItemPoolController<Item, Data : Any>(
     }
     // 如果为 null 的话，说明 mOldDataMap 被提前 remove 了，可能是你提前把 view 给 remove 掉了
     // 然后触发了上面的 onItemRemovedAfter() 回调
+  }
+
+  private fun putRecycleItem(item: Item) {
+    if (item.onRecycle()) {
+      if (mRecyclePool.size < 10) {
+        mRecyclePool.add(item)
+      }
+    }
   }
   
   /**

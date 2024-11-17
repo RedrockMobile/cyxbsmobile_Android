@@ -8,15 +8,12 @@ import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.mredrock.cyxbs.common.ui.BaseActivity
+import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.protocol.R
-import com.mredrock.cyxbs.protocol.config.PROTOCOL_WEB_CONTAINER
 
 
-@Route(path = PROTOCOL_WEB_CONTAINER)
 class WebContainerActivity : BaseActivity() {
-    
+
     companion object {
         const val URI = "uri"
         

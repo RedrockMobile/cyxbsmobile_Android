@@ -1,8 +1,5 @@
 package com.mredrock.cyxbs.lib.base.utils
 
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
-import com.umeng.analytics.MobclickAgent
-
 /**
  * 该类用于给其他模块提供 Umeng 相关功能
  *
@@ -13,14 +10,13 @@ object Umeng {
   
   // 注册成功会返回 deviceId，是推送消息的唯一标志
   var deviceId: String? = null
+
+  // 由 module_app 模块实现，base 模块不应该依赖 Umeng
+  var umengListener: ((Event) -> Unit)? = null
   
   // 发送自定义事件
   fun sendEvent(event: Event) {
-    if (event.map != null) {
-      MobclickAgent.onEventObject(appContext, event.eventId, event.map)
-    } else {
-      MobclickAgent.onEvent(appContext, event.eventId)
-    }
+    umengListener?.invoke(event)
   }
   
   // Umeng 的自定义事件类

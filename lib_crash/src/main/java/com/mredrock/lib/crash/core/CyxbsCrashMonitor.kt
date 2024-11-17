@@ -4,15 +4,14 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.os.*
-import com.google.gson.Gson
+import com.mredrock.cyxbs.lib.utils.extensions.GsonDefault
 import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.extensions.getSp
 import com.mredrock.cyxbs.lib.utils.extensions.toast
 import com.mredrock.cyxbs.lib.utils.utils.LogLocal
+import com.mredrock.cyxbs.lib.utils.utils.impl.ActivityLifecycleCallbacksImpl
 import com.mredrock.lib.crash.core.interceptor.*
-import com.mredrock.lib.crash.util.noOpDelegate
 import com.mredrock.lib.crash.util.reStartApp
-import com.tencent.bugly.crashreport.CrashReport
 import java.lang.reflect.Field
 
 /**
@@ -31,6 +30,9 @@ import java.lang.reflect.Field
  */
 
 object CyxbsCrashMonitor : Thread.UncaughtExceptionHandler {
+
+    // 提供给 application 模块向外暴露异常用于上传
+    var crashReport: ((Throwable) -> Unit)? = null
 
     /**
      * 如果后人发现了没有囊括的异常类型，请将新的拦截链添加在此处，添加顺序决定优先级。
@@ -79,8 +81,8 @@ object CyxbsCrashMonitor : Thread.UncaughtExceptionHandler {
         val reason = sp.getString("reason", "")
         if (stackInfo != null && stackInfo != "" && reason != null && reason != "") {
             //因为异常重启上报一次异常，因为重启之前来不及上传异常应用进程已经结束了
-            val e = Gson().fromJson(stackInfo, Throwable::class.java)
-            CrashReport.postCatchedException(e)
+            val e = GsonDefault.fromJson(stackInfo, Throwable::class.java)
+            crashReport?.invoke(e)
             LogLocal.log(
                 tag = "CrashMonitor",
                 msg = "异常拦截链异常!!!",
@@ -99,7 +101,7 @@ object CyxbsCrashMonitor : Thread.UncaughtExceptionHandler {
         Thread.setDefaultUncaughtExceptionHandler(this)
         //记录activity的启动
         application.registerActivityLifecycleCallbacks(object :
-            Application.ActivityLifecycleCallbacks by noOpDelegate() {
+            ActivityLifecycleCallbacksImpl {
 
             override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
                 if (activities.contains(activity)) {
@@ -127,7 +129,7 @@ object CyxbsCrashMonitor : Thread.UncaughtExceptionHandler {
         try {
             handleException(t, e)
         } catch (e: Throwable) {
-            CrashReport.postCatchedException(e)
+            crashReport?.invoke(e)
             LogLocal.log(
                 tag = "CrashMonitor",
                 msg = "异常拦截链异常!!!",
@@ -161,7 +163,7 @@ object CyxbsCrashMonitor : Thread.UncaughtExceptionHandler {
      */
     private fun handleException(t: Thread? = null, e: Throwable, message: Message? = null) {
         //检测到异常上报bugly并保存日志
-        CrashReport.postCatchedException(e)
+        crashReport?.invoke(e)
         LogLocal.log(
             tag = "CrashMonitor",
             msg = "CrashMonitor检测到异常",
@@ -221,7 +223,7 @@ object CyxbsCrashMonitor : Thread.UncaughtExceptionHandler {
                     } catch (throwable: Throwable) {
                         handleException(e = throwable, message = msg)
                         if (!isActivityRemovedAfterFinished) {
-                            activities.removeLast()
+                            activities.removeAt(activities.lastIndex)
                             isActivityRemovedAfterFinished = true
                         }
                     }
@@ -237,7 +239,7 @@ object CyxbsCrashMonitor : Thread.UncaughtExceptionHandler {
                     } catch (throwable: Throwable) {
                         handleException(e = throwable, message = msg)
                         if (!isActivityRemovedAfterFinished) {
-                            activities.removeLast()
+                            activities.removeAt(activities.lastIndex)
                             isActivityRemovedAfterFinished = true
                         }
                     }

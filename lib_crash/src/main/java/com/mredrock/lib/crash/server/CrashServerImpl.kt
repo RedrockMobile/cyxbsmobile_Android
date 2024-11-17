@@ -6,7 +6,6 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.mredrock.cyxbs.api.crash.CRASH_SERVER
 import com.mredrock.cyxbs.api.crash.ICrashService
 import com.mredrock.cyxbs.lib.base.BaseApp
-import com.mredrock.cyxbs.lib.utils.extensions.toast
 import com.mredrock.lib.crash.dialog.CrashDialog
 
 /**

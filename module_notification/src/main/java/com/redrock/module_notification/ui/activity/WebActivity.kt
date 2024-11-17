@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.RelativeLayout
 import com.mredrock.cyxbs.common.ui.BaseActivity
 import com.mredrock.cyxbs.common.utils.extensions.startActivity
-import com.mredrock.cyxbs.common.webView.LiteJsWebView
+import com.mredrock.cyxbs.lib.base.webView.LiteJsWebView
 import com.redrock.module_notification.R
 
 /**

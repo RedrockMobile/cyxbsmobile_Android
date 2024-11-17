@@ -6,6 +6,8 @@
 # 忽略 build，但不忽略 src 下的 build
 build
 !**/src/**/build
+release
+!**/src/**/release
 
 /captures
 .externalNativeBuild
@@ -18,5 +20,6 @@ secret.gradle
 **/lint-baseline.xml
 **/modules
 maven
+.kotlin
 
 
