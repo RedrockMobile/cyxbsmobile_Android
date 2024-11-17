@@ -95,9 +95,9 @@ class MainActivity : BaseActivity() {
     setContentView(R.layout.main_activity_main)
     initAction()
     initSplash()
-    initCourse()
     initViewPager()
     initBottomNav()
+    initCourse()
     initNotification()
     initUpdate()
   }
