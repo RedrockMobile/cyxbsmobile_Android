@@ -8,10 +8,10 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.text.isDigitsOnly
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.common.component.DashGapLine
-import com.mredrock.cyxbs.common.utils.SchoolCalendar
+import com.mredrock.cyxbs.config.config.SchoolCalendar
 import com.mredrock.cyxbs.discover.grades.R
 import com.mredrock.cyxbs.discover.grades.bean.Exam
+import com.mredrock.cyxbs.discover.grades.widget.DashGapLine
 import java.util.*
 
 /**
@@ -67,10 +67,13 @@ class ExamAdapter(val data: MutableList<Exam>) : RecyclerView.Adapter<ExamAdapte
                         val drawableLocation = ResourcesCompat.getDrawable(context.resources, R.drawable.grades_exam_location, null)
                         drawableLocation?.setBounds(0, 0, 30, 30)
                         holder.mTvExamLocation.setCompoundDrawables(drawableLocation, null, null, null)
-                        var schoolCalendar: SchoolCalendar? = null
+                        var schoolCalendar: Calendar? = null
                         it.week?.let { week ->
                             it.weekday?.let { weekday ->
-                                schoolCalendar = SchoolCalendar(week.toInt(), weekday.toInt())
+                                schoolCalendar = SchoolCalendar.getFirstMonDayOfTerm()?.also {
+                                    it.add(Calendar.DATE, (week.toInt() - 1) * 7)
+                                    it.add(Calendar.DATE, weekday.toInt() - 1 - (it.get(Calendar.DAY_OF_WEEK) + 5) % 7)
+                                }
                             }
                         }
                         val isSuccess = ExamDataHelper.tryModifyData(it)
@@ -100,9 +103,9 @@ class ExamAdapter(val data: MutableList<Exam>) : RecyclerView.Adapter<ExamAdapte
                                 holder.mTvExamDayOfWeek.text = String.format("%s周周%s", getChineseWeek(week.toInt() - 1), it.chineseWeekday
                                     ?: "--")
                             }
-                            holder.mTvExamDayOfMonth.text = String.format("%s" + "号", schoolCalendar?.day
+                            holder.mTvExamDayOfMonth.text = String.format("%s" + "号", schoolCalendar?.get(Calendar.DATE)
                                 ?: "--")
-                            holder.mTvExamMonth.text = String.format("%s月", schoolCalendar?.month
+                            holder.mTvExamMonth.text = String.format("%s月", schoolCalendar?.get(Calendar.MONTH)?.plus(1)
                                 ?: "--")
                         } else {
                             holder.mTvExamDayOfWeek.text = String.format("%s周周%s", "-", "-")

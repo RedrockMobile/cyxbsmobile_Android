@@ -9,8 +9,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
-import com.mredrock.cyxbs.common.ui.BaseActivity
-import com.mredrock.cyxbs.common.webView.LiteJsWebView
+import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.mredrock.cyxbs.lib.base.webView.LiteJsWebView
 import com.mredrock.cyxbs.protocol.R
 
 /**

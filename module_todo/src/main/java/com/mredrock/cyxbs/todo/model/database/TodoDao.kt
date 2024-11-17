@@ -19,10 +19,10 @@ interface TodoDao {
      * 插入数据，如果存在则替换
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(todoList: List<Todo>?)
+    suspend fun insertAll(todoList: List<Todo>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(todo: Todo?)
+    suspend fun insert(todo: Todo)
 
     /**
      * 删除数据
@@ -31,7 +31,7 @@ interface TodoDao {
     suspend fun deleteAll()
 
     @Query("DELETE FROM todo_list WHERE todoId = :todoId")
-    suspend fun deleteTodoById(todoId: Long?)
+    suspend fun deleteTodoById(todoId: Long)
 
     /**
      * 查询所有数据
@@ -43,9 +43,9 @@ interface TodoDao {
      * 查询指定id的数据
      */
     @Query("select * from todo_list where todoId=:todoId")
-    suspend fun queryById(todoId: Int?): Todo?
+    suspend fun queryById(todoId: Int): Todo?
 
     @Query("select * from todo_list where type=:type")
-    suspend fun queryByType(type: String?): List<Todo>?
+    suspend fun queryByType(type: String): List<Todo>?
 
 }

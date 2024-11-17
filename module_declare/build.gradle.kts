@@ -1,21 +1,18 @@
 plugins {
-    id("module-debug")
+  id("manager.libraryApp")
 }
 
-
-dependLibBase()
-dependLibUtils()
-dependLibConfig()
-dependApiStore()
-
-dependRxjava()
-dependNetwork()
-dependCoroutinesRx3()
-dependMaterialDialog()
-useDataBinding()
 useARouter()
+useDataBinding()
+
 dependencies {
-    implementation(Android.appcompat)
-    implementation(Android.constraintlayout)
-    implementation(Android.material)
+  implementation(projects.libBase)
+  implementation(projects.libConfig)
+  implementation(projects.libUtils)
+  implementation(projects.moduleStore.apiStore)
+
+  implementation(libs.bundles.projectBase)
+  implementation(libs.bundles.views)
+  implementation(libs.bundles.network)
+  implementation(libs.dialog)
 }

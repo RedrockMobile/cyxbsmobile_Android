@@ -147,9 +147,8 @@ class GpAGraph : View {
         setMeasuredDimension(resolveSize(mWidth, widthMeasureSpec), resolveSize(mHeight, heightMeasureSpec))
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        val canvas = canvas ?: return
         canvas.save()
         path.reset()
         pathBlue.reset()

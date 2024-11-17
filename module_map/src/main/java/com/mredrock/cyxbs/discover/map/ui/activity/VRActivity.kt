@@ -12,7 +12,7 @@ import com.mredrock.cyxbs.common.ui.BaseActivity
 import com.mredrock.cyxbs.common.utils.extensions.defaultSharedPreferences
 import com.mredrock.cyxbs.common.utils.extensions.editor
 import com.mredrock.cyxbs.common.utils.extensions.startActivity
-import com.mredrock.cyxbs.common.webView.LiteJsWebView
+import com.mredrock.cyxbs.lib.base.webView.LiteJsWebView
 
 class VRActivity : BaseActivity() {
 

@@ -15,16 +15,16 @@ import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
 import com.google.android.material.tabs.TabLayout
-import com.mredrock.cyxbs.common.component.CommonDialogFragment
-import com.mredrock.cyxbs.common.utils.extensions.gone
-import com.mredrock.cyxbs.common.utils.extensions.visible
 import com.mredrock.cyxbs.discover.grades.R
 import com.mredrock.cyxbs.discover.grades.bean.analyze.GPAData
 import com.mredrock.cyxbs.discover.grades.bean.analyze.SingleGrade
 import com.mredrock.cyxbs.discover.grades.bean.analyze.TermGrade
+import com.mredrock.cyxbs.discover.grades.ui.dialog.CommonDialogFragment
 import com.mredrock.cyxbs.discover.grades.utils.widget.AverageRule
 import com.mredrock.cyxbs.discover.grades.utils.widget.GpAGraph
 import com.mredrock.cyxbs.discover.grades.utils.widget.NoDoubleClickListener
+import com.mredrock.cyxbs.lib.utils.extensions.gone
+import com.mredrock.cyxbs.lib.utils.extensions.visible
 
 /**
  * Created by roger on 2020/3/22

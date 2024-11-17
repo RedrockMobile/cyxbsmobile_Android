@@ -2,7 +2,6 @@ package com.mredrock.cyxbs.common.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -84,7 +83,6 @@ abstract class BaseFeedFragment<T : BaseViewModel> : BaseViewModelFragment<T>() 
 
     fun setAdapter(adapter: Adapter) {
         this.adapter = adapter
-        TransitionManager.beginDelayedTransition(ll_feed)
         if (ll_feed.childCount > 2) {
             ll_feed.removeViews(2, ll_feed.childCount - 2)
         }

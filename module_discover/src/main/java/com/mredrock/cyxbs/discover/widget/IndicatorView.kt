@@ -64,12 +64,10 @@ class IndicatorView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) 
         isAntiAlias = true
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        if (canvas != null) {
-            drawUnder(canvas)
-            drawProgress(canvas)
-        }
+        drawUnder(canvas)
+        drawProgress(canvas)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {

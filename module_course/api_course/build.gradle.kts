@@ -1,13 +1,13 @@
 plugins {
-  id("module-manager")
-}
-
-dependLibUtils()
-dependLibConfig()
-dependApiAffair()
-
-dependencies {
-  implementation(Rxjava.rxjava3)
+  id("manager.library")
 }
 
 useARouter()
+
+dependencies {
+  implementation(projects.libConfig)
+  implementation(projects.libUtils)
+  implementation(projects.moduleAffair.apiAffair)
+
+  implementation(libs.rxjava)
+}

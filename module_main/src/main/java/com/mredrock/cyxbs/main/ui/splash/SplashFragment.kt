@@ -53,7 +53,11 @@ class SplashFragment : BaseFragment() {
   private fun initSplash() {
     val lastUrl = getLastLoadUrl()
     if (lastUrl != null) {
-      mIvSplash.setImageFromUrl(lastUrl.first, R.drawable.main_ic_bg_splash_big, R.drawable.main_ic_bg_splash_big)
+      mIvSplash.setImageFromUrl(
+        lastUrl.first,
+        com.mredrock.cyxbs.config.R.drawable.config_ic_bg_splash_big,
+        com.mredrock.cyxbs.config.R.drawable.config_ic_bg_splash_big
+      )
       mIvSplash.setOnSingleClickListener {
         val uri = Uri.parse(lastUrl.second)
         startActivity(Intent(Intent.ACTION_VIEW, uri))

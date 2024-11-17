@@ -54,7 +54,7 @@
         android:layout_height="97dp"
         android:layout_marginStart="16dp"
         android:src="@drawable/mine_ic_head_test"
-        app:civ_border_color="@color/common_grades_activity_tl_white"
+        app:civ_border_color="@android:color/white"
         app:civ_border_width="1dp"
         app:layout_constraintBottom_toTopOf="@+id/fl_head_background"
         app:layout_constraintStart_toStartOf="parent"

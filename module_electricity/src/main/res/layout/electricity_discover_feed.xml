@@ -7,7 +7,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/csl_electricity_data_feed"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible" >
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_electricity_feed_fee"
@@ -15,7 +17,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/impact_min"
             android:layout_marginTop="17dp"
-            android:textColor="@color/levelFourFontColor"
+            android:textColor="@color/config_level_four_font_color"
             app:layout_constraintStart_toStartOf="@+id/electricity_guideline"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="12.42" />
@@ -26,7 +28,7 @@
             android:layout_marginBottom="23dp"
             android:alpha="0.6"
             android:text="应缴/本月"
-            android:textColor="@color/common_level_two_font_color"
+            android:textColor="@color/config_level_two_font_color"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tv_electricity_feed_fee"
@@ -39,7 +41,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/impact_min"
             android:layout_marginTop="17dp"
-            android:textColor="@color/levelFourFontColor"
+            android:textColor="@color/config_level_four_font_color"
             app:layout_constraintEnd_toStartOf="@+id/electricity_guideline2"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="12.42" />
@@ -50,7 +52,7 @@
             android:layout_marginBottom="23dp"
             android:alpha="0.6"
             android:text="使用度数/本月"
-            android:textColor="@color/common_level_two_font_color"
+            android:textColor="@color/config_level_two_font_color"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tv_electricity_feed_kilowatt"
@@ -79,9 +81,10 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:alpha="0.6"
-        android:visibility="gone"
         android:text="@string/electricity_no_data"
-        android:textColor="@color/common_level_two_font_color"
+        android:textColor="@color/config_level_two_font_color"
         android:textSize="15sp" />
+
+
 </FrameLayout>
 

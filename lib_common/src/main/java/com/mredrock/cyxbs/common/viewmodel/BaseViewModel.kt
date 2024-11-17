@@ -46,6 +46,6 @@ open class BaseViewModel : ViewModel() {
     }
 
     protected fun toastLong(s: CharSequence) {
-        longToast(s)
+        com.mredrock.cyxbs.lib.utils.extensions.toastLong(s)
     }
 }

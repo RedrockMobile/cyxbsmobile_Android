@@ -92,14 +92,14 @@ class FavoriteEditText : androidx.appcompat.widget.AppCompatEditText {
         notifyStringChange()
     }
 
-    override fun draw(canvas: Canvas?) {
+    override fun draw(canvas: Canvas) {
         super.draw(canvas)
-        canvas?.translate((scrollX).toFloat(), 0f)
+        canvas.translate((scrollX).toFloat(), 0f)
         //显示文本长度
-        canvas?.drawText(hintString, -offsetXHint + (width - hintWidth) - context.dp2px(8f), hintBaseline, paint)
+        canvas.drawText(hintString, -offsetXHint + (width - hintWidth) - context.dp2px(8f), hintBaseline, paint)
         //清空按钮
-        canvas?.drawBitmap(clearBitmap, offsetXClear + width - clearBitmap.width - context.dp2px(8f), (height - clearBitmap.height) / 2f, Paint())
-        canvas?.translate((-scrollX).toFloat(), 0f)
+        canvas.drawBitmap(clearBitmap, offsetXClear + width - clearBitmap.width - context.dp2px(8f), (height - clearBitmap.height) / 2f, Paint())
+        canvas.translate((-scrollX).toFloat(), 0f)
 
     }
 

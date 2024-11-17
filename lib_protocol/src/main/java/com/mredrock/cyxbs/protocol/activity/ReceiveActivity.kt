@@ -6,7 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.mredrock.cyxbs.api.protocol.api.IProtocolService
-import com.mredrock.cyxbs.common.service.ServiceManager
+import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import com.mredrock.cyxbs.protocol.R
 import com.mredrock.cyxbs.protocol.databinding.ProtocolActivityReceiveBinding
 

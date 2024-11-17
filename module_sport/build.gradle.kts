@@ -1,21 +1,23 @@
 plugins {
-    id("module-debug")
+  id("manager.libraryApp")
 }
 
-
-dependApiLogin()
-dependApiAccount()
-dependApiInit()
-
-dependLibBase()
-dependLibUtils()
-dependLibConfig()
-
-dependNetwork()
-dependRxjava()
-dependSmartRefreshLayout()
-dependMaterialDialog()
-
-
-useDataBinding()
 useARouter()
+useDataBinding()
+useAutoService()
+
+dependencies {
+  implementation(projects.apiInit)
+  implementation(projects.libBase)
+  implementation(projects.libConfig)
+  implementation(projects.libUtils)
+  implementation(projects.libAccount.apiAccount)
+  implementation(projects.moduleSport.apiSport)
+  implementation(projects.moduleLogin.apiLogin)
+
+  implementation(libs.bundles.projectBase)
+  implementation(libs.bundles.views)
+  implementation(libs.bundles.network)
+  implementation(libs.smartRefreshLayout)
+  implementation(libs.dialog)
+}

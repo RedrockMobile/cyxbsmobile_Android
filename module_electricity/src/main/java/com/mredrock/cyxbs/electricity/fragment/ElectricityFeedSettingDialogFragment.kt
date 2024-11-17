@@ -1,6 +1,5 @@
 package com.mredrock.cyxbs.electricity.fragment
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,15 +7,14 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.edit
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import com.aigestudio.wheelpicker.WheelPicker
-import com.mredrock.cyxbs.common.utils.LogUtils
-import com.mredrock.cyxbs.common.utils.extensions.defaultSharedPreferences
-import com.mredrock.cyxbs.common.utils.extensions.editor
 import com.mredrock.cyxbs.electricity.config.*
 import com.mredrock.cyxbs.electricity.R
-import com.mredrock.cyxbs.common.utils.extensions.*
+import com.mredrock.cyxbs.config.sp.defaultSp
+import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
 
 
 class ElectricityFeedSettingDialogFragment : DialogFragment() {
@@ -51,11 +49,9 @@ class ElectricityFeedSettingDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var room = context?.defaultSharedPreferences?.getString(SP_ROOM_KEY, "101") ?: "101"
-        selectBuildingHeadPosition = context?.defaultSharedPreferences?.getInt(SP_BUILDING_HEAD_KEY, 0)
-                ?: 0
-        selectBuildingFootPosition = context?.defaultSharedPreferences?.getInt(SP_BUILDING_FOOT_KEY, 0)
-                ?: 0
+        var room = defaultSp.getString(SP_ROOM_KEY, "101") ?: "101"
+        selectBuildingHeadPosition = defaultSp.getInt(SP_BUILDING_HEAD_KEY, 0)
+        selectBuildingFootPosition = defaultSp.getInt(SP_BUILDING_FOOT_KEY, 0)
         et_electricity_room_num = view.findViewById(R.id.et_electricity_room_num)
         wp_dormitory_head = view.findViewById(R.id.wp_dormitory_head)
         wp_dormitory_foot = view.findViewById(R.id.wp_dormitory_foot)
@@ -91,13 +87,10 @@ class ElectricityFeedSettingDialogFragment : DialogFragment() {
                 selectBuildingFootPosition = wp_dormitory_foot.currentItemPosition
                 val id = BUILDING_NAMES.getValue(BUILDING_NAMES_HEADER[selectBuildingHeadPosition])[selectBuildingFootPosition].split("(")[1].split("栋")[0]
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    LogUtils.d("MyTag", "refresher:${this.accessibilityClassName}")
-                }
                 refresher?.invoke(id, room)
                 this@ElectricityFeedSettingDialogFragment.dismiss()
 
-                context.defaultSharedPreferences.editor {
+                defaultSp.edit {
                     putInt(SP_BUILDING_HEAD_KEY, selectBuildingHeadPosition)
                     putInt(SP_BUILDING_FOOT_KEY, selectBuildingFootPosition)
                     putString(SP_ROOM_KEY, et_electricity_room_num.text.toString())

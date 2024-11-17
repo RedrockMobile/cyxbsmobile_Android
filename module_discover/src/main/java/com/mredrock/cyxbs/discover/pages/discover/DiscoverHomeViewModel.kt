@@ -3,15 +3,14 @@ package com.mredrock.cyxbs.discover.pages.discover
 import android.os.Parcelable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.mredrock.cyxbs.common.network.ApiGenerator
-import com.mredrock.cyxbs.common.utils.extensions.mapOrThrowApiException
-import com.mredrock.cyxbs.common.utils.extensions.unsafeSubscribeBy
-import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
-import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
 import com.mredrock.cyxbs.discover.bean.NewsListItem
 import com.mredrock.cyxbs.discover.network.RollerViewInfo
 import com.mredrock.cyxbs.discover.network.ApiServices
+import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
 import com.mredrock.cyxbs.lib.utils.extensions.launchCatch
+import com.mredrock.cyxbs.lib.utils.extensions.setSchedulers
+import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
+import com.mredrock.cyxbs.lib.utils.network.mapOrThrowApiException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -48,10 +47,9 @@ class DiscoverHomeViewModel : BaseViewModel() {
     apiServices.getRollerViewInfo()
       .mapOrThrowApiException()
       .setSchedulers()
-      .unsafeSubscribeBy {
+      .safeSubscribeBy {
         viewPagerInfo.value = it
       }
-      .lifeCycle()
   }
 
   /**
@@ -61,20 +59,18 @@ class DiscoverHomeViewModel : BaseViewModel() {
     apiServices.getHashUnreadMsg()
       .mapOrThrowApiException()
       .setSchedulers()
-      .unsafeSubscribeBy {
+      .safeSubscribeBy {
         hasUnread.value = it.has
       }
-      .lifeCycle()
   }
   
   private fun getJwNews() {
     apiServices.getNewsList(1)
       .mapOrThrowApiException()
       .setSchedulers()
-      .unsafeSubscribeBy {
+      .safeSubscribeBy {
         jwNews.value = it
       }
-      .lifeCycle()
   }
 
   /**

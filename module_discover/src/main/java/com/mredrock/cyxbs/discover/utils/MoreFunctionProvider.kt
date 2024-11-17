@@ -2,13 +2,21 @@ package com.mredrock.cyxbs.discover.utils
 
 import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
-import com.mredrock.cyxbs.common.config.*
-import com.mredrock.cyxbs.common.service.ServiceManager
 import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.common.BaseApp
-import com.mredrock.cyxbs.common.utils.extensions.defaultSharedPreferences
+import com.mredrock.cyxbs.config.route.DISCOVER_MAP
+import com.mredrock.cyxbs.config.route.DISCOVER_MORE_FUNCTION
+import com.mredrock.cyxbs.config.route.DISCOVER_NO_CLASS
+import com.mredrock.cyxbs.config.route.DISCOVER_OTHER_COURSE
+import com.mredrock.cyxbs.config.route.DISCOVER_SCHOOL_CAR
+import com.mredrock.cyxbs.config.route.DISCOVER_TODO_MAIN
+import com.mredrock.cyxbs.config.route.DISCOVER_CALENDAR
+import com.mredrock.cyxbs.config.route.DISCOVER_SPORT
+import com.mredrock.cyxbs.config.route.DISCOVER_EMPTY_ROOM
+import com.mredrock.cyxbs.config.route.DISCOVER_GRADES
+import com.mredrock.cyxbs.config.sp.defaultSp
 import com.mredrock.cyxbs.discover.R
 import com.mredrock.cyxbs.lib.utils.logger.event.ClickEvent
+import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import java.lang.ref.SoftReference
 
 /**
@@ -54,9 +62,8 @@ object MoreFunctionProvider {
     }
 
     private fun getHomePageFunctionsFromSp(): List<Int> {
-        val context = BaseApp.appContext
         val list = mutableListOf<Int>()
-        context.defaultSharedPreferences.apply {
+        defaultSp.apply {
             list.add(getInt(HOME_PAGE_FUNCTION_1, 2))
             list.add(getInt(HOME_PAGE_FUNCTION_2, 1))
             list.add(getInt(HOME_PAGE_FUNCTION_3, 4))

@@ -63,7 +63,7 @@ class LinkLessonItem(private var lessonData: StuLessonData) :
   override fun onReuse(): Boolean {
     val view = getNetView() ?: return true
     return view.run {
-      parent == null && !isAttachedToWindow
+      parent == null && !isAttachedToWindow && view.animation == null
     }
   }
   

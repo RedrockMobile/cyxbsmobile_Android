@@ -1,25 +1,22 @@
 plugins {
-  id("module-debug")
-}
-
-
-dependApiLogin()
-dependApiAccount()
-dependApiCourse()
-
-dependLibBase()
-dependLibUtils()
-dependLibConfig()
-
-dependRoomRxjava()
-dependCoroutines()
-dependRoom()
-dependNetwork()
-dependRxjava()
-
-dependencies {
-  // 选择器 https://github.com/wangjiegulu/WheelView
-  implementation("com.github.gzu-liyujiang.AndroidPicker:WheelView:4.1.9")
+  id("manager.libraryApp")
 }
 
 useARouter()
+useRoom(rxjava = true)
+
+dependencies {
+  implementation(projects.libBase)
+  implementation(projects.libUtils)
+  implementation(projects.libConfig)
+  implementation(projects.libAccount.apiAccount)
+  implementation(projects.moduleAffair.apiAffair)
+  implementation(projects.moduleLogin.apiLogin)
+  implementation(projects.moduleCourse.apiCourse)
+
+  implementation(libs.bundles.projectBase)
+  implementation(libs.bundles.views)
+  implementation(libs.bundles.network)
+
+  implementation(libs.wheelView)
+}
