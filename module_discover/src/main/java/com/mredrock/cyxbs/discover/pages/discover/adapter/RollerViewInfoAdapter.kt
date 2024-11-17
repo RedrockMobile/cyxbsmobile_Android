@@ -36,12 +36,17 @@ class RollerViewInfoAdapter(
             TrackingUtils.trackClickEvent(ClickEvent.CLICK_YLC_BANNER_ENTRY)
           }
         }
-        val data = list[layoutPosition]
+
+        val data = list[realPosition]
         if (data.picture_goto_url.startsWith("http")) {
           RollerViewActivity.startRollerViewActivity(data, iv.context)
         }
       }
     }
+
+    // 因为 banner 是循环的，所以这里要取余才行
+    val realPosition: Int
+      get() = layoutPosition % itemCount
   }
 
   override fun onCreateViewHolder(
@@ -67,9 +72,9 @@ class RollerViewInfoAdapter(
 
   override fun onBindViewHolder(
     holder: VHolder,
-    position: Int
+    position: Int // 这个 position 不对哈，因为循环，所以要使用 holder.realPosition
   ) {
-    val data = list[position]
+    val data = list[holder.realPosition]
     Glide.with(holder.iv)
       .load(data.picture_url)
       .placeholder(R.drawable.discover_ic_cyxbsv6)
