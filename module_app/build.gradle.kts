@@ -21,9 +21,6 @@ dependencies {
   implementation(libs.umeng.push) {
     exclude(group = "com.umeng.umsdk", module = "alicloud-httpdns")
   }
-  // 阿里云 dns 解析工具
-  // https://help.aliyun.com/document_detail/434554.html?spm=a2c4g.435252.0.0.1da95979yyEzm3
-  implementation(libs.alicloud.httpdns)
 
   implementation(libs.okhttp)
   implementation(libs.vasdolly)
