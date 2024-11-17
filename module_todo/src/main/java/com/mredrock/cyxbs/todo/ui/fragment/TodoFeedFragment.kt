@@ -23,6 +23,7 @@ import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.extensions.getSp
 import com.mredrock.cyxbs.lib.utils.extensions.gone
 import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.mredrock.cyxbs.lib.utils.utils.LogUtils
 import com.mredrock.cyxbs.todo.model.bean.DelPushWrapper
 import com.mredrock.cyxbs.todo.model.bean.RemindMode
 import com.mredrock.cyxbs.todo.model.bean.TodoListPushWrapper
@@ -72,7 +73,7 @@ class TodoFeedFragment : BaseFragment() {
 
                         if (todoList[it].remindMode.repeatMode != RemindMode.NONE) {
                             val notifyDateTime = getNextNoticeTime(todoList[it])
-
+                            notifyItemChanged(it)
                             if (!notifyDateTime.isNullOrEmpty()) {
                                 // 如果有下次提醒时间，推送更新的todo
                                 todoList[it].remindMode.notifyDateTime = notifyDateTime
@@ -136,7 +137,7 @@ class TodoFeedFragment : BaseFragment() {
     }
 
     private fun getNextNoticeTime(todo: Todo): String? {
-        val dateFormat = SimpleDateFormat("yyyy年MM月dd日HH:mm", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyy年M月d日HH:mm", Locale.getDefault())
         val now = Calendar.getInstance()
 
         // 初始化当前时间，如果 notifyDateTime 为空则使用当前时间
@@ -166,24 +167,19 @@ class TodoFeedFragment : BaseFragment() {
             }
 
             RemindMode.WEEK -> {
-                // 获取今天的星期几（将周日=1 转换为周一=1，周日=7）
                 val today = (startTime.get(Calendar.DAY_OF_WEEK) + 5) % 7 + 1
                 val sortedWeekDays = todo.remindMode.week.sorted()
 
                 // 找到下一个有效的提醒日
-                val nextValidDay = sortedWeekDays.firstOrNull { it > today } ?: sortedWeekDays.firstOrNull()
+                val nextValidDay =
+                    sortedWeekDays.firstOrNull { it > today } ?: sortedWeekDays.firstOrNull()
 
                 if (nextValidDay != null) {
-                    // 计算需要增加的天数
-                    val daysToAdd = if (nextValidDay <= today) {
+                    var daysToAdd = nextValidDay - today
+                    if (daysToAdd <= 0) {
                         // 如果下一个有效提醒日已经过去，则推迟到下周
-                        startTime.add(Calendar.WEEK_OF_YEAR, 1)
-                        (nextValidDay - today + 7) % 7 // 计算下一个有效提醒日的天数
-                    } else {
-                        (nextValidDay - today) // 直接计算天数
+                        daysToAdd += 7
                     }
-
-                    // 增加天数到开始时间
                     startTime.add(Calendar.DAY_OF_MONTH, daysToAdd)
                 }
             }

@@ -282,9 +282,12 @@ class TodoAllFragment : BaseFragment(), TodoAllAdapter.OnItemClickListener {
                     viewLifecycleOwner
                 )
             } else {
-                item.remindMode.notifyDateTime = item.endTime
-                val syncTime = appContext.getSp("todo").getLong("TODO_LAST_SYNC_TIME", 0L)
-                mViewModel.pushTodo(TodoListPushWrapper(listOf(item), syncTime, 1, 0))
+                if (item.endTime != ""){
+                    item.remindMode.notifyDateTime = item.endTime
+                    val syncTime = appContext.getSp("todo").getLong("TODO_LAST_SYNC_TIME", 0L)
+                    mViewModel.pushTodo(TodoListPushWrapper(listOf(item), syncTime, 1, 0))
+                }
+
             }
 
         }
