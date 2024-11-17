@@ -5,9 +5,6 @@
         <activity
             android:name=".page.login.ui.LoginActivity"
             android:launchMode="singleTask" />
-        <activity
-            android:name=".page.bind.ui.BindActivity"
-            android:exported="false" />
     </application>
 
 </manifest>

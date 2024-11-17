@@ -2,7 +2,6 @@ package com.mredrock.cyxbs.sport.ui.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.core.view.postDelayed
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -18,7 +17,6 @@ import com.mredrock.cyxbs.sport.model.SportDetailBean
 import com.mredrock.cyxbs.sport.ui.adapter.SportRvAdapter
 import com.mredrock.cyxbs.sport.ui.viewmodel.SportDetailViewModel
 import java.util.Calendar
-import kotlin.random.Random
 
 /**
  * @author : why
@@ -52,15 +50,7 @@ class SportDetailActivity : BaseBindActivity<SportActivitySportDetailBinding>() 
         val vm = ViewModelProvider(this).get(SportDetailViewModel::class.java)
         binding.run {
             //设置刷新监听
-            if (!mIsHoliday) {
-                //未放假则正常刷新
-                sportSrlDetailList.setOnRefreshListener {
-                    // 应产品要求，该刷新作为摆设，因为每次刷新都是登录一次教务在线，容易被冻结账号
-                    sportSrlDetailList.postDelayed(Random.nextLong(300, 800)) {
-                        sportSrlDetailList.finishRefresh()
-                    }
-                }
-            } else {
+            if (mIsHoliday) {
                 //放假则直接结束刷新
                 sportSrlDetailList.setEnableRefresh(false)
             }

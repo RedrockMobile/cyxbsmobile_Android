@@ -1,6 +1,5 @@
 package com.mredrock.cyxbs.login.page.login.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.mredrock.cyxbs.api.account.IAccountService
 import com.mredrock.cyxbs.lib.base.BaseApp
@@ -89,11 +88,13 @@ class LoginViewModel : BaseViewModel() {
           }
         }
         //上传设备以及ip信息
-        LoginApiService.INSTANCE.recordDeviceInfo(DeviceInfoParams(
+        LoginApiService.INSTANCE.recordDeviceInfo(
+          DeviceInfoParams(
           BaseApp.getAndroidID(),
           BaseApp.getDeviceModel(),
           ipAddress
-        )).subscribeOn(Schedulers.io())
+        )
+        ).subscribeOn(Schedulers.io())
           .observeOn(AndroidSchedulers.mainThread())
           .doOnError {
             it.printStackTrace()

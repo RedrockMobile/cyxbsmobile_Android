@@ -2,13 +2,10 @@ package com.mredrock.cyxbs.sport.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mredrock.cyxbs.api.login.IBindService
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
 import com.mredrock.cyxbs.lib.utils.network.ApiException
-import com.mredrock.cyxbs.lib.utils.service.impl
 import com.mredrock.cyxbs.sport.model.SportDetailBean
 import com.mredrock.cyxbs.sport.model.SportRepository
-import com.mredrock.cyxbs.sport.util.sSpIdsIsBind
 
 /**
  * @author : why
@@ -36,26 +33,18 @@ class DiscoverSportFeedViewModel : BaseViewModel() {
   private val _isBind = MutableLiveData<Boolean>()
   
   init {
-    IBindService::class.impl
-      .bindEvent
-      .collectLaunch {
-        sSpIdsIsBind = it
-        _isBind.value = it
-      }
     
     SportRepository.sportDataShareFlow
       .collectLaunch {
         it.onSuccess { bean ->
           _isBind.postValue(true)
           _sportData.postValue(bean)
-          sSpIdsIsBind = true
         }.onFailure { throwable ->
           if (throwable is ApiException) {
             //出错时更新LiveData
             if (throwable.status == 20100) {
               //若未绑定教务在线（后端返回状态码为20100）则更新LiveData，并保存状态
               _isBind.postValue(false)
-              sSpIdsIsBind = false
             }
           }
           _isError.postValue(true)
