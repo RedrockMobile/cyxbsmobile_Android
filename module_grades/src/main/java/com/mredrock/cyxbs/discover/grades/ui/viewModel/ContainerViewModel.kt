@@ -11,6 +11,7 @@ import com.mredrock.cyxbs.discover.grades.R
 import com.mredrock.cyxbs.discover.grades.bean.Exam
 import com.mredrock.cyxbs.discover.grades.bean.Status
 import com.mredrock.cyxbs.discover.grades.bean.analyze.GPAStatus
+import com.mredrock.cyxbs.discover.grades.bean.analyze.isSuccessful
 import com.mredrock.cyxbs.discover.grades.network.ApiService
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
 import com.mredrock.cyxbs.lib.utils.extensions.setSchedulers
@@ -47,11 +48,13 @@ class ContainerViewModel : BaseViewModel() {
     fun getAnalyzeData() {
         apiService.getAnalyzeData()
             .setSchedulers()
-            .mapOrInterceptException {
+            .doOnError {
                 toast("加载绩点失败")
             }
             .safeSubscribeBy {
-                _analyzeData.postValue(it)
+                if (it.isSuccessful) {
+                    _analyzeData.postValue(it)
+                }
             }
     }
 
