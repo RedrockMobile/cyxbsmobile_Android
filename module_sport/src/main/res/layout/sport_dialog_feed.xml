@@ -29,7 +29,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="1.关于信息来源："
             android:textColor="@color/sport_feed_dialog_text_color"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -37,12 +36,12 @@
             app:layout_constraintTop_toBottomOf="@+id/sport_tv_feed_dialog_title"
             tools:ignore="HardcodedText" />
 
+
         <TextView
             android:id="@+id/sport_tv_feed_dialog_content1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="所有信息来源于教务在线，实际请以教务在线为准。"
             android:textColor="@color/sport_feed_dialog_text_color"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/sport_tv_feed_dialog_title2"
@@ -54,7 +53,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="2.关于剩余次数："
             android:textColor="@color/sport_feed_dialog_text_color"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -67,12 +65,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="根据重庆邮电大学体育打卡规定，跑步锻炼可以替代其他锻炼次数。所以关于主页面显示的其他剩余次数减少原因可能时由于其他锻炼造成，也有可能是由跑步锻炼造成。但是其他锻炼不可以代替跑步。"
             android:textColor="@color/sport_feed_dialog_text_color"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sport_tv_feed_dialog_title2"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/sport_tv_feed_dialog_title3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/sport_feed_dialog_text_color"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/sport_tv_feed_dialog_content3"
+            app:layout_constraintTop_toBottomOf="@+id/sport_tv_feed_dialog_content2"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/sport_tv_feed_dialog_content3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/sport_feed_dialog_text_color"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sport_tv_feed_dialog_title3"
             tools:ignore="HardcodedText" />
 
         <com.google.android.material.button.MaterialButton

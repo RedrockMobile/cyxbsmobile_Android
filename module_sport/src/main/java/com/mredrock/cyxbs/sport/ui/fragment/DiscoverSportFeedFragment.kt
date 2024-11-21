@@ -1,9 +1,12 @@
 package com.mredrock.cyxbs.sport.ui.fragment
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
@@ -19,6 +22,7 @@ import com.mredrock.cyxbs.sport.R
 import com.mredrock.cyxbs.sport.databinding.SportFragmentDiscoverFeedBinding
 import com.mredrock.cyxbs.sport.model.SportDetailBean
 import com.mredrock.cyxbs.sport.model.SportDetailRepository
+import com.mredrock.cyxbs.sport.model.SportNoticeRepository
 import com.mredrock.cyxbs.sport.ui.activity.SportDetailActivity
 
 /**
@@ -39,6 +43,31 @@ class DiscoverSportFeedFragment :
                     findViewById<Button>(R.id.sport_btn_feed_dialog_confirm).setOnSingleClickListener {
                         dismiss()
                     }
+
+                    //体育打卡信息说明改成后端下发
+                    SportNoticeRepository.noticeData.observe { result ->
+                        result.onSuccess {
+                            findViewById<TextView>(R.id.sport_tv_feed_dialog_title1).text =
+                                it[0].title
+                            findViewById<TextView>(R.id.sport_tv_feed_dialog_content1).text =
+                                it[0].content
+                            findViewById<TextView>(R.id.sport_tv_feed_dialog_title2).text =
+                                it[1].title
+                            findViewById<TextView>(R.id.sport_tv_feed_dialog_content2).text =
+                                it[1].content
+                            findViewById<TextView>(R.id.sport_tv_feed_dialog_title3).text =
+                                it[2].title
+                            findViewById<TextView>(R.id.sport_tv_feed_dialog_content3).text =
+                                it[2].content
+                        }.onFailure {
+                            findViewById<TextView>(R.id.sport_tv_feed_dialog_title1).apply {
+                                text ="数据加载失败，正在努力修复中~"
+                                gravity = Gravity.CENTER_HORIZONTAL
+                                typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
+                            }
+                        }
+                    }
+
                 }
                 cornerRadius(16f)
             }
