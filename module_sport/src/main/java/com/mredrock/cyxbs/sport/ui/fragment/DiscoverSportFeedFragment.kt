@@ -4,8 +4,10 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.TextView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
@@ -36,38 +38,41 @@ class DiscoverSportFeedFragment :
     BaseBindFragment<SportFragmentDiscoverFeedBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val feedDialogCustomView = LayoutInflater.from(requireContext())
+            .inflate(R.layout.sport_dialog_feed, FrameLayout(requireContext()), false).apply {
+                //体育打卡信息说明改成后端下发
+                SportNoticeRepository.noticeData.observe { result ->
+                    result.onSuccess {
+                        findViewById<TextView>(R.id.sport_tv_feed_dialog_title1).text =
+                            it[0].title
+                        findViewById<TextView>(R.id.sport_tv_feed_dialog_content1).text =
+                            it[0].content
+                        findViewById<TextView>(R.id.sport_tv_feed_dialog_title2).text =
+                            it[1].title
+                        findViewById<TextView>(R.id.sport_tv_feed_dialog_content2).text =
+                            it[1].content
+                        findViewById<TextView>(R.id.sport_tv_feed_dialog_title3).text =
+                            it[2].title
+                        findViewById<TextView>(R.id.sport_tv_feed_dialog_content3).text =
+                            it[2].content
+                    }.onFailure {
+                        findViewById<TextView>(R.id.sport_tv_feed_dialog_title1).apply {
+                            text ="数据加载失败，正在努力修复中~"
+                            gravity = Gravity.CENTER_HORIZONTAL
+                            typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
+                        }
+                    }
+                }
+            }
+
         binding.sportIvFeedTips.setOnSingleClickListener {
             MaterialDialog(requireActivity()).show {
-                customView(R.layout.sport_dialog_feed)
+                customView(view=feedDialogCustomView)
                 getCustomView().apply {
                     findViewById<Button>(R.id.sport_btn_feed_dialog_confirm).setOnSingleClickListener {
                         dismiss()
                     }
-
-                    //体育打卡信息说明改成后端下发
-                    SportNoticeRepository.noticeData.observe { result ->
-                        result.onSuccess {
-                            findViewById<TextView>(R.id.sport_tv_feed_dialog_title1).text =
-                                it[0].title
-                            findViewById<TextView>(R.id.sport_tv_feed_dialog_content1).text =
-                                it[0].content
-                            findViewById<TextView>(R.id.sport_tv_feed_dialog_title2).text =
-                                it[1].title
-                            findViewById<TextView>(R.id.sport_tv_feed_dialog_content2).text =
-                                it[1].content
-                            findViewById<TextView>(R.id.sport_tv_feed_dialog_title3).text =
-                                it[2].title
-                            findViewById<TextView>(R.id.sport_tv_feed_dialog_content3).text =
-                                it[2].content
-                        }.onFailure {
-                            findViewById<TextView>(R.id.sport_tv_feed_dialog_title1).apply {
-                                text ="数据加载失败，正在努力修复中~"
-                                gravity = Gravity.CENTER_HORIZONTAL
-                                typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
-                            }
-                        }
-                    }
-
                 }
                 cornerRadius(16f)
             }
