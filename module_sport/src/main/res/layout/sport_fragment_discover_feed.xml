@@ -52,7 +52,7 @@
                 android:layout_gravity="end|center_vertical"
                 android:layout_marginEnd="15dp"
                 android:alpha="0.54"
-                android:text="实际以教务在线为准"
+                android:text="实际以智慧体育为准"
                 android:textColor="@color/config_level_two_font_color"
                 android:textSize="11sp"
                 tools:ignore="HardcodedText" />
