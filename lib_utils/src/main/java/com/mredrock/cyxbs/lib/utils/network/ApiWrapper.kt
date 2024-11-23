@@ -1,9 +1,7 @@
 package com.mredrock.cyxbs.lib.utils.network
 
-import android.util.Log
 import com.google.gson.annotations.SerializedName
 import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.lib.utils.extensions.toast
 import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import java.io.Serializable
 import java.util.concurrent.atomic.AtomicBoolean
@@ -86,7 +84,6 @@ interface IApiStatus : Serializable {
       }
     }
     if (!isSuccess()) {
-      Log.e("okhttp", "throwApiExceptionIfFail: "+ApiException(status,info), )
       throw ApiException(status, info)
     }
   }
