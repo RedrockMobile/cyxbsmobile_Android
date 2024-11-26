@@ -83,7 +83,9 @@ interface IApiStatus : Serializable {
         userTokenService.refreshTokenExpired()
       }
     }
-    if (!isSuccess()) throw ApiException(status, info)
+    if (!isSuccess()) {
+      throw ApiException(status, info)
+    }
   }
 }
 

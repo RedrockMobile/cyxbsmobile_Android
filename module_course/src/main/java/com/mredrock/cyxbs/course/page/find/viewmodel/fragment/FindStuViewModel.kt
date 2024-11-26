@@ -18,6 +18,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 /**
  * ...
@@ -49,9 +50,15 @@ class FindStuViewModel : BaseViewModel() {
       }.onCompletion {
 //        progressDialogEvent.value = ProgressDialogEvent.DISMISS_DIALOG_EVENT
       }.mapOrThrowApiException()
-      .catch {
-        toast("网络似乎开小差了")
-      }.collectLaunch {
+      //数据请求有多次请求受限，这里检测出okhttp拦截下的异常为HttpException，异常码为429，所以这里对其进行处理
+      .catch { throwable ->
+        val code = (throwable as? HttpException)?.code()
+        if (code == 429)
+          toast("查询过于频繁，请稍后再试")
+         else
+          toast("网络似乎开小差了")
+      }
+      .collectLaunch {
         _studentSearchData.emit(it)
       }
   }
