@@ -12,17 +12,19 @@ import org.gradle.api.Project
  */
 object Config {
   // 发版有单独的 gradle task，请全局搜索 ReleaseAppTask
-  const val versionCode = 87 // 线上86，开发87
-  const val versionName = "6.8.3-alpha" // 线上6.8.2，开发6.8.3-alpha，自己打包 -alpha，内测 -beta
+  const val versionCode = 88 // 线上87，开发88
+  const val versionName = "6.9.1-alpha" // 线上6.9.0，开发6.9.1-alpha，自己打包 -alpha，内测 -beta
   
   val releaseAbiFilters = listOf("arm64-v8a")
   val debugAbiFilters = listOf("arm64-v8a","x86_64")
 
   // 线上版本更新内容，注意缩进统一
   val updateContent = """
-    1.个人中心功能调整，邮票小店库存更新
-    2.偶现课表数据异常修复
-    3.修正了一些问题，提升了性能
+    1.新增体育打卡功能，空教室功能，方便邮子们的校园生活
+    2.邮子清单全面升级，给邮子提供更全面的体验
+    3.邮票中心升级，邮票小店库存更新
+    4.重邮地图更新，新增南部校区明志苑
+    5.美食咨询处更新，新增滨湖餐厅
   """.trimIndent()
 
   val resourcesExclude = listOf(
