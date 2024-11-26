@@ -6,6 +6,7 @@ import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody.Companion.asRequestBody
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -58,6 +59,7 @@ open class CyxbsReleaseTask : DefaultTask() {
 
     private val netService = retrofit.create(TaskService::class.java)
 
+    @Input
     var getApkFile: (() -> File?)? = null // 由外界任务执行者设置
 
     @TaskAction
