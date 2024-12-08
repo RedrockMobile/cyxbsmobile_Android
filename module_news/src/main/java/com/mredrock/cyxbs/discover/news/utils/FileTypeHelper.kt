@@ -32,7 +32,7 @@ object FileTypeHelper {
             return type
         }
 
-        val end = fName.substring(dotIndex, fName.length).toLowerCase(Locale.getDefault())
+        val end = fName.substring(dotIndex, fName.length).lowercase()
         if (end.isBlank()) return type
         type = MIME_TABLE[end] ?: return type
         return type
