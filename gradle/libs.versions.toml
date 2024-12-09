@@ -23,7 +23,7 @@ kotlinJvmTarget = "11"
 ####################################################################################################
 #                                            Android
 ####################################################################################################
-agp = "8.7.2"
+agp = "8.7.3"
 android-compileSdk = "35"
 android-minSdk = "24"
 android-targetSdk = "35"
@@ -42,7 +42,7 @@ androidx-fragment-ktx = "1.8.5"
 # https://developer.android.com/jetpack/androidx/releases/activity
 androidx-activity-ktx = "1.9.3"
 # https://mvnrepository.com/artifact/androidx.databinding/databinding-runtime
-androidx-databinding = "8.7.2"
+androidx-databinding = "8.7.3"
 # https://developer.android.com/jetpack/androidx/releases/paging
 androidx-paging = "3.3.4"
 # https://developer.android.com/jetpack/androidx/releases/room
@@ -75,7 +75,7 @@ lottie = "6.6.0"
 photoView = "2.3.0"
 # https://github.com/985892345/NetLayout
 # 20 级郭祥瑞封装的课表底层控件，如果有问题，欢迎来联系 👀
-netLayout = "1.1.1-SNAPSHOT"
+netLayout = "1.1.2"
 # https://github.com/985892345/SlideShow
 # 20 级郭祥瑞封装的 Banner 库，如果有问题，欢迎来联系 👀
 slideShow = "2.0.1"
@@ -94,9 +94,9 @@ wheelView = "4.1.9"
 #                                              Kotlin
 ####################################################################################################
 # https://github.com/JetBrains/kotlin/releases
-kotlin = "2.0.21"
+kotlin = "2.1.0"
 # https://github.com/google/ksp/releases
-ksp = "2.0.21-1.0.26" # ksp 版本与 kotlin 版本强绑定，升级 kotlin 记得去更 ksp
+ksp = "2.1.0-1.0.29" # ksp 版本与 kotlin 版本强绑定，升级 kotlin 记得去更 ksp
 # https://github.com/Kotlin/kotlinx.coroutines
 kotlinx-coroutines = "1.9.0"
 # https://github.com/Kotlin/kotlinx.collections.immutable
