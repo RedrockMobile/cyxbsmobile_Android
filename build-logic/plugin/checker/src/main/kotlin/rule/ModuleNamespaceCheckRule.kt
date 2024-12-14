@@ -35,6 +35,10 @@ object ModuleNamespaceCheckRule : AndroidProjectChecker.ICheckRule {
     if (specialNamespace != null) {
       return specialNamespace
     }
+    if (!project.name.contains("_")) {
+      // todo 这里暂时这样处理，等后面移植完所有模块后才完善判断逻辑
+      return "com${project.path.replace(":", ".").replace("-", ".")}"
+    }
     return if (project.projectDir.parentFile == project.rootDir) {
       // 二：是一级模块
       // 一级模块以 com.mredrock.cyxbs.xxx 命名
@@ -48,12 +52,22 @@ object ModuleNamespaceCheckRule : AndroidProjectChecker.ICheckRule {
   
   override fun onConfig(project: Project) {
     val namespace = getCorrectNamespace(project)
-    val file = project.projectDir
+    val javaFile = project.projectDir
       .resolve("src")
       .resolve("main")
       .resolve("java")
       .resolve(namespace.replace(".", File.separator))
-    if (!file.exists()) {
+    val kotlinFile = project.projectDir
+      .resolve("src")
+      .resolve("main")
+      .resolve("kotlin")
+      .resolve(namespace.replace(".", File.separator))
+    val androidMainKotlinFile = project.projectDir
+      .resolve("src")
+      .resolve("androidMain")
+      .resolve("kotlin")
+      .resolve(namespace.replace(".", File.separator))
+    if (!javaFile.exists() && !kotlinFile.exists() && !androidMainKotlinFile.exists()) {
       val rule = """
         
         模块包名命名规范：

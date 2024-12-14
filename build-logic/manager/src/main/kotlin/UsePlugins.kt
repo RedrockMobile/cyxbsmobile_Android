@@ -24,7 +24,7 @@ fun Project.useARouter(isNeedKsp: Boolean = !name.startsWith("api_")) {
       arg("AROUTER_MODULE_NAME", project.name)
     }
     dependencies {
-      "ksp"(libsEx.`arouter-compiler`)
+      "kspAndroid"(libsEx.`arouter-compiler`)
     }
   }
   dependencies {
@@ -93,7 +93,7 @@ fun Project.useRoom(
   dependencies {
     "implementation"(libsEx.`androidx-room`)
     "implementation"(libsEx.`androidx-room-ktx`)
-    "ksp"(libsEx.`androidx-room-compiler`)
+    "kspAndroid"(libsEx.`androidx-room-compiler`)
     if (rxjava) {
       "implementation"(libsEx.`androidx-room-rxjava`)
     }

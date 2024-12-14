@@ -23,7 +23,7 @@ if (!isAllowDebugModule) {
   println("${project.name} 的单模块调试被取消！")
   apply(plugin = "manager.library")
 } else {
-  apply(plugin = "manager.application")
+  apply(plugin = "manager.androidApp")
   extensions.configure<BaseAppModuleExtension>("android") {
     // 设置 debug 的源集
     sourceSets {

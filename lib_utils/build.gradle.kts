@@ -1,4 +1,4 @@
-import utils.config.Config
+import Config
 
 plugins {
   id("manager.library")
