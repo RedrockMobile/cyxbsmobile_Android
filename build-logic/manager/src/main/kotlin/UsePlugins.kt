@@ -2,10 +2,13 @@ import com.android.build.api.dsl.ApplicationBuildFeatures
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryBuildFeatures
 import com.google.devtools.ksp.gradle.KspExtension
+import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 /**
  * 使用 ARouter
@@ -27,8 +30,12 @@ fun Project.useARouter(isNeedKsp: Boolean = !name.startsWith("api_")) {
       "kspAndroid"(libsEx.`arouter-compiler`)
     }
   }
-  dependencies {
-    "implementation"(libsEx.`arouter`)
+  extensions.configure<KotlinMultiplatformExtension> {
+    extensions.configure<NamedDomainObjectContainer<KotlinSourceSet>> {
+      androidMain.dependencies {
+        implementation(libsEx.`arouter`)
+      }
+    }
   }
 }
 
@@ -49,9 +56,13 @@ fun Project.useDataBinding(isNeedKapt: Boolean = !name.startsWith("api_")) {
       }
     }
   }
-  dependencies {
-    "implementation"(libsEx.`androidx-databinding`)
-    "implementation"(libsEx.`androidx-databinding-ktx`)
+  extensions.configure<KotlinMultiplatformExtension> {
+    extensions.configure<NamedDomainObjectContainer<KotlinSourceSet>> {
+      androidMain.dependencies {
+        implementation(libsEx.`androidx-databinding`)
+        implementation(libsEx.`androidx-databinding-ktx`)
+      }
+    }
   }
 }
 
@@ -67,9 +78,13 @@ fun Project.useAutoService(isNeedKapt: Boolean = !name.startsWith("api_")) {
       "kapt"(libsEx.`autoService-compiler`)
     }
   }
-  dependencies {
-    // 谷歌官方的一种动态加载库 https://github.com/google/auto/tree/main/service
-    "compileOnly"(libsEx.autoService)
+  extensions.configure<KotlinMultiplatformExtension> {
+    extensions.configure<NamedDomainObjectContainer<KotlinSourceSet>> {
+      androidMain.dependencies {
+        // 谷歌官方的一种动态加载库 https://github.com/google/auto/tree/main/service
+        compileOnly(libsEx.autoService)
+      }
+    }
   }
 }
 
@@ -90,16 +105,22 @@ fun Project.useRoom(
     // 启用 Gradle 增量注释处理器
     arg("room.incremental", "true")
   }
+  extensions.configure<KotlinMultiplatformExtension> {
+    extensions.configure<NamedDomainObjectContainer<KotlinSourceSet>> {
+      androidMain.dependencies {
+        implementation(libsEx.`androidx-room`)
+        implementation(libsEx.`androidx-room-ktx`)
+        if (rxjava) {
+          implementation(libsEx.`androidx-room-rxjava`)
+        }
+        if (paging) {
+          implementation(libsEx.`androidx-room-paging`)
+        }
+      }
+    }
+  }
   dependencies {
-    "implementation"(libsEx.`androidx-room`)
-    "implementation"(libsEx.`androidx-room-ktx`)
     "kspAndroid"(libsEx.`androidx-room-compiler`)
-    if (rxjava) {
-      "implementation"(libsEx.`androidx-room-rxjava`)
-    }
-    if (paging) {
-      "implementation"(libsEx.`androidx-room-paging`)
-    }
   }
 }
 
@@ -112,8 +133,14 @@ fun Project.useRoom(
 fun Project.useGlide() {
   //kapt 按需引入
   apply(plugin = "org.jetbrains.kotlin.kapt")
+  extensions.configure<KotlinMultiplatformExtension> {
+    extensions.configure<NamedDomainObjectContainer<KotlinSourceSet>> {
+      androidMain.dependencies {
+        implementation(libsEx.glide)
+      }
+    }
+  }
   dependencies {
-    "implementation"(libsEx.glide)
     "kapt"(libsEx.`glide-compiler`)
   }
 }

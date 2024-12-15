@@ -54,7 +54,6 @@ object Config {
   )
   
   fun getApplicationId(project: Project): String {
-    println("getApplicationId: ${project.path}")
     return when (project.path) {
       ":cyxbs-applications:pro" -> {
         if (project.gradle.startParameter.taskNames.any { it.contains("Release") }) {

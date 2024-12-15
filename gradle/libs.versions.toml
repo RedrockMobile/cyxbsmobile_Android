@@ -176,7 +176,8 @@ alicloud-httpdns = "2.5.0"
 # https://github.com/mozilla/rhino
 # js 引擎，支持与 java 直接进行交互
 rhino = "1.7.15"
-
+# 字节很好用调试工具 https://github.com/bytedance/CodeLocator
+codelocator = "2.0.4"
 
 [libraries]
 ####################################################################################################
@@ -285,6 +286,7 @@ leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.re
 pandora = { module = "com.github.whataa:pandora", version.ref = "pandora" }         # 很牛逼的 debug 检测工具，debug 模式下摇一摇手机或者按三次手机中间顶部区域触发
 alicloud-httpdns = { module = "com.aliyun.ams:alicloud-android-httpdns", version.ref = "alicloud-httpdns" }     # 阿里云httpdns依赖
 rhino = { module = "org.mozilla:rhino", version.ref = "rhino" }         # js 引擎，支持与 java 直接进行交互
+codeLocator-core = { module = "com.bytedance.tools.codelocator:codelocator-core", version.ref = "codelocator" }
 
 ####################################### 公有依赖，大部分模块使用 #######################################
 arouter = { module = "com.alibaba:arouter-api", version.ref = "arouter" }

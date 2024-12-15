@@ -96,7 +96,7 @@ class UmengInitialService : InitialService {
                             │
                             │    检测到你目前包名不为 com.mredrock.cyxbs，会导致 Umeng 注册失败
                             │       如果你需要测试 Umeng 功能，
-                            │       请修改 build-logic/core/version 模块中的 Config#getApplicationId() 方法
+                            │       请修改 build-logic/config/version 模块中的 Config#getApplicationId() 方法
                             │
                             └────────────────────────────────────────────────────────────────────
                         """.trimIndent()

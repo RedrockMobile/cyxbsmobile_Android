@@ -13,7 +13,7 @@ kotlin {
   sourceSets {
     androidMain.dependencies {
       // module_main 模块去依赖了其他模块，所以这里只依赖 module_main
-      implementation(projects.moduleMain)
+      implementation(projects.cyxbsPages.home)
 
       implementation(libs.bundles.projectBase)
 
@@ -23,7 +23,6 @@ kotlin {
         exclude(group = "com.umeng.umsdk", module = "alicloud-httpdns")
       }
 
-      implementation(libs.okhttp)
       implementation(libs.vasdolly)
       implementation(libs.bugly.crash)
       implementation(libs.bugly.crash.native)

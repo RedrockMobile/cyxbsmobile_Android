@@ -34,4 +34,7 @@ dependencies {
    * (doKit 在之前引入过，但因为不兼容AGP版本所以后面删除了，如果想再次引入，可参考 23/7/16 时“移除 doKit” 的 commit)
    */
   implementation(libs.pandora)
+
+  // 字节很好用调试工具 https://github.com/bytedance/CodeLocator
+  implementation(libs.codeLocator.core)
 }

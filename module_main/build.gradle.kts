@@ -17,7 +17,7 @@ dependencies {
         && it.name != "module_app" // module_app 依赖 module_main，而不是反向依赖
         && it.name != "lib_single" // lib_single 只跟单模块调试有关，单模块编译时单独依赖
         && it.name != "lib_debug" // lib_debug 单独依赖
-        && !it.path.contains("cyxbs-applications")
+        && !it.path.contains("cyxbs-")
   }.forEach {
     "api"(it)
   }

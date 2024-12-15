@@ -1,4 +1,3 @@
-import gradle.kotlin.dsl.accessors._551895834a49b6597ddd57f2667583fb.kotlin
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import rule.ModuleNamespaceCheckRule
 

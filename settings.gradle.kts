@@ -38,7 +38,7 @@ dependencyResolutionManagement {
 // 测试使用，排除掉不需要的模块，记得还原！！！
 val excludeList = listOf<String>(
   "module_qa", // qa 模块因合规问题下线，新的代替将上线，所以排除 qa
-//  "module_app"
+  "module_main"
 )
 
 //对文件夹进行遍历，深度为2
@@ -76,8 +76,9 @@ rootDir.walk()
 /**
  * 每次新建模块会自动添加 include()，请删除掉，因为上面会自动读取
  */
-include("cyxbs-applications")
 include("cyxbs-applications:pro")
+include("cyxbs-applications:test")
+include("cyxbs-pages:home")
 
 
 

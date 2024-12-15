@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/home_ic_shortcut_stu_schedule"
+        android:shortcutDisabledMessage="@string/home_shortcut_cancel"
+        android:shortcutId="course"
+        android:shortcutLongLabel="@string/home_course_long_name"
+        android:shortcutShortLabel="@string/home_course_short_name">
+
+        <intent
+            android:action="com.mredrock.cyxbs.action.COURSE"
+            android:targetClass="com.cyxbs.pages.home.ui.main.MainActivity"
+            android:targetPackage="com.mredrock.cyxbs" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/home_ic_shortcut_grade"
+        android:shortcutDisabledMessage="@string/home_shortcut_cancel"
+        android:shortcutId="grade"
+        android:shortcutLongLabel="@string/home_grade_long_name"
+        android:shortcutShortLabel="@string/home_grade_short_name">
+        <intent
+            android:action="android.intent.action.EXAM"
+            android:targetClass="com.cyxbs.pages.home.ui.main.MainActivity"
+            android:targetPackage="com.mredrock.cyxbs" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/home_ic_shortcut_school_car"
+        android:shortcutDisabledMessage="@string/home_shortcut_cancel"
+        android:shortcutId="schoolCar"
+        android:shortcutLongLabel="@string/home_school_car_long_name"
+        android:shortcutShortLabel="@string/home_school_car_short_name">
+
+        <intent
+            android:action="android.intent.action.SCHOOLCAR"
+            android:targetClass="com.cyxbs.pages.home.ui.main.MainActivity"
+            android:targetPackage="com.mredrock.cyxbs" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/home_ic_shortcut_empty_room"
+        android:shortcutDisabledMessage="@string/home_shortcut_cancel"
+        android:shortcutId="emptyRoom"
+        android:shortcutLongLabel="@string/home_empty_room_long_name"
+        android:shortcutShortLabel="@string/home_empty_room_short_name">
+
+        <intent
+            android:action="android.intent.action.EMPTYROOM"
+            android:targetClass="com.cyxbs.pages.home.ui.main.MainActivity"
+            android:targetPackage="com.mredrock.cyxbs" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+</shortcuts>

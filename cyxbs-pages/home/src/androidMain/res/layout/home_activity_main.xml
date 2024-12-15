@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/config_window_background">
+
+    <!--Vp 由内部每个界面自己 fitsSystemWindows-->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/home_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp" />
+
+    <FrameLayout
+        android:id="@+id/home_fl_fitsSystemWindows"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true" >
+        <!--设置 fitsSystemWindows-->
+
+        <!--课表-->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/home_fcv_course_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!--底部按钮-->
+        <com.cyxbs.pages.home.widget.BottomNavLayout
+            android:id="@+id/home_bnl_bottom_nav"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"/>
+
+    </FrameLayout>
+
+    <!--闪屏页-->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/home_fcv_splash_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</FrameLayout>
