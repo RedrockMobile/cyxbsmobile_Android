@@ -3,8 +3,6 @@ package crash.ui
 import android.content.Intent
 import android.graphics.Canvas
 import android.os.Bundle
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -46,7 +44,7 @@ class DebugSecondActivity : AppCompatActivity() {
                         )
                     }
 
-                    override fun onDraw(canvas: Canvas?) {
+                    override fun onDraw(canvas: Canvas) {
                         super.onDraw(canvas)
                         if (openException) {
                             openException = false

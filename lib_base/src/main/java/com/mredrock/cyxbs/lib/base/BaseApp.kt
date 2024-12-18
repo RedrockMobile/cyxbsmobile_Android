@@ -63,7 +63,6 @@ open class BaseApp : Application() {
     initARouter()
     initInitialService()
     initActivityManger()
-    android.util.Log.d("ggg", "(${Error().stackTrace[0].run { "$fileName:$lineNumber" }}) -> onCreate")
   }
   
   /**

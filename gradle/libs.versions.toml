@@ -122,6 +122,9 @@ compose-multiplatform = "1.7.0"
 # https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-navigation-routing.html#setup
 # 官网文档可能更新不及时，版本请看 compose 发布时给出的版本
 compose-navigation = "2.8.0-alpha11"
+# https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-lifecycle.html
+# 看 compose 发布时给出的版本
+compose-lifecycle = "2.9.0-alpha01"
 
 ####################################################################################################
 #                                               三方库
@@ -266,6 +269,7 @@ kmp-ktProvider-manager = { module = "io.github.985892345:provider-manager", vers
 compose-gradlePlugin = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "compose-multiplatform" }
 compose-compiler-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "compose-navigation" }
+compose-lifecycle = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "compose-lifecycle" }
 
 ####################################################################################################
 #                                               三方库

@@ -14,12 +14,13 @@ kotlin {
       implementation(compose.runtime)
       implementation(compose.foundation)
       implementation(compose.material)
+      implementation(compose.material3)
       implementation(compose.ui)
       implementation(compose.components.resources)
       implementation(compose.components.uiToolingPreview)
       implementation(compose.materialIconsExtended)
       implementation(libsEx.`compose-navigation`)
-//      implementation(libsEx.bundles.adaptive) // 部分关联依赖缺失
+      implementation(libsEx.`compose-lifecycle`)
     }
     desktopMain.dependencies {
       implementation(compose.desktop.currentOs)

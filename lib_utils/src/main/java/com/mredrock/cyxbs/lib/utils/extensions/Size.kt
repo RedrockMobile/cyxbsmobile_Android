@@ -3,7 +3,13 @@ package com.mredrock.cyxbs.lib.utils.extensions
 import android.graphics.drawable.Drawable
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.annotation.DimenRes
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Dp
 import androidx.core.content.ContextCompat
 
 /**
@@ -31,11 +37,19 @@ val Int.px2dpF: Float
 val Int.px2dp: Int
   get() = px2dpF.toInt()
 
+val Int.px2dpCompose: Dp
+  @Composable
+  get() = LocalDensity.current.run { toDp() }
+
 val Float.px2dpF: Float
   get() = this / appContext.resources.displayMetrics.density
 
 val Float.px2dp: Int
   get() = px2dpF.toInt()
+
+val Float.px2dpCompose: Dp
+  @Composable
+  get() = LocalDensity.current.run { toDp() }
 
 val Int.dp2spF: Float
   get() = appContext.resources.displayMetrics.scaledDensity * this
@@ -61,17 +75,37 @@ val Float.sp2dpF: Float
 val Float.sp2dp: Float
   get() = sp2dpF * this
 
+val Dp.px: Float
+  @Composable
+  get() = LocalDensity.current.run { toPx() }
+
 val Int.color: Int
   get() = ContextCompat.getColor(appContext, this)
+
+val Int.colorCompose: Color
+  @Composable
+  get() = Color(ContextCompat.getColor(LocalContext.current, this))
 
 val Int.string: String
   get() = appContext.getString(this)
 
+val Int.stringCompose: String
+  @Composable
+  get() = LocalContext.current.getString(this)
+
 val Int.drawable: Drawable
   get() = AppCompatResources.getDrawable(appContext, this)!!
 
+val Int.drawableCompose: Drawable
+  @Composable
+  get() = AppCompatResources.getDrawable(LocalContext.current, this)!!
+
 val Int.dimen: Float
   get() = appContext.resources.getDimension(this)
+
+val Int.dimenCompose: Float
+  @Composable
+  get() = LocalContext.current.resources.getDimension(this)
 
 val Int.anim: Animation
   get() = AnimationUtils.loadAnimation(appContext, this)

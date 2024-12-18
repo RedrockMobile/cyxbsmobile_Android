@@ -15,5 +15,6 @@ dependencies {
   // 这里面写只有自己模块才会用到的依赖
   implementation(libs.androidx.appcompat)
   implementation(libs.androidx.constraintlayout)
+  implementation(libs.androidx.recyclerview)
   implementation(libs.gson)// 用于序列化Throwable
 }

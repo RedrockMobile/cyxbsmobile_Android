@@ -2,6 +2,7 @@ package com.mredrock.cyxbs.course.service
 
 import android.app.Dialog
 import android.content.Context
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.lifecycle.LiveData
@@ -26,19 +27,10 @@ import com.mredrock.cyxbs.course.page.course.ui.home.HomeCourseVpFragment
 @Route(path = COURSE_SERVICE, name = COURSE_SERVICE)
 class CourseServiceImpl : ICourseService {
 
-  override fun tryReplaceHomeCourseFragmentById(fm: FragmentManager, id: Int) {
-    val fragment = fm.findFragmentById(id)
-    if (fragment !is HomeCourseVpFragment) {
-      fm.commit { replace(id, HomeCourseVpFragment()) }
-    }
-    
-    /*
-    * 由于 HomeCourseVpFragment 的 ViewModel 观察了当前登录人的学号，
-    * 会自动根据不同登录人发送不同的数据，
-    * 所以这里没必要去通知 HomeCourseFragment 刷新数据
-    * */
+  override fun createHomeCourseFragment(): Fragment {
+    return HomeCourseVpFragment()
   }
-  
+
   override fun setHeaderAlpha(alpha: Float) {
     _headerAlphaState.value = alpha
   }

@@ -1,7 +1,7 @@
 <resources>
 
     <string name="home_nav_discover">发现</string>
-    <string name="home_nav_fairground">游乐园</string>
+    <string name="home_nav_fairground">邮乐园</string>
     <string name="home_nav_mine">我的</string>
 
     <string name="home_course_long_name" translatable="false">我的课表</string>

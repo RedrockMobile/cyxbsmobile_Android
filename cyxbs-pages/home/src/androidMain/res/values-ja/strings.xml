@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="home_nav_discover">発見</string>
-    <string name="home_nav_fairground">遊園地です</string>
+    <string name="home_nav_fairground">郵園地です</string>
     <string name="home_nav_mine">自分</string>
 </resources>

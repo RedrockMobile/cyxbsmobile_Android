@@ -2,9 +2,8 @@ package com.mredrock.cyxbs.api.course
 
 import android.app.Dialog
 import android.content.Context
-import androidx.annotation.IdRes
 import androidx.core.content.edit
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.template.IProvider
 import com.mredrock.cyxbs.api.affair.IAffairService
 import com.mredrock.cyxbs.lib.utils.extensions.appContext
@@ -29,22 +28,9 @@ interface ICourseService : IProvider {
       appContext.getSp("课表").edit { putInt("课表最大周数", maxWeek) }
       this.maxWeek = maxWeek
     }
-
   }
-  
-  
-  /**
-   * 尝试调用 replace() 显示主页的课表，如果已经添加，则不会重复添加
-   *
-   * 内部按规范添加 Fragment，对于异常重启，不会生成新的 Fragment
-   *
-   * @param fm FragmentManager，内部自动帮你添加课表 Fragment
-   */
-  fun tryReplaceHomeCourseFragmentById(
-    fm: FragmentManager,
-    @IdRes
-    id: Int
-  )
+
+  fun createHomeCourseFragment(): Fragment
   
   /**
    * 设置课表头的透明度

@@ -21,8 +21,7 @@
         <!--设置 fitsSystemWindows-->
 
         <!--课表-->
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/home_fcv_course_fragment"
+        <com.cyxbs.pages.home.ui.course.HomeCourseLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

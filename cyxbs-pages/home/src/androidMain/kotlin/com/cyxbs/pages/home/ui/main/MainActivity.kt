@@ -1,10 +1,10 @@
 package com.cyxbs.pages.home.ui.main
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.mredrock.cyxbs.api.account.IAccountService
 import com.mredrock.cyxbs.api.login.ILoginService
@@ -15,7 +15,6 @@ import com.mredrock.cyxbs.config.sp.SP_COURSE_SHOW_STATE
 import com.mredrock.cyxbs.config.sp.defaultSp
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.base.utils.Umeng
-import com.mredrock.cyxbs.lib.utils.extensions.dp2pxF
 import com.mredrock.cyxbs.lib.utils.extensions.launch
 import com.mredrock.cyxbs.lib.utils.extensions.processLifecycleScope
 import com.mredrock.cyxbs.lib.utils.logger.TrackingUtils
@@ -23,12 +22,9 @@ import com.mredrock.cyxbs.lib.utils.logger.event.ClickEvent
 import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import com.mredrock.cyxbs.lib.utils.service.impl
 import com.mredrock.cyxbs.lib.utils.utils.judge.NetworkUtil
-import com.cyxbs.pages.home.R
-import com.cyxbs.pages.home.adapter.MainAdapter
-import com.cyxbs.pages.home.ui.course.CourseFragment
-import com.cyxbs.pages.home.ui.splash.SplashFragment
 import com.cyxbs.pages.home.viewmodel.MainViewModel
-import com.cyxbs.pages.home.widget.BottomNavLayout
+import com.mredrock.cyxbs.config.route.DISCOVER_EMPTY_ROOM
+import com.mredrock.cyxbs.config.route.DISCOVER_GRADES
 import kotlinx.coroutines.launch
 
 /**
@@ -47,10 +43,7 @@ class MainActivity : BaseActivity() {
   private val mViewModel by viewModels<MainViewModel>()
   
   private val mAccountService = IAccountService::class.impl
-  
-  private val mViewPager by R.id.home_vp.view<ViewPager2>()
-  private val mBottomNavLayout by R.id.home_bnl_bottom_nav.view<BottomNavLayout>()
-  
+
   private var mIsLogin = false
   
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,14 +85,13 @@ class MainActivity : BaseActivity() {
    * 以后初始化的内容写在这里
    */
   private fun initUI() {
-    setContentView(R.layout.home_activity_main)
     initAction()
-    initSplash()
-    initViewPager()
     initBottomNav()
-    initCourse()
     initNotification()
     initUpdate()
+    setContent {
+      MainCompose()
+    }
   }
 
   /**
@@ -110,73 +102,45 @@ class MainActivity : BaseActivity() {
     when (intent.action) {
       DESKTOP_SHORTCUT_COURSE -> {
         if (mIsLogin) {
-          mViewPager.post {
-            // 延迟些时间才打开课表，因为打开快了，课表会出现短时间的白屏
-            mViewModel.courseBottomSheetExpand.value = true
-          }
+          mViewModel.courseBottomSheetExpand.value = true
         }
       }
       // 因政策问题暂时关闭
-//      DESKTOP_SHORTCUT_EXAM -> {
-//        if (mIsLogin) {
-//          ServiceManager.activity(DISCOVER_GRADES)
-//        }
-//      }
+      DESKTOP_SHORTCUT_EXAM -> {
+        if (mIsLogin) {
+          ServiceManager.activity(DISCOVER_GRADES)
+        }
+      }
       DESKTOP_SHORTCUT_SCHOOL_CAR -> {
         ServiceManager.activity(DISCOVER_SCHOOL_CAR)
       }
-//      DESKTOP_SHORTCUT_EMPTY_ROOM -> {
-//        ServiceManager.activity(DISCOVER_EMPTY_ROOM)
-//      }
+      DESKTOP_SHORTCUT_EMPTY_ROOM -> {
+        ServiceManager.activity(DISCOVER_EMPTY_ROOM)
+      }
       else -> {
         if (mIsLogin && defaultSp.getBoolean(SP_COURSE_SHOW_STATE, false)) {
           // 打开应用优先显示课表的设置
-          mViewPager.post {
-            // 延迟些时间才打开课表，因为打开快了，课表会出现短时间的白屏
-            mViewModel.courseBottomSheetExpand.value = true
-          }
+          mViewModel.courseBottomSheetExpand.value = true
         }
       }
     }
-  }
-  
-  // 初始化闪屏页
-  private fun initSplash() {
-    replaceFragment(R.id.home_fcv_splash_fragment) {
-      SplashFragment()
-    }
-  }
-  
-  private fun initCourse() {
-    replaceFragment(R.id.home_fcv_course_fragment) {
-      CourseFragment()
-    }
-  }
-  
-  private fun initViewPager() {
-    mViewPager.adapter = MainAdapter(this)
-    mViewPager.isUserInputEnabled = false
   }
   
   private fun initBottomNav() {
     mViewModel.courseBottomSheetOffset.observe {
       // 底部按钮跟随课表展开而变化
-      mBottomNavLayout.translationY = mBottomNavLayout.height * it
-      mBottomNavLayout.alpha = 1 - it
+      BottomNavState.offsetYRadio.floatValue = it
+      BottomNavState.alpha.floatValue = 1 - it
     }
-    mBottomNavLayout.addSelectListener {
-      mViewPager.currentItem = it
+    BottomNavState.selectedItem.collectLaunch {
       when (it) {
-        0, 2 -> {
-          mBottomNavLayout.cardElevation = 0F
+        BottomNavState.discoverItem, BottomNavState.mineItem -> {
           if (mViewModel.courseBottomSheetExpand.value == null) {
             mViewModel.courseBottomSheetExpand.value = false
           }
         }
-        1 -> {
-          mBottomNavLayout.cardElevation = 4.dp2pxF
+        BottomNavState.fairgroundItem -> {
           mViewModel.courseBottomSheetExpand.value = null
-
           if (mIsLogin) {
             // “邮乐园” 按钮点击事件埋点
             processLifecycleScope.launch {
@@ -186,21 +150,14 @@ class MainActivity : BaseActivity() {
         }
       }
       
-      
       // Umeng 埋点统计
-      Umeng.sendEvent(Umeng.Event.ClickBottomTab(it))
+      Umeng.sendEvent(Umeng.Event.ClickBottomTab(BottomNavState.items.indexOf(it)))
     }
   }
 
   private fun initNotification() {
     mViewModel.hasUnReadNotification.observe {
-      if (!it) {
-        // 设置为无红点的状态
-        mBottomNavLayout.setBtnSelector(2,true)
-        return@observe
-      }
-      // 设置为有红点的状态
-      mBottomNavLayout.setBtnSelector(2,false)
+      BottomNavState.mineItem.setRedDot(it)
     }
     lifecycle.addObserver(object : DefaultLifecycleObserver {
       override fun onResume(owner: LifecycleOwner) {
@@ -219,8 +176,8 @@ class MainActivity : BaseActivity() {
   companion object {
     // 长按桌面图标的那个东西，对应 AndroidManifest.xml 中的设置
     const val DESKTOP_SHORTCUT_COURSE = "com.mredrock.cyxbs.action.COURSE"
-//    const val DESKTOP_SHORTCUT_EXAM = "android.intent.action.EXAM"
+    const val DESKTOP_SHORTCUT_EXAM = "android.intent.action.EXAM"
     const val DESKTOP_SHORTCUT_SCHOOL_CAR = "android.intent.action.SCHOOLCAR"
-//    const val DESKTOP_SHORTCUT_EMPTY_ROOM = "android.intent.action.EMPTY_ROOM"
+    const val DESKTOP_SHORTCUT_EMPTY_ROOM = "android.intent.action.EMPTY_ROOM"
   }
 }
