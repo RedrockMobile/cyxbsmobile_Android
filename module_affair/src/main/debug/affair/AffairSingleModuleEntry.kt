@@ -1,8 +1,7 @@
 package affair
 
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.mredrock.cyxbs.api.affair.IAffairService
-import com.mredrock.cyxbs.lib.utils.service.ServiceManager
+import com.cyxbs.pages.affair.api.IAffairService
 import com.mredrock.cyxbs.single.ISingleModuleEntry
 import com.mredrock.cyxbs.single.ui.SingleModuleActivity
 

@@ -10,7 +10,7 @@ dependencies {
   implementation(projects.libUtils)
   implementation(projects.libAccount.apiAccount)
   implementation(projects.moduleStore.apiStore)
-  implementation(projects.moduleAffair.apiAffair)
+  implementation(projects.cyxbsPages.affair.api)
   implementation(projects.moduleCourse.apiCourse)
   implementation(projects.moduleCourse.libCourse)
 

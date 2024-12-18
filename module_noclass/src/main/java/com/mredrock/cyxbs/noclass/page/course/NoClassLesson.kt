@@ -3,7 +3,7 @@ package com.mredrock.cyxbs.noclass.page.course
 import android.content.Context
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.mredrock.cyxbs.api.affair.DateJson
+import com.cyxbs.pages.affair.api.DateJson
 import com.mredrock.cyxbs.api.course.utils.getBeginLesson
 import com.mredrock.cyxbs.lib.course.item.lesson.BaseLessonLayoutParams
 import com.mredrock.cyxbs.lib.course.item.lesson.ILessonItem

@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.mredrock.cyxbs.api.affair.IAffairService
+import com.cyxbs.pages.affair.api.IAffairService
 import com.mredrock.cyxbs.api.course.ICourseService
 import com.mredrock.cyxbs.api.course.ILessonService
 import com.mredrock.cyxbs.api.widget.IWidgetService

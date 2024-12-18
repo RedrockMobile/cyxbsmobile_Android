@@ -2,7 +2,7 @@ package com.cyxbs.pages.home.ui.course.utils
 
 import android.util.Log
 import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.api.affair.IAffairService
+import com.cyxbs.pages.affair.api.IAffairService
 import com.mredrock.cyxbs.api.course.ICourseService
 import com.mredrock.cyxbs.api.course.ILessonService
 import com.mredrock.cyxbs.api.course.ILinkService

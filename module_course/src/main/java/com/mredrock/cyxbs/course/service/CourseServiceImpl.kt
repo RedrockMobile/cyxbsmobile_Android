@@ -3,12 +3,10 @@ package com.mredrock.cyxbs.course.service
 import android.app.Dialog
 import android.content.Context
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.commit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.mredrock.cyxbs.api.affair.IAffairService
+import com.cyxbs.pages.affair.api.IAffairService
 import com.mredrock.cyxbs.api.course.COURSE_SERVICE
 import com.mredrock.cyxbs.api.course.ICourseService
 import com.mredrock.cyxbs.api.course.ILessonService

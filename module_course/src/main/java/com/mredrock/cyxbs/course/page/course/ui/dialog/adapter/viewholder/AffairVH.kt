@@ -5,7 +5,7 @@ import android.content.DialogInterface
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import com.mredrock.cyxbs.api.affair.IAffairService
+import com.cyxbs.pages.affair.api.IAffairService
 import com.mredrock.cyxbs.course.R
 import com.mredrock.cyxbs.course.page.course.data.AffairData
 import com.mredrock.cyxbs.lib.base.utils.safeSubscribeBy

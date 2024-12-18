@@ -3,7 +3,7 @@ package com.mredrock.cyxbs.course.page.course.ui.home.utils
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.edit
-import com.mredrock.cyxbs.api.affair.IAffairService
+import com.cyxbs.pages.affair.api.IAffairService
 import com.mredrock.cyxbs.api.course.ILessonService
 import com.mredrock.cyxbs.api.course.utils.getBeginLesson
 import com.mredrock.cyxbs.config.config.SchoolCalendar

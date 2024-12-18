@@ -13,7 +13,7 @@ dependencies {
   implementation(projects.libAccount.apiAccount)
   implementation(projects.moduleCourse.apiCourse)
   implementation(projects.moduleCourse.libCourse)
-  implementation(projects.moduleAffair.apiAffair)
+  implementation(projects.cyxbsPages.affair.api)
   implementation(projects.moduleWidget.apiWidget)
 
   implementation(libs.bundles.projectBase)

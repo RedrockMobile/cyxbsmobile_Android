@@ -1,7 +1,7 @@
 package com.mredrock.cyxbs.course.page.course.data
 
 import androidx.recyclerview.widget.DiffUtil
-import com.mredrock.cyxbs.api.affair.IAffairService
+import com.cyxbs.pages.affair.api.IAffairService
 import com.mredrock.cyxbs.lib.course.item.affair.IAffairData
 
 /**

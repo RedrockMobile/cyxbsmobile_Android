@@ -6,7 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.core.content.edit
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.mredrock.cyxbs.api.affair.IAffairService
+import com.cyxbs.pages.affair.api.IAffairService
 import com.mredrock.cyxbs.api.course.ILessonService
 import com.mredrock.cyxbs.api.course.utils.getStartRow
 import com.mredrock.cyxbs.api.widget.IWidgetService

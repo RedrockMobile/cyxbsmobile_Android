@@ -56,18 +56,21 @@ object ModuleNamespaceCheckRule : AndroidProjectChecker.ICheckRule {
       .resolve("src")
       .resolve("main")
       .resolve("java")
-      .resolve(namespace.replace(".", File.separator))
     val kotlinFile = project.projectDir
       .resolve("src")
       .resolve("main")
       .resolve("kotlin")
-      .resolve(namespace.replace(".", File.separator))
     val androidMainKotlinFile = project.projectDir
       .resolve("src")
       .resolve("androidMain")
       .resolve("kotlin")
-      .resolve(namespace.replace(".", File.separator))
-    if (!javaFile.exists() && !kotlinFile.exists() && !androidMainKotlinFile.exists()) {
+    val javaCodeFile = javaFile.resolve(namespace.replace(".", File.separator))
+    val kotlinCodeFile = kotlinFile.resolve(namespace.replace(".", File.separator))
+    val androidMainKotlinCodeFile = androidMainKotlinFile.resolve(namespace.replace(".", File.separator))
+    if (javaFile.list().isNullOrEmpty() && kotlinFile.list().isNullOrEmpty() && androidMainKotlinFile.list().isNullOrEmpty()) {
+      // 如果都不存在，则应该是新模块，自动帮他创建文件夹
+      androidMainKotlinCodeFile.mkdirs()
+    } else if (!javaCodeFile.exists() && !kotlinCodeFile.exists() && !androidMainKotlinCodeFile.exists()) {
       val rule = """
         
         模块包名命名规范：

@@ -1,7 +1,7 @@
 package com.mredrock.cyxbs.course.page.course.ui.home.utils
 
 import android.view.View
-import com.mredrock.cyxbs.api.affair.IAffairService
+import com.cyxbs.pages.affair.api.IAffairService
 import com.mredrock.cyxbs.course.page.course.data.AffairData
 import com.mredrock.cyxbs.course.page.course.data.toAffair
 import com.mredrock.cyxbs.course.page.course.item.affair.AffairItem

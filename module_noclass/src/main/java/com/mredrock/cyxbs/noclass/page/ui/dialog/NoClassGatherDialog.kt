@@ -9,9 +9,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.viewpager2.widget.ViewPager2
 import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.api.affair.DateJson
-import com.mredrock.cyxbs.api.affair.IAffairService
-import com.mredrock.cyxbs.api.affair.NoClassBean
+import com.cyxbs.pages.affair.api.DateJson
+import com.cyxbs.pages.affair.api.IAffairService
+import com.cyxbs.pages.affair.api.NoClassBean
 import com.mredrock.cyxbs.lib.utils.adapter.FragmentVpAdapter
 import com.mredrock.cyxbs.lib.utils.extensions.dp2px
 import com.mredrock.cyxbs.lib.utils.extensions.gone

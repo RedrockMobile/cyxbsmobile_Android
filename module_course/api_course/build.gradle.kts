@@ -7,7 +7,7 @@ useARouter()
 dependencies {
   implementation(projects.libConfig)
   implementation(projects.libUtils)
-  implementation(projects.moduleAffair.apiAffair)
+  implementation(projects.cyxbsPages.affair.api)
 
   implementation(libs.rxjava)
 }

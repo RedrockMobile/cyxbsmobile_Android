@@ -1,7 +1,7 @@
 package com.mredrock.cyxbs.api.widget
 
 import com.alibaba.android.arouter.facade.template.IProvider
-import com.mredrock.cyxbs.api.affair.IAffairService
+import com.cyxbs.pages.affair.api.IAffairService
 import com.mredrock.cyxbs.api.course.ILessonService
 
 /**

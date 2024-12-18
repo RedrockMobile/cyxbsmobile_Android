@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import androidx.appcompat.app.AppCompatActivity
-import com.mredrock.cyxbs.api.affair.DateJson
+import com.cyxbs.pages.affair.api.DateJson
 import com.mredrock.cyxbs.api.course.utils.getBeginLesson
 import com.mredrock.cyxbs.lib.course.helper.affair.view.TouchAffairView
 import com.mredrock.cyxbs.lib.course.internal.item.IItem

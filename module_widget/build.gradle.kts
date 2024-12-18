@@ -19,7 +19,7 @@ dependencies {
   implementation(projects.libAccount.apiAccount)
   implementation(projects.moduleWidget.apiWidget)
   implementation(projects.moduleCourse.apiCourse)
-  implementation(projects.moduleAffair.apiAffair)
+  implementation(projects.cyxbsPages.affair.api)
 
   implementation(libs.bundles.projectBase)
   implementation(libs.bundles.views)

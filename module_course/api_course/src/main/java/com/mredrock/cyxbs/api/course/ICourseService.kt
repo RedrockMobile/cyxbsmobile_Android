@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.template.IProvider
-import com.mredrock.cyxbs.api.affair.IAffairService
+import com.cyxbs.pages.affair.api.IAffairService
 import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.extensions.getSp
 

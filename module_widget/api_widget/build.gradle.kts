@@ -6,5 +6,5 @@ useARouter()
 
 dependencies {
   implementation(projects.moduleCourse.apiCourse)
-  implementation(projects.moduleAffair.apiAffair)
+  implementation(projects.cyxbsPages.affair.api)
 }

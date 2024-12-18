@@ -2,7 +2,7 @@ package com.mredrock.cyxbs.widget.repo.bean
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.mredrock.cyxbs.api.affair.IAffairService
+import com.cyxbs.pages.affair.api.IAffairService
 import java.io.Serializable
 
 /**
