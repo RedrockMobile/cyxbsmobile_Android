@@ -1,4 +1,4 @@
-package com.mredrock.cyxbs.calendar
+package com.mredrock.cyxbs.discover.pages.calendar
 
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
@@ -16,6 +16,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.bumptech.glide.request.transition.Transition
 import com.mredrock.cyxbs.config.route.DISCOVER_CALENDAR
+import com.mredrock.cyxbs.discover.R
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.utils.extensions.isDarkMode
 import com.mredrock.cyxbs.lib.utils.network.getBaseUrl
@@ -30,7 +31,7 @@ class CalendarActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.calendar_activity_main)
+        setContentView(R.layout.discover_calendar_activity)
         val request = RequestOptions()
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .skipMemoryCache(true)

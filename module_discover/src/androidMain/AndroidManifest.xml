@@ -7,6 +7,8 @@
             android:name=".pages.RollerViewActivity"
             android:usesCleartextTraffic="true"
              />
+        <activity android:name=".pages.calendar.CalendarActivity"
+            android:launchMode="singleTop"/>
     </application>
 
 </manifest>

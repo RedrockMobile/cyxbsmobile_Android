@@ -40,7 +40,8 @@ val excludeList = listOf<String>(
   "module_qa", // qa 模块因合规问题下线，新的代替将上线，所以排除 qa
   "module_main",
   "module_login",
-  "module_affair"
+  "module_affair",
+  "module_calendar"
 )
 
 //对文件夹进行遍历，深度为2
