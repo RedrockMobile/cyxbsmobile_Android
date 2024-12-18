@@ -3,12 +3,9 @@ package com.cyxbs.pages.home.ui.course
 import android.widget.FrameLayout
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,26 +14,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
-import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -45,17 +33,13 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.commit
 import com.cyxbs.pages.home.R
 import com.cyxbs.pages.home.ui.course.utils.CourseHeaderHelper
-import com.cyxbs.pages.home.ui.main.BottomNavState
 import com.mredrock.cyxbs.api.course.ICourseService
 import com.mredrock.cyxbs.api.crash.ICrashService
 import com.mredrock.cyxbs.config.route.COURSE_POS_TO_MAP
 import com.mredrock.cyxbs.config.route.DISCOVER_MAP
 import com.mredrock.cyxbs.lib.base.utils.Umeng
-import com.mredrock.cyxbs.lib.utils.compose.BottomSheetCompose
 import com.mredrock.cyxbs.lib.utils.compose.BottomSheetState
 import com.mredrock.cyxbs.lib.utils.compose.clickableNoIndicator
-import com.mredrock.cyxbs.lib.utils.compose.rememberBottomSheetState
-import com.mredrock.cyxbs.lib.utils.extensions.asFlow
 import com.mredrock.cyxbs.lib.utils.extensions.color
 import com.mredrock.cyxbs.lib.utils.extensions.colorCompose
 import com.mredrock.cyxbs.lib.utils.extensions.drawable
@@ -102,7 +86,9 @@ fun HomeCourseCompose(modifier: Modifier = Modifier) {
 //      bottomSheetState = bottomSheetState
 //    )
 //  }
-  // Compose 与原生的嵌套滑动存在问题
+  // Compose 与原生的嵌套滑动存在问题，OffsetInWindow 始终为 0，
+  // 导致 NestedScrollView ACTION_MOVE 中的 mLastMotionY = y - scrollOffset 不被正确计算
+  // 所以这里需要等到课表的 Scroll 变成 Compose 后再进行 BottomSheet 的迁移
   AndroidView(
     modifier = modifier.fillMaxSize().systemBarsPadding(),
     factory = {

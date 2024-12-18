@@ -11,7 +11,7 @@ dependencies {
   implementation(projects.libUpdate.apiUpdate)
   implementation(projects.libAccount.apiAccount)
   implementation(projects.libProtocol.apiProtocol)
-  implementation(projects.moduleLogin.apiLogin)
+  implementation(projects.cyxbsPages.login.api)
 
   implementation(libs.bundles.projectBase)
   implementation(libs.bundles.views)

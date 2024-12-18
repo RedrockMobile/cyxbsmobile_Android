@@ -3,7 +3,7 @@ package com.mredrock.cyxbs.single.ui
 import android.annotation.SuppressLint
 import android.os.Bundle
 import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.api.login.ILoginService
+import com.cyxbs.pages.login.api.ILoginService
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.utils.extensions.lazyUnlock
 import com.mredrock.cyxbs.lib.utils.service.ServiceManager

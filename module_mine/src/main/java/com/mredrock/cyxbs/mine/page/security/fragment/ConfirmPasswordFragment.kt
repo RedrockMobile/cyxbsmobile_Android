@@ -8,7 +8,7 @@ import android.widget.EditText
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
-import com.mredrock.cyxbs.api.login.ILoginService
+import com.cyxbs.pages.login.api.ILoginService
 import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.lib.base.ui.BaseBindFragment
 import com.mredrock.cyxbs.lib.utils.extensions.gone

@@ -1,8 +1,9 @@
 package com.mredrock.cyxbs.lib.utils.compose.dialog
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -10,6 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -47,6 +49,7 @@ abstract class Dialog {
   abstract val priority: Int
   abstract val properties: DialogProperties
   abstract val onDismissRequest: Dialog.() -> Unit
+
   @Composable
   abstract fun Content()
 
@@ -83,6 +86,7 @@ abstract class Dialog {
       override val priority: Int = Int.MAX_VALUE / 2
       override val properties: DialogProperties = DialogProperties()
       override val onDismissRequest: Dialog.() -> Unit = { hide() }
+
       @Composable
       override fun Content() = Unit
     }
@@ -105,11 +109,11 @@ fun DialogCompose() {
         AppDialogState.onDismissRequest.invoke(AppDialogState)
       }
     ) {
-      Card(
-        modifier = Modifier.wrapContentSize(),
-        shape = RoundedCornerShape(16.dp),
-        backgroundColor = Color(0xFFFAFAFA),
-        elevation = 0.dp,
+      Box(
+        modifier = Modifier
+          .wrapContentSize()
+          .clip(RoundedCornerShape(16.dp))
+          .background(Color(0xFFFAFAFA)),
       ) {
         AppDialogState.Content()
       }

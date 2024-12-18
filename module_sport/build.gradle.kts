@@ -13,7 +13,7 @@ dependencies {
   implementation(projects.libUtils)
   implementation(projects.libAccount.apiAccount)
   implementation(projects.moduleSport.apiSport)
-  implementation(projects.moduleLogin.apiLogin)
+  implementation(projects.cyxbsPages.login.api)
 
   implementation(libs.bundles.projectBase)
   implementation(libs.bundles.views)

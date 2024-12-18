@@ -11,7 +11,7 @@ dependencies {
   implementation(projects.libConfig)
   implementation(projects.libAccount.apiAccount)
   implementation(projects.moduleAffair.apiAffair)
-  implementation(projects.moduleLogin.apiLogin)
+  implementation(projects.cyxbsPages.login.api)
   implementation(projects.moduleCourse.apiCourse)
 
   implementation(libs.bundles.projectBase)

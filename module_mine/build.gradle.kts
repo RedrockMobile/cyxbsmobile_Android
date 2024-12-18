@@ -14,7 +14,7 @@ dependencies {
   implementation(projects.libAccount.apiAccount)
   implementation(projects.libProtocol.apiProtocol)
   implementation(projects.moduleMine.apiMine)
-  implementation(projects.moduleLogin.apiLogin)
+  implementation(projects.cyxbsPages.login.api)
   implementation(projects.moduleStore.apiStore)
   implementation(projects.moduleCourse.apiCourse)
 

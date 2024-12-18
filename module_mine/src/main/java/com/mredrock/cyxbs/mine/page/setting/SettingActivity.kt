@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.core.view.postDelayed
 import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.api.login.ILoginService
+import com.cyxbs.pages.login.api.ILoginService
 import com.mredrock.cyxbs.common.config.COURSE_SHOW_STATE
 import com.mredrock.cyxbs.common.config.SP_WIDGET_NEED_FRESH
 import com.mredrock.cyxbs.common.config.WIDGET_COURSE

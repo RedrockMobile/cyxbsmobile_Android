@@ -11,8 +11,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.snapshots.StateFactoryMarker
 import androidx.compose.ui.Alignment
@@ -133,11 +133,11 @@ internal class ChooseDialog(
       modifier = Modifier
         .width(btnWidth)
         .height(btnHeight),
-      backgroundColor = Color(0xFF4A44E4),
+//      backgroundColor = Color(0xFF4A44E4),
       shape = RoundedCornerShape(16.dp),
     ) {
       Box(
-        modifier = Modifier.clickable(onClick = { onClickPositionBtn.invoke(this) }),
+        modifier = Modifier.clickable(onClick = { onClickPositionBtn.invoke(this@ChooseDialog) }),
         contentAlignment = Alignment.Center
       ) {
         Text(text = positiveBtnText, color = Color.White)
@@ -151,11 +151,11 @@ internal class ChooseDialog(
       modifier = Modifier
         .width(btnWidth)
         .height(btnHeight),
-      backgroundColor = Color(0xFFC3D4EE),
+//      backgroundColor = Color(0xFFC3D4EE),
       shape = RoundedCornerShape(16.dp),
     ) {
       Box(
-        modifier = Modifier.clickable(onClick = { onClickNegativeBtn.invoke(this) }),
+        modifier = Modifier.clickable(onClick = { onClickNegativeBtn.invoke(this@ChooseDialog) }),
         contentAlignment = Alignment.Center
       ) {
         Text(text = negativeBtnText)

@@ -13,7 +13,7 @@ dependencies {
   implementation(projects.libConfig)
   implementation(projects.libUtils)
   implementation(projects.libAccount.apiAccount)
-  implementation(projects.moduleLogin.apiLogin)
+  implementation(projects.cyxbsPages.login.api)
 
   implementation(libs.androidx.appcompat)
 }

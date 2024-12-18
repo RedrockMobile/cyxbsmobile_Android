@@ -15,7 +15,7 @@ import com.mredrock.cyxbs.account.bean.TokenWrapper
 import com.mredrock.cyxbs.account.utils.UserInfoEncryption
 import com.mredrock.cyxbs.api.account.*
 import com.mredrock.cyxbs.api.account.utils.Value
-import com.mredrock.cyxbs.api.login.ILoginService
+import com.cyxbs.pages.login.api.ILoginService
 import com.mredrock.cyxbs.config.sp.defaultSp
 import com.mredrock.cyxbs.lib.utils.extensions.dp2pxF
 import com.mredrock.cyxbs.lib.utils.extensions.toast

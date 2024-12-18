@@ -7,7 +7,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.api.login.ILoginService
+import com.cyxbs.pages.login.api.ILoginService
 import com.mredrock.cyxbs.api.update.IAppUpdateService
 import com.mredrock.cyxbs.config.route.DISCOVER_SCHOOL_CAR
 import com.mredrock.cyxbs.config.route.MAIN_MAIN
@@ -127,6 +127,9 @@ class MainActivity : BaseActivity() {
   }
   
   private fun initBottomNav() {
+    if (!mIsActivityRebuilt) {
+      BottomNavState.select(BottomNavState.discoverItem) // 非重建 activity 时底部按钮默认为发现页
+    }
     mViewModel.courseBottomSheetOffset.observe {
       // 底部按钮跟随课表展开而变化
       BottomNavState.offsetYRadio.floatValue = it

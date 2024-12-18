@@ -38,7 +38,8 @@ dependencyResolutionManagement {
 // 测试使用，排除掉不需要的模块，记得还原！！！
 val excludeList = listOf<String>(
   "module_qa", // qa 模块因合规问题下线，新的代替将上线，所以排除 qa
-  "module_main"
+  "module_main",
+  "module_login"
 )
 
 //对文件夹进行遍历，深度为2
@@ -79,6 +80,8 @@ rootDir.walk()
 include("cyxbs-applications:pro")
 include("cyxbs-applications:test")
 include("cyxbs-pages:home")
+include("cyxbs-pages:login")
+include("cyxbs-pages:login:api")
 
 
 
