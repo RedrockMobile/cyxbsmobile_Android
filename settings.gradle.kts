@@ -41,7 +41,8 @@ val excludeList = listOf<String>(
   "module_main",
   "module_login",
   "module_affair",
-  "module_calendar"
+  "module_calendar",
+  "module_declare",
 )
 
 //对文件夹进行遍历，深度为2
@@ -86,6 +87,7 @@ include("cyxbs-pages:login")
 include("cyxbs-pages:login:api")
 include("cyxbs-pages:affair")
 include("cyxbs-pages:affair:api")
+include("cyxbs-pages:declare")
 
 
 

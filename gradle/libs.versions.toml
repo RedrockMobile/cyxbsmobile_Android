@@ -18,8 +18,8 @@
 
 
 [versions]
-javaTarget = "11" # 17 目前 R8 还不支持 sealed，暂时不升级
-kotlinJvmTarget = "11"
+javaTarget = "17" # 17 目前 R8 还不支持 sealed，暂时不升级
+kotlinJvmTarget = "17"
 ####################################################################################################
 #                                            Android
 ####################################################################################################
@@ -41,8 +41,6 @@ androidx-collection-ktx = "1.4.5"
 androidx-fragment = "1.8.5"
 # https://developer.android.com/jetpack/androidx/releases/activity
 androidx-activity = "1.9.3"
-# https://mvnrepository.com/artifact/androidx.databinding/databinding-runtime
-androidx-databinding = "8.7.3"
 # https://developer.android.com/jetpack/androidx/releases/paging
 androidx-paging = "3.3.5"
 # https://developer.android.com/jetpack/androidx/releases/room
@@ -144,7 +142,7 @@ arouter-ksp = "1.9.22-1.0.7"
 autoService = "1.1.1"
 # 具体参考自官方文档 https://bugly.qq.com/v2/index
 # 其中掌邮接入了 异常上报 和 应用升级 两个功能，注意看完官网文档
-bugly = "latest.release"
+bugly = "4.1.9.3"
 # https://github.com/greenrobot/EventBus
 eventBus = "3.3.1"
 # https://github.com/bumptech/glide/releases
@@ -203,8 +201,8 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 
 ######################################## 特殊依赖，少量模块引入 ########################################
 android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
-androidx-databinding = { module = "androidx.databinding:databinding-runtime", version.ref = "androidx-databinding" }
-androidx-databinding-ktx = { module = "androidx.databinding:databinding-ktx", version.ref = "androidx-databinding" }
+androidx-databinding = { module = "androidx.databinding:databinding-runtime", version.ref = "agp" }
+androidx-databinding-ktx = { module = "androidx.databinding:databinding-ktx", version.ref = "agp" }
 androidx-paging = { module = "androidx.paging:paging-runtime", version.ref = "androidx-paging" }
 androidx-paging-rxjava = { module = "androidx.paging:paging-runtime-rxjava3", version.ref = "androidx-paging" }
 androidx-room = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
@@ -281,8 +279,7 @@ umeng-asms = { module = "com.umeng.umsdk:asms", version.ref = "umeng-asms" }
 umeng-push = { module = "com.umeng.umsdk:push", version.ref = "umeng-push" } # 友盟的 push 真能用吗？
 vasdolly = { module = "com.tencent.vasdolly:helper", version.ref = "vasdolly" }
 vasdolly-gradlePlugin = { module = "com.tencent.vasdolly:plugin", version.ref = "vasdolly" }
-bugly-crash = { module = "com.tencent.bugly:crashreport_upgrade", version.ref = "bugly" }
-bugly-crash-native = { module = "com.tencent.bugly:nativecrashreport", version.ref = "bugly" }
+bugly-crash = { module = "com.tencent.bugly:crashreport", version.ref = "bugly" }
 lPhotoPicker = { module = "com.github.limuyang2:LPhotoPicker", version.ref = "lPhotoPicker" }           # 本地图片选择
 ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop" }                                 # 图片裁剪
 rxpermissions = { module = "com.github.tbruyelle:rxpermissions", version.ref = "rxpermissions" }        # 权限申请

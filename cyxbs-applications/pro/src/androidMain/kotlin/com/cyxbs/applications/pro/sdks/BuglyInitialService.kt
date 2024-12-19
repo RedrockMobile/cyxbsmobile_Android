@@ -8,7 +8,6 @@ import com.mredrock.cyxbs.init.InitialService
 import com.mredrock.cyxbs.lib.base.BaseApp
 import com.mredrock.cyxbs.lib.utils.service.impl
 import com.mredrock.lib.crash.core.CyxbsCrashMonitor
-import com.tencent.bugly.Bugly
 import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.vasdolly.helper.ChannelReaderUtil
 
@@ -50,9 +49,9 @@ class BuglyInitialService : InitialService {
         CrashReport.setUserId(
             IAccountService::class.impl.getUserService().getStuNum()
         )
-        
+
         //初始化bugly
-        Bugly.init(appContext, BuildConfig.BUGLY_APP_ID, BuildConfig.DEBUG, strategy)
+        CrashReport.initCrashReport(appContext, BuildConfig.BUGLY_APP_ID, BuildConfig.DEBUG, strategy)
 
         // 配置 module_crash 的异常上传
         CyxbsCrashMonitor.crashReport = {
