@@ -124,15 +124,9 @@ fun Project.useRoom(
   }
 }
 
-
-/**
- * glide 的配置，我看了一下目前只有 module_map 模块在用，而且只是用来下载文件获取进度，为什么不直接用 okhttp 下载呢？
- * 你们啥时候去把这个逻辑干掉，那就不需要使用这个 kapt 了
- */
-@Deprecated("仅限 module_map 使用，其他模块请直接依赖 glide 即可")
 fun Project.useGlide() {
   //kapt 按需引入
-  apply(plugin = "org.jetbrains.kotlin.kapt")
+  apply(plugin = "com.google.devtools.ksp")
   extensions.configure<KotlinMultiplatformExtension> {
     extensions.configure<NamedDomainObjectContainer<KotlinSourceSet>> {
       androidMain.dependencies {
@@ -141,6 +135,6 @@ fun Project.useGlide() {
     }
   }
   dependencies {
-    "kapt"(libsEx.`glide-compiler`)
+    "kspAndroid"(libsEx.`glide-compiler`)
   }
 }
