@@ -43,6 +43,7 @@ val excludeList = listOf<String>(
   "module_affair",
   "module_calendar",
   "module_declare",
+  "module_dialog",
 )
 
 //对文件夹进行遍历，深度为2
