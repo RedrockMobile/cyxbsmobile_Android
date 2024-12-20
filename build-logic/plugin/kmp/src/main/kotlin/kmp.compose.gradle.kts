@@ -8,8 +8,6 @@ plugins {
 
 kotlin {
   sourceSets {
-    val desktopMain by getting
-
     commonMain.dependencies {
       implementation(compose.runtime)
       implementation(compose.foundation)
@@ -21,12 +19,17 @@ kotlin {
       implementation(libsEx.`compose-navigation`)
       implementation(libsEx.`compose-lifecycle`)
     }
-    desktopMain.dependencies {
-      implementation(compose.desktop.currentOs)
-    }
+
     androidMain.dependencies {
       implementation(compose.preview)
       implementation(libsEx.`androidx-activity-compose`)
+    }
+
+    if (Multiplatform.enableDesktop(project)) {
+      val desktopMain by getting
+      desktopMain.dependencies {
+        implementation(compose.desktop.currentOs)
+      }
     }
   }
 }

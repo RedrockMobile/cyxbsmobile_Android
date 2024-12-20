@@ -8,32 +8,36 @@ plugins {
 }
 
 kotlin {
-  @OptIn(ExperimentalWasmDsl::class)
-  wasmJs {
-    browser {
-      commonWebpackConfig {
-        outputFileName = "${Config.getBaseName(project)}.js"
+  if (Multiplatform.enableWasm(project)) {
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+      browser {
+        commonWebpackConfig {
+          outputFileName = "${Config.getBaseName(project)}.js"
+        }
       }
+      binaries.executable()
     }
-    binaries.executable()
   }
 }
 
-compose.desktop {
-  application {
-    mainClass = "com.test.MainKt" // todo 待补充 desktop 的 main Class
-    nativeDistributions {
-      targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-      packageName = Config.getApplicationId(project)
-      packageVersion = Config.composeDesktopVersion
-    }
-    buildTypes {
-      release {
-        proguard {
-          isEnabled.set(true)
-          configurationFiles.from(rootDir.resolve("build-logic")
-            .resolve("manager")
-            .resolve("proguard-rules.pro"))
+if (Multiplatform.enableDesktop(project)) {
+  compose.desktop {
+    application {
+      mainClass = "com.test.MainKt" // todo 待补充 desktop 的 main Class
+      nativeDistributions {
+        targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+        packageName = Config.getApplicationId(project)
+        packageVersion = Config.composeDesktopVersion
+      }
+      buildTypes {
+        release {
+          proguard {
+            isEnabled.set(true)
+            configurationFiles.from(rootDir.resolve("build-logic")
+              .resolve("manager")
+              .resolve("proguard-rules.pro"))
+          }
         }
       }
     }
