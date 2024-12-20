@@ -2,6 +2,7 @@ package com.mredrock.cyxbs.discover.map.component
 
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.graphics.PointF
 import android.net.Uri
@@ -13,7 +14,6 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
-import com.bumptech.glide.load.model.GlideUrl
 import com.davemorrissey.labs.subscaleview.ImageSource
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import com.mredrock.cyxbs.common.utils.extensions.dp2px
@@ -22,12 +22,14 @@ import com.mredrock.cyxbs.common.utils.extensions.visible
 import com.mredrock.cyxbs.discover.map.R
 import com.mredrock.cyxbs.discover.map.bean.IconBean
 import com.mredrock.cyxbs.discover.map.model.DataSet
-import com.mredrock.cyxbs.discover.map.util.SubsamplingScaleImageViewTarget
-import com.mredrock.cyxbs.discover.map.widget.GlideApp
+import com.mredrock.cyxbs.discover.map.util.MapImageDownloader
 import com.mredrock.cyxbs.discover.map.widget.GlideProgressDialog
-import com.mredrock.cyxbs.discover.map.widget.ProgressInterceptor
-import com.mredrock.cyxbs.discover.map.widget.ProgressListener
-import java.io.File
+import com.mredrock.cyxbs.discover.map.widget.MapDialogTips
+import com.mredrock.cyxbs.discover.map.widget.OnSelectListenerTips
+import com.mredrock.cyxbs.lib.utils.extensions.runCatchingCoroutine
+import com.mredrock.cyxbs.lib.utils.extensions.toast
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlin.math.sqrt
 
 
@@ -43,7 +45,6 @@ class MapLayout : FrameLayout, View.OnClickListener {
         const val FOCUS_ANIMATION_DURATION = 800L
     }
 
-    private var url: String? = null
     var isLock = false
     
     /**
@@ -74,8 +75,6 @@ class MapLayout : FrameLayout, View.OnClickListener {
     private var onCloseFinishListener: OnCloseFinishListener? = null
 
     private var onShowFinishListener: OnShowFinishListener? = null
-
-    private var onUrlGetListener: OnUrlGetListener? = null
 
     /**
      *下面四个为继承FrameLayout的构造器方法
@@ -123,64 +122,6 @@ class MapLayout : FrameLayout, View.OnClickListener {
         }
 
         subsamplingScaleImageView.setDoubleTapZoomScale(1f)
-
-
-        /**
-         * 监听是否获得url
-         * url = "loadFail"，加载失败，使用本地地图缓存
-         * url = "noUpdate",取消更新地图，使用本地地图缓存
-         * 其他则直接下载地图到/data/data/com.mredrock.cyxbs.discover.map/cache/image_manager_disk_cache目录下
-         */
-        setOnUrlGetListener(object : OnUrlGetListener {
-
-            override fun onUrlGet() {
-                when (url) {
-                    "loadFail" -> {
-                        MapToast.makeText(context, context.getString(R.string.map_use_local_map_data), Toast.LENGTH_SHORT).show()
-                        val path = DataSet.getPath()
-                        try {
-                            if (path != null && File(path).exists()) {
-                                subsamplingScaleImageView.setImage(ImageSource.uri(Uri.fromFile(File(path))))
-                            }
-                            GlideProgressDialog.hide()
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
-                    }
-
-                    "noUpdate" -> {
-                        val path = DataSet.getPath()
-                        try {
-                            if (path != null && File(path).exists()) {
-                                subsamplingScaleImageView.setImage(ImageSource.uri(Uri.fromFile(File(path))))
-                            }
-                            GlideProgressDialog.hide()
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
-                    }
-
-                    else -> {
-                        url?.let {
-                            ProgressInterceptor.addListener(it, object : ProgressListener {
-                                override fun onProgress(progress: Int) {
-                                    this@MapLayout.post {
-                                        GlideProgressDialog.setProcess(progress)
-                                    }
-                                }
-
-                            })
-                        }
-                        GlideApp.with(context)
-                                .download(GlideUrl(url))
-                                .into(SubsamplingScaleImageViewTarget(context, subsamplingScaleImageView, url
-                                        ?: ""))
-                    }
-                }
-
-            }
-
-        })
 
         addView(subsamplingScaleImageView, rootParams)
 
@@ -320,7 +261,7 @@ class MapLayout : FrameLayout, View.OnClickListener {
      * 添加一个标签
      * bean：要添加的标签bean类
      */
-    fun addIcon(bean: IconBean) {
+    private fun addIcon(bean: IconBean) {
         val icon = ImageView(context)
         icon.setImageResource(R.drawable.map_ic_local)
         icon.tag = bean
@@ -350,7 +291,13 @@ class MapLayout : FrameLayout, View.OnClickListener {
         beans.forEach { bean ->
             addIcon(bean)
         }
+    }
 
+    fun clearIcons() {
+        iconList.forEach { icon ->
+            removeView(icon)
+        }
+        iconList.clear()
     }
 
 
@@ -577,10 +524,45 @@ class MapLayout : FrameLayout, View.OnClickListener {
         }, delayTime + 300)
     }
 
+    suspend fun loadNewMap(url: String) {
+        val result = runCatchingCoroutine {
+            withContext(Dispatchers.IO) {
+                MapImageDownloader.download(url, DataSet.mapImageFile) { bytesRead, contentLength ->
+                    post {
+                        GlideProgressDialog.setProcess(((bytesRead.toFloat() / contentLength) * 100).toInt())
+                    }
+                }
+            }
+        }
+        if (DataSet.mapImageFile.exists()) {
+            if (result.isFailure) {
+                toast(context.getString(R.string.map_map_load_failed))
+            }
+            loadCache()
+        } else {
+            MapDialogTips.show(context, context.getString(R.string.map_map_load_failed_title_tip)
+                , context.getString(R.string.map_map_load_failed_message_tip)
+                , false, object : OnSelectListenerTips {
+                    override fun onPositive() {
+                        val activity = context as Activity
+                        activity.finish()
+                    }
+                })
+        }
+    }
 
-    fun setUrl(url: String) {
-        this.url = url
-        onUrlGetListener?.onUrlGet()
+    fun loadCache(): Boolean {
+        runCatching {
+            if (DataSet.mapImageFile.exists()) {
+                subsamplingScaleImageView.setImage(ImageSource.uri(Uri.fromFile(DataSet.mapImageFile)))
+                GlideProgressDialog.hide()
+                return true
+            }
+        }.onFailure {
+            // 加载出问题就删除文件，防止一直出问题
+            DataSet.mapImageFile.deleteOnExit()
+        }
+        return false
     }
 
     fun setIsLock(lock: Boolean) {
@@ -625,13 +607,6 @@ class MapLayout : FrameLayout, View.OnClickListener {
         fun onShowFinish()
     }
 
-    /**
-     * 获取url回调
-     */
-    interface OnUrlGetListener {
-        fun onUrlGet()
-    }
-
     fun setMyOnIconClickListener(onIconClickListener: OnIconClickListener) {
         this.onIconClickListener = onIconClickListener
     }
@@ -650,10 +625,6 @@ class MapLayout : FrameLayout, View.OnClickListener {
 
     fun setOnShowFinishListener(onShowFinishListener: OnShowFinishListener) {
         this.onShowFinishListener = onShowFinishListener
-    }
-
-    private fun setOnUrlGetListener(onUrlGetListener: OnUrlGetListener) {
-        this.onUrlGetListener = onUrlGetListener
     }
 
     fun setOpenSiteId(id: String) {

@@ -108,7 +108,7 @@ class MapViewModel : BaseViewModel() {
     val closeSearchFragment = MutableLiveData<Boolean>()
 
     //网络请求失败，使用本地缓存
-    val loadFail = MutableLiveData<Boolean>()
+    val loadFail = MutableLiveData<Unit>()
 
     //是否锁定
     val isLock = MutableLiveData<Boolean>(false)
@@ -151,7 +151,7 @@ class MapViewModel : BaseViewModel() {
                 if (mapInfoStore != null) {
                     mapInfo.postValue(mapInfoStore!!)
                 }
-                loadFail.postValue(true)
+                loadFail.postValue(Unit)
                 true
             }
             .unsafeSubscribeBy {

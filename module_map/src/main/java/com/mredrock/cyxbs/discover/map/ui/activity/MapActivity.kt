@@ -22,7 +22,6 @@ import com.mredrock.cyxbs.discover.map.util.KeyboardController
 import com.mredrock.cyxbs.discover.map.viewmodel.MapViewModel
 import com.mredrock.cyxbs.discover.map.widget.GlideProgressDialog
 import com.mredrock.cyxbs.discover.map.widget.ProgressDialog
-import com.mredrock.cyxbs.discover.map.widget.ProgressInterceptor
 import top.limuyang2.photolibrary.LPhotoHelper
 import java.io.File
 
@@ -46,11 +45,10 @@ class MapActivity : BaseViewModelActivity<MapViewModel>() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.map_activity_map)
         val openString = intent.getStringExtra(COURSE_POS_TO_MAP)
-        val path = DataSet.getPath()
         /**
          * 如果有保存路径且地图存在，则不展示dialog
          */
-        if (path == null || !fileIsExists(path)) {
+        if (!DataSet.mapImageFile.exists()) {
             GlideProgressDialog.show(this, getString(R.string.map_download_title), getString(R.string.map_download_message), false)
         }
 
@@ -136,7 +134,6 @@ class MapActivity : BaseViewModelActivity<MapViewModel>() {
         super.onDestroy()
         ProgressDialog.hide()
         GlideProgressDialog.hide()
-        ProgressInterceptor.removeAllListener()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

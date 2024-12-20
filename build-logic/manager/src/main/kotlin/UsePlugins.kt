@@ -123,18 +123,3 @@ fun Project.useRoom(
     "kspAndroid"(libsEx.`androidx-room-compiler`)
   }
 }
-
-fun Project.useGlide() {
-  //kapt 按需引入
-  apply(plugin = "com.google.devtools.ksp")
-  extensions.configure<KotlinMultiplatformExtension> {
-    extensions.configure<NamedDomainObjectContainer<KotlinSourceSet>> {
-      androidMain.dependencies {
-        implementation(libsEx.glide)
-      }
-    }
-  }
-  dependencies {
-    "kspAndroid"(libsEx.`glide-compiler`)
-  }
-}

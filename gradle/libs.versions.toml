@@ -292,7 +292,6 @@ autoService = { module = "com.google.auto.service:auto-service-annotations", ver
 autoService-compiler = { module = "com.google.auto.service:auto-service", version.ref = "autoService" }
 eventBus = { module = "org.greenrobot:eventbus", version.ref = "eventBus" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
-glide-compiler = { module = "com.github.bumptech.glide:ksp", version.ref = "glide" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 retrofit-converter-kotlinxSerialization = { module = "com.squareup.retrofit2:converter-kotlinx-serialization", version.ref = "retrofit" }

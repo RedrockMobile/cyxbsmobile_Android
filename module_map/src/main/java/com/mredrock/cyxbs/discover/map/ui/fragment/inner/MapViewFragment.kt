@@ -23,13 +23,14 @@ import com.mredrock.cyxbs.discover.map.bean.IconBean
 import com.mredrock.cyxbs.discover.map.bean.PlaceItem
 import com.mredrock.cyxbs.discover.map.component.ClickView
 import com.mredrock.cyxbs.discover.map.component.MapLayout
-import com.mredrock.cyxbs.discover.map.component.MapToast
 import com.mredrock.cyxbs.discover.map.model.DataSet
 import com.mredrock.cyxbs.discover.map.ui.activity.VRActivity
 import com.mredrock.cyxbs.discover.map.ui.adapter.FavoriteListAdapter
 import com.mredrock.cyxbs.discover.map.ui.adapter.SymbolRvAdapter
 import com.mredrock.cyxbs.discover.map.viewmodel.MapViewModel
 import com.mredrock.cyxbs.discover.map.widget.*
+import com.mredrock.cyxbs.lib.utils.extensions.launch
+import com.mredrock.cyxbs.lib.utils.extensions.toast
 import java.io.File
 
 
@@ -55,9 +56,8 @@ class MapViewFragment : BaseFragment() {
     }
 
 
-    @SuppressLint("ResourceAsColor")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(MapViewModel::class.java)
         /**
          * 初始化地图view
@@ -88,40 +88,42 @@ class MapViewFragment : BaseFragment() {
                             bean.tagBottom.toFloat()
                     ))
                 }
-
             }
+            mMapLayout.clearIcons()
             mMapLayout.addSomeIcons(iconList)
             openSiteId = data.openSiteId.toString()
             /**
              * 根据时间戳判断是否清除缓存重新加载
              */
             val version = DataSet.getPictureVersion()
-            val path = DataSet.getPath()
-            /**
-             * 如果时间戳更新，地图存在，则弹出更新弹窗
-             * 地图不存在则直接下载地图
-             */
-            if (data.pictureVersion != version && path != null && fileIsExists(path)) {
-                context?.let {
-                    UpdateMapDialog.show(it, requireContext().getString(R.string.map_update_title),
+            val fileExist = DataSet.mapImageFile.exists()
+            if (fileExist) {
+                if (data.pictureVersion == version) {
+                    mMapLayout.loadCache()
+                } else {
+                    // 如果版本更新，并且地图存在，则弹出更新弹窗
+                    UpdateMapDialog.show(requireContext(), requireContext().getString(R.string.map_update_title),
                         requireContext().getString(R.string.map_update_message),
-                            object : OnUpdateSelectListener {
-                                override fun onDeny() {
-                                    mMapLayout.setUrl("noUpdate")
-                                }
+                        object : OnUpdateSelectListener {
+                            override fun onDeny() {
+                                mMapLayout.loadCache()
+                            }
 
-                                override fun onPositive() {
-                                    deleteFile(path)
-                                    DataSet.savePictureVersion(data.pictureVersion)
-                                    mMapLayout.setUrl(data.mapUrl)
+                            override fun onPositive() {
+                                DataSet.savePictureVersion(data.pictureVersion)
+                                launch {
+                                    mMapLayout.loadNewMap(data.mapUrl)
                                 }
-                            })
+                            }
+                        })
                 }
             } else {
+                // 地图不存在直接下载地图
                 DataSet.savePictureVersion(data.pictureVersion)
-                mMapLayout.setUrl(data.mapUrl)
+                launch {
+                    mMapLayout.loadNewMap(data.mapUrl)
+                }
             }
-
         })
         /**
          * 监听进入地图要聚焦的地点
@@ -129,7 +131,7 @@ class MapViewFragment : BaseFragment() {
         viewModel.openId.observe(viewLifecycleOwner, Observer {
             when (it) {
                 MapViewModel.PLACE_SEARCH_500 -> {
-                    context?.let { MapToast.makeText(it, it.getText(R.string.map_open_site_id_null), Toast.LENGTH_SHORT).show() }
+                    toast(getString(R.string.map_open_site_id_null))
                     mMapLayout.setOpenSiteId(openSiteId)
                     mMapLayout.showIconWithoutAnim(openSiteId)
                 }
@@ -149,41 +151,18 @@ class MapViewFragment : BaseFragment() {
          * 加载失败时使用本地地图缓存
          */
         viewModel.loadFail.observe(viewLifecycleOwner, Observer {
-
-
-
-            if (it) {
-                val path = DataSet.getPath()
-                if (path == null) {
-                    GlideProgressDialog.hide()
-                    context?.let { it1 ->
-                        MapDialogTips.show(it1, it1.getString(R.string.map_map_load_failed_title_tip)
-                                , it1.getString(R.string.map_map_load_failed_message_tip)
-                                , false, object : OnSelectListenerTips {
-                            override fun onPositive() {
-                                activity?.finish()
-                            }
-                        })
-                    }
-                } else {
-                    if (fileIsExists(path)) {
-                        mMapLayout.setUrl("loadFail")
-                    } else {
-                        GlideProgressDialog.hide()
-                        context?.let { it1 ->
-                            MapDialogTips.show(it1, it1.getString(R.string.map_map_load_failed_title_tip)
-                                    , it1.getString(R.string.map_map_load_failed_message_tip)
-                                    , false, object : OnSelectListenerTips {
-                                override fun onPositive() {
-                                    activity?.finish()
-                                }
-                            })
+            GlideProgressDialog.hide()
+            if (mMapLayout.loadCache()) {
+                toast(getString(R.string.map_use_local_map_data))
+            } else {
+                MapDialogTips.show(requireContext(), getString(R.string.map_map_load_failed_title_tip)
+                    , getString(R.string.map_map_load_failed_message_tip)
+                    , false, object : OnSelectListenerTips {
+                        override fun onPositive() {
+                            activity?.finish()
                         }
-                    }
-                    GlideProgressDialog.hide()
-                }
+                    })
             }
-
         })
 
         /**
@@ -250,7 +229,7 @@ class MapViewFragment : BaseFragment() {
                 }
                 animator.start()
                 mIvLock.setImageResource(R.drawable.map_ic_unlock)
-                MapToast.makeText(requireContext(), R.string.map_unlock, Toast.LENGTH_SHORT).show()
+                toast(getString(R.string.map_unlock))
                 viewModel.isLock.value = false
                 mMapLayout.setIsLock(false)
             }
@@ -271,7 +250,7 @@ class MapViewFragment : BaseFragment() {
                     }
                     animator.start()
                     mIvLock.setImageResource(R.drawable.map_ic_unlock)
-                    MapToast.makeText(requireContext(), R.string.map_unlock, Toast.LENGTH_SHORT).show()
+                    toast(getString(R.string.map_unlock))
                     viewModel.isLock.value = false
                     mMapLayout.setIsLock(false)
                 }
@@ -285,7 +264,7 @@ class MapViewFragment : BaseFragment() {
                 }
                 animator.start()
                 mIvLock.setImageResource(R.drawable.map_ic_lock)
-                MapToast.makeText(requireContext(), R.string.map_lock, Toast.LENGTH_SHORT).show()
+                toast(getString(R.string.map_lock))
                 viewModel.isLock.value = true
                 mMapLayout.setIsLock(true)
             }
@@ -478,32 +457,6 @@ class MapViewFragment : BaseFragment() {
         mRootMapView.animate().alpha(1f).duration = 1000
         viewModel.mapViewIsInAnimation.value = false
         super.onResume()
-    }
-
-    /**
-     * 删除单个文件
-     * @param   filePath    被删除文件的文件名
-     * @return 文件删除成功返回true，否则返回false
-     */
-    fun deleteFile(filePath: String): Boolean {
-        val file = File(filePath)
-        return if (file.isFile && file.exists()) {
-            file.delete()
-        } else false
-    }
-
-    /**
-     * 判断文件是否存在
-     */
-    private fun fileIsExists(strFile: String?): Boolean {
-        try {
-            if (!File(strFile).exists()) {
-                return false
-            }
-        } catch (e: Exception) {
-            return false
-        }
-        return true
     }
 
     private fun isFastClick(): Boolean {

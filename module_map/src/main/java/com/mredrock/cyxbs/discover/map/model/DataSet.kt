@@ -1,11 +1,12 @@
 package com.mredrock.cyxbs.discover.map.model
 
-import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.mredrock.cyxbs.common.BaseApp
 import com.mredrock.cyxbs.common.utils.extensions.editor
 import com.mredrock.cyxbs.common.utils.extensions.sharedPreferences
 import com.mredrock.cyxbs.discover.map.bean.*
+import com.mredrock.cyxbs.lib.utils.extensions.GsonDefault
+import com.mredrock.cyxbs.lib.utils.extensions.appContext
 
 /**
  *@author zhangzhe
@@ -16,7 +17,10 @@ import com.mredrock.cyxbs.discover.map.bean.*
 
 object DataSet {
     private val sharedPreferences by lazy { BaseApp.appContext.sharedPreferences("map_cache") }
-    private val gson = Gson()
+    private val gson = GsonDefault
+
+    // data/data/包名/files 下的 map_image 文件
+    val mapImageFile = appContext.filesDir.resolve("map_image")
 
     fun saveMapInfo(mapInfo: MapInfo) {
         val s = gson.toJson(mapInfo)
@@ -39,16 +43,6 @@ object DataSet {
         sharedPreferences.editor {
             putString("ButtonInfoStore", s)
         }
-    }
-
-    fun savePath(path: String) {
-        sharedPreferences.editor {
-            putString("Path", path)
-        }
-    }
-
-    fun getPath(): String? {
-        return sharedPreferences.getString("Path", null)
     }
 
     fun savePictureVersion(version: Long) {
