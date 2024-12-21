@@ -15,4 +15,7 @@ dependencies {
   implementation(libs.bundles.projectBase)
   implementation(libs.bundles.views)
   implementation(libs.bundles.network)
+  implementation(libs.photoView)
+  implementation(libs.slideShow)
+  implementation(libs.glide)
 }

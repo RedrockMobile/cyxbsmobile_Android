@@ -1,26 +1,31 @@
 package com.cyxbs.pages.news.ui.activity
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.mredrock.cyxbs.common.config.DISCOVER_NEWS
-import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
 import com.cyxbs.pages.news.R
 import com.cyxbs.pages.news.ui.adapter.NewsAdapter
 import com.cyxbs.pages.news.viewmodel.NewsListViewModel
+import com.mredrock.cyxbs.config.route.DISCOVER_NEWS
+import com.mredrock.cyxbs.config.view.JToolbar
+import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 
 /**
  * @author zixuan
  * 2019/11/20
  */
 @Route(path = DISCOVER_NEWS)
-class NewsListActivity : BaseViewModelActivity<NewsListViewModel>() {
+class NewsListActivity : BaseActivity() {
+
+    private val viewModel by viewModels<NewsListViewModel>()
+
     private val srl_list by R.id.srl_list.view<SwipeRefreshLayout>()
     private val rv_list by R.id.rv_list.view<RecyclerView>()
-
+    private val common_toolbar by com.mredrock.cyxbs.config.R.id.toolbar.view<JToolbar>()
 
     private lateinit var adapter: NewsAdapter
 

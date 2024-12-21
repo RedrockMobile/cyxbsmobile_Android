@@ -1,8 +1,8 @@
 package com.cyxbs.pages.news.network
 
-import com.mredrock.cyxbs.common.bean.RedrockApiWrapper
 import com.cyxbs.pages.news.bean.NewsDetails
 import com.cyxbs.pages.news.bean.NewsListItem
+import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
 import io.reactivex.rxjava3.core.Observable
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -17,11 +17,11 @@ import retrofit2.http.Streaming
  */
 interface ApiService {
     @GET("/magipoke-jwzx/jwNews/list")
-    fun getNewsList(@Query ("page") page: Int): Observable<RedrockApiWrapper<List<NewsListItem>>>
+    fun getNewsList(@Query ("page") page: Int): Observable<ApiWrapper<List<NewsListItem>>>
 
     @GET("/magipoke-jwzx/jwNews/content")
     fun getNewsDetails(@Query("id") id: String,
-                       @Query("forceFetch") fetch: Boolean = true): Observable<RedrockApiWrapper<NewsDetails>>
+                       @Query("forceFetch") fetch: Boolean = true): Observable<ApiWrapper<NewsDetails>>
 
     @Streaming
     @GET("/magipoke-jwzx/jwNews/file")

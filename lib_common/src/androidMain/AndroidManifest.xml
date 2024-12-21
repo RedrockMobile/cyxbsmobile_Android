@@ -18,7 +18,7 @@
 <!--            android:theme="@android:style/Theme.Translucent" />-->
 
         <activity
-            android:name=".component.PhotoViewerActivity"
+            android:name="com.cyxbs.pages.news.ui.activity.PhotoViewerActivity"
             android:launchMode="singleInstance" />
 
     </application>

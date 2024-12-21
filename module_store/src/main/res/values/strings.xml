@@ -20,8 +20,6 @@
     <string name="store_balance_title">余额：</string>
     <string name="store_product_stock_title">库存量：</string>
     <string name="store_equity_description">权益说明</string>
-    <string name="store_pic_save_alert_dialog_title">是否保存</string>
-    <string name="store_pic_save_alert_dialog_message">这张图片将保存到手机</string>
 
     <!--如果要在 xml 中使用 DataBinding, 对于直接添加其他字符串可能会出现 kaptDebugKotlin 的 bug
         使用下面这种方式可以解决(%s 就是你要替换的文字)-->

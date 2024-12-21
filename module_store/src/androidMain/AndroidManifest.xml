@@ -18,8 +18,6 @@
             android:name=".page.exchange.ui.activity.ProductExchangeActivity"
             android:theme="@style/StoreAppTheme_NoSplitMotionEvent"
             android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.activity.PhotoActivity"/>
     </application>
 
 </manifest>

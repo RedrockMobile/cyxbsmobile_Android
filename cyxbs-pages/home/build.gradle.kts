@@ -36,4 +36,7 @@ kotlin {
   }
 }
 
+dependencies {
+  debugImplementation(projects.libDebug)
+}
 

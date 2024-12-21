@@ -18,7 +18,7 @@ import com.mredrock.cyxbs.store.R
 import com.mredrock.cyxbs.store.bean.ProductDetail
 import com.mredrock.cyxbs.store.databinding.StoreActivityProductExchangeBinding
 import com.mredrock.cyxbs.store.page.exchange.viewmodel.ProductExchangeViewModel
-import com.mredrock.cyxbs.store.ui.activity.PhotoActivity
+import com.mredrock.cyxbs.lib.base.pages.PhotoViewerActivity
 import com.mredrock.cyxbs.store.utils.StoreType
 import com.ndhzs.slideshow.adapter.ImageViewAdapter
 import com.ndhzs.slideshow.adapter.setImgAdapter
@@ -240,7 +240,7 @@ class ProductExchangeActivity : BaseBindActivity<StoreActivityProductExchangeBin
     }
   }
   
-  private var mPositionResult: PhotoActivity.Companion.Position? = null
+  private var mPositionResult: PhotoViewerActivity.Companion.Position? = null
   
   private fun initSlideShow(imgUrls: List<String>) {
     binding.storeSsExchangeProductImage
@@ -259,7 +259,7 @@ class ProductExchangeActivity : BaseBindActivity<StoreActivityProductExchangeBin
                 )
               )
               
-              mPositionResult = PhotoActivity.activityStart(
+              mPositionResult = PhotoViewerActivity.start(
                 this@ProductExchangeActivity, ArrayList(imgUrls),
                 // 因为开启了循环滑动, 所以必须使用 realPosition 得到你所看到的位置
                 realPosition, options.toBundle()

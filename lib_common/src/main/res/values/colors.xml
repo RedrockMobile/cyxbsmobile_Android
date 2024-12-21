@@ -66,7 +66,6 @@ TODO 以后不要再把颜色写在这里面 ！！！
     <color name="common_blue_sign_text_color">#839BFA</color>
     <!--    分割线颜色-->
     <color name="common_sever_view_color">#BDCCE5</color>
-    <color name="common_alpha_sever_view_color">#39BDCCE5</color>
     <color name="common_blue_button">#465FFF</color>
 
     <!--    按钮颜色-->

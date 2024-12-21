@@ -7,7 +7,6 @@ useARouter()
 kotlin {
   sourceSets {
     commonMain.dependencies {
-      implementation(projects.libCommon) // TODO common 模块不再使用，新模块请依赖 base 和 utils 模块
       implementation(projects.libBase)
       implementation(projects.libConfig)
       implementation(projects.libUtils)
@@ -19,6 +18,8 @@ kotlin {
       implementation(libs.androidx.work)
       implementation(libs.dialog)
       implementation(libs.rxpermissions)
+      implementation(libs.glide)
+      implementation(libs.photoView)
     }
   }
 }

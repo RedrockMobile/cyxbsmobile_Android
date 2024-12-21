@@ -1,15 +1,16 @@
 package com.cyxbs.pages.news.ui.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.mredrock.cyxbs.common.utils.extensions.startActivity
 import com.cyxbs.pages.news.R
 import com.cyxbs.pages.news.bean.NewsListItem
 import com.cyxbs.pages.news.ui.activity.NewsItemActivity
 import com.cyxbs.pages.news.utils.TimeFormatHelper
-import com.mredrock.cyxbs.common.utils.extensions.*
+import com.mredrock.cyxbs.lib.utils.extensions.lazyUnlock
+import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
 
 
 /**
@@ -79,7 +80,11 @@ class NewsAdapter(private val loadMore: () -> Unit)
         protected open fun View.init(news: NewsListItem?) {
             news ?: return
             setOnSingleClickListener {
-                context.startActivity<NewsItemActivity>("id" to news.id, "title" to news.title)
+                context.startActivity(
+                    Intent(context, NewsItemActivity::class.java)
+                        .putExtra("id", news.id)
+                        .putExtra("title", news.title)
+                )
             }
             tv_time.text = TimeFormatHelper.format(news.date)
             tv_title.text = news.title

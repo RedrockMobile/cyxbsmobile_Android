@@ -1,13 +1,13 @@
 package com.cyxbs.pages.news.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.mredrock.cyxbs.common.network.ApiGenerator
-import com.mredrock.cyxbs.common.utils.extensions.mapOrThrowApiException
-import com.mredrock.cyxbs.common.utils.extensions.unsafeSubscribeBy
-import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
-import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
 import com.cyxbs.pages.news.bean.NewsListItem
 import com.cyxbs.pages.news.network.ApiService
+import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
+import com.mredrock.cyxbs.lib.utils.network.mapOrThrowApiException
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 /**
  * Create By Hosigus at 2019/4/30
@@ -21,11 +21,12 @@ class NewsListViewModel : BaseViewModel() {
     fun loadNewsData() {
         ApiGenerator.getApiService(ApiService::class.java)
                 .getNewsList(nextPage++)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .mapOrThrowApiException()
-                .setSchedulers()
-                .unsafeSubscribeBy {
+                .safeSubscribeBy {
                     newsEvent.postValue(it)
-                }.lifeCycle()
+                }
     }
 
     fun clearPages() {

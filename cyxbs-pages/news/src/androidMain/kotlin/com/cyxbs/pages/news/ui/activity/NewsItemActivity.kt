@@ -13,24 +13,23 @@ import android.view.Menu
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItemsMultiChoice
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.mredrock.cyxbs.common.component.showPhotos
-import com.mredrock.cyxbs.common.config.DISCOVER_NEWS_ITEM
-import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
-import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.common.utils.extensions.sp
-import com.mredrock.cyxbs.common.utils.extensions.toast
-import com.mredrock.cyxbs.common.viewmodel.event.ProgressDialogEvent
 import com.cyxbs.pages.news.R
 import com.cyxbs.pages.news.bean.NewsAttachment
 import com.cyxbs.pages.news.utils.FileTypeHelper
 import com.cyxbs.pages.news.utils.TimeFormatHelper
 import com.cyxbs.pages.news.viewmodel.NewsItemViewModel
+import com.mredrock.cyxbs.config.route.DISCOVER_NEWS_ITEM
+import com.mredrock.cyxbs.config.view.JToolbar
+import com.mredrock.cyxbs.lib.base.pages.PhotoViewerActivity
+import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.lib.utils.extensions.showFile
 import com.tbruyelle.rxpermissions3.RxPermissions
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -39,7 +38,10 @@ import java.util.regex.Pattern
 
 
 @Route(path = DISCOVER_NEWS_ITEM)
-class NewsItemActivity : BaseViewModelActivity<NewsItemViewModel>(), NewsItemViewModel.NewsDownloadListener {
+class NewsItemActivity : BaseActivity(), NewsItemViewModel.NewsDownloadListener {
+
+    private val viewModel by viewModels<NewsItemViewModel>()
+
     private val uris = mutableListOf<Uri>()
     private var downloadNeedSize = 0
     private var downloadEndSize = 0
@@ -48,6 +50,7 @@ class NewsItemActivity : BaseViewModelActivity<NewsItemViewModel>(), NewsItemVie
     private val tv_time by R.id.tv_time.view<TextView>()
     private val tv_detail by R.id.tv_detail.view<TextView>()
     private val ll_content by R.id.ll_content.view<LinearLayout>()
+    private val common_toolbar by com.mredrock.cyxbs.config.R.id.toolbar.view<JToolbar>()
 
     private val permissionDialog by lazy {
         AlertDialog.Builder(this)
@@ -87,13 +90,13 @@ class NewsItemActivity : BaseViewModelActivity<NewsItemViewModel>(), NewsItemVie
                     }
                 }
             }
-            cornerRadius(res = com.mredrock.cyxbs.common.R.dimen.common_corner_radius)
+            cornerRadius(16F)
 
         }
     }
 
     override fun onDownloadStart() {
-        viewModel.progressDialogEvent.value = ProgressDialogEvent.SHOW_CANCELABLE_DIALOG_EVENT
+        toastLong("下载开始，请等待")
     }
 
     override fun onProgress(id: Int, currentBytes: Long, contentLength: Long) {
@@ -109,9 +112,8 @@ class NewsItemActivity : BaseViewModelActivity<NewsItemViewModel>(), NewsItemVie
             AndroidSchedulers.mainThread().scheduleDirect {
                 when (e?.message) {
                     "permission deny" -> permissionDialog.show()
-                    else -> viewModel.toastEvent.value = R.string.news_download_error
+                    else -> toast(R.string.news_download_error)
                 }
-                viewModel.progressDialogEvent.value = ProgressDialogEvent.DISMISS_DIALOG_EVENT
             }
         }
         downloadEndSize++
@@ -119,17 +121,11 @@ class NewsItemActivity : BaseViewModelActivity<NewsItemViewModel>(), NewsItemVie
             if (uris.size < 1) {
                 AndroidSchedulers.mainThread().scheduleDirect {
                     toast("下载失败了，请稍候重试或反馈一下")
-                    viewModel.progressDialogEvent.value = ProgressDialogEvent.DISMISS_DIALOG_EVENT
                 }
                 return
             }
-//            MediaScannerConnection.scanFile(this,
-//                    arrayOf(uris[0].toFile().parent),
-//                    uris.map { FileTypeHelper.getMIMEType(it.toFile()) }.toTypedArray(),
-//                    null)
             AndroidSchedulers.mainThread().scheduleDirect {
                 toast("文件保存于系统\"Download\"文件夹下哦")
-                viewModel.progressDialogEvent.value = ProgressDialogEvent.DISMISS_DIALOG_EVENT
                 showOpenFileDialog()
             }
         }
@@ -181,13 +177,13 @@ class NewsItemActivity : BaseViewModelActivity<NewsItemViewModel>(), NewsItemVie
                     if (index == 0) {
                         tv_detail.apply {
                             text = value
-                            textSize = context.sp(5).toFloat()
+                            textSize = 15F
                         }
                     } else {
                         val textView = TextView(this).apply {
                             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-                            setTextColor(ContextCompat.getColor(this@NewsItemActivity, com.mredrock.cyxbs.common.R.color.common_level_two_font_color))
-                            textSize = context.sp(5).toFloat()
+                            setTextColor(ContextCompat.getColor(this@NewsItemActivity, com.mredrock.cyxbs.config.R.color.config_level_two_font_color))
+                            textSize = 15F
                             text = value
                         }
                         ll_content.addView(textView)
@@ -198,7 +194,7 @@ class NewsItemActivity : BaseViewModelActivity<NewsItemViewModel>(), NewsItemVie
                         setImageBitmap(list[index])
                         scaleType = ImageView.ScaleType.CENTER_CROP
                         setOnSingleClickListener {
-                            showPhotos(this@NewsItemActivity, listOf(originStreamList[index]), 0)
+                            PhotoViewerActivity.start(this@NewsItemActivity, listOf(originStreamList[index]))
                         }
                     }
                     ll_content.addView(imageView)
@@ -222,11 +218,11 @@ class NewsItemActivity : BaseViewModelActivity<NewsItemViewModel>(), NewsItemVie
         menu.getItem(0)?.setOnMenuItemClickListener { _ ->
             val items = viewModel.news.value?.files
             if (items == null) {
-                viewModel.toastEvent.value = R.string.news_init
+                toast(R.string.news_init)
                 return@setOnMenuItemClickListener false
             }
             if (items.isEmpty()) {
-                viewModel.toastEvent.value = R.string.news_no_download
+                toast(R.string.news_no_download)
                 return@setOnMenuItemClickListener false
             }
             MaterialDialog(this).show {
@@ -242,7 +238,7 @@ class NewsItemActivity : BaseViewModelActivity<NewsItemViewModel>(), NewsItemVie
                     }
                 }
                 positiveButton(text = "确定")
-                cornerRadius(res = com.mredrock.cyxbs.common.R.dimen.common_corner_radius)
+                cornerRadius(16F)
 
             }
             return@setOnMenuItemClickListener false
