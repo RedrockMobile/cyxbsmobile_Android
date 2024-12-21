@@ -24,7 +24,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.mredrock.cyxbs.api.account.IAccountService
 import com.cyxbs.pages.electricity.api.IElectricityService
-import com.mredrock.cyxbs.api.sport.ISportService
+import com.cyxbs.pages.sport.api.ISportService
 import com.mredrock.cyxbs.api.todo.ITodoService
 import com.cyxbs.pages.discover.utils.SpacesHorizontalItemDecoration
 import com.mredrock.cyxbs.config.config.SchoolCalendar

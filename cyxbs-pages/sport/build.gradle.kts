@@ -3,27 +3,26 @@ plugins {
 }
 
 useARouter()
+useDataBinding()
+useAutoService()
 
 kotlin {
   sourceSets {
     commonMain.dependencies {
+      subprojects.forEach { implementation(it) }
+      implementation(projects.apiInit)
       implementation(projects.libBase)
       implementation(projects.libConfig)
       implementation(projects.libUtils)
       implementation(projects.libAccount.apiAccount)
-      implementation(projects.moduleTodo.apiTodo)
-      implementation(projects.cyxbsPages.sport.api)
-      implementation(projects.moduleVolunteer.apiVolunteer)
-      implementation(projects.cyxbsPages.electricity.api)
+      implementation(projects.cyxbsPages.login.api)
     }
     androidMain.dependencies {
       implementation(libs.bundles.projectBase)
       implementation(libs.bundles.views)
       implementation(libs.bundles.network)
-      implementation(libs.glide)
-      implementation(libs.eventBus)
-      implementation(libs.slideShow)
+      implementation(libs.smartRefreshLayout)
+      implementation(libs.dialog)
     }
   }
 }
-
