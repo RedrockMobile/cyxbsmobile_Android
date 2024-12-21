@@ -50,6 +50,7 @@ val excludeList = setOf<String>(
   "module_emptyroom",
   "module_food",
   "module_grades",
+  "module_mine",
 )
 
 //对文件夹进行遍历，深度为2
@@ -102,6 +103,8 @@ include("cyxbs-pages:electricity:api")
 include("cyxbs-pages:emptyroom")
 include("cyxbs-pages:food")
 include("cyxbs-pages:grades")
+include("cyxbs-pages:mine")
+include("cyxbs-pages:mine:api")
 
 
 

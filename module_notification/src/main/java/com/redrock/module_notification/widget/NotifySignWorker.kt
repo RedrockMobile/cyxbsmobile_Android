@@ -12,8 +12,8 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.mredrock.cyxbs.common.service.ServiceManager
-import com.mredrock.cyxbs.api.mine.IGetDaySignClassService
+import com.cyxbs.pages.mine.api.IGetDaySignClassService
+import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import com.redrock.module_notification.util.Constant.NOTIFY_TAG
 import java.util.*
 import java.util.concurrent.TimeUnit

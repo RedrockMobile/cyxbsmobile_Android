@@ -17,10 +17,10 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.mredrock.cyxbs.common.config.NOTIFICATION_SETTING
-import com.mredrock.cyxbs.common.service.ServiceManager
 import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
 import com.mredrock.cyxbs.lib.utils.extensions.visible
-import com.mredrock.cyxbs.api.mine.IGetDaySignClassService
+import com.cyxbs.pages.mine.api.IGetDaySignClassService
+import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import com.redrock.module_notification.BuildConfig
 import com.redrock.module_notification.R
 import com.redrock.module_notification.util.Constant.IS_SWITCH1_SELECT

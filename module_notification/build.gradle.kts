@@ -10,7 +10,7 @@ dependencies {
   implementation(projects.libConfig)
   implementation(projects.libUtils)
   implementation(projects.libAccount.apiAccount)
-  implementation(projects.moduleMine.apiMine)
+  implementation(projects.cyxbsPages.mine.api)
 
   implementation(libs.bundles.projectBase)
   implementation(libs.bundles.views)
