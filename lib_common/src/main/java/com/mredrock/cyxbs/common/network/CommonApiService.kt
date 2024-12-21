@@ -3,6 +3,7 @@ package com.mredrock.cyxbs.common.network
 import com.mredrock.cyxbs.common.bean.RedrockApiWrapper
 import com.mredrock.cyxbs.common.utils.down.bean.DownMessage
 import com.mredrock.cyxbs.common.utils.down.params.DownMessageParams
+import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
 
@@ -19,5 +20,5 @@ interface CommonApiService {
      */
     @Headers("Content-Type: application/json")
     @POST("/magipoke-text/text/get")
-    fun getDownMessage(@Body downMessageParams: DownMessageParams): Observable<RedrockApiWrapper<DownMessage>>
+    fun getDownMessage(@Body downMessageParams: DownMessageParams): Observable<ApiWrapper<DownMessage>>
 }

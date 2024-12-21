@@ -55,4 +55,7 @@
     <!--可上拉下拉标识小块背景-->
     <color name="config_table_drag_indicator_block_color">#000000</color>
 
+    <!--    图片选择器状态栏和toolbar颜色-->
+    <color name="config_photo_select_status_color">#000000</color>
+
 </resources>

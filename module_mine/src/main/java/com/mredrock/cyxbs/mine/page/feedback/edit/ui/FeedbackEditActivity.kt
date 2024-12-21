@@ -19,8 +19,6 @@ import com.mredrock.cyxbs.mine.page.feedback.edit.viewmodel.FeedbackEditViewMode
 import com.mredrock.cyxbs.mine.page.feedback.utils.CHOOSE_FEED_BACK_PIC
 import com.mredrock.cyxbs.mine.page.feedback.utils.FileUtils
 import com.mredrock.cyxbs.mine.page.feedback.utils.selectImageFromAlbum
-import com.mredrock.cyxbs.mine.page.feedback.utils.setSelectedPhotos
-import java.util.*
 
 /**
  * @Date : 2021/8/23   20:52
@@ -121,9 +119,10 @@ class FeedbackEditActivity :
                 }, { view, i ->
                     presenter?.removePic(i)
                 }, { view, i ->
-                    val list = ArrayList(viewModel?.uris?.value)
-                    setSelectedPhotos(list)
-                    this@FeedbackEditActivity.selectImageFromAlbum(3)
+                    val list = viewModel.uris.value
+                    if (list != null) {
+                        this@FeedbackEditActivity.selectImageFromAlbum(3, list)
+                    }
                 }
             )
             rvPicAdapter.submitList(list)
