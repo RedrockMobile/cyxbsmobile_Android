@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mredrock.cyxbs.api.store.IStoreService
+import com.cyxbs.pages.store.api.IStoreService
 import com.cyxbs.pages.declare.databinding.DeclareActivityDetailBinding
 import com.cyxbs.pages.declare.detail.bean.VoteData
 import com.cyxbs.pages.declare.detail.page.adapter.DetailRvAdapter

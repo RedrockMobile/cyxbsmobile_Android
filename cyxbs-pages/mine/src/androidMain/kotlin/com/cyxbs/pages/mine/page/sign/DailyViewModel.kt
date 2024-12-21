@@ -9,7 +9,7 @@ import com.mredrock.cyxbs.common.viewmodel.event.SingleLiveEvent
 import com.cyxbs.pages.mine.network.model.ScoreStatus
 import com.cyxbs.pages.mine.util.apiService
 import com.cyxbs.pages.mine.util.extension.normalWrapper
-import com.mredrock.cyxbs.api.store.IStoreService
+import com.cyxbs.pages.store.api.IStoreService
 import io.reactivex.rxjava3.functions.Function
 
 /**

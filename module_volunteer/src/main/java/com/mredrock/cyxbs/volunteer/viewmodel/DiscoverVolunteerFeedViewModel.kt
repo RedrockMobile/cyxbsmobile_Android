@@ -10,7 +10,7 @@ import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
 import com.mredrock.cyxbs.common.viewmodel.event.SingleLiveEvent
 import com.mredrock.cyxbs.volunteer.bean.VolunteerTime
 import com.mredrock.cyxbs.volunteer.network.ApiService
-import com.mredrock.cyxbs.api.store.IStoreService
+import com.cyxbs.pages.store.api.IStoreService
 
 class DiscoverVolunteerFeedViewModel : BaseViewModel() {
     val volunteerData = MutableLiveData<VolunteerTime?>()

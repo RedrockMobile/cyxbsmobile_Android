@@ -10,7 +10,7 @@ dependencies {
   implementation(projects.libConfig)
   implementation(projects.libUtils)
   implementation(projects.moduleTodo.apiTodo)
-  implementation(projects.moduleStore.apiStore)
+  implementation(projects.cyxbsPages.store.api)
 
   implementation(libs.bundles.projectBase)
   implementation(libs.bundles.views)

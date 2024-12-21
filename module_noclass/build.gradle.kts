@@ -9,7 +9,7 @@ dependencies {
   implementation(projects.libConfig)
   implementation(projects.libUtils)
   implementation(projects.libAccount.apiAccount)
-  implementation(projects.moduleStore.apiStore)
+  implementation(projects.cyxbsPages.store.api)
   implementation(projects.cyxbsPages.affair.api)
   implementation(projects.moduleCourse.apiCourse)
   implementation(projects.moduleCourse.libCourse)

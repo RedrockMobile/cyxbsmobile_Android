@@ -14,7 +14,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
-import com.mredrock.cyxbs.api.store.IStoreService
+import com.cyxbs.pages.store.api.IStoreService
 import com.mredrock.cyxbs.config.route.FOOD_ENTRY
 import com.cyxbs.pages.food.R
 import com.cyxbs.pages.food.ui.adapters.FoodMainRvAdapter

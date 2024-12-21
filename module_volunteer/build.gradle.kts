@@ -13,7 +13,8 @@ dependencies {
   implementation(projects.libUtils)
   implementation(projects.libAccount.apiAccount)
   implementation(projects.moduleVolunteer.apiVolunteer)
-  implementation(projects.moduleStore.apiStore)
+  implementation(projects.cyxbsPages.store.api)
+  implementation(projects.cyxbsPages.store.api)
 
   implementation(libs.bundles.projectBase)
   implementation(libs.bundles.views)
