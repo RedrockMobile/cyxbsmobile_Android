@@ -6,15 +6,16 @@ useARouter()
 
 kotlin {
   sourceSets {
-    androidMain.dependencies {
+    commonMain.dependencies {
+      subprojects.forEach { implementation(it) }
       implementation(projects.libBase)
       implementation(projects.libConfig)
       implementation(projects.libUtils)
       implementation(projects.libUpdate.apiUpdate)
       implementation(projects.libAccount.apiAccount)
       implementation(projects.libProtocol.apiProtocol)
-      implementation(projects.cyxbsPages.login.api)
-
+    }
+    androidMain.dependencies {
       implementation(libs.bundles.projectBase)
       implementation(libs.bundles.views)
       implementation(libs.bundles.network)

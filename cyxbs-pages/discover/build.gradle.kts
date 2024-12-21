@@ -6,7 +6,7 @@ useARouter()
 
 kotlin {
   sourceSets {
-    androidMain.dependencies {
+    commonMain.dependencies {
       implementation(projects.libBase)
       implementation(projects.libConfig)
       implementation(projects.libUtils)
@@ -15,7 +15,8 @@ kotlin {
       implementation(projects.moduleSport.apiSport)
       implementation(projects.moduleVolunteer.apiVolunteer)
       implementation(projects.cyxbsPages.electricity.api)
-
+    }
+    androidMain.dependencies {
       implementation(libs.bundles.projectBase)
       implementation(libs.bundles.views)
       implementation(libs.bundles.network)

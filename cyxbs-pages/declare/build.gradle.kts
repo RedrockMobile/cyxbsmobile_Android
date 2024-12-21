@@ -7,12 +7,13 @@ useDataBinding()
 
 kotlin {
   sourceSets {
-    androidMain.dependencies {
+    commonMain.dependencies {
       implementation(projects.libBase)
       implementation(projects.libConfig)
       implementation(projects.libUtils)
       implementation(projects.moduleStore.apiStore)
-
+    }
+    androidMain.dependencies {
       implementation(libs.bundles.projectBase)
       implementation(libs.bundles.views)
       implementation(libs.bundles.network)

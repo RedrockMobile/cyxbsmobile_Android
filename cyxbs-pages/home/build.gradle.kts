@@ -11,6 +11,9 @@ useARouter()
 
 kotlin {
   sourceSets {
+    commonMain.dependencies {
+//      debugImplementation(projects.libDebug)
+    }
     // 依赖所有模块
     androidMain.dependencies {
       // 根 gradle 中包含的所有子模块
@@ -26,16 +29,11 @@ kotlin {
       }.forEach {
         api(it)
       }
+      implementation(libs.bundles.projectBase)
+      implementation(libs.bundles.views)
+      implementation(libs.bundles.network)
     }
   }
-}
-
-dependencies {
-  debugImplementation(projects.libDebug)
-
-  implementation(libs.bundles.projectBase)
-  implementation(libs.bundles.views)
-  implementation(libs.bundles.network)
 }
 
 
