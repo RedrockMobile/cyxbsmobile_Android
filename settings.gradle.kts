@@ -36,7 +36,7 @@ dependencyResolutionManagement {
 }
 
 // 测试使用，排除掉不需要的模块，记得还原！！！
-val excludeList = listOf<String>(
+val excludeList = setOf<String>(
   "module_qa", // qa 模块因合规问题下线，新的代替将上线，所以排除 qa
   "module_main",
   "module_login",
@@ -48,6 +48,7 @@ val excludeList = listOf<String>(
   "module_map",
   "module_electricity",
   "module_emptyroom",
+  "module_food",
 )
 
 //对文件夹进行遍历，深度为2
@@ -98,6 +99,7 @@ include("cyxbs-pages:map")
 include("cyxbs-pages:electricity")
 include("cyxbs-pages:electricity:api")
 include("cyxbs-pages:emptyroom")
+include("cyxbs-pages:food")
 
 
 
