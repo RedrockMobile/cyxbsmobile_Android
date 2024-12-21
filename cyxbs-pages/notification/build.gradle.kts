@@ -10,18 +10,15 @@ kotlin {
       implementation(projects.libBase)
       implementation(projects.libConfig)
       implementation(projects.libUtils)
+      implementation(projects.libAccount.apiAccount)
+      implementation(projects.cyxbsPages.mine.api)
     }
     androidMain.dependencies {
       implementation(libs.bundles.projectBase)
       implementation(libs.bundles.views)
       implementation(libs.bundles.network)
       implementation(libs.androidx.work)
-      implementation(libs.dialog)
-      implementation(libs.rxpermissions)
       implementation(libs.glide)
-      implementation(libs.photoView)
     }
   }
 }
-
-

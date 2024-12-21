@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.NotificationActivity">
+
+    <com.cyxbs.pages.notification.widget.VerticalSwipeRefreshLayout
+        android:id="@+id/notification_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="139dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/notification_home_vp2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.cyxbs.pages.notification.widget.VerticalSwipeRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/notification_main_column_container_background"
+        android:layout_width="match_parent"
+        android:layout_height="139dp"
+        android:background="@color/notification_home_page_tabLayout_shadow"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/notification_main_column_container"
+        android:layout_width="match_parent"
+        android:layout_height="139dp"
+        android:background="@drawable/notification_shape_home_cl_container"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/notification_rl_home_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="53dp"
+        android:background="@drawable/notification_ripple_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/notification_home_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/notification_ic_base_back"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="37dp"
+        android:gravity="center_horizontal"
+        android:text="我的消息"
+        android:paddingBottom="1.5dp"
+        android:textAppearance="@style/notification_toolbar_tv"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/notification_rl_home_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/notification_rl_home_back"
+        tools:ignore="HardcodedText" />
+
+    <RelativeLayout
+        android:id="@+id/notification_rl_home_dots"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="53dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/notification_ripple_back"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/notification_home_red_dots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/notification_ic_home_reddots"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/notification_home_dots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/notification_ic_home_dots"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/notification_home_tl"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="@android:color/transparent"
+        android:theme="@style/Theme.MaterialComponents"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabGravity="fill"
+        app:tabIndicator="@drawable/notification_ic_tab_indicator"
+        app:tabIndicatorColor="@android:color/transparent"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorHeight="3dp"
+        app:tabMinWidth="78dp"
+        app:tabMaxWidth="110dp"
+        app:tabMode="fixed"
+        app:tabPaddingBottom="10dp"
+        app:tabPaddingEnd="12dp"
+        app:tabPaddingStart="12dp"
+        app:tabRippleColor="@android:color/transparent"
+        app:tabTextAppearance="@style/notification_home_tab_style"
+        app:tabTextColor="@color/notification_home_tabLayout_text_selected" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

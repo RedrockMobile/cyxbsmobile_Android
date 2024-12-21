@@ -86,7 +86,7 @@ class HomeCourseLayout(context: Context, attrs: AttributeSet?) : FrameLayout(con
     }
 
     if (mActivity.supportFragmentManager.findFragmentById(mFcvCourse.id) == null) {
-      mActivity.supportFragmentManager.commit {
+      mActivity.supportFragmentManager.commit(true) {
         replace(mFcvCourse.id, mCourseService.createHomeCourseFragment())
       }
     }

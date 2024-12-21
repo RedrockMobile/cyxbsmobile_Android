@@ -14,7 +14,6 @@ import android.util.SparseArray
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.WindowCompat
-import androidx.core.view.postDelayed
 import com.bumptech.glide.Glide
 import com.github.chrisbanes.photoview.PhotoView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
