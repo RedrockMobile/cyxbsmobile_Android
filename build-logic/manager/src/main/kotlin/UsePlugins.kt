@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
  *
  * @param isNeedKsp 是否需要处理注解，对于非实现模块是不需要处理注解的，比如 api 模块
  */
-fun Project.useARouter(isNeedKsp: Boolean = !name.startsWith("api_")) {
+fun Project.useARouter(isNeedKsp: Boolean = !name.startsWith("api")) {
   if (isNeedKsp) {
     // kapt 按需引入
     apply(plugin = "com.google.devtools.ksp")
@@ -43,7 +43,8 @@ fun Project.useARouter(isNeedKsp: Boolean = !name.startsWith("api_")) {
  * 使用 DataBinding
  * @param isNeedKapt 是否只依赖而不开启 DataBinding，默认开启 DataBinding
  */
-fun Project.useDataBinding(isNeedKapt: Boolean = !name.startsWith("api_")) {
+@Deprecated("不再建议使用 DataBinding，因为强依赖了 kapt，官方也未提供 ksp 支持。使用 Int.view() 或者 findViewById() 代替")
+fun Project.useDataBinding(isNeedKapt: Boolean = !name.startsWith("api")) {
   if (isNeedKapt) {
     // kapt 按需引入
     apply(plugin = "org.jetbrains.kotlin.kapt")
@@ -70,7 +71,7 @@ fun Project.useDataBinding(isNeedKapt: Boolean = !name.startsWith("api_")) {
  * 使用 AutoService
  * todo 感觉可以切换为我的 KtProvider https://github.com/985892345/KtProvider
  */
-fun Project.useAutoService(isNeedKapt: Boolean = !name.startsWith("api_")) {
+fun Project.useAutoService(isNeedKapt: Boolean = !name.startsWith("api")) {
   if (isNeedKapt) {
     // kapt 按需引入
     apply(plugin = "org.jetbrains.kotlin.kapt")
