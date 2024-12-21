@@ -12,7 +12,7 @@ import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
 /**
  *  Presenter的基类，内部自动获取了ViewModel的实例
  */
-abstract class BasePresenter<VM : BaseViewModel> : LifecycleObserver,IPresenter<VM>{
+abstract class BasePresenter<VM : BaseViewModel> : DefaultLifecycleObserver,IPresenter<VM>{
     protected var vm: VM? = null
 
     /*protected var view: WeakReference<V>? = null
@@ -49,36 +49,4 @@ abstract class BasePresenter<VM : BaseViewModel> : LifecycleObserver,IPresenter<
      *  2.改方法是用以清楚Presenter中一些可能会存在内存泄漏的变量
      */
     open fun clear(){}
-
-
-    /**
-     * 生命周期相关的回调
-     */
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    open fun onCreate(lifecycleOwner: LifecycleOwner) {
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    open fun onResume(lifecycleOwner: LifecycleOwner) {
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    open fun onStart(lifecycleOwner: LifecycleOwner) {
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    open fun onPause(lifecycleOwner: LifecycleOwner) {
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    open fun onStop(lifecycleOwner: LifecycleOwner) {
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    open fun onDestroy(lifecycleOwner: LifecycleOwner) {
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
-    open fun onAny(lifecycleOwner: LifecycleOwner) {
-    }
 }

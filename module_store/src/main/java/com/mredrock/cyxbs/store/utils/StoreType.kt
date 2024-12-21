@@ -31,18 +31,6 @@ class StoreType {
         DAILY_SIGN.title -> {
           ARouter.getInstance().build(MINE_CHECK_IN).navigation()
         }
-        SEE_DYNAMIC.title,
-        PUBLISH_DYNAMIC.title,
-        SHARE_DYNAMIC.title,
-        POST_COMMENT.title,
-        GIVE_A_LIKE.title -> {
-          /**
-           * TODO 下架服务
-           */
-          ARouter.getInstance().build(DEFAULT_PAGE).navigation()
-//          val intent = Intent(context, QaActivity::class.java)
-//          context.startActivity(intent)
-        }
         JOIN_FOOD.title->{
           ARouter.getInstance().build(FOOD_ENTRY).navigation()
         }
@@ -54,9 +42,6 @@ class StoreType {
         }
         JOIN_UFIELD.title->{
           ARouter.getInstance().build(UFIELD_MAIN_ENTRY).navigation()
-        }
-        EDIT_INFO.title -> {
-          ARouter.getInstance().build(MINE_EDIT_INFO).navigation()
         }
         LOGIN_VOLUNTEER.title -> {
           ARouter.getInstance().build(DEFAULT_PAGE).navigation()

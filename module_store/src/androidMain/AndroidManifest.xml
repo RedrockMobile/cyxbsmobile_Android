@@ -19,10 +19,6 @@
             android:theme="@style/StoreAppTheme_NoSplitMotionEvent"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".page.qa.ui.activity.QaActivity"
-            android:theme="@style/StoreAppTheme_NoSplitMotionEvent"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".ui.activity.PhotoActivity"/>
     </application>
 

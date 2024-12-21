@@ -44,10 +44,6 @@ class UserViewModel : BaseViewModel() {
     val status: LiveData<ScoreStatus>
         get() = _status
 
-    private val _qaNumber = MutableLiveData<QANumber>()
-    val qaNumber: LiveData<QANumber>
-        get() = _qaNumber
-
     private val _userCount = MutableLiveData<UserCount?>()
     val userCount: LiveData<UserCount?>
         get() = _userCount
@@ -133,18 +129,6 @@ class UserViewModel : BaseViewModel() {
             .lifeCycle()
     }
 
-    fun getQANumber() {
-        apiService.getQANumber()
-            .normalWrapper(this)
-            .unsafeSubscribeBy(
-                onNext = {
-                    _qaNumber.postValue(it)
-                }
-            )
-            .lifeCycle()
-
-    }
-
     //获取用户三大数据的数量
     fun getUserCount() {
         apiService.getUserCount()
@@ -194,20 +178,6 @@ class UserViewModel : BaseViewModel() {
             )
     }
 
-    //思考了一下，这里view的引用应该会随着函数调用的结束出栈，所以不会引起内存泄漏
-    fun judgeChangedAndSetText(textView: TextView, count: Int) {
-        val text = getNumber(count)
-        if (textView.text == text) return
-        textView.text = text
-        val animator = ValueAnimator.ofFloat(0f, 1f)
-        animator.duration = 200
-        animator.interpolator = DecelerateInterpolator()
-        animator.addUpdateListener { va ->
-            textView.scaleY = va.animatedValue as Float
-        }
-        animator.start()
-    }
-
     fun setViewWidthAndText(textView: TextView, count: Int) {
         if (count == 0) {
             //如果当前的数值已经归零，就不操作了
@@ -240,52 +210,10 @@ class UserViewModel : BaseViewModel() {
         animator.start()
     }
 
-    fun setLeftMargin(textView: TextView, count: Int) {
-        var leftMargin = 17
-        if (count > 99) {
-            leftMargin += 45
-        } else {
-            leftMargin += if (count % 10 == 1) {
-                12
-            } else {
-                15
-            }
-            leftMargin += when (count / 10) {
-                1 -> {
-                    12
-                }
-                0 -> 0
-                else -> 15
-            }
-        }
-        val lp = textView.layoutParams as ConstraintLayout.LayoutParams
-        lp.leftMargin = appContext.dip(leftMargin)
-        textView.layoutParams = lp
-    }
-
     //转换数字为对应字符
     private fun getNumber(number: Int): String = when {
         number in 0..99 -> number.toString()
         number > 99 -> "99+"
         else -> "0"
-    }
-
-    fun saveCheckTimeStamp(type: Int) {
-        appContext.defaultSharedPreferences.editor {
-            if (type == 1) {//刷新未读回复数的本地记录时间戳
-                putLong(UNCHECK_COMMENT_KEY, System.currentTimeMillis() / 1000)
-            } else if (type == 2) {//刷新点赞数的本地记录时间戳
-                putLong(UNCHECK_PRAISE_KEY, System.currentTimeMillis() / 1000)
-            }
-            apply()
-        }
-    }
-
-    /**
-     * 清除User的信息，唯一会调用这个方法的时候是在用户登出
-     */
-    fun clearUser() {
-        ServiceManager(IAccountService::class).getVerifyService()
-            .logout(appContext)
     }
 }

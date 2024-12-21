@@ -16,6 +16,7 @@ import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.core.view.postDelayed
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,16 +26,19 @@ import com.afollestad.materialdialogs.list.listItems
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.mredrock.cyxbs.api.account.IAccountService
 import com.mredrock.cyxbs.api.account.IUserService
-import com.mredrock.cyxbs.common.config.MINE_EDIT_INFO
-import com.mredrock.cyxbs.common.service.impl
-import com.mredrock.cyxbs.common.utils.extensions.*
+import com.mredrock.cyxbs.config.route.MINE_EDIT_INFO
 import com.mredrock.cyxbs.config.view.JToolbar
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.mredrock.cyxbs.lib.utils.extensions.doPermissionAction
+import com.mredrock.cyxbs.lib.utils.extensions.setAvatarImageFromUrl
+import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.mredrock.cyxbs.lib.utils.service.impl
 import com.mredrock.cyxbs.mine.R
 import com.mredrock.cyxbs.mine.util.ui.DynamicRVAdapter
 import com.yalantis.ucrop.UCrop
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.io.IOException
@@ -48,7 +52,7 @@ import java.io.IOException
 class EditInfoActivity : BaseActivity() {
 
     private val mine_et_name by R.id.mine_tv_name.view<TextView>()
-    private val mine_et_introduce by R.id.mine_tv_number.view<TextView>()
+    private val mine_et_stunum by R.id.mine_tv_number.view<TextView>()
     private val mine_et_gender by R.id.mine_et_gender.view<TextView>()
     private val mine_et_college by R.id.mine_et_college.view<TextView>()
     private val mine_edit_et_avatar by R.id.mine_edit_et_avatar.view<ImageView>()
@@ -64,7 +68,6 @@ class EditInfoActivity : BaseActivity() {
         window.setBackgroundDrawableResource(android.R.color.transparent)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.mine_activity_edit_info)
-        viewModel.getUserData()
 
         common_toolbar.apply {
             setBackgroundColor(
@@ -111,32 +114,19 @@ class EditInfoActivity : BaseActivity() {
     }
 
     private fun refreshUserInfo() {
-        loadAvatar(userService.getAvatarImgUrl(), mine_edit_et_avatar)
-        viewModel.getUserData()
+        mine_edit_et_avatar.setAvatarImageFromUrl(userService.getAvatarImgUrl())
         /*
         * 如果返回的数据为空格，则表示数据为空，昵称除外
         * */
-        mine_et_name.setText(userService.getNickname())
-        mine_et_introduce.setText(
-            if (userService.getIntroduction().isBlank()) "" else userService.getIntroduction()
-        )
+        mine_et_name.text = userService.getUsername()
+        mine_et_stunum.text = userService.getStuNum()
         mine_et_gender.text = userService.getGender()
-        mine_et_college.text = userService.getBirth()
+        mine_et_college.text = userService.getCollege()
     }
 
     private fun initObserver() {
-        viewModel.personData.observe(this) {
-            mine_et_name.text = it.data.username
-            mine_et_introduce.text = it.data.stunum
-            mine_et_gender.text = it.data.gender
-            mine_et_college.text = it.data.college
-        }
         viewModel.upLoadImageEvent.observe {
             if (it) {
-                loadAvatar(
-                    IAccountService::class.impl.getUserService()
-                        .getAvatarImgUrl(), mine_edit_et_avatar
-                )
                 //更新显示的头像
                 IAccountService::class.impl.getUserService().refreshInfo()
                 mine_edit_et_avatar.postDelayed(500) {
@@ -176,7 +166,9 @@ class EditInfoActivity : BaseActivity() {
         registerForActivityResult(ActivityResultContracts.TakePicture()) { result ->
             //若获取成功则进入裁剪界面
             if (result) {
-                startCropActivity(cameraImageFile.uri)
+                startCropActivity(
+                    FileProvider.getUriForFile(this@EditInfoActivity, "${packageName}.fileProvider", cameraImageFile)
+                )
             }
         }
 
@@ -188,7 +180,9 @@ class EditInfoActivity : BaseActivity() {
         doPermissionAction(Manifest.permission.CAMERA) {
             reason = "拍照需要访问你的相机哦~"
             doAfterGranted {
-                takePictureLauncher.launch(cameraImageFile.uri)
+                takePictureLauncher.launch(
+                    FileProvider.getUriForFile(this@EditInfoActivity, "${packageName}.fileProvider", cameraImageFile)
+                )
             }
         }
     }
@@ -257,7 +251,7 @@ class EditInfoActivity : BaseActivity() {
             val fileBody = MultipartBody.Part.createFormData(
                 "fold",
                 destinationFile.name,
-                destinationFile.getRequestBody()
+                destinationFile.asRequestBody("multipart/form-data".toMediaTypeOrNull())
             )
 
             val numBody =

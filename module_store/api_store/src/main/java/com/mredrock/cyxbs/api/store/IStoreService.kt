@@ -36,12 +36,6 @@ interface IStoreService : IProvider {
     // 以下跳转到 module_qa 的 DailySignActivity
     DAILY_SIGN("今日打卡", TaskType.BASE),
     
-    // 以下跳转到 module_qa 的 DynamicFragment
-    SEE_DYNAMIC("逛逛邮问", TaskType.BASE), // 浏览动态
-    PUBLISH_DYNAMIC("斐然成章", TaskType.BASE), // 发布动态
-    SHARE_DYNAMIC("围观吃瓜", TaskType.BASE), // 分享动态
-    POST_COMMENT("能说会道", TaskType.BASE), // 发布评论
-    GIVE_A_LIKE("拍案叫绝", TaskType.BASE), // 点赞
     //以下跳转到美食板块
     JOIN_FOOD("使用美食板块",TaskType.BASE),
     //以下是跳转到没课约
@@ -50,9 +44,7 @@ interface IStoreService : IProvider {
     JOIN_DECLARE("发表一次表态",TaskType.BASE),
     //以下跳转到module_ufield
     JOIN_UFIELD("参加一次活动",TaskType.MORE),
-    // 以下跳转到 module_mine 的 EditInfoActivity
-    EDIT_INFO("完善个人信息", TaskType.MORE),
-    
+
     // 以下跳转到 module_volunteer 的 VolunteerLoginActivity
     LOGIN_VOLUNTEER("绑定志愿者账号", TaskType.MORE)
   }

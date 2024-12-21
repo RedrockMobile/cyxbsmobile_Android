@@ -34,7 +34,6 @@ import com.mredrock.cyxbs.mine.noyification.NotificationUtils
 import com.mredrock.cyxbs.mine.page.about.AboutActivity
 import com.mredrock.cyxbs.mine.page.edit.EditInfoActivity
 import com.mredrock.cyxbs.mine.page.feedback.center.ui.FeedbackCenterActivity
-import com.mredrock.cyxbs.mine.page.mine.ui.activity.HomepageActivity
 import com.mredrock.cyxbs.mine.page.setting.SettingActivity
 import com.mredrock.cyxbs.mine.page.sign.DailySignActivity
 import kotlinx.coroutines.launch
@@ -50,7 +49,6 @@ class UserFragment : BaseFragment() {
 
     private val viewModel by viewModels<UserViewModel>()
 
-    private val mine_user_ib_arrow by R.id.mine_user_ib_arrow.view<ImageButton>()
     private val mine_user_iv_center_stamp by R.id.mine_user_iv_center_stamp.view<ImageView>()
     private val mine_user_iv_center_feedback by R.id.mine_user_iv_center_feedback.view<ImageView>()
     private val mine_user_tv_sign by R.id.mine_user_tv_sign.view<TextView>()
@@ -64,7 +62,6 @@ class UserFragment : BaseFragment() {
     private val mine_user_username by R.id.mine_user_username.view<TextView>()
     private val mine_user_iv_center_activity by R.id.mine_user_iv_center_activity.view<ImageView>()
     private val mine_user_tv_center_notification_count by R.id.mine_user_tv_center_notification_count.view<TextView>()
-    private val mine_user_iv_enter by R.id.mine_user_ib_arrow.view<ImageButton>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addObserver()
@@ -74,16 +71,6 @@ class UserFragment : BaseFragment() {
     private fun initView() {
         //功能按钮
         context?.apply {
-
-
-            mine_user_ib_arrow.setOnSingleClickListener {
-                doIfLogin {
-                    HomepageActivity.startHomePageActivity(
-                        null,
-                        context as Activity
-                    )
-                }
-            }
             mine_user_iv_center_stamp.setOnSingleClickListener {
                 doIfLogin {
                     // “邮票中心”点击埋点
@@ -205,22 +192,6 @@ class UserFragment : BaseFragment() {
                 }
             }
         }
-        mine_user_iv_enter.setOnSingleClickListener {
-            doIfLogin {
-                startActivity(
-                    Intent(
-                        context,
-                        EditInfoActivity::class.java
-                    ),
-                    (context as? Activity)?.let { it1 ->
-                        ActivityOptionsCompat.makeSceneTransitionAnimation(
-                            it1,
-                            Pair(mine_user_avatar, "avatar")
-                        ).toBundle()
-                    }
-                )
-            }
-        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -325,16 +296,7 @@ class UserFragment : BaseFragment() {
     private fun refreshUserLayout() {
         val userService = ServiceManager(IAccountService::class).getUserService()
         context?.loadAvatar(userService.getAvatarImgUrl(), mine_user_avatar)
-        mine_user_username.text = userService.getRealName()
-        if (userService.getNickname().isNotBlank() &&
-            userService.getIntroduction().isNotBlank() &&
-            userService.getQQ().isNotBlank() &&
-            userService.getPhone().isNotBlank()
-        ) {
-            // 当都不为空时, 说明已经设置了个人信息, 则提交积分商城任务进度, 后端已做重复处理
-            ServiceManager(IStoreService::class)
-                .postTask(IStoreService.Task.EDIT_INFO, null)
-        }
+        mine_user_username.text = userService.getUsername()
     }
 
     override fun onCreateView(

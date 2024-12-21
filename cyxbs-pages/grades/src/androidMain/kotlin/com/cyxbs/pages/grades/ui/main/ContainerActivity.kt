@@ -150,7 +150,7 @@ class ContainerActivity : BaseActivity() {
     private fun initHeader() {
         Glide.with(this).load(user.getAvatarImgUrl()).into(mIvGradesAvatar)
         mTvGradesStuNum.text = user.getStuNum()
-        mTvGradesName.text = user.getRealName()
+        mTvGradesName.text = user.getUsername()
     }
 
     private fun replaceFragment(fragment: Fragment) {

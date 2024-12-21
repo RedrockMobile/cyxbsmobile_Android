@@ -1,15 +1,11 @@
 package com.mredrock.cyxbs.mine.page.edit
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mredrock.cyxbs.common.network.ApiGenerator
 import com.mredrock.cyxbs.common.network.CommonApiService
 import com.mredrock.cyxbs.common.utils.down.bean.DownMessageText
 import com.mredrock.cyxbs.common.utils.down.params.DownMessageParams
-import com.mredrock.cyxbs.common.utils.extensions.errorHandler
-import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
 import com.mredrock.cyxbs.lib.utils.network.api
-import com.mredrock.cyxbs.mine.bean.PersonData
 import com.mredrock.cyxbs.mine.network.ApiService
 import com.mredrock.cyxbs.mine.util.apiService
 import com.mredrock.cyxbs.mine.util.widget.ExecuteOnceObserver
@@ -26,10 +22,6 @@ class EditViewModel : com.mredrock.cyxbs.lib.base.ui.BaseViewModel() {
 
     val upLoadImageEvent = MutableLiveData<Boolean>()
 
-    private val _personData = MutableLiveData<PersonData>()
-    val personData: LiveData<PersonData>
-        get() = _personData
-
     fun uploadAvatar(
         requestBody: RequestBody,
         file: MultipartBody.Part
@@ -42,18 +34,6 @@ class EditViewModel : com.mredrock.cyxbs.lib.base.ui.BaseViewModel() {
             .safeSubscribeBy {
                 upLoadImageEvent.postValue(true)
                 apiService.updateUserImage(it.data.thumbnail_src, it.data.photosrc)
-            }
-    }
-
-    fun getUserData() {
-        ApiService::class.api
-            .getPersonData()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnError {
-                toast("抱歉，网不好，没有获取到信息")
-            }.safeSubscribeBy {
-                _personData.postValue(it)
             }
     }
 

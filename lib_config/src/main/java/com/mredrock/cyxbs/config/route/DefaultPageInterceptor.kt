@@ -25,19 +25,6 @@ class DefaultPageInterceptor: IInterceptor {
     DISCOVER_VOLUNTEER,
     DISCOVER_VOLUNTEER_RECORD,
     DISCOVER_VOLUNTEER_FEED,
-    //邮问
-    QA_ENTRY,
-    QA_QUIZ,
-    QA_CIRCLE_DETAIL,
-    QA_DYNAMIC_DETAIL,
-    QA_DYNAMIC_MINE,
-    QA_MY_COMMENT,
-    QA_MY_IGNORE,
-    QA_MY_PRAISE,
-    QA_DYNAMIC_MINE_FRAGMENT,
-    //个人中心
-    MINE_PERSON_PAGE,
-    ""
   )
   override fun init(context: Context) {
     println(context)

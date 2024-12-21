@@ -28,35 +28,14 @@ interface ApiService:IApi {
         @Part fold: MultipartBody.Part
     ): Observable<RedrockApiWrapper<UploadImgResponse>>
 
-
-    @POST("magipoke/Person/Search")
-    fun getPersonData():Single<PersonData>
-
-
-
-    /**
-     * 上传用户信息
-     */
-    @FormUrlEncoded
-    @PUT("/magipoke/person/info")
-    fun updateUserInfo(
-        @Field("nickname") nickname: String,
-        @Field("introduction") introduction: String,
-        @Field("qq") qq: String,
-        @Field("phone") phone: String,
-        @Field("photo_src") photo_src: String,
-        @Field("gender") gender: String,
-        @Field("birthday") birthday: String
-    ): Observable<RedrockApiStatus>
-
     /**
      * 上传图片
      */
     @FormUrlEncoded
     @POST("/magipoke/Person/SetInfo")
     fun updateUserImage(
-        @Field("photo_thumbnail_src") photo_thumbnail_src: String,
-        @Field("photo_src") photo_src: String
+        @Field("photo_thumbnail_src") photo_thumbnail_src: String?,
+        @Field("photo_src") photo_src: String?
     ): Observable<RedrockApiStatus>
 
     /**
@@ -68,12 +47,6 @@ interface ApiService:IApi {
     //获取积分
     @POST("/magipoke-intergral/QA/User/getScoreStatus")
     fun getScoreStatus(): Observable<RedrockApiWrapper<ScoreStatus>>
-
-    /**
-     * 我的首页部分
-     */
-    @POST("app/index.php/QA/User/mine")
-    fun getQANumber(): Observable<RedrockApiWrapper<QANumber>>
 
 
     /**
@@ -261,62 +234,6 @@ interface ApiService:IApi {
     fun getUncheckedCommentCount(
         @Query("time") timeStamp: Long
     ): Observable<RedrockApiWrapper<UserUncheckCount>>
-
-    // 关注/取关用户
-    @FormUrlEncoded
-    @POST("/magipoke-loop/focus")
-    fun changeFocusStatus(@Field("redid") redid: String?): Observable<RedrockApiStatus>
-
-    // 获取全部粉丝信息
-    @GET("/magipoke-loop/focus/fan")
-    fun getFans(@Query("redid") redid: String): Observable<RedrockApiWrapper<List<Fan>>>
-
-    // 获取全部关注的人的信息
-    @GET("/magipoke-loop/focus/follow")
-    fun getFollows(@Query("redid") redid: String): Observable<RedrockApiWrapper<List<Fan>>>
-
-    // 查询用户信息
-    @GET("/magipoke/person/info")
-    fun getPersonInfo(@Query("redid") redid: String?): Observable<UserInfo>
-
-    // 更新用户个人主页的背景图片
-    @Multipart
-    @PUT("/magipoke/person/background_url")
-    fun changePersonalBackground(@Part file: MultipartBody.Part): Observable<RedrockApiStatus>
-
-    // 获取用户认证身份
-    @GET("/magipoke-identity/GetAuthentication")
-    fun getAuthenticationStatus(@Query("id") redId: String?): Observable<AuthenticationStatus>
-
-    // 获取用户个性身份
-    @GET("/magipoke-identity/GetCustomization")
-    fun getCustomization(@Query("id") redId: String): Observable<AuthenticationStatus>
-
-    // 获取用户全部身份
-    @GET("/magipoke-identity/GetAllIdentify")
-    fun getAllIdentify(@Query("id") redId: String?): Observable<AllStatus>
-
-    // 上传在用户自己发布的动态的展示身份
-    @FormUrlEncoded
-    @POST("/magipoke-identity/UploadDisplayIdentity")
-    fun uploadDisplayIdentity(@Field("identityId") identityId: String?): Observable<RedrockApiStatus>
-
-    // 删除身份
-    @FormUrlEncoded
-    @POST("/magipoke-identity/DeleteIdentity")
-    fun deleteIdentity(@Field("identityId") identityId: String): Observable<RedrockApiStatus>
-
-    // 更新动态信息
-    @PUT("/magipoke-loop/post")
-    fun update()
-
-    // 获取用户展示的身份
-    @GET("/magipoke-identity/GetShowIdentify")
-    fun getShowIdentify(@Query("id") id: String): Observable<PersonalStatu>
-
-    // 获取动态、评论、获赞、粉丝、关注数接口
-    @GET("magipoke-loop/user/count")
-    fun getPersonalCount(@Query("redid") redid: String?): Observable<PersonalCount>
 
     //获取活动的数量
     @GET("/magipoke-ufield/message/list/")

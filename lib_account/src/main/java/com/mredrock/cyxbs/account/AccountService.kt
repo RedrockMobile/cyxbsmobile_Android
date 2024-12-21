@@ -39,7 +39,6 @@ internal class AccountService : IAccountService {
 
     private val mUserService: IUserService = UserService()
     private val mUserStateService: IUserStateService = UserStateService()
-    private val mUserEditorService: IUserEditorService = UserEditorService()
     private val mUserTokenSerVice: IUserTokenService = UserTokenSerVice()
     private val mUserInfoEncryption = UserInfoEncryption()
 
@@ -58,7 +57,6 @@ internal class AccountService : IAccountService {
 
     override fun getVerifyService() = mUserStateService
 
-    override fun getUserEditorService() = mUserEditorService
     override fun getUserTokenService(): IUserTokenService = mUserTokenSerVice
 
     private fun bind(tokenWrapper: TokenWrapper) {
@@ -100,30 +98,15 @@ internal class AccountService : IAccountService {
     }
 
     inner class UserService : IUserService {
+        override fun getUsername(): String = user?.username.orEmpty()
 
         override fun getStuNum() = user?.stuNum.orEmpty()
 
-        override fun getNickname() = user?.nickname.orEmpty()
-
         override fun getAvatarImgUrl() = user?.photoSrc.orEmpty()
-
-        override fun getPhotoThumbnailSrc() = user?.photoThumbnailSrc.orEmpty()
-
-        override fun getIntroduction() = user?.introduction.orEmpty()
-
-        override fun getPhone() = user?.phone.toString()
-
-        override fun getQQ() = user?.qq.toString()
 
         override fun getGender() = user?.gender.orEmpty()
 
-        override fun getRealName() = user?.realName.orEmpty()
-
         override fun getCollege() = user?.college.orEmpty()
-
-        override fun getBirth() = user?.birthDay.orEmpty()
-
-        override fun getRedid() = user?.redId.orEmpty()
 
         //用于刷新个人信息，请在需要的地方调用
         override fun refreshInfo() {
@@ -148,28 +131,6 @@ internal class AccountService : IAccountService {
     
         override fun observeStuNumEvent(): Observable<Value<String>> {
             return stuNumEvent.distinctUntilChanged()
-        }
-    }
-
-    inner class UserEditorService : IUserEditorService {
-        override fun setNickname(nickname: String) {
-            user?.nickname = nickname
-        }
-
-        override fun setAvatarImgUrl(avatarImgUrl: String) {
-            user?.photoSrc = avatarImgUrl
-        }
-
-        override fun setIntroduction(introduction: String) {
-            user?.introduction = introduction
-        }
-
-        override fun setPhone(phone: String) {
-            user?.phone = phone
-        }
-
-        override fun setQQ(qq: String) {
-            user?.qq = qq
         }
     }
 

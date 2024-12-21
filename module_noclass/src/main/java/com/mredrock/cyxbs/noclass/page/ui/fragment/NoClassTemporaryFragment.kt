@@ -158,7 +158,7 @@ class NoClassTemporaryFragment : BaseFragment(R.layout.noclass_fragment_temporar
      */
     private fun initUserInfo() {
         ServiceManager.invoke(IAccountService::class).getUserService().apply {
-            mUserName = this.getRealName()
+            mUserName = this.getUsername()
             mUserId = this.getStuNum()
         }
     }

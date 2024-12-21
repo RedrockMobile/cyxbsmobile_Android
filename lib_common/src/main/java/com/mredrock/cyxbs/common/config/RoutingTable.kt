@@ -12,7 +12,6 @@ package com.mredrock.cyxbs.common.config
 const val MAIN_MAIN = "/main/entry"
 
 const val COURSE_ENTRY = "/course/entry"
-const val QA_ENTRY = "/qa/entry"
 const val DISCOVER_ENTRY = "/discover/entry"
 const val MINE_ENTRY = "/mine/entry"
 
@@ -60,19 +59,6 @@ const val MINE_FORGET_PASSWORD = "/forget_password/mine/entry"
 const val MINE_BIND_EMAIL = "/bind_email/mine/entry"
 // 个人界面的编辑个人信息界面
 const val MINE_EDIT_INFO = "/edit_info/mine/entry"
-//个人界面的个人主页
-const val MINE_PERSON_PAGE = "/person_page/mine/entry"
-
-
-// QA
-const val QA_QUIZ = "/quiz/qa/entry"
-const val QA_CIRCLE_DETAIL = "/circle_detail/qa/entry"
-const val QA_DYNAMIC_DETAIL = "/dynamic_detail/qa/entry"
-const val QA_DYNAMIC_MINE = "/dynamic_mine/qa/entry"
-const val QA_MY_COMMENT = "/my_comment/qa/entry"
-const val QA_MY_IGNORE = "/my_ignore/qa/entry"
-const val QA_MY_PRAISE = "/my_praise/qa/entry"
-const val QA_DYNAMIC_MINE_FRAGMENT="/identity/mine/entry"
 
 //todo模块
 //跳转到TODO的详情页

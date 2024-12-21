@@ -2,6 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
-        <activity android:name="com.mredrock.cyxbs.discover.grades.ui.main.ContainerActivity" />
+        <activity android:name=".ui.main.ContainerActivity" />
     </application>
 </manifest>

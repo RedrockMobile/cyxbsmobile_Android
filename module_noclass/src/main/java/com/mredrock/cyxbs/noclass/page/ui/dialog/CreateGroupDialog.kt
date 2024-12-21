@@ -103,7 +103,7 @@ class CreateGroupDialog(
      */
     private fun initUserInfo() {
         ServiceManager.invoke(IAccountService::class).getUserService().apply {
-            mUserName = this.getRealName()
+            mUserName = this.getUsername()
             mUserId = this.getStuNum()
         }
     }

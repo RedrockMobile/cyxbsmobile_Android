@@ -52,7 +52,7 @@ fun ImageView.setImageFromId(
  * 加载头像
  */
 fun ImageView.setAvatarImageFromUrl(
-  url: String? = null,
+  url: String?,
   @DrawableRes placeholder: Int = R.drawable.config_ic_default_avatar,
   @DrawableRes error: Int = R.drawable.config_ic_default_avatar,
   func: (RequestBuilder<Drawable>.() -> Unit)? = null,

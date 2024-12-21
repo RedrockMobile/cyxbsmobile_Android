@@ -4,29 +4,16 @@ import com.mredrock.cyxbs.api.account.utils.Value
 import io.reactivex.rxjava3.core.Observable
 
 interface IUserService {
+
+    fun getUsername(): String
+
     fun getStuNum(): String
-
-    fun getNickname(): String
-
-    fun getIntroduction(): String
-
-    fun getPhone(): String
-
-    fun getQQ(): String
 
     fun getGender(): String
 
     fun getAvatarImgUrl(): String
 
-    fun getRealName(): String
-
-    fun getPhotoThumbnailSrc(): String
-
     fun getCollege(): String
-
-    fun getBirth(): String
-
-    fun getRedid(): String
 
     //用于刷新个人信息，请在需要的地方调用
     fun refreshInfo()
