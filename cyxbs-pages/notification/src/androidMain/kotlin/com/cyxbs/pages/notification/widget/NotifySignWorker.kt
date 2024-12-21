@@ -88,7 +88,7 @@ class NotifySignWorker(
         //可以点击通知栏的删除按钮删除
         builder.setAutoCancel(true)
         //系统状态栏显示的小图标
-        builder.setSmallIcon(com.mredrock.cyxbs.common.R.drawable.common_ic_app_notifacation)
+        builder.setSmallIcon(com.mredrock.cyxbs.config.R.drawable.config_ic_app_notifacation)
         //下拉显示的大图标
         val intent = Intent(ctx, ServiceManager(IGetDaySignClassService::class)
             .getDaySignClassService())

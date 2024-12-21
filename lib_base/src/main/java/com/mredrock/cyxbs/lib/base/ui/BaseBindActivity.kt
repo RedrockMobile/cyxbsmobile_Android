@@ -62,12 +62,6 @@ abstract class BaseBindActivity<VB : ViewBinding> : BaseActivity() {
     if (binding is ViewDataBinding) {
       // ViewBinding 是 ViewBind 和 DataBind 共有的父类
       binding.lifecycleOwner = getViewLifecycleOwner()
-    } else {
-      // 目前掌邮更建议使用 DataBind，因为 ViewBind 是白名单模式，默认所有 xml 生成类，严重影响编译速度
-      // 但 DataBind 不是很推荐使用双向绑定，因为 xml 中写代码以后很难维护
-      if (BuildConfig.DEBUG) {
-        toast("更推荐使用 DataBind (Activity: ${this::class.simpleName})")
-      }
     }
     binding
   }

@@ -14,6 +14,7 @@ TODO 以后不要再把颜色写在这里面 ！！！
     <color name="common_chosen_background">#1D1D1D</color>
 
     <!--    纯白色背景和纯白色字体-->
+    <!--替换为 config_white_black-->
     <color name="common_white_background">#000000</color>
     <color name="common_white_font_color">#ffffff</color>
     <!--    启动页颜色-->

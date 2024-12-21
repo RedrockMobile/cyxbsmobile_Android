@@ -1,4 +1,4 @@
-package com.mredrock.cyxbs.schoolcar
+package com.cyxbs.pages.schoolcar
 
 import org.junit.Assert.*
 import org.junit.Test
