@@ -54,13 +54,14 @@
                     app:layout_constraintStart_toStartOf="@+id/mine_guideline_right"
                     app:layout_constraintTop_toBottomOf="@+id/mine_tv_name" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/mine_edit_et_avatar"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginTop="17dp"
                     android:src="@drawable/mine_avatar_default_img"
                     android:transitionName="avatar"
+                    app:shapeAppearance="@style/ConfigShapeableImageViewCircleStyle"
                     app:layout_constraintStart_toStartOf="@+id/mine_guideline_right"
                     app:layout_constraintTop_toTopOf="parent" />
 

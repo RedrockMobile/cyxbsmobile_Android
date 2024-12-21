@@ -32,12 +32,12 @@
         <item name="windowNoTitle">true</item>
     </style>
     
-    <style name="ShapeableImageViewCircleStyle" tools:ignore="ResourceName">
+    <style name="ConfigShapeableImageViewCircleStyle" tools:ignore="ResourceName">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
 
-    <style name="config_LPhotoTheme" parent="LPhotoTheme">
+    <style name="ConfigLPhotoTheme" parent="LPhotoTheme">
         <!--页面通用属性（图片选择、图片预览共用）-->
         <item name="l_pp_toolBar_height">56dp</item>
         <item name="l_pp_toolBar_backIcon">@drawable/config_ic_back</item><!--返回按钮资源-->

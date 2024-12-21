@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/mine_main_avatar"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
@@ -27,6 +27,7 @@
                 android:layout_marginBottom="20dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/mine_avatar_default_img"
+                app:shapeAppearance="@style/ConfigShapeableImageViewCircleStyle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

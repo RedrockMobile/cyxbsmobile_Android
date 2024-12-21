@@ -23,7 +23,7 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:src="@drawable/config_ic_default_avatar"
-            app:shapeAppearance="@style/ShapeableImageViewCircleStyle"
+            app:shapeAppearance="@style/ConfigShapeableImageViewCircleStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.1"

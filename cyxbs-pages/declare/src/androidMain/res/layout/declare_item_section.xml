@@ -18,7 +18,7 @@
             android:layout_height="20dp"
             android:layout_gravity="center"
             android:layout_marginEnd="18dp"
-            app:shapeAppearance="@style/declare_circle_style"
+            app:shapeAppearance="@style/ConfigShapeableImageViewCircleStyle"
             app:srcCompat="@drawable/declare_ic_remove" />
 
             <androidx.appcompat.widget.AppCompatEditText

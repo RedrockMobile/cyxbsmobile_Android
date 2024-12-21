@@ -33,7 +33,6 @@ import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.mine.R
 import com.mredrock.cyxbs.mine.util.ui.DynamicRVAdapter
 import com.yalantis.ucrop.UCrop
-import de.hdodenhof.circleimageview.CircleImageView
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -52,7 +51,7 @@ class EditInfoActivity : BaseActivity() {
     private val mine_et_introduce by R.id.mine_tv_number.view<TextView>()
     private val mine_et_gender by R.id.mine_et_gender.view<TextView>()
     private val mine_et_college by R.id.mine_et_college.view<TextView>()
-    private val mine_edit_et_avatar by R.id.mine_edit_et_avatar.view<CircleImageView>()
+    private val mine_edit_et_avatar by R.id.mine_edit_et_avatar.view<ImageView>()
     private val mine_edit_iv_agreement by R.id.mine_edit_iv_agreement.view<ImageView>()
     val common_toolbar by com.mredrock.cyxbs.config.R.id.toolbar.view<JToolbar>()
     private val viewModel by lazy { ViewModelProvider(this)[EditViewModel::class.java] }

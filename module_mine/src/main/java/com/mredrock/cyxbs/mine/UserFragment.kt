@@ -37,7 +37,6 @@ import com.mredrock.cyxbs.mine.page.feedback.center.ui.FeedbackCenterActivity
 import com.mredrock.cyxbs.mine.page.mine.ui.activity.HomepageActivity
 import com.mredrock.cyxbs.mine.page.setting.SettingActivity
 import com.mredrock.cyxbs.mine.page.sign.DailySignActivity
-import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.launch
 
 /**
@@ -60,7 +59,7 @@ class UserFragment : BaseFragment() {
     private val mine_user_fm_setting by R.id.mine_user_fm_setting.view<FrameLayout>()
     private val mine_user_cl_info by R.id.mine_user_cl_info.view<ConstraintLayout>()
     private val mine_user_iv_center_notification by R.id.mine_user_iv_center_notification.view<ImageView>()
-    private val mine_user_avatar by R.id.mine_user_avatar.view<CircleImageView>()
+    private val mine_user_avatar by R.id.mine_user_avatar.view<ImageView>()
     private val mine_user_tv_unchecked_notification_count by R.id.mine_user_tv_unchecked_notification_count.view<TextView>()
     private val mine_user_username by R.id.mine_user_username.view<TextView>()
     private val mine_user_iv_center_activity by R.id.mine_user_iv_center_activity.view<ImageView>()

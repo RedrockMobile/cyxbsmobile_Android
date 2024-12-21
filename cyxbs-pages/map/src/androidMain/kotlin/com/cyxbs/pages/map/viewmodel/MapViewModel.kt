@@ -4,8 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
-import android.os.Build
-import android.widget.Toast
 import androidx.databinding.ObservableArrayList
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
@@ -477,7 +475,7 @@ class MapViewModel : BaseViewModel() {
             .isSingleChoose(false) // 是否是单选
             .isOpenLastAlbum(false) // 是否直接打开最后一次选择的相册
             .selectedPhotos(ArrayList())
-            .theme(com.mredrock.cyxbs.config.R.style.config_LPhotoTheme)
+            .theme(com.mredrock.cyxbs.config.R.style.ConfigLPhotoTheme)
             .build()
             .start(activity, PICTURE_SELECT)
     }

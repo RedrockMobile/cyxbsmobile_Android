@@ -13,13 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/mine_follow_item_iv_avatar"
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="25dp"
             android:src="#C4C4C4"
+            app:shapeAppearance="@style/ConfigShapeableImageViewCircleStyle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
