@@ -7,8 +7,8 @@ import android.os.Build
 import android.os.Process
 import com.mredrock.cyxbs.config.sp.SP_PRIVACY_AGREED
 import com.mredrock.cyxbs.config.sp.defaultSp
-import com.mredrock.cyxbs.init.InitialManager
-import com.mredrock.cyxbs.init.InitialService
+import com.cyxbs.components.init.InitialManager
+import com.cyxbs.components.init.InitialService
 import java.util.ServiceLoader
 
 /**

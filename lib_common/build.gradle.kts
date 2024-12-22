@@ -5,7 +5,7 @@ plugins {
 useARouter(false) // lib_common 模块不包含实现类，不需要处理注解
 
 dependencies {
-  implementation(projects.apiInit)
+  implementation(projects.cyxbsComponents.init)
   implementation(projects.libConfig)
   implementation(projects.libUtils)
   implementation(projects.libAccount.apiAccount)

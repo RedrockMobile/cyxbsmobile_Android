@@ -6,7 +6,7 @@ useARouter()
 useAutoService()
 
 dependencies {
-  implementation(projects.apiInit)
+  implementation(projects.cyxbsComponents.init)
   implementation(projects.libBase)
   implementation(projects.libUtils)
   implementation(projects.libConfig)

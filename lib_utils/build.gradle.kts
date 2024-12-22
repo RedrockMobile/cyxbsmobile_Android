@@ -8,7 +8,7 @@ useAutoService()
 kotlin {
   sourceSets {
     androidMain.dependencies {
-      implementation(projects.apiInit)
+      implementation(projects.cyxbsComponents.init)
       implementation(projects.libConfig)
       implementation(projects.libAccount.apiAccount)
 

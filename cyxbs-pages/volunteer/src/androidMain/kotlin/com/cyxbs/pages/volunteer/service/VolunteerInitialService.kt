@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import com.mredrock.cyxbs.api.account.IAccountService
 import com.mredrock.cyxbs.api.account.IUserStateService
 import com.mredrock.cyxbs.common.service.impl
-import com.mredrock.cyxbs.init.InitialManager
-import com.mredrock.cyxbs.init.InitialService
+import com.cyxbs.components.init.InitialManager
+import com.cyxbs.components.init.InitialService
 import com.cyxbs.pages.volunteer.event.VolunteerLogoutEvent
 import org.greenrobot.eventbus.EventBus
 

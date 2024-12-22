@@ -9,8 +9,8 @@ import com.google.auto.service.AutoService
 import com.cyxbs.pages.course.api.ILessonService
 import com.cyxbs.pages.course.api.utils.getStartRow
 import com.mredrock.cyxbs.config.config.SchoolCalendar
-import com.mredrock.cyxbs.init.InitialManager
-import com.mredrock.cyxbs.init.InitialService
+import com.cyxbs.components.init.InitialManager
+import com.cyxbs.components.init.InitialService
 import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.extensions.unsafeSubscribeBy
 import com.mredrock.cyxbs.lib.utils.service.impl

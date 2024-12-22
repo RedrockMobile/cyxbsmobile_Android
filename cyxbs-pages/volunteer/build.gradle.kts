@@ -9,7 +9,7 @@ kotlin {
   sourceSets {
     commonMain.dependencies {
       subprojects.forEach { implementation(it) }
-      implementation(projects.apiInit)
+      implementation(projects.cyxbsComponents.init)
       implementation(projects.libCommon) // TODO common 模块不再使用，新模块请依赖 base 和 utils 模块
       implementation(projects.libBase)
       implementation(projects.libConfig)

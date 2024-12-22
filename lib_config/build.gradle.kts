@@ -6,7 +6,7 @@ useARouter()
 useAutoService()
 
 dependencies {
-  implementation(projects.apiInit)
+  implementation(projects.cyxbsComponents.init)
   implementation(projects.libAccount.apiAccount)
   implementation(libs.androidx.appcompat)
   implementation(libs.androidx.constraintlayout)

@@ -8,7 +8,7 @@ useRoom(rxjava = true)
 kotlin {
   sourceSets {
     commonMain.dependencies {
-      implementation(projects.apiInit)
+      implementation(projects.cyxbsComponents.init)
       implementation(projects.libBase)
       implementation(projects.libConfig)
       implementation(projects.libUtils)

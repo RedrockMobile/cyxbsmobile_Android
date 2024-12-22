@@ -3,8 +3,8 @@ package com.cyxbs.applications.pro.sdks
 import com.google.auto.service.AutoService
 import com.cyxbs.applications.pro.BuildConfig
 import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.init.InitialManager
-import com.mredrock.cyxbs.init.InitialService
+import com.cyxbs.components.init.InitialManager
+import com.cyxbs.components.init.InitialService
 import com.mredrock.cyxbs.lib.base.BaseApp
 import com.mredrock.cyxbs.lib.utils.service.impl
 import com.mredrock.lib.crash.core.CyxbsCrashMonitor

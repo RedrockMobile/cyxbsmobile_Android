@@ -6,8 +6,8 @@ import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
 import com.google.auto.service.AutoService
-import com.mredrock.cyxbs.init.InitialManager
-import com.mredrock.cyxbs.init.InitialService
+import com.cyxbs.components.init.InitialManager
+import com.cyxbs.components.init.InitialService
 import com.mredrock.cyxbs.lib.debug.SecretActivity
 import com.mredrock.cyxbs.lib.utils.utils.impl.ActivityLifecycleCallbacksImpl
 import tech.linjiang.pandora.Pandora

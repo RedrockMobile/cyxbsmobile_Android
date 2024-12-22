@@ -37,7 +37,7 @@ dependencyResolutionManagement {
 
 // 测试使用，排除掉不需要的模块，记得还原！！！
 val excludeList = setOf<String>(
-
+  "api_init"
 )
 
 fun includeModule(topName: String, file: File) {
