@@ -1,4 +1,4 @@
-package com.mredrock.cyxbs.lib.debug.pandora
+package com.cyxbs.functions.debug.pandora
 
 import android.app.Activity
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.widget.FrameLayout
 import com.google.auto.service.AutoService
 import com.cyxbs.components.init.InitialManager
 import com.cyxbs.components.init.InitialService
-import com.mredrock.cyxbs.lib.debug.SecretActivity
+import com.cyxbs.functions.debug.SecretActivity
 import com.mredrock.cyxbs.lib.utils.utils.impl.ActivityLifecycleCallbacksImpl
 import tech.linjiang.pandora.Pandora
 import tech.linjiang.pandora.util.SensorDetector

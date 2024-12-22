@@ -20,7 +20,8 @@ import com.mredrock.cyxbs.lib.utils.extensions.visible
 import com.cyxbs.pages.notification.R
 import com.cyxbs.pages.notification.bean.ReceivedItineraryMsgBean
 import com.cyxbs.pages.notification.util.Date
-import com.cyxbs.pages.notification.util.sp2px
+import com.mredrock.cyxbs.lib.utils.extensions.dp2pxF
+import com.mredrock.cyxbs.lib.utils.extensions.sp2dpF
 
 /**
  * ...
@@ -92,7 +93,7 @@ class ReceivedItineraryNotificationRvAdapter(
                 override fun onPreDraw(): Boolean {
                     content.viewTreeObserver.removeOnPreDrawListener(this)
                     val paddingDp = 17
-                    val emsCount = ((itemView.width - 2 * paddingDp.dp2px) / sp2px(14F))
+                    val emsCount = ((itemView.width - 2 * paddingDp.dp2px) / 14.sp2dpF.dp2pxF)
                     content.setEms(emsCount.toInt())
                     return true
                 }
@@ -127,7 +128,7 @@ class ReceivedItineraryNotificationRvAdapter(
                 override fun onPreDraw(): Boolean {
                     rawContent.viewTreeObserver.removeOnPreDrawListener(this)
                     val paddingDp = 17
-                    val emsCount = ((itemView.width - 2 * paddingDp.dp2px) / sp2px(14F))
+                    val emsCount = ((itemView.width - 2 * paddingDp.dp2px) / 14.sp2dpF.dp2pxF)
                     rawContent.setEms(emsCount.toInt())
                     newContent.setEms(emsCount.toInt())
                     return true

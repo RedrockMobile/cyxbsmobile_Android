@@ -1,4 +1,4 @@
-package com.mredrock.cyxbs.lib.debug.crash
+package com.cyxbs.functions.debug.crash
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -11,7 +11,7 @@ import androidx.core.view.isGone
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.debug.R
+import com.cyxbs.functions.debug.R
 import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.extensions.gone
 import com.mredrock.cyxbs.lib.utils.extensions.visible

@@ -3,7 +3,6 @@ plugins {
 }
 
 useARouter()
-useAutoService()
 
 dependencies {
   implementation(projects.cyxbsComponents.init)

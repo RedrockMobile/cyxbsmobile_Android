@@ -20,7 +20,10 @@ import com.mredrock.cyxbs.lib.utils.extensions.color
 import com.mredrock.cyxbs.lib.utils.extensions.dp2px
 
 /**
- * .
+ * 用于展示崩溃日志的 dialog
+ * ```
+ * CrashDialog.Builder(context, throwable).show()
+ * ```
  *
  * @author 985892345
  * 2023/3/1 10:29

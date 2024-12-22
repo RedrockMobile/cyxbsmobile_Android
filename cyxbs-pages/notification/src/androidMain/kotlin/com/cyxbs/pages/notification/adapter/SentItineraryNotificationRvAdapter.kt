@@ -20,8 +20,8 @@ import com.mredrock.cyxbs.lib.utils.extensions.visible
 import com.cyxbs.pages.notification.R
 import com.cyxbs.pages.notification.bean.SentItineraryMsgBean
 import com.cyxbs.pages.notification.util.Date
-import com.cyxbs.pages.notification.util.myGetColor
-import com.cyxbs.pages.notification.util.sp2px
+import com.mredrock.cyxbs.lib.utils.extensions.dp2pxF
+import com.mredrock.cyxbs.lib.utils.extensions.sp2dpF
 
 /**
  * ...
@@ -85,7 +85,7 @@ class SentItineraryNotificationRvAdapter(
                 override fun onPreDraw(): Boolean {
                     content.viewTreeObserver.removeOnPreDrawListener(this)
                     val paddingDp = 17
-                    val emsCount = ((itemView.width - 2 * paddingDp.dp2px) / sp2px(14F))
+                    val emsCount = ((itemView.width - 2 * paddingDp.dp2px) / 14.sp2dpF.dp2pxF)
                     content.setEms(emsCount.toInt())
                     return true
                 }
@@ -172,10 +172,10 @@ class SentItineraryNotificationRvAdapter(
      * @param holder
      */
     private fun textColor2canceled(holder: VH) {
-        holder.title.setTextColor(myGetColor(R.color.notification_itinerary_item_canceled_title_text))
-        holder.content.setTextColor(myGetColor(R.color.notification_itinerary_item_canceled_content_text))
-        holder.startTime.setTextColor(myGetColor(R.color.notification_itinerary_item_canceled_generate_time_text))
-        holder.startStatusHint.setTextColor(myGetColor(R.color.notification_itinerary_item_canceled_start_status_hint_text))
-        holder.canceledHint.setTextColor(myGetColor(R.color.notification_itinerary_item_canceled_hint_text))
+        holder.title.setTextColor(R.color.notification_itinerary_item_canceled_title_text.color)
+        holder.content.setTextColor(R.color.notification_itinerary_item_canceled_content_text.color)
+        holder.startTime.setTextColor(R.color.notification_itinerary_item_canceled_generate_time_text.color)
+        holder.startStatusHint.setTextColor(R.color.notification_itinerary_item_canceled_start_status_hint_text.color)
+        holder.canceledHint.setTextColor(R.color.notification_itinerary_item_canceled_hint_text.color)
     }
 }

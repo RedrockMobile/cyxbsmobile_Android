@@ -5,7 +5,7 @@ plugins {
 kotlin {
   sourceSets {
     androidMain.dependencies {
-      api(libs.autoService)
+      implementation(libs.autoService)
     }
   }
 }

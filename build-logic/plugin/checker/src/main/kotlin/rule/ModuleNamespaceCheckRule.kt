@@ -15,7 +15,7 @@ object ModuleNamespaceCheckRule : AndroidProjectChecker.ICheckRule {
   private val specialModuleNameSpaceMap = mapOf(
     "lib_crash" to "com.mredrock.lib.crash",
     "lib_base" to "com.mredrock.cyxbs.lib.base",
-    "lib_debug" to "com.mredrock.cyxbs.lib.debug",
+    "lib_debug" to "com.cyxbs.functions.debug",
     "lib_utils" to "com.mredrock.cyxbs.lib.utils",
     "module_app" to "com.mredrock.cyxbs",
     "module_emptyroom" to "com.mredrock.cyxbs.discover.emptyroom",

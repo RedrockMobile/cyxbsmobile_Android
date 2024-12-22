@@ -3,6 +3,7 @@ package com.mredrock.cyxbs.lib.utils.utils.config
 import android.Manifest
 import android.content.ContentUris
 import android.content.ContentValues
+import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.icu.util.TimeZone
@@ -10,7 +11,7 @@ import android.provider.CalendarContract.*
 import androidx.annotation.IntRange
 import androidx.fragment.app.FragmentActivity
 import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.lib.utils.UtilsApplicationWrapper.Companion.application
+import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.extensions.doPermissionAction
 import com.mredrock.cyxbs.lib.utils.service.impl
 import io.reactivex.rxjava3.core.Completable
@@ -46,7 +47,8 @@ import kotlin.coroutines.resume
  */
 object PhoneCalendar {
   
-  private val context = application
+  private val context: Context
+    get() = appContext
   
   /**
    * 账户名称。这个在手机日历账号管理中可以看到。比如：123456789

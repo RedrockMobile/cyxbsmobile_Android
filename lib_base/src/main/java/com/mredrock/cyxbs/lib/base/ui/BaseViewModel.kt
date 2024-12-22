@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.cyxbs.components.init.appApplication
 import com.mredrock.cyxbs.lib.base.BaseApp
 import com.mredrock.cyxbs.lib.base.utils.RxjavaLifecycle
 import com.mredrock.cyxbs.lib.base.utils.ToastUtils
@@ -103,7 +104,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 abstract class BaseViewModel : ViewModel(), RxjavaLifecycle, ToastUtils {
   
   val appContext: Context
-    get() = BaseApp.baseApp
+    get() = appApplication
 
   private val mDisposables = CompositeDisposable()
   

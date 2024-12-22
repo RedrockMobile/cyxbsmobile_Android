@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.core.content.ContextCompat
+import kotlin.math.roundToInt
 
 /**
  * ...
@@ -54,26 +55,26 @@ val Float.px2dpCompose: Dp
 val Int.dp2spF: Float
   get() = appContext.resources.displayMetrics.scaledDensity * this
 
-val Int.dp2sp: Float
-  get() = dp2spF * this
+val Int.dp2sp: Int
+  get() = (dp2spF * this).roundToInt()
 
 val Float.dp2spF: Float
   get() = appContext.resources.displayMetrics.scaledDensity * this
 
-val Float.dp2sp: Float
-  get() = dp2spF * this
+val Float.dp2sp: Int
+  get() = (dp2spF * this).roundToInt()
 
 val Int.sp2dpF: Float
   get() = this / appContext.resources.displayMetrics.scaledDensity
 
-val Int.sp2dp: Float
-  get() = sp2dpF * this
+val Int.sp2dp: Int
+  get() = (sp2dpF * this).roundToInt()
 
 val Float.sp2dpF: Float
   get() = this / appContext.resources.displayMetrics.scaledDensity
 
-val Float.sp2dp: Float
-  get() = sp2dpF * this
+val Float.sp2dp: Int
+  get() = (sp2dpF * this).roundToInt()
 
 val Dp.px: Float
   @Composable

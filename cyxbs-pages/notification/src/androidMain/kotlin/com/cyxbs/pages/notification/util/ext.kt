@@ -4,9 +4,6 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.content.SharedPreferences
 import android.view.Window
-import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
-import com.mredrock.cyxbs.lib.base.BaseApp
 import com.cyxbs.pages.notification.util.Constant.NOTIFICATION_SP_FILE_NAME
 
 /**
@@ -34,15 +31,5 @@ internal fun Window.changeWindowAlpha(targetWindowAlpha: Float) {
     }
     anim.start()
 }
-
-internal fun myGetColor(@ColorRes colorId: Int): Int {
-    return ContextCompat.getColor(BaseApp.baseApp, colorId)
-}
-
-internal fun sp2px(spValue: Float): Float {
-    val fontScale = BaseApp.baseApp.resources.displayMetrics.scaledDensity
-    return (spValue * fontScale + 0.5f)
-}
-
 
 

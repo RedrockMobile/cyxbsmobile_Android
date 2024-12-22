@@ -2,7 +2,7 @@ package com.mredrock.cyxbs.lib.utils.extensions
 
 import android.content.Context
 import androidx.lifecycle.*
-import com.mredrock.cyxbs.lib.utils.UtilsApplicationWrapper
+import com.cyxbs.components.init.appApplication
 
 /**
  * ...
@@ -12,7 +12,7 @@ import com.mredrock.cyxbs.lib.utils.UtilsApplicationWrapper
  */
 
 val appContext: Context
-  get() = UtilsApplicationWrapper.application.applicationContext
+  get() = appApplication.applicationContext
 
 /**
  * 应用程序的生命周期

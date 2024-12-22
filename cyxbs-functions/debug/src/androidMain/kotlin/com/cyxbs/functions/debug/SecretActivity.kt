@@ -1,4 +1,4 @@
-package com.mredrock.cyxbs.lib.debug
+package com.cyxbs.functions.debug
 
 import android.content.Intent
 import android.os.Bundle

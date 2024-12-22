@@ -9,8 +9,8 @@ import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
 import com.mredrock.cyxbs.api.account.IAccountService
 import com.mredrock.cyxbs.lib.utils.BuildConfig
-import com.mredrock.cyxbs.lib.utils.UtilsApplicationWrapper
 import com.mredrock.cyxbs.lib.utils.extensions.JsonDefault
+import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import com.mredrock.cyxbs.lib.utils.service.impl
 import com.mredrock.cyxbs.lib.utils.utils.LogLocal
@@ -360,7 +360,7 @@ object ApiGenerator {
                         Handler(Looper.getMainLooper()).post {
                             // 使用原生 toast 醒目一点
                             Toast.makeText(
-                                UtilsApplicationWrapper.application,
+                                appContext,
                                 "dev 请求异常, 请查看 Pandora",
                                 Toast.LENGTH_SHORT
                             ).show()

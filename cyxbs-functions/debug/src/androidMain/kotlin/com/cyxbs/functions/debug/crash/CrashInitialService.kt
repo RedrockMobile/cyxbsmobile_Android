@@ -1,4 +1,4 @@
-package com.mredrock.cyxbs.lib.debug.crash
+package com.cyxbs.functions.debug.crash
 
 import com.google.auto.service.AutoService
 import com.cyxbs.components.init.InitialManager

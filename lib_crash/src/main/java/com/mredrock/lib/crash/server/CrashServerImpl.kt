@@ -3,9 +3,9 @@ package com.mredrock.lib.crash.server
 import android.app.Dialog
 import android.content.Context
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.cyxbs.components.init.appTopActivity
 import com.mredrock.cyxbs.api.crash.CRASH_SERVER
 import com.mredrock.cyxbs.api.crash.ICrashService
-import com.mredrock.cyxbs.lib.base.BaseApp
 import com.mredrock.lib.crash.dialog.CrashDialog
 
 /**
@@ -18,7 +18,7 @@ import com.mredrock.lib.crash.dialog.CrashDialog
 class CrashServerImpl : ICrashService {
   
   override fun createCrashDialog(throwable: Throwable): Dialog {
-    val topActivity = BaseApp.topActivity.get() ?: error("不存在栈顶 Activity，这是不应该出现的情况！")
+    val topActivity = appTopActivity.get() ?: error("不存在栈顶 Activity，这是不应该出现的情况！")
     return CrashDialog.Builder(topActivity, throwable).build()
   }
   

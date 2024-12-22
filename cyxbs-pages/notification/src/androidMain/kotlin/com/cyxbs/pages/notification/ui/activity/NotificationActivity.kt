@@ -39,10 +39,10 @@ import com.cyxbs.pages.notification.ui.fragment.UfieldNotificationFragment
 import com.cyxbs.pages.notification.util.Constant.HAS_USER_ENTER_SETTING_PAGE
 import com.cyxbs.pages.notification.util.Constant.IS_SWITCH1_SELECT
 import com.cyxbs.pages.notification.util.NotificationSp
-import com.cyxbs.pages.notification.util.myGetColor
 import com.cyxbs.pages.notification.viewmodel.NotificationViewModel
 import com.cyxbs.pages.notification.widget.*
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.mredrock.cyxbs.lib.utils.extensions.color
 import com.mredrock.cyxbs.lib.utils.extensions.dp2px
 import com.mredrock.cyxbs.lib.utils.utils.impl.defaultImpl
 import kotlin.properties.Delegates
@@ -251,12 +251,12 @@ class NotificationActivity : BaseActivity() {
         val onTabSelectedListener = object : TabLayout.OnTabSelectedListener by defaultImpl() {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 tab.customView?.findViewById<TextView>(R.id.notification_tv_tl_tab)
-                    ?.setTextColor(ColorStateList.valueOf(myGetColor(R.color.notification_home_tabLayout_text_selected)))
+                    ?.setTextColor(ColorStateList.valueOf(R.color.notification_home_tabLayout_text_selected.color))
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
                 tab.customView?.findViewById<TextView>(R.id.notification_tv_tl_tab)
-                    ?.setTextColor(ColorStateList.valueOf(myGetColor(R.color.notification_home_tabLayout_text_unselect)))
+                    ?.setTextColor(ColorStateList.valueOf(R.color.notification_home_tabLayout_text_unselect.color))
             }
         }
         notification_home_tl.addOnTabSelectedListener(onTabSelectedListener)

@@ -1,4 +1,4 @@
-package com.mredrock.cyxbs.lib.debug.pandora
+package com.cyxbs.functions.debug.pandora
 
 import com.google.auto.service.AutoService
 import com.mredrock.cyxbs.lib.utils.network.INetworkConfigService

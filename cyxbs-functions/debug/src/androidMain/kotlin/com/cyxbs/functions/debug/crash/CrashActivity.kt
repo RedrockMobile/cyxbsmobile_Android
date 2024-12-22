@@ -1,4 +1,4 @@
-package com.mredrock.cyxbs.lib.debug.crash
+package com.cyxbs.functions.debug.crash
 
 import android.annotation.SuppressLint
 import android.content.ClipData
@@ -16,8 +16,8 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import com.mredrock.cyxbs.config.view.ScaleScrollTextView
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.debug.R
-import com.mredrock.cyxbs.lib.debug.SecretActivity
+import com.cyxbs.functions.debug.R
+import com.cyxbs.functions.debug.SecretActivity
 import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.extensions.collectUsefulStackTrace
 import java.io.Serializable

@@ -3,11 +3,14 @@ package com.mredrock.cyxbs.lib.base
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.annotation.CallSuper
 import com.alibaba.android.arouter.launcher.ARouter
+import com.cyxbs.components.init.appApplication
+import com.cyxbs.components.init.appTopActivity
 import com.mredrock.cyxbs.lib.base.utils.InitialManagerImpl
 import com.mredrock.cyxbs.lib.utils.utils.impl.ActivityLifecycleCallbacksImpl
 import java.lang.ref.WeakReference
@@ -22,15 +25,6 @@ open class BaseApp : Application() {
   companion object {
     @SuppressLint("StaticFieldLeak")
     lateinit var baseApp: BaseApp
-      private set
-  
-    /**
-     * 获取栈顶的 Activity
-     *
-     * 栈顶 Activity 可用于实现全局 dialog
-     */
-    @SuppressLint("StaticFieldLeak")
-    lateinit var topActivity: WeakReference<Activity>
       private set
 
     /**
@@ -55,6 +49,11 @@ open class BaseApp : Application() {
   }
   
   private lateinit var mInitialManager: InitialManagerImpl
+
+  override fun attachBaseContext(base: Context) {
+    super.attachBaseContext(base)
+    appApplication = this
+  }
   
   @CallSuper
   override fun onCreate() {
@@ -95,12 +94,12 @@ open class BaseApp : Application() {
     registerActivityLifecycleCallbacks(
       object : ActivityLifecycleCallbacksImpl {
         override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-          topActivity = WeakReference(activity)
+          appTopActivity = WeakReference(activity)
         }
   
         override fun onActivityResumed(activity: Activity) {
-          if (activity !== topActivity.get()) {
-            topActivity = WeakReference(activity)
+          if (activity !== appTopActivity.get()) {
+            appTopActivity = WeakReference(activity)
           }
         }
       }
