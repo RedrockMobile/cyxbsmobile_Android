@@ -14,7 +14,6 @@ dependencies {
   implementation(projects.moduleCourse.apiCourse)
   implementation(projects.moduleCourse.libCourse)
   implementation(projects.cyxbsPages.affair.api)
-  implementation(projects.moduleWidget.apiWidget)
 
   implementation(libs.bundles.projectBase)
   implementation(libs.bundles.views)

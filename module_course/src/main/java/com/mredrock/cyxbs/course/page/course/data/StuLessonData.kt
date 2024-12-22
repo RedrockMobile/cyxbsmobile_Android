@@ -1,6 +1,7 @@
 package com.mredrock.cyxbs.course.page.course.data
 
 import androidx.recyclerview.widget.DiffUtil
+import com.mredrock.cyxbs.api.course.ILessonService
 import com.mredrock.cyxbs.course.page.course.room.ILessonEntity
 import com.mredrock.cyxbs.course.page.course.room.StuLessonEntity
 

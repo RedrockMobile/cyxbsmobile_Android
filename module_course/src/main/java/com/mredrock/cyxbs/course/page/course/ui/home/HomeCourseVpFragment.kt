@@ -8,6 +8,7 @@ import com.mredrock.cyxbs.config.config.SchoolCalendar
 import com.mredrock.cyxbs.course.page.course.ui.home.base.HomeCourseVpLinkFragment
 import com.mredrock.cyxbs.course.page.course.ui.home.viewmodel.HomeCourseViewModel
 import com.mredrock.cyxbs.course.page.find.ui.find.activity.FindLessonActivity
+import com.mredrock.cyxbs.course.page.link.model.LinkRepository
 import com.mredrock.cyxbs.lib.course.fragment.page.CoursePageFragment
 import com.mredrock.cyxbs.lib.utils.extensions.gone
 import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
@@ -48,8 +49,8 @@ class HomeCourseVpFragment : HomeCourseVpLinkFragment() {
     }
     
     mIvLink.setOnLongClickListener {
-      val linkNum = mViewModel.linkStu.value?.linkNum
-      return@setOnLongClickListener if (linkNum != null) {
+      val linkNum = mViewModel.linkStu.value.linkNum
+      return@setOnLongClickListener if (linkNum.isNotBlank()) {
         FindLessonActivity.startByStuNum(it.context, linkNum)
         true
       } else false
@@ -87,7 +88,7 @@ class HomeCourseVpFragment : HomeCourseVpLinkFragment() {
   }
   
   private fun initObserve() {
-    mViewModel.linkStu.observe {
+    mViewModel.linkStu.collectLaunch {
       if (it.isNull()) {
         mIvLink.gone()
       } else {

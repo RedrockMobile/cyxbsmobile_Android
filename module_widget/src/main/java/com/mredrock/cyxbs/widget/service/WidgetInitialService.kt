@@ -1,18 +1,19 @@
 package com.mredrock.cyxbs.widget.service
 
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import androidx.core.content.edit
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.pages.affair.api.IAffairService
+import com.google.auto.service.AutoService
 import com.mredrock.cyxbs.api.course.ILessonService
 import com.mredrock.cyxbs.api.course.utils.getStartRow
-import com.mredrock.cyxbs.api.widget.IWidgetService
-import com.mredrock.cyxbs.api.widget.WIDGET_SERVICE
 import com.mredrock.cyxbs.config.config.SchoolCalendar
+import com.mredrock.cyxbs.init.InitialManager
+import com.mredrock.cyxbs.init.InitialService
+import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.extensions.unsafeSubscribeBy
+import com.mredrock.cyxbs.lib.utils.service.impl
 import com.mredrock.cyxbs.widget.repo.database.AffairDatabase
 import com.mredrock.cyxbs.widget.repo.database.LessonDatabase
 import com.mredrock.cyxbs.widget.repo.database.LessonDatabase.Companion.MY_STU_NUM
@@ -33,11 +34,24 @@ import io.reactivex.rxjava3.schedulers.Schedulers
  * email : 1446157077@qq.com
  * date : 2022/8/3 15:22
  */
-@Route(path = WIDGET_SERVICE, name = WIDGET_SERVICE)
-class WidgetService : IWidgetService {
-    private lateinit var mContext: Context
+@AutoService(InitialService::class)
+class WidgetInitialService : InitialService {
 
-    override fun notifyWidgetRefresh(
+    override fun onMainProcess(manager: InitialManager) {
+        super.onMainProcess(manager)
+        val lessonService = ILessonService::class.impl
+        val affairService = IAffairService::class.impl
+        Observable.combineLatest(
+            lessonService.observeSelfLesson(), // 自己课的观察流
+            lessonService.observeLinkLesson(), // 关联人课的观察流
+            affairService.observeSelfAffair(), // 事务的观察流
+        ) { self, link, affair ->
+            // 装换为 data 数据类
+            notifyWidgetRefresh(self, link, affair)
+        }.unsafeSubscribeBy()
+    }
+
+    private fun notifyWidgetRefresh(
         myLessons: List<ILessonService.Lesson>,
         otherStuLessons: List<ILessonService.Lesson>,
         affairs: List<IAffairService.Affair>,
@@ -71,17 +85,13 @@ class WidgetService : IWidgetService {
             //延迟100ms,确保发送广播时已经将数据插入数据库
             .subscribe {
                 widgetList.forEach { pkg ->
-                    mContext?.sendBroadcast(Intent(actionFlush).apply {
-                        component = ComponentName(mContext!!, pkg)
+                    appContext.sendBroadcast(Intent(actionFlush).apply {
+                        component = ComponentName(appContext, pkg)
                     })
                 }
             }
 
         refreshCourseSingleWidget(myLessons)
-    }
-
-    override fun init(context: Context) {
-        mContext = context
     }
 
     private var refreshDispose: Disposable? = null
@@ -100,7 +110,7 @@ class WidgetService : IWidgetService {
         val weekOfTerm = SchoolCalendar.getWeekOfTerm()
         if (weekOfTerm != null) {
             CourseWidget.setData(
-                mContext,
+                appContext,
                 weekOfTerm,
                 mapOf(
                     WidgetRankImpl(0) to myLessons.map { LessonWidgetItem(it) },

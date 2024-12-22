@@ -9,8 +9,11 @@ import com.mredrock.cyxbs.course.page.course.model.StuLessonRepository
 import com.mredrock.cyxbs.course.page.course.room.StuLessonEntity
 import com.mredrock.cyxbs.course.page.link.model.LinkRepository
 import com.mredrock.cyxbs.lib.utils.service.ServiceManager
+import com.mredrock.cyxbs.lib.utils.utils.judge.NetworkUtil
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.rx3.asObservable
 
 /**
  * ...
@@ -50,21 +53,45 @@ class LessonServiceImpl : ILessonService {
       }
   }
   
-  override fun getSelfLinkLesson(): Single<Pair<List<ILessonService.Lesson>, List<ILessonService.Lesson>>> {
-    return Single.zip(
-      getSelfLesson(),
-      getLinkLesson().onErrorReturnItem(emptyList())
-    ) { self, link ->
-      self to link
-    }
-  }
-  
   override fun observeSelfLesson(): Observable<List<ILessonService.Lesson>> {
-    return StuLessonRepository.observeSelfLesson()
-      .map { it.toLesson() }
+    return observeSelfLessonInternal().map { it.toLesson() }
   }
-  
+
+  override fun observeLinkLesson(): Observable<List<ILessonService.Lesson>> {
+    return observeLinkLessonInternal().map { it.toLesson() }
+  }
+
   override fun init(context: Context) {
+  }
+
+  companion object {
+    fun observeSelfLessonInternal(
+      isToast: Boolean = false,
+    ): Observable<List<StuLessonEntity>> {
+      return StuLessonRepository.observeSelfLesson(isToast = isToast)
+    }
+
+    fun observeLinkLessonInternal(): Observable<List<StuLessonEntity>> {
+      return LinkRepository.observeLinkStudent()
+        .switchMap { entity ->
+          // 没得关联人和不显示关联课程时发送空数据
+          if (entity.isNull() || !entity.isShowLink) Observable.just(emptyList()) else {
+            flow {
+              if (!ILessonService.isUseLocalSaveLesson) {
+                // 如果不允许使用本地数据就挂起直到网络连接成功
+                NetworkUtil.suspendUntilAvailable()
+              }
+              emit(Unit)
+            }.asObservable()
+              .flatMap {
+                // 在没有连接网络时 StuLessonRepository.getLesson() 方法会抛出异常
+                StuLessonRepository.getLesson(entity.linkNum).toObservable()
+              }.onErrorReturn {
+                emptyList()
+              }
+          }
+        }
+    }
   }
 }
 

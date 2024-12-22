@@ -60,14 +60,6 @@ interface ILessonService : IProvider {
   fun getLinkLesson(): Single<List<Lesson>>
   
   /**
-   * 直接得到当前登录人和关联人的课
-   * - 上游已主动切换成 io 线程
-   * - 在得不到当前登录人课表数据时会抛出异常
-   * - 在不存在关联人和得不到这个人课表数据时会返回 emptyList()
-   */
-  fun getSelfLinkLesson(): Single<Pair<List<Lesson>, List<Lesson>>>
-  
-  /**
    * 观察当前登录人的课
    * - 在登录人改变时回调
    * - 已使用 distinctUntilChanged() 进行了去重处理
@@ -77,6 +69,17 @@ interface ILessonService : IProvider {
    * - 不会抛出异常给下游
    */
   fun observeSelfLesson(): Observable<List<Lesson>>
+
+  /**
+   * 观察当前关联人的课
+   * - 在登录人改变时回调
+   * - 已使用 distinctUntilChanged() 进行了去重处理
+   * - 上游已主动切换成 io 线程
+   * - 没登录时发送 emptyList()
+   * - 没有连接网络并且不允许使用本地缓存时会一直不发送数据给下游
+   * - 不会抛出异常给下游
+   */
+  fun observeLinkLesson(): Observable<List<Lesson>>
   
   /**
    * 这里提供 Calendar 与 [hashDay] 互换代码
