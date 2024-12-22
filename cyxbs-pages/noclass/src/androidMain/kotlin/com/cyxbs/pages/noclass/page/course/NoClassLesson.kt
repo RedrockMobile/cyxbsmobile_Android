@@ -4,9 +4,9 @@ import android.content.Context
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.cyxbs.pages.affair.api.DateJson
-import com.mredrock.cyxbs.api.course.utils.getBeginLesson
-import com.mredrock.cyxbs.lib.course.item.lesson.BaseLessonLayoutParams
-import com.mredrock.cyxbs.lib.course.item.lesson.ILessonItem
+import com.cyxbs.pages.course.api.utils.getBeginLesson
+import com.cyxbs.pages.course.widget.item.lesson.BaseLessonLayoutParams
+import com.cyxbs.pages.course.widget.item.lesson.ILessonItem
 import com.mredrock.cyxbs.lib.utils.extensions.color
 import com.mredrock.cyxbs.lib.utils.extensions.dp2px
 import com.cyxbs.pages.noclass.R
@@ -76,8 +76,8 @@ class NoClassLesson(
             val begin = mLastingTime.first
             val end = mLastingTime.second - 1
 
-            val beginTime = com.mredrock.cyxbs.api.course.utils.getShowStartTimeStr(begin)
-            val endTime = com.mredrock.cyxbs.api.course.utils.getShowEndTimeStr(end)
+            val beginTime = com.cyxbs.pages.course.api.utils.getShowStartTimeStr(begin)
+            val endTime = com.cyxbs.pages.course.api.utils.getShowEndTimeStr(end)
 
             val beginLesson =  if(mLastingTime.first >= 10) mLastingTime.first - 1 else if (mLastingTime.first<=3) mLastingTime.first + 1 else mLastingTime.first
 

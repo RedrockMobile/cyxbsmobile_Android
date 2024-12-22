@@ -13,13 +13,9 @@ import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.core.content.edit
 import com.google.gson.Gson
-import com.mredrock.cyxbs.api.course.ICourseService
 import com.mredrock.cyxbs.lib.utils.extensions.CyxbsToast
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
-import com.mredrock.cyxbs.lib.utils.service.impl
 import com.cyxbs.pages.widget.R
 import com.cyxbs.pages.widget.repo.bean.LessonEntity
-import com.cyxbs.pages.widget.repo.bean.LessonEntity.Companion.convertToApi
 import com.cyxbs.pages.widget.repo.database.LessonDatabase
 import com.cyxbs.pages.widget.repo.database.LessonDatabase.Companion.MY_STU_NUM
 import com.cyxbs.pages.widget.util.*

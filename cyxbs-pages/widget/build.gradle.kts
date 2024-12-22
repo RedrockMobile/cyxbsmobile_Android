@@ -13,7 +13,7 @@ kotlin {
       implementation(projects.libConfig)
       implementation(projects.libUtils)
       implementation(projects.libAccount.apiAccount)
-      implementation(projects.moduleCourse.apiCourse)
+      implementation(projects.cyxbsPages.course.api)
       implementation(projects.cyxbsPages.affair.api)
     }
     androidMain.dependencies {

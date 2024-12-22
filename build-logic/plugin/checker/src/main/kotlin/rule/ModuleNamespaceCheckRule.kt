@@ -75,9 +75,9 @@ object ModuleNamespaceCheckRule : AndroidProjectChecker.ICheckRule {
         
         模块包名命名规范：
         1、一级模块
-          一级模块以 com.mredrock.cyxbs.xxx 包名命名。如：module_course 为 com.mredrock.cyxbs.course
+          一级模块以 com.mredrock.cyxbs.xxx 包名命名。如：module_course 为 com.cyxbs.pages.course
         2、二级模块
-          一级模块以 com.mredrock.cyxbs.[module|lib|api].xxx 包名命名。如：api_course 为 com.mredrock.cyxbs.api.course
+          一级模块以 com.mredrock.cyxbs.[module|lib|api].xxx 包名命名。如：api_course 为 com.cyxbs.pages.course.api
           
         你当前 ${project.name} 模块的包名应该改为：$namespace
         ${project.projectDir}

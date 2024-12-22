@@ -1,7 +1,7 @@
 package com.cyxbs.pages.noclass.bean
 
-import com.mredrock.cyxbs.api.course.ICourseService
-import com.mredrock.cyxbs.api.course.ILessonService
+import com.cyxbs.pages.course.api.ICourseService
+import com.cyxbs.pages.course.api.ILessonService
 import java.io.Serializable
 
 /**

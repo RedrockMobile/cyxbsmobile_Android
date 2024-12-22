@@ -2,7 +2,7 @@ package com.cyxbs.pages.noclass.page.viewmodel.other
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mredrock.cyxbs.api.course.ILessonService
+import com.cyxbs.pages.course.api.ILessonService
 import com.cyxbs.pages.store.api.IStoreService
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
 import com.mredrock.cyxbs.lib.utils.service.ServiceManager

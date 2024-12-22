@@ -10,7 +10,7 @@
         android:id="@+id/main_view_course_bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/course_layer_list_course_bg"
+        android:background="@drawable/course_widget_layer_list_course_bg"
         app:behavior_peekHeight="130dp"
         app:behavior_hideable="false"
         app:behavior_draggable="false"

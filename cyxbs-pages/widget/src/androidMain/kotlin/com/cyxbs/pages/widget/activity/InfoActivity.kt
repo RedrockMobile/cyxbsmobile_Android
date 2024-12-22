@@ -2,9 +2,8 @@ package com.cyxbs.pages.widget.activity
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.mredrock.cyxbs.api.course.ICourseService
+import com.cyxbs.pages.course.api.ICourseService
 import com.mredrock.cyxbs.lib.utils.service.impl
 import com.cyxbs.pages.widget.repo.bean.AffairEntity
 import com.cyxbs.pages.widget.repo.bean.AffairEntity.Companion.convertToApi

@@ -59,7 +59,14 @@ android {
     abortOnError = false // 编译遇到错误不退出，可以一次检查多个错误，并且已执行的 task 下次执行会直接走缓存
   }
   // 命名规范设置，因为多模块相同资源名在打包时会合并，所以必须强制开启
-  resourcePrefix = project.name.substringAfter("_")
+  if (project.parent == null) {
+    resourcePrefix = project.name.substringAfter("_")
+  } else if (project.parent!!.name.contains("cyxbs-")) {
+    resourcePrefix = project.name.substringAfter("_")
+  } else {
+    val names = project.path.split(":")
+    resourcePrefix = names[names.size - 2] + "_" + names.last()
+  }
   packaging {
     jniLibs.excludes += Config.jniExclude
     resources.excludes += Config.resourcesExclude

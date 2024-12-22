@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.FrameLayout
-import com.mredrock.cyxbs.api.course.ICourseService
+import com.cyxbs.pages.course.api.ICourseService
 import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
 import com.mredrock.cyxbs.lib.utils.extensions.dp2px
 

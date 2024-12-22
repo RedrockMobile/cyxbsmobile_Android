@@ -6,8 +6,8 @@ import android.graphics.Color
 import androidx.core.content.edit
 import com.cyxbs.pages.affair.api.IAffairService
 import com.google.auto.service.AutoService
-import com.mredrock.cyxbs.api.course.ILessonService
-import com.mredrock.cyxbs.api.course.utils.getStartRow
+import com.cyxbs.pages.course.api.ILessonService
+import com.cyxbs.pages.course.api.utils.getStartRow
 import com.mredrock.cyxbs.config.config.SchoolCalendar
 import com.mredrock.cyxbs.init.InitialManager
 import com.mredrock.cyxbs.init.InitialService

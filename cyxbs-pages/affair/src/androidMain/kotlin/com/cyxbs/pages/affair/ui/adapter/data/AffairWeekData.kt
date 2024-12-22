@@ -1,9 +1,9 @@
 package com.cyxbs.pages.affair.ui.adapter.data
 
 import com.cyxbs.pages.affair.room.AffairEntity
-import com.mredrock.cyxbs.api.course.ICourseService
-import com.mredrock.cyxbs.api.course.utils.getEndRow
-import com.mredrock.cyxbs.api.course.utils.getStartRow
+import com.cyxbs.pages.course.api.ICourseService
+import com.cyxbs.pages.course.api.utils.getEndRow
+import com.cyxbs.pages.course.api.utils.getStartRow
 import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.extensions.lazyUnlock
 
@@ -37,7 +37,7 @@ data class AffairWeekData(
      */
     val WEEK_ARRAY: Array<String> by lazyUnlock {
       appContext.resources.getStringArray(
-        com.mredrock.cyxbs.api.course.R.array.course_course_weeks_strings)
+        com.cyxbs.pages.course.api.R.array.course_api_course_weeks_strings)
     }
   }
 }
@@ -85,13 +85,13 @@ data class AffairTimeData(
     val DAY_ARRAY by lazyUnlock {
       val resources = appContext.resources
       arrayOf(
-        resources.getString(com.mredrock.cyxbs.api.course.R.string.course_week_mon),
-        resources.getString(com.mredrock.cyxbs.api.course.R.string.course_week_tue),
-        resources.getString(com.mredrock.cyxbs.api.course.R.string.course_week_wed),
-        resources.getString(com.mredrock.cyxbs.api.course.R.string.course_week_thu),
-        resources.getString(com.mredrock.cyxbs.api.course.R.string.course_week_fri),
-        resources.getString(com.mredrock.cyxbs.api.course.R.string.course_week_sat),
-        resources.getString(com.mredrock.cyxbs.api.course.R.string.course_week_sun),
+        resources.getString(com.cyxbs.pages.course.api.R.string.course_api_week_mon),
+        resources.getString(com.cyxbs.pages.course.api.R.string.course_api_week_tue),
+        resources.getString(com.cyxbs.pages.course.api.R.string.course_api_week_wed),
+        resources.getString(com.cyxbs.pages.course.api.R.string.course_api_week_thu),
+        resources.getString(com.cyxbs.pages.course.api.R.string.course_api_week_fri),
+        resources.getString(com.cyxbs.pages.course.api.R.string.course_api_week_sat),
+        resources.getString(com.cyxbs.pages.course.api.R.string.course_api_week_sun),
       )
     }
   }

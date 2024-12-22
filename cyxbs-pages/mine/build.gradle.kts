@@ -18,7 +18,7 @@ kotlin {
       implementation(projects.libProtocol.apiProtocol)
       implementation(projects.cyxbsPages.login.api)
       implementation(projects.cyxbsPages.store.api)
-      implementation(projects.moduleCourse.apiCourse)
+      implementation(projects.cyxbsPages.course.api)
     }
     androidMain.dependencies {
       implementation(libs.bundles.projectBase)

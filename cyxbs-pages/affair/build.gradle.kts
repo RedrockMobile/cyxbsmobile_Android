@@ -15,7 +15,7 @@ kotlin {
       implementation(projects.libConfig)
       implementation(projects.libAccount.apiAccount)
       implementation(projects.cyxbsPages.login.api)
-      implementation(projects.moduleCourse.apiCourse)
+      implementation(projects.cyxbsPages.course.api)
     }
     androidMain.dependencies {
       implementation(libs.bundles.projectBase)

@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import androidx.appcompat.app.AppCompatActivity
 import com.cyxbs.pages.affair.api.DateJson
-import com.mredrock.cyxbs.api.course.utils.getBeginLesson
-import com.mredrock.cyxbs.lib.course.helper.affair.view.TouchAffairView
-import com.mredrock.cyxbs.lib.course.internal.item.IItem
-import com.mredrock.cyxbs.lib.course.internal.view.course.ICourseViewGroup
-import com.mredrock.cyxbs.lib.course.item.helper.expand.ISingleSideExpandable
+import com.cyxbs.pages.course.api.utils.getBeginLesson
+import com.cyxbs.pages.course.widget.helper.affair.view.TouchAffairView
+import com.cyxbs.pages.course.widget.internal.item.IItem
+import com.cyxbs.pages.course.widget.internal.view.course.ICourseViewGroup
+import com.cyxbs.pages.course.widget.item.helper.expand.ISingleSideExpandable
 import com.cyxbs.pages.noclass.page.ui.dialog.NoClassGatherDialog
 
 
@@ -60,8 +60,8 @@ class NoClassTouchAffairItem(
         val begin = lp.startRow   //得到开始的节数
         val end = begin + duration - 1
 
-        val beginTime = com.mredrock.cyxbs.api.course.utils.getShowStartTimeStr(begin)
-        val endTime = com.mredrock.cyxbs.api.course.utils.getShowEndTimeStr(end)
+        val beginTime = com.cyxbs.pages.course.api.utils.getShowStartTimeStr(begin)
+        val endTime = com.cyxbs.pages.course.api.utils.getShowEndTimeStr(end)
 
         val beginLesson = if (begin >= 10) begin - 1 else if (begin <= 3) begin + 1 else begin
 

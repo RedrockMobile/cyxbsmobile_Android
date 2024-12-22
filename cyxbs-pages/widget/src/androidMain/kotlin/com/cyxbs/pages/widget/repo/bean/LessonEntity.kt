@@ -2,7 +2,7 @@ package com.cyxbs.pages.widget.repo.bean
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.mredrock.cyxbs.api.course.ILessonService
+import com.cyxbs.pages.course.api.ILessonService
 import java.io.Serializable
 
 /**

@@ -13,8 +13,8 @@ kotlin {
       implementation(projects.libAccount.apiAccount)
       implementation(projects.cyxbsPages.store.api)
       implementation(projects.cyxbsPages.affair.api)
-      implementation(projects.moduleCourse.apiCourse)
-      implementation(projects.moduleCourse.libCourse)
+      implementation(projects.cyxbsPages.course.api)
+      implementation(projects.cyxbsPages.course.widget)
     }
     androidMain.dependencies {
       implementation(libs.bundles.projectBase)

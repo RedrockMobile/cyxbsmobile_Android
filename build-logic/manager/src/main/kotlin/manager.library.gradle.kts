@@ -24,7 +24,14 @@ android {
     targetSdk = libsEx.versions.`android-targetSdk`.toInt()
   }
   // 命名规范设置，因为多模块相同资源名在打包时会合并，所以必须强制开启
-  resourcePrefix = project.name.substringAfter("_")
+  if (project.parent == null) {
+    resourcePrefix = project.name.substringAfter("_")
+  } else if (project.parent!!.name.contains("cyxbs-")) {
+    resourcePrefix = project.name.substringAfter("_")
+  } else {
+    val names = project.path.split(":")
+    resourcePrefix = names[names.size - 2] + "_" + names.last()
+  }
   buildFeatures {
     buildConfig = true
   }

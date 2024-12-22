@@ -33,7 +33,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.commit
 import com.cyxbs.pages.home.R
 import com.cyxbs.pages.home.ui.course.utils.CourseHeaderHelper
-import com.mredrock.cyxbs.api.course.ICourseService
+import com.cyxbs.pages.course.api.ICourseService
 import com.mredrock.cyxbs.api.crash.ICrashService
 import com.mredrock.cyxbs.config.route.COURSE_POS_TO_MAP
 import com.mredrock.cyxbs.config.route.DISCOVER_MAP
@@ -112,7 +112,7 @@ fun HomeCourseContainerCompose(
         activity.supportFragmentManager.commit {
           replace(id, courseService.createHomeCourseFragment())
         }
-        background = com.mredrock.cyxbs.lib.course.R.drawable.course_layer_list_course_bg.drawable
+        background = com.cyxbs.pages.course.widget.R.drawable.course_widget_layer_list_course_bg.drawable
         isNestedScrollingEnabled = true
       }
     },
@@ -273,61 +273,3 @@ private fun CourseShowHeaderCompose(
     }
   }
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//private fun PreviewCourseHintHeaderCompose() {
-//  Box(modifier = Modifier.fillMaxSize()) {
-//    Image(
-//      modifier = Modifier.fillMaxSize(),
-//      painter = painterResource(com.mredrock.cyxbs.lib.course.R.drawable.course_layer_list_course_bg),
-//      contentDescription = null,
-//    )
-//    CourseHintHeaderCompose(
-//      modifier = Modifier.height(70.dp),
-//      header = CourseHeaderHelper.HintHeader(
-//        hint = "今天和明天都没课咯～",
-//        throwable = null
-//      )
-//    )
-//  }
-//}
-
-
-//@Preview(showBackground = true)
-//@Composable
-//private fun PreviewCourseShowHeaderCompose() {
-//  Box(modifier = Modifier.fillMaxSize()) {
-//    Image(
-//      modifier = Modifier.fillMaxSize(),
-//      painter = painterResource(com.mredrock.cyxbs.lib.course.R.drawable.course_layer_list_course_bg),
-//      contentDescription = null,
-//    )
-//    CourseShowHeaderCompose(
-//      modifier = Modifier.padding(top = 20.dp),
-//      header = CourseHeaderHelper.ShowHeader(
-//        state = "下节课",
-//        title = "数据结构",
-//        time = "8:00-9:40",
-//        content = "综合实验楼",
-//        item = CourseHeaderHelper.LessonItem(
-//          lesson = ILessonService.Lesson(
-//            stuNum = "stuNum",
-//            week = 1,
-//            beginLesson = 0,
-//            classroom = "综合实验楼",
-//            course = "course",
-//            courseNum = "courseNum",
-//            day = "星期一",
-//            hashDay = 0,
-//            period = 2,
-//            rawWeek = "rawWeek",
-//            teacher = "teacher",
-//            type = "必修",
-//          ),
-//          isSelf = true,
-//        )
-//      )
-//    )
-//  }
-//}

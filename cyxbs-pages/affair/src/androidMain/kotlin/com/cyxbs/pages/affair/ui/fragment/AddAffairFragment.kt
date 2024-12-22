@@ -25,8 +25,8 @@ import com.cyxbs.pages.affair.ui.fragment.utils.AffairPageManager
 import com.cyxbs.pages.affair.ui.viewmodel.activity.AffairViewModel
 import com.cyxbs.pages.affair.ui.viewmodel.fragment.AddAffairViewModel
 import com.cyxbs.pages.affair.ui.dialog.RemindSelectDialog
-import com.mredrock.cyxbs.api.course.utils.getStartRow
-import com.mredrock.cyxbs.api.course.utils.getStartTimeMinute
+import com.cyxbs.pages.course.api.utils.getStartRow
+import com.cyxbs.pages.course.api.utils.getStartTimeMinute
 import com.mredrock.cyxbs.config.config.SchoolCalendar
 import com.mredrock.cyxbs.lib.base.ui.BaseFragment
 import com.mredrock.cyxbs.lib.utils.extensions.*

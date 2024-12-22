@@ -1,6 +1,6 @@
 package com.cyxbs.pages.noclass.page.course
 
-import com.mredrock.cyxbs.lib.course.item.lesson.BaseLessonLayoutParams
+import com.cyxbs.pages.course.widget.item.lesson.BaseLessonLayoutParams
 
 /**
  *

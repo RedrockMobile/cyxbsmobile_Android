@@ -3,8 +3,8 @@ package com.cyxbs.pages.noclass.page.ui.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
-import com.mredrock.cyxbs.lib.course.fragment.page.CoursePageFragment
-import com.mredrock.cyxbs.lib.course.fragment.vp.AbstractHeaderCourseVpFragment
+import com.cyxbs.pages.course.widget.fragment.page.CoursePageFragment
+import com.cyxbs.pages.course.widget.fragment.vp.AbstractHeaderCourseVpFragment
 import com.cyxbs.pages.noclass.bean.NoClassSpareTime
 import kotlin.math.max
 

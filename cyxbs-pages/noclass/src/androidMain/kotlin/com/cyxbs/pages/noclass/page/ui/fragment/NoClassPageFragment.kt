@@ -1,11 +1,11 @@
 package com.cyxbs.pages.noclass.page.ui.fragment
 
 
-import com.mredrock.cyxbs.lib.course.fragment.page.CoursePageFragment
-import com.mredrock.cyxbs.lib.course.helper.affair.CreateAffairDispatcher
-import com.mredrock.cyxbs.lib.course.helper.affair.expose.ICreateAffairConfig
-import com.mredrock.cyxbs.lib.course.helper.affair.expose.ITouchAffairItem
-import com.mredrock.cyxbs.lib.course.internal.view.course.ICourseViewGroup
+import com.cyxbs.pages.course.widget.fragment.page.CoursePageFragment
+import com.cyxbs.pages.course.widget.helper.affair.CreateAffairDispatcher
+import com.cyxbs.pages.course.widget.helper.affair.expose.ICreateAffairConfig
+import com.cyxbs.pages.course.widget.helper.affair.expose.ITouchAffairItem
+import com.cyxbs.pages.course.widget.internal.view.course.ICourseViewGroup
 import com.cyxbs.pages.noclass.bean.NoClassSpareTime
 import com.cyxbs.pages.noclass.page.course.NoClassLesson
 import com.cyxbs.pages.noclass.page.course.NoClassLessonData

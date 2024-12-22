@@ -2,15 +2,13 @@ package com.cyxbs.pages.widget.service
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
-import com.mredrock.cyxbs.api.course.utils.parseClassRoom
+import com.cyxbs.pages.course.api.utils.parseClassRoom
 import com.cyxbs.pages.widget.R
 import com.cyxbs.pages.widget.repo.bean.AffairEntity
 import com.cyxbs.pages.widget.repo.bean.LessonEntity
-import com.cyxbs.pages.widget.repo.database.AffairDatabase
 import com.cyxbs.pages.widget.util.*
 import kotlin.concurrent.thread
 

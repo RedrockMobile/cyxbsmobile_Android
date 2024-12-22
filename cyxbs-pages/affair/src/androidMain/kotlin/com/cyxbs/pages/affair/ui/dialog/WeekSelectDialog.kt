@@ -12,7 +12,7 @@ import com.cyxbs.pages.affair.R
 import com.cyxbs.pages.affair.ui.adapter.AffairWeekAdapter
 import com.cyxbs.pages.affair.ui.adapter.data.AffairWeekData
 import com.cyxbs.pages.affair.ui.dialog.base.RedRockBottomSheetDialog
-import com.mredrock.cyxbs.api.course.ICourseService
+import com.cyxbs.pages.course.api.ICourseService
 import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.lib.utils.extensions.toast
 

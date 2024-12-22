@@ -10,11 +10,11 @@ import com.cyxbs.pages.affair.room.AffairDataBase
 import com.cyxbs.pages.affair.room.AffairEntity
 import com.cyxbs.pages.affair.room.AffairEntity.Companion.LocalRemoteId
 import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.api.course.ICourseService
-import com.mredrock.cyxbs.api.course.utils.getEndRow
-import com.mredrock.cyxbs.api.course.utils.getEndTimeMinute
-import com.mredrock.cyxbs.api.course.utils.getStartRow
-import com.mredrock.cyxbs.api.course.utils.getStartTimeMinute
+import com.cyxbs.pages.course.api.ICourseService
+import com.cyxbs.pages.course.api.utils.getEndRow
+import com.cyxbs.pages.course.api.utils.getEndTimeMinute
+import com.cyxbs.pages.course.api.utils.getStartRow
+import com.cyxbs.pages.course.api.utils.getStartTimeMinute
 import com.mredrock.cyxbs.lib.utils.utils.config.PhoneCalendar
 import com.mredrock.cyxbs.config.config.SchoolCalendar
 import com.mredrock.cyxbs.lib.utils.extensions.unsafeSubscribeBy
