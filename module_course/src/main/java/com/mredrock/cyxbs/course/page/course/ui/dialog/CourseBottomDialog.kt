@@ -26,7 +26,7 @@ class CourseBottomDialog(
   context: Context,
   val data: List<ICourseItemData>,
   val isShowLink: Boolean
-) : BottomSheetDialog(context, R.style.BottomSheetDialogTheme) {
+) : BottomSheetDialog(context, com.mredrock.cyxbs.config.R.style.ConfigBottomSheetDialogTheme) {
   
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

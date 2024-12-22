@@ -3,26 +3,27 @@ plugins {
 }
 
 useARouter()
+useAutoService()
 
 kotlin {
   sourceSets {
     commonMain.dependencies {
+      subprojects.forEach { implementation(it) }
+      implementation(projects.apiInit)
+      implementation(projects.libCommon) // TODO common 模块不再使用，新模块请依赖 base 和 utils 模块
       implementation(projects.libBase)
       implementation(projects.libConfig)
       implementation(projects.libUtils)
       implementation(projects.libAccount.apiAccount)
-      implementation(projects.cyxbsPages.todo.api)
-      implementation(projects.cyxbsPages.sport.api)
-      implementation(projects.cyxbsPages.volunteer.api)
-      implementation(projects.cyxbsPages.electricity.api)
+      implementation(projects.cyxbsPages.store.api)
+      implementation(projects.cyxbsPages.store.api)
     }
     androidMain.dependencies {
       implementation(libs.bundles.projectBase)
       implementation(libs.bundles.views)
       implementation(libs.bundles.network)
-      implementation(libs.glide)
+      implementation(libs.lottie)
       implementation(libs.eventBus)
-      implementation(libs.slideShow)
     }
   }
 }

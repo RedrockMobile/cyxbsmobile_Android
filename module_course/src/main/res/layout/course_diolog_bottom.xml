@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="280dp"
-    android:background="@drawable/course_layer_list_dialog_bg"
+    android:background="@drawable/config_layer_list_dialog_bg"
     android:paddingTop="36dp">
 
     <!--解决 Vp 与 BottomSheet 的嵌套滑动问题-->
