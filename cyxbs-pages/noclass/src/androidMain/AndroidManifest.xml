@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+
+        <activity android:name="com.cyxbs.pages.noclass.page.ui.activity.NoClassActivity"/>
+        <activity
+            android:name=".page.ui.activity.BatchAdditionActivity"
+            android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".page.ui.activity.GroupDetailActivity"/>
+
+    </application>
+
+</manifest>
