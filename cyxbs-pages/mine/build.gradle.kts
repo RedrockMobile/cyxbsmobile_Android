@@ -15,7 +15,6 @@ kotlin {
       implementation(projects.libUtils)
       implementation(projects.libUpdate.apiUpdate)
       implementation(projects.libAccount.apiAccount)
-      implementation(projects.libProtocol.apiProtocol)
       implementation(projects.cyxbsPages.login.api)
       implementation(projects.cyxbsPages.store.api)
       implementation(projects.cyxbsPages.course.api)

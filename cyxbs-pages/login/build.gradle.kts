@@ -13,7 +13,6 @@ kotlin {
       implementation(projects.libUtils)
       implementation(projects.libUpdate.apiUpdate)
       implementation(projects.libAccount.apiAccount)
-      implementation(projects.libProtocol.apiProtocol)
     }
     androidMain.dependencies {
       implementation(libs.bundles.projectBase)

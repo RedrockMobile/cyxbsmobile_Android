@@ -19,7 +19,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.api.protocol.api.IProtocolService
+import com.cyxbs.pages.login.api.ILegalNoticeService
 import com.mredrock.cyxbs.api.update.AppUpdateStatus
 import com.mredrock.cyxbs.api.update.BuildConfig
 import com.mredrock.cyxbs.api.update.IAppUpdateService
@@ -181,15 +181,11 @@ class AboutActivity : BaseViewModelActivity<AboutViewModel>() {
 
     //跳转到用户协议的activity
     private fun clickProtocol() {
-        ServiceManager(IProtocolService::class).startLegalNoticeActivity(
-            this,
-            IProtocolService.USER_PROTOCOL_URL,"用户协议")
+        ServiceManager(ILegalNoticeService::class).startUserAgreementActivity(this)
     }
 
     private fun clickPrivacy() {
-        ServiceManager(IProtocolService::class).startLegalNoticeActivity(
-            this,
-            IProtocolService.PRIVACY_POLICY_URL,"隐私权声明")
+        ServiceManager(ILegalNoticeService::class).startPrivacyPolicyActivity(this)
     }
 
 

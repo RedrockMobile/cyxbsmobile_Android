@@ -9,7 +9,6 @@ dependencies {
   implementation(projects.libConfig)
   implementation(projects.libUtils)
   implementation(projects.libAccount.apiAccount)
-  implementation(projects.libProtocol.apiProtocol)
   implementation(projects.cyxbsPages.login.api)
 
   implementation(libs.bundles.projectBase)

@@ -3,8 +3,11 @@
 
     <application>
         <activity
-            android:name="com.cyxbs.pages.login.login.ui.LoginActivity"
+            android:name=".login.ui.LoginActivity"
             android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.LegalNoticeActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

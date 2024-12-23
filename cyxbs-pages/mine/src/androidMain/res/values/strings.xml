@@ -198,7 +198,7 @@
     <string name="mine_feedback_none_history_text">你还没有提交过反馈意见哦~</string>
     <string name="mine_about_user_protocol">《用户协议》</string>
     <string name="mine_about_and"><![CDATA[&]]></string>
-    <string name="mine_about_privacy_statement">《隐私权声明》</string>
+    <string name="mine_about_privacy_statement">《隐私政策》</string>
 
 
 </resources>

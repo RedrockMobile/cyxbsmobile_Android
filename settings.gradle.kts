@@ -39,11 +39,12 @@ dependencyResolutionManagement {
 val excludeList = setOf<String>(
   "api_init",
   "lib_debug",
+  "protocol",
 )
 
 fun includeModule(topName: String, file: File) {
-  if (!file.resolve("settings.gradle.kts").exists()) {
-    if (file.resolve("build.gradle.kts").exists() && !excludeList.contains(file.name)) {
+  if (!file.resolve("settings.gradle.kts").exists() && !excludeList.contains(file.name)) {
+    if (file.resolve("build.gradle.kts").exists()) {
       var path = ""
       var nowFile = file
       while (nowFile.name != topName) {

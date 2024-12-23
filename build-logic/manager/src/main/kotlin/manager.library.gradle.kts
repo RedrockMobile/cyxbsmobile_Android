@@ -24,13 +24,13 @@ android {
     targetSdk = libsEx.versions.`android-targetSdk`.toInt()
   }
   // 命名规范设置，因为多模块相同资源名在打包时会合并，所以必须强制开启
-  if (project.parent == null) {
+  val paths = project.path.split(":").drop(1)
+  if (paths.size == 1) {
     resourcePrefix = project.name.substringAfter("_")
-  } else if (project.parent!!.name.contains("cyxbs-")) {
-    resourcePrefix = project.name.substringAfter("_")
+  } else if (paths.first().contains("cyxbs-")) {
+    resourcePrefix = project.name
   } else {
-    val names = project.path.split(":")
-    resourcePrefix = names[names.size - 2] + "_" + names.last()
+    resourcePrefix = paths[paths.size - 2] + "_" + paths.last()
   }
   buildFeatures {
     buildConfig = true

@@ -27,7 +27,6 @@ import androidx.core.view.get
 import com.airbnb.lottie.LottieAnimationView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.api.protocol.api.IProtocolService
 import com.mredrock.cyxbs.api.update.IAppUpdateService
 import com.mredrock.cyxbs.config.route.MAIN_MAIN
 import com.mredrock.cyxbs.config.route.MINE_FORGET_PASSWORD
@@ -43,6 +42,7 @@ import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import com.mredrock.cyxbs.lib.utils.service.impl
 import com.mredrock.cyxbs.lib.utils.utils.judge.NetworkUtil
 import com.cyxbs.pages.login.R
+import com.cyxbs.pages.login.api.ILegalNoticeService
 import com.cyxbs.pages.login.login.viewmodel.LoginViewModel
 import com.cyxbs.pages.login.ui.UserAgreementDialog
 
@@ -167,16 +167,14 @@ class LoginActivity : BaseActivity() {
 
     //设置用户协议和隐私政策的文字
     val spannableString = SpannableStringBuilder()
-    spannableString.append("同意《用户协议》和《隐私权政策》")
+    spannableString.append("同意《用户协议》和《隐私政策》")
     //解决文字点击后变色
     mTvUserAgreement.highlightColor =
       ContextCompat.getColor(this, android.R.color.transparent)
-    //设置用户协议和隐私权政策点击事件
+    //设置用户协议和隐私政策点击事件
     val userAgreementClickSpan = object : ClickableSpan() {
       override fun onClick(widget: View) {
-          ServiceManager(IProtocolService::class).startLegalNoticeActivity(
-              this@LoginActivity,
-              IProtocolService.USER_PROTOCOL_URL,"用户协议")
+          ServiceManager(ILegalNoticeService::class).startUserAgreementActivity(this@LoginActivity)
       }
 
       override fun updateDrawState(ds: TextPaint) {
@@ -188,9 +186,7 @@ class LoginActivity : BaseActivity() {
     }.wrapByNoLeak(mTvUserAgreement) // 防止内存泄漏
     val privacyClickSpan = object : ClickableSpan() {
       override fun onClick(widget: View) {
-        ServiceManager(IProtocolService::class).startLegalNoticeActivity(
-            this@LoginActivity,
-            IProtocolService.PRIVACY_POLICY_URL,"隐私权政策")
+        ServiceManager(ILegalNoticeService::class).startPrivacyPolicyActivity(this@LoginActivity)
       }
 
       override fun updateDrawState(ds: TextPaint) {
@@ -201,13 +197,13 @@ class LoginActivity : BaseActivity() {
       }
     }.wrapByNoLeak(mTvUserAgreement) // 防止内存泄漏
     spannableString.setSpan(userAgreementClickSpan, 2, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
-    spannableString.setSpan(privacyClickSpan, 9, 16, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+    spannableString.setSpan(privacyClickSpan, 9, 15, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
 
     //设置用户协议和隐私权政策字体颜色
     val userAgreementSpan = ForegroundColorSpan(Color.parseColor("#2CDEFF"))
     val privacySpan = ForegroundColorSpan(Color.parseColor("#2CDEFF"))
     spannableString.setSpan(userAgreementSpan, 2, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
-    spannableString.setSpan(privacySpan, 9, 16, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+    spannableString.setSpan(privacySpan, 9, 15, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
 
     mTvUserAgreement.text = spannableString
     mTvUserAgreement.movementMethod = LinkMovementMethod.getInstance()

@@ -8,3 +8,4 @@ package com.cyxbs.pages.login.api
  */
 
 const val LOGIN_SERVICE = "/login/service"
+const val PROTOCOL_SERVICE = "/protocol/service"
