@@ -27,7 +27,7 @@ import androidx.core.view.get
 import com.airbnb.lottie.LottieAnimationView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.api.update.IAppUpdateService
+import com.cyxbs.functions.update.api.IAppUpdateService
 import com.mredrock.cyxbs.config.route.MAIN_MAIN
 import com.mredrock.cyxbs.config.route.MINE_FORGET_PASSWORD
 import com.mredrock.cyxbs.config.sp.SP_PRIVACY_AGREED

@@ -13,7 +13,7 @@ kotlin {
       implementation(projects.libBase)
       implementation(projects.libConfig)
       implementation(projects.libUtils)
-      implementation(projects.libUpdate.apiUpdate)
+      implementation(projects.cyxbsFunctions.update.api)
       implementation(projects.libAccount.apiAccount)
       implementation(projects.cyxbsPages.login.api)
       implementation(projects.cyxbsPages.store.api)

@@ -40,6 +40,7 @@ val excludeList = setOf<String>(
   "api_init",
   "lib_debug",
   "protocol",
+  "lib_update"
 )
 
 fun includeModule(topName: String, file: File) {

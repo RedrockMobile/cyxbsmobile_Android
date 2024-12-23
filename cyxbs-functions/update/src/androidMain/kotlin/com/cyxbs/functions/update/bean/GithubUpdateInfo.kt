@@ -1,4 +1,4 @@
-package com.mredrock.cyxbs.update.model
+package com.cyxbs.functions.update.bean
 
 import com.google.gson.annotations.SerializedName
 

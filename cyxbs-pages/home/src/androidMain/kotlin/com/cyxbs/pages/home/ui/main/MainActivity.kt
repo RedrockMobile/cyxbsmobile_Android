@@ -8,7 +8,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.mredrock.cyxbs.api.account.IAccountService
 import com.cyxbs.pages.login.api.ILoginService
-import com.mredrock.cyxbs.api.update.IAppUpdateService
+import com.cyxbs.functions.update.api.IAppUpdateService
 import com.mredrock.cyxbs.config.route.DISCOVER_SCHOOL_CAR
 import com.mredrock.cyxbs.config.route.MAIN_MAIN
 import com.mredrock.cyxbs.config.sp.SP_COURSE_SHOW_STATE

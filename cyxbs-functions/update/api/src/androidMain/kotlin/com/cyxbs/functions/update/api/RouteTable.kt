@@ -1,4 +1,4 @@
-package com.mredrock.cyxbs.api.update
+package com.cyxbs.functions.update.api
 
 /**
  * ...

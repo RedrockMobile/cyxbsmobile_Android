@@ -20,9 +20,9 @@ import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cyxbs.pages.login.api.ILegalNoticeService
-import com.mredrock.cyxbs.api.update.AppUpdateStatus
-import com.mredrock.cyxbs.api.update.BuildConfig
-import com.mredrock.cyxbs.api.update.IAppUpdateService
+import com.cyxbs.functions.update.api.AppUpdateStatus
+import com.cyxbs.functions.update.api.BuildConfig
+import com.cyxbs.functions.update.api.IAppUpdateService
 import com.mredrock.cyxbs.common.config.APP_WEBSITE
 import com.mredrock.cyxbs.common.config.DIR_LOG
 import com.mredrock.cyxbs.common.config.ICP_WEBSITE
