@@ -13,6 +13,7 @@ class UserInfoEncryption {
     try {
       SerialAESEncryptor.encrypt("abc".toByteArray(StandardCharsets.UTF_8))
     } catch (e: Exception) {
+      e.printStackTrace()
       isSupportEncrypt = false
     }
   }
@@ -25,6 +26,7 @@ class UserInfoEncryption {
         Base64.DEFAULT
       )
     } catch (e: Exception) {
+      e.printStackTrace()
       json
     }
   }
@@ -42,6 +44,7 @@ class UserInfoEncryption {
         ), StandardCharsets.UTF_8
       )
     } catch (e: Exception) {
+      e.printStackTrace()
       ""
     }
   }

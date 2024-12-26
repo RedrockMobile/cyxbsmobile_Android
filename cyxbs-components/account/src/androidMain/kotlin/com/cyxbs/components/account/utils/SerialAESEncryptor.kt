@@ -23,17 +23,12 @@ object SerialAESEncryptor {
     val keyBytes = key.toByteArray(StandardCharsets.US_ASCII)
     SecretKeySpec(deriveInsecureKey(keyBytes, 16), "AES")
   }
-  private val cipher = Cipher.getInstance("AES")
-  private val encryptCipher = cipher.apply {
-    init(Cipher.ENCRYPT_MODE, keySpec, IvParameterSpec(ByteArray(blockSize)))
-  }
-  private val decryptCipher = cipher.apply {
-    init(Cipher.DECRYPT_MODE, keySpec, IvParameterSpec(ByteArray(blockSize)))
-  }
 
   fun encrypt(orig: ByteArray): ByteArray {
     try {
-      return encryptCipher.doFinal(orig)
+      val cipher = Cipher.getInstance("AES")
+      cipher.init(Cipher.ENCRYPT_MODE, keySpec, IvParameterSpec(ByteArray(cipher.blockSize)))
+      return cipher.doFinal(orig)
     } catch (e: Exception) {
       throw RuntimeException("encrypt failure", e)
     }
@@ -41,7 +36,9 @@ object SerialAESEncryptor {
 
   fun decrypt(encrypted: ByteArray): ByteArray {
     try {
-      return decryptCipher.doFinal(encrypted)
+      val cipher = Cipher.getInstance("AES")
+      cipher.init(Cipher.DECRYPT_MODE, keySpec, IvParameterSpec(ByteArray(cipher.blockSize)))
+      return cipher.doFinal(encrypted)
     } catch (e: Exception) {
       throw RuntimeException("decrypt failure", e)
     }
