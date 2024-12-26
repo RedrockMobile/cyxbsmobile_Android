@@ -3,14 +3,13 @@ package com.cyxbs.pages.course.page.course.bean
 import android.os.Handler
 import android.os.Looper
 import com.google.gson.annotations.SerializedName
-import com.mredrock.cyxbs.api.crash.ICrashService
 import com.cyxbs.pages.course.BuildConfig
 import com.cyxbs.pages.course.page.course.room.ILessonEntity
 import com.cyxbs.pages.course.page.course.room.StuLessonEntity
+import com.mredrock.cyxbs.lib.base.crash.CrashDialog
 import com.mredrock.cyxbs.lib.utils.extensions.toast
 import com.mredrock.cyxbs.lib.utils.extensions.toastLong
 import com.mredrock.cyxbs.lib.utils.network.IApiWrapper
-import com.mredrock.cyxbs.lib.utils.service.impl
 import java.io.Serializable
 
 /**
@@ -103,8 +102,7 @@ data class StuLessonBean(
               if (BuildConfig.DEBUG) {
                 // debug 版查他人课表直接显示异常原因
                 toast("发生课表数据异常！")
-                ICrashService::class.impl
-                  .showCrashDialog(e)
+                CrashDialog.Builder(e).show()
               } else {
                 toastLong("课表数据可能存在异常，请向我们反馈")
               }

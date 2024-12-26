@@ -173,8 +173,7 @@
     <string name="mine_feedback_center_history_icon">历史反馈</string>
     <string name="mine_feedback_center_normal_question">常见问题</string>
     <string name="mine_feedback_center_btn_tv">意见反馈</string>
-    <string name="mine_feedback_center_qq_tv">实时反馈可添加QQ反馈群：</string>
-    <string name="mine_feedback_center_qq_num">57919844</string>
+    <string name="mine_feedback_center_qq_tv">点击跳转QQ反馈群：</string>
     <string name="mine_feedback_edit_title_num">12</string>
     <string name="mine_feedback_edit_description_num">%d/200</string>
     <string name="mine_feedback_edit_pic_num">%d/3</string>

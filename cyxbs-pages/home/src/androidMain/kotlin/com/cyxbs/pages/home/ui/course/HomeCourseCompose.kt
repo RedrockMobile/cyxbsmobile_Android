@@ -34,9 +34,9 @@ import androidx.fragment.app.commit
 import com.cyxbs.pages.home.R
 import com.cyxbs.pages.home.ui.course.utils.CourseHeaderHelper
 import com.cyxbs.pages.course.api.ICourseService
-import com.mredrock.cyxbs.api.crash.ICrashService
 import com.mredrock.cyxbs.config.route.COURSE_POS_TO_MAP
 import com.mredrock.cyxbs.config.route.DISCOVER_MAP
+import com.mredrock.cyxbs.lib.base.crash.CrashDialog
 import com.mredrock.cyxbs.lib.base.utils.Umeng
 import com.mredrock.cyxbs.lib.utils.compose.BottomSheetState
 import com.mredrock.cyxbs.lib.utils.compose.clickableNoIndicator
@@ -175,7 +175,7 @@ private fun CourseHintHeaderCompose(
           indication = null,
           onLongClick = {
             if (header.throwable != null) {
-              ICrashService::class.impl.showCrashDialog(header.throwable)
+              CrashDialog.Builder(header.throwable).show()
             }
           },
           onClick = {}

@@ -17,9 +17,9 @@ import com.cyxbs.pages.home.viewmodel.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mredrock.cyxbs.api.account.IAccountService
 import com.cyxbs.pages.course.api.ICourseService
-import com.mredrock.cyxbs.api.crash.ICrashService
 import com.mredrock.cyxbs.config.route.COURSE_POS_TO_MAP
 import com.mredrock.cyxbs.config.route.DISCOVER_MAP
+import com.mredrock.cyxbs.lib.base.crash.CrashDialog
 import com.mredrock.cyxbs.lib.base.utils.Umeng
 import com.mredrock.cyxbs.lib.base.utils.safeSubscribeBy
 import com.mredrock.cyxbs.lib.utils.extensions.gone
@@ -119,8 +119,7 @@ class HomeCourseLayout(context: Context, attrs: AttributeSet?) : FrameLayout(con
                 mTvHeaderHint.text = "发生异常，长按显示"
               }
               mTvHeaderHint.setOnLongClickListener {
-                ICrashService::class.impl
-                  .showCrashDialog(throwable)
+                CrashDialog.Builder(throwable).show()
                 true
               }
             }

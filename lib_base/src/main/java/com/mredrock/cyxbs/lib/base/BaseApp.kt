@@ -9,8 +9,10 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.annotation.CallSuper
 import com.alibaba.android.arouter.launcher.ARouter
+import com.cyxbs.components.init.appActivities
 import com.cyxbs.components.init.appApplication
 import com.cyxbs.components.init.appTopActivity
+import com.mredrock.cyxbs.lib.base.crash.CrashMonitor
 import com.mredrock.cyxbs.lib.base.utils.InitialManagerImpl
 import com.mredrock.cyxbs.lib.utils.utils.impl.ActivityLifecycleCallbacksImpl
 import java.lang.ref.WeakReference
@@ -52,13 +54,14 @@ open class BaseApp : Application() {
 
   override fun attachBaseContext(base: Context) {
     super.attachBaseContext(base)
+    baseApp = this
     appApplication = this
+    CrashMonitor.install()
   }
   
   @CallSuper
   override fun onCreate() {
     super.onCreate()
-    baseApp = this
     initARouter()
     initInitialService()
     initActivityManger()
@@ -93,14 +96,17 @@ open class BaseApp : Application() {
   private fun initActivityManger() {
     registerActivityLifecycleCallbacks(
       object : ActivityLifecycleCallbacksImpl {
-        override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+        override fun onActivityPreCreated(activity: Activity, savedInstanceState: Bundle?) {
           appTopActivity = WeakReference(activity)
+          appActivities[activity] = Unit
         }
-  
-        override fun onActivityResumed(activity: Activity) {
+        override fun onActivityPreResumed(activity: Activity) {
           if (activity !== appTopActivity.get()) {
             appTopActivity = WeakReference(activity)
           }
+        }
+        override fun onActivityPostDestroyed(activity: Activity) {
+          appActivities[activity] = Unit
         }
       }
     )

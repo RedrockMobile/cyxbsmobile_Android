@@ -121,17 +121,17 @@ open class ScaleScrollTextView(
   )
 
   protected val mTvLineNum = TextView(context).apply {
-    textSize = 12F
+    textSize = 10F
     setTextColor(if (isDaytimeMode()) 0xFF595959.toInt() else 0xFFDFDFDF.toInt())
     setBackgroundColor(if (isDaytimeMode()) 0xFFE6E6E6.toInt() else 0xFF434343.toInt())
-    setPadding(12.dp2px, 4.dp2px, 10.dp2px, 4.dp2px)
+    setPadding(10.dp2px, 4.dp2px, 3.dp2px, 4.dp2px)
     gravity = Gravity.END
     elevation = 1F // 显示在 mTvContent 之上
   }
 
   protected val mTvContent by lazy {
     createContentView(context).apply {
-      textSize = 12F
+      textSize = 10F
       post {
         // 延后处理，因为内部会调用 setText()，如果在初始化时又设置 addTextChangedListener() 会陷入死循环
         setTextIsSelectable(true) // 内容可长按复制
@@ -224,6 +224,12 @@ open class ScaleScrollTextView(
       }
       MotionEvent.ACTION_MOVE -> {
         if (abs(mLastMoveX - x) > mTouchSlop || abs(mLastMoveY - y) > mTouchSlop) {
+          // 这里拦截后后续都会调用 onTouchEvent，但是 onTouchEvent 却丢失了 DOWN 事件，所以补一个数据
+          mInitialX = x
+          mInitialY = y
+          mLastMoveX = x
+          mLastMoveY = y
+          mIsClick = true
           return true
         }
       }

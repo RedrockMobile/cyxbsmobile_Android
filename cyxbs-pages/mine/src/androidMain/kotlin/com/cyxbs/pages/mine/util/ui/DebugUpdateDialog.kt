@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Color
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.FrameLayout
 import com.mredrock.cyxbs.config.R
@@ -56,7 +55,7 @@ class DebugUpdateDialog private constructor(
     textSize = 12F
   }
   
-  override fun createContentView(parent: ViewGroup): View {
+  override fun createContentView(parent: FrameLayout): View {
     return mEditText
   }
   

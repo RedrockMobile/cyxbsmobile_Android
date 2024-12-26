@@ -12,7 +12,7 @@ import com.cyxbs.pages.mine.page.feedback.center.presenter.FeedbackCenterPresent
 import com.cyxbs.pages.mine.page.feedback.center.viewmodel.FeedbackCenterViewModel
 import com.cyxbs.pages.mine.page.feedback.edit.ui.FeedbackEditActivity
 import com.cyxbs.pages.mine.page.feedback.history.list.HistoryListActivity
-import com.cyxbs.pages.mine.page.security.util.Jump2QQHelper
+import com.mredrock.cyxbs.lib.utils.utils.Jump2QQHelper
 
 /**
  * @Date : 2021/8/23   20:51
@@ -79,10 +79,9 @@ class FeedbackCenterActivity :
             ivHistory.setOnSingleClickListener {
                 startActivity(Intent(this@FeedbackCenterActivity, HistoryListActivity::class.java))
             }
+            tvQqTwo.text = Jump2QQHelper.FEED_BACK_QQ_GROUP
             tvQqTwo.setOnSingleClickListener {
-                Jump2QQHelper.onFeedBackClick(
-                    this@FeedbackCenterActivity
-                )
+                Jump2QQHelper.onFeedBackClick()
             }
             fabCenterBack.setOnSingleClickListener { finish() }
         }

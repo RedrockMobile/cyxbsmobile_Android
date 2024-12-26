@@ -47,4 +47,15 @@
         tools:ignore="SpUsage"
         tools:backgroundTint="@color/config_choose_dialog_btn_positive"/>
 
+    <FrameLayout
+        android:id="@+id/config_fl_choose_dialog_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="bottom" >
+
+        <!--用于给底部填充内容-->
+        <!--比如 CrashDialog 在底部添加了 QQ 反馈群按钮-->
+
+    </FrameLayout>
+
 </FrameLayout>

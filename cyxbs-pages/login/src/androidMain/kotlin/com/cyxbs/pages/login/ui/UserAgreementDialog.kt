@@ -10,7 +10,7 @@ import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -60,7 +60,7 @@ class UserAgreementDialog private constructor(
     textSize = 14F
   }
   
-  override fun createContentView(parent: ViewGroup): View {
+  override fun createContentView(parent: FrameLayout): View {
     return LinearLayout(parent.context).apply {
       orientation = LinearLayout.VERTICAL
       addView(

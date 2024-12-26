@@ -9,6 +9,7 @@ import com.mredrock.cyxbs.config.sp.SP_PRIVACY_AGREED
 import com.mredrock.cyxbs.config.sp.defaultSp
 import com.cyxbs.components.init.InitialManager
 import com.cyxbs.components.init.InitialService
+import com.cyxbs.components.init.appCurrentProcessName
 import java.util.ServiceLoader
 
 /**
@@ -38,28 +39,8 @@ internal class InitialManagerImpl(
     }
   }
 
-  // https://cloud.tencent.com/developer/article/1708529
-  override val currentProcessName: String by lazy {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-      Application.getProcessName()
-    } else {
-      try {
-        // Android 9 之前无反射限制
-        @SuppressLint("PrivateApi")
-        val declaredMethod = Class
-          .forName("android.app.ActivityThread", false, Application::class.java.classLoader)
-          .getDeclaredMethod("currentProcessName")
-        declaredMethod.isAccessible = true
-        declaredMethod.invoke(null) as String
-      } catch (e: Throwable) {
-        (application.getSystemService(Application.ACTIVITY_SERVICE) as ActivityManager)
-          .runningAppProcesses
-          .first {
-            it.pid == Process.myPid()
-          }.processName
-      }
-    }
-  }
+  override val currentProcessName: String
+    get() = appCurrentProcessName
 
   //非主进程
   private fun onOtherProcess() {

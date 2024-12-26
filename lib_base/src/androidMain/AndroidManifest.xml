@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
-        <activity
-            android:name=".pages.PhotoViewerActivity"/>
+        <activity android:name=".pages.PhotoViewerActivity"/>
+        <activity android:name=".crash.CrashActivity" />
+        <activity android:name=".pages.SecretActivity" />
+        <activity android:name=".crash.NetworkApiResultActivity" />
     </application>
 </manifest>

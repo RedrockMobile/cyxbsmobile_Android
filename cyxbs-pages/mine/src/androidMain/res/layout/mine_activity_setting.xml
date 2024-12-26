@@ -26,7 +26,7 @@
                 android:text="@string/mine_show_schedule_first_launch"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
-                android:textColor="@color/common_level_three_font_color"/>
+                android:textColor="@color/config_level_three_font_color"/>
 
             <com.cyxbs.pages.mine.util.widget.SwitchPlus
                 android:id="@+id/mine_setting_switch"
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/common_level_three_font_color"
+                android:textColor="@color/config_level_three_font_color"
                 android:text="账号与安全"
                 android:layout_marginStart="15dp"
                 android:layout_gravity="center_vertical" />
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/common_level_three_font_color"
+                android:textColor="@color/config_level_three_font_color"
                 android:text="清理软件数据"
                 android:layout_marginStart="15dp"
                 android:layout_gravity="center_vertical" />
@@ -89,7 +89,7 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:textSize="15sp"
-              android:textColor="@color/common_level_three_font_color"
+              android:textColor="@color/config_level_three_font_color"
               android:text="设置课表最大周数"
               android:layout_marginStart="15dp"
               android:layout_gravity="center_vertical" />

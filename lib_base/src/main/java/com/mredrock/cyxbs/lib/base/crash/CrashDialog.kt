@@ -1,28 +1,32 @@
-package com.mredrock.lib.crash.dialog
+package com.mredrock.cyxbs.lib.base.crash
 
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.Color
+import android.os.Handler
+import android.os.Looper
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.cyxbs.components.init.appTopActivity
 import com.mredrock.cyxbs.config.view.ScaleScrollTextView
 import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
 import com.mredrock.cyxbs.lib.utils.extensions.collectUsefulStackTrace
 import com.mredrock.cyxbs.lib.utils.extensions.color
 import com.mredrock.cyxbs.lib.utils.extensions.dp2px
+import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.mredrock.cyxbs.lib.utils.utils.Jump2QQHelper
 
 /**
  * 用于展示崩溃日志的 dialog
  * ```
- * CrashDialog.Builder(context, throwable).show()
+ * CrashDialog.Builder(throwable).show()
  * ```
  *
  * @author 985892345
@@ -33,10 +37,9 @@ class CrashDialog private constructor(
 ) : ChooseDialog(context) {
   
   class Builder(
-    context: Context,
     throwable: Throwable
   ) : ChooseDialog.Builder(
-    context,
+    context = appTopActivity.get()!!,
     DataImpl(
       content = throwable.collectUsefulStackTrace(),
       positiveButtonText = "复制信息",
@@ -56,6 +59,16 @@ class CrashDialog private constructor(
         dismiss()
       }
       return CrashDialog(context)
+    }
+
+    override fun show() {
+      if (Looper.getMainLooper().isCurrentThread) {
+        super.show()
+      } else {
+        Handler(Looper.getMainLooper()).post {
+          super.show()
+        }
+      }
     }
   }
   
@@ -96,7 +109,7 @@ class CrashDialog private constructor(
     addView(mScaleScrollTextView)
   }
   
-  override fun createContentView(parent: ViewGroup): View {
+  override fun createContentView(parent: FrameLayout): View {
     return mLinearLayout
   }
   
@@ -113,7 +126,7 @@ class CrashDialog private constructor(
         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
       )
     }
-    val title = "异常信息（双指支持放大缩小）\n截图请向左滑动，确保能看到前几个红色的文字\n"
+    val title = "异常信息（双指支持放大缩小）\n截图请向左滑动，确保能看到前几行红色的文字结尾数字\n"
     builder.insert(0, title)
     builder.setSpan(
       ForegroundColorSpan(0xFFFF8800.toInt()),
@@ -124,5 +137,29 @@ class CrashDialog private constructor(
     mScaleScrollTextView.text = builder
     val length = data.content.indexOf('\n').let { if (it == -1) data.content.length else it }
     mTvExceptionMessage.text = data.content.substring(0, length) // 只显示第一行的 message
+  }
+
+  override fun createBottomView(parent: FrameLayout): View {
+    return LinearLayout(parent.context).apply {
+      layoutParams = FrameLayout.LayoutParams(
+        FrameLayout.LayoutParams.WRAP_CONTENT,
+        FrameLayout.LayoutParams.WRAP_CONTENT,
+        Gravity.CENTER,
+      )
+      orientation = LinearLayout.HORIZONTAL
+      addView(TextView(parent.context).apply {
+        text = "点击跳转QQ反馈群："
+        textSize = 10F
+        setTextColor(0xFFABBCDB.toInt())
+      })
+      addView(TextView(parent.context).apply {
+        text = Jump2QQHelper.FEED_BACK_QQ_GROUP
+        textSize = 10F
+        setTextColor(0xFF0BCCF0.toInt())
+      })
+      setOnSingleClickListener {
+        Jump2QQHelper.onFeedBackClick()
+      }
+    }
   }
 }

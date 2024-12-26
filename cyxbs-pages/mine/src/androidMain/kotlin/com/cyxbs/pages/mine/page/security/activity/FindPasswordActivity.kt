@@ -20,7 +20,7 @@ import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.mine.R
 import com.cyxbs.pages.mine.databinding.MineActivityFindPasswordBinding
 import com.cyxbs.pages.mine.page.security.util.AnswerTextWatcher
-import com.cyxbs.pages.mine.page.security.util.Jump2QQHelper
+import com.mredrock.cyxbs.lib.utils.utils.Jump2QQHelper
 import com.cyxbs.pages.mine.page.security.viewmodel.FindPasswordViewModel
 
 /**
@@ -97,7 +97,7 @@ class FindPasswordActivity : BaseViewModelActivity<FindPasswordViewModel>() {
         turnPageType(type)
         //联系我们的点击事件
         mTvSecurityFindContractUs.setOnSingleClickListener {
-            Jump2QQHelper.onFeedBackClick(this)
+            Jump2QQHelper.onFeedBackClick()
         }
     }
 

@@ -3,7 +3,7 @@ package com.cyxbs.pages.todo.ui.dialog
 import android.content.Context
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.cyxbs.pages.todo.R
@@ -45,7 +45,7 @@ class DetailAlarmDialog private constructor(
         gravity = Gravity.CENTER //居中显示
     }
 
-    override fun createContentView(parent: ViewGroup): View {
+    override fun createContentView(parent: FrameLayout): View {
         return LinearLayout(parent.context).apply {
             orientation = LinearLayout.VERTICAL
             addView(

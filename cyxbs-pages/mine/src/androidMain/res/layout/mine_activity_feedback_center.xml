@@ -135,7 +135,7 @@
                 android:id="@+id/tv_qq_two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mine_feedback_center_qq_num"
+                tools:text="123456"
                 android:textColor="#0BCCF0"
                 android:textSize="11sp" />
         </LinearLayout>

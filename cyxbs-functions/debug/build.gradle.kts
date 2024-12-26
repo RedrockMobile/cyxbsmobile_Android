@@ -2,6 +2,7 @@ plugins {
   id("manager.library")
 }
 
+useARouter()
 useAutoService()
 
 kotlin {
@@ -11,7 +12,6 @@ kotlin {
       implementation(projects.libBase)
       implementation(projects.libUtils)
       implementation(projects.libConfig)
-      implementation(projects.libCrash.apiCrash)
       implementation(projects.libAccount.apiAccount)
 
       // 依赖 LeakCanary，检查内存泄漏 https://github.com/square/leakcanary

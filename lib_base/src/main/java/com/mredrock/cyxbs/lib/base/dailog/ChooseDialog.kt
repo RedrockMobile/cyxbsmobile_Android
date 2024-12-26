@@ -12,6 +12,21 @@ import com.mredrock.cyxbs.lib.utils.extensions.dp2px
 
 /**
  * 该 dialog 为通用 dialog，包含一个按钮或两个按钮
+ * ```
+ * ChooseDialog.Builder(
+ *   context,
+ *   ChooseDialog.DataImpl(
+ *     content = "啊欧，手慢了！下次再来吧=.=",
+ *     width = 300,
+ *     height = 178,
+ *     type = BaseChooseDialog.DialogType.ONE_BUT
+ *   )
+ * ).setPositiveClick {
+ *   dismiss()
+ * }.setDismissCallback {
+ *
+ * }.show()
+ * ```
  *
  * 更多注释请查看 [BaseChooseDialog]
  *
@@ -71,7 +86,7 @@ open class ChooseDialog : BaseChooseDialog<ChooseDialog, ChooseDialog.Data> {
     }
   }
 
-  override fun createContentView(parent: ViewGroup): View {
+  override fun createContentView(parent: FrameLayout): View {
     return TextView(parent.context).apply {
       layoutParams = FrameLayout.LayoutParams(
         FrameLayout.LayoutParams.MATCH_PARENT,

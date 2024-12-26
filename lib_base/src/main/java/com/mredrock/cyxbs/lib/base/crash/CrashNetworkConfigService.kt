@@ -1,4 +1,4 @@
-package com.cyxbs.functions.debug.crash
+package com.mredrock.cyxbs.lib.base.crash
 
 import com.google.auto.service.AutoService
 import com.mredrock.cyxbs.lib.utils.network.INetworkConfigService

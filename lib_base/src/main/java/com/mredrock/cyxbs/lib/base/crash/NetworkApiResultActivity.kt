@@ -1,4 +1,4 @@
-package com.cyxbs.functions.debug.crash
+package com.mredrock.cyxbs.lib.base.crash
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -11,7 +11,7 @@ import androidx.core.view.isGone
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.cyxbs.functions.debug.R
+import com.mredrock.cyxbs.lib.base.R
 import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.extensions.gone
 import com.mredrock.cyxbs.lib.utils.extensions.visible
@@ -50,7 +50,7 @@ class NetworkApiResultActivity : BaseActivity() {
   
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.debug_activity_network_result)
+    setContentView(R.layout.base_activity_network_result)
     mRecyclerView.layoutManager = LinearLayoutManager(this)
     mRecyclerView.adapter = RvAdapter()
     
@@ -100,13 +100,13 @@ class NetworkApiResultActivity : BaseActivity() {
         ApiVH::class.hashCode() -> {
           ApiVH(
             LayoutInflater.from(parent.context)
-              .inflate(R.layout.debug_rv_item_api_result, parent, false)
+              .inflate(R.layout.base_rv_item_api_result, parent, false)
           )
         }
         LogVH::class.hashCode() -> {
           LogVH(
             LayoutInflater.from(parent.context)
-              .inflate(R.layout.debug_rv_item_log_result, parent, false)
+              .inflate(R.layout.base_rv_item_log_result, parent, false)
           )
         }
         else -> error("")

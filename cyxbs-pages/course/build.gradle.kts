@@ -12,7 +12,6 @@ kotlin {
       implementation(projects.libBase)
       implementation(projects.libConfig)
       implementation(projects.libUtils)
-      implementation(projects.libCrash.apiCrash)
       implementation(projects.libAccount.apiAccount)
       implementation(projects.cyxbsPages.affair.api)
     }

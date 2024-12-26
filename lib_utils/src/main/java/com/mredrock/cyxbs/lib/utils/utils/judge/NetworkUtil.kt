@@ -14,14 +14,17 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withTimeout
 import retrofit2.http.GET
 import java.net.InetAddress
 import java.net.UnknownHostException
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
+import java.util.concurrent.TimeoutException
 import kotlin.coroutines.resume
 
 
@@ -152,11 +155,15 @@ object NetworkUtil {
    *
    * @return 如果返回 null，则说明是网络连接异常，此时无法确认后端是否寄掉
    */
-  suspend fun tryPingNetWork(): Result<ApiStatus>? {
+  suspend fun tryPingNetWork(timeOut: Long = 5000L): Result<ApiStatus>? {
     try {
-      val result = ApiServer::class.commonApi.pingMagipoke()
+      val result = withTimeout(timeOut) {
+        ApiServer::class.commonApi.pingMagipoke()
+      }
       result.throwApiExceptionIfFail() // 如果 status 状态码不成功将抛出异常
       return Result.success(result)
+    } catch (e: TimeoutCancellationException) {
+      return Result.failure(TimeoutException("请求超时"))
     } catch (e: CancellationException) {
       throw e
     } catch (e: Exception) {

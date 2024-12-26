@@ -6,7 +6,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -51,7 +50,7 @@ open class CheckDialog protected constructor(
     ) : Data by Data
 
     private lateinit var editText: EditText
-    override fun createContentView(parent: ViewGroup): View {
+    override fun createContentView(parent: FrameLayout): View {
 
         editText = EditText(parent.context).apply {
             layoutParams = FrameLayout.LayoutParams(

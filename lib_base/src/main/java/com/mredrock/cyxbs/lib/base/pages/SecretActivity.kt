@@ -1,4 +1,4 @@
-package com.cyxbs.functions.debug
+package com.mredrock.cyxbs.lib.base.pages
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import androidx.core.content.edit
 import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.extensions.getSp
 import com.mredrock.cyxbs.lib.utils.extensions.toast
+import com.mredrock.cyxbs.lib.base.R
 
 /**
  * .
@@ -20,9 +21,9 @@ class SecretActivity : AppCompatActivity() {
   
   companion object {
   
-    private var sSpPandoraIsOpen: Boolean
+    var sSpPandoraIsOpen: Boolean
       get() = appContext.getSp("pandora").getBoolean("isOpen", false)
-      set(value) {
+      private set(value) {
         appContext.getSp("pandora").edit {
           putBoolean("isOpen", value)
         }
@@ -54,7 +55,7 @@ class SecretActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     
-    setContentView(R.layout.debug_activity_secret)
+    setContentView(R.layout.base_activity_secret)
     val et = findViewById<EditText>(R.id.debug_et_secret)
     val btn = findViewById<Button>(R.id.debug_btn_secret)
     

@@ -16,7 +16,7 @@ import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.common.utils.extensions.toast
 import com.mredrock.cyxbs.common.utils.extensions.visible
 import com.cyxbs.pages.mine.R
-import com.cyxbs.pages.mine.page.security.util.Jump2QQHelper
+import com.mredrock.cyxbs.lib.utils.utils.Jump2QQHelper
 import com.cyxbs.pages.mine.page.security.viewmodel.BindEmailViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -57,7 +57,7 @@ class BindEmailActivity : BaseActivity() {
         }
 
         tv_bind_email_contact_us.setOnSingleClickListener {
-            Jump2QQHelper.onFeedBackClick(this)
+            Jump2QQHelper.onFeedBackClick()
         }
 
         tv_bind_email_send_code.setOnSingleClickListener {

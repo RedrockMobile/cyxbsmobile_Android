@@ -59,12 +59,17 @@ abstract class BaseChooseDialog<T : BaseChooseDialog<T, D>, D: BaseChooseDialog.
   /**
    * 创建显示的内容，你可以在这里面返回你自己的内容视图
    */
-  abstract fun createContentView(parent: ViewGroup): View
+  abstract fun createContentView(parent: FrameLayout): View
 
   /**
    * @param view 你在 [createContentView] 返回的 View
    */
   abstract fun initContentView(view: View)
+
+  /**
+   * 创建底部视图，在按钮底部显示，高度限制 30dp
+   */
+  open fun createBottomView(parent: FrameLayout): View? = null
 
   private var _data: D? = null
 
@@ -90,6 +95,11 @@ abstract class BaseChooseDialog<T : BaseChooseDialog<T, D>, D: BaseChooseDialog.
         data.height.let { if (it > 0) it.dp2px else it }
       )
     )
+    val bottomParent = view.findViewById<FrameLayout>(R.id.config_fl_choose_dialog_bottom)
+    val bottomChild = createBottomView(bottomParent)
+    if (bottomChild != null) {
+      bottomParent.addView(bottomChild)
+    }
     initViewInternal(view)
     initContentView(insertView)
   }
@@ -222,7 +232,7 @@ abstract class BaseChooseDialog<T : BaseChooseDialog<T, D>, D: BaseChooseDialog.
     /**
      * 直接展示
      */
-    fun show() {
+    open fun show() {
       build().show()
     }
   }

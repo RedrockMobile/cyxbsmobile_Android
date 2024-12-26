@@ -1,4 +1,4 @@
-package com.cyxbs.functions.debug.crash
+package com.mredrock.cyxbs.lib.base.crash
 
 import android.annotation.SuppressLint
 import android.content.ClipData
@@ -11,15 +11,20 @@ import android.os.Process
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import com.cyxbs.components.init.appCurrentProcessName
 import com.mredrock.cyxbs.config.view.ScaleScrollTextView
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.cyxbs.functions.debug.R
-import com.cyxbs.functions.debug.SecretActivity
+import com.mredrock.cyxbs.lib.base.R
+import com.mredrock.cyxbs.lib.base.pages.SecretActivity
 import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.extensions.collectUsefulStackTrace
+import com.mredrock.cyxbs.lib.utils.extensions.gone
+import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.mredrock.cyxbs.lib.utils.utils.Jump2QQHelper
 import java.io.Serializable
 import kotlin.system.exitProcess
 
@@ -32,9 +37,10 @@ import kotlin.system.exitProcess
 class CrashActivity : BaseActivity() {
   
   companion object {
-    fun start(throwable: Throwable, processName: String, threadName: String) {
+    fun start(throwable: Throwable, netWorkApiResults: List<NetworkApiResult>? = null) {
       appContext.startActivity(
         Intent(appContext, CrashActivity::class.java)
+          .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
           .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
           .putExtra(CrashActivity::mStackTrace.name, throwable.collectUsefulStackTrace())
           .putExtra(
@@ -44,14 +50,13 @@ class CrashActivity : BaseActivity() {
               .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
               .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
           ).putExtra(CrashActivity::mMainProcessPid.name, Process.myPid())
-          .putExtra(
-            CrashActivity::mNetworkResult.name,
-            CrashNetworkConfigService.apiResultList.mapTo(ArrayList()) {
-              // 因为 CrashActivity 是在另一个进程中启动，所以只能以 String 的形式传过去
-              NetworkApiResult(it.request.toString(), it.response.toString(), it.throwable)
+          .putExtra(CrashActivity::mProcessName.name, appCurrentProcessName)
+          .putExtra(CrashActivity::mThreadName.name, Thread.currentThread().name)
+          .apply {
+            if (netWorkApiResults != null) {
+              putExtra(CrashActivity::mNetworkResult.name, ArrayList(netWorkApiResults))
             }
-          ).putExtra(CrashActivity::mProcessName.name, processName)
-          .putExtra(CrashActivity::mThreadName.name, threadName)
+          }
       )
     }
     
@@ -65,7 +70,7 @@ class CrashActivity : BaseActivity() {
   private val mStackTrace by intent<String>()
   private val mRebootIntent by intent<Intent>()
   private val mMainProcessPid by intent<Int>()
-  private val mNetworkResult by intent<ArrayList<NetworkApiResult>>()
+  private val mNetworkResult by intentNullable<ArrayList<NetworkApiResult>>()
   private val mProcessName by intent<String>()
   private val mThreadName by intent<String>()
   
@@ -76,11 +81,15 @@ class CrashActivity : BaseActivity() {
   private val mBtnCopy by R.id.debug_btn_copy_crash.view<Button>()
   private val mBtnReboot by R.id.debug_btn_reboot_crash.view<Button>()
   private val mBtnNetwork by R.id.debug_btn_network_crash.view<Button>()
-  
+  private val mFlNetwork by R.id.debug_fl_network_crash.view<View>()
+  private val mJumpQQGroup by R.id.debug_qq_group_jump.view<View>()
+  private val mTvQQGroup by R.id.debug_tv_qq_two.view<TextView>()
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    android.util.Log.d("ggg", "(${Error().stackTrace[0].run { "$fileName:$lineNumber" }}) -> CrashActivity")
     Process.killProcess(mMainProcessPid); // Kill original main process
-    setContentView(R.layout.debug_activity_crash)
+    setContentView(R.layout.base_activity_crash)
     initTextView()
     initShowStackTrace()
     initClick()
@@ -148,11 +157,21 @@ class CrashActivity : BaseActivity() {
         }
       }
     }
-    
-    mBtnNetwork.setOnClickListener {
-      SecretActivity.tryStart {
-        NetworkApiResultActivity.start(mNetworkResult)
+
+    val networkResult = mNetworkResult
+    if (networkResult == null) {
+      mFlNetwork.gone()
+    } else {
+      mBtnNetwork.setOnClickListener {
+        SecretActivity.tryStart {
+          NetworkApiResultActivity.start(networkResult)
+        }
       }
+    }
+
+    mTvQQGroup.text = Jump2QQHelper.FEED_BACK_QQ_GROUP
+    mJumpQQGroup.setOnSingleClickListener {
+      Jump2QQHelper.onFeedBackClick()
     }
   }
   
