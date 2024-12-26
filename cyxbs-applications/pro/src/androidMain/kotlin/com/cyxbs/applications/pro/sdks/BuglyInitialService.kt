@@ -2,7 +2,7 @@ package com.cyxbs.applications.pro.sdks
 
 import com.google.auto.service.AutoService
 import com.cyxbs.applications.pro.BuildConfig
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.init.InitialManager
 import com.cyxbs.components.init.InitialService
 import com.mredrock.cyxbs.lib.base.BaseApp

@@ -1,6 +1,6 @@
 package com.mredrock.cyxbs.lib.base.operations
 
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.mredrock.cyxbs.lib.base.ui.BaseUi
 import com.mredrock.cyxbs.lib.utils.service.impl
 

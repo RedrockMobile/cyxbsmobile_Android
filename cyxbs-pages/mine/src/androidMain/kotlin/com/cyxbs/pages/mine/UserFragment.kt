@@ -16,7 +16,7 @@ import androidx.core.util.Pair
 import androidx.fragment.app.viewModels
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.mredrock.cyxbs.common.utils.extensions.loadAvatar
 import com.mredrock.cyxbs.config.route.*
 import com.mredrock.cyxbs.lib.base.operations.doIfLogin

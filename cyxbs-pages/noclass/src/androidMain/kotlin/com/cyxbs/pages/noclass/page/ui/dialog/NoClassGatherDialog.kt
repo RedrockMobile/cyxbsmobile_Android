@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.viewpager2.widget.ViewPager2
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.pages.affair.api.DateJson
 import com.cyxbs.pages.affair.api.IAffairService
 import com.cyxbs.pages.affair.api.NoClassBean

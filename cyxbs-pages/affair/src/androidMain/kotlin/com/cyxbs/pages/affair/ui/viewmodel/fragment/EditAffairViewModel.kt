@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.cyxbs.pages.affair.model.AffairRepository
 import com.cyxbs.pages.affair.room.AffairDataBase
 import com.cyxbs.pages.affair.room.AffairEntity
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
 import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

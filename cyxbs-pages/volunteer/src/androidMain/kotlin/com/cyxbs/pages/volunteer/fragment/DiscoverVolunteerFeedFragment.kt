@@ -6,8 +6,8 @@ import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.gson.Gson
-import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.api.account.IUserStateService
+import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.account.api.IUserStateService
 import com.cyxbs.pages.volunteer.R
 import com.cyxbs.pages.volunteer.adapter.VolunteerFeedAdapter
 import com.cyxbs.pages.volunteer.adapter.VolunteerFeedUnbindAdapter

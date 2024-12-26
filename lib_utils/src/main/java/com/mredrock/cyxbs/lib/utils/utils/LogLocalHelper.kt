@@ -1,6 +1,6 @@
 package com.mredrock.cyxbs.lib.utils.utils
 
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import java.io.File
 import java.io.FileOutputStream

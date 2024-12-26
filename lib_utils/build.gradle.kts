@@ -9,7 +9,7 @@ kotlin {
     androidMain.dependencies {
       implementation(projects.cyxbsComponents.init)
       implementation(projects.libConfig)
-      implementation(projects.libAccount.apiAccount)
+      implementation(projects.cyxbsComponents.account.api)
 
       implementation(libs.bundles.projectBase)
       implementation(libs.bundles.views)

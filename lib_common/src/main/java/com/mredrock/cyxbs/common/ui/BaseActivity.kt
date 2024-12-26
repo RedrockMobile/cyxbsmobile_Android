@@ -8,7 +8,7 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.mredrock.cyxbs.common.R
 import com.mredrock.cyxbs.common.mark.ActionLoginStatusSubscriber
 import com.mredrock.cyxbs.common.mark.EventBusLifecycleSubscriber

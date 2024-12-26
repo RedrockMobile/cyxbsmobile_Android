@@ -1,7 +1,7 @@
 package com.cyxbs.pages.home.ui.course.utils
 
 import android.util.Log
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.pages.affair.api.IAffairService
 import com.cyxbs.pages.course.api.ICourseService
 import com.cyxbs.pages.course.api.ILessonService

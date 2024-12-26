@@ -9,12 +9,12 @@ import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.core.view.postDelayed
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.pages.login.api.ILoginService
 import com.mredrock.cyxbs.common.config.COURSE_SHOW_STATE
 import com.mredrock.cyxbs.common.config.SP_WIDGET_NEED_FRESH
 import com.mredrock.cyxbs.common.config.WIDGET_COURSE
-import com.mredrock.cyxbs.common.service.ServiceManager
+import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import com.mredrock.cyxbs.common.service.impl
 import com.mredrock.cyxbs.config.sp.defaultSp
 import com.mredrock.cyxbs.config.view.JToolbar

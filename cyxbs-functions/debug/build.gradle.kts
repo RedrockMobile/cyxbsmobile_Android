@@ -12,7 +12,7 @@ kotlin {
       implementation(projects.libBase)
       implementation(projects.libUtils)
       implementation(projects.libConfig)
-      implementation(projects.libAccount.apiAccount)
+      implementation(projects.cyxbsComponents.account.api)
 
       // 依赖 LeakCanary，检查内存泄漏 https://github.com/square/leakcanary
       implementation(libs.leakcanary)

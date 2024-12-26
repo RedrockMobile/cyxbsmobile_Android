@@ -10,7 +10,7 @@ kotlin {
       implementation(projects.libBase)
       implementation(projects.libConfig)
       implementation(projects.libUtils)
-      implementation(projects.libAccount.apiAccount)
+      implementation(projects.cyxbsComponents.account.api)
       implementation(projects.cyxbsPages.mine.api)
     }
     androidMain.dependencies {

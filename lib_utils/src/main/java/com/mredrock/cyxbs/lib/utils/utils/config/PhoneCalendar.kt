@@ -11,7 +11,7 @@ import android.provider.CalendarContract.*
 import androidx.annotation.IntRange
 import androidx.fragment.app.FragmentActivity
 import com.cyxbs.components.init.appApplication
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.mredrock.cyxbs.lib.utils.extensions.doPermissionAction
 import com.mredrock.cyxbs.lib.utils.service.impl
 import io.reactivex.rxjava3.core.Completable

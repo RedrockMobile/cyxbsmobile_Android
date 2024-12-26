@@ -7,7 +7,6 @@ import android.view.View
 import android.webkit.WebSettings
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -19,8 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.api.account.IUserService
+import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.account.api.IUserService
 import com.mredrock.cyxbs.config.route.DISCOVER_GRADES
 import com.mredrock.cyxbs.config.view.JToolbar
 import com.cyxbs.pages.grades.R
@@ -35,7 +34,6 @@ import com.mredrock.cyxbs.lib.utils.extensions.gone
 import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.lib.utils.extensions.visible
 import com.mredrock.cyxbs.lib.base.webView.LiteJsWebView
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 
 

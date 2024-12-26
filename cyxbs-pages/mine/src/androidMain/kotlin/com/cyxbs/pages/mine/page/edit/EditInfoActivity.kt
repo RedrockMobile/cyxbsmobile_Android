@@ -24,8 +24,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItems
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.api.account.IUserService
+import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.account.api.IUserService
 import com.mredrock.cyxbs.config.route.MINE_EDIT_INFO
 import com.mredrock.cyxbs.config.view.JToolbar
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity

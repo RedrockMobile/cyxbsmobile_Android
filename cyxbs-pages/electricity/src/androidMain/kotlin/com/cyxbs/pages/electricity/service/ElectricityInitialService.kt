@@ -3,8 +3,8 @@ package com.cyxbs.pages.electricity.service
 import android.annotation.SuppressLint
 import androidx.core.content.edit
 import com.google.auto.service.AutoService
-import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.api.account.IUserStateService
+import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.account.api.IUserStateService
 import com.mredrock.cyxbs.config.sp.defaultSp
 import com.cyxbs.pages.electricity.config.SP_BUILDING_FOOT_KEY
 import com.cyxbs.pages.electricity.config.SP_BUILDING_HEAD_KEY

@@ -1,8 +1,8 @@
 package com.cyxbs.pages.volunteer.service
 
 import android.annotation.SuppressLint
-import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.api.account.IUserStateService
+import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.account.api.IUserStateService
 import com.mredrock.cyxbs.common.service.impl
 import com.cyxbs.components.init.InitialManager
 import com.cyxbs.components.init.InitialService

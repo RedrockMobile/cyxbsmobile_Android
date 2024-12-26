@@ -1,7 +1,7 @@
 package com.cyxbs.pages.login.login.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.mredrock.cyxbs.lib.base.BaseApp
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
 import com.mredrock.cyxbs.lib.utils.service.impl

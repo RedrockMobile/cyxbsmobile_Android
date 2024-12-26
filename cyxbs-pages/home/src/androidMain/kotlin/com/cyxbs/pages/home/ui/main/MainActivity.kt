@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.pages.login.api.ILoginService
 import com.cyxbs.functions.update.api.IAppUpdateService
 import com.mredrock.cyxbs.config.route.DISCOVER_SCHOOL_CAR

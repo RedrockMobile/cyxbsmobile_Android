@@ -1,7 +1,7 @@
 package com.mredrock.cyxbs.lib.utils.network
 
 import com.google.gson.annotations.SerializedName
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import java.io.Serializable
 import java.util.concurrent.atomic.AtomicBoolean

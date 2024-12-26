@@ -7,11 +7,10 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.annotation.IdRes
 import com.google.gson.Gson
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.mredrock.cyxbs.lib.base.BaseApp
 import com.mredrock.cyxbs.lib.utils.extensions.CyxbsToast
 import com.mredrock.cyxbs.lib.utils.extensions.appContext

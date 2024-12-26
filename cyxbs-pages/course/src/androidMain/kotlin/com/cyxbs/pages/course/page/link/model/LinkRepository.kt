@@ -1,6 +1,6 @@
 package com.cyxbs.pages.course.page.link.model
 
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.pages.course.page.link.network.LinkApiServices
 import com.cyxbs.pages.course.page.link.room.LinkDataBase
 import com.cyxbs.pages.course.page.link.room.LinkStuEntity

@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.mredrock.cyxbs.config.route.DISCOVER_ELECTRICITY_FEED
 import com.mredrock.cyxbs.config.sp.defaultSp
 import com.cyxbs.pages.electricity.R

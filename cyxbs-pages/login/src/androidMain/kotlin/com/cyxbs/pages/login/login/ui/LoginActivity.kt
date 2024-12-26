@@ -26,7 +26,7 @@ import androidx.core.content.edit
 import androidx.core.view.get
 import com.airbnb.lottie.LottieAnimationView
 import com.alibaba.android.arouter.launcher.ARouter
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.functions.update.api.IAppUpdateService
 import com.mredrock.cyxbs.config.route.MAIN_MAIN
 import com.mredrock.cyxbs.config.route.MINE_FORGET_PASSWORD

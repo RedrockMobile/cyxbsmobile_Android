@@ -2,7 +2,7 @@ package com.cyxbs.pages.course.service
 
 import android.content.Context
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.pages.course.api.COURSE_LESSON
 import com.cyxbs.pages.course.api.ILessonService
 import com.cyxbs.pages.course.page.course.model.StuLessonRepository

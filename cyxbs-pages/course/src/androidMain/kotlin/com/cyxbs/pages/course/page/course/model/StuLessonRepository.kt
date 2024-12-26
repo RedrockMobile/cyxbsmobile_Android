@@ -2,7 +2,7 @@ package com.cyxbs.pages.course.page.course.model
 
 import androidx.annotation.WorkerThread
 import androidx.core.content.edit
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.pages.course.api.ILessonService
 import com.cyxbs.pages.course.page.course.bean.StuLessonBean
 import com.cyxbs.pages.course.page.course.room.LessonDataBase

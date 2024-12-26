@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.mredrock.cyxbs.config.route.COURSE_POS_TO_MAP
 import com.mredrock.cyxbs.config.route.DISCOVER_MAP
 import com.cyxbs.pages.course.R

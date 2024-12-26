@@ -6,7 +6,7 @@ useARouter()
 
 dependencies {
   implementation(projects.cyxbsComponents.init)
-  implementation(projects.libAccount.apiAccount)
+  implementation(projects.cyxbsComponents.account.api)
   implementation(libs.androidx.appcompat)
   implementation(libs.androidx.constraintlayout)
   implementation(libs.material)

@@ -14,7 +14,7 @@ kotlin {
       implementation(projects.libBase)
       implementation(projects.libConfig)
       implementation(projects.libUtils)
-      implementation(projects.libAccount.apiAccount)
+      implementation(projects.cyxbsComponents.account.api)
       implementation(projects.cyxbsPages.store.api)
       implementation(projects.cyxbsPages.store.api)
     }

@@ -8,7 +8,7 @@ dependencies {
   implementation(projects.cyxbsComponents.init)
   implementation(projects.libConfig)
   implementation(projects.libUtils)
-  implementation(projects.libAccount.apiAccount)
+  implementation(projects.cyxbsComponents.account.api)
   implementation(projects.cyxbsPages.login.api)
 
   implementation(libs.bundles.projectBase)

@@ -2,7 +2,7 @@ package com.cyxbs.pages.discover.utils
 
 import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.mredrock.cyxbs.config.route.DISCOVER_MAP
 import com.mredrock.cyxbs.config.route.DISCOVER_MORE_FUNCTION
 import com.mredrock.cyxbs.config.route.DISCOVER_NO_CLASS

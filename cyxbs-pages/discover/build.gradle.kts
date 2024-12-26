@@ -10,7 +10,7 @@ kotlin {
       implementation(projects.libBase)
       implementation(projects.libConfig)
       implementation(projects.libUtils)
-      implementation(projects.libAccount.apiAccount)
+      implementation(projects.cyxbsComponents.account.api)
       implementation(projects.cyxbsPages.todo.api)
       implementation(projects.cyxbsPages.sport.api)
       implementation(projects.cyxbsPages.volunteer.api)
