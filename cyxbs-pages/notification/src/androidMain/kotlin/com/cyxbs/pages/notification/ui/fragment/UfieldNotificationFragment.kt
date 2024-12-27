@@ -12,8 +12,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.pages.notification.R
 import com.cyxbs.pages.notification.adapter.ActivityUfieldRVAdapter
 import com.cyxbs.pages.notification.bean.UfieldMsgBean

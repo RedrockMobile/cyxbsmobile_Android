@@ -10,7 +10,7 @@ import com.cyxbs.components.config.config.SchoolCalendar
 import com.mredrock.cyxbs.lib.base.ui.BaseFragment
 import com.cyxbs.pages.course.widget.fragment.vp.expose.ICourseVp
 import com.cyxbs.pages.course.widget.widget.NestedDispatchLayout
-import com.mredrock.cyxbs.lib.utils.extensions.lazyUnlock
+import com.cyxbs.components.utils.extensions.lazyUnlock
 
 /**
  * 封装了 Vp2 的课表 Fragment

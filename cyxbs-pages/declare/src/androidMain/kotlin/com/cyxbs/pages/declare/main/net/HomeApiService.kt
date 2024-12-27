@@ -2,8 +2,8 @@ package com.cyxbs.pages.declare.main.net
 
 import com.cyxbs.pages.declare.main.bean.HasPermBean
 import com.cyxbs.pages.declare.main.bean.VotesBean
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
-import com.mredrock.cyxbs.lib.utils.network.IApi
+import com.cyxbs.components.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.IApi
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 

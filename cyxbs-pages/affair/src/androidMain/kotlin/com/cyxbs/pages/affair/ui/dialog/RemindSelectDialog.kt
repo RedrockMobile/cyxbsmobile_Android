@@ -7,7 +7,7 @@ import android.widget.TextView
 import com.github.gzuliyujiang.wheelview.widget.WheelView
 import com.cyxbs.pages.affair.R
 import com.cyxbs.pages.affair.ui.dialog.base.RedRockBottomSheetDialog
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 /**
  * author: WhiteNight(1448375249@qq.com)

@@ -17,7 +17,7 @@ import com.cyxbs.pages.course.widget.fragment.course.base.FoldImpl
 import com.cyxbs.pages.course.widget.fragment.course.base.OverlapImpl
 import com.cyxbs.pages.course.widget.internal.item.forEachRow
 import com.cyxbs.pages.course.widget.item.single.ISingleDayItem
-import com.mredrock.cyxbs.lib.utils.extensions.dimen
+import com.cyxbs.components.utils.extensions.dimen
 import com.ndhzs.netlayout.attrs.NetLayoutParams
 import com.ndhzs.netlayout.attrs.SideType
 import com.ndhzs.netlayout.callback.OnWeightChangeListener

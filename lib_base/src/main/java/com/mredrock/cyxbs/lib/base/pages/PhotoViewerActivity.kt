@@ -20,9 +20,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.cyxbs.components.config.dir.DIR_PHOTO
 import com.mredrock.cyxbs.lib.base.R
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.utils.extensions.doPermissionAction
-import com.mredrock.cyxbs.lib.utils.extensions.saveImage
-import com.mredrock.cyxbs.lib.utils.extensions.setImageFromUrl
+import com.cyxbs.components.utils.extensions.doPermissionAction
+import com.cyxbs.components.utils.extensions.saveImage
+import com.cyxbs.components.utils.extensions.setImageFromUrl
 import com.ndhzs.slideshow.SlideShow
 import com.ndhzs.slideshow.adapter.ViewAdapter
 import com.ndhzs.slideshow.adapter.setViewAdapter

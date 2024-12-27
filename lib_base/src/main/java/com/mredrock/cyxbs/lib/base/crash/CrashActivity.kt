@@ -20,11 +20,11 @@ import com.cyxbs.components.config.view.ScaleScrollTextView
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.base.R
 import com.mredrock.cyxbs.lib.base.pages.SecretActivity
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
-import com.mredrock.cyxbs.lib.utils.extensions.collectUsefulStackTrace
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.lib.utils.utils.Jump2QQHelper
+import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.collectUsefulStackTrace
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.utils.Jump2QQHelper
 import java.io.Serializable
 import kotlin.system.exitProcess
 

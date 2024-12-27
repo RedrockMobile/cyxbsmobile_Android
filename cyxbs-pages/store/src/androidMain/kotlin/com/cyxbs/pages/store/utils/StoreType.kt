@@ -9,7 +9,7 @@ import com.cyxbs.components.config.route.DISCOVER_NO_CLASS
 import com.cyxbs.components.config.route.FOOD_ENTRY
 import com.cyxbs.components.config.route.MINE_CHECK_IN
 import com.cyxbs.components.config.route.UFIELD_MAIN_ENTRY
-import com.mredrock.cyxbs.lib.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.toast
 import com.cyxbs.pages.store.bean.StampCenter
 
 /**

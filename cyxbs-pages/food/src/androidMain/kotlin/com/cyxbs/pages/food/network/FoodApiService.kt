@@ -4,8 +4,8 @@ import com.cyxbs.pages.food.network.bean.FoodMainBean
 import com.cyxbs.pages.food.network.bean.FoodPraiseBean
 import com.cyxbs.pages.food.network.bean.FoodRefreshBean
 import com.cyxbs.pages.food.network.bean.FoodResultBeanItem
-import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.ApiGenerator
+import com.cyxbs.components.utils.network.ApiWrapper
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

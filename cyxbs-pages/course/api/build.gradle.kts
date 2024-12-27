@@ -7,7 +7,7 @@ useARouter()
 kotlin {
   sourceSets {
     commonMain.dependencies {
-      implementation(projects.libUtils)
+      implementation(projects.cyxbsComponents.utils)
       implementation(projects.cyxbsPages.affair.api)
     }
     androidMain.dependencies {

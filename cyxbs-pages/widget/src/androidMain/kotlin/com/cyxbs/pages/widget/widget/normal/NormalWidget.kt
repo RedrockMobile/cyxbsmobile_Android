@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.core.content.edit
 import com.google.gson.Gson
-import com.mredrock.cyxbs.lib.utils.extensions.CyxbsToast
+import com.cyxbs.components.utils.extensions.CyxbsToast
 import com.cyxbs.pages.widget.R
 import com.cyxbs.pages.widget.repo.bean.LessonEntity
 import com.cyxbs.pages.widget.repo.database.LessonDatabase

@@ -7,7 +7,7 @@ import android.view.animation.LinearInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
-import com.mredrock.cyxbs.lib.utils.utils.VibratorUtil
+import com.cyxbs.components.utils.utils.VibratorUtil
 import com.cyxbs.pages.noclass.R
 
 /**

@@ -8,7 +8,7 @@ import com.bumptech.glide.request.transition.Transition
 import com.davemorrissey.labs.subscaleview.ImageSource
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import com.cyxbs.pages.map.R
-import com.mredrock.cyxbs.lib.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.toast
 import java.io.File
 
 class SubsamplingScaleImageViewShowPictureTarget(val context: Context, view: SubsamplingScaleImageView)

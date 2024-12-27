@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cyxbs.pages.map.R
-import com.mredrock.cyxbs.lib.utils.extensions.pressToZoomOut
+import com.cyxbs.components.utils.extensions.pressToZoomOut
 
 class DetailTagRvAdapter : ListAdapter<String, DetailTagRvAdapter.ViewHolder>(
     object : DiffUtil.ItemCallback<String>() {

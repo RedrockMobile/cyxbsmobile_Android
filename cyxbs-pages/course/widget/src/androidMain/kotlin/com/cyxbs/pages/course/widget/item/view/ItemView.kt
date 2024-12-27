@@ -8,7 +8,7 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import com.mredrock.cyxbs.lib.utils.extensions.*
+import com.cyxbs.components.utils.extensions.*
 
 /**
  * 用于 item 中的一个通用 View

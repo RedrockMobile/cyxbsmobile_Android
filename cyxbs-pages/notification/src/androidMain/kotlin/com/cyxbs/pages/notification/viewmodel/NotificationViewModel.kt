@@ -3,11 +3,11 @@ package com.cyxbs.pages.notification.viewmodel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mredrock.cyxbs.lib.utils.extensions.setSchedulers
-import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
-import com.mredrock.cyxbs.lib.utils.network.mapOrInterceptException
-import com.mredrock.cyxbs.lib.utils.network.mapOrThrowApiException
-import com.mredrock.cyxbs.lib.utils.utils.LogUtils
+import com.cyxbs.components.utils.extensions.setSchedulers
+import com.cyxbs.components.utils.network.ApiGenerator
+import com.cyxbs.components.utils.network.mapOrInterceptException
+import com.cyxbs.components.utils.network.mapOrThrowApiException
+import com.cyxbs.components.utils.utils.LogUtils
 import com.cyxbs.pages.notification.bean.ChangeReadStatusToBean
 import com.cyxbs.pages.notification.bean.DeleteMsgToBean
 import com.cyxbs.pages.notification.bean.ItineraryAllMsg

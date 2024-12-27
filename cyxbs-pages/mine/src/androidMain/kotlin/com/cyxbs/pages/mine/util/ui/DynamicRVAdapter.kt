@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.common.utils.down.bean.DownMessageText
+import com.cyxbs.components.utils.network.DownMessage
 import com.cyxbs.pages.mine.R
 
 /**
  * copy from UserAgreementAdapter
  */
 
-class DynamicRVAdapter(private val list: List<DownMessageText>) :
+class DynamicRVAdapter(private val list: List<DownMessage.DownMessageText>) :
     RecyclerView.Adapter<DynamicRVAdapter.ViewHolder>() {
 
     inner class ViewHolder(view:View):RecyclerView.ViewHolder(view){

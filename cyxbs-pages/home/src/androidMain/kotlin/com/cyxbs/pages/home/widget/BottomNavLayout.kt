@@ -8,7 +8,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.CheckedTextView
 import androidx.cardview.widget.CardView
-import com.mredrock.cyxbs.lib.utils.extensions.drawable
+import com.cyxbs.components.utils.extensions.drawable
 import com.cyxbs.pages.home.BuildConfig
 import com.cyxbs.pages.home.R
 

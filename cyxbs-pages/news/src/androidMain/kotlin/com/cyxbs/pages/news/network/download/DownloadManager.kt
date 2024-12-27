@@ -2,9 +2,9 @@ package com.cyxbs.pages.news.network.download
 
 import android.os.Environment
 import com.cyxbs.pages.news.network.ApiService
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
-import com.mredrock.cyxbs.lib.utils.extensions.saveFile
-import com.mredrock.cyxbs.lib.utils.network.getBaseUrl
+import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.saveFile
+import com.cyxbs.components.utils.network.getBaseUrl
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import retrofit2.Call

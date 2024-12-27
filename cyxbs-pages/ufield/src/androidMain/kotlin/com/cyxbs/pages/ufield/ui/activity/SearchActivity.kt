@@ -12,8 +12,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.utils.adapter.FragmentVpAdapter
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
+import com.cyxbs.components.utils.adapter.FragmentVpAdapter
+import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.pages.ufield.R
 import com.cyxbs.pages.ufield.helper.SoftKeyBoardListener
 import com.cyxbs.pages.ufield.ui.fragment.searchfragment.AllSearchFragment

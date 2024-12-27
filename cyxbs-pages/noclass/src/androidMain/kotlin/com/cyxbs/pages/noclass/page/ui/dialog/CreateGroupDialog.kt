@@ -12,9 +12,9 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.cyxbs.components.account.api.IAccountService
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.lib.utils.extensions.toast
-import com.mredrock.cyxbs.lib.utils.service.ServiceManager
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.toast
+import com.cyxbs.components.utils.service.ServiceManager
 import com.cyxbs.pages.noclass.R
 import com.cyxbs.pages.noclass.page.viewmodel.dialog.CreateGroupViewModel
 import com.cyxbs.pages.noclass.util.startShake

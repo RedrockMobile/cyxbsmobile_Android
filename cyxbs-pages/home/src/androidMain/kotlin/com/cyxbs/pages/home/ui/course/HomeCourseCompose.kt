@@ -38,13 +38,13 @@ import com.cyxbs.components.config.route.COURSE_POS_TO_MAP
 import com.cyxbs.components.config.route.DISCOVER_MAP
 import com.mredrock.cyxbs.lib.base.crash.CrashDialog
 import com.mredrock.cyxbs.lib.base.utils.Umeng
-import com.mredrock.cyxbs.lib.utils.compose.BottomSheetState
-import com.mredrock.cyxbs.lib.utils.compose.clickableNoIndicator
-import com.mredrock.cyxbs.lib.utils.extensions.color
-import com.mredrock.cyxbs.lib.utils.extensions.colorCompose
-import com.mredrock.cyxbs.lib.utils.extensions.drawable
-import com.mredrock.cyxbs.lib.utils.service.ServiceManager
-import com.mredrock.cyxbs.lib.utils.service.impl
+import com.cyxbs.components.utils.compose.BottomSheetState
+import com.cyxbs.components.utils.compose.clickableNoIndicator
+import com.cyxbs.components.utils.extensions.color
+import com.cyxbs.components.utils.extensions.colorCompose
+import com.cyxbs.components.utils.extensions.drawable
+import com.cyxbs.components.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.impl
 import kotlinx.coroutines.launch
 import kotlin.math.max
 

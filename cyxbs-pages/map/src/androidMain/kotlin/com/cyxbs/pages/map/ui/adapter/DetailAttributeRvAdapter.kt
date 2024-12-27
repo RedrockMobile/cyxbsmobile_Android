@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.cyxbs.pages.map.R
-import com.mredrock.cyxbs.lib.utils.extensions.pressToZoomOut
+import com.cyxbs.components.utils.extensions.pressToZoomOut
 
 class DetailAttributeRvAdapter(val context: Context, private val mList: MutableList<String>) : RecyclerView.Adapter<DetailAttributeRvAdapter.ViewHolder>() {
 

@@ -6,8 +6,8 @@ import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.template.IProvider
 import com.cyxbs.pages.affair.api.IAffairService
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
-import com.mredrock.cyxbs.lib.utils.extensions.getSp
+import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.getSp
 
 /**
  * ...

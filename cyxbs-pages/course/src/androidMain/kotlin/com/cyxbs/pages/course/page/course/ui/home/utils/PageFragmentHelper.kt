@@ -19,10 +19,10 @@ import com.cyxbs.pages.course.widget.helper.affair.expose.ITouchCallback
 import com.cyxbs.pages.course.widget.internal.item.IItem
 import com.cyxbs.pages.course.widget.internal.item.IItemContainer
 import com.cyxbs.pages.course.widget.internal.view.course.ICourseViewGroup
-import com.mredrock.cyxbs.lib.utils.extensions.getSp
-import com.mredrock.cyxbs.lib.utils.extensions.launch
-import com.mredrock.cyxbs.lib.utils.service.impl
-import com.mredrock.cyxbs.lib.utils.utils.judge.NetworkUtil
+import com.cyxbs.components.utils.extensions.getSp
+import com.cyxbs.components.utils.extensions.launch
+import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.utils.judge.NetworkUtil
 import com.ndhzs.netlayout.touch.multiple.event.IPointerEvent
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 

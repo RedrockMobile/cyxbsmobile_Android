@@ -4,10 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import com.cyxbs.functions.update.api.AppUpdateStatus
 import com.cyxbs.functions.update.bean.UpdateInfo
 import com.cyxbs.functions.update.network.AppUpdateApiService
-import com.mredrock.cyxbs.lib.utils.extensions.unsafeSubscribeBy
-import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
-import com.mredrock.cyxbs.lib.utils.utils.get.getAppVersionCode
-import com.mredrock.cyxbs.lib.utils.utils.get.getAppVersionName
+import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
+import com.cyxbs.components.utils.network.ApiGenerator
+import com.cyxbs.components.utils.utils.get.getAppVersionCode
+import com.cyxbs.components.utils.utils.get.getAppVersionName
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 

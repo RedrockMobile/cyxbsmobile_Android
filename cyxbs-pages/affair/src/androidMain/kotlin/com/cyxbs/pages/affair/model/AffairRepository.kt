@@ -15,12 +15,12 @@ import com.cyxbs.pages.course.api.utils.getEndRow
 import com.cyxbs.pages.course.api.utils.getEndTimeMinute
 import com.cyxbs.pages.course.api.utils.getStartRow
 import com.cyxbs.pages.course.api.utils.getStartTimeMinute
-import com.mredrock.cyxbs.lib.utils.utils.config.PhoneCalendar
+import com.cyxbs.components.utils.utils.config.PhoneCalendar
 import com.cyxbs.components.config.config.SchoolCalendar
-import com.mredrock.cyxbs.lib.utils.extensions.unsafeSubscribeBy
-import com.mredrock.cyxbs.lib.utils.network.throwApiExceptionIfFail
-import com.mredrock.cyxbs.lib.utils.service.ServiceManager
-import com.mredrock.cyxbs.lib.utils.utils.judge.NetworkUtil
+import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
+import com.cyxbs.components.utils.network.throwApiExceptionIfFail
+import com.cyxbs.components.utils.service.ServiceManager
+import com.cyxbs.components.utils.utils.judge.NetworkUtil
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable

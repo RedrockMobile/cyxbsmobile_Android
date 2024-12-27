@@ -11,9 +11,9 @@ import com.mredrock.cyxbs.lib.base.dailog.BaseChooseDialog
 import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
 import com.mredrock.cyxbs.lib.base.ui.BaseBindActivity
 import com.mredrock.cyxbs.lib.base.ui.viewModelBy
-import com.mredrock.cyxbs.lib.utils.extensions.color
-import com.mredrock.cyxbs.lib.utils.extensions.setImageFromUrl
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.color
+import com.cyxbs.components.utils.extensions.setImageFromUrl
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.store.R
 import com.cyxbs.pages.store.bean.ProductDetail
 import com.cyxbs.pages.store.databinding.StoreActivityProductExchangeBinding

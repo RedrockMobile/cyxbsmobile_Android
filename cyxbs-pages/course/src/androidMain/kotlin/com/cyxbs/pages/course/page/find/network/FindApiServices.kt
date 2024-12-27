@@ -2,8 +2,8 @@ package com.cyxbs.pages.course.page.find.network
 
 import com.cyxbs.pages.course.page.find.bean.FindStuBean
 import com.cyxbs.pages.course.page.find.bean.FindTeaBean
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
-import com.mredrock.cyxbs.lib.utils.network.IApi
+import com.cyxbs.components.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.IApi
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
 

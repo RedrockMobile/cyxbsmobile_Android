@@ -15,10 +15,10 @@ import androidx.transition.*
 import com.cyxbs.pages.affair.R
 import com.cyxbs.pages.affair.widge.TextViewTransition
 import com.mredrock.cyxbs.lib.base.ui.BaseFragment
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.invisible
-import com.mredrock.cyxbs.lib.utils.extensions.toast
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.invisible
+import com.cyxbs.components.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.visible
 
 /**
  * 封装事务点击按钮到下一页的逻辑

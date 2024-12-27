@@ -3,7 +3,7 @@ package com.cyxbs.pages.schoolcar.network
 import com.cyxbs.pages.schoolcar.bean.MapLines
 import com.cyxbs.pages.schoolcar.bean.MapLinesVersion
 import com.cyxbs.pages.schoolcar.bean.SchoolCarLocation
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.ApiWrapper
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
 

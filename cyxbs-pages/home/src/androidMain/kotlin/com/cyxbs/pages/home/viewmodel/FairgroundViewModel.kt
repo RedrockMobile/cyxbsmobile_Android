@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
-import com.mredrock.cyxbs.lib.utils.network.api
-import com.mredrock.cyxbs.lib.utils.network.mapOrInterceptException
+import com.cyxbs.components.utils.network.api
+import com.cyxbs.components.utils.network.mapOrInterceptException
 import com.cyxbs.pages.home.bean.MessageBean
 import com.cyxbs.pages.home.network.FairgroundApiService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

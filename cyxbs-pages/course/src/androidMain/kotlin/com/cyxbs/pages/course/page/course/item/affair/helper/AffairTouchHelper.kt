@@ -17,7 +17,7 @@ import com.cyxbs.pages.course.page.course.item.affair.IAffairManager
 import com.cyxbs.pages.course.page.course.item.affair.helper.listener.*
 import com.cyxbs.pages.course.page.course.ui.home.HomeWeekFragment
 import com.cyxbs.pages.course.page.course.item.affair.helper.listener.AffairExpandableHandler
-import com.mredrock.cyxbs.lib.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.toast
 import com.ndhzs.netlayout.touch.multiple.event.IPointerEvent
 
 /**

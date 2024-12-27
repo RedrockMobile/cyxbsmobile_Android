@@ -1,7 +1,7 @@
 package com.cyxbs.pages.store.page.center.ui.item
 
-import com.mredrock.cyxbs.lib.utils.extensions.setImageFromUrl
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.setImageFromUrl
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.store.R
 import com.cyxbs.pages.store.bean.StampCenter
 import com.cyxbs.pages.store.databinding.StoreRecyclerItemSmallShopProductBinding

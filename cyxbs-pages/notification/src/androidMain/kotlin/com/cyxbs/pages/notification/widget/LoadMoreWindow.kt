@@ -11,7 +11,7 @@ import android.widget.PopupWindow
 import androidx.annotation.LayoutRes
 import com.cyxbs.pages.notification.R
 import com.cyxbs.pages.notification.util.changeWindowAlpha
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 /**
  * Author by OkAndGreat

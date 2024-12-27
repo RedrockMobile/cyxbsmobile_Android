@@ -4,7 +4,7 @@ import com.cyxbs.components.account.bean.LoginParams
 import com.cyxbs.components.account.bean.RefreshParams
 import com.cyxbs.components.account.bean.TokenWrapper
 import com.cyxbs.components.account.bean.UserInfo
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.ApiWrapper
 import retrofit2.Call
 import retrofit2.http.*
 

@@ -11,7 +11,7 @@ import com.cyxbs.pages.course.widget.internal.view.course.ICourseViewGroup
 import com.cyxbs.pages.course.widget.item.helper.expand.ISingleSideExpandable
 import com.cyxbs.pages.course.widget.item.touch.ITouchItem
 import com.cyxbs.pages.course.widget.item.touch.helper.expand.ExpandableItemHelper
-import com.mredrock.cyxbs.lib.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.toast
 import com.ndhzs.netlayout.touch.multiple.event.IPointerEvent
 
 /**

@@ -20,7 +20,7 @@ import com.mredrock.cyxbs.common.utils.extensions.doIfLogin
 import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER
 import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER_FEED
 import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER_RECORD
-import com.mredrock.cyxbs.lib.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.ServiceManager
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.rx3.asFlow

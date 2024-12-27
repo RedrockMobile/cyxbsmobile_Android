@@ -1,11 +1,11 @@
 package com.cyxbs.pages.mine.page.edit
 
 import androidx.lifecycle.MutableLiveData
-import com.mredrock.cyxbs.common.network.ApiGenerator
-import com.mredrock.cyxbs.common.network.CommonApiService
-import com.mredrock.cyxbs.common.utils.down.bean.DownMessageText
-import com.mredrock.cyxbs.common.utils.down.params.DownMessageParams
-import com.mredrock.cyxbs.lib.utils.network.api
+import com.cyxbs.components.utils.network.ApiGenerator
+import com.cyxbs.components.utils.network.CommonApiService
+import com.cyxbs.components.utils.network.DownMessage
+import com.cyxbs.components.utils.network.DownMessageParams
+import com.cyxbs.components.utils.network.api
 import com.cyxbs.pages.mine.network.ApiService
 import com.cyxbs.pages.mine.util.apiService
 import com.cyxbs.pages.mine.util.widget.ExecuteOnceObserver
@@ -37,7 +37,7 @@ class EditViewModel : com.mredrock.cyxbs.lib.base.ui.BaseViewModel() {
             }
     }
 
-    val portraitAgreementList: MutableList<DownMessageText> = mutableListOf()
+    val portraitAgreementList: MutableList<DownMessage.DownMessageText> = mutableListOf()
 
     fun getPortraitAgreement(successCallBack: () -> Unit) {
         val key = "zscy-portrait-agreement"
@@ -48,6 +48,7 @@ class EditViewModel : com.mredrock.cyxbs.lib.base.ui.BaseViewModel() {
             //有时候网路慢会转一下圈圈，但是有时候网络快，圈圈就像是闪了一下，像bug，就让它最少转一秒吧
             .delay((1000 - (System.currentTimeMillis() - time)).coerceAtLeast(0), TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
+            .toObservable()
             .subscribe(ExecuteOnceObserver(
                 onExecuteOnceNext = {
                     portraitAgreementList.clear()

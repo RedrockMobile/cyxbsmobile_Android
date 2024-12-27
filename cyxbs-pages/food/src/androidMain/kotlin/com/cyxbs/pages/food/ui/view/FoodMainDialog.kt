@@ -8,8 +8,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.cyxbs.pages.food.R
 import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
-import com.mredrock.cyxbs.lib.utils.extensions.color
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.color
+import com.cyxbs.components.utils.extensions.dp2px
 
 /**
  * Create by bangbangp on 2023/2/14 17:55

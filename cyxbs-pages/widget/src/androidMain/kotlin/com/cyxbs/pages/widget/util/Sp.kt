@@ -2,7 +2,7 @@ package com.cyxbs.pages.widget.util
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.appContext
 
 /**
  * description ： 本模块通用的sp

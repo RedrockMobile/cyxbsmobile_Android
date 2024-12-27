@@ -14,9 +14,9 @@ import com.cyxbs.components.config.route.DISCOVER_MAP
 import com.cyxbs.components.config.route.UFIELD_DETAIL_ENTRY
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.base.ui.viewModelBy
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.setImageFromUrl
-import com.mredrock.cyxbs.lib.utils.service.ServiceManager
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.setImageFromUrl
+import com.cyxbs.components.utils.service.ServiceManager
 import com.cyxbs.pages.ufield.R
 import com.cyxbs.pages.ufield.bean.RemindMode
 import com.cyxbs.pages.ufield.bean.Todo

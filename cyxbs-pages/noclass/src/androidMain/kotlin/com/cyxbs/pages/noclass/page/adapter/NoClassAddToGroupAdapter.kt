@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.lib.utils.extensions.color
+import com.cyxbs.components.utils.extensions.color
 import com.cyxbs.pages.noclass.R
 import com.cyxbs.pages.noclass.bean.NoClassGroup
 

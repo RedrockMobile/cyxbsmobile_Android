@@ -6,7 +6,7 @@ import com.cyxbs.pages.map.bean.ButtonInfo
 import com.cyxbs.pages.map.bean.FavoritePlace
 import com.cyxbs.pages.map.bean.MapInfo
 import com.cyxbs.pages.map.bean.PlaceDetails
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.ApiWrapper
 import io.reactivex.rxjava3.core.Observable
 
 /**

@@ -8,8 +8,8 @@ import com.cyxbs.pages.course.page.course.item.affair.AffairItem
 import com.cyxbs.pages.course.page.course.item.affair.IAffairManager
 import com.cyxbs.pages.course.page.course.ui.home.IHomePageFragment
 import com.cyxbs.pages.course.widget.fragment.page.ICoursePage
-import com.mredrock.cyxbs.lib.utils.extensions.unsafeSubscribeBy
-import com.mredrock.cyxbs.lib.utils.service.impl
+import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
+import com.cyxbs.components.utils.service.impl
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 
 /**

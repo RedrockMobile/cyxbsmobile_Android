@@ -7,8 +7,8 @@ import com.cyxbs.pages.course.api.utils.getStartRow
 import com.cyxbs.pages.course.api.R
 import com.cyxbs.pages.course.page.course.data.expose.IWeek
 import com.cyxbs.pages.course.widget.item.single.ISingleDayData
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
-import com.mredrock.cyxbs.lib.utils.extensions.lazyUnlock
+import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.lazyUnlock
 
 /**
  * 课表 item 数据类

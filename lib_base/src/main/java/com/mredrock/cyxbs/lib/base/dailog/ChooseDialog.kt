@@ -3,12 +3,11 @@ package com.mredrock.cyxbs.lib.base.dailog
 import android.content.Context
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.StyleRes
-import com.mredrock.cyxbs.lib.utils.extensions.color
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.color
+import com.cyxbs.components.utils.extensions.dp2px
 
 /**
  * 该 dialog 为通用 dialog，包含一个按钮或两个按钮

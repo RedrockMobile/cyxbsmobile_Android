@@ -5,7 +5,7 @@ import com.cyxbs.pages.discover.bean.ItineraryMsgBean
 import com.cyxbs.pages.discover.bean.NewsListItem
 import com.cyxbs.pages.discover.bean.UfieldMsgBean
 import com.cyxbs.pages.discover.bean.UnreadData
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.ApiWrapper
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query

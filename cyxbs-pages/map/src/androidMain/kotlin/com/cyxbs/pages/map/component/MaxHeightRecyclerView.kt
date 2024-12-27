@@ -6,7 +6,7 @@ import android.content.res.TypedArray
 import android.util.AttributeSet
 import androidx.recyclerview.widget.RecyclerView
 import com.cyxbs.pages.map.R
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.dp2px
 
 
 /**

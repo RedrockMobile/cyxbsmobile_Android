@@ -1,7 +1,7 @@
 package com.cyxbs.pages.affair.bean
 
 import com.google.gson.annotations.SerializedName
-import com.mredrock.cyxbs.lib.utils.network.IApiStatus
+import com.cyxbs.components.utils.network.IApiStatus
 import java.io.Serializable
 
 data class AddAffairBean(

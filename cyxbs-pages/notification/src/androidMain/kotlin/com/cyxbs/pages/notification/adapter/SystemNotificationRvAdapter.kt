@@ -18,7 +18,7 @@ import com.cyxbs.pages.notification.ui.activity.WebActivity
 import com.cyxbs.pages.notification.util.Date
 import com.cyxbs.pages.notification.viewmodel.NotificationViewModel
 import com.cyxbs.pages.notification.widget.DeleteDialog
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 /**
  * Author by OkAndGreat

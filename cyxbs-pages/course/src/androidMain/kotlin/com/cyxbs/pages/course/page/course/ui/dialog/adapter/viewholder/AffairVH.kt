@@ -9,9 +9,9 @@ import com.cyxbs.pages.affair.api.IAffairService
 import com.cyxbs.pages.course.R
 import com.cyxbs.pages.course.page.course.data.AffairData
 import com.mredrock.cyxbs.lib.base.utils.safeSubscribeBy
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.lib.utils.extensions.toast
-import com.mredrock.cyxbs.lib.utils.service.impl
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.toast
+import com.cyxbs.components.utils.service.impl
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 
 /**

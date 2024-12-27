@@ -8,8 +8,8 @@ import com.cyxbs.pages.course.api.ILessonService
 import com.cyxbs.pages.course.page.course.model.StuLessonRepository
 import com.cyxbs.pages.course.page.course.room.StuLessonEntity
 import com.cyxbs.pages.course.page.link.model.LinkRepository
-import com.mredrock.cyxbs.lib.utils.service.ServiceManager
-import com.mredrock.cyxbs.lib.utils.utils.judge.NetworkUtil
+import com.cyxbs.components.utils.service.ServiceManager
+import com.cyxbs.components.utils.utils.judge.NetworkUtil
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import kotlinx.coroutines.flow.flow

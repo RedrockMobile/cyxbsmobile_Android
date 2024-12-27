@@ -2,7 +2,7 @@ package com.cyxbs.pages.news.network
 
 import com.cyxbs.pages.news.bean.NewsDetails
 import com.cyxbs.pages.news.bean.NewsListItem
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.ApiWrapper
 import io.reactivex.rxjava3.core.Observable
 import okhttp3.ResponseBody
 import retrofit2.Call

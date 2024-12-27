@@ -5,7 +5,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.webkit.WebSettings
 import android.webkit.WebView
-import com.mredrock.cyxbs.lib.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.toast
 
 /**
  * 传入的实现类应该继承 IAndroidWebView,如果仅使用这个自定义类的话，生命周期回调是没有效果的

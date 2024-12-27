@@ -42,10 +42,10 @@ open class BaseViewModel : ViewModel() {
     }
 
     protected fun toast(s: CharSequence) {
-        com.mredrock.cyxbs.lib.utils.extensions.toast(s)
+        com.cyxbs.components.utils.extensions.toast(s)
     }
 
     protected fun toastLong(s: CharSequence) {
-        com.mredrock.cyxbs.lib.utils.extensions.toastLong(s)
+        com.cyxbs.components.utils.extensions.toastLong(s)
     }
 }

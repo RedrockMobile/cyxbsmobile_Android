@@ -8,7 +8,8 @@ kotlin {
   sourceSets {
     commonMain.dependencies {
       subprojects.forEach { implementation(it) }
-      implementation(projects.libUtils)
+      implementation(projects.cyxbsComponents.utils)
+      implementation(projects.cyxbsComponents.utils)
     }
     androidMain.dependencies {
       implementation(libs.bundles.network)

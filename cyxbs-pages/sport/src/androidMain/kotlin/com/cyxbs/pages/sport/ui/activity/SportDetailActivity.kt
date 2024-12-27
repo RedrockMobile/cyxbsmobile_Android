@@ -7,9 +7,9 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.components.config.config.SchoolCalendar
 import com.cyxbs.components.config.route.DISCOVER_SPORT
 import com.mredrock.cyxbs.lib.base.ui.BaseBindActivity
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.setOnDoubleClickListener
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.setOnDoubleClickListener
+import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.pages.sport.R
 import com.cyxbs.pages.sport.databinding.SportActivitySportDetailBinding
 import com.cyxbs.pages.sport.model.SportDetailBean

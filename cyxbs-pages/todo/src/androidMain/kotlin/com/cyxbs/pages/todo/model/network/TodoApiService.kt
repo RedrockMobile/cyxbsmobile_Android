@@ -6,8 +6,8 @@ import com.cyxbs.pages.todo.model.bean.TodoListGetWrapper
 import com.cyxbs.pages.todo.model.bean.TodoListPushWrapper
 import com.cyxbs.pages.todo.model.bean.TodoListSyncTimeWrapper
 import com.cyxbs.pages.todo.model.bean.TodoPinData
-import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.ApiGenerator
+import com.cyxbs.components.utils.network.ApiWrapper
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Body
 import retrofit2.http.GET

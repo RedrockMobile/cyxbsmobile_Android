@@ -3,7 +3,7 @@ package com.cyxbs.pages.course.page.course.item.view
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.view.View
-import com.mredrock.cyxbs.lib.utils.extensions.dp2pxF
+import com.cyxbs.components.utils.extensions.dp2pxF
 
 /**
  * 跟重叠标记相关的帮助类

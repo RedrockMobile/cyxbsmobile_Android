@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.cyxbs.pages.todo.R
 import com.cyxbs.pages.todo.util.getColor
 import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.dp2px
 
 /**
  * @Project: CyxbsMobile_Android

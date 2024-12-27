@@ -15,7 +15,7 @@ import com.cyxbs.pages.map.widget.OnSelectListener
 import com.cyxbs.pages.map.widget.ProgressDialog
 import com.cyxbs.pages.map.component.FavoriteEditText
 import com.mredrock.cyxbs.lib.base.ui.BaseFragment
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 
 class FavoriteEditFragment : BaseFragment() {

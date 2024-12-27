@@ -16,7 +16,7 @@ import com.mredrock.cyxbs.common.service.ServiceManager
 import com.mredrock.cyxbs.common.utils.LogUtils
 import com.mredrock.cyxbs.common.utils.extensions.getDarkModeStatus
 import com.cyxbs.components.config.view.JToolbar
-import com.mredrock.cyxbs.lib.utils.utils.BindView
+import com.cyxbs.components.utils.utils.BindView
 import org.greenrobot.eventbus.EventBus
 
 

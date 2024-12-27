@@ -12,9 +12,9 @@ import com.cyxbs.pages.declare.detail.page.activity.DetailActivity
 import com.cyxbs.pages.declare.main.page.adapter.HomeRvAdapter
 import com.cyxbs.pages.declare.main.page.viewmodel.HomeViewModel
 import com.mredrock.cyxbs.lib.base.ui.BaseBindActivity
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.setOnDoubleClickListener
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.setOnDoubleClickListener
+import com.cyxbs.components.utils.extensions.visible
 
 @Route(path = DECLARE_ENTRY)
 class HomeActivity : BaseBindActivity<DeclareActivityHomeBinding>() {

@@ -5,7 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.cyxbs.pages.schoolcar.bean.Line
 import com.cyxbs.pages.schoolcar.bean.MapLines
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.appContext
 
 /**
  *@Author:SnowOwlet

@@ -3,7 +3,7 @@ package com.cyxbs.pages.ufield.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
-import com.mredrock.cyxbs.lib.utils.network.mapOrInterceptException
+import com.cyxbs.components.utils.network.mapOrInterceptException
 import com.cyxbs.pages.ufield.bean.ItemActivityBean
 import com.cyxbs.pages.ufield.repository.SearchRepository
 

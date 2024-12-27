@@ -14,7 +14,7 @@ import com.cyxbs.components.init.appApplication
 import com.cyxbs.components.init.appTopActivity
 import com.mredrock.cyxbs.lib.base.crash.CrashMonitor
 import com.mredrock.cyxbs.lib.base.utils.InitialManagerImpl
-import com.mredrock.cyxbs.lib.utils.utils.impl.ActivityLifecycleCallbacksImpl
+import com.cyxbs.components.utils.utils.impl.ActivityLifecycleCallbacksImpl
 import java.lang.ref.WeakReference
 
 /**

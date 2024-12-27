@@ -7,7 +7,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.cyxbs.pages.course.R
 import com.cyxbs.pages.course.page.course.data.ICourseItemData
 import com.cyxbs.pages.course.page.course.ui.dialog.adapter.DialogBottomVpAdapter
-import com.mredrock.cyxbs.lib.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.gone
 import com.ndhzs.slideshow.SlideShow
 
 /**

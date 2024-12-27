@@ -7,9 +7,9 @@ import com.cyxbs.pages.course.BuildConfig
 import com.cyxbs.pages.course.page.course.room.ILessonEntity
 import com.cyxbs.pages.course.page.course.room.StuLessonEntity
 import com.mredrock.cyxbs.lib.base.crash.CrashDialog
-import com.mredrock.cyxbs.lib.utils.extensions.toast
-import com.mredrock.cyxbs.lib.utils.extensions.toastLong
-import com.mredrock.cyxbs.lib.utils.network.IApiWrapper
+import com.cyxbs.components.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.toastLong
+import com.cyxbs.components.utils.network.IApiWrapper
 import java.io.Serializable
 
 /**

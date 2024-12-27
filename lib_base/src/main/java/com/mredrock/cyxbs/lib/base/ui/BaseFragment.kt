@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.*
 import com.mredrock.cyxbs.lib.base.utils.ArgumentHelper
 import com.mredrock.cyxbs.lib.base.utils.ArgumentHelperNullable
-import com.mredrock.cyxbs.lib.utils.utils.BindView
+import com.cyxbs.components.utils.utils.BindView
 
 /**
  * 绝对基础的抽象

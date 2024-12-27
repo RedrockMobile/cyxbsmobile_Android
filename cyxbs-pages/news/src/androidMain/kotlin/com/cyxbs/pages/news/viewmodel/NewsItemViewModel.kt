@@ -10,8 +10,8 @@ import com.cyxbs.pages.news.network.ApiService
 import com.cyxbs.pages.news.network.download.DownloadManager
 import com.cyxbs.pages.news.network.download.RedDownloadListener
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
-import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
-import com.mredrock.cyxbs.lib.utils.network.mapOrThrowApiException
+import com.cyxbs.components.utils.network.ApiGenerator
+import com.cyxbs.components.utils.network.mapOrThrowApiException
 import com.tbruyelle.rxpermissions3.RxPermissions
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers

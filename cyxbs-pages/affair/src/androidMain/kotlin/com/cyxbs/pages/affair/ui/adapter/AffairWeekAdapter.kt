@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cyxbs.pages.affair.R
 import com.cyxbs.pages.affair.ui.adapter.data.AffairWeekData.Companion.WEEK_ARRAY
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 /**
  * author: WhiteNight(1448375249@qq.com)

@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cyxbs.pages.map.R
 import com.cyxbs.pages.map.component.RoundRectImageView
-import com.mredrock.cyxbs.lib.utils.extensions.setImageFromUrl
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.setImageFromUrl
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 class AllPictureRvAdapter(val context: Context, private val mList: MutableList<String>) : RecyclerView.Adapter<AllPictureRvAdapter.ViewHolder>() {
 

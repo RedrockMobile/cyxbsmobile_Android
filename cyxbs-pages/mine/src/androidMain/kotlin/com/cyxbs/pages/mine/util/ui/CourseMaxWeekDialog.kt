@@ -8,7 +8,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import com.cyxbs.pages.course.api.ICourseService
 import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.dp2px
 
 /**
  * 用于设置课表最大周数的 dialog

@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cyxbs.pages.declare.R
 import com.cyxbs.pages.declare.detail.bean.VoteData
 import com.cyxbs.pages.declare.detail.widget.IncreaseCardView
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 /**
  * ... 投票详情页面的Adapter

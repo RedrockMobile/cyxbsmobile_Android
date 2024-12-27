@@ -2,7 +2,7 @@ package com.cyxbs.pages.todo.util
 
 import androidx.core.content.ContextCompat
 import com.cyxbs.pages.todo.model.bean.RemindMode
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.appContext
 
 val weekStringList = listOf(
     "一",

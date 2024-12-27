@@ -8,8 +8,8 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import com.cyxbs.components.config.R
 import com.mredrock.cyxbs.lib.base.dailog.BaseChooseDialog
-import com.mredrock.cyxbs.lib.utils.extensions.color
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.color
+import com.cyxbs.components.utils.extensions.dp2px
 
 /**
  * 用于在 debug 下输入更新内容测试更新弹窗的 dialog

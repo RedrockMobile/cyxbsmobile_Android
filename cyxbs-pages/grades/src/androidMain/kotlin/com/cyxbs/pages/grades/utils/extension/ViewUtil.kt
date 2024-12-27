@@ -1,6 +1,6 @@
 package com.cyxbs.pages.grades.utils.extension
 
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.appContext
 
 /**
  * Created by roger on 2020/2/12

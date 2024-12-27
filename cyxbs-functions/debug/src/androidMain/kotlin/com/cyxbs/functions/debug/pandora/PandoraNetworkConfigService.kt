@@ -1,7 +1,7 @@
 package com.cyxbs.functions.debug.pandora
 
 import com.google.auto.service.AutoService
-import com.mredrock.cyxbs.lib.utils.network.INetworkConfigService
+import com.cyxbs.components.utils.network.INetworkConfigService
 import okhttp3.OkHttpClient
 import tech.linjiang.pandora.Pandora
 

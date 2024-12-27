@@ -3,8 +3,8 @@ package com.cyxbs.pages.mine.page.feedback.utils
 import android.Manifest
 import android.net.Uri
 import androidx.fragment.app.FragmentActivity
-import com.mredrock.cyxbs.lib.utils.extensions.doPermissionAction
-import com.mredrock.cyxbs.lib.utils.extensions.toastLong
+import com.cyxbs.components.utils.extensions.doPermissionAction
+import com.cyxbs.components.utils.extensions.toastLong
 import top.limuyang2.photolibrary.LPhotoHelper
 import top.limuyang2.photolibrary.util.LPPImageType
 

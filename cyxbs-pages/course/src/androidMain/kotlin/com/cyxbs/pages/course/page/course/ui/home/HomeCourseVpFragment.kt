@@ -9,8 +9,8 @@ import com.cyxbs.pages.course.page.course.ui.home.base.HomeCourseVpLinkFragment
 import com.cyxbs.pages.course.page.course.ui.home.viewmodel.HomeCourseViewModel
 import com.cyxbs.pages.course.page.find.ui.find.activity.FindLessonActivity
 import com.cyxbs.pages.course.widget.fragment.page.CoursePageFragment
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 
 /**

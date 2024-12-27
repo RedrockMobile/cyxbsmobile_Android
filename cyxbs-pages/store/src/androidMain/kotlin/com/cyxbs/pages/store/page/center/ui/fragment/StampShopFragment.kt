@@ -12,9 +12,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mredrock.cyxbs.lib.base.ui.BaseFragment
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.invisible
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.invisible
+import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.pages.store.R
 import com.cyxbs.pages.store.bean.StampCenter
 import com.cyxbs.pages.store.page.center.ui.item.SmallShopProductItem

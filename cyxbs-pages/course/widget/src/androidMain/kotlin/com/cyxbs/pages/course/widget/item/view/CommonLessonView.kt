@@ -3,7 +3,7 @@ package com.cyxbs.pages.course.widget.item.view
 import android.content.Context
 import com.cyxbs.pages.course.widget.R
 import com.cyxbs.pages.course.widget.item.lesson.LessonPeriod
-import com.mredrock.cyxbs.lib.utils.extensions.color
+import com.cyxbs.components.utils.extensions.color
 
 /**
  * 通用的课表 itemView

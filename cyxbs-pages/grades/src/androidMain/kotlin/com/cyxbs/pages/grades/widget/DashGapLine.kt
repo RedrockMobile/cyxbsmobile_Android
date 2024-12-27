@@ -7,8 +7,8 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
 import android.view.View
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
-import com.mredrock.cyxbs.lib.utils.extensions.dp2pxF
+import com.cyxbs.components.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.dp2pxF
 
 class DashGapLine(
   context: Context,

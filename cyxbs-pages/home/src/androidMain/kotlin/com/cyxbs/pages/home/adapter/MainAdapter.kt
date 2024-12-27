@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.cyxbs.components.config.route.DISCOVER_ENTRY
 import com.cyxbs.components.config.route.FAIRGROUND_ENTRY
 import com.cyxbs.components.config.route.MINE_ENTRY
-import com.mredrock.cyxbs.lib.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.ServiceManager
 
 /**
  * Created by dingdeqiao on 2021/3/16

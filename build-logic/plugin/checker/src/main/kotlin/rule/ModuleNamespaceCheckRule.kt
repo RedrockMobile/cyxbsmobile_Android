@@ -16,7 +16,7 @@ object ModuleNamespaceCheckRule : AndroidProjectChecker.ICheckRule {
     "lib_crash" to "com.cyxbs.functions.crash",
     "lib_base" to "com.mredrock.cyxbs.lib.base",
     "lib_debug" to "com.cyxbs.functions.debug",
-    "lib_utils" to "com.mredrock.cyxbs.lib.utils",
+    "lib_utils" to "com.cyxbs.components.utils",
     "module_app" to "com.mredrock.cyxbs",
     "module_emptyroom" to "com.mredrock.cyxbs.discover.emptyroom",
     "module_grades" to "com.mredrock.cyxbs.discover.grades",

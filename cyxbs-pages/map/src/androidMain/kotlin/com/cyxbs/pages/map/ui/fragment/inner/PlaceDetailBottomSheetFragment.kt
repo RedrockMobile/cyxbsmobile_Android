@@ -26,8 +26,8 @@ import com.cyxbs.pages.map.util.BannerPageTransformer
 import com.cyxbs.pages.map.viewmodel.MapViewModel
 import com.mredrock.cyxbs.lib.base.operations.doIfLogin
 import com.mredrock.cyxbs.lib.base.ui.BaseFragment
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.visible
 
 
 class PlaceDetailBottomSheetFragment : BaseFragment() {

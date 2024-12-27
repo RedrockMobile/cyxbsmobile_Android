@@ -28,11 +28,11 @@ import com.cyxbs.pages.map.viewmodel.MapViewModel
 import com.cyxbs.pages.map.widget.*
 import com.mredrock.cyxbs.lib.base.operations.doIfLogin
 import com.mredrock.cyxbs.lib.base.ui.BaseFragment
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
-import com.mredrock.cyxbs.lib.utils.extensions.invisible
-import com.mredrock.cyxbs.lib.utils.extensions.launch
-import com.mredrock.cyxbs.lib.utils.extensions.pressToZoomOut
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.invisible
+import com.cyxbs.components.utils.extensions.launch
+import com.cyxbs.components.utils.extensions.pressToZoomOut
+import com.cyxbs.components.utils.extensions.visible
 
 
 class MapViewFragment : BaseFragment() {

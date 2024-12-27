@@ -22,9 +22,9 @@ import com.cyxbs.pages.todo.model.bean.Todo
 import com.cyxbs.pages.todo.util.getColor
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.toast
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.visible
 
 /**
  * description: 增加todo的Dialog

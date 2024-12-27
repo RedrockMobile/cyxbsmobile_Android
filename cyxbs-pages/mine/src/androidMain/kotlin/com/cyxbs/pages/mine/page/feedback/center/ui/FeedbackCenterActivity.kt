@@ -12,7 +12,7 @@ import com.cyxbs.pages.mine.page.feedback.center.presenter.FeedbackCenterPresent
 import com.cyxbs.pages.mine.page.feedback.center.viewmodel.FeedbackCenterViewModel
 import com.cyxbs.pages.mine.page.feedback.edit.ui.FeedbackEditActivity
 import com.cyxbs.pages.mine.page.feedback.history.list.HistoryListActivity
-import com.mredrock.cyxbs.lib.utils.utils.Jump2QQHelper
+import com.cyxbs.components.utils.utils.Jump2QQHelper
 
 /**
  * @Date : 2021/8/23   20:51

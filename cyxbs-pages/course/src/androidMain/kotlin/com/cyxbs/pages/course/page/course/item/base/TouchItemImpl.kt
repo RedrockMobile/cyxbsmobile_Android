@@ -4,7 +4,7 @@ import com.cyxbs.pages.course.widget.item.touch.ITouchItem
 import com.cyxbs.pages.course.widget.item.touch.ITouchItemHelper
 import com.cyxbs.pages.course.widget.item.touch.TouchItemHelper
 import com.cyxbs.pages.course.widget.item.touch.helper.click.ClickItemHelper
-import com.mredrock.cyxbs.lib.utils.extensions.lazyUnlock
+import com.cyxbs.components.utils.extensions.lazyUnlock
 
 /**
  * 设置 Item 通用 Touch 事件的基类

@@ -6,8 +6,8 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.pages.sport.R
 import com.cyxbs.pages.sport.databinding.SportItemRvDetailListBinding
 import com.cyxbs.pages.sport.model.SportDetailItemData

@@ -6,8 +6,8 @@ import com.cyxbs.pages.declare.main.bean.HasPermBean
 import com.cyxbs.pages.declare.main.bean.VotesBean
 import com.cyxbs.pages.declare.main.net.HomeApiService
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
-import com.mredrock.cyxbs.lib.utils.network.api
-import com.mredrock.cyxbs.lib.utils.network.mapOrInterceptException
+import com.cyxbs.components.utils.network.api
+import com.cyxbs.components.utils.network.mapOrInterceptException
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 

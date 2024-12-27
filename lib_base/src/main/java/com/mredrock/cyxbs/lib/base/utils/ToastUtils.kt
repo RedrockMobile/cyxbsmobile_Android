@@ -2,8 +2,8 @@ package com.mredrock.cyxbs.lib.base.utils
 
 import android.widget.Toast
 import androidx.annotation.StringRes
-import com.mredrock.cyxbs.lib.utils.extensions.CyxbsToast
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.CyxbsToast
+import com.cyxbs.components.utils.extensions.appContext
 
 /**
  * Toast 工具类接口

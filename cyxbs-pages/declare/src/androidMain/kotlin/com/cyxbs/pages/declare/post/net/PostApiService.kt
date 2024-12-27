@@ -2,10 +2,10 @@ package com.cyxbs.pages.declare.post.net
 
 import com.google.gson.Gson
 import com.cyxbs.pages.declare.post.bean.PostReqBean
-import com.mredrock.cyxbs.lib.utils.network.ApiStatus
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
-import com.mredrock.cyxbs.lib.utils.network.IApi
-import com.mredrock.cyxbs.lib.utils.network.api
+import com.cyxbs.components.utils.network.ApiStatus
+import com.cyxbs.components.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.IApi
+import com.cyxbs.components.utils.network.api
 import io.reactivex.rxjava3.core.Single
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody

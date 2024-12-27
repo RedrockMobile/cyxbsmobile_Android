@@ -9,8 +9,8 @@ import com.cyxbs.pages.news.R
 import com.cyxbs.pages.news.bean.NewsListItem
 import com.cyxbs.pages.news.ui.activity.NewsItemActivity
 import com.cyxbs.pages.news.utils.TimeFormatHelper
-import com.mredrock.cyxbs.lib.utils.extensions.lazyUnlock
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.lazyUnlock
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 
 /**

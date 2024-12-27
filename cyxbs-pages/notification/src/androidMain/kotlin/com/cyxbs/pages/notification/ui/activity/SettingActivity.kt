@@ -17,9 +17,9 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.pages.mine.api.IGetDaySignClassService
-import com.mredrock.cyxbs.lib.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.ServiceManager
 import com.cyxbs.pages.notification.BuildConfig
 import com.cyxbs.pages.notification.R
 import com.cyxbs.pages.notification.util.Constant.IS_SWITCH1_SELECT

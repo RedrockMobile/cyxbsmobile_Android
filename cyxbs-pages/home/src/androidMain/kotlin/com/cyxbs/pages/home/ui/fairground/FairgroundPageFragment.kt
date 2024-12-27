@@ -20,8 +20,8 @@ import com.cyxbs.components.config.route.FOOD_ENTRY
 import com.cyxbs.components.config.route.UFIELD_MAIN_ENTRY
 import com.mredrock.cyxbs.lib.base.operations.doIfLogin
 import com.mredrock.cyxbs.lib.base.ui.BaseFragment
-import com.mredrock.cyxbs.lib.utils.extensions.setAvatarImageFromUrl
-import com.mredrock.cyxbs.lib.utils.service.ServiceManager
+import com.cyxbs.components.utils.extensions.setAvatarImageFromUrl
+import com.cyxbs.components.utils.service.ServiceManager
 import com.cyxbs.pages.home.R
 import com.cyxbs.pages.home.viewmodel.FairgroundViewModel
 

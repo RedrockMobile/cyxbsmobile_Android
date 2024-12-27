@@ -6,8 +6,8 @@ import com.cyxbs.pages.schoolcar.bean.MapLines
 import com.cyxbs.pages.schoolcar.database.MapInfoDataBase
 import com.cyxbs.pages.schoolcar.network.ApiService
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
-import com.mredrock.cyxbs.lib.utils.extensions.setSchedulers
-import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
+import com.cyxbs.components.utils.extensions.setSchedulers
+import com.cyxbs.components.utils.network.ApiGenerator
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 /**

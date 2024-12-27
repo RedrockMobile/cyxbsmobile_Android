@@ -3,8 +3,8 @@ package com.cyxbs.pages.declare.detail.net
 import com.cyxbs.pages.declare.detail.bean.CancelChoiceBean
 import com.cyxbs.pages.declare.detail.bean.DetailBean
 import com.cyxbs.pages.declare.detail.bean.VotedBean
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
-import com.mredrock.cyxbs.lib.utils.network.IApi
+import com.cyxbs.components.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.IApi
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
 

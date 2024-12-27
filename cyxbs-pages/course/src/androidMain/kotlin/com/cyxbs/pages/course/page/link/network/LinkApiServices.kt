@@ -1,9 +1,9 @@
 package com.cyxbs.pages.course.page.link.network
 
 import com.cyxbs.pages.course.page.link.bean.LinkStudent
-import com.mredrock.cyxbs.lib.utils.network.ApiStatus
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
-import com.mredrock.cyxbs.lib.utils.network.IApi
+import com.cyxbs.components.utils.network.ApiStatus
+import com.cyxbs.components.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.IApi
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
 

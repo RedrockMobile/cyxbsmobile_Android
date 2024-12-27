@@ -18,8 +18,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mredrock.cyxbs.lib.base.ui.BaseFragment
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.pages.noclass.R
 import com.cyxbs.pages.noclass.bean.NoClassGroup
 import com.cyxbs.pages.noclass.page.adapter.NoClassSolidAdapter

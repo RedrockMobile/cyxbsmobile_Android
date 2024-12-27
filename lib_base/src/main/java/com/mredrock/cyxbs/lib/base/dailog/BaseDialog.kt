@@ -6,7 +6,7 @@ import androidx.activity.ComponentDialog
 import androidx.annotation.StyleRes
 import androidx.lifecycle.LifecycleOwner
 import com.mredrock.cyxbs.lib.base.ui.BaseUi
-import com.mredrock.cyxbs.lib.utils.utils.BindView
+import com.cyxbs.components.utils.utils.BindView
 
 /**
  * 支持自定义内容视图的圆角 dialog，该 dialog 样式符合视觉要求的大部分场景

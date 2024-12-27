@@ -13,7 +13,7 @@ import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.cyxbs.pages.mine.api.IGetDaySignClassService
-import com.mredrock.cyxbs.lib.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.ServiceManager
 import com.cyxbs.pages.notification.util.Constant.NOTIFY_TAG
 import java.util.*
 import java.util.concurrent.TimeUnit

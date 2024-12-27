@@ -13,14 +13,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.cyxbs.components.account.api.IAccountService
-import com.mredrock.cyxbs.lib.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.ServiceManager
 import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
 import com.mredrock.cyxbs.common.utils.extensions.dp2px
 import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.mine.R
 import com.cyxbs.pages.mine.databinding.MineActivityFindPasswordBinding
 import com.cyxbs.pages.mine.page.security.util.AnswerTextWatcher
-import com.mredrock.cyxbs.lib.utils.utils.Jump2QQHelper
+import com.cyxbs.components.utils.utils.Jump2QQHelper
 import com.cyxbs.pages.mine.page.security.viewmodel.FindPasswordViewModel
 
 /**

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
 import com.cyxbs.pages.map.component.RoundRectImageView
-import com.mredrock.cyxbs.lib.utils.extensions.setImageFromUrl
+import com.cyxbs.components.utils.extensions.setImageFromUrl
 
 class BannerViewAdapter(val context: Context, val mList: MutableList<String>) : PagerAdapter() {
 

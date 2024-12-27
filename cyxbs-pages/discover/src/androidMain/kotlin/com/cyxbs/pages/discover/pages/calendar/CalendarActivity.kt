@@ -18,8 +18,8 @@ import com.bumptech.glide.request.transition.Transition
 import com.cyxbs.components.config.route.DISCOVER_CALENDAR
 import com.cyxbs.pages.discover.R
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.utils.extensions.isDarkMode
-import com.mredrock.cyxbs.lib.utils.network.getBaseUrl
+import com.cyxbs.components.utils.extensions.isDarkMode
+import com.cyxbs.components.utils.network.getBaseUrl
 
 @Route(path = DISCOVER_CALENDAR)
 class CalendarActivity : BaseActivity() {

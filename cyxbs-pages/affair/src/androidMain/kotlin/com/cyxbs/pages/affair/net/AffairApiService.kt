@@ -6,9 +6,9 @@ import com.cyxbs.pages.affair.bean.NotificationResultBean
 import com.cyxbs.pages.affair.bean.SyncTime
 import com.cyxbs.pages.affair.bean.TodoListPushWrapper
 import com.cyxbs.pages.affair.api.NotificationBean
-import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
-import com.mredrock.cyxbs.lib.utils.network.ApiStatus
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.ApiGenerator
+import com.cyxbs.components.utils.network.ApiStatus
+import com.cyxbs.components.utils.network.ApiWrapper
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
 

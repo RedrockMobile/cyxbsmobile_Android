@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.widget.Button
 import android.widget.TextView
-import com.mredrock.cyxbs.lib.utils.extensions.screenHeight
+import com.cyxbs.components.utils.extensions.screenHeight
 import com.cyxbs.pages.noclass.R
 
 /**

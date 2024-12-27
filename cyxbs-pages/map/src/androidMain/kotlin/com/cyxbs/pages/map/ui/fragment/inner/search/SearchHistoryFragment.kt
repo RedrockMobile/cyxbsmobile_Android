@@ -16,8 +16,8 @@ import com.cyxbs.pages.map.viewmodel.MapViewModel
 import com.cyxbs.pages.map.widget.MapDialog
 import com.cyxbs.pages.map.widget.OnSelectListener
 import com.mredrock.cyxbs.lib.base.ui.BaseFragment
-import com.mredrock.cyxbs.lib.utils.extensions.invisible
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.invisible
+import com.cyxbs.components.utils.extensions.visible
 
 
 class SearchHistoryFragment : BaseFragment() {

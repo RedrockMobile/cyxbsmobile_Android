@@ -20,7 +20,7 @@ import com.cyxbs.pages.affair.ui.viewmodel.fragment.NoClassAffairFragmentViewMod
 import com.cyxbs.pages.affair.api.NoClassBean
 import com.cyxbs.pages.affair.api.NotificationBean
 import com.mredrock.cyxbs.lib.base.ui.BaseFragment
-import com.mredrock.cyxbs.lib.utils.extensions.color
+import com.cyxbs.components.utils.extensions.color
 
 
 //没课约的安排日程

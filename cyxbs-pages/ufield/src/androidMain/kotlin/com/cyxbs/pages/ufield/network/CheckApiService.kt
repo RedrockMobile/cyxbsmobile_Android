@@ -1,8 +1,8 @@
 package com.cyxbs.pages.ufield.network
 
-import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
-import com.mredrock.cyxbs.lib.utils.network.ApiStatus
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.ApiGenerator
+import com.cyxbs.components.utils.network.ApiStatus
+import com.cyxbs.components.utils.network.ApiWrapper
 import com.cyxbs.pages.ufield.bean.DoneBean
 import com.cyxbs.pages.ufield.bean.TodoBean
 import io.reactivex.rxjava3.core.Single

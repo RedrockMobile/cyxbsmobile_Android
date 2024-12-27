@@ -29,10 +29,10 @@ import com.cyxbs.components.account.api.IUserService
 import com.cyxbs.components.config.route.MINE_EDIT_INFO
 import com.cyxbs.components.config.view.JToolbar
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.utils.extensions.doPermissionAction
-import com.mredrock.cyxbs.lib.utils.extensions.setAvatarImageFromUrl
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.lib.utils.service.impl
+import com.cyxbs.components.utils.extensions.doPermissionAction
+import com.cyxbs.components.utils.extensions.setAvatarImageFromUrl
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.mine.R
 import com.cyxbs.pages.mine.util.ui.DynamicRVAdapter
 import com.yalantis.ucrop.UCrop

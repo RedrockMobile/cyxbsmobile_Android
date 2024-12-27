@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.cyxbs.pages.declare.databinding.DeclareItemAddSectionBinding
 import com.cyxbs.pages.declare.databinding.DeclareItemSectionBinding
-import com.mredrock.cyxbs.lib.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.toast
 
 
 /**

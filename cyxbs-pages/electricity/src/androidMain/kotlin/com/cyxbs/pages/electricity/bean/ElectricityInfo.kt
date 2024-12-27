@@ -1,7 +1,7 @@
 package com.cyxbs.pages.electricity.bean
 
 import com.google.gson.annotations.SerializedName
-import com.mredrock.cyxbs.lib.utils.network.IApiStatus
+import com.cyxbs.components.utils.network.IApiStatus
 
 data class ElectricityInfo(
   @SerializedName("elec_inf")

@@ -12,9 +12,9 @@ import androidx.annotation.IdRes
 import com.google.gson.Gson
 import com.cyxbs.components.account.api.IAccountService
 import com.mredrock.cyxbs.lib.base.BaseApp
-import com.mredrock.cyxbs.lib.utils.extensions.CyxbsToast
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
-import com.mredrock.cyxbs.lib.utils.service.impl
+import com.cyxbs.components.utils.extensions.CyxbsToast
+import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.widget.repo.bean.LessonEntity
 import com.cyxbs.pages.widget.repo.database.LessonDatabase
 import com.cyxbs.pages.widget.activity.InfoActivity

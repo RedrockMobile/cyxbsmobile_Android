@@ -16,8 +16,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import com.mredrock.cyxbs.lib.base.utils.IntentHelper
 import com.mredrock.cyxbs.lib.base.utils.IntentHelperNullable
-import com.mredrock.cyxbs.lib.utils.extensions.isDaytimeMode
-import com.mredrock.cyxbs.lib.utils.utils.BindView
+import com.cyxbs.components.utils.extensions.isDaytimeMode
+import com.cyxbs.components.utils.utils.BindView
 
 /**
  * 绝对基础的抽象

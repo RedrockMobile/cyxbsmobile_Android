@@ -13,7 +13,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.cyxbs.components.config.route.UFIELD_MAIN_ENTRY
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.utils.adapter.FragmentVpAdapter
+import com.cyxbs.components.utils.adapter.FragmentVpAdapter
 import com.cyxbs.pages.ufield.R
 import com.cyxbs.pages.ufield.ui.fragment.ufieldfragment.AllFragment
 import com.cyxbs.pages.ufield.ui.fragment.ufieldfragment.CultureFragment

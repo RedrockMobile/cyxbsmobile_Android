@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cyxbs.pages.map.R
 import com.cyxbs.pages.map.model.DataSet
 import com.cyxbs.pages.map.viewmodel.MapViewModel
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 /**
  *@author zhangzhe

@@ -17,11 +17,11 @@ import android.widget.TextView
 import com.cyxbs.components.init.appTopActivity
 import com.cyxbs.components.config.view.ScaleScrollTextView
 import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
-import com.mredrock.cyxbs.lib.utils.extensions.collectUsefulStackTrace
-import com.mredrock.cyxbs.lib.utils.extensions.color
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.lib.utils.utils.Jump2QQHelper
+import com.cyxbs.components.utils.extensions.collectUsefulStackTrace
+import com.cyxbs.components.utils.extensions.color
+import com.cyxbs.components.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.utils.Jump2QQHelper
 
 /**
  * 用于展示崩溃日志的 dialog

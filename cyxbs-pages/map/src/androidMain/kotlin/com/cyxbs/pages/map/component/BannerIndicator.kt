@@ -8,7 +8,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
 import androidx.viewpager.widget.ViewPager
-import com.mredrock.cyxbs.lib.utils.extensions.dp2pxF
+import com.cyxbs.components.utils.extensions.dp2pxF
 
 
 class BannerIndicator : LinearLayout {

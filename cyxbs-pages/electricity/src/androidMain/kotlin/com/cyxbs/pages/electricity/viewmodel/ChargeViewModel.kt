@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import com.cyxbs.pages.electricity.bean.ElecInf
 import com.cyxbs.pages.electricity.network.ApiService
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
-import com.mredrock.cyxbs.lib.utils.extensions.setSchedulers
-import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
-import com.mredrock.cyxbs.lib.utils.network.throwApiExceptionIfFail
+import com.cyxbs.components.utils.extensions.setSchedulers
+import com.cyxbs.components.utils.network.ApiGenerator
+import com.cyxbs.components.utils.network.throwApiExceptionIfFail
 import kotlinx.coroutines.flow.MutableSharedFlow
 
 /**

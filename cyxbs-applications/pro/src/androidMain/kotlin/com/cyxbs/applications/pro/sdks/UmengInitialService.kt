@@ -6,8 +6,8 @@ import com.cyxbs.applications.pro.BuildConfig
 import com.cyxbs.components.init.InitialManager
 import com.cyxbs.components.init.InitialService
 import com.mredrock.cyxbs.lib.base.utils.Umeng
-import com.mredrock.cyxbs.lib.utils.extensions.unsafeSubscribeBy
-import com.mredrock.cyxbs.lib.utils.utils.LogUtils
+import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
+import com.cyxbs.components.utils.utils.LogUtils
 import com.tencent.vasdolly.helper.ChannelReaderUtil
 import com.umeng.analytics.MobclickAgent
 import com.umeng.commonsdk.UMConfigure

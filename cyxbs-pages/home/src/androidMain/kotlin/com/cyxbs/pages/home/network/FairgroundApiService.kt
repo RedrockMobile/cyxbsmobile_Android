@@ -1,7 +1,7 @@
 package com.cyxbs.pages.home.network
 
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
-import com.mredrock.cyxbs.lib.utils.network.IApi
+import com.cyxbs.components.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.IApi
 import com.cyxbs.pages.home.bean.DaysBean
 import com.cyxbs.pages.home.bean.MessageBean
 import io.reactivex.rxjava3.core.Single

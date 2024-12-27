@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import com.cyxbs.pages.course.page.course.ui.home.viewmodel.HomeCourseViewModel
 import com.cyxbs.pages.course.widget.R
 import com.cyxbs.pages.course.widget.internal.view.course.ICourseViewGroup
-import com.mredrock.cyxbs.lib.utils.extensions.anim
+import com.cyxbs.components.utils.extensions.anim
 import com.ndhzs.netlayout.child.OnChildExistListener
 
 /**

@@ -9,7 +9,7 @@ import com.cyxbs.pages.course.widget.helper.affair.expose.ITouchCallback
 import com.cyxbs.pages.course.widget.helper.base.ILongPressTouchHandler
 import com.cyxbs.pages.course.widget.internal.view.course.ICourseScrollControl
 import com.cyxbs.pages.course.widget.internal.view.course.ICourseViewGroup
-import com.mredrock.cyxbs.lib.utils.utils.VibratorUtil
+import com.cyxbs.components.utils.utils.VibratorUtil
 import com.ndhzs.netlayout.draw.ItemDecoration
 import com.ndhzs.netlayout.touch.multiple.event.IPointerEvent
 import com.ndhzs.netlayout.touch.multiple.event.IPointerEvent.Action.*

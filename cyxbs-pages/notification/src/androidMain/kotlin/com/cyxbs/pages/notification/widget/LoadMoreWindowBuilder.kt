@@ -3,7 +3,7 @@ package com.cyxbs.pages.notification.widget
 import android.content.Context
 import android.view.Window
 import androidx.annotation.LayoutRes
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.dp2px
 import kotlin.properties.Delegates
 
 /**

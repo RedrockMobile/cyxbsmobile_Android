@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.lib.utils.extensions.string
+import com.cyxbs.components.utils.extensions.string
 import com.cyxbs.pages.noclass.R
 import com.cyxbs.pages.noclass.bean.NoClassBatchResponseInfo.Student
 

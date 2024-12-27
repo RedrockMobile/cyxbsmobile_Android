@@ -3,7 +3,7 @@ package com.cyxbs.pages.course.page.course.bean
 import androidx.annotation.WorkerThread
 import com.cyxbs.pages.course.BuildConfig
 import com.cyxbs.pages.course.page.course.room.LessonDataBase
-import com.mredrock.cyxbs.lib.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.toast
 
 /**
  * 比对课表版本号所必须的变量

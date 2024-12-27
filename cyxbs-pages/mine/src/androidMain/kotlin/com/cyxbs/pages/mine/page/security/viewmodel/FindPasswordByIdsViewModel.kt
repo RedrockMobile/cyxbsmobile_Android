@@ -3,9 +3,9 @@ package com.cyxbs.pages.mine.page.security.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
-import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
-import com.mredrock.cyxbs.lib.utils.network.mapOrInterceptException
-import com.mredrock.cyxbs.lib.utils.network.throwOrInterceptException
+import com.cyxbs.components.utils.network.ApiGenerator
+import com.cyxbs.components.utils.network.mapOrInterceptException
+import com.cyxbs.components.utils.network.throwOrInterceptException
 import com.cyxbs.pages.mine.network.ApiService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers

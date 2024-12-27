@@ -6,8 +6,8 @@ import com.cyxbs.pages.course.page.course.bean.TeaLessonBean
 import com.cyxbs.pages.course.page.course.room.LessonDataBase
 import com.cyxbs.pages.course.page.course.room.TeaLessonEntity
 import com.cyxbs.pages.course.page.course.network.CourseApiServices
-import com.mredrock.cyxbs.lib.utils.network.api
-import com.mredrock.cyxbs.lib.utils.network.throwApiExceptionIfFail
+import com.cyxbs.components.utils.network.api
+import com.cyxbs.components.utils.network.throwApiExceptionIfFail
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 

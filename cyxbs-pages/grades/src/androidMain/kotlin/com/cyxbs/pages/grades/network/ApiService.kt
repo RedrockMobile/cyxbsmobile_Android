@@ -3,7 +3,7 @@ package com.cyxbs.pages.grades.network
 import com.cyxbs.pages.grades.bean.Exam
 import com.cyxbs.pages.grades.bean.Status
 import com.cyxbs.pages.grades.bean.analyze.GPAStatus
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.ApiWrapper
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
 

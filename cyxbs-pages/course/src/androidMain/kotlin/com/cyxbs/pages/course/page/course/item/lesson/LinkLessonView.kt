@@ -10,7 +10,7 @@ import com.cyxbs.pages.course.page.course.item.view.IOverlapTag
 import com.cyxbs.pages.course.page.course.item.view.OverlapTagHelper
 import com.cyxbs.pages.course.page.course.utils.container.base.IDataOwner
 import com.cyxbs.pages.course.widget.item.view.ItemView
-import com.mredrock.cyxbs.lib.utils.extensions.color
+import com.cyxbs.components.utils.extensions.color
 
 /**
  * 显示关联人课程的 View

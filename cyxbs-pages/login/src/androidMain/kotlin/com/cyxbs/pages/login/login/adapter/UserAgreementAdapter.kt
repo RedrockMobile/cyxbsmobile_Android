@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.lib.utils.network.DownMessage
+import com.cyxbs.components.utils.network.DownMessage
 import com.cyxbs.pages.login.R
 
 /**

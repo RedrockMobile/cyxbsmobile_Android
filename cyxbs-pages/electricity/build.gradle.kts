@@ -12,7 +12,7 @@ kotlin {
       implementation(projects.cyxbsComponents.init)
       implementation(projects.libBase)
       implementation(projects.cyxbsComponents.config)
-      implementation(projects.libUtils)
+      implementation(projects.cyxbsComponents.utils)
       implementation(projects.cyxbsComponents.account.api)
     }
     androidMain.dependencies {

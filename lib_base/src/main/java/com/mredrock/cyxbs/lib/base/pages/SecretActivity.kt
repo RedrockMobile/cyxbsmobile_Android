@@ -6,9 +6,9 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
-import com.mredrock.cyxbs.lib.utils.extensions.getSp
-import com.mredrock.cyxbs.lib.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.getSp
+import com.cyxbs.components.utils.extensions.toast
 import com.mredrock.cyxbs.lib.base.R
 
 /**

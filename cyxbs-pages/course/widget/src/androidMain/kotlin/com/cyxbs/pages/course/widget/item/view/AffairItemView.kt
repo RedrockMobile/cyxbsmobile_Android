@@ -3,8 +3,8 @@ package com.cyxbs.pages.course.widget.item.view
 import android.content.Context
 import android.graphics.*
 import com.cyxbs.pages.course.widget.R
-import com.mredrock.cyxbs.lib.utils.extensions.color
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.color
+import com.cyxbs.components.utils.extensions.dp2px
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sqrt

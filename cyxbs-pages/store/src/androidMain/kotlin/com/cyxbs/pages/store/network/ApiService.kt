@@ -1,7 +1,7 @@
 package com.cyxbs.pages.store.network
 
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
-import com.mredrock.cyxbs.lib.utils.network.IApi
+import com.cyxbs.components.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.IApi
 import com.cyxbs.pages.store.bean.*
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*

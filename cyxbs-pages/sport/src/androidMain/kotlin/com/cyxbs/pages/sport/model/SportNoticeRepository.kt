@@ -2,8 +2,8 @@ package com.cyxbs.pages.sport.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
- import com.mredrock.cyxbs.lib.utils.extensions.unsafeSubscribeBy
-import com.mredrock.cyxbs.lib.utils.network.mapOrInterceptException
+ import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
+import com.cyxbs.components.utils.network.mapOrInterceptException
 import com.cyxbs.pages.sport.model.network.SportNoticeApiService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers

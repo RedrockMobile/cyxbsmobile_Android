@@ -8,8 +8,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.lib.utils.extensions.toast
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.pages.noclass.R
 import com.cyxbs.pages.noclass.bean.NoClassGroup
 import com.cyxbs.pages.noclass.bean.Student

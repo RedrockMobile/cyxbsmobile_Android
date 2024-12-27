@@ -23,8 +23,8 @@ import com.cyxbs.pages.grades.ui.dialog.CommonDialogFragment
 import com.cyxbs.pages.grades.utils.widget.AverageRule
 import com.cyxbs.pages.grades.utils.widget.GpAGraph
 import com.cyxbs.pages.grades.utils.widget.NoDoubleClickListener
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.visible
 
 /**
  * Created by roger on 2020/3/22

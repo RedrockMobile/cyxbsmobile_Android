@@ -11,7 +11,7 @@ kotlin {
     commonMain.dependencies {
       subprojects.forEach { implementation(it) }
       implementation(projects.libBase)
-      implementation(projects.libUtils)
+      implementation(projects.cyxbsComponents.utils)
       implementation(projects.cyxbsComponents.config)
       implementation(projects.cyxbsComponents.config)
       implementation(projects.cyxbsComponents.account.api)

@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import com.cyxbs.pages.news.bean.NewsListItem
 import com.cyxbs.pages.news.network.ApiService
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
-import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
-import com.mredrock.cyxbs.lib.utils.network.mapOrThrowApiException
+import com.cyxbs.components.utils.network.ApiGenerator
+import com.cyxbs.components.utils.network.mapOrThrowApiException
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 

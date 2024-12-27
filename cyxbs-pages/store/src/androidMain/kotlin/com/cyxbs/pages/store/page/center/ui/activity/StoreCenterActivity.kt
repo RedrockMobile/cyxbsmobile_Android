@@ -14,10 +14,10 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.cyxbs.components.config.route.STORE_ENTRY
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.utils.adapter.FragmentVpAdapter
-import com.mredrock.cyxbs.lib.utils.extensions.color
-import com.mredrock.cyxbs.lib.utils.extensions.dp2pxF
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.adapter.FragmentVpAdapter
+import com.cyxbs.components.utils.extensions.color
+import com.cyxbs.components.utils.extensions.dp2pxF
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.store.R
 import com.cyxbs.pages.store.page.center.ui.fragment.StampShopFragment
 import com.cyxbs.pages.store.page.center.ui.fragment.StampTaskFragment

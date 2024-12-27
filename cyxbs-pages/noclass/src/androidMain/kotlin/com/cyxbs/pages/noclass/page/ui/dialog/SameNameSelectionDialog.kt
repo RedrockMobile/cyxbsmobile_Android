@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.mredrock.cyxbs.lib.utils.extensions.drawable
+import com.cyxbs.components.utils.extensions.drawable
 import com.cyxbs.pages.noclass.R
 import com.cyxbs.pages.noclass.bean.NoClassBatchResponseInfo.Student
 import com.cyxbs.pages.noclass.page.adapter.SameNameStudentsAdapter

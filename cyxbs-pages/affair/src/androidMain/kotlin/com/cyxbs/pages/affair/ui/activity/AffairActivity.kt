@@ -13,8 +13,8 @@ import com.cyxbs.pages.affair.ui.fragment.AddAffairFragment
 import com.cyxbs.pages.affair.ui.fragment.EditAffairFragment
 import com.cyxbs.pages.affair.ui.viewmodel.activity.AffairViewModel
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import java.io.Serializable
 import kotlin.math.PI
 import kotlin.math.cos

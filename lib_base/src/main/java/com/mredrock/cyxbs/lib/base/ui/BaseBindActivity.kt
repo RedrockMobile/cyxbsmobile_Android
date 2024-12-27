@@ -6,9 +6,8 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
 import androidx.viewbinding.ViewBinding
-import com.mredrock.cyxbs.lib.base.BuildConfig
-import com.mredrock.cyxbs.lib.utils.extensions.lazyUnlock
-import com.mredrock.cyxbs.lib.utils.utils.get.GenericityUtils.getGenericClass
+import com.cyxbs.components.utils.extensions.lazyUnlock
+import com.cyxbs.components.utils.utils.get.GenericityUtils.getGenericClass
 import java.lang.reflect.Method
 
 /**

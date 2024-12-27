@@ -14,9 +14,9 @@ import com.cyxbs.pages.mine.network.model.UserCount
 import com.cyxbs.pages.mine.network.model.UserUncheckCount
 import com.mredrock.cyxbs.common.bean.RedrockApiStatus
 import com.mredrock.cyxbs.common.bean.RedrockApiWrapper
-import com.mredrock.cyxbs.lib.utils.network.ApiStatus
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
-import com.mredrock.cyxbs.lib.utils.network.IApi
+import com.cyxbs.components.utils.network.ApiStatus
+import com.cyxbs.components.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.IApi
 import com.cyxbs.pages.mine.network.model.ConfirmQuestion
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single

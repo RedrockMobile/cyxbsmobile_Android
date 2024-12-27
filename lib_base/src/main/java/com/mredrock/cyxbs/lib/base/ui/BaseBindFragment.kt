@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
 import androidx.viewbinding.ViewBinding
-import com.mredrock.cyxbs.lib.base.BuildConfig
-import com.mredrock.cyxbs.lib.utils.utils.get.GenericityUtils.getGenericClass
+import com.cyxbs.components.utils.utils.get.GenericityUtils.getGenericClass
 import java.lang.reflect.Method
 
 /**

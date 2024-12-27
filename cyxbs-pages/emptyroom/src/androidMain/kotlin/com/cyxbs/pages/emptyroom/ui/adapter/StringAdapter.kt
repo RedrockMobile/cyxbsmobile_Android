@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import com.cyxbs.pages.emptyroom.ui.widget.MultiSelector
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
-import com.mredrock.cyxbs.lib.utils.extensions.screenWidth
+import com.cyxbs.components.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.screenWidth
 
 /**
  * Created by Cynthia on 2018/9/19

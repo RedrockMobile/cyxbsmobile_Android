@@ -16,7 +16,7 @@ import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.common.utils.extensions.toast
 import com.mredrock.cyxbs.common.utils.extensions.visible
 import com.cyxbs.pages.mine.R
-import com.mredrock.cyxbs.lib.utils.utils.Jump2QQHelper
+import com.cyxbs.components.utils.utils.Jump2QQHelper
 import com.cyxbs.pages.mine.page.security.viewmodel.BindEmailViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable

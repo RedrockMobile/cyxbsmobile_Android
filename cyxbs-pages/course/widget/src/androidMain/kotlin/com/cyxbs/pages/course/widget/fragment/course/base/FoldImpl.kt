@@ -16,8 +16,8 @@ import com.cyxbs.pages.course.widget.internal.view.course.ICourseViewGroup
 import com.cyxbs.pages.course.widget.item.overlap.AbstractOverlapSingleDayItem
 import com.cyxbs.pages.course.widget.item.overlap.IOverlap
 import com.cyxbs.pages.course.widget.utils.forEachInline
-import com.mredrock.cyxbs.lib.utils.extensions.invisible
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.invisible
+import com.cyxbs.components.utils.extensions.visible
 
 /**
  * ## 展开时出现卡顿

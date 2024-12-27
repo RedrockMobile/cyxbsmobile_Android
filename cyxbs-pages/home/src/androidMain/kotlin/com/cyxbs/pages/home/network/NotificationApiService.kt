@@ -1,7 +1,7 @@
 package com.cyxbs.pages.home.network
 
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
-import com.mredrock.cyxbs.lib.utils.network.IApi
+import com.cyxbs.components.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.IApi
 import com.cyxbs.pages.home.bean.ItineraryMsgBean
 import com.cyxbs.pages.home.bean.UfieldMsgBean
 import retrofit2.http.GET

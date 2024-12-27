@@ -16,10 +16,10 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.cyxbs.pages.login.api.ILegalNoticeService
 import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
-import com.mredrock.cyxbs.lib.utils.extensions.color
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
-import com.mredrock.cyxbs.lib.utils.extensions.wrapByNoLeak
-import com.mredrock.cyxbs.lib.utils.service.ServiceManager
+import com.cyxbs.components.utils.extensions.color
+import com.cyxbs.components.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.wrapByNoLeak
+import com.cyxbs.components.utils.service.ServiceManager
 
 /**
  * 用户协议的 Dialog

@@ -2,10 +2,10 @@ package com.cyxbs.pages.notification.model
 
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
-import com.mredrock.cyxbs.lib.utils.extensions.unsafeSubscribeBy
-import com.mredrock.cyxbs.lib.utils.network.ApiStatus
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
-import com.mredrock.cyxbs.lib.utils.network.mapOrInterceptException
+import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
+import com.cyxbs.components.utils.network.ApiStatus
+import com.cyxbs.components.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.mapOrInterceptException
 import com.cyxbs.pages.notification.bean.ItineraryDateBean
 import com.cyxbs.pages.notification.bean.MsgBeanData
 import com.cyxbs.pages.notification.bean.ReceivedItineraryMsgBean

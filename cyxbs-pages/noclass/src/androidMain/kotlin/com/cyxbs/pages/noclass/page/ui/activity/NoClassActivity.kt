@@ -20,7 +20,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.cyxbs.components.config.route.DISCOVER_NO_CLASS
 import com.cyxbs.components.config.sp.defaultSp
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.utils.adapter.FragmentVpAdapter
+import com.cyxbs.components.utils.adapter.FragmentVpAdapter
 import com.cyxbs.pages.noclass.R
 import com.cyxbs.pages.noclass.bean.NoClassSpareTime
 import com.cyxbs.pages.noclass.page.ui.dialog.CreateGroupDialog

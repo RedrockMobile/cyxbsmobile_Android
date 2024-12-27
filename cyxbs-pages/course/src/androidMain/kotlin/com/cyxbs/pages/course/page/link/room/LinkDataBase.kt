@@ -2,7 +2,7 @@ package com.cyxbs.pages.course.page.link.room
 
 import androidx.room.*
 import com.cyxbs.pages.course.page.link.bean.LinkStudent
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.appContext
 import io.reactivex.rxjava3.core.Observable
 import java.io.Serializable
 

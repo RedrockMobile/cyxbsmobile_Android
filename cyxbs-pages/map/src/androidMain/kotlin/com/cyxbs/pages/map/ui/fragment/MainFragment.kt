@@ -17,7 +17,7 @@ import com.cyxbs.pages.map.util.KeyboardController
 import com.cyxbs.pages.map.viewmodel.MapViewModel
 import com.cyxbs.pages.map.component.SearchEditText
 import com.mredrock.cyxbs.lib.base.ui.BaseFragment
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 
 //该MainFragment使用FragmentTransaction管理两个Fragment

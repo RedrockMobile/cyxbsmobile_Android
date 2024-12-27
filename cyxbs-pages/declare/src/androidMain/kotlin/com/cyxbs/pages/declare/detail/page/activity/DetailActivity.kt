@@ -11,9 +11,9 @@ import com.cyxbs.pages.declare.detail.bean.VoteData
 import com.cyxbs.pages.declare.detail.page.adapter.DetailRvAdapter
 import com.cyxbs.pages.declare.detail.page.viewmodel.DetailViewModel
 import com.mredrock.cyxbs.lib.base.ui.BaseBindActivity
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.visible
-import com.mredrock.cyxbs.lib.utils.service.ServiceManager
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.visible
+import com.cyxbs.components.utils.service.ServiceManager
 
 class DetailActivity : BaseBindActivity<DeclareActivityDetailBinding>() {
     companion object {

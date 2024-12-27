@@ -2,7 +2,7 @@ package com.cyxbs.pages.noclass.page.viewmodel.fragment
 
 import androidx.lifecycle.MutableLiveData
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.ApiWrapper
 import com.cyxbs.pages.noclass.bean.Cls
 import com.cyxbs.pages.noclass.bean.NoClassGroup
 import com.cyxbs.pages.noclass.bean.NoClassTemporarySearch

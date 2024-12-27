@@ -1,6 +1,6 @@
 package com.cyxbs.pages.store.page.record.ui.item
 
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.store.R
 import com.cyxbs.pages.store.utils.SimpleRvAdapter
 import com.cyxbs.pages.store.bean.ExchangeRecord

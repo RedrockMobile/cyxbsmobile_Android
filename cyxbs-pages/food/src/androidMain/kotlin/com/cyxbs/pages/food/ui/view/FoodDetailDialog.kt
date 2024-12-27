@@ -13,8 +13,8 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
 import com.cyxbs.pages.food.R
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
-import com.mredrock.cyxbs.lib.utils.extensions.setImageFromUrl
+import com.cyxbs.components.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.setImageFromUrl
 
 /**
  * Create by bangbangp on 2023/3/15 16:00

@@ -33,10 +33,10 @@ import com.cyxbs.pages.emptyroom.viewmodel.EmptyRoomViewModel.Companion.LOADING
 import java.util.*
 import com.cyxbs.components.config.route.DISCOVER_EMPTY_ROOM
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.visible
 
 
 @Route(path = DISCOVER_EMPTY_ROOM)

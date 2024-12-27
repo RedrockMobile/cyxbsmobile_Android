@@ -1,7 +1,7 @@
 package com.mredrock.cyxbs.lib.base.crash
 
 import com.google.auto.service.AutoService
-import com.mredrock.cyxbs.lib.utils.network.INetworkConfigService
+import com.cyxbs.components.utils.network.INetworkConfigService
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response

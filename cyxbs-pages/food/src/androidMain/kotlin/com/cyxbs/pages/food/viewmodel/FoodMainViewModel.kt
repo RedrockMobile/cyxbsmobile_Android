@@ -8,7 +8,7 @@ import com.cyxbs.pages.food.network.FoodApiService
 import com.cyxbs.pages.food.network.bean.FoodPraiseBean
 import com.cyxbs.pages.food.network.bean.FoodRefreshBean
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
-import com.mredrock.cyxbs.lib.utils.network.mapOrInterceptException
+import com.cyxbs.components.utils.network.mapOrInterceptException
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 

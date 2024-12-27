@@ -14,8 +14,8 @@ import com.cyxbs.pages.affair.ui.dialog.base.RedRockBottomSheetDialog
 import com.cyxbs.pages.course.api.utils.getBeginLesson
 import com.cyxbs.pages.course.api.utils.getEndRow
 import com.cyxbs.pages.course.api.utils.getStartRow
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.lib.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.toast
 
 
 /**

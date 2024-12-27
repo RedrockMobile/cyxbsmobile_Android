@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import com.cyxbs.pages.map.util.SubsamplingScaleImageViewShowPictureTarget
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 
 class MyImageAdapter(private val imageUrls: MutableList<String>?

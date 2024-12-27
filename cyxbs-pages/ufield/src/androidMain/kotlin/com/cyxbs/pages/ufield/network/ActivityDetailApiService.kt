@@ -1,8 +1,8 @@
 package com.cyxbs.pages.ufield.network
 
-import com.mredrock.cyxbs.lib.utils.network.ApiStatus
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
-import com.mredrock.cyxbs.lib.utils.network.IApi
+import com.cyxbs.components.utils.network.ApiStatus
+import com.cyxbs.components.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.IApi
 import com.cyxbs.pages.ufield.bean.ActivityBean
 import com.cyxbs.pages.ufield.bean.SyncTime
 import com.cyxbs.pages.ufield.bean.TodoListPushWrapper

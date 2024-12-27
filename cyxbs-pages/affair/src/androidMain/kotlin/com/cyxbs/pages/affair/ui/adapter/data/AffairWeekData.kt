@@ -4,8 +4,8 @@ import com.cyxbs.pages.affair.room.AffairEntity
 import com.cyxbs.pages.course.api.ICourseService
 import com.cyxbs.pages.course.api.utils.getEndRow
 import com.cyxbs.pages.course.api.utils.getStartRow
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
-import com.mredrock.cyxbs.lib.utils.extensions.lazyUnlock
+import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.lazyUnlock
 
 /**
  * ...

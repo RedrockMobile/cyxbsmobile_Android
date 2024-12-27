@@ -10,12 +10,12 @@ import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.pages.discover.R
 import com.cyxbs.pages.discover.network.RollerViewInfo
 import com.cyxbs.pages.discover.pages.RollerViewActivity
-import com.mredrock.cyxbs.lib.utils.extensions.dp2pxF
-import com.mredrock.cyxbs.lib.utils.extensions.processLifecycleScope
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.lib.utils.logger.TrackingUtils
-import com.mredrock.cyxbs.lib.utils.logger.event.ClickEvent
-import com.mredrock.cyxbs.lib.utils.service.impl
+import com.cyxbs.components.utils.extensions.dp2pxF
+import com.cyxbs.components.utils.extensions.processLifecycleScope
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.logger.TrackingUtils
+import com.cyxbs.components.utils.logger.event.ClickEvent
+import com.cyxbs.components.utils.service.impl
 import kotlinx.coroutines.launch
 
 /**

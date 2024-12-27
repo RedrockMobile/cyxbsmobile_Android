@@ -1,8 +1,8 @@
 package com.cyxbs.pages.noclass.net
 
-import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
-import com.mredrock.cyxbs.lib.utils.network.ApiStatus
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.ApiGenerator
+import com.cyxbs.components.utils.network.ApiStatus
+import com.cyxbs.components.utils.network.ApiWrapper
 import com.cyxbs.pages.noclass.bean.NoClassBatchResponseInfo
 import com.cyxbs.pages.noclass.bean.NoClassGroup
 import com.cyxbs.pages.noclass.bean.NoClassTemporarySearch

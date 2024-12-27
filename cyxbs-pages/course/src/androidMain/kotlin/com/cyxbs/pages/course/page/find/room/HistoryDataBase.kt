@@ -3,7 +3,7 @@ package com.cyxbs.pages.course.page.find.room
 import androidx.room.*
 import com.cyxbs.pages.course.page.find.bean.FindStuBean
 import com.cyxbs.pages.course.page.find.bean.FindTeaBean
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.appContext
 import io.reactivex.rxjava3.core.Observable
 import kotlinx.coroutines.flow.Flow
 

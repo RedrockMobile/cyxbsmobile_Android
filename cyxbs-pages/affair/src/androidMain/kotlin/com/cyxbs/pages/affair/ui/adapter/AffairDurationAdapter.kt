@@ -16,8 +16,8 @@ import com.cyxbs.pages.affair.ui.adapter.data.AffairTimeData
 import com.cyxbs.pages.affair.ui.adapter.data.AffairWeekData
 import com.cyxbs.pages.affair.ui.dialog.TimeSelectDialog
 import com.cyxbs.pages.affair.ui.dialog.WeekSelectDialog
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.lib.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.toast
 
 /**
  *

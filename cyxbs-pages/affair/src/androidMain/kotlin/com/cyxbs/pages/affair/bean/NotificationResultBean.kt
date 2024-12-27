@@ -1,6 +1,6 @@
 package com.cyxbs.pages.affair.bean
 
-import com.mredrock.cyxbs.lib.utils.network.IApiStatus
+import com.cyxbs.components.utils.network.IApiStatus
 
 /**
  * 发送通知post的结果bean类

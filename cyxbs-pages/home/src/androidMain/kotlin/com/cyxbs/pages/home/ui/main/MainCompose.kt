@@ -47,8 +47,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.cyxbs.pages.home.R
 import com.cyxbs.pages.home.adapter.MainAdapter
 import com.cyxbs.pages.home.ui.course.HomeCourseCompose
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
-import com.mredrock.cyxbs.lib.utils.extensions.color
+import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.color
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

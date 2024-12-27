@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.base.R
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.visible
-import com.mredrock.cyxbs.lib.utils.network.getBaseUrl
+import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.visible
+import com.cyxbs.components.utils.network.getBaseUrl
 
 /**
  * 在崩溃后查看简单网络请求的 Activity

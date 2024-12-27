@@ -11,9 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.cyxbs.pages.login.api.ILoginService
 import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.lib.base.ui.BaseBindFragment
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.visible
-import com.mredrock.cyxbs.lib.utils.service.impl
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.visible
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.mine.R
 import com.cyxbs.pages.mine.databinding.MineFragmentFindPasswordIdsConfirmBinding
 import com.cyxbs.pages.mine.page.security.util.IdsFindPasswordDialog

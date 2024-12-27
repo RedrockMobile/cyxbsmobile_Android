@@ -2,7 +2,7 @@ package com.cyxbs.pages.mine.page.feedback.history.detail
 
 import com.mredrock.cyxbs.common.utils.extensions.unsafeSubscribeBy
 import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
-import com.mredrock.cyxbs.lib.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.toast
 import com.cyxbs.pages.mine.page.feedback.api
 import com.cyxbs.pages.mine.page.feedback.base.presenter.BasePresenter
 import com.cyxbs.pages.mine.page.feedback.history.detail.bean.Feedback

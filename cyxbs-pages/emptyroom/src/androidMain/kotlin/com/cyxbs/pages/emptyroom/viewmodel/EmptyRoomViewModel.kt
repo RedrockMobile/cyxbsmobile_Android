@@ -5,8 +5,8 @@ import com.cyxbs.pages.emptyroom.bean.EmptyRoom
 import com.cyxbs.pages.emptyroom.network.ApiService
 import com.cyxbs.pages.emptyroom.utils.EmptyConverter
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
-import com.mredrock.cyxbs.lib.utils.extensions.setSchedulers
-import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
+import com.cyxbs.components.utils.extensions.setSchedulers
+import com.cyxbs.components.utils.network.ApiGenerator
 import io.reactivex.rxjava3.disposables.Disposable
 import java.util.concurrent.TimeUnit
 

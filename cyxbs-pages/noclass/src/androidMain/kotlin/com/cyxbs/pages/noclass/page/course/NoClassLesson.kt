@@ -7,8 +7,8 @@ import com.cyxbs.pages.affair.api.DateJson
 import com.cyxbs.pages.course.api.utils.getBeginLesson
 import com.cyxbs.pages.course.widget.item.lesson.BaseLessonLayoutParams
 import com.cyxbs.pages.course.widget.item.lesson.ILessonItem
-import com.mredrock.cyxbs.lib.utils.extensions.color
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.color
+import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.pages.noclass.R
 import com.cyxbs.pages.noclass.page.ui.dialog.NoClassGatherDialog
 

@@ -3,7 +3,7 @@ package com.cyxbs.pages.affair.bean
 import com.google.gson.annotations.SerializedName
 import com.cyxbs.pages.affair.room.AffairEntity
 import com.cyxbs.pages.affair.room.AffairIncompleteEntity
-import com.mredrock.cyxbs.lib.utils.network.IApiWrapper
+import com.cyxbs.components.utils.network.IApiWrapper
 import java.io.Serializable
 
 // 详细的字段解释请看数据库中的实体类

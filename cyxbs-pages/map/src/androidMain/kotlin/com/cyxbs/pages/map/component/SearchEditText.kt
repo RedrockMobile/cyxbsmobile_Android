@@ -11,7 +11,7 @@ import android.view.MotionEvent
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.cyxbs.pages.map.R
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.dp2px
 
 /**
  *@author zhangzhe

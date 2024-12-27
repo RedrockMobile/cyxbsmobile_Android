@@ -7,7 +7,7 @@ import com.cyxbs.pages.course.widget.fragment.course.ICourseBase
 import com.cyxbs.pages.course.widget.fragment.course.expose.wrapper.ICourseWrapper
 import com.cyxbs.pages.course.widget.internal.view.course.ICourseViewGroup
 import com.cyxbs.pages.course.widget.internal.view.course.base.AbstractCourseViewGroup
-import com.mredrock.cyxbs.lib.utils.extensions.color
+import com.cyxbs.components.utils.extensions.color
 import com.ndhzs.netlayout.draw.ItemDecoration
 import java.util.*
 

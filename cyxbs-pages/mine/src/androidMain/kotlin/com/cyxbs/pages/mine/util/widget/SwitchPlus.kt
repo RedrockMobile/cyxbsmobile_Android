@@ -3,7 +3,7 @@ package com.cyxbs.pages.mine.util.widget
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.Switch
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.dp2px
 
 /**
  * Created by roger on 2019/12/12

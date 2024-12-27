@@ -10,9 +10,9 @@ import com.cyxbs.pages.course.page.find.room.HistoryDataBase
 import com.cyxbs.pages.course.page.link.model.LinkRepository
 import com.cyxbs.pages.course.page.link.room.LinkStuEntity
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
-import com.mredrock.cyxbs.lib.utils.extensions.asFlow
-import com.mredrock.cyxbs.lib.utils.network.api
-import com.mredrock.cyxbs.lib.utils.network.mapOrThrowApiException
+import com.cyxbs.components.utils.extensions.asFlow
+import com.cyxbs.components.utils.network.api
+import com.cyxbs.components.utils.network.mapOrThrowApiException
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers

@@ -13,8 +13,8 @@ import com.cyxbs.pages.course.widget.item.lesson.ILessonItem
 import com.cyxbs.pages.course.widget.fragment.page.expose.INoLesson
 import com.cyxbs.pages.course.widget.internal.item.IItem
 import com.cyxbs.pages.course.widget.internal.item.IItemContainer
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.visible
 
 /**
  * ...

@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
-import com.mredrock.cyxbs.lib.utils.extensions.launchCatch
-import com.mredrock.cyxbs.lib.utils.network.api
+import com.cyxbs.components.utils.extensions.launchCatch
+import com.cyxbs.components.utils.network.api
 import com.cyxbs.pages.home.network.NotificationApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

@@ -11,9 +11,9 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.lib.utils.extensions.setImageFromId
-import com.mredrock.cyxbs.lib.utils.extensions.setImageFromUrl
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.setImageFromId
+import com.cyxbs.components.utils.extensions.setImageFromUrl
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.ufield.R
 import com.cyxbs.pages.ufield.ui.activity.DetailActivity
 import com.cyxbs.pages.ufield.bean.RankBean

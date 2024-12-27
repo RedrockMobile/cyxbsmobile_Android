@@ -9,7 +9,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.work.*
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.pages.mine.page.sign.DailySignActivity
 import java.util.*
 import java.util.concurrent.TimeUnit

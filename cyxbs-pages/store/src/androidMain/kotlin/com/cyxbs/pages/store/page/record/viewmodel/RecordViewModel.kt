@@ -3,8 +3,8 @@ package com.cyxbs.pages.store.page.record.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
-import com.mredrock.cyxbs.lib.utils.network.api
-import com.mredrock.cyxbs.lib.utils.network.mapOrInterceptException
+import com.cyxbs.components.utils.network.api
+import com.cyxbs.components.utils.network.mapOrInterceptException
 import com.cyxbs.pages.store.bean.ExchangeRecord
 import com.cyxbs.pages.store.bean.StampGetRecord
 import com.cyxbs.pages.store.network.ApiService

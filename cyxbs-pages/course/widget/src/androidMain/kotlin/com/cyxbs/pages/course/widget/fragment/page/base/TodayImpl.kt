@@ -5,9 +5,9 @@ import android.graphics.Paint
 import android.view.View
 import com.cyxbs.pages.course.widget.R
 import com.cyxbs.pages.course.widget.fragment.page.expose.IToday
-import com.mredrock.cyxbs.lib.utils.extensions.color
-import com.mredrock.cyxbs.lib.utils.extensions.dp2pxF
-import com.mredrock.cyxbs.lib.utils.extensions.lazyUnlock
+import com.cyxbs.components.utils.extensions.color
+import com.cyxbs.components.utils.extensions.dp2pxF
+import com.cyxbs.components.utils.extensions.lazyUnlock
 import com.ndhzs.netlayout.draw.ItemDecoration
 
 /**

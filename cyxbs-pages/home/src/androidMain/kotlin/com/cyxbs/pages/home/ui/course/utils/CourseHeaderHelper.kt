@@ -12,11 +12,11 @@ import com.cyxbs.pages.course.api.utils.getShowTimeStr
 import com.cyxbs.pages.course.api.utils.getStartRow
 import com.cyxbs.pages.course.api.utils.getStartTimeMinute
 import com.cyxbs.pages.course.api.utils.parseClassRoom
-import com.mredrock.cyxbs.lib.utils.service.impl
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.config.config.SchoolCalendar
-import com.mredrock.cyxbs.lib.utils.extensions.isDebuggableBuild
-import com.mredrock.cyxbs.lib.utils.extensions.toast
-import com.mredrock.cyxbs.lib.utils.utils.judge.NetworkUtil
+import com.cyxbs.components.utils.extensions.isDebuggableBuild
+import com.cyxbs.components.utils.extensions.toast
+import com.cyxbs.components.utils.utils.judge.NetworkUtil
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers

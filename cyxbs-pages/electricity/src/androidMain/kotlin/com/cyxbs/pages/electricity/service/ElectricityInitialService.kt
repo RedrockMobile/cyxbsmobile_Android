@@ -11,7 +11,7 @@ import com.cyxbs.pages.electricity.config.SP_BUILDING_HEAD_KEY
 import com.cyxbs.pages.electricity.config.SP_ROOM_KEY
 import com.cyxbs.components.init.InitialManager
 import com.cyxbs.components.init.InitialService
-import com.mredrock.cyxbs.lib.utils.service.impl
+import com.cyxbs.components.utils.service.impl
 
 /**
  * .

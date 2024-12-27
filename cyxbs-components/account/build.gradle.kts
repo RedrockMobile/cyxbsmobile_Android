@@ -8,7 +8,7 @@ kotlin {
   sourceSets {
     commonMain.dependencies {
       subprojects.forEach { implementation(it) }
-      implementation(projects.libUtils)
+      implementation(projects.cyxbsComponents.utils)
       implementation(projects.cyxbsComponents.config)
       implementation(projects.cyxbsPages.login.api)
     }

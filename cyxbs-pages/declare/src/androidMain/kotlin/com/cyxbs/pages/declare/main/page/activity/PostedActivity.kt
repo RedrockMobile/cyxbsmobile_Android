@@ -12,9 +12,9 @@ import com.cyxbs.pages.declare.main.page.adapter.HomeRvAdapter
 import com.cyxbs.pages.declare.main.page.viewmodel.PostedViewModel
 import com.cyxbs.pages.declare.post.PostActivity
 import com.mredrock.cyxbs.lib.base.ui.BaseBindActivity
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.setOnDoubleClickListener
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.setOnDoubleClickListener
+import com.cyxbs.components.utils.extensions.visible
 
 /**
  * 因为发布过投票的页面和主页面差不多，所以这里就共用了主页面的xml

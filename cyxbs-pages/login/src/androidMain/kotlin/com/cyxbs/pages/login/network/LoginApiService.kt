@@ -1,7 +1,7 @@
 package com.cyxbs.pages.login.network
 
-import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
-import com.mredrock.cyxbs.lib.utils.network.ApiStatus
+import com.cyxbs.components.utils.network.ApiGenerator
+import com.cyxbs.components.utils.network.ApiStatus
 import com.cyxbs.pages.login.bean.DeviceInfoParams
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Body

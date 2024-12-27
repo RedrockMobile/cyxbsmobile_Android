@@ -10,7 +10,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.lib.utils.extensions.setImageFromUrl
+import com.cyxbs.components.utils.extensions.setImageFromUrl
 import com.cyxbs.pages.ufield.R
 import com.cyxbs.pages.ufield.bean.ItemActivityBean
 import com.cyxbs.pages.ufield.helper.formatNumberToTime

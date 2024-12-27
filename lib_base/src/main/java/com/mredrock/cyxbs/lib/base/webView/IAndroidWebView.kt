@@ -5,8 +5,8 @@ import android.os.Message
 import android.webkit.JavascriptInterface
 import com.alibaba.android.arouter.launcher.ARouter
 import com.cyxbs.components.account.api.IAccountService
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
-import com.mredrock.cyxbs.lib.utils.service.ServiceManager
+import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.service.ServiceManager
 
 /**
  * 新增的AndroidWebView直接继承这个类

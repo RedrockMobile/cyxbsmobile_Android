@@ -8,7 +8,7 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.*
-import com.mredrock.cyxbs.lib.utils.extensions.dp2pxF
+import com.cyxbs.components.utils.extensions.dp2pxF
 import com.cyxbs.pages.noclass.R
 import java.lang.Integer.min
 

@@ -16,10 +16,10 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.config.route.DISCOVER_SPORT_FEED
 import com.mredrock.cyxbs.lib.base.ui.BaseBindFragment
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.lib.utils.extensions.visible
-import com.mredrock.cyxbs.lib.utils.service.impl
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.visible
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.sport.R
 import com.cyxbs.pages.sport.databinding.SportFragmentDiscoverFeedBinding
 import com.cyxbs.pages.sport.model.SportDetailBean

@@ -19,9 +19,9 @@ import com.cyxbs.pages.course.page.find.ui.course.tea.FindTeaCourseFragment
 import com.cyxbs.pages.course.page.find.ui.find.fragment.FindStuFragment
 import com.cyxbs.pages.course.page.find.viewmodel.activity.FindLessonViewModel
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.utils.adapter.FragmentVpAdapter
-import com.mredrock.cyxbs.lib.utils.extensions.lazyUnlock
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.adapter.FragmentVpAdapter
+import com.cyxbs.components.utils.extensions.lazyUnlock
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 /**
  * ...

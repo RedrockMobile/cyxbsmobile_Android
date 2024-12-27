@@ -10,18 +10,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.lib.utils.extensions.color
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
-import com.mredrock.cyxbs.lib.utils.extensions.drawable
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.lib.utils.extensions.string
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.color
+import com.cyxbs.components.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.drawable
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.string
+import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.pages.notification.R
 import com.cyxbs.pages.notification.bean.ReceivedItineraryMsgBean
 import com.cyxbs.pages.notification.util.Date
-import com.mredrock.cyxbs.lib.utils.extensions.dp2pxF
-import com.mredrock.cyxbs.lib.utils.extensions.sp2dpF
+import com.cyxbs.components.utils.extensions.dp2pxF
+import com.cyxbs.components.utils.extensions.sp2dpF
 
 /**
  * ...

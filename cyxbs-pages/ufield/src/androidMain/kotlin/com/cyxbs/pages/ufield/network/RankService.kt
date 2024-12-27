@@ -1,7 +1,7 @@
 package com.cyxbs.pages.ufield.network
 
-import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
-import com.mredrock.cyxbs.lib.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.ApiGenerator
+import com.cyxbs.components.utils.network.ApiWrapper
 import com.cyxbs.pages.ufield.bean.MsgBeanData
 import com.cyxbs.pages.ufield.bean.RankBean
 import io.reactivex.rxjava3.core.Observable

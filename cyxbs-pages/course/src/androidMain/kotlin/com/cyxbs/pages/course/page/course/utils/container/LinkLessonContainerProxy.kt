@@ -4,7 +4,7 @@ import com.cyxbs.pages.course.page.course.data.StuLessonData
 import com.cyxbs.pages.course.page.course.item.lesson.LinkLessonItem
 import com.cyxbs.pages.course.page.course.utils.container.base.ItemPoolController
 import com.cyxbs.pages.course.widget.fragment.page.ICoursePage
-import com.mredrock.cyxbs.lib.utils.extensions.anim
+import com.cyxbs.components.utils.extensions.anim
 
 /**
  * 代理添加 [LinkLessonItem]

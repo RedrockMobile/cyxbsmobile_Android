@@ -13,9 +13,9 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.screenWidth
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.screenWidth
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 
 /**

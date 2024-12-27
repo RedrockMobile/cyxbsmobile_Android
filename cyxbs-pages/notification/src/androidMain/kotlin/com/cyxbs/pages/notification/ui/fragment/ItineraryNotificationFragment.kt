@@ -18,10 +18,10 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mredrock.cyxbs.lib.base.ui.BaseFragment
 import com.mredrock.cyxbs.lib.base.ui.viewModelBy
-import com.mredrock.cyxbs.lib.utils.adapter.FragmentVpAdapter
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
-import com.mredrock.cyxbs.lib.utils.extensions.color
-import com.mredrock.cyxbs.lib.utils.extensions.dp2pxF
+import com.cyxbs.components.utils.adapter.FragmentVpAdapter
+import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.color
+import com.cyxbs.components.utils.extensions.dp2pxF
 import com.cyxbs.pages.notification.R
 import com.cyxbs.pages.notification.ui.activity.NotificationActivity
 import com.cyxbs.pages.notification.util.Constant.IS_SWITCH1_SELECT
@@ -29,7 +29,7 @@ import com.cyxbs.pages.notification.util.NotificationSp
 import com.cyxbs.pages.notification.viewmodel.ItineraryViewModel
 import com.cyxbs.pages.notification.viewmodel.NotificationViewModel
 import com.cyxbs.pages.notification.widget.ScaleInTransformer
-import com.mredrock.cyxbs.lib.utils.utils.impl.defaultImpl
+import com.cyxbs.components.utils.utils.impl.defaultImpl
 import kotlin.properties.Delegates
 
 /**

@@ -15,8 +15,8 @@ import com.cyxbs.pages.map.util.PhotoViewPager
 import com.cyxbs.pages.map.widget.MapDialog
 import com.cyxbs.pages.map.widget.OnSelectListener
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.utils.extensions.doPermissionAction
-import com.mredrock.cyxbs.lib.utils.extensions.launch
+import com.cyxbs.components.utils.extensions.doPermissionAction
+import com.cyxbs.components.utils.extensions.launch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.io.File

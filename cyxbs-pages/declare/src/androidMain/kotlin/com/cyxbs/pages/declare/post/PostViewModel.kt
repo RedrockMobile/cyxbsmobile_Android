@@ -2,8 +2,8 @@ package com.cyxbs.pages.declare.post
 
 import com.cyxbs.pages.declare.post.net.PostApiService
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
-import com.mredrock.cyxbs.lib.utils.extensions.asFlow
-import com.mredrock.cyxbs.lib.utils.network.ApiStatus
+import com.cyxbs.components.utils.extensions.asFlow
+import com.cyxbs.components.utils.network.ApiStatus
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.flow.MutableSharedFlow

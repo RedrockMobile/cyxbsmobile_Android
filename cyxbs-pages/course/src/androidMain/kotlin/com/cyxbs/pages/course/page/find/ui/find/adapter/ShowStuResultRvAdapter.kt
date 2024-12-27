@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cyxbs.pages.course.R
 import com.cyxbs.pages.course.page.find.bean.FindStuBean
-import com.mredrock.cyxbs.lib.utils.extensions.drawable
-import com.mredrock.cyxbs.lib.utils.extensions.lazyUnlock
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.drawable
+import com.cyxbs.components.utils.extensions.lazyUnlock
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 /**
  * 显示查找到的学生的 Adapter

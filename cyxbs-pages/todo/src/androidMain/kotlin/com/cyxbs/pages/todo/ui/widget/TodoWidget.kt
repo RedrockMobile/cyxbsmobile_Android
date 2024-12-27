@@ -12,7 +12,7 @@ import android.widget.RemoteViews
 import com.alibaba.android.arouter.launcher.ARouter
 import com.cyxbs.pages.todo.service.TodoWidgetService
 import com.cyxbs.components.config.route.TODO_ADD_TODO_BY_WIDGET
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.pages.todo.R
 
 /**

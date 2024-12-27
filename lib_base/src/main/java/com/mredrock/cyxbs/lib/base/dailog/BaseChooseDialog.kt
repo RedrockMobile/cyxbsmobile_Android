@@ -14,7 +14,7 @@ import androidx.annotation.StyleRes
 import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
 import com.cyxbs.components.config.R
-import com.mredrock.cyxbs.lib.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.dp2px
 
 /**
  * 封装了只有单按钮和双按钮的 dialog，自带圆角，符合大部分视觉需要的场景

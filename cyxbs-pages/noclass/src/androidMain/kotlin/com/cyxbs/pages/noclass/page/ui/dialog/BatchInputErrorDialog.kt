@@ -7,7 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.Button
-import com.mredrock.cyxbs.lib.utils.extensions.screenHeight
+import com.cyxbs.components.utils.extensions.screenHeight
 import com.cyxbs.pages.noclass.R
 
 /**

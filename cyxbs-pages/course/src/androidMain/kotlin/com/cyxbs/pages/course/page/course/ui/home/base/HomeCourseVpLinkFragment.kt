@@ -10,8 +10,8 @@ import androidx.core.view.isGone
 import com.cyxbs.pages.course.R
 import com.cyxbs.pages.course.page.course.ui.home.expose.IHomeCourseVp
 import com.cyxbs.pages.course.widget.fragment.vp.AbstractHeaderCourseVpFragment
-import com.mredrock.cyxbs.lib.utils.extensions.lazyUnlock
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.lazyUnlock
+import com.cyxbs.components.utils.extensions.visible
 
 /**
  * 处理关联图标的逻辑

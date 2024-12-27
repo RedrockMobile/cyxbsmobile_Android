@@ -13,8 +13,8 @@ import com.cyxbs.pages.affair.ui.adapter.AffairWeekAdapter
 import com.cyxbs.pages.affair.ui.adapter.data.AffairWeekData
 import com.cyxbs.pages.affair.ui.dialog.base.RedRockBottomSheetDialog
 import com.cyxbs.pages.course.api.ICourseService
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.lib.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.toast
 
 /**
  * author: WhiteNight(1448375249@qq.com)

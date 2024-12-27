@@ -3,7 +3,7 @@ package com.cyxbs.pages.map.util
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.appContext
 
 /**
  *@author zhangzhe

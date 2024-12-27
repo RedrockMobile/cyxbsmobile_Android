@@ -3,8 +3,8 @@ package com.cyxbs.pages.ufield.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
-import com.mredrock.cyxbs.lib.utils.extensions.setSchedulers
-import com.mredrock.cyxbs.lib.utils.network.mapOrThrowApiException
+import com.cyxbs.components.utils.extensions.setSchedulers
+import com.cyxbs.components.utils.network.mapOrThrowApiException
 import com.cyxbs.pages.ufield.bean.RankBean
 import com.cyxbs.pages.ufield.network.RankService
 

@@ -28,9 +28,9 @@ import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.base.webView.IAndroidWebView
 import com.mredrock.cyxbs.lib.base.webView.LiteJsWebView
 import com.mredrock.cyxbs.lib.base.webView.WebViewBaseCallBack
-import com.mredrock.cyxbs.lib.utils.extensions.doPermissionAction
-import com.mredrock.cyxbs.lib.utils.extensions.loadBitmap
-import com.mredrock.cyxbs.lib.utils.extensions.saveImage
+import com.cyxbs.components.utils.extensions.doPermissionAction
+import com.cyxbs.components.utils.extensions.loadBitmap
+import com.cyxbs.components.utils.extensions.saveImage
 
 
 class RollerViewActivity : BaseActivity() {

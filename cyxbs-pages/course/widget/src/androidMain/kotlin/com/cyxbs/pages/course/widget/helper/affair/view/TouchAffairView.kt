@@ -13,10 +13,10 @@ import com.cyxbs.pages.course.widget.item.helper.expand.DoubleSideExpandableHelp
 import com.cyxbs.pages.course.widget.item.helper.expand.ISingleSideExpandable
 import com.cyxbs.pages.course.widget.item.single.SingleDayLayoutParams
 import com.cyxbs.pages.course.widget.item.view.ItemView
-import com.mredrock.cyxbs.lib.utils.extensions.color
-import com.mredrock.cyxbs.lib.utils.extensions.dimen
-import com.mredrock.cyxbs.lib.utils.extensions.lazyUnlock
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.color
+import com.cyxbs.components.utils.extensions.dimen
+import com.cyxbs.components.utils.extensions.lazyUnlock
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 /**
  * 这是长按空白区域生成的带有加号的那个灰色 View。用于点击一下打开添加事务界面

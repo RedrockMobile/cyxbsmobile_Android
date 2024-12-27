@@ -14,9 +14,9 @@ import com.cyxbs.pages.grades.bean.analyze.GPAStatus
 import com.cyxbs.pages.grades.bean.analyze.isSuccessful
 import com.cyxbs.pages.grades.network.ApiService
 import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
-import com.mredrock.cyxbs.lib.utils.extensions.setSchedulers
-import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
-import com.mredrock.cyxbs.lib.utils.network.mapOrInterceptException
+import com.cyxbs.components.utils.extensions.setSchedulers
+import com.cyxbs.components.utils.network.ApiGenerator
+import com.cyxbs.components.utils.network.mapOrInterceptException
 import io.reactivex.rxjava3.core.Observable
 
 class ContainerViewModel : BaseViewModel() {

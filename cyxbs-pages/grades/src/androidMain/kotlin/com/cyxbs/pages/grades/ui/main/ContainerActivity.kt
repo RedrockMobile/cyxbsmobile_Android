@@ -30,11 +30,11 @@ import com.cyxbs.pages.grades.ui.fragment.GPAFragment
 import com.cyxbs.pages.grades.ui.fragment.NoDataFragment
 import com.cyxbs.pages.grades.ui.viewModel.ContainerViewModel
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.utils.extensions.gone
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.visible
 import com.mredrock.cyxbs.lib.base.webView.LiteJsWebView
-import com.mredrock.cyxbs.lib.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.ServiceManager
 
 
 /**

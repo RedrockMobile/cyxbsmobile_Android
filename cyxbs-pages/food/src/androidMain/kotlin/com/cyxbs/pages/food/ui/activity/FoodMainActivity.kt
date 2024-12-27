@@ -24,7 +24,7 @@ import com.cyxbs.pages.food.viewmodel.FoodMainViewModel
 import com.mredrock.cyxbs.lib.base.dailog.BaseChooseDialog
 import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.utils.extensions.*
+import com.cyxbs.components.utils.extensions.*
 
 @Route(path = FOOD_ENTRY)
 class FoodMainActivity : BaseActivity() {
@@ -139,7 +139,7 @@ class FoodMainActivity : BaseActivity() {
                 ).setPositiveClick {
                     this.dismiss()
                 }.show()
-                com.mredrock.cyxbs.lib.utils.service.ServiceManager(IStoreService::class)
+                com.cyxbs.components.utils.service.ServiceManager(IStoreService::class)
                     .postTask(IStoreService.Task.JOIN_FOOD,"","今日已使用美食咨询处一次，获得10邮票")
             }
         }

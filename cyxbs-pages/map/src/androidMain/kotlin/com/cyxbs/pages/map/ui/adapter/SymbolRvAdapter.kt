@@ -15,9 +15,9 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.cyxbs.pages.map.R
 import com.cyxbs.pages.map.bean.InfoItem
 import com.cyxbs.pages.map.viewmodel.MapViewModel
-import com.mredrock.cyxbs.lib.utils.extensions.invisible
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.lib.utils.extensions.visible
+import com.cyxbs.components.utils.extensions.invisible
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.visible
 
 class SymbolRvAdapter(val context: Context, val viewModel: MapViewModel, private val mList: MutableList<InfoItem>, val lifecycleOwner: LifecycleOwner) : RecyclerView.Adapter<SymbolRvAdapter.ViewHolder>() {
     var curSelectorItem: AppCompatCheckedTextView? = null

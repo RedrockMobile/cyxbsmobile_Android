@@ -21,8 +21,8 @@ import com.cyxbs.pages.affair.ui.viewmodel.activity.AffairViewModel
 import com.cyxbs.pages.affair.ui.viewmodel.fragment.EditAffairViewModel
 import com.cyxbs.pages.affair.ui.dialog.RemindSelectDialog
 import com.mredrock.cyxbs.lib.base.ui.BaseFragment
-import com.mredrock.cyxbs.lib.utils.extensions.doPermissionAction
-import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.doPermissionAction
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 /**
  * ...

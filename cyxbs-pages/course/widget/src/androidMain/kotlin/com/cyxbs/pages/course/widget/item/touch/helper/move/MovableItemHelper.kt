@@ -11,7 +11,7 @@ import com.cyxbs.pages.course.widget.item.touch.helper.longpress.ILongPressItemL
 import com.cyxbs.pages.course.widget.item.touch.helper.move.utils.LocationUtil
 import com.cyxbs.pages.course.widget.item.touch.helper.move.utils.MoveAnimation
 import com.cyxbs.pages.course.widget.utils.forEachReversed
-import com.mredrock.cyxbs.lib.utils.utils.VibratorUtil
+import com.cyxbs.components.utils.utils.VibratorUtil
 import com.ndhzs.netlayout.draw.ItemDecoration
 import com.ndhzs.netlayout.touch.multiple.event.IPointerEvent
 import kotlin.math.min
