@@ -3,7 +3,7 @@ package com.mredrock.cyxbs.common.service
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.template.IProvider
-import com.mredrock.cyxbs.lib.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.ServiceManager
 import kotlin.reflect.KClass
 
 /**

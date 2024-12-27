@@ -11,6 +11,9 @@
 - [入手掌邮(内部文档)](https://redrock.feishu.cn/wiki/wikcnHCgHJSFgn5ccJ8BqjMGFef): 掌邮内部一些开发工具
 - [掌邮 Android 新人接锅指南(内部文档)](https://redrock.feishu.cn/wiki/wikcn90MLIPKsG006YTLzg60fvb)
 
+## 发版相关
+发布新版本流程请遵循该[流程(内部文档)](https://redrock.feishu.cn/wiki/wikcnWGkmdTjWUQlrhHvBsqGsCf)
+
 ## 群聊
 欢迎各位 Android 爱好者加群
 

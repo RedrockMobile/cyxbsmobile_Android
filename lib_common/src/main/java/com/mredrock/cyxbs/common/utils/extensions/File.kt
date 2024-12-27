@@ -6,6 +6,7 @@ import androidx.core.content.FileProvider
 import com.mredrock.cyxbs.common.BaseApp
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
 /**
@@ -19,5 +20,5 @@ val File.uri: Uri
     }
 
 fun File.getRequestBody(): RequestBody {
-    return RequestBody.create("multipart/form-data".toMediaTypeOrNull(), this)
+    return this.asRequestBody("multipart/form-data".toMediaTypeOrNull())
 }

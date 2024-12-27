@@ -13,6 +13,7 @@ pluginManagement {
     gradlePluginPortal()
     mavenCentral()
     google()
+    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev") // compose multiplatform
     maven("https://jitpack.io")
     jcenter() // 部分依赖需要
   }
@@ -23,10 +24,11 @@ dependencyResolutionManagement {
     maven("$rootDir/build/maven") // 本地模块缓存文件夹
     google()
     mavenCentral() // 优先 MavenCentral，一是：github CI 下不了 aliyun 依赖；二是：开 VPN 访问 aliyun 反而变慢了
+    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     maven("https://jitpack.io")
     jcenter() // 部分依赖需要
     // mavenCentral 快照仓库
-    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/") // compose multiplatform
     maven("https://maven.aliyun.com/repository/public")
     maven("https://maven.aliyun.com/repository/google")
     mavenLocal() // maven 默认的本地依赖位置：用户名/.m2/repository 中
@@ -34,49 +36,45 @@ dependencyResolutionManagement {
 }
 
 // 测试使用，排除掉不需要的模块，记得还原！！！
-val excludeList = listOf<String>(
-  "module_qa", // qa 模块因合规问题下线，新的代替将上线，所以排除 qa
-  
+val excludeList = setOf<String>(
+  "api_init",
+  "lib_debug",
+  "protocol",
+  "lib_update"
 )
 
-//对文件夹进行遍历，深度为2
-rootDir.walk()
-  .maxDepth(2)
-  .asSequence()
-  .filter {
-    //过滤掉干扰文件夹
-    val isDirectory = it.isDirectory
-    val isSubModule = it.resolve("build.gradle").exists()
-      || it.resolve("build.gradle.kts").exists()
-    val isIndependentProject = it.resolve("settings.gradle").exists()
-      || it.resolve("settings.gradle.kts").exists()
-    isDirectory && isSubModule && !isIndependentProject
-  }
-  .filter {
-    //对module进行过滤
-    "(api_.+)|(module_.+)|(lib_.+)".toRegex().matches(it.name)
-      && it.name !in excludeList
-      && it.parentFile.name !in excludeList // 如果父模块被忽略，则子模块同步忽略
-  }
-  .map {
-    //将file映射到相对路径
-    val parentFile = it.parentFile
-    if (parentFile.path == rootDir.path) {
-      ":${it.name}"
-    } else {
-      ":${parentFile.name}:${it.name}"
+fun includeModule(topName: String, file: File) {
+  if (!file.resolve("settings.gradle.kts").exists() && !excludeList.contains(file.name)) {
+    if (file.resolve("build.gradle.kts").exists()) {
+      var path = ""
+      var nowFile = file
+      while (nowFile.name != topName) {
+        path = ":${nowFile.name}$path"
+        nowFile = nowFile.parentFile
+      }
+      path = "${topName}$path"
+      include(path)
+    }
+    // 递归寻找所有子模块
+    file.listFiles()?.filter {
+      it.name != "src" // 去掉 src 文件夹
+          && it.name != "build"
+          && it.name != "iosApp"
+          && it.name != "gradle"
+          && !it.name.startsWith(".")
+    }?.forEach {
+      includeModule(topName, it)
     }
   }
-  .forEach {
-    //进行include
-    include(it)
-  }
+}
+
+rootDir.listFiles()!!.filter { it.isDirectory }.forEach {
+  includeModule(it.name, it)
+}
+
 /**
  * 每次新建模块会自动添加 include()，请删除掉，因为上面会自动读取
  */
-
-
-
 
 
 

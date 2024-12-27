@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.account.api.IAccountService
 import com.mredrock.cyxbs.common.mark.ActionLoginStatusSubscriber
 import com.mredrock.cyxbs.common.mark.EventBusLifecycleSubscriber
-import com.mredrock.cyxbs.common.service.ServiceManager
+import com.cyxbs.components.utils.service.ServiceManager
 import com.mredrock.cyxbs.common.utils.LogUtils
-import com.mredrock.cyxbs.lib.utils.utils.BindView
+import com.cyxbs.components.utils.utils.BindView
 import org.greenrobot.eventbus.EventBus
 
 /**

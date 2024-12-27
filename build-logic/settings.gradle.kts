@@ -9,6 +9,7 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev") // compose multiplatform
         maven("https://maven.aliyun.com/repository/public")
         maven("https://maven.aliyun.com/repository/google")
         maven("https://jitpack.io")
@@ -19,6 +20,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral() // 优先 MavenCentral，一是：github CI 下不了 aliyun 依赖；二是：开 VPN 访问 aliyun 反而变慢了
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev") // compose multiplatform
         maven("https://maven.aliyun.com/repository/public")
         maven("https://maven.aliyun.com/repository/google")
         maven("https://jitpack.io")
@@ -34,10 +36,14 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "build-logic"
+
+// 项目全局配置
+include(":config")
 // 项目模块插件
 include(":manager")
 //其他业务插件
 include(":plugin")
 include(":plugin:cache")
 include(":plugin:checker")
+include(":plugin:kmp")
 

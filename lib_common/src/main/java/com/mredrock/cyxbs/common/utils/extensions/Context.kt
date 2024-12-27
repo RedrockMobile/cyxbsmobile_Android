@@ -7,11 +7,11 @@ import android.os.Build
 import android.view.View
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
-import com.mredrock.cyxbs.common.service.ServiceManager
-import com.mredrock.cyxbs.api.account.IAccountService
+import com.cyxbs.components.utils.service.ServiceManager
+import com.cyxbs.components.account.api.IAccountService
 import com.mredrock.cyxbs.common.utils.Internals
-import com.mredrock.cyxbs.lib.utils.extensions.appContext
-import com.mredrock.cyxbs.lib.utils.extensions.toastLong
+import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.toastLong
 
 /**
  * Created by anriku on 2018/8/14.
@@ -38,11 +38,11 @@ fun Activity.setFullScreen() {
             or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
 }
 
-@Deprecated("使用 lib_utils 中 toast() 替换", replaceWith = ReplaceWith(""))
-fun toast(message: CharSequence) = com.mredrock.cyxbs.lib.utils.extensions.toast(message)
+@Deprecated("使用 lib_utils 中 toast() 替换", replaceWith = ReplaceWith("com.cyxbs.components.utils.extensions.toast(message)"))
+fun toast(message: CharSequence) = com.cyxbs.components.utils.extensions.toast(message)
 
-@Deprecated("使用 lib_utils 中 toast() 替换", replaceWith = ReplaceWith(""))
-fun toast(res: Int) = com.mredrock.cyxbs.lib.utils.extensions.toast(appContext.resources.getText(res))
+@Deprecated("使用 lib_utils 中 toast() 替换", replaceWith = ReplaceWith("com.cyxbs.components.utils.extensions.toast(res)"))
+fun toast(res: Int) = com.cyxbs.components.utils.extensions.toast(appContext.resources.getText(res))
 
 @Deprecated("使用 lib_utils 中 isDarkMode() 替换")
 fun Context.getDarkModeStatus(): Boolean {

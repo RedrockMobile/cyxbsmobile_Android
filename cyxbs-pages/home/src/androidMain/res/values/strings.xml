@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="home_nav_discover">发现</string>
+    <string name="home_nav_fairground">邮乐园</string>
+    <string name="home_nav_mine">我的</string>
+
+    <string name="home_course_long_name" translatable="false">我的课表</string>
+    <string name="home_course_short_name" translatable="false">课表</string>
+    <string name="home_school_car_long_name" translatable="false">校车查询</string>
+    <string name="home_school_car_short_name" translatable="false">校车</string>
+    <string name="home_empty_room_long_name" translatable="false">空教室查询</string>
+    <string name="home_empty_room_short_name" translatable="false">空教室</string>
+    <string name="home_grade_long_name" translatable="false">考试安排查询</string>
+    <string name="home_grade_short_name" translatable="false">考试</string>
+    <string name="home_shortcut_cancel" translatable="false">暂时无法使用哦</string>
+
+</resources>

@@ -4,7 +4,7 @@
     android:id="@+id/fl_photo_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".component.PhotoViewerActivity">
+    tools:context="com.cyxbs.pages.news.ui.activity.PhotoViewerActivity">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_photo"

@@ -1,6 +1,6 @@
 package com.mredrock.cyxbs.common.network
 
-import com.mredrock.cyxbs.lib.utils.network.ApiGenerator
+import com.cyxbs.components.utils.network.ApiGenerator
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 

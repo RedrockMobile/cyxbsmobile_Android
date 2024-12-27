@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="ConfigAppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--        透明状态栏-->
+        <item name="statusBarBackground">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!--        每个Activity的Window背景，最好别设置透明或者空-->
+        <item name="android:windowBackground">@color/config_window_background</item>
+        <item name="actionMenuTextColor">@color/config_level_two_font_color</item>
+        <!--   Material Dialog color-->
+        <item name="md_color_title">@color/config_level_three_font_color</item>
+        <item name="md_color_content">@color/config_level_four_font_color</item>
+        <item name="md_color_button_text">@color/config_level_two_font_color</item>
+    </style>
+
+    <!--    闪屏页,用于系统在创建app进程之前显示的预览图片-->
+    <style name="SplashTheme" parent="ConfigAppTheme" tools:ignore="ResourceName">
+        <item name="android:windowBackground">@drawable/config_ic_bg_splash_big</item>
+    </style>
+
+    <style name="ConfigAppTheme.FullScreen" parent="ConfigAppTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="ConfigAppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    
+    <style name="ConfigShapeableImageViewCircleStyle" tools:ignore="ResourceName">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="ConfigLPhotoTheme" parent="LPhotoTheme">
+        <!--页面通用属性（图片选择、图片预览共用）-->
+        <item name="l_pp_toolBar_height">56dp</item>
+        <item name="l_pp_toolBar_backIcon">@drawable/config_ic_back</item><!--返回按钮资源-->
+        <item name="l_pp_toolBar_title_size">16sp</item><!--toolBar上字体大小-->
+        <item name="l_pp_bottomBar_height">50dp</item><!--底栏的高度-->
+        <!--图片选择页面属性-->
+        <item name="l_pp_status_bar_color">@color/config_photo_select_status_color
+        </item><!--状态栏颜色-->
+        <item name="l_pp_toolBar_background">@color/config_photo_select_status_color
+        </item><!--toolBar颜色-->
+        <item name="l_pp_picker_activity_bg">@color/config_window_background
+        </item><!--activity背景颜色-->
+        <item name="l_pp_toolBar_title_color">@color/config_level_two_font_color
+        </item><!--(图片选择页面)顶部toolBar字体颜色-->
+        <item name="l_pp_picker_bottomBar_background">@color/config_window_background
+        </item><!--底栏的颜色，如果需要毛玻璃效果，颜色加上透明度-->
+        <item name="l_pp_picker_bottomBar_enabled_text_color">#333333</item><!--底部按钮启用时的颜色-->
+
+        <!--图片分割线宽度-->
+
+        <!--圆形选择框样式（图片选择、图片预览共用，有特别说明的除外）-->
+        <item name="l_pp_checkBox_color_tick" format="color">#00FF7F</item><!--勾勾颜色-->
+        <item name="l_pp_checkBox_duration" format="integer">100</item><!--动画时间-->
+        <item name="l_pp_checkBox_color_checked" format="color">@color/colorPrimary
+        </item><!--选择后的背景色-->
+        <item name="l_pp_checkBox_stroke_width" format="dimension">2dp</item><!--（仅预览页面）圆圈边框宽度-->
+        <item name="l_pp_checkBox_tick_width" format="dimension">2dp</item><!--勾勾的线条宽度-->
+    </style>
+
+    <style name="ConfigBottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog" tools:ignore="ResourceName">
+        <!--dialog是否有边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--dialog是否悬浮在activity上,设置为false，相当于布局在activity中，例如软键盘，可以顶起false的dialog-->
+        <!--但是如果设置 true，会导致-->
+        <item name="android:windowIsFloating">false</item>
+
+        <item name="android:windowIsTranslucent">true</item>
+        <!--状态栏字体颜色，只是在安卓6.0以上可用-->
+        <item name="android:windowLightStatusBar" >true</item>
+        <!--去除dialog最底部的灰色背景-->
+        <item name="colorBackgroundFloating">@android:color/transparent</item>
+        <!--去除dialog默认白色背景-->
+        <item name="android:background">@android:color/transparent</item>
+        <!--是否加遮罩（对话框出现时，背景变暗。为true则充许变暗）-->
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+</resources>

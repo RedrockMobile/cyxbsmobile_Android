@@ -2,10 +2,13 @@ import com.android.build.api.dsl.ApplicationBuildFeatures
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryBuildFeatures
 import com.google.devtools.ksp.gradle.KspExtension
+import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 /**
  * 使用 ARouter
@@ -16,7 +19,7 @@ import org.gradle.kotlin.dsl.dependencies
  *
  * @param isNeedKsp 是否需要处理注解，对于非实现模块是不需要处理注解的，比如 api 模块
  */
-fun Project.useARouter(isNeedKsp: Boolean = !name.startsWith("api_")) {
+fun Project.useARouter(isNeedKsp: Boolean = !name.startsWith("api")) {
   if (isNeedKsp) {
     // kapt 按需引入
     apply(plugin = "com.google.devtools.ksp")
@@ -24,11 +27,15 @@ fun Project.useARouter(isNeedKsp: Boolean = !name.startsWith("api_")) {
       arg("AROUTER_MODULE_NAME", project.name)
     }
     dependencies {
-      "ksp"(libsEx.`arouter-compiler`)
+      "kspAndroid"(libsEx.`arouter-compiler`)
     }
   }
-  dependencies {
-    "implementation"(libsEx.`arouter`)
+  extensions.configure<KotlinMultiplatformExtension> {
+    extensions.configure<NamedDomainObjectContainer<KotlinSourceSet>> {
+      androidMain.dependencies {
+        implementation(libsEx.`arouter`)
+      }
+    }
   }
 }
 
@@ -36,7 +43,8 @@ fun Project.useARouter(isNeedKsp: Boolean = !name.startsWith("api_")) {
  * 使用 DataBinding
  * @param isNeedKapt 是否只依赖而不开启 DataBinding，默认开启 DataBinding
  */
-fun Project.useDataBinding(isNeedKapt: Boolean = !name.startsWith("api_")) {
+@Deprecated("不再建议使用 DataBinding，因为强依赖了 kapt，官方也未提供 ksp 支持。使用 Int.view() 或者 findViewById() 代替")
+fun Project.useDataBinding(isNeedKapt: Boolean = !name.startsWith("api")) {
   if (isNeedKapt) {
     // kapt 按需引入
     apply(plugin = "org.jetbrains.kotlin.kapt")
@@ -49,9 +57,13 @@ fun Project.useDataBinding(isNeedKapt: Boolean = !name.startsWith("api_")) {
       }
     }
   }
-  dependencies {
-    "implementation"(libsEx.`androidx-databinding`)
-    "implementation"(libsEx.`androidx-databinding-ktx`)
+  extensions.configure<KotlinMultiplatformExtension> {
+    extensions.configure<NamedDomainObjectContainer<KotlinSourceSet>> {
+      androidMain.dependencies {
+        implementation(libsEx.`androidx-databinding`)
+        implementation(libsEx.`androidx-databinding-ktx`)
+      }
+    }
   }
 }
 
@@ -59,7 +71,7 @@ fun Project.useDataBinding(isNeedKapt: Boolean = !name.startsWith("api_")) {
  * 使用 AutoService
  * todo 感觉可以切换为我的 KtProvider https://github.com/985892345/KtProvider
  */
-fun Project.useAutoService(isNeedKapt: Boolean = !name.startsWith("api_")) {
+fun Project.useAutoService(isNeedKapt: Boolean = !name.startsWith("api")) {
   if (isNeedKapt) {
     // kapt 按需引入
     apply(plugin = "org.jetbrains.kotlin.kapt")
@@ -67,9 +79,13 @@ fun Project.useAutoService(isNeedKapt: Boolean = !name.startsWith("api_")) {
       "kapt"(libsEx.`autoService-compiler`)
     }
   }
-  dependencies {
-    // 谷歌官方的一种动态加载库 https://github.com/google/auto/tree/main/service
-    "compileOnly"(libsEx.autoService)
+  extensions.configure<KotlinMultiplatformExtension> {
+    extensions.configure<NamedDomainObjectContainer<KotlinSourceSet>> {
+      androidMain.dependencies {
+        // 谷歌官方的一种动态加载库 https://github.com/google/auto/tree/main/service
+        compileOnly(libsEx.autoService)
+      }
+    }
   }
 }
 
@@ -90,30 +106,21 @@ fun Project.useRoom(
     // 启用 Gradle 增量注释处理器
     arg("room.incremental", "true")
   }
-  dependencies {
-    "implementation"(libsEx.`androidx-room`)
-    "implementation"(libsEx.`androidx-room-ktx`)
-    "ksp"(libsEx.`androidx-room-compiler`)
-    if (rxjava) {
-      "implementation"(libsEx.`androidx-room-rxjava`)
-    }
-    if (paging) {
-      "implementation"(libsEx.`androidx-room-paging`)
+  extensions.configure<KotlinMultiplatformExtension> {
+    extensions.configure<NamedDomainObjectContainer<KotlinSourceSet>> {
+      androidMain.dependencies {
+        implementation(libsEx.`androidx-room`)
+        implementation(libsEx.`androidx-room-ktx`)
+        if (rxjava) {
+          implementation(libsEx.`androidx-room-rxjava`)
+        }
+        if (paging) {
+          implementation(libsEx.`androidx-room-paging`)
+        }
+      }
     }
   }
-}
-
-
-/**
- * glide 的配置，我看了一下目前只有 module_map 模块在用，而且只是用来下载文件获取进度，为什么不直接用 okhttp 下载呢？
- * 你们啥时候去把这个逻辑干掉，那就不需要使用这个 kapt 了
- */
-@Deprecated("仅限 module_map 使用，其他模块请直接依赖 glide 即可")
-fun Project.useGlide() {
-  //kapt 按需引入
-  apply(plugin = "org.jetbrains.kotlin.kapt")
   dependencies {
-    "implementation"(libsEx.glide)
-    "kapt"(libsEx.`glide-compiler`)
+    "kspAndroid"(libsEx.`androidx-room-compiler`)
   }
 }

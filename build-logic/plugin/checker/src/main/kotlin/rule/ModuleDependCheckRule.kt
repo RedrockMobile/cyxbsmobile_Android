@@ -14,7 +14,7 @@ object ModuleDependCheckRule : AndroidProjectChecker.ICheckRule {
   // TODO 用于特殊情况时忽略 api 模块检查，正常情况下就应该依赖 api 模块而不是实现模块
   // 以下模块在依赖其他模块时忽略检查
   private val ignoreRootProjectPaths = setOf<String>(
-    ":module_main"
+    ":cyxbs-pages:home"
   )
 
   // 以下模块在被依赖时忽略检查
@@ -23,9 +23,10 @@ object ModuleDependCheckRule : AndroidProjectChecker.ICheckRule {
 
   override fun onConfig(project: Project) {
     if (ignoreRootProjectPaths.contains(project.path)) return
+    val regex = Regex("[Ii]mplementation|[Aa]pi")
     project.afterEvaluate {
       configurations.all {
-        if (name == "implementation" || name == "api") {
+        if (name.contains(regex)) {
           dependencies.forEach { dependency ->
             if (dependency is ProjectDependency) {
               checkProjectDependency(project, dependency.dependencyProject)
@@ -37,10 +38,8 @@ object ModuleDependCheckRule : AndroidProjectChecker.ICheckRule {
   }
 
   private fun checkProjectDependency(root: Project, dependency: Project) {
-    if (dependency.name.startsWith("api")) return
     if (ignoreDependencyProjectPaths.contains(dependency.path)) return
-    val subprojects = dependency.subprojects
-    val apiProject = subprojects.find { it.name.startsWith("api") }
+    val apiProject = dependency.subprojects.find { it.name.startsWith("api") }
     if (apiProject != null) {
       throw IllegalStateException("${root.path} 模块依赖配置有误，不应该依赖 ${dependency.path} 模块，" +
           "而应该依赖其 api 模块: ${apiProject.path}\n" +
