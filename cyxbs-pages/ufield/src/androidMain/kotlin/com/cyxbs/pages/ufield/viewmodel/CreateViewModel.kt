@@ -3,7 +3,7 @@ package com.cyxbs.pages.ufield.viewmodel
 import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.pages.ufield.network.PublishApiService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers

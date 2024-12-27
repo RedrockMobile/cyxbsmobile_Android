@@ -8,7 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.cyxbs.pages.todo.R
 import com.cyxbs.pages.todo.util.getColor
-import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
+import com.cyxbs.components.base.dailog.ChooseDialog
 import com.cyxbs.components.utils.extensions.dp2px
 
 /**

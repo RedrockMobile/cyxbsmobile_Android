@@ -19,7 +19,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.cyxbs.components.config.route.DISCOVER_NO_CLASS
 import com.cyxbs.components.config.sp.defaultSp
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.adapter.FragmentVpAdapter
 import com.cyxbs.pages.noclass.R
 import com.cyxbs.pages.noclass.bean.NoClassSpareTime

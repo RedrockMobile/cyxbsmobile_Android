@@ -22,9 +22,8 @@ import com.cyxbs.components.config.route.NOTIFICATION_HOME
 import com.cyxbs.components.config.route.STORE_ENTRY
 import com.cyxbs.components.config.route.UFIELD_CENTER_ENTRY
 import com.mredrock.cyxbs.common.utils.extensions.loadAvatar
-import com.cyxbs.components.config.route.*
-import com.mredrock.cyxbs.lib.base.operations.doIfLogin
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.operations.doIfLogin
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.processLifecycleScope
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener

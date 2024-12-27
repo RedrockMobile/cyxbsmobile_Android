@@ -40,8 +40,8 @@ import com.cyxbs.pages.discover.utils.IS_SWITCH1_SELECT
 import com.cyxbs.pages.discover.utils.MoreFunctionProvider
 import com.cyxbs.pages.discover.utils.NotificationSp
 import com.cyxbs.pages.discover.widget.IndicatorView
-import com.mredrock.cyxbs.lib.base.operations.doIfLogin
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.operations.doIfLogin
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.processLifecycleScope

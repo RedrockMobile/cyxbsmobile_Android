@@ -2,8 +2,8 @@ package com.cyxbs.pages.login.login.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import com.cyxbs.components.account.api.IAccountService
-import com.mredrock.cyxbs.lib.base.BaseApp
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.BaseApp
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.utils.utils.judge.NetworkUtil
 import com.cyxbs.pages.login.bean.DeviceInfoParams

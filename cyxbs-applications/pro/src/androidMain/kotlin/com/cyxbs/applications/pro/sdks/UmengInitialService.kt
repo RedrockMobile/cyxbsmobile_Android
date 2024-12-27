@@ -5,7 +5,7 @@ import com.google.auto.service.AutoService
 import com.cyxbs.applications.pro.BuildConfig
 import com.cyxbs.components.init.InitialManager
 import com.cyxbs.components.init.InitialService
-import com.mredrock.cyxbs.lib.base.utils.Umeng
+import com.cyxbs.components.base.utils.Umeng
 import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
 import com.cyxbs.components.utils.utils.LogUtils
 import com.tencent.vasdolly.helper.ChannelReaderUtil

@@ -7,7 +7,7 @@ import com.cyxbs.pages.affair.bean.TodoListPushWrapper
 import com.cyxbs.pages.affair.model.AffairRepository
 import com.cyxbs.pages.affair.net.AffairApiService
 import com.cyxbs.pages.affair.room.AffairEntity
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.extensions.getSp
 import com.cyxbs.components.utils.network.mapOrInterceptException
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

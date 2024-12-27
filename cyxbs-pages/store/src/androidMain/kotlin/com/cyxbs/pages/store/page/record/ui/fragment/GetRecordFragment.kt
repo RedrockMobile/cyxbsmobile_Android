@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.pages.store.R
 import com.cyxbs.pages.store.utils.SimpleRvAdapter

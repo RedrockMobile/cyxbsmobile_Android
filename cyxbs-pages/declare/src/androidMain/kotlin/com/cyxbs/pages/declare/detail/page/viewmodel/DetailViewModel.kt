@@ -6,7 +6,7 @@ import com.cyxbs.pages.declare.detail.bean.CancelChoiceBean
 import com.cyxbs.pages.declare.detail.bean.DetailBean
 import com.cyxbs.pages.declare.detail.bean.VotedBean
 import com.cyxbs.pages.declare.detail.net.DetailApiService
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.network.api
 import com.cyxbs.components.utils.network.mapOrInterceptException
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

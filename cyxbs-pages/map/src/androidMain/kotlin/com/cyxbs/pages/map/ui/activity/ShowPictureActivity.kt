@@ -14,7 +14,7 @@ import com.cyxbs.pages.map.ui.adapter.MyImageAdapter
 import com.cyxbs.pages.map.util.PhotoViewPager
 import com.cyxbs.pages.map.widget.MapDialog
 import com.cyxbs.pages.map.widget.OnSelectListener
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.doPermissionAction
 import com.cyxbs.components.utils.extensions.launch
 import kotlinx.coroutines.Dispatchers

@@ -15,7 +15,7 @@ import com.cyxbs.pages.map.bean.PlaceItem
 import com.cyxbs.pages.map.ui.adapter.SearchResultAdapter
 import com.cyxbs.pages.map.util.ThreadPool
 import com.cyxbs.pages.map.viewmodel.MapViewModel
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.ui.BaseFragment
 import java.util.regex.Pattern
 
 class SearchResultFragment : BaseFragment() {

@@ -36,8 +36,8 @@ import com.cyxbs.pages.home.ui.course.utils.CourseHeaderHelper
 import com.cyxbs.pages.course.api.ICourseService
 import com.cyxbs.components.config.route.COURSE_POS_TO_MAP
 import com.cyxbs.components.config.route.DISCOVER_MAP
-import com.mredrock.cyxbs.lib.base.crash.CrashDialog
-import com.mredrock.cyxbs.lib.base.utils.Umeng
+import com.cyxbs.components.base.crash.CrashDialog
+import com.cyxbs.components.base.utils.Umeng
 import com.cyxbs.components.utils.compose.BottomSheetState
 import com.cyxbs.components.utils.compose.clickableNoIndicator
 import com.cyxbs.components.utils.extensions.color

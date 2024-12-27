@@ -6,7 +6,7 @@ import com.cyxbs.pages.affair.model.AffairRepository
 import com.cyxbs.pages.affair.room.AffairDataBase
 import com.cyxbs.pages.affair.room.AffairEntity
 import com.cyxbs.components.account.api.IAccountService
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.service.ServiceManager
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers

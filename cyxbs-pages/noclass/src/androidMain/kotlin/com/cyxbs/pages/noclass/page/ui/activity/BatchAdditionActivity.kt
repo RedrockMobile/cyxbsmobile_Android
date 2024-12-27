@@ -16,7 +16,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.cyxbs.components.config.sp.defaultSp
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.visible

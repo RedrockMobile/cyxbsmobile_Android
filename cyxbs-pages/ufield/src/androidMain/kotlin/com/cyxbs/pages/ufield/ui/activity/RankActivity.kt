@@ -5,7 +5,7 @@ import android.widget.RelativeLayout
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.ufield.R
 import com.cyxbs.pages.ufield.adapter.RankAdapter

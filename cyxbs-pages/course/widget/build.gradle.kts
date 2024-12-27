@@ -5,7 +5,7 @@ plugins {
 kotlin {
   sourceSets {
     commonMain.dependencies {
-      implementation(projects.libBase)
+      implementation(projects.cyxbsComponents.base)
       implementation(projects.cyxbsComponents.config)
       implementation(projects.cyxbsComponents.utils)
       implementation(projects.cyxbsPages.course.api)

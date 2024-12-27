@@ -21,9 +21,9 @@ import com.cyxbs.pages.food.ui.adapters.FoodMainRvAdapter
 import com.cyxbs.pages.food.ui.view.FoodDetailDialog
 import com.cyxbs.pages.food.ui.view.FoodMainDialog
 import com.cyxbs.pages.food.viewmodel.FoodMainViewModel
-import com.mredrock.cyxbs.lib.base.dailog.BaseChooseDialog
-import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.dailog.BaseChooseDialog
+import com.cyxbs.components.base.dailog.ChooseDialog
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.*
 
 @Route(path = FOOD_ENTRY)

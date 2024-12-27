@@ -8,7 +8,7 @@ import android.widget.FrameLayout
 import com.google.auto.service.AutoService
 import com.cyxbs.components.init.InitialManager
 import com.cyxbs.components.init.InitialService
-import com.mredrock.cyxbs.lib.base.pages.SecretActivity
+import com.cyxbs.components.base.pages.SecretActivity
 import com.cyxbs.components.utils.utils.impl.ActivityLifecycleCallbacksImpl
 import tech.linjiang.pandora.Pandora
 import tech.linjiang.pandora.util.SensorDetector

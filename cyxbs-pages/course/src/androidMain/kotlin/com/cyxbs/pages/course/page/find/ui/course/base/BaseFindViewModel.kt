@@ -2,7 +2,7 @@ package com.cyxbs.pages.course.page.find.ui.course.base
 
 import androidx.lifecycle.LiveData
 import com.cyxbs.pages.course.page.course.data.LessonData
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.config.config.SchoolCalendar
 
 /**

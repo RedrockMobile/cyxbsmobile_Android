@@ -22,7 +22,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.pages.todo.R
 import com.google.gson.Gson
 import com.cyxbs.components.config.route.TODO_TODO_DETAIL
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.toastWithYOffset
 import com.cyxbs.components.utils.extensions.visible

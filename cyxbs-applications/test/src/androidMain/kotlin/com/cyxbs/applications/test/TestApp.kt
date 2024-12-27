@@ -1,6 +1,6 @@
 package com.cyxbs.applications.test
 
-import com.mredrock.cyxbs.lib.base.BaseApp
+import com.cyxbs.components.base.BaseApp
 
 /**
  * .

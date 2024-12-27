@@ -2,7 +2,7 @@ package com.cyxbs.pages.home.ui.defaultpage
 
 import android.os.Bundle
 import android.view.View
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.pages.home.R
 
 /**

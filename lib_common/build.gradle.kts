@@ -22,3 +22,8 @@ dependencies {
   implementation(libs.photoView)
 }
 
+/*
+* lib_common 模块已被分离为 base、utils、config 模块
+* 后续不要再依赖该模块，在完成迁移后会进行删除
+*
+* */

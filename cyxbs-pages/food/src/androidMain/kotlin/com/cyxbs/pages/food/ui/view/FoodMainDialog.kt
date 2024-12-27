@@ -7,7 +7,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.cyxbs.pages.food.R
-import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
+import com.cyxbs.components.base.dailog.ChooseDialog
 import com.cyxbs.components.utils.extensions.color
 import com.cyxbs.components.utils.extensions.dp2px
 

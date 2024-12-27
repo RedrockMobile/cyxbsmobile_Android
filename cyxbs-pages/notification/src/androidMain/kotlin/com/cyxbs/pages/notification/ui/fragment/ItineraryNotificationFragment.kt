@@ -16,8 +16,8 @@ import com.google.android.material.shape.RoundedCornerTreatment
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
-import com.mredrock.cyxbs.lib.base.ui.viewModelBy
+import com.cyxbs.components.base.ui.BaseFragment
+import com.cyxbs.components.base.ui.viewModelBy
 import com.cyxbs.components.utils.adapter.FragmentVpAdapter
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.color

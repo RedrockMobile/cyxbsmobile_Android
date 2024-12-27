@@ -10,7 +10,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.cyxbs.pages.login.api.ILoginService
 import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.lib.base.ui.BaseBindFragment
+import com.cyxbs.components.base.ui.BaseBindFragment
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.components.utils.service.impl

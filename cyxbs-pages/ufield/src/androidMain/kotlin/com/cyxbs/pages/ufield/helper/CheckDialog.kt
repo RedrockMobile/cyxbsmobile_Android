@@ -10,7 +10,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.mredrock.cyxbs.lib.base.dailog.BaseChooseDialog
+import com.cyxbs.components.base.dailog.BaseChooseDialog
 import com.cyxbs.components.utils.extensions.color
 import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.pages.ufield.R

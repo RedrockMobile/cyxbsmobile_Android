@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cyxbs.pages.schoolcar.adapter.CarPageAdapter
 import com.cyxbs.pages.schoolcar.databinding.SchoolcarActivityDetailSchoolcarBinding
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 
 /**
  *@Author:SnowOwlet

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import com.cyxbs.pages.course.BuildConfig
 import com.cyxbs.pages.course.page.course.room.ILessonEntity
 import com.cyxbs.pages.course.page.course.room.StuLessonEntity
-import com.mredrock.cyxbs.lib.base.crash.CrashDialog
+import com.cyxbs.components.base.crash.CrashDialog
 import com.cyxbs.components.utils.extensions.toast
 import com.cyxbs.components.utils.extensions.toastLong
 import com.cyxbs.components.utils.network.IApiWrapper

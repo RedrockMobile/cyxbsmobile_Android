@@ -27,8 +27,8 @@ import com.cyxbs.pages.news.utils.TimeFormatHelper
 import com.cyxbs.pages.news.viewmodel.NewsItemViewModel
 import com.cyxbs.components.config.route.DISCOVER_NEWS_ITEM
 import com.cyxbs.components.config.view.JToolbar
-import com.mredrock.cyxbs.lib.base.pages.PhotoViewerActivity
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.pages.PhotoViewerActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.showFile
 import com.tbruyelle.rxpermissions3.RxPermissions

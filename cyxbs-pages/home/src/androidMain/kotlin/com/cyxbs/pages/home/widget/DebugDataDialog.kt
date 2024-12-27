@@ -9,7 +9,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.TextView
-import com.mredrock.cyxbs.lib.base.utils.Umeng
+import com.cyxbs.components.base.utils.Umeng
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.toast
 import com.cyxbs.pages.home.R

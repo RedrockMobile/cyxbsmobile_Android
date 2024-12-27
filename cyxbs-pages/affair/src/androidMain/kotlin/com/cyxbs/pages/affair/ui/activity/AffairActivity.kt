@@ -12,7 +12,7 @@ import com.cyxbs.pages.affair.R
 import com.cyxbs.pages.affair.ui.fragment.AddAffairFragment
 import com.cyxbs.pages.affair.ui.fragment.EditAffairFragment
 import com.cyxbs.pages.affair.ui.viewmodel.activity.AffairViewModel
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import java.io.Serializable

@@ -1,6 +1,7 @@
 package com.cyxbs.pages.mine.page.edit
 
 import androidx.lifecycle.MutableLiveData
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.network.ApiGenerator
 import com.cyxbs.components.utils.network.CommonApiService
 import com.cyxbs.components.utils.network.DownMessage
@@ -18,7 +19,7 @@ import java.util.concurrent.TimeUnit
 /**
  * Created by zia on 2018/8/26.
  */
-class EditViewModel : com.mredrock.cyxbs.lib.base.ui.BaseViewModel() {
+class EditViewModel : BaseViewModel() {
 
     val upLoadImageEvent = MutableLiveData<Boolean>()
 

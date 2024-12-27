@@ -16,7 +16,7 @@ import com.cyxbs.pages.map.ui.fragment.inner.SearchFragment
 import com.cyxbs.pages.map.util.KeyboardController
 import com.cyxbs.pages.map.viewmodel.MapViewModel
 import com.cyxbs.pages.map.component.SearchEditText
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 

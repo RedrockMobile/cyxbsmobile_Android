@@ -2,7 +2,7 @@ package com.cyxbs.pages.course.page.course.item.base
 
 import com.cyxbs.pages.course.page.course.data.ICourseItemData
 import com.cyxbs.pages.course.page.course.ui.dialog.CourseBottomDialog
-import com.mredrock.cyxbs.lib.base.utils.Umeng
+import com.cyxbs.components.base.utils.Umeng
 import com.cyxbs.pages.course.widget.internal.item.forEachRow
 import com.cyxbs.pages.course.widget.item.overlap.AbstractOverlapSingleDayItem
 import java.util.*

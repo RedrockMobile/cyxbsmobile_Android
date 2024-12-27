@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cyxbs.pages.store.utils.SimpleRvAdapter
 import com.cyxbs.pages.store.R
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.pages.store.bean.ExchangeRecord
 import com.cyxbs.pages.store.page.record.ui.item.ExchangePageItem

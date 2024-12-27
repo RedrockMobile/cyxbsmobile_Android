@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.lib.base.ui.BaseBindActivity
+import com.cyxbs.components.base.ui.BaseBindActivity
 import com.cyxbs.pages.mine.R
 import com.cyxbs.pages.mine.databinding.MineActivityFindPasswordIdsBinding
 import com.cyxbs.pages.mine.page.security.fragment.LoginIdsFragment

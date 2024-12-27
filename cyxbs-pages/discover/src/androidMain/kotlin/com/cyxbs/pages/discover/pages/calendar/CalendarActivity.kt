@@ -17,7 +17,7 @@ import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.bumptech.glide.request.transition.Transition
 import com.cyxbs.components.config.route.DISCOVER_CALENDAR
 import com.cyxbs.pages.discover.R
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.isDarkMode
 import com.cyxbs.components.utils.network.getBaseUrl
 

@@ -3,7 +3,7 @@ package com.cyxbs.pages.home.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.extensions.launchCatch
 import com.cyxbs.components.utils.network.api
 import com.cyxbs.pages.home.network.NotificationApiService

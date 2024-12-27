@@ -5,8 +5,8 @@ import com.cyxbs.applications.pro.BuildConfig
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.init.InitialManager
 import com.cyxbs.components.init.InitialService
-import com.mredrock.cyxbs.lib.base.BaseApp
-import com.mredrock.cyxbs.lib.base.crash.CrashMonitor
+import com.cyxbs.components.base.BaseApp
+import com.cyxbs.components.base.crash.CrashMonitor
 import com.cyxbs.components.utils.service.impl
 import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.vasdolly.helper.ChannelReaderUtil

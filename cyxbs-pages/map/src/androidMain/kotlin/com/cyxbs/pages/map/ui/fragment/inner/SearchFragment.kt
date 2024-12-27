@@ -11,7 +11,7 @@ import com.cyxbs.pages.map.R
 import com.cyxbs.pages.map.ui.fragment.inner.search.SearchHistoryFragment
 import com.cyxbs.pages.map.ui.fragment.inner.search.SearchResultFragment
 import com.cyxbs.pages.map.viewmodel.MapViewModel
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.ui.BaseFragment
 
 /**
  * 因为多fragment在transaction的多层嵌套会出现内部fragment被回收的情况，于是每次都手动创建新的fragment并回收原来的fragment

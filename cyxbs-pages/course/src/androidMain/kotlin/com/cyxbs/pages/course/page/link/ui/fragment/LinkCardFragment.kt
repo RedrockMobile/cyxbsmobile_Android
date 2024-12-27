@@ -14,8 +14,8 @@ import com.cyxbs.pages.course.R
 import com.cyxbs.pages.course.page.find.viewmodel.activity.FindLessonViewModel
 import com.cyxbs.pages.course.page.link.room.LinkStuEntity
 import com.cyxbs.pages.course.page.link.viewmodel.fragment.LinkCardViewModel
-import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.dailog.ChooseDialog
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.visible

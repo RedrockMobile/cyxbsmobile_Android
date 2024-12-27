@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.pages.course.widget.R
 import com.cyxbs.pages.course.widget.fragment.course.ICourseBase
 import com.cyxbs.pages.course.widget.fragment.course.expose.wrapper.ICourseWrapper

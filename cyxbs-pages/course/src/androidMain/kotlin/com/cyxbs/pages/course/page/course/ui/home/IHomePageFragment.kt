@@ -4,7 +4,7 @@ import com.cyxbs.pages.course.page.course.ui.home.viewmodel.HomeCourseViewModel
 import com.cyxbs.pages.course.page.course.utils.container.AffairContainerProxy
 import com.cyxbs.pages.course.page.course.utils.container.LinkLessonContainerProxy
 import com.cyxbs.pages.course.page.course.utils.container.SelfLessonContainerProxy
-import com.mredrock.cyxbs.lib.base.ui.BaseUi
+import com.cyxbs.components.base.ui.BaseUi
 import com.cyxbs.pages.course.widget.fragment.page.ICoursePage
 
 /**

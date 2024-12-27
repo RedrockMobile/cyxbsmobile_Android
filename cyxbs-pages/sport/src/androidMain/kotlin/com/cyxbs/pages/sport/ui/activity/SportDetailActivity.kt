@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.components.config.config.SchoolCalendar
 import com.cyxbs.components.config.route.DISCOVER_SPORT
-import com.mredrock.cyxbs.lib.base.ui.BaseBindActivity
+import com.cyxbs.components.base.ui.BaseBindActivity
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.setOnDoubleClickListener
 import com.cyxbs.components.utils.extensions.visible

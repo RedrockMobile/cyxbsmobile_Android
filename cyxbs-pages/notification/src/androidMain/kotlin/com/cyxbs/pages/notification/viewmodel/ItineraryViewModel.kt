@@ -2,7 +2,7 @@ package com.cyxbs.pages.notification.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.network.mapOrInterceptException
 import com.cyxbs.components.utils.network.throwOrInterceptException
 import com.cyxbs.components.utils.utils.LogUtils

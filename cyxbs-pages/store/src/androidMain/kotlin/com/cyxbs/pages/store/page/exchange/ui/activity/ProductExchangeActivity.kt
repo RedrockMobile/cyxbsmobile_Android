@@ -7,10 +7,10 @@ import android.os.Bundle
 import android.widget.ImageButton
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
-import com.mredrock.cyxbs.lib.base.dailog.BaseChooseDialog
-import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
-import com.mredrock.cyxbs.lib.base.ui.BaseBindActivity
-import com.mredrock.cyxbs.lib.base.ui.viewModelBy
+import com.cyxbs.components.base.dailog.BaseChooseDialog
+import com.cyxbs.components.base.dailog.ChooseDialog
+import com.cyxbs.components.base.ui.BaseBindActivity
+import com.cyxbs.components.base.ui.viewModelBy
 import com.cyxbs.components.utils.extensions.color
 import com.cyxbs.components.utils.extensions.setImageFromUrl
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
@@ -18,7 +18,7 @@ import com.cyxbs.pages.store.R
 import com.cyxbs.pages.store.bean.ProductDetail
 import com.cyxbs.pages.store.databinding.StoreActivityProductExchangeBinding
 import com.cyxbs.pages.store.page.exchange.viewmodel.ProductExchangeViewModel
-import com.mredrock.cyxbs.lib.base.pages.PhotoViewerActivity
+import com.cyxbs.components.base.pages.PhotoViewerActivity
 import com.cyxbs.pages.store.utils.StoreType
 import com.ndhzs.slideshow.adapter.ImageViewAdapter
 import com.ndhzs.slideshow.adapter.setImgAdapter

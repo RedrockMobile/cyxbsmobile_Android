@@ -17,7 +17,7 @@ import com.cyxbs.pages.declare.databinding.DeclareActivityPostBinding
 import com.cyxbs.pages.declare.databinding.DeclareLayoutDialogEditBinding
 import com.cyxbs.pages.declare.databinding.DeclareLayoutDialogSubmitBinding
 import com.cyxbs.pages.declare.post.adapter.PostSectionRvAdapter
-import com.mredrock.cyxbs.lib.base.ui.BaseBindActivity
+import com.cyxbs.components.base.ui.BaseBindActivity
 import com.cyxbs.components.utils.extensions.dp2px
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine

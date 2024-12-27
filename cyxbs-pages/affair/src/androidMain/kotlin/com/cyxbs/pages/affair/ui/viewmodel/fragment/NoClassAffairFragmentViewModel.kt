@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.cyxbs.pages.affair.bean.NotificationResultBean
 import com.cyxbs.pages.affair.net.AffairApiService
 import com.cyxbs.pages.affair.api.NotificationBean
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.network.mapOrInterceptException
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers

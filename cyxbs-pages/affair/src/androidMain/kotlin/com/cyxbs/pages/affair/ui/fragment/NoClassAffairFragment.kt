@@ -19,7 +19,7 @@ import com.cyxbs.pages.affair.ui.viewmodel.activity.NoClassAffairActivityViewMod
 import com.cyxbs.pages.affair.ui.viewmodel.fragment.NoClassAffairFragmentViewModel
 import com.cyxbs.pages.affair.api.NoClassBean
 import com.cyxbs.pages.affair.api.NotificationBean
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.utils.extensions.color
 
 

@@ -24,9 +24,9 @@ import com.cyxbs.pages.course.page.find.ui.find.activity.ShowResultActivity
 import com.cyxbs.pages.course.page.find.viewmodel.activity.FindLessonViewModel
 import com.cyxbs.pages.course.page.find.viewmodel.fragment.FindStuViewModel
 import com.cyxbs.pages.course.page.link.ui.fragment.LinkCardFragment
-import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
-import com.mredrock.cyxbs.lib.base.operations.doIfLogin
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.dailog.ChooseDialog
+import com.cyxbs.components.base.operations.doIfLogin
+import com.cyxbs.components.base.ui.BaseFragment
 
 /**
  * ...

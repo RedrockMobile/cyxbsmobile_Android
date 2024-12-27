@@ -23,7 +23,7 @@ import com.cyxbs.pages.course.page.find.room.FindStuEntity
 import com.cyxbs.pages.course.page.find.ui.find.activity.ShowResultActivity
 import com.cyxbs.pages.course.page.find.viewmodel.activity.FindLessonViewModel
 import com.cyxbs.pages.course.page.find.viewmodel.fragment.FindTeaViewModel
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.ui.BaseFragment
 
 /**
  * ...

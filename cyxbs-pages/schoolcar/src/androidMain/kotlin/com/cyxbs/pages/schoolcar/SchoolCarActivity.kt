@@ -28,7 +28,7 @@ import com.cyxbs.pages.schoolcar.widget.SchoolCarsSmoothMove
 import com.cyxbs.pages.schoolcar.databinding.SchoolcarActivitySchoolcarBinding
 import com.cyxbs.components.config.route.DISCOVER_SCHOOL_CAR
 import com.cyxbs.components.config.sp.defaultSp
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.components.utils.extensions.px2dp
 import com.cyxbs.components.utils.network.ApiWrapper

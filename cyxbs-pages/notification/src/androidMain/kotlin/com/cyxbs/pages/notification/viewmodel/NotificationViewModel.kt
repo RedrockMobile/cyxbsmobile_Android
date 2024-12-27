@@ -15,7 +15,7 @@ import com.cyxbs.pages.notification.bean.SystemMsgBean
 import com.cyxbs.pages.notification.bean.UfieldMsgBean
 import com.cyxbs.pages.notification.network.ApiService
 import com.cyxbs.pages.notification.util.Constant.NOTIFICATION_LOG_TAG
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 

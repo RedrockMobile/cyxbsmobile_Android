@@ -13,8 +13,8 @@ import com.cyxbs.components.config.route.DISCOVER_SCHOOL_CAR
 import com.cyxbs.components.config.route.MAIN_MAIN
 import com.cyxbs.components.config.sp.SP_COURSE_SHOW_STATE
 import com.cyxbs.components.config.sp.defaultSp
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.base.utils.Umeng
+import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.base.utils.Umeng
 import com.cyxbs.components.utils.extensions.launch
 import com.cyxbs.components.utils.extensions.processLifecycleScope
 import com.cyxbs.components.utils.logger.TrackingUtils

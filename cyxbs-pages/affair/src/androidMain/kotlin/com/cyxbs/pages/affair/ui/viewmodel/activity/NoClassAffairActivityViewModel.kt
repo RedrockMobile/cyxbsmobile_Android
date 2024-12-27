@@ -1,7 +1,7 @@
 package com.cyxbs.pages.affair.ui.viewmodel.activity
 
 import androidx.lifecycle.viewModelScope
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch

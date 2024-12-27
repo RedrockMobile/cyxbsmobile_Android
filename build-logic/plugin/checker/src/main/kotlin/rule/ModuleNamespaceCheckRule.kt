@@ -14,7 +14,7 @@ object ModuleNamespaceCheckRule : AndroidProjectChecker.ICheckRule {
   // TODO 这里面是用于兼容特殊模块的，请不要私自添加 ！！！
   private val specialModuleNameSpaceMap = mapOf(
     "lib_crash" to "com.cyxbs.functions.crash",
-    "lib_base" to "com.mredrock.cyxbs.lib.base",
+    "lib_base" to "com.cyxbs.components.base",
     "lib_debug" to "com.cyxbs.functions.debug",
     "lib_utils" to "com.cyxbs.components.utils",
     "module_app" to "com.mredrock.cyxbs",

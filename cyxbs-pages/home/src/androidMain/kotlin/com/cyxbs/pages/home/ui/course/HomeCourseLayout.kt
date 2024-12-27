@@ -19,9 +19,9 @@ import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.pages.course.api.ICourseService
 import com.cyxbs.components.config.route.COURSE_POS_TO_MAP
 import com.cyxbs.components.config.route.DISCOVER_MAP
-import com.mredrock.cyxbs.lib.base.crash.CrashDialog
-import com.mredrock.cyxbs.lib.base.utils.Umeng
-import com.mredrock.cyxbs.lib.base.utils.safeSubscribeBy
+import com.cyxbs.components.base.crash.CrashDialog
+import com.cyxbs.components.base.utils.Umeng
+import com.cyxbs.components.base.utils.safeSubscribeBy
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.invisible
 import com.cyxbs.components.utils.extensions.lazyUnlock

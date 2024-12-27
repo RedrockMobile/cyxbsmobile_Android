@@ -11,7 +11,7 @@ import com.cyxbs.pages.affair.ui.fragment.NoClassAffairFragment
 import com.cyxbs.pages.affair.ui.viewmodel.activity.NoClassAffairActivityViewModel
 import com.cyxbs.pages.affair.api.NoClassBean
 import com.cyxbs.components.config.route.NOTIFICATION_HOME
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.service.ServiceManager

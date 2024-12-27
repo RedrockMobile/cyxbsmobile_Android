@@ -13,7 +13,7 @@ import com.cyxbs.pages.grades.bean.Status
 import com.cyxbs.pages.grades.bean.analyze.GPAStatus
 import com.cyxbs.pages.grades.bean.analyze.isSuccessful
 import com.cyxbs.pages.grades.network.ApiService
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.extensions.setSchedulers
 import com.cyxbs.components.utils.network.ApiGenerator
 import com.cyxbs.components.utils.network.mapOrInterceptException

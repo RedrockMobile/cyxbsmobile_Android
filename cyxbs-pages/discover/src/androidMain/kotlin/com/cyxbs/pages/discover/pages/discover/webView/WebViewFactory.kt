@@ -1,8 +1,8 @@
 package com.cyxbs.pages.discover.pages.discover.webView
 
 import android.os.Handler
-import com.mredrock.cyxbs.lib.base.webView.AndroidWebView
-import com.mredrock.cyxbs.lib.base.webView.IAndroidWebView
+import com.cyxbs.components.base.webView.AndroidWebView
+import com.cyxbs.components.base.webView.IAndroidWebView
 
 class WebViewFactory(
     private val url:String = "",

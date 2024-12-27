@@ -41,7 +41,7 @@ import com.cyxbs.pages.notification.util.Constant.IS_SWITCH1_SELECT
 import com.cyxbs.pages.notification.util.NotificationSp
 import com.cyxbs.pages.notification.viewmodel.NotificationViewModel
 import com.cyxbs.pages.notification.widget.*
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.color
 import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.components.utils.utils.impl.defaultImpl

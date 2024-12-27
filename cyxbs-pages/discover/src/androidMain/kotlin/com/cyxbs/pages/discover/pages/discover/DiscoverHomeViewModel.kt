@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.cyxbs.pages.discover.bean.NewsListItem
 import com.cyxbs.pages.discover.network.RollerViewInfo
 import com.cyxbs.pages.discover.network.ApiServices
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.extensions.launchCatch
 import com.cyxbs.components.utils.extensions.setSchedulers
 import com.cyxbs.components.utils.network.ApiGenerator

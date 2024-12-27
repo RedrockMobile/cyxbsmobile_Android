@@ -20,7 +20,7 @@ import com.cyxbs.pages.notification.ui.activity.NotificationActivity
 import com.cyxbs.pages.notification.viewmodel.NotificationViewModel
 import com.cyxbs.pages.notification.widget.DeleteDialog
 import com.cyxbs.pages.notification.widget.SwipeDeleteRecyclerView
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.ui.BaseFragment
 import kotlin.properties.Delegates
 
 /**

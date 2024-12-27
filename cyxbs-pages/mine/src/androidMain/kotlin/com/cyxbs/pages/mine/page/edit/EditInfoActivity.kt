@@ -28,7 +28,7 @@ import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.account.api.IUserService
 import com.cyxbs.components.config.route.MINE_EDIT_INFO
 import com.cyxbs.components.config.view.JToolbar
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.doPermissionAction
 import com.cyxbs.components.utils.extensions.setAvatarImageFromUrl
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener

@@ -11,7 +11,7 @@ import com.cyxbs.pages.declare.detail.page.activity.DetailActivity
 import com.cyxbs.pages.declare.main.page.adapter.HomeRvAdapter
 import com.cyxbs.pages.declare.main.page.viewmodel.PostedViewModel
 import com.cyxbs.pages.declare.post.PostActivity
-import com.mredrock.cyxbs.lib.base.ui.BaseBindActivity
+import com.cyxbs.components.base.ui.BaseBindActivity
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.setOnDoubleClickListener
 import com.cyxbs.components.utils.extensions.visible

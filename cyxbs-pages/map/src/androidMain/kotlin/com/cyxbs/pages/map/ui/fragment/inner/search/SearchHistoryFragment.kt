@@ -15,7 +15,7 @@ import com.cyxbs.pages.map.ui.adapter.SearchHistoryAdapter
 import com.cyxbs.pages.map.viewmodel.MapViewModel
 import com.cyxbs.pages.map.widget.MapDialog
 import com.cyxbs.pages.map.widget.OnSelectListener
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.utils.extensions.invisible
 import com.cyxbs.components.utils.extensions.visible
 

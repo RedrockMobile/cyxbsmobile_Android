@@ -15,7 +15,7 @@ import com.afollestad.materialdialogs.customview.getCustomView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.config.route.DISCOVER_SPORT_FEED
-import com.mredrock.cyxbs.lib.base.ui.BaseBindFragment
+import com.cyxbs.components.base.ui.BaseBindFragment
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.visible

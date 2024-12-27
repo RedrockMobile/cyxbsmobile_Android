@@ -19,7 +19,7 @@ import com.cyxbs.pages.notification.adapter.ActivityUfieldRVAdapter
 import com.cyxbs.pages.notification.bean.UfieldMsgBean
 import com.cyxbs.pages.notification.ui.activity.NotificationActivity
 import com.cyxbs.pages.notification.viewmodel.NotificationViewModel
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.ui.BaseFragment
 import kotlin.properties.Delegates
 
 class UfieldNotificationFragment : BaseFragment() {

@@ -3,7 +3,7 @@ package com.cyxbs.pages.home.viewmodel
 import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.network.api
 import com.cyxbs.components.utils.network.mapOrInterceptException
 import com.cyxbs.pages.home.bean.MessageBean

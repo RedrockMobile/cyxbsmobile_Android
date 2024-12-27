@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.widget.ImageButton
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.components.config.route.DEFAULT_PAGE
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.pages.home.R
 

@@ -10,7 +10,7 @@ import com.cyxbs.pages.declare.databinding.DeclareActivityDetailBinding
 import com.cyxbs.pages.declare.detail.bean.VoteData
 import com.cyxbs.pages.declare.detail.page.adapter.DetailRvAdapter
 import com.cyxbs.pages.declare.detail.page.viewmodel.DetailViewModel
-import com.mredrock.cyxbs.lib.base.ui.BaseBindActivity
+import com.cyxbs.components.base.ui.BaseBindActivity
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.components.utils.service.ServiceManager

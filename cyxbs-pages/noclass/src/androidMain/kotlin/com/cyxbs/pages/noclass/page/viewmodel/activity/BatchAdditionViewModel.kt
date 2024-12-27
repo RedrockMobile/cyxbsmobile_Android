@@ -1,7 +1,7 @@
 package com.cyxbs.pages.noclass.page.viewmodel.activity
 
 import androidx.lifecycle.MutableLiveData
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.network.mapOrInterceptException
 import com.cyxbs.pages.noclass.bean.NoClassBatchResponseInfo
 import com.cyxbs.pages.noclass.page.repository.NoClassRepository

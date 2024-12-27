@@ -15,7 +15,7 @@ import com.cyxbs.pages.course.page.link.model.LinkRepository
 import com.cyxbs.pages.course.page.link.room.LinkStuEntity
 import com.cyxbs.pages.course.service.CourseServiceImpl
 import com.cyxbs.pages.course.service.LessonServiceImpl
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.extensions.asFlow
 import com.cyxbs.components.utils.service.impl
 import io.reactivex.rxjava3.core.Observable

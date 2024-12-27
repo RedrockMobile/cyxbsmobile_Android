@@ -9,7 +9,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.lib.base.ui.BaseBindFragment
+import com.cyxbs.components.base.ui.BaseBindFragment
 import com.cyxbs.pages.mine.R
 import com.cyxbs.pages.mine.databinding.MineFragmentFindPasswordIdsLoginBinding
 import com.cyxbs.pages.mine.page.security.activity.FindPasswordByIdsActivity

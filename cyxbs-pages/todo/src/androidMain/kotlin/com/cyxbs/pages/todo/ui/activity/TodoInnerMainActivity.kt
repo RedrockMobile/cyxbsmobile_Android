@@ -16,7 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.cyxbs.components.config.route.DISCOVER_TODO_MAIN
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.adapter.FragmentVpAdapter
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.color
@@ -29,7 +29,6 @@ import com.cyxbs.pages.todo.ui.fragment.TodoLifeFragment
 import com.cyxbs.pages.todo.ui.fragment.TodoOtherFragment
 import com.cyxbs.pages.todo.ui.fragment.TodoStudyFragment
 import com.cyxbs.pages.todo.viewmodel.TodoViewModel
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.cyxbs.components.utils.extensions.lazyUnlock
 import kotlin.properties.Delegates
 

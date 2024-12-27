@@ -21,9 +21,9 @@ import com.cyxbs.pages.course.page.find.ui.find.adapter.ShowStuResultRvAdapter
 import com.cyxbs.pages.course.page.find.ui.find.adapter.ShowTeaResultRvAdapter
 import com.cyxbs.pages.course.page.find.viewmodel.activity.ShowResultViewModel
 import com.cyxbs.pages.course.page.link.room.LinkStuEntity
-import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
-import com.mredrock.cyxbs.lib.base.operations.doIfLogin
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.dailog.ChooseDialog
+import com.cyxbs.components.base.operations.doIfLogin
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.lazyUnlock
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.utils.BindView

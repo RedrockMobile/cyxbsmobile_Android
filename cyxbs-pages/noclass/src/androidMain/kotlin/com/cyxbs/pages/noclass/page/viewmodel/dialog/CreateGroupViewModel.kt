@@ -2,7 +2,7 @@ package com.cyxbs.pages.noclass.page.viewmodel.dialog
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.pages.noclass.bean.NoclassGroupId
 import com.cyxbs.pages.noclass.page.repository.NoClassRepository
 

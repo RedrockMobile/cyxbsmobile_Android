@@ -26,8 +26,8 @@ import com.cyxbs.pages.map.ui.adapter.FavoriteListAdapter
 import com.cyxbs.pages.map.ui.adapter.SymbolRvAdapter
 import com.cyxbs.pages.map.viewmodel.MapViewModel
 import com.cyxbs.pages.map.widget.*
-import com.mredrock.cyxbs.lib.base.operations.doIfLogin
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.operations.doIfLogin
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.components.utils.extensions.invisible
 import com.cyxbs.components.utils.extensions.launch

@@ -13,9 +13,9 @@ import com.cyxbs.pages.map.bean.*
 import com.cyxbs.pages.map.model.DataSet
 import com.cyxbs.pages.map.network.MapApiService
 import com.cyxbs.pages.map.widget.*
-import com.mredrock.cyxbs.lib.base.operations.doIfLogin
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.operations.doIfLogin
+import com.cyxbs.components.base.ui.BaseFragment
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.extensions.doPermissionAction
 import com.cyxbs.components.utils.extensions.interceptException
 import com.cyxbs.components.utils.network.ApiGenerator

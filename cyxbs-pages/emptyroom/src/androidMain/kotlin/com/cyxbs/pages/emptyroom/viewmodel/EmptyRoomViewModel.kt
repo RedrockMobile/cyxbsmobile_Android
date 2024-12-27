@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.cyxbs.pages.emptyroom.bean.EmptyRoom
 import com.cyxbs.pages.emptyroom.network.ApiService
 import com.cyxbs.pages.emptyroom.utils.EmptyConverter
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.extensions.setSchedulers
 import com.cyxbs.components.utils.network.ApiGenerator
 import io.reactivex.rxjava3.disposables.Disposable

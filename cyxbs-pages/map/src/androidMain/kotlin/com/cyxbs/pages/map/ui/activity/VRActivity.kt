@@ -14,8 +14,8 @@ import androidx.core.content.edit
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.cyxbs.components.config.sp.defaultSp
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.base.webView.LiteJsWebView
+import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.base.webView.LiteJsWebView
 
 class VRActivity : BaseActivity() {
 

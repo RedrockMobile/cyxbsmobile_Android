@@ -7,7 +7,7 @@ import com.cyxbs.pages.course.page.course.data.StuLessonData
 import com.cyxbs.pages.course.page.course.data.toStuLessonData
 import com.cyxbs.pages.course.page.course.model.StuLessonRepository
 import com.cyxbs.pages.course.page.find.ui.course.base.BaseFindViewModel
-import com.mredrock.cyxbs.lib.base.crash.CrashDialog
+import com.cyxbs.components.base.crash.CrashDialog
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 
 /**

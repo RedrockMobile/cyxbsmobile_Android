@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
-import com.mredrock.cyxbs.lib.base.ui.BaseBindActivity
+import com.cyxbs.components.base.ui.BaseBindActivity
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.store.R
 import com.cyxbs.pages.store.bean.ExchangeRecord

@@ -9,7 +9,7 @@ import com.cyxbs.pages.course.page.find.room.FindStuEntity
 import com.cyxbs.pages.course.page.find.room.HistoryDataBase
 import com.cyxbs.pages.course.page.link.model.LinkRepository
 import com.cyxbs.pages.course.page.link.room.LinkStuEntity
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.extensions.asFlow
 import com.cyxbs.components.utils.network.api
 import com.cyxbs.components.utils.network.mapOrThrowApiException

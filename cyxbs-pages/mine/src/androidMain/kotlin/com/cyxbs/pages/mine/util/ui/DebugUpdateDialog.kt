@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.FrameLayout
 import com.cyxbs.components.config.R
-import com.mredrock.cyxbs.lib.base.dailog.BaseChooseDialog
+import com.cyxbs.components.base.dailog.BaseChooseDialog
 import com.cyxbs.components.utils.extensions.color
 import com.cyxbs.components.utils.extensions.dp2px
 

@@ -15,7 +15,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.cyxbs.pages.login.api.ILegalNoticeService
-import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
+import com.cyxbs.components.base.dailog.ChooseDialog
 import com.cyxbs.components.utils.extensions.color
 import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.components.utils.extensions.wrapByNoLeak

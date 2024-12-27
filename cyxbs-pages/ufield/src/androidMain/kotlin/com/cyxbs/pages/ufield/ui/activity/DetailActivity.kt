@@ -12,8 +12,8 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.pages.store.api.IStoreService
 import com.cyxbs.components.config.route.DISCOVER_MAP
 import com.cyxbs.components.config.route.UFIELD_DETAIL_ENTRY
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.base.ui.viewModelBy
+import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.viewModelBy
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.setImageFromUrl
 import com.cyxbs.components.utils.service.ServiceManager

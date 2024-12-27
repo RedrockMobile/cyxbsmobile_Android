@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.RelativeLayout
-import com.mredrock.cyxbs.lib.base.webView.LiteJsWebView
+import com.cyxbs.components.base.webView.LiteJsWebView
 import com.cyxbs.pages.notification.R
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 
 /**
  * Author by OkAndGreat

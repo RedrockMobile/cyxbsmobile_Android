@@ -3,7 +3,7 @@ package com.cyxbs.pages.news.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.cyxbs.pages.news.bean.NewsListItem
 import com.cyxbs.pages.news.network.ApiService
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.network.ApiGenerator
 import com.cyxbs.components.utils.network.mapOrThrowApiException
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

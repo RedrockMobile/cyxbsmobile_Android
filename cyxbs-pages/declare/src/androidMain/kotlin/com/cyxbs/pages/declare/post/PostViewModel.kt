@@ -1,7 +1,7 @@
 package com.cyxbs.pages.declare.post
 
 import com.cyxbs.pages.declare.post.net.PostApiService
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.extensions.asFlow
 import com.cyxbs.components.utils.network.ApiStatus
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

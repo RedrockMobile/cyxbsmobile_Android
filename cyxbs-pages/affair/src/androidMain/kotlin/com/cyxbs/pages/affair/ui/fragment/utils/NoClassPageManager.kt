@@ -15,7 +15,7 @@ import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
 import com.cyxbs.pages.affair.R
 import com.cyxbs.pages.affair.widge.TextViewTransition
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.invisible
 import com.cyxbs.components.utils.extensions.toast

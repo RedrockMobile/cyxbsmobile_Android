@@ -1,7 +1,7 @@
 package com.cyxbs.pages.noclass.util
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.mredrock.cyxbs.lib.base.utils.ArgumentHelper
+import com.cyxbs.components.base.utils.ArgumentHelper
 
 open class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
 

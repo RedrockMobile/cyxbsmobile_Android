@@ -12,7 +12,7 @@ import com.cyxbs.pages.news.ui.adapter.NewsAdapter
 import com.cyxbs.pages.news.viewmodel.NewsListViewModel
 import com.cyxbs.components.config.route.DISCOVER_NEWS
 import com.cyxbs.components.config.view.JToolbar
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 
 /**
  * @author zixuan

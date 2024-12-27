@@ -32,8 +32,8 @@ import com.cyxbs.components.config.route.MAIN_MAIN
 import com.cyxbs.components.config.route.MINE_FORGET_PASSWORD
 import com.cyxbs.components.config.sp.SP_PRIVACY_AGREED
 import com.cyxbs.components.config.sp.defaultSp
-import com.mredrock.cyxbs.lib.base.BaseApp
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.BaseApp
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.launch
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener

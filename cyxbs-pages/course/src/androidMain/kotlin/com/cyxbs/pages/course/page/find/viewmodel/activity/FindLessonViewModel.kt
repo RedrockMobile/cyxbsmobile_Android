@@ -2,7 +2,7 @@ package com.cyxbs.pages.course.page.find.viewmodel.activity
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 
 /**
  * ...

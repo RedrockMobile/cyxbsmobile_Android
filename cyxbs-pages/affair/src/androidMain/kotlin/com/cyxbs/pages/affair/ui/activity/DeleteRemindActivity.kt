@@ -2,7 +2,7 @@ package com.cyxbs.pages.affair.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.appContext
 
 /**

@@ -7,7 +7,7 @@ import com.cyxbs.pages.course.page.find.bean.FindTeaBean
 import com.cyxbs.pages.course.page.find.network.FindApiServices
 import com.cyxbs.pages.course.page.find.room.HistoryDataBase
 import com.cyxbs.pages.course.page.find.room.FindTeaEntity
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.extensions.asFlow
 import com.cyxbs.components.utils.extensions.lazyUnlock
 import com.cyxbs.components.utils.network.api

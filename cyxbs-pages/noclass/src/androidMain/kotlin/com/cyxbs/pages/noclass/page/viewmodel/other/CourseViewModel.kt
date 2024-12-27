@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.cyxbs.pages.course.api.ILessonService
 import com.cyxbs.pages.store.api.IStoreService
-import com.mredrock.cyxbs.lib.base.ui.BaseViewModel
+import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.service.ServiceManager
 import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.noclass.bean.NoClassSpareTime

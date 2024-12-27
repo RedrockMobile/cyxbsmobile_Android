@@ -23,7 +23,7 @@ import com.cyxbs.components.utils.extensions.setOnSingleClickListener
  */
 @Deprecated(
     "不规范的 Fragment 使用，不能暴露接口出来给外部设置，建议使用 lib_base 中 ChooseDialog 代替",
-    ReplaceWith("ChooseDialog", "com.mredrock.cyxbs.lib.base.dailog")
+    ReplaceWith("ChooseDialog", "com.cyxbs.components.base.dailog")
 )
 class CommonDialogFragment() : DialogFragment() {
     @LayoutRes

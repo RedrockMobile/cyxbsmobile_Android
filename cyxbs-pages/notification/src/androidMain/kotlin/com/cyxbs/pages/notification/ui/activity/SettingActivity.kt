@@ -29,7 +29,7 @@ import com.cyxbs.pages.notification.util.NotificationSp
 import com.cyxbs.pages.notification.viewmodel.NotificationViewModel
 import com.cyxbs.pages.notification.widget.NotifySignWorker
 import com.cyxbs.components.config.route.NOTIFICATION_SETTING
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import java.util.*
 import kotlin.properties.Delegates
 

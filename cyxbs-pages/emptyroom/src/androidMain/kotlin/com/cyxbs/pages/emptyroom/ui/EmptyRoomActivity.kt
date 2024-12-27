@@ -9,7 +9,6 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.Px
 import androidx.core.content.ContextCompat
@@ -32,7 +31,7 @@ import com.cyxbs.pages.emptyroom.viewmodel.EmptyRoomViewModel.Companion.FINISH
 import com.cyxbs.pages.emptyroom.viewmodel.EmptyRoomViewModel.Companion.LOADING
 import java.util.*
 import com.cyxbs.components.config.route.DISCOVER_EMPTY_ROOM
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener

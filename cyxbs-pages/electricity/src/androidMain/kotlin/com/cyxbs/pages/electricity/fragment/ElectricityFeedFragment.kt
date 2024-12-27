@@ -22,8 +22,8 @@ import com.cyxbs.pages.electricity.config.SP_BUILDING_FOOT_KEY
 import com.cyxbs.pages.electricity.config.SP_BUILDING_HEAD_KEY
 import com.cyxbs.pages.electricity.config.SP_ROOM_KEY
 import com.cyxbs.pages.electricity.viewmodel.ChargeViewModel
-import com.mredrock.cyxbs.lib.base.operations.doIfLogin
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.operations.doIfLogin
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener

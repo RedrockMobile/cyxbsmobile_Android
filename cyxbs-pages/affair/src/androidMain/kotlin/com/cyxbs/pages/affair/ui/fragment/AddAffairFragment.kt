@@ -28,7 +28,7 @@ import com.cyxbs.pages.affair.ui.dialog.RemindSelectDialog
 import com.cyxbs.pages.course.api.utils.getStartRow
 import com.cyxbs.pages.course.api.utils.getStartTimeMinute
 import com.cyxbs.components.config.config.SchoolCalendar
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.utils.extensions.*
 import java.util.Calendar
 

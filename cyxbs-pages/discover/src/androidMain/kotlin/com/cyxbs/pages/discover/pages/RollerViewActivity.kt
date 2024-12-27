@@ -24,10 +24,10 @@ import com.cyxbs.pages.discover.BuildConfig
 import com.cyxbs.pages.discover.R
 import com.cyxbs.pages.discover.network.RollerViewInfo
 import com.cyxbs.pages.discover.pages.discover.webView.WebViewFactory
-import com.mredrock.cyxbs.lib.base.ui.BaseActivity
-import com.mredrock.cyxbs.lib.base.webView.IAndroidWebView
-import com.mredrock.cyxbs.lib.base.webView.LiteJsWebView
-import com.mredrock.cyxbs.lib.base.webView.WebViewBaseCallBack
+import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.base.webView.IAndroidWebView
+import com.cyxbs.components.base.webView.LiteJsWebView
+import com.cyxbs.components.base.webView.WebViewBaseCallBack
 import com.cyxbs.components.utils.extensions.doPermissionAction
 import com.cyxbs.components.utils.extensions.loadBitmap
 import com.cyxbs.components.utils.extensions.saveImage
@@ -46,9 +46,9 @@ class RollerViewActivity : BaseActivity() {
     }
 
     //这里是拿到衍生的Web方法类
-    private var webApi:IAndroidWebView ? = null
+    private var webApi: IAndroidWebView? = null
 
-    private val callback: WebViewBaseCallBack ? = webApi
+    private val callback: WebViewBaseCallBack? = webApi
 
     //传感器(方便remove)
     private val sm: SensorManager? = null

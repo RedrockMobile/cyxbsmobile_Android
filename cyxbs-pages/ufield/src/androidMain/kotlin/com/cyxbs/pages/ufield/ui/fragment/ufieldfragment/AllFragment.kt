@@ -8,14 +8,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.lib.base.ui.BaseFragment
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.pages.ufield.R
 import com.cyxbs.pages.ufield.adapter.UfieldRvAdapter
 import com.cyxbs.pages.ufield.bean.ItemActivityBean
 import com.cyxbs.pages.ufield.helper.GridSpacingItemDecoration
 import com.cyxbs.pages.ufield.ui.activity.DetailActivity
 import com.cyxbs.pages.ufield.viewmodel.UFieldViewModel
-import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 

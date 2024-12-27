@@ -9,7 +9,7 @@ kotlin {
   sourceSets {
     androidMain.dependencies {
       implementation(projects.cyxbsComponents.init)
-      implementation(projects.libBase)
+      implementation(projects.cyxbsComponents.base)
       implementation(projects.cyxbsComponents.utils)
       implementation(projects.cyxbsComponents.config)
       implementation(projects.cyxbsComponents.account.api)
