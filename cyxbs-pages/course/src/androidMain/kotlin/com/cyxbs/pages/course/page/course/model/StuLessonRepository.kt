@@ -10,8 +10,8 @@ import com.cyxbs.pages.course.page.course.room.StuLessonEntity
 import com.cyxbs.pages.course.page.course.network.CourseApiServices
 import com.mredrock.cyxbs.lib.utils.network.api
 import com.mredrock.cyxbs.lib.utils.service.impl
-import com.mredrock.cyxbs.config.config.SchoolCalendar
-import com.mredrock.cyxbs.config.sp.defaultSp
+import com.cyxbs.components.config.config.SchoolCalendar
+import com.cyxbs.components.config.sp.defaultSp
 import com.mredrock.cyxbs.lib.utils.extensions.*
 import com.mredrock.cyxbs.lib.utils.utils.judge.NetworkUtil
 import io.reactivex.rxjava3.core.*

@@ -7,14 +7,14 @@ import com.cyxbs.pages.volunteer.R
 import com.cyxbs.pages.volunteer.bean.VolunteerAffair
 import com.cyxbs.pages.volunteer.utils.DateUtils.stamp2Date
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.mredrock.cyxbs.config.view.MarqueeTextView
+import com.cyxbs.components.config.view.MarqueeTextView
 
 /**
  * Created by yyfbe, Date on 2020/9/5.
  */
 class VolunteerAffairBottomSheetDialog(
     context: Context
-) : BottomSheetDialog(context, com.mredrock.cyxbs.config.R.style.ConfigBottomSheetDialogTheme) {
+) : BottomSheetDialog(context, com.cyxbs.components.config.R.style.ConfigBottomSheetDialogTheme) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

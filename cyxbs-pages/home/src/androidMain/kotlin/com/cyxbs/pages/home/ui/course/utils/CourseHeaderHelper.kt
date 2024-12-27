@@ -13,7 +13,7 @@ import com.cyxbs.pages.course.api.utils.getStartRow
 import com.cyxbs.pages.course.api.utils.getStartTimeMinute
 import com.cyxbs.pages.course.api.utils.parseClassRoom
 import com.mredrock.cyxbs.lib.utils.service.impl
-import com.mredrock.cyxbs.config.config.SchoolCalendar
+import com.cyxbs.components.config.config.SchoolCalendar
 import com.mredrock.cyxbs.lib.utils.extensions.isDebuggableBuild
 import com.mredrock.cyxbs.lib.utils.extensions.toast
 import com.mredrock.cyxbs.lib.utils.utils.judge.NetworkUtil

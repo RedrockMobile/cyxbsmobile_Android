@@ -16,7 +16,7 @@ import com.cyxbs.pages.course.api.utils.getEndTimeMinute
 import com.cyxbs.pages.course.api.utils.getStartRow
 import com.cyxbs.pages.course.api.utils.getStartTimeMinute
 import com.mredrock.cyxbs.lib.utils.utils.config.PhoneCalendar
-import com.mredrock.cyxbs.config.config.SchoolCalendar
+import com.cyxbs.components.config.config.SchoolCalendar
 import com.mredrock.cyxbs.lib.utils.extensions.unsafeSubscribeBy
 import com.mredrock.cyxbs.lib.utils.network.throwApiExceptionIfFail
 import com.mredrock.cyxbs.lib.utils.service.ServiceManager

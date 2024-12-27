@@ -11,7 +11,7 @@ import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.mredrock.cyxbs.config.R
+import com.cyxbs.components.config.R
 import com.mredrock.cyxbs.lib.utils.network.getBaseUrl
 
 /**

@@ -14,10 +14,10 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.mredrock.cyxbs.config.route.DECLARE_ENTRY
-import com.mredrock.cyxbs.config.route.FAIRGROUND_ENTRY
-import com.mredrock.cyxbs.config.route.FOOD_ENTRY
-import com.mredrock.cyxbs.config.route.UFIELD_MAIN_ENTRY
+import com.cyxbs.components.config.route.DECLARE_ENTRY
+import com.cyxbs.components.config.route.FAIRGROUND_ENTRY
+import com.cyxbs.components.config.route.FOOD_ENTRY
+import com.cyxbs.components.config.route.UFIELD_MAIN_ENTRY
 import com.mredrock.cyxbs.lib.base.operations.doIfLogin
 import com.mredrock.cyxbs.lib.base.ui.BaseFragment
 import com.mredrock.cyxbs.lib.utils.extensions.setAvatarImageFromUrl

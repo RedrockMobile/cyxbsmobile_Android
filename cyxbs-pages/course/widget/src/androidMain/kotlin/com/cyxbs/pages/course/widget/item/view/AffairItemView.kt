@@ -18,7 +18,7 @@ import kotlin.math.sqrt
  */
 open class AffairItemView(context: Context) : ItemView(context) {
   
-  protected val mTextColor = com.mredrock.cyxbs.config.R.color.config_level_two_font_color.color
+  protected val mTextColor = com.cyxbs.components.config.R.color.config_level_two_font_color.color
   protected val mStripeColor = R.color.course_widget_affair_stripe.color
   
   init {

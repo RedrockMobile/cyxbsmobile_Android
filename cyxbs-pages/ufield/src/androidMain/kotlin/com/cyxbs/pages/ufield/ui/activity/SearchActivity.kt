@@ -107,7 +107,7 @@ class SearchActivity : BaseActivity() {
 
         mSearch.apply {
             findViewById<EditText>(androidx.appcompat.R.id.search_src_text).apply {
-                setTextColor(getColor(com.mredrock.cyxbs.config.R.color.config_level_three_font_color))
+                setTextColor(getColor(com.cyxbs.components.config.R.color.config_level_three_font_color))
                 setHintTextColor(getColor(R.color.uField_activity_style_color))
                 textSize = 16F
                 (this.layoutParams as ViewGroup.MarginLayoutParams).apply {

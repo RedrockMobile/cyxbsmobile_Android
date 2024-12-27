@@ -3,13 +3,12 @@ package com.cyxbs.pages.store.utils
 import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
 import com.cyxbs.pages.store.api.IStoreService.Task.*
-import com.mredrock.cyxbs.config.route.DECLARE_ENTRY
-import com.mredrock.cyxbs.config.route.DEFAULT_PAGE
-import com.mredrock.cyxbs.config.route.DISCOVER_NO_CLASS
-import com.mredrock.cyxbs.config.route.FOOD_ENTRY
-import com.mredrock.cyxbs.config.route.MINE_CHECK_IN
-import com.mredrock.cyxbs.config.route.MINE_EDIT_INFO
-import com.mredrock.cyxbs.config.route.UFIELD_MAIN_ENTRY
+import com.cyxbs.components.config.route.DECLARE_ENTRY
+import com.cyxbs.components.config.route.DEFAULT_PAGE
+import com.cyxbs.components.config.route.DISCOVER_NO_CLASS
+import com.cyxbs.components.config.route.FOOD_ENTRY
+import com.cyxbs.components.config.route.MINE_CHECK_IN
+import com.cyxbs.components.config.route.UFIELD_MAIN_ENTRY
 import com.mredrock.cyxbs.lib.utils.extensions.toast
 import com.cyxbs.pages.store.bean.StampCenter
 

@@ -15,7 +15,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.cyxbs.components.init.appTopActivity
-import com.mredrock.cyxbs.config.view.ScaleScrollTextView
+import com.cyxbs.components.config.view.ScaleScrollTextView
 import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
 import com.mredrock.cyxbs.lib.utils.extensions.collectUsefulStackTrace
 import com.mredrock.cyxbs.lib.utils.extensions.color
@@ -90,7 +90,7 @@ class CrashDialog private constructor(
     ).apply {
       topMargin = 10.dp2px
     }
-    setSideBackgroundColor(com.mredrock.cyxbs.config.R.color.config_dialog_bg.color)
+    setSideBackgroundColor(com.cyxbs.components.config.R.color.config_dialog_bg.color)
   }
   
   private val mLinearLayout = LinearLayout(context).apply {

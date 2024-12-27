@@ -20,8 +20,8 @@ import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.account.api.IUserService
-import com.mredrock.cyxbs.config.route.DISCOVER_GRADES
-import com.mredrock.cyxbs.config.view.JToolbar
+import com.cyxbs.components.config.route.DISCOVER_GRADES
+import com.cyxbs.components.config.view.JToolbar
 import com.cyxbs.pages.grades.R
 import com.cyxbs.pages.grades.bean.Exam
 import com.cyxbs.pages.grades.bean.analyze.isSuccessful

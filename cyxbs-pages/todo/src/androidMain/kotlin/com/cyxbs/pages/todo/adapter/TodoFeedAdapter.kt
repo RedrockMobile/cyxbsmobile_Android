@@ -130,7 +130,7 @@ class TodoFeedAdapter :
         private fun updateUi(isOverTime: Boolean) {
             defaultCheckbox.uncheckedColor =
                 getColor(if (isOverTime) R.color.todo_check_overtime_color else R.color.todo_inner_check_eclipse_color)
-            todoTitle.setTextColor(getColor(if (isOverTime) R.color.todo_text_overtime_color else com.mredrock.cyxbs.config.R.color.config_level_two_font_color))
+            todoTitle.setTextColor(getColor(if (isOverTime) R.color.todo_text_overtime_color else com.cyxbs.components.config.R.color.config_level_two_font_color))
             todoFeedTime.setTextColor(getColor(if (isOverTime) R.color.todo_textTime_overtime_color else R.color.todo_item_nf_time_color))
             todoFeedIv.setImageResource(if (isOverTime) R.drawable.todo_ic_addtodo_overtime_notice else R.drawable.todo_ic_addtodo_notice2)
         }

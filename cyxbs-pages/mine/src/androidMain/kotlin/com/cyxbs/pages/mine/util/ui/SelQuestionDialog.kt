@@ -18,7 +18,7 @@ class SelQuestionDialog(
     context: Context,
     val listOfSecurityQuestion: List<SecurityQuestion>,
     val onClick: (Int) -> Unit
-) : BottomSheetDialog(context, com.mredrock.cyxbs.config.R.style.ConfigBottomSheetDialogTheme) {
+) : BottomSheetDialog(context, com.cyxbs.components.config.R.style.ConfigBottomSheetDialogTheme) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -42,7 +42,7 @@ abstract class NoClassItemView (context: Context) : CardView(context) {
   }
   
   // 课表背景色
-  private val mFloorColor = com.mredrock.cyxbs.config.R.color.config_common_background_color.color
+  private val mFloorColor = com.cyxbs.components.config.R.color.config_common_background_color.color
   
   override fun draw(canvas: Canvas) {
     canvas.drawColor(mFloorColor) // 需要在底层绘制背景色，不然黑夜模式下 item 颜色会透过去

@@ -34,8 +34,8 @@ import androidx.fragment.app.commit
 import com.cyxbs.pages.home.R
 import com.cyxbs.pages.home.ui.course.utils.CourseHeaderHelper
 import com.cyxbs.pages.course.api.ICourseService
-import com.mredrock.cyxbs.config.route.COURSE_POS_TO_MAP
-import com.mredrock.cyxbs.config.route.DISCOVER_MAP
+import com.cyxbs.components.config.route.COURSE_POS_TO_MAP
+import com.cyxbs.components.config.route.DISCOVER_MAP
 import com.mredrock.cyxbs.lib.base.crash.CrashDialog
 import com.mredrock.cyxbs.lib.base.utils.Umeng
 import com.mredrock.cyxbs.lib.utils.compose.BottomSheetState
@@ -181,7 +181,7 @@ private fun CourseHintHeaderCompose(
           onClick = {}
         ),
       text = if (header.throwable == null) header.hint else "发生异常，长按显示",
-      color = com.mredrock.cyxbs.config.R.color.config_level_four_font_color.colorCompose,
+      color = com.cyxbs.components.config.R.color.config_level_four_font_color.colorCompose,
     )
   }
 }
@@ -200,7 +200,7 @@ private fun CourseShowHeaderCompose(
     ) {
       Text(
         text = header.state,
-        color = com.mredrock.cyxbs.config.R.color.config_level_four_font_color.colorCompose,
+        color = com.cyxbs.components.config.R.color.config_level_four_font_color.colorCompose,
         fontSize = 8.sp
       )
       Text(
@@ -229,7 +229,7 @@ private fun CourseShowHeaderCompose(
             }
           },
         text = header.title,
-        color = com.mredrock.cyxbs.config.R.color.config_level_two_font_color.color.colorCompose,
+        color = com.cyxbs.components.config.R.color.config_level_two_font_color.color.colorCompose,
         fontSize = 22.sp,
         fontWeight = FontWeight.Bold,
       )

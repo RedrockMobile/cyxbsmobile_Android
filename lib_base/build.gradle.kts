@@ -8,7 +8,7 @@ useDataBinding(false) // lib_base 模块只依赖 DataBinding 但不开启 DataB
 dependencies {
   implementation(projects.cyxbsComponents.init)
   implementation(projects.libUtils)
-  implementation(projects.libConfig)
+  implementation(projects.cyxbsComponents.config)
   implementation(projects.cyxbsComponents.account.api)
   implementation(projects.cyxbsPages.login.api)
 

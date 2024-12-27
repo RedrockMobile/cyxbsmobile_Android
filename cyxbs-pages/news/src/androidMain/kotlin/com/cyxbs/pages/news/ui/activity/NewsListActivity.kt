@@ -10,8 +10,8 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.pages.news.R
 import com.cyxbs.pages.news.ui.adapter.NewsAdapter
 import com.cyxbs.pages.news.viewmodel.NewsListViewModel
-import com.mredrock.cyxbs.config.route.DISCOVER_NEWS
-import com.mredrock.cyxbs.config.view.JToolbar
+import com.cyxbs.components.config.route.DISCOVER_NEWS
+import com.cyxbs.components.config.view.JToolbar
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 
 /**
@@ -25,7 +25,7 @@ class NewsListActivity : BaseActivity() {
 
     private val srl_list by R.id.srl_list.view<SwipeRefreshLayout>()
     private val rv_list by R.id.rv_list.view<RecyclerView>()
-    private val common_toolbar by com.mredrock.cyxbs.config.R.id.toolbar.view<JToolbar>()
+    private val common_toolbar by com.cyxbs.components.config.R.id.toolbar.view<JToolbar>()
 
     private lateinit var adapter: NewsAdapter
 

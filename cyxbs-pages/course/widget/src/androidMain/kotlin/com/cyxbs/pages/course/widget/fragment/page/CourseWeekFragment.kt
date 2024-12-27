@@ -6,7 +6,7 @@ import androidx.annotation.CallSuper
 import com.cyxbs.pages.course.api.ICourseService
 import com.cyxbs.pages.course.widget.helper.show.CourseNowTimeHelper
 import com.mredrock.cyxbs.lib.utils.extensions.lazyUnlock
-import com.mredrock.cyxbs.config.config.SchoolCalendar
+import com.cyxbs.components.config.config.SchoolCalendar
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import java.util.*
 

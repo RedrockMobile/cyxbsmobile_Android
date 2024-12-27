@@ -6,7 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import com.cyxbs.pages.course.api.ICourseService
 import com.cyxbs.pages.course.widget.helper.show.CourseNowTimeHelper
-import com.mredrock.cyxbs.config.config.SchoolCalendar
+import com.cyxbs.components.config.config.SchoolCalendar
 import com.cyxbs.pages.noclass.bean.NoClassSpareTime
 import com.cyxbs.pages.noclass.page.viewmodel.other.CourseViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

@@ -51,24 +51,24 @@ class CommonDialogFragment() : DialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         val v = inflater.inflate(
-            com.mredrock.cyxbs.config.R.layout.config_dialog, dialog?.window?.findViewById(
+            com.cyxbs.components.config.R.layout.config_dialog, dialog?.window?.findViewById(
                 android.R.id.content) ?: container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.setLayout((screenWidth * 0.75).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
         containerRes?.let {
-            v.findViewById<FrameLayout>(com.mredrock.cyxbs.config.R.id.config_dialog_container).addView(LayoutInflater.from(context).inflate(it, null))
+            v.findViewById<FrameLayout>(com.cyxbs.components.config.R.id.config_dialog_container).addView(LayoutInflater.from(context).inflate(it, null))
         }
         return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val btnPositive = view.findViewById<Button>(com.mredrock.cyxbs.config.R.id.config_dialog_btn_positive)
+        val btnPositive = view.findViewById<Button>(com.cyxbs.components.config.R.id.config_dialog_btn_positive)
         btnPositive.setOnSingleClickListener {
             onPositiveClick?.invoke()
         }
         btnPositive.text = positiveString
-        val ivNegative = view.findViewById<ImageView>(com.mredrock.cyxbs.config.R.id.config_dialog_btn_negative)
+        val ivNegative = view.findViewById<ImageView>(com.cyxbs.components.config.R.id.config_dialog_btn_negative)
         if (onNegativeClick == null) {
             ivNegative.gone()
         } else {

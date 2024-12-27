@@ -10,7 +10,7 @@ import com.cyxbs.pages.affair.R
 import com.cyxbs.pages.affair.ui.fragment.NoClassAffairFragment
 import com.cyxbs.pages.affair.ui.viewmodel.activity.NoClassAffairActivityViewModel
 import com.cyxbs.pages.affair.api.NoClassBean
-import com.mredrock.cyxbs.config.route.NOTIFICATION_HOME
+import com.cyxbs.components.config.route.NOTIFICATION_HOME
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener

@@ -6,7 +6,7 @@ import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.cyxbs.pages.course.api.ICourseService
-import com.mredrock.cyxbs.config.config.SchoolCalendar
+import com.cyxbs.components.config.config.SchoolCalendar
 import com.mredrock.cyxbs.lib.base.ui.BaseFragment
 import com.cyxbs.pages.course.widget.fragment.vp.expose.ICourseVp
 import com.cyxbs.pages.course.widget.widget.NestedDispatchLayout

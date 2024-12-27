@@ -25,8 +25,8 @@ import com.cyxbs.pages.news.bean.NewsAttachment
 import com.cyxbs.pages.news.utils.FileTypeHelper
 import com.cyxbs.pages.news.utils.TimeFormatHelper
 import com.cyxbs.pages.news.viewmodel.NewsItemViewModel
-import com.mredrock.cyxbs.config.route.DISCOVER_NEWS_ITEM
-import com.mredrock.cyxbs.config.view.JToolbar
+import com.cyxbs.components.config.route.DISCOVER_NEWS_ITEM
+import com.cyxbs.components.config.view.JToolbar
 import com.mredrock.cyxbs.lib.base.pages.PhotoViewerActivity
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
@@ -50,7 +50,7 @@ class NewsItemActivity : BaseActivity(), NewsItemViewModel.NewsDownloadListener 
     private val tv_time by R.id.tv_time.view<TextView>()
     private val tv_detail by R.id.tv_detail.view<TextView>()
     private val ll_content by R.id.ll_content.view<LinearLayout>()
-    private val common_toolbar by com.mredrock.cyxbs.config.R.id.toolbar.view<JToolbar>()
+    private val common_toolbar by com.cyxbs.components.config.R.id.toolbar.view<JToolbar>()
 
     private val permissionDialog by lazy {
         AlertDialog.Builder(this)
@@ -182,7 +182,7 @@ class NewsItemActivity : BaseActivity(), NewsItemViewModel.NewsDownloadListener 
                     } else {
                         val textView = TextView(this).apply {
                             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-                            setTextColor(ContextCompat.getColor(this@NewsItemActivity, com.mredrock.cyxbs.config.R.color.config_level_two_font_color))
+                            setTextColor(ContextCompat.getColor(this@NewsItemActivity, com.cyxbs.components.config.R.color.config_level_two_font_color))
                             textSize = 15F
                             text = value
                         }

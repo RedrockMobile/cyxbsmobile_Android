@@ -475,7 +475,7 @@ class MapViewModel : BaseViewModel() {
             .isSingleChoose(false) // 是否是单选
             .isOpenLastAlbum(false) // 是否直接打开最后一次选择的相册
             .selectedPhotos(ArrayList())
-            .theme(com.mredrock.cyxbs.config.R.style.ConfigLPhotoTheme)
+            .theme(com.cyxbs.components.config.R.style.ConfigLPhotoTheme)
             .build()
             .start(activity, PICTURE_SELECT)
     }

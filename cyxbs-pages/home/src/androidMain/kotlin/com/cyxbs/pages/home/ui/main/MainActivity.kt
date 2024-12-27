@@ -9,10 +9,10 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.pages.login.api.ILoginService
 import com.cyxbs.functions.update.api.IAppUpdateService
-import com.mredrock.cyxbs.config.route.DISCOVER_SCHOOL_CAR
-import com.mredrock.cyxbs.config.route.MAIN_MAIN
-import com.mredrock.cyxbs.config.sp.SP_COURSE_SHOW_STATE
-import com.mredrock.cyxbs.config.sp.defaultSp
+import com.cyxbs.components.config.route.DISCOVER_SCHOOL_CAR
+import com.cyxbs.components.config.route.MAIN_MAIN
+import com.cyxbs.components.config.sp.SP_COURSE_SHOW_STATE
+import com.cyxbs.components.config.sp.defaultSp
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.base.utils.Umeng
 import com.mredrock.cyxbs.lib.utils.extensions.launch
@@ -23,8 +23,8 @@ import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import com.mredrock.cyxbs.lib.utils.service.impl
 import com.mredrock.cyxbs.lib.utils.utils.judge.NetworkUtil
 import com.cyxbs.pages.home.viewmodel.MainViewModel
-import com.mredrock.cyxbs.config.route.DISCOVER_EMPTY_ROOM
-import com.mredrock.cyxbs.config.route.DISCOVER_GRADES
+import com.cyxbs.components.config.route.DISCOVER_EMPTY_ROOM
+import com.cyxbs.components.config.route.DISCOVER_GRADES
 import kotlinx.coroutines.launch
 
 /**
@@ -48,7 +48,7 @@ class MainActivity : BaseActivity() {
   
   override fun onCreate(savedInstanceState: Bundle?) {
     // 还原主题，因为 MainActivity 最开始在 AndroidManifest.xml 设置了闪屏页背景，所以这里需要还原
-    setTheme(com.mredrock.cyxbs.config.R.style.ConfigAppTheme)
+    setTheme(com.cyxbs.components.config.R.style.ConfigAppTheme)
     super.onCreate(savedInstanceState)
     val isLogin = checkIsLogin()
     if (isLogin != null) {

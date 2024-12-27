@@ -15,7 +15,7 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.cyxbs.pages.store.api.IStoreService
-import com.mredrock.cyxbs.config.route.FOOD_ENTRY
+import com.cyxbs.components.config.route.FOOD_ENTRY
 import com.cyxbs.pages.food.R
 import com.cyxbs.pages.food.ui.adapters.FoodMainRvAdapter
 import com.cyxbs.pages.food.ui.view.FoodDetailDialog
@@ -323,7 +323,7 @@ class FoodMainActivity : BaseActivity() {
                                 context,
                                 R.drawable.food_shape_btn_normal
                             )
-                        setTextColor(getColor(com.mredrock.cyxbs.config.R.color.config_alpha_level_two_font_color))
+                        setTextColor(getColor(com.cyxbs.components.config.R.color.config_alpha_level_two_font_color))
                     }
                 }
         }

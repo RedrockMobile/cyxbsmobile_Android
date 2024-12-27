@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
-import com.mredrock.cyxbs.config.config.SchoolCalendar
+import com.cyxbs.components.config.config.SchoolCalendar
 import com.cyxbs.pages.course.page.course.ui.home.base.HomeCourseVpLinkFragment
 import com.cyxbs.pages.course.page.course.ui.home.viewmodel.HomeCourseViewModel
 import com.cyxbs.pages.course.page.find.ui.find.activity.FindLessonActivity

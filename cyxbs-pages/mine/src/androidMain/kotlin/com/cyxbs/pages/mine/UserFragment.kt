@@ -17,8 +17,12 @@ import androidx.fragment.app.viewModels
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.config.route.MINE_ENTRY
+import com.cyxbs.components.config.route.NOTIFICATION_HOME
+import com.cyxbs.components.config.route.STORE_ENTRY
+import com.cyxbs.components.config.route.UFIELD_CENTER_ENTRY
 import com.mredrock.cyxbs.common.utils.extensions.loadAvatar
-import com.mredrock.cyxbs.config.route.*
+import com.cyxbs.components.config.route.*
 import com.mredrock.cyxbs.lib.base.operations.doIfLogin
 import com.mredrock.cyxbs.lib.base.ui.BaseFragment
 import com.mredrock.cyxbs.lib.utils.extensions.gone

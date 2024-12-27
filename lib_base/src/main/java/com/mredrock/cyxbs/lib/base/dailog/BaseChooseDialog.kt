@@ -13,7 +13,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
 import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
-import com.mredrock.cyxbs.config.R
+import com.cyxbs.components.config.R
 import com.mredrock.cyxbs.lib.utils.extensions.dp2px
 
 /**

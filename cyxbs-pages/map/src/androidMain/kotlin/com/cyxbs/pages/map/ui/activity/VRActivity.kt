@@ -13,7 +13,7 @@ import android.widget.FrameLayout
 import androidx.core.content.edit
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import com.mredrock.cyxbs.config.sp.defaultSp
+import com.cyxbs.components.config.sp.defaultSp
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.base.webView.LiteJsWebView
 

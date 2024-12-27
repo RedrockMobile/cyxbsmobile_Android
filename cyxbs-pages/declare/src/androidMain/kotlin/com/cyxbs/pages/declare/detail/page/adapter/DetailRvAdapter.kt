@@ -36,7 +36,7 @@ class DetailRvAdapter :
         }) {
 
 
-    private val commonTextColor = appContext.getColor(com.mredrock.cyxbs.config.R.color.config_level_three_font_color)//未投票的文字颜色
+    private val commonTextColor = appContext.getColor(com.cyxbs.components.config.R.color.config_level_three_font_color)//未投票的文字颜色
     private val votedTextColor = appContext.getColor(R.color.declare_voted_text)//所投选项的文字颜色
     private val noVoteTextColor = appContext.getColor(R.color.declare_novoted_text)//不是所投选项的文字颜色
 
@@ -44,7 +44,7 @@ class DetailRvAdapter :
     private val votedBgColor = Color.parseColor("#554FFD")//所投选项的背景颜色
     private val votedPercentColor = Color.parseColor("#453EF1")//所投选项的占比背景颜色
     private val noVotePercentColor = Color.parseColor("#1A4A44E4")//不是所投选项的占比背景颜色
-    private val noVotePercentTextColor = appContext.getColor(com.mredrock.cyxbs.config.R.color.config_alpha_level_two_font_color)//不是所投选项的百分数文字颜色
+    private val noVotePercentTextColor = appContext.getColor(com.cyxbs.components.config.R.color.config_alpha_level_two_font_color)//不是所投选项的百分数文字颜色
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InnerHolder {
         val view = LayoutInflater.from(parent.context)

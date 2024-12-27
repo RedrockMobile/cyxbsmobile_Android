@@ -17,9 +17,9 @@ import com.cyxbs.pages.volunteer.viewmodel.DiscoverVolunteerFeedViewModel
 import com.mredrock.cyxbs.common.mark.EventBusLifecycleSubscriber
 import com.mredrock.cyxbs.common.ui.BaseFeedFragment
 import com.mredrock.cyxbs.common.utils.extensions.doIfLogin
-import com.mredrock.cyxbs.config.route.DISCOVER_VOLUNTEER
-import com.mredrock.cyxbs.config.route.DISCOVER_VOLUNTEER_FEED
-import com.mredrock.cyxbs.config.route.DISCOVER_VOLUNTEER_RECORD
+import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER
+import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER_FEED
+import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER_RECORD
 import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

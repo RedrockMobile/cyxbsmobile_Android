@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.mredrock.cyxbs.config.route.DECLARE_ENTRY
+import com.cyxbs.components.config.route.DECLARE_ENTRY
 import com.cyxbs.pages.declare.databinding.DeclareActivityHomeBinding
 import com.cyxbs.pages.declare.detail.page.activity.DetailActivity
 import com.cyxbs.pages.declare.main.page.adapter.HomeRvAdapter

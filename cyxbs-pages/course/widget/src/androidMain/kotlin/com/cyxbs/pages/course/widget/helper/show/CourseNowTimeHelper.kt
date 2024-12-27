@@ -57,7 +57,7 @@ open class CourseNowTimeHelper private constructor(
   
   // 画笔
   private val mPaint = Paint().apply {
-    color = com.mredrock.cyxbs.config.R.color.config_level_four_font_color.color
+    color = com.cyxbs.components.config.R.color.config_level_four_font_color.color
     isAntiAlias = true
     style = Paint.Style.FILL
     strokeWidth = 1.dp2pxF()

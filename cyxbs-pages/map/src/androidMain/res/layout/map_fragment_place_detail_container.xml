@@ -55,7 +55,7 @@
                         android:paddingEnd="16dp">
 
 
-                        <com.mredrock.cyxbs.config.view.MarqueeTextView
+                        <com.cyxbs.components.config.view.MarqueeTextView
                             android:id="@+id/map_tv_detail_place_name"
                             android:layout_width="300dp"
                             android:layout_height="wrap_content"

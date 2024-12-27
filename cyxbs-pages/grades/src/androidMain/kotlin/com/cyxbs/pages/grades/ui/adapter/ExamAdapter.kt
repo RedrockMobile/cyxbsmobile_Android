@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.text.isDigitsOnly
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.config.config.SchoolCalendar
+import com.cyxbs.components.config.config.SchoolCalendar
 import com.cyxbs.pages.grades.R
 import com.cyxbs.pages.grades.bean.Exam
 import com.cyxbs.pages.grades.widget.DashGapLine

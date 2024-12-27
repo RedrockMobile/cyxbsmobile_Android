@@ -18,7 +18,7 @@ import com.cyxbs.pages.electricity.config.SP_BUILDING_HEAD_KEY
 import com.cyxbs.pages.electricity.config.SP_ROOM_KEY
 import com.cyxbs.pages.electricity.config.*
 import com.cyxbs.pages.electricity.R
-import com.mredrock.cyxbs.config.sp.defaultSp
+import com.cyxbs.components.config.sp.defaultSp
 import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
 
 

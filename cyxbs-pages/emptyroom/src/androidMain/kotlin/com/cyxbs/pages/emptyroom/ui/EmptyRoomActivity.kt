@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayout
-import com.mredrock.cyxbs.config.config.SchoolCalendar
+import com.cyxbs.components.config.config.SchoolCalendar
 import com.cyxbs.pages.emptyroom.R
 import com.cyxbs.pages.emptyroom.ui.adapter.EmptyRoomResultAdapter
 import com.cyxbs.pages.emptyroom.ui.adapter.StringAdapter
@@ -31,7 +31,7 @@ import com.cyxbs.pages.emptyroom.viewmodel.EmptyRoomViewModel.Companion.ERROR
 import com.cyxbs.pages.emptyroom.viewmodel.EmptyRoomViewModel.Companion.FINISH
 import com.cyxbs.pages.emptyroom.viewmodel.EmptyRoomViewModel.Companion.LOADING
 import java.util.*
-import com.mredrock.cyxbs.config.route.DISCOVER_EMPTY_ROOM
+import com.cyxbs.components.config.route.DISCOVER_EMPTY_ROOM
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.utils.extensions.dp2px
 import com.mredrock.cyxbs.lib.utils.extensions.gone
@@ -205,7 +205,7 @@ class EmptyRoomActivity : BaseActivity(), OnItemSelectedChangeListener {
                             textView.setTextColor(ContextCompat.getColor(this@EmptyRoomActivity, R.color.emptyroom_selected))
                             textView.paint.isFakeBoldText = true
                         } else {
-                            textView.setTextColor(ContextCompat.getColor(this@EmptyRoomActivity, com.mredrock.cyxbs.config.R.color.config_level_two_font_color))
+                            textView.setTextColor(ContextCompat.getColor(this@EmptyRoomActivity, com.cyxbs.components.config.R.color.config_level_two_font_color))
                             textView.paint.isFakeBoldText = false
                         }
                         textView.gravity = Gravity.CENTER

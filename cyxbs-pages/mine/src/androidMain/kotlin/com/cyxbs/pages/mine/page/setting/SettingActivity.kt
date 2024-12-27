@@ -16,8 +16,8 @@ import com.mredrock.cyxbs.common.config.SP_WIDGET_NEED_FRESH
 import com.mredrock.cyxbs.common.config.WIDGET_COURSE
 import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 import com.mredrock.cyxbs.common.service.impl
-import com.mredrock.cyxbs.config.sp.defaultSp
-import com.mredrock.cyxbs.config.view.JToolbar
+import com.cyxbs.components.config.sp.defaultSp
+import com.cyxbs.components.config.view.JToolbar
 import com.mredrock.cyxbs.lib.base.dailog.ChooseDialog
 import com.mredrock.cyxbs.lib.base.operations.doIfLogin
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity

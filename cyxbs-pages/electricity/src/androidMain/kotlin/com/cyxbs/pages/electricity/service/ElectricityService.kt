@@ -6,7 +6,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.cyxbs.pages.electricity.api.ELECTRICITY_SERVICE
 import com.cyxbs.pages.electricity.api.IElectricityService
-import com.mredrock.cyxbs.config.route.DISCOVER_ELECTRICITY_FEED
+import com.cyxbs.components.config.route.DISCOVER_ELECTRICITY_FEED
 
 /**
  * Created by yyfbe, Date on 2020/8/31.

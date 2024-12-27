@@ -10,7 +10,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.webkit.MimeTypeMap
 import androidx.annotation.RequiresApi
-import com.mredrock.cyxbs.config.dir.DIR_PHOTO
+import com.cyxbs.components.config.dir.DIR_PHOTO
 import java.io.File
 import java.io.OutputStream
 

@@ -10,8 +10,8 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.pages.store.api.IStoreService
-import com.mredrock.cyxbs.config.route.DISCOVER_MAP
-import com.mredrock.cyxbs.config.route.UFIELD_DETAIL_ENTRY
+import com.cyxbs.components.config.route.DISCOVER_MAP
+import com.cyxbs.components.config.route.UFIELD_DETAIL_ENTRY
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.base.ui.viewModelBy
 import com.mredrock.cyxbs.lib.utils.extensions.gone

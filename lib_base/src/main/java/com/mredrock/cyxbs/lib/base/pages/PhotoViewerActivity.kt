@@ -17,7 +17,7 @@ import androidx.core.view.WindowCompat
 import com.bumptech.glide.Glide
 import com.github.chrisbanes.photoview.PhotoView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.mredrock.cyxbs.config.dir.DIR_PHOTO
+import com.cyxbs.components.config.dir.DIR_PHOTO
 import com.mredrock.cyxbs.lib.base.R
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.utils.extensions.doPermissionAction

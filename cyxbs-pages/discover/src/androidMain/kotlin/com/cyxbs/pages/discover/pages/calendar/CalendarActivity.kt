@@ -15,7 +15,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.bumptech.glide.request.transition.Transition
-import com.mredrock.cyxbs.config.route.DISCOVER_CALENDAR
+import com.cyxbs.components.config.route.DISCOVER_CALENDAR
 import com.cyxbs.pages.discover.R
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.utils.extensions.isDarkMode

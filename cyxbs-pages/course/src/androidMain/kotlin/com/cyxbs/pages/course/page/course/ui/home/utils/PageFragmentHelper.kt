@@ -6,7 +6,7 @@ import androidx.core.content.edit
 import com.cyxbs.pages.affair.api.IAffairService
 import com.cyxbs.pages.course.api.ILessonService
 import com.cyxbs.pages.course.api.utils.getBeginLesson
-import com.mredrock.cyxbs.config.config.SchoolCalendar
+import com.cyxbs.components.config.config.SchoolCalendar
 import com.cyxbs.pages.course.page.course.ui.home.HomeSemesterFragment
 import com.cyxbs.pages.course.page.course.ui.home.HomeWeekFragment
 import com.cyxbs.pages.course.page.course.ui.home.IHomePageFragment
@@ -169,7 +169,7 @@ class PageFragmentHelper<T> where T: IHomePageFragment, T: CoursePageFragment {
       val noLessonText = tvNoLesson.text
       launch {
         if (!NetworkUtil.isAvailableExact()) {
-          ivNoLesson.setImageResource(com.mredrock.cyxbs.config.R.drawable.config_ic_404)
+          ivNoLesson.setImageResource(com.cyxbs.components.config.R.drawable.config_ic_404)
           tvNoLesson.text = "联网才能查看课表哦~"
           NetworkUtil.suspendUntilAvailable() // 挂起直到网络可用
           // 网络可用了就还原设置

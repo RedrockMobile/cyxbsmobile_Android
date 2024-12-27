@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.mredrock.cyxbs.config.config.SchoolCalendar
-import com.mredrock.cyxbs.config.route.DISCOVER_SPORT
+import com.cyxbs.components.config.config.SchoolCalendar
+import com.cyxbs.components.config.route.DISCOVER_SPORT
 import com.mredrock.cyxbs.lib.base.ui.BaseBindActivity
 import com.mredrock.cyxbs.lib.utils.extensions.gone
 import com.mredrock.cyxbs.lib.utils.extensions.setOnDoubleClickListener
@@ -188,7 +188,7 @@ class SportDetailActivity : BaseBindActivity<SportActivitySportDetailBinding>() 
             sportSrlDetailList.finishRefresh()
             //隐藏RecyclerView并加载出错的图片及提示
             sportRvDetailList.gone()
-            sportSivDetailHint.setImageResource(com.mredrock.cyxbs.config.R.drawable.config_ic_404)
+            sportSivDetailHint.setImageResource(com.cyxbs.components.config.R.drawable.config_ic_404)
             sportSivDetailHint.visible()
             sportTvDetailHint.text = "数据错误"
             sportTvDetailHint.visible()

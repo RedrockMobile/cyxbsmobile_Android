@@ -25,7 +25,7 @@ fun FragmentActivity.selectImageFromAlbum(maxCount: Int, list: List<Uri>) {
                 .pauseOnScroll(false) // 是否滑动暂停加载图片显示
                 .isSingleChoose(false) // 是否是单选
                 .isOpenLastAlbum(false) // 是否直接打开最后一次选择的相册
-                .theme(com.mredrock.cyxbs.config.R.style.ConfigLPhotoTheme)
+                .theme(com.cyxbs.components.config.R.style.ConfigLPhotoTheme)
                 .build()
                 .start(this@selectImageFromAlbum, CHOOSE_FEED_BACK_PIC)
         }

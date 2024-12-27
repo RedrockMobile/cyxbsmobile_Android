@@ -8,7 +8,7 @@ kotlin {
   sourceSets {
     commonMain.dependencies {
       implementation(projects.libBase)
-      implementation(projects.libConfig)
+      implementation(projects.cyxbsComponents.config)
       implementation(projects.libUtils)
     }
     androidMain.dependencies {

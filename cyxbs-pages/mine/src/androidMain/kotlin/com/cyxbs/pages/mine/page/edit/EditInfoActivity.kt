@@ -26,8 +26,8 @@ import com.afollestad.materialdialogs.list.listItems
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.account.api.IUserService
-import com.mredrock.cyxbs.config.route.MINE_EDIT_INFO
-import com.mredrock.cyxbs.config.view.JToolbar
+import com.cyxbs.components.config.route.MINE_EDIT_INFO
+import com.cyxbs.components.config.view.JToolbar
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.utils.extensions.doPermissionAction
 import com.mredrock.cyxbs.lib.utils.extensions.setAvatarImageFromUrl
@@ -57,7 +57,7 @@ class EditInfoActivity : BaseActivity() {
     private val mine_et_college by R.id.mine_et_college.view<TextView>()
     private val mine_edit_et_avatar by R.id.mine_edit_et_avatar.view<ImageView>()
     private val mine_edit_iv_agreement by R.id.mine_edit_iv_agreement.view<ImageView>()
-    val common_toolbar by com.mredrock.cyxbs.config.R.id.toolbar.view<JToolbar>()
+    val common_toolbar by com.cyxbs.components.config.R.id.toolbar.view<JToolbar>()
     private val viewModel by lazy { ViewModelProvider(this)[EditViewModel::class.java] }
 
     private val userService: IUserService by lazy {
@@ -220,10 +220,10 @@ class EditInfoActivity : BaseActivity() {
             )
         )
         options.setToolbarColor(
-            ContextCompat.getColor(this, com.mredrock.cyxbs.config.R.color.colorPrimaryDark)
+            ContextCompat.getColor(this, com.cyxbs.components.config.R.color.colorPrimaryDark)
         )
         options.setStatusBarColor(
-            ContextCompat.getColor(this, com.mredrock.cyxbs.config.R.color.colorPrimaryDark)
+            ContextCompat.getColor(this, com.cyxbs.components.config.R.color.colorPrimaryDark)
         )
         uCrop.withOptions(options)
             .withAspectRatio(300f, 300f)

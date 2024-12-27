@@ -29,7 +29,7 @@ abstract class TodayImpl : NoLessonImpl(), IToday {
   override fun showToday(weekNum: Int) {
     mTodayHighlightHelper.setWeekNum(weekNum)
     getWeekWeekView(weekNum) { week, month ->
-      val color = com.mredrock.cyxbs.config.R.color.config_white_black.color
+      val color = com.cyxbs.components.config.R.color.config_white_black.color
       week.setTextColor(color)
       month.setTextColor(color)
     }
@@ -43,7 +43,7 @@ abstract class TodayImpl : NoLessonImpl(), IToday {
     private val mRadius = 8.dp2pxF
     
     private val mWeekPaint = Paint().apply {
-      color = com.mredrock.cyxbs.config.R.color.config_level_four_font_color.color
+      color = com.cyxbs.components.config.R.color.config_level_four_font_color.color
       style = Paint.Style.FILL
       isAntiAlias = true
     }

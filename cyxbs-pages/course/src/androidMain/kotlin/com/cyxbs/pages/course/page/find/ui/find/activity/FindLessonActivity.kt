@@ -12,7 +12,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.mredrock.cyxbs.config.route.DISCOVER_OTHER_COURSE
+import com.cyxbs.components.config.route.DISCOVER_OTHER_COURSE
 import com.cyxbs.pages.course.R
 import com.cyxbs.pages.course.page.find.ui.course.stu.FindStuCourseFragment
 import com.cyxbs.pages.course.page.find.ui.course.tea.FindTeaCourseFragment

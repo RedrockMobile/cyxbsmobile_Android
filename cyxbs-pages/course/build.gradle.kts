@@ -10,7 +10,7 @@ kotlin {
     commonMain.dependencies {
       subprojects.forEach { implementation(it) }
       implementation(projects.libBase)
-      implementation(projects.libConfig)
+      implementation(projects.cyxbsComponents.config)
       implementation(projects.libUtils)
       implementation(projects.cyxbsComponents.account.api)
       implementation(projects.cyxbsPages.affair.api)

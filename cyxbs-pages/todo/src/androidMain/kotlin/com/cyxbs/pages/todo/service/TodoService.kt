@@ -6,7 +6,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.cyxbs.pages.todo.api.ITodoService
 import com.cyxbs.pages.todo.api.TODO_SERVICE
-import com.mredrock.cyxbs.config.route.DISCOVER_TODO_FEED
+import com.cyxbs.components.config.route.DISCOVER_TODO_FEED
 
 /**
  * Author: RayleighZ

@@ -19,7 +19,7 @@ import com.cyxbs.components.account.api.utils.Value
 import com.cyxbs.components.account.bean.ErrorMsg
 import com.cyxbs.components.account.bean.UserInfo
 import com.cyxbs.pages.login.api.ILoginService
-import com.mredrock.cyxbs.config.sp.defaultSp
+import com.cyxbs.components.config.sp.defaultSp
 import com.mredrock.cyxbs.lib.utils.extensions.GsonDefault
 import com.mredrock.cyxbs.lib.utils.extensions.toast
 import com.mredrock.cyxbs.lib.utils.network.ApiException

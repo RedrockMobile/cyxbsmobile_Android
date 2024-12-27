@@ -24,8 +24,8 @@ import com.google.android.material.shape.RoundedCornerTreatment
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.mredrock.cyxbs.config.route.NOTIFICATION_HOME
-import com.mredrock.cyxbs.config.route.NOTIFICATION_SETTING
+import com.cyxbs.components.config.route.NOTIFICATION_HOME
+import com.cyxbs.components.config.route.NOTIFICATION_SETTING
 import com.mredrock.cyxbs.lib.utils.adapter.FragmentVpAdapter
 import com.mredrock.cyxbs.lib.utils.extensions.dp2pxF
 import com.mredrock.cyxbs.lib.utils.extensions.gone

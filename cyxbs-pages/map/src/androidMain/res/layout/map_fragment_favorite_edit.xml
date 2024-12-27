@@ -93,7 +93,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.mredrock.cyxbs.config.view.MarqueeTextView
+            <com.cyxbs.components.config.view.MarqueeTextView
                 android:id="@+id/map_tv_favorite_place_name"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"

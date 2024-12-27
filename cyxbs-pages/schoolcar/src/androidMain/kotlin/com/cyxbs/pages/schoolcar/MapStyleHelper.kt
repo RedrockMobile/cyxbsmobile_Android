@@ -3,7 +3,7 @@ package com.cyxbs.pages.schoolcar
 import android.content.Context
 import androidx.core.content.edit
 import com.cyxbs.pages.schoolcar.network.MapService
-import com.mredrock.cyxbs.config.sp.defaultSp
+import com.cyxbs.components.config.sp.defaultSp
 import com.mredrock.cyxbs.lib.utils.extensions.setSchedulers
 import com.mredrock.cyxbs.lib.utils.extensions.unsafeSubscribeBy
 import com.mredrock.cyxbs.lib.utils.network.ApiGenerator

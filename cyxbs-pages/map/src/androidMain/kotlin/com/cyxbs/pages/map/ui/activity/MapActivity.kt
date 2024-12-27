@@ -20,8 +20,8 @@ import com.cyxbs.pages.map.util.KeyboardController
 import com.cyxbs.pages.map.viewmodel.MapViewModel
 import com.cyxbs.pages.map.widget.GlideProgressDialog
 import com.cyxbs.pages.map.widget.ProgressDialog
-import com.mredrock.cyxbs.config.route.COURSE_POS_TO_MAP
-import com.mredrock.cyxbs.config.route.DISCOVER_MAP
+import com.cyxbs.components.config.route.COURSE_POS_TO_MAP
+import com.cyxbs.components.config.route.DISCOVER_MAP
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import top.limuyang2.photolibrary.LPhotoHelper
 

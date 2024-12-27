@@ -6,7 +6,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.EditText
 import android.widget.FrameLayout
-import com.mredrock.cyxbs.config.R
+import com.cyxbs.components.config.R
 import com.mredrock.cyxbs.lib.base.dailog.BaseChooseDialog
 import com.mredrock.cyxbs.lib.utils.extensions.color
 import com.mredrock.cyxbs.lib.utils.extensions.dp2px

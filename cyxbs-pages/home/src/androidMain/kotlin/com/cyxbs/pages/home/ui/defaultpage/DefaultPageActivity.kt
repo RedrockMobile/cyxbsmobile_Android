@@ -3,7 +3,7 @@ package com.cyxbs.pages.home.ui.defaultpage
 import android.os.Bundle
 import android.widget.ImageButton
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.mredrock.cyxbs.config.route.DEFAULT_PAGE
+import com.cyxbs.components.config.route.DEFAULT_PAGE
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.utils.extensions.visible
 import com.cyxbs.pages.home.R

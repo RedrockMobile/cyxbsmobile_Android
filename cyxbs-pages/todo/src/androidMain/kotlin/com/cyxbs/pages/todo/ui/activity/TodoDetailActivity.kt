@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.pages.todo.R
 import com.google.gson.Gson
-import com.mredrock.cyxbs.config.route.TODO_TODO_DETAIL
+import com.cyxbs.components.config.route.TODO_TODO_DETAIL
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.utils.extensions.gone
 import com.mredrock.cyxbs.lib.utils.extensions.toastWithYOffset
@@ -281,7 +281,7 @@ class TodoDetailActivity : BaseActivity() {
                             }
                         }
                         ivDeadlineDel.visible()
-                        setTextColor(getColor(com.mredrock.cyxbs.config.R.color.config_level_two_font_color))
+                        setTextColor(getColor(com.cyxbs.components.config.R.color.config_level_two_font_color))
                         viewModel.setChangeState(judge())
                     }
                 }.show()

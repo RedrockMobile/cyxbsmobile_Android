@@ -1,6 +1,6 @@
 package com.cyxbs.pages.widget.util
 
-import com.mredrock.cyxbs.config.sp.defaultSp
+import com.cyxbs.components.config.sp.defaultSp
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*

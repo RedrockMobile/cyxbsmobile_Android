@@ -66,7 +66,7 @@ class AffairWeekAdapter : ListAdapter<AffairWeekAdapter.AffairWeekSelectData, Af
     if (getItem(position).isChoice) {
       holder.textView.setTextColor(appContext.getColor(R.color.affair_edit_affair_select_week_tv))
     } else {
-      holder.textView.setTextColor(appContext.getColor(com.mredrock.cyxbs.config.R.color.config_level_two_font_color))
+      holder.textView.setTextColor(appContext.getColor(com.cyxbs.components.config.R.color.config_level_two_font_color))
     }
   }
   

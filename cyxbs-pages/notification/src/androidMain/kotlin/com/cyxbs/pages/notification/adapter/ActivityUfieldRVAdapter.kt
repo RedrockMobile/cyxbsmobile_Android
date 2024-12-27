@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
-import com.mredrock.cyxbs.config.route.UFIELD_DETAIL_ENTRY
+import com.cyxbs.components.config.route.UFIELD_DETAIL_ENTRY
 import com.mredrock.cyxbs.lib.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.notification.R
 import com.cyxbs.pages.notification.bean.UfieldMsgBean

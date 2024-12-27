@@ -56,7 +56,7 @@ class UserAgreementDialog private constructor(
       rightMargin = leftMargin
       bottomMargin = 24.dp2px
     }
-    setTextColor(com.mredrock.cyxbs.config.R.color.config_level_four_font_color.color)
+    setTextColor(com.cyxbs.components.config.R.color.config_level_four_font_color.color)
     textSize = 14F
   }
   
@@ -73,7 +73,7 @@ class UserAgreementDialog private constructor(
           ).apply {
             topMargin = 28.dp2px
           }
-          setTextColor(com.mredrock.cyxbs.config.R.color.config_level_four_font_color.color)
+          setTextColor(com.cyxbs.components.config.R.color.config_level_four_font_color.color)
           textSize = 18F
           gravity = Gravity.CENTER
         }

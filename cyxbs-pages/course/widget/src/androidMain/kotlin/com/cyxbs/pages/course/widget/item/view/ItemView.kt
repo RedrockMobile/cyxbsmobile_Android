@@ -33,7 +33,7 @@ abstract class ItemView(context: Context) : CardView(context) {
   }
   
   // 底色
-  protected val mBottomColor = com.mredrock.cyxbs.config.R.color.config_common_background_color.color
+  protected val mBottomColor = com.cyxbs.components.config.R.color.config_common_background_color.color
   
   override fun draw(canvas: Canvas) {
     canvas.drawColor(mBottomColor) // 需要在底层绘制背景色，不然黑夜模式下 item 颜色会透过去

@@ -8,7 +8,7 @@ import com.cyxbs.pages.todo.R
 import com.cyxbs.pages.todo.model.bean.TodoListPushWrapper
 import com.cyxbs.pages.todo.ui.dialog.AddTodoDialog
 import com.cyxbs.pages.todo.viewmodel.TodoViewModel
-import com.mredrock.cyxbs.config.route.TODO_ADD_TODO_BY_WIDGET
+import com.cyxbs.components.config.route.TODO_ADD_TODO_BY_WIDGET
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.utils.extensions.appContext
 import com.mredrock.cyxbs.lib.utils.extensions.getSp

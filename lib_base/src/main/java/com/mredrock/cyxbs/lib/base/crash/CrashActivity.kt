@@ -16,7 +16,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import com.cyxbs.components.init.appCurrentProcessName
-import com.mredrock.cyxbs.config.view.ScaleScrollTextView
+import com.cyxbs.components.config.view.ScaleScrollTextView
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.base.R
 import com.mredrock.cyxbs.lib.base.pages.SecretActivity

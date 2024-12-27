@@ -11,7 +11,7 @@ kotlin {
       subprojects.forEach { implementation(it) }
       implementation(projects.cyxbsComponents.init)
       implementation(projects.libBase)
-      implementation(projects.libConfig)
+      implementation(projects.cyxbsComponents.config)
       implementation(projects.libUtils)
       implementation(projects.cyxbsComponents.account.api)
     }

@@ -3,7 +3,9 @@ package com.cyxbs.pages.home.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.mredrock.cyxbs.config.route.*
+import com.cyxbs.components.config.route.DISCOVER_ENTRY
+import com.cyxbs.components.config.route.FAIRGROUND_ENTRY
+import com.cyxbs.components.config.route.MINE_ENTRY
 import com.mredrock.cyxbs.lib.utils.service.ServiceManager
 
 /**

@@ -26,8 +26,8 @@ import com.cyxbs.pages.schoolcar.adapter.CarSiteAdapter
 import com.cyxbs.pages.schoolcar.bean.SchoolCarLocation
 import com.cyxbs.pages.schoolcar.widget.SchoolCarsSmoothMove
 import com.cyxbs.pages.schoolcar.databinding.SchoolcarActivitySchoolcarBinding
-import com.mredrock.cyxbs.config.route.DISCOVER_SCHOOL_CAR
-import com.mredrock.cyxbs.config.sp.defaultSp
+import com.cyxbs.components.config.route.DISCOVER_SCHOOL_CAR
+import com.cyxbs.components.config.sp.defaultSp
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.utils.extensions.dp2px
 import com.mredrock.cyxbs.lib.utils.extensions.px2dp
@@ -323,7 +323,7 @@ class SchoolCarActivity: BaseActivity() {
         vm.mapInfo.value?.lines?.forEach { line ->
           if (line.id == arrays[0]) {
             binding.schoolCarCardTvChangeBts.text = line.name
-            binding.schoolCarCardTvChangeBts.setTextColor(resources.getColor(com.mredrock.cyxbs.config.R.color.config_level_one_font_color))
+            binding.schoolCarCardTvChangeBts.setTextColor(resources.getColor(com.cyxbs.components.config.R.color.config_level_one_font_color))
             binding.schoolCarCardIvChangeBts.setImageResource(R.drawable.schoolcar_bts_btn_change)
             binding.schoolCarCardChangeBts.setBackgroundResource(R.drawable.schoolcar_bts_btn_change_shape)
           }

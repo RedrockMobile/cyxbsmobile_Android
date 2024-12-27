@@ -10,7 +10,7 @@ kotlin {
     commonMain.dependencies {
       implementation(projects.cyxbsComponents.init)
       implementation(projects.libBase)
-      implementation(projects.libConfig)
+      implementation(projects.cyxbsComponents.config)
       implementation(projects.libUtils)
       implementation(projects.cyxbsComponents.account.api)
       implementation(projects.cyxbsPages.course.api)

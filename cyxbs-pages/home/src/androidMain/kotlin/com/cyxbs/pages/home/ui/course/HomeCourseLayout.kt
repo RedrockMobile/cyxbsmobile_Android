@@ -17,8 +17,8 @@ import com.cyxbs.pages.home.viewmodel.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.pages.course.api.ICourseService
-import com.mredrock.cyxbs.config.route.COURSE_POS_TO_MAP
-import com.mredrock.cyxbs.config.route.DISCOVER_MAP
+import com.cyxbs.components.config.route.COURSE_POS_TO_MAP
+import com.cyxbs.components.config.route.DISCOVER_MAP
 import com.mredrock.cyxbs.lib.base.crash.CrashDialog
 import com.mredrock.cyxbs.lib.base.utils.Umeng
 import com.mredrock.cyxbs.lib.base.utils.safeSubscribeBy

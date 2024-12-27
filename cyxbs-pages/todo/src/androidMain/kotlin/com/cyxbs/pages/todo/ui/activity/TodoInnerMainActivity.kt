@@ -15,7 +15,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.mredrock.cyxbs.config.route.DISCOVER_TODO_MAIN
+import com.cyxbs.components.config.route.DISCOVER_TODO_MAIN
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.utils.adapter.FragmentVpAdapter
 import com.mredrock.cyxbs.lib.utils.extensions.appContext
@@ -150,12 +150,12 @@ class TodoInnerMainActivity : BaseActivity() {
         val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 tab.customView?.findViewById<TextView>(R.id.todo_tv_tl_tab)
-                    ?.setTextColor(ColorStateList.valueOf(com.mredrock.cyxbs.config.R.color.config_level_one_font_color.color))
+                    ?.setTextColor(ColorStateList.valueOf(com.cyxbs.components.config.R.color.config_level_one_font_color.color))
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
                 tab.customView?.findViewById<TextView>(R.id.todo_tv_tl_tab)
-                    ?.setTextColor(ColorStateList.valueOf(com.mredrock.cyxbs.config.R.color.config_alpha_forty_level_two_font_color.color))
+                    ?.setTextColor(ColorStateList.valueOf(com.cyxbs.components.config.R.color.config_alpha_forty_level_two_font_color.color))
 
             }
 

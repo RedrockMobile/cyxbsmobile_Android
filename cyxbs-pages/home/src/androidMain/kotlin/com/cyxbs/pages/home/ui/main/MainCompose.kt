@@ -177,7 +177,7 @@ private fun HomeNavCompose(modifier: Modifier = Modifier) {
       .graphicsLayer {
         alpha = BottomNavState.alpha.floatValue
       }
-      .background(Color(com.mredrock.cyxbs.config.R.color.config_common_background_color.color)),
+      .background(Color(com.cyxbs.components.config.R.color.config_common_background_color.color)),
     horizontalArrangement = Arrangement.SpaceAround,
     verticalAlignment = Alignment.CenterVertically,
   ) {

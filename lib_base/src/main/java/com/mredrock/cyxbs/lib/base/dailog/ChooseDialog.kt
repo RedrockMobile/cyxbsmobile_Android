@@ -98,7 +98,7 @@ open class ChooseDialog : BaseChooseDialog<ChooseDialog, ChooseDialog.Data> {
         leftMargin = 25.dp2px
         rightMargin = leftMargin
       }
-      setTextColor(com.mredrock.cyxbs.config.R.color.config_level_four_font_color.color)
+      setTextColor(com.cyxbs.components.config.R.color.config_level_four_font_color.color)
     }
   }
 

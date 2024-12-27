@@ -5,8 +5,8 @@ import android.app.ActivityManager
 import android.app.Application
 import android.os.Build
 import android.os.Process
-import com.mredrock.cyxbs.config.sp.SP_PRIVACY_AGREED
-import com.mredrock.cyxbs.config.sp.defaultSp
+import com.cyxbs.components.config.sp.SP_PRIVACY_AGREED
+import com.cyxbs.components.config.sp.defaultSp
 import com.cyxbs.components.init.InitialManager
 import com.cyxbs.components.init.InitialService
 import com.cyxbs.components.init.appCurrentProcessName

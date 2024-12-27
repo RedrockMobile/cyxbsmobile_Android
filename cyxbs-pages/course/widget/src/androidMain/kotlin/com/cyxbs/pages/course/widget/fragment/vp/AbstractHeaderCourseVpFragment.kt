@@ -15,7 +15,7 @@ import androidx.core.content.edit
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.mredrock.cyxbs.config.sp.defaultSp
+import com.cyxbs.components.config.sp.defaultSp
 import com.cyxbs.pages.course.widget.R
 import com.cyxbs.pages.course.widget.fragment.vp.expose.IHeaderCourseVp
 import com.mredrock.cyxbs.lib.utils.extensions.gone

@@ -213,7 +213,7 @@ class CalendarDialog(
                     if (calendar.get(Calendar.YEAR) == currentYear &&
                         calendar.get(Calendar.MONTH) == currentMonth &&
                         it.text.toString().toInt() == currentDay
-                    ) getColor(R.color.todo_calendar_current_day_tv_color) else getColor(com.mredrock.cyxbs.config.R.color.config_level_three_font_color)
+                    ) getColor(R.color.todo_calendar_current_day_tv_color) else getColor(com.cyxbs.components.config.R.color.config_level_three_font_color)
                 )
             }
             selectedDayView = this
@@ -229,7 +229,7 @@ class CalendarDialog(
                 if (calendar.get(Calendar.YEAR) == currentYear &&
                     calendar.get(Calendar.MONTH) == currentMonth &&
                     text.toString().toInt() == currentDay
-                ) getColor(R.color.todo_calendar_current_day_tv_color) else getColor(com.mredrock.cyxbs.config.R.color.config_level_three_font_color)
+                ) getColor(R.color.todo_calendar_current_day_tv_color) else getColor(com.cyxbs.components.config.R.color.config_level_three_font_color)
             )
         }
     }
@@ -254,11 +254,11 @@ class CalendarDialog(
             val year = calendar.get(Calendar.YEAR)
             val month = calendar.get(Calendar.MONTH)
             val dayColor = when {
-                year > currentYear -> getColor(com.mredrock.cyxbs.config.R.color.config_level_three_font_color)
+                year > currentYear -> getColor(com.cyxbs.components.config.R.color.config_level_three_font_color)
                 year < currentYear -> getColor(R.color.todo_calendar_ago_day_color)
                 month < currentMonth -> getColor(R.color.todo_calendar_ago_day_color)
-                month > currentMonth -> getColor(com.mredrock.cyxbs.config.R.color.config_level_three_font_color)
-                day > currentDay -> getColor(com.mredrock.cyxbs.config.R.color.config_level_three_font_color)
+                month > currentMonth -> getColor(com.cyxbs.components.config.R.color.config_level_three_font_color)
+                day > currentDay -> getColor(com.cyxbs.components.config.R.color.config_level_three_font_color)
                 day < currentDay -> getColor(R.color.todo_calendar_ago_day_color)
                 else -> {
                     if (selectedDayView == null) {

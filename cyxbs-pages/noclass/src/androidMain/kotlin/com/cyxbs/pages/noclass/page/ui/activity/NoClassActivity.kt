@@ -17,8 +17,8 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.mredrock.cyxbs.config.route.DISCOVER_NO_CLASS
-import com.mredrock.cyxbs.config.sp.defaultSp
+import com.cyxbs.components.config.route.DISCOVER_NO_CLASS
+import com.cyxbs.components.config.sp.defaultSp
 import com.mredrock.cyxbs.lib.base.ui.BaseActivity
 import com.mredrock.cyxbs.lib.utils.adapter.FragmentVpAdapter
 import com.cyxbs.pages.noclass.R
