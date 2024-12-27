@@ -2,7 +2,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
-  id("manager.androidApp")
+  id("manager.app")
   id("kmp.base")
   id("kmp.compose")
 }

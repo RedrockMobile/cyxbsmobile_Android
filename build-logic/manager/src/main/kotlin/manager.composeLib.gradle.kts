@@ -1,5 +1,5 @@
 plugins {
-  id("manager.library")
+  id("manager.lib")
   id("kmp.base")
   id("kmp.compose")
 }

@@ -22,11 +22,9 @@ kotlin {
       }.forEach {
         api(it)
       }
-//      debugImplementation(projects.libDebug)
     }
     // 依赖所有模块
     androidMain.dependencies {
-
       implementation(libs.bundles.projectBase)
       implementation(libs.bundles.views)
       implementation(libs.bundles.network)
