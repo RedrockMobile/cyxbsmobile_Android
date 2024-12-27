@@ -1,7 +1,7 @@
-package com.cyxbs.components.account.utils
+package com.cyxbs.components.utils.utils.secret
 
 import android.os.Build
-import com.cyxbs.components.account.utils.InsecureSHA1PRNGKeyDerivator.Companion.deriveInsecureKey
+import com.cyxbs.components.utils.utils.secret.InsecureSHA1PRNGKeyDerivator.Companion.deriveInsecureKey
 import java.nio.charset.StandardCharsets
 import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec

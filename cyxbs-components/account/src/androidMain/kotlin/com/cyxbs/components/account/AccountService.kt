@@ -14,8 +14,8 @@ import com.cyxbs.components.account.api.IUserTokenService
 import com.cyxbs.components.account.bean.LoginParams
 import com.cyxbs.components.account.bean.RefreshParams
 import com.cyxbs.components.account.bean.TokenWrapper
-import com.cyxbs.components.account.utils.UserInfoEncryption
-import com.cyxbs.components.account.api.utils.Value
+import com.cyxbs.components.utils.utils.secret.Secret
+import com.cyxbs.components.utils.extensions.Value
 import com.cyxbs.components.account.bean.ErrorMsg
 import com.cyxbs.components.account.bean.UserInfo
 import com.cyxbs.pages.login.api.ILoginService
@@ -43,7 +43,7 @@ internal class AccountService : IAccountService {
     private val mUserService: IUserService = UserService()
     private val mUserStateService: IUserStateService = UserStateService()
     private val mUserTokenSerVice: IUserTokenService = UserTokenSerVice()
-    private val mUserInfoEncryption = UserInfoEncryption()
+    private val mUserInfoEncryption = Secret()
 
     private var user: UserInfo? = null
     @Volatile
@@ -118,21 +118,19 @@ internal class AccountService : IAccountService {
         
         // 发送学号给下游
         fun emitStuNum(stuNum: String?) {
-            val value = Value(
-                if (stuNum == null || stuNum.isBlank()) null else stuNum
-            )
+            val value = stuNum ?: ""
             stuNumState.onNext(value)
             stuNumEvent.onNext(value)
         }
     
-        private val stuNumState = BehaviorSubject.create<Value<String>>()
-        private val stuNumEvent = PublishSubject.create<Value<String>>()
+        private val stuNumState = BehaviorSubject.create<String>()
+        private val stuNumEvent = PublishSubject.create<String>()
     
-        override fun observeStuNumState(): Observable<Value<String>> {
+        override fun observeStuNumState(): Observable<String> {
             return stuNumState.distinctUntilChanged()
         }
     
-        override fun observeStuNumEvent(): Observable<Value<String>> {
+        override fun observeStuNumEvent(): Observable<String> {
             return stuNumEvent.distinctUntilChanged()
         }
     }

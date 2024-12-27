@@ -24,7 +24,7 @@ saveImage(bitmap, md5Encoding("掌邮二维码"),"/cyxbs/photo",100,Bitmap.Compr
 
 saveImage(bitmap, md5Encoding("掌邮二维码")+".png","/cyxbs/photo",100,Bitmap.CompressFormat.PNG)
 */
-@Deprecated(message = "common 模块的 BaseApp 已被废弃，请使用最新的 lib_utils 模块")
+@Deprecated(message = "common 模块的 BaseApp 已被废弃，请使用最新的 utils 模块")
 fun Context.saveImage(bitmap:Bitmap?,name: String,quality: Int = 100,
                  compressFormat: Bitmap.CompressFormat = Bitmap.CompressFormat.JPEG) {
   val values = ContentValues()

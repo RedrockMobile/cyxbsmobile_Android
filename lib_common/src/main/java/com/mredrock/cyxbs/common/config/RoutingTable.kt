@@ -70,5 +70,5 @@ const val TODO_ADD_TODO_BY_WIDGET = "/widget/todo/entry"
 const val STORE_ENTRY="/store/entry"
 
 /*
-* common 模块中的该路由表已废弃，请使用 lib_config 中的新路由表 ! ! ! ! ！
+* common 模块中的该路由表已废弃，请使用 config 中的新路由表 ! ! ! ! ！
 * */

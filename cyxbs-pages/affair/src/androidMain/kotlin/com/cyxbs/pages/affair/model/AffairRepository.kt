@@ -68,9 +68,9 @@ object AffairRepository {
       .getUserService()
       .observeStuNumState()
       .observeOn(Schedulers.io())
-      .switchMap { value ->
+      .switchMap {
         // 使用 switchMap 可以停止之前学号的订阅
-        value.nullUnless(Observable.just(emptyList())) {
+        if (it.isEmpty()) Observable.just(emptyList()) else {
           AffairDao.observeAffair(it)
             .distinctUntilChanged()
             .doOnSubscribe {

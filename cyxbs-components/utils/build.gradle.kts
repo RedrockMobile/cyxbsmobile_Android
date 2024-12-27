@@ -2,7 +2,7 @@ plugins {
   id("manager.composeLib")
 }
 
-useARouter(false) // lib_utils 模块不包含实现类，不需要处理注解
+useARouter(false) // utils 模块不包含实现类，不需要处理注解
 
 kotlin {
   sourceSets {

@@ -256,7 +256,7 @@ class HomeCourseLayout(context: Context, attrs: AttributeSet?) : FrameLayout(con
       .observeOn(AndroidSchedulers.mainThread())
       .safeSubscribeBy(mActivity) {
         // 只有登录了才允许拖动课表
-        mBottomSheet.isDraggable = it.isNotNull()
+        mBottomSheet.isDraggable = it.isNotEmpty()
       }
   }
   

@@ -66,9 +66,9 @@ object StuLessonRepository {
       .getUserService()
       .observeStuNumState()
       .observeOn(Schedulers.io())
-      .switchMap { value ->
+      .switchMap { stuNum ->
         // 使用 switchMap 可以停止之前学号的订阅
-        value.nullUnless(Observable.just(emptyList())) { stuNum ->
+        if (stuNum.isEmpty()) Observable.just(emptyList()) else {
           if (ILessonService.isUseLocalSaveLesson) {
             LessonDataBase.stuLessonDao
               .observeLesson(stuNum)

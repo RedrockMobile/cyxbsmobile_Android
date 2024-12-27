@@ -1,4 +1,4 @@
-package com.cyxbs.components.account.utils
+package com.cyxbs.components.utils.utils.secret
 
 import android.util.Base64
 import java.nio.charset.StandardCharsets
@@ -6,7 +6,8 @@ import java.nio.charset.StandardCharsets
 /**
  * @author Haruue Icymoon haruue@caoyue.com.cn
  */
-class UserInfoEncryption {
+class Secret {
+
   private var isSupportEncrypt = true
 
   init {
@@ -18,34 +19,33 @@ class UserInfoEncryption {
     }
   }
 
-  fun encrypt(json: String): String {
-    if (!isSupportEncrypt) return json
+  fun encrypt(input: String): String {
+    if (!isSupportEncrypt) return input
     return try {
       Base64.encodeToString(
-        SerialAESEncryptor.encrypt(json.toByteArray(StandardCharsets.UTF_8)),
+        SerialAESEncryptor.encrypt(input.toByteArray(StandardCharsets.UTF_8)),
         Base64.DEFAULT
       )
     } catch (e: Exception) {
       e.printStackTrace()
-      json
+      input
     }
   }
 
-  fun decrypt(base64Encrypted: String): String {
-    if (base64Encrypted == "") return ""
-    if (!isSupportEncrypt) return base64Encrypted
+  fun decrypt(input: String): String {
+    if (!isSupportEncrypt) return input
     return try {
       String(
         SerialAESEncryptor.decrypt(
           Base64.decode(
-            base64Encrypted,
+            input,
             Base64.DEFAULT
           )
         ), StandardCharsets.UTF_8
       )
     } catch (e: Exception) {
       e.printStackTrace()
-      ""
+      input
     }
   }
 }
