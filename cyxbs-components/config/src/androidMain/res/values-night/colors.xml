@@ -58,4 +58,6 @@
     <!--    图片选择器状态栏和toolbar颜色-->
     <color name="config_photo_select_status_color">#000000</color>
 
+    <color name="config_blue_button">#2921D1</color>
+    <color name="config_switch_off">#5A5A5A</color>
 </resources>

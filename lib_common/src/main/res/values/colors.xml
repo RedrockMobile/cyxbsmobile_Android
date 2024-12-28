@@ -17,6 +17,7 @@ TODO 以后不要再把颜色写在这里面 ！！！
     <!--    纯白色背景和纯白色字体-->
     <!--替换为 config_white_black-->
     <color name="common_white_background">#ffffff</color>
+    <!--替换为 @android:color/white-->
     <color name="common_white_font_color">#ffffff</color>
     <!--    启动页颜色-->
     <color name="common_start_page_white_color">#ffffff</color>
@@ -67,13 +68,11 @@ TODO 以后不要再把颜色写在这里面 ！！！
     <color name="common_blue_sign_text_color">#839BFA</color>
     <!--    分割线颜色-->
     <color name="common_sever_view_color">#BDCCE5</color>
-    <color name="common_blue_button">#465FFF</color>
 
     <!--    按钮颜色-->
     <color name="common_grey_button">#E1DFE0</color>
     <color name="common_grey_button_text">#C3C0C1</color>
     <color name="common_grey_text">#C4C2C2</color>
-    <color name="common_switch_off">#C3D4EE</color>
 
     <!--    tab_layout颜色-->
     <color name="common_mine_tab_layout_text_unselected">#8f15315B</color>
