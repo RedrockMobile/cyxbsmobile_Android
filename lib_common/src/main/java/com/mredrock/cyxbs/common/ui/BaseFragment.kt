@@ -1,6 +1,5 @@
 package com.mredrock.cyxbs.common.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +7,10 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.utils.BindView
 import com.mredrock.cyxbs.common.mark.ActionLoginStatusSubscriber
 import com.mredrock.cyxbs.common.mark.EventBusLifecycleSubscriber
-import com.cyxbs.components.utils.service.ServiceManager
-import com.mredrock.cyxbs.common.utils.LogUtils
-import com.cyxbs.components.utils.utils.BindView
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -43,15 +41,6 @@ open class BaseFragment : Fragment() {
 //     */
 //    protected open val openStatistics = false
 
-    /**
-     * 这里可以开启生命周期的Log，你可以重写这个值并给值为true，
-     * 也可以直接赋值为true（赋值的话请在init{}里面赋值或者在super.onCreate(savedInstanceState)调用之前赋值）
-     */
-    protected open var isOpenLifeCycleLog = false
-
-    //当然，你要定义自己的TAG方便在Log里面找也可以重写这个
-    protected open var TAG: String = this::class.java.simpleName
-
     // 只做本地封装使用
     private var baseBundle: Bundle? = null
 
@@ -59,7 +48,7 @@ open class BaseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         baseBundle = savedInstanceState
         if (this is EventBusLifecycleSubscriber) EventBus.getDefault().register(this)
-        val verifyService = ServiceManager(IAccountService::class).getVerifyService()
+        val verifyService = IAccountService::class.impl().getVerifyService()
         if (this is ActionLoginStatusSubscriber) {
             if (verifyService.isLogin()) initOnLoginMode(baseBundle)
             if (verifyService.isTouristMode()) initOnTouristMode(baseBundle)
@@ -70,9 +59,8 @@ open class BaseFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        lifeCycleLog("onDestroyView")
         if (this is EventBusLifecycleSubscriber && EventBus.getDefault().isRegistered(this)) EventBus.getDefault().unregister(this)
-        val verifyService = ServiceManager(IAccountService::class).getVerifyService()
+        val verifyService = IAccountService::class.impl().getVerifyService()
         if (this is ActionLoginStatusSubscriber) {
             if (verifyService.isLogin()) destroyOnLoginMode()
             if (verifyService.isTouristMode()) destroyOnTouristMode()
@@ -80,82 +68,14 @@ open class BaseFragment : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        lifeCycleLog("onCreate")
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        lifeCycleLog("onAttach")
-    }
-
     @LayoutRes
     open var layoutRes : Int? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        lifeCycleLog("onCreateView")
         layoutRes?.let { return inflater.inflate(layoutRes!!, container, false) }
         return super.onCreateView(inflater, container, savedInstanceState)
     }
-
-    @Deprecated("Deprecated in Java")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        lifeCycleLog("onActivityCreated")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        lifeCycleLog("onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-//        if (openStatistics) {
-//            fragmentPageOpen()
-//        }
-        lifeCycleLog("onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-//        if (openStatistics) {
-//            fragmentPageClose()
-//        }
-        lifeCycleLog("onPause")
-    }
-
-    fun fragmentPageOpen() {
-//        MobclickAgent.onPageStart(javaClass.name)
-        LogUtils.d("UMStat", javaClass.name + " started")
-    }
-
-    fun fragmentPageClose() {
-//        MobclickAgent.onPageEnd(javaClass.name)
-        LogUtils.d("UMStat", javaClass.name + " paused")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        lifeCycleLog("onStop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        lifeCycleLog("onDestroy")
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        lifeCycleLog("onDetach")
-    }
-
-    private fun lifeCycleLog(message: String) {
-        if (isOpenLifeCycleLog) {
-            LogUtils.d(TAG, "${this::class.java.simpleName}\$\$${message}")
-        }
-    }
+    
 
     /**
      * 在简单界面，使用这种方式来得到 View，避免使用 DataBinding 大材小用

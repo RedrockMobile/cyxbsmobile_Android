@@ -9,8 +9,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.cyxbs.components.utils.network.BASE_NORMAL_IMG_URL
 import com.mredrock.cyxbs.common.R
-import com.mredrock.cyxbs.common.config.BASE_NORMAL_IMG_URL
 
 
 /**

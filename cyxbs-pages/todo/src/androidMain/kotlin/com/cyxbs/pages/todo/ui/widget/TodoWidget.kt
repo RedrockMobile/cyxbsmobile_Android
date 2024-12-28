@@ -1,6 +1,7 @@
 package com.cyxbs.pages.todo.ui.widget
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
@@ -9,11 +10,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.widget.RemoteViews
-import com.alibaba.android.arouter.launcher.ARouter
-import com.cyxbs.pages.todo.service.TodoWidgetService
 import com.cyxbs.components.config.route.TODO_ADD_TODO_BY_WIDGET
 import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.service.implClass
 import com.cyxbs.pages.todo.R
+import com.cyxbs.pages.todo.service.TodoWidgetService
 
 /**
  * description: 待办事项桌面小组件
@@ -81,8 +82,10 @@ class TodoWidget : AppWidgetProvider() {
                 context?.let { refresh(it) }
             }
             "cyxbs.widget.todo.add" -> {
-                // 启动添加任务的界面或 Activity
-                ARouter.getInstance().build(TODO_ADD_TODO_BY_WIDGET).navigation()
+                // 启动添加任务的界面或 Activity，这里不能使用 utils 中的 startActivity(String)
+                context?.startActivity(
+                    Intent(context, Activity::class.implClass(TODO_ADD_TODO_BY_WIDGET).java)
+                )
             }
         }
     }

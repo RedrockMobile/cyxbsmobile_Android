@@ -9,11 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.base.operations.doIfLogin
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.config.route.DISCOVER_ELECTRICITY_FEED
 import com.cyxbs.components.config.sp.defaultSp
+import com.cyxbs.components.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.visible
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.electricity.R
 import com.cyxbs.pages.electricity.bean.ElecInf
 import com.cyxbs.pages.electricity.config.BUILDING_NAMES
@@ -22,18 +29,12 @@ import com.cyxbs.pages.electricity.config.SP_BUILDING_FOOT_KEY
 import com.cyxbs.pages.electricity.config.SP_BUILDING_HEAD_KEY
 import com.cyxbs.pages.electricity.config.SP_ROOM_KEY
 import com.cyxbs.pages.electricity.viewmodel.ChargeViewModel
-import com.cyxbs.components.base.operations.doIfLogin
-import com.cyxbs.components.base.ui.BaseFragment
-import com.cyxbs.components.utils.extensions.dp2px
-import com.cyxbs.components.utils.extensions.gone
-import com.cyxbs.components.utils.extensions.setOnSingleClickListener
-import com.cyxbs.components.utils.extensions.visible
-import com.cyxbs.components.utils.service.ServiceManager
+import com.g985892345.provider.api.annotation.ImplProvider
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 
-@Route(path = DISCOVER_ELECTRICITY_FEED)
+@ImplProvider(clazz = Fragment::class, name = DISCOVER_ELECTRICITY_FEED)
 class ElectricityFeedFragment : BaseFragment() {
 
     private val viewModel by viewModels<ChargeViewModel>()
@@ -95,7 +96,7 @@ class ElectricityFeedFragment : BaseFragment() {
     }
 
     private fun onRefresh() {
-        if (!ServiceManager(IAccountService::class).getVerifyService().isLogin()) {
+        if (!IAccountService::class.impl().getVerifyService().isLogin()) {
             return
         }
         if (viewModel.chargeInfo.value != null) {

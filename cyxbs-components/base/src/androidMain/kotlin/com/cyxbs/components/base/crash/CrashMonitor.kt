@@ -2,6 +2,7 @@ package com.cyxbs.components.base.crash
 
 import android.os.Looper
 import android.os.SystemClock
+import android.util.Log
 import com.cyxbs.components.base.BuildConfig
 import com.cyxbs.components.base.crash.CrashActivity.Companion.NetworkApiResult
 import com.cyxbs.components.base.pages.SecretActivity
@@ -28,11 +29,14 @@ object CrashMonitor {
   private fun installThreadHandler() {
     Thread.setDefaultUncaughtExceptionHandler { t, e ->
       if (t === Looper.getMainLooper().thread) {
+        if (BuildConfig.DEBUG) {
+          Log.d("crash", e.stackTraceToString())
+        }
         handleMainThread(t, e)
+        crashReport?.invoke(e)
       } else {
         handleOtherThread(t, e)
       }
-      crashReport?.invoke(e)
     }
   }
 
@@ -43,12 +47,7 @@ object CrashMonitor {
   }
 
   private fun handleOtherThread(thread: Thread, throwable: Throwable) {
-    CrashDialog.Builder(
-      RuntimeException(
-        "触发了一次来自其他线程的异常, thread.name: ${thread.name}, " +
-            "message: ${throwable.message}", throwable
-      )
-    ).show()
+    // 其他线程不处理
   }
 
   private fun handleMainThread(thread: Thread, throwable: Throwable) {
@@ -67,6 +66,7 @@ object CrashMonitor {
     try {
       Looper.loop()
     } catch (e: Exception) {
+      e.printStackTrace()
       if (SystemClock.elapsedRealtime() - lastThrowableTime < 1000) {
         // 短时间内再次崩溃，则直接打开 CrashActivity
         CrashActivity.start(

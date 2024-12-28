@@ -1,6 +1,7 @@
 package com.cyxbs.pages.notification.ui.activity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Paint
@@ -17,20 +18,18 @@ import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.edit
 import androidx.viewpager2.widget.ViewPager2
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
-import com.google.android.material.shape.MaterialShapeDrawable
-import com.google.android.material.shape.RoundedCornerTreatment
-import com.google.android.material.shape.ShapeAppearanceModel
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.config.route.NOTIFICATION_HOME
 import com.cyxbs.components.config.route.NOTIFICATION_SETTING
 import com.cyxbs.components.utils.adapter.FragmentVpAdapter
+import com.cyxbs.components.utils.extensions.color
+import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.components.utils.extensions.dp2pxF
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.visible
+import com.cyxbs.components.utils.service.startActivity
+import com.cyxbs.components.utils.utils.impl.defaultImpl
 import com.cyxbs.pages.notification.R
 import com.cyxbs.pages.notification.bean.ChangeReadStatusToBean
 import com.cyxbs.pages.notification.ui.fragment.ItineraryNotificationFragment
@@ -40,14 +39,20 @@ import com.cyxbs.pages.notification.util.Constant.HAS_USER_ENTER_SETTING_PAGE
 import com.cyxbs.pages.notification.util.Constant.IS_SWITCH1_SELECT
 import com.cyxbs.pages.notification.util.NotificationSp
 import com.cyxbs.pages.notification.viewmodel.NotificationViewModel
-import com.cyxbs.pages.notification.widget.*
-import com.cyxbs.components.base.ui.BaseActivity
-import com.cyxbs.components.utils.extensions.color
-import com.cyxbs.components.utils.extensions.dp2px
-import com.cyxbs.components.utils.utils.impl.defaultImpl
+import com.cyxbs.pages.notification.widget.DeleteDialog
+import com.cyxbs.pages.notification.widget.LoadMoreWindow
+import com.cyxbs.pages.notification.widget.ScaleInTransformer
+import com.cyxbs.pages.notification.widget.VerticalSwipeRefreshLayout
+import com.cyxbs.pages.notification.widget.buildLoadMoreWindow
+import com.g985892345.provider.api.annotation.KClassProvider
+import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.android.material.shape.RoundedCornerTreatment
+import com.google.android.material.shape.ShapeAppearanceModel
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlin.properties.Delegates
 
-@Route(path = NOTIFICATION_HOME)
+@KClassProvider(clazz = Activity::class, name = NOTIFICATION_HOME)
 class NotificationActivity : BaseActivity() {
 
     private val viewModel by viewModels<NotificationViewModel>()
@@ -112,7 +117,7 @@ class NotificationActivity : BaseActivity() {
     }
 
     private fun enterSettingPage() {
-        ARouter.getInstance().build(NOTIFICATION_SETTING).navigation()
+        startActivity(NOTIFICATION_SETTING)
         notification_home_red_dots.visibility = View.INVISIBLE
         NotificationSp.edit { putBoolean(HAS_USER_ENTER_SETTING_PAGE, true) }
     }
@@ -151,7 +156,7 @@ class NotificationActivity : BaseActivity() {
                         )
                     }
                     setOnItemClickListener(R.id.notification_ll_home_popup_setting) {
-                        ARouter.getInstance().build(NOTIFICATION_SETTING).navigation()
+                        startActivity(NOTIFICATION_SETTING)
                         notification_home_red_dots.visibility = View.INVISIBLE
                         NotificationSp.edit { putBoolean(HAS_USER_ENTER_SETTING_PAGE, true) }
                     }
@@ -173,27 +178,8 @@ class NotificationActivity : BaseActivity() {
             1 -> {
                 notification_home_red_dots.visibility = View.INVISIBLE
                 NotificationSp.edit { putBoolean(HAS_USER_ENTER_SETTING_PAGE, true) }
-                ARouter.getInstance().build(NOTIFICATION_SETTING).navigation()
-            }/*{
-                popupWindow = buildLoadMoreWindow {
-                    context = this@NotificationActivity
-                    window = this@NotificationActivity.window
-                    layoutRes = R.layout.notification_popupwindow_dots_act
-                    Height = dp2px(80.toFloat())
-                }
-
-                popupWindow.apply {
-                    setOnItemClickListener(R.id.notification_ll_home_popup_fast_read_act) {
-                        viewModel.changeMsgStatus(ChangeReadStatusToBean(allUnreadActiveMsgIds))
-                        viewModel.changeActiveDotStatus(false)
-                    }
-                    setOnItemClickListener(R.id.notification_ll_home_popup_setting) {
-                        ARouter.getInstance().build(NOTIFICATION_SETTING).navigation()
-                        notification_home_red_dots.visibility = View.INVISIBLE
-                        NotificationSp.editor { putBoolean(HAS_USER_ENTER_SETTING_PAGE, true) }
-                    }
-                }
-            }*/
+                startActivity(NOTIFICATION_SETTING)
+            }
         }
 
 
@@ -364,8 +350,8 @@ class NotificationActivity : BaseActivity() {
      * #### 2 为     行程通知页面
      * 如下面的进入消息中心后初始显示行程通知页面的写法
      * ```
-     * ServiceManager.activity(NOTIFICATION_HOME){
-     *      withInt("MsgType", 2)
+     * startActivity(NOTIFICATION_HOME){
+     *      putExtra("MsgType", 2)
      * }
      * ```
      */

@@ -14,10 +14,10 @@ import com.cyxbs.pages.login.R
 /**
  * ```
  * // 打开用户协议页面
- * ServiceManager(ILegalNoticeService::class).startUserAgreementActivity()
+ * ILegalNoticeService::class.impl().startUserAgreementActivity()
  *
  * // 打开隐私政策页面
- * ServiceManager(ILegalNoticeService::class).startPrivacyPolicyActivity()
+ * ILegalNoticeService::class.impl().startPrivacyPolicyActivity()
  * ```
  *
  * @author: lytMoon

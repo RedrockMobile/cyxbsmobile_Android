@@ -19,22 +19,22 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.cyxbs.pages.login.api.ILegalNoticeService
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.functions.update.api.AppUpdateStatus
 import com.cyxbs.functions.update.api.BuildConfig
 import com.cyxbs.functions.update.api.IAppUpdateService
+import com.cyxbs.pages.login.api.ILegalNoticeService
+import com.cyxbs.pages.mine.R
+import com.cyxbs.pages.mine.util.ui.DebugUpdateDialog
+import com.cyxbs.pages.mine.util.ui.DynamicRVAdapter
 import com.mredrock.cyxbs.common.config.APP_WEBSITE
 import com.mredrock.cyxbs.common.config.DIR_LOG
 import com.mredrock.cyxbs.common.config.ICP_WEBSITE
 import com.mredrock.cyxbs.common.config.OKHTTP_LOCAL_LOG
-import com.mredrock.cyxbs.common.service.ServiceManager
 import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
 import com.mredrock.cyxbs.common.utils.extensions.toast
 import com.mredrock.cyxbs.common.utils.getAppVersionName
-import com.cyxbs.components.utils.extensions.setOnSingleClickListener
-import com.cyxbs.pages.mine.R
-import com.cyxbs.pages.mine.util.ui.DebugUpdateDialog
-import com.cyxbs.pages.mine.util.ui.DynamicRVAdapter
 import java.io.File
 import java.util.Calendar
 
@@ -97,7 +97,7 @@ class AboutActivity : BaseViewModelActivity<AboutViewModel>() {
             title.text = "$oldText 长按测试(debug才显示)"
             mine_about_rl_update.setOnLongClickListener {
                 DebugUpdateDialog.Builder(this).setPositiveClick {
-                    ServiceManager(IAppUpdateService::class).debug(
+                    IAppUpdateService::class.impl().debug(
                         this@AboutActivity,
                         getContent()
                     )
@@ -162,7 +162,7 @@ class AboutActivity : BaseViewModelActivity<AboutViewModel>() {
 
     private fun clickUpdate() {
         selfUpdateCheck = true
-        ServiceManager(IAppUpdateService::class).apply {
+        IAppUpdateService::class.impl().apply {
             when (getUpdateStatus().value) {
                 AppUpdateStatus.DATED -> {
                     noticeUpdate(this@AboutActivity)
@@ -181,11 +181,11 @@ class AboutActivity : BaseViewModelActivity<AboutViewModel>() {
 
     //跳转到用户协议的activity
     private fun clickProtocol() {
-        ServiceManager(ILegalNoticeService::class).startUserAgreementActivity(this)
+        ILegalNoticeService::class.impl().startUserAgreementActivity(this)
     }
 
     private fun clickPrivacy() {
-        ServiceManager(ILegalNoticeService::class).startPrivacyPolicyActivity(this)
+        ILegalNoticeService::class.impl().startPrivacyPolicyActivity(this)
     }
 
 
@@ -196,7 +196,7 @@ class AboutActivity : BaseViewModelActivity<AboutViewModel>() {
 
     private var selfUpdateCheck = false
     private fun bindUpdate() {
-        ServiceManager(IAppUpdateService::class).apply {
+        IAppUpdateService::class.impl().apply {
             getUpdateStatus().observe {
                 when (it) {
                     AppUpdateStatus.UNCHECK -> checkUpdate()

@@ -39,7 +39,7 @@ class LoginViewModel : BaseViewModel() {
     val startTime = System.currentTimeMillis()
     Completable.create {
       try {
-        IAccountService::class.impl
+        IAccountService::class.impl()
           .getVerifyService()
           .login(appContext, stuNum, password)
         it.onComplete()

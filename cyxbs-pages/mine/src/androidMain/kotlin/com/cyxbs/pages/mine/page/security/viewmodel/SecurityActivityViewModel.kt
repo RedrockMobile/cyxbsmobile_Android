@@ -1,12 +1,12 @@
 package com.cyxbs.pages.mine.page.security.viewmodel
 
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.components.utils.service.ServiceManager
-import com.mredrock.cyxbs.common.utils.extensions.doOnErrorWithDefaultErrorHandler
-import com.mredrock.cyxbs.common.utils.extensions.unsafeSubscribeBy
-import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
-import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.mine.util.apiService
+import com.mredrock.cyxbs.common.utils.extensions.doOnErrorWithDefaultErrorHandler
+import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
+import com.mredrock.cyxbs.common.utils.extensions.unsafeSubscribeBy
+import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
 
 /**
  * Author: RayleighZ
@@ -20,7 +20,7 @@ class SecurityActivityViewModel : BaseViewModel() {
 
     fun checkBinding(onSuccess: () -> Unit) {
         apiService.checkBinding(
-                ServiceManager(IAccountService::class).getUserService().getStuNum()
+                IAccountService::class.impl().getUserService().getStuNum()
         )
                 .setSchedulers()
                 .doOnErrorWithDefaultErrorHandler {

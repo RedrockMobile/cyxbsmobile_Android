@@ -1,8 +1,9 @@
 plugins {
-  id("manager.composeLib")
+  id("manager.lib")
+  id("kmp.compose")
 }
 
-useARouter()
+useKtProvider()
 
 kotlin {
   sourceSets {
@@ -11,7 +12,6 @@ kotlin {
       implementation(projects.cyxbsComponents.config)
       implementation(projects.cyxbsComponents.utils)
       implementation(projects.cyxbsComponents.account.api)
-      implementation(projects.cyxbsPages.mine.api)
     }
     androidMain.dependencies {
       implementation(libs.bundles.projectBase)

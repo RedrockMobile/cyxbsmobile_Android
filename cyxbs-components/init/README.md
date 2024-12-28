@@ -3,18 +3,18 @@
 
 ## 使用教程
 ### 1. 添加依赖
-在 `build.gradle` 中添加如下依赖
+在 `build.gradle` 中添加如下配置
 ```kotlin
-dependApiInit() // 已包含 AutoService
+useKtProvider()
 ```
 
 ### 2. 设置启动类
-- 设置一个启动类，比如：XXXInitialService（建议以 InitialService 结尾）
-- 添加 `@AutoService(InitialService::class)`
+- 新增一个单例类，比如：XXXInitialService（建议以 InitialService 结尾）
+- 添加 `@ImplProvider(clazz = InitialService::class, name = "XXXInitialService")`
 - 接入 `InitialService` 接口
 ```kotlin
-@AutoService(InitialService::class)
-class CrashInitialService : InitialService {
+@ImplProvider(clazz = InitialService::class, name = "CrashInitialService")
+object CrashInitialService : InitialService {
   // Ctrl + o 实现里面的方法
 }
 ```

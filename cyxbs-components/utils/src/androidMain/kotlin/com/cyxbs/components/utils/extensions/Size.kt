@@ -3,13 +3,10 @@ package com.cyxbs.components.utils.extensions
 import android.graphics.drawable.Drawable
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import androidx.annotation.DimenRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.Dp
 import androidx.core.content.ContextCompat
 import kotlin.math.roundToInt
 
@@ -38,19 +35,11 @@ val Int.px2dpF: Float
 val Int.px2dp: Int
   get() = px2dpF.toInt()
 
-val Int.px2dpCompose: Dp
-  @Composable
-  get() = LocalDensity.current.run { toDp() }
-
 val Float.px2dpF: Float
   get() = this / appContext.resources.displayMetrics.density
 
 val Float.px2dp: Int
   get() = px2dpF.toInt()
-
-val Float.px2dpCompose: Dp
-  @Composable
-  get() = LocalDensity.current.run { toDp() }
 
 val Int.dp2spF: Float
   get() = appContext.resources.displayMetrics.scaledDensity * this
@@ -75,10 +64,6 @@ val Float.sp2dpF: Float
 
 val Float.sp2dp: Int
   get() = (sp2dpF * this).roundToInt()
-
-val Dp.px: Float
-  @Composable
-  get() = LocalDensity.current.run { toPx() }
 
 val Int.color: Int
   get() = ContextCompat.getColor(appContext, this)

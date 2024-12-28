@@ -51,7 +51,7 @@ object SportDetailRepository {
   }
 
   init {
-    IAccountService::class.impl.getVerifyService()
+    IAccountService::class.impl().getVerifyService()
       .observeUserStateState()
       .unsafeSubscribeBy {
         when (it) {

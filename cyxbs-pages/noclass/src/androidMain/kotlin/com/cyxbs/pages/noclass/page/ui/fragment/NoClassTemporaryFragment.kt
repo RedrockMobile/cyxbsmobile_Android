@@ -20,14 +20,14 @@ import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.visible
-import com.cyxbs.components.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.noclass.R
 import com.cyxbs.pages.noclass.bean.Student
 import com.cyxbs.pages.noclass.page.adapter.NoClassTemporaryAdapter
 import com.cyxbs.pages.noclass.page.ui.dialog.SearchAllDialog
 import com.cyxbs.pages.noclass.page.ui.dialog.SearchNoExistDialog
-import com.cyxbs.pages.noclass.page.viewmodel.other.CourseViewModel
 import com.cyxbs.pages.noclass.page.viewmodel.fragment.TemporaryViewModel
+import com.cyxbs.pages.noclass.page.viewmodel.other.CourseViewModel
 import com.cyxbs.pages.noclass.util.alphaAnim
 
 /**
@@ -157,7 +157,7 @@ class NoClassTemporaryFragment : BaseFragment(R.layout.noclass_fragment_temporar
      * 初始化用户信息
      */
     private fun initUserInfo() {
-        ServiceManager.invoke(IAccountService::class).getUserService().apply {
+        IAccountService::class.impl().getUserService().apply {
             mUserName = this.getUsername()
             mUserId = this.getStuNum()
         }

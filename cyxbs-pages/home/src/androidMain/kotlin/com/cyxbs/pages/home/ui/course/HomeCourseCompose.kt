@@ -31,20 +31,20 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.viewinterop.NoOpUpdate
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.commit
-import com.cyxbs.pages.home.R
-import com.cyxbs.pages.home.ui.course.utils.CourseHeaderHelper
-import com.cyxbs.pages.course.api.ICourseService
-import com.cyxbs.components.config.route.COURSE_POS_TO_MAP
-import com.cyxbs.components.config.route.DISCOVER_MAP
 import com.cyxbs.components.base.crash.CrashDialog
 import com.cyxbs.components.base.utils.Umeng
+import com.cyxbs.components.config.route.COURSE_POS_TO_MAP
+import com.cyxbs.components.config.route.DISCOVER_MAP
 import com.cyxbs.components.utils.compose.BottomSheetState
 import com.cyxbs.components.utils.compose.clickableNoIndicator
 import com.cyxbs.components.utils.extensions.color
 import com.cyxbs.components.utils.extensions.colorCompose
 import com.cyxbs.components.utils.extensions.drawable
-import com.cyxbs.components.utils.service.ServiceManager
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.service.startActivity
+import com.cyxbs.pages.course.api.ICourseService
+import com.cyxbs.pages.home.R
+import com.cyxbs.pages.home.ui.course.utils.CourseHeaderHelper
 import kotlinx.coroutines.launch
 import kotlin.math.max
 
@@ -102,7 +102,7 @@ fun HomeCourseContainerCompose(
   bottomSheetState: BottomSheetState,
   modifier: Modifier = Modifier,
 ) {
-  val courseService = remember { ICourseService::class.impl }
+  val courseService = remember { ICourseService::class.impl() }
   AndroidView(
     modifier = modifier.fillMaxSize(),
     factory = {
@@ -212,14 +212,14 @@ private fun CourseShowHeaderCompose(
           ) {
             when (header.item) {
               is CourseHeaderHelper.AffairItem -> {
-                ICourseService::class.impl.openBottomSheetDialogByAffair(
+                ICourseService::class.impl().openBottomSheetDialogByAffair(
                   context,
                   header.item.affair
                 )
               }
 
               is CourseHeaderHelper.LessonItem -> {
-                ICourseService::class.impl.openBottomSheetDialogByLesson(
+                ICourseService::class.impl().openBottomSheetDialogByLesson(
                   context,
                   header.item.lesson
                 )
@@ -252,8 +252,8 @@ private fun CourseShowHeaderCompose(
         .clickable(interactionSource = null, indication = null) {
           if (header.item is CourseHeaderHelper.LessonItem) {
             // 跳转至地图界面
-            ServiceManager.activity(DISCOVER_MAP) {
-              withString(COURSE_POS_TO_MAP, header.content)
+            startActivity(DISCOVER_MAP) {
+              putExtra(COURSE_POS_TO_MAP, header.content)
             }
           }
         },

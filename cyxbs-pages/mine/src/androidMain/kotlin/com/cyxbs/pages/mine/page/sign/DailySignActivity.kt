@@ -2,6 +2,7 @@ package com.cyxbs.pages.mine.page.sign
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -16,18 +17,17 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
-import com.alibaba.android.arouter.facade.annotation.Route
+import com.cyxbs.components.config.route.MINE_CHECK_IN
+import com.cyxbs.pages.mine.R
+import com.cyxbs.pages.mine.network.model.ScoreStatus
 import com.cyxbs.pages.mine.util.widget.ColorState
 import com.cyxbs.pages.mine.util.widget.ImageState
 import com.cyxbs.pages.mine.util.widget.SchoolCalendarPlus
 import com.cyxbs.pages.mine.util.widget.Stick
-import com.mredrock.cyxbs.common.config.MINE_CHECK_IN
+import com.cyxbs.pages.mine.util.widget.WeekGenerator
+import com.g985892345.provider.api.annotation.KClassProvider
 import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
 import com.mredrock.cyxbs.common.utils.extensions.toast
-import com.cyxbs.pages.mine.R
-import com.cyxbs.pages.mine.network.model.ScoreStatus
-import com.cyxbs.pages.mine.util.widget.WeekGenerator
-import com.cyxbs.pages.mine.util.widget.*
 import kotlin.math.abs
 
 /**
@@ -35,7 +35,7 @@ import kotlin.math.abs
  * origin by jay86
  * 每日签到
  */
-@Route(path = MINE_CHECK_IN)
+@KClassProvider(clazz = Activity::class, name = MINE_CHECK_IN)
 class DailySignActivity : BaseViewModelActivity<DailyViewModel>() {
     private val mine_daily_sign by R.id.mine_daily_sign.view<Button>()
     private val mine_daily_tv_year by R.id.mine_daily_tv_year.view<TextView>()

@@ -7,12 +7,10 @@ import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.mredrock.cyxbs.common.BaseApp.Companion.appContext
-import com.mredrock.cyxbs.common.utils.extensions.*
-import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
+import com.cyxbs.components.config.sp.defaultSp
+import com.cyxbs.components.utils.extensions.EmptyCoroutineExceptionHandler
 import com.cyxbs.components.utils.extensions.setSchedulers
 import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
-import com.cyxbs.components.utils.extensions.launchCatch
 import com.cyxbs.components.utils.network.ApiWrapper
 import com.cyxbs.pages.mine.network.model.ItineraryMsgBean
 import com.cyxbs.pages.mine.network.model.ScoreStatus
@@ -20,9 +18,13 @@ import com.cyxbs.pages.mine.network.model.UfieldMsgBean
 import com.cyxbs.pages.mine.network.model.UserCount
 import com.cyxbs.pages.mine.network.model.UserUncheckCount
 import com.cyxbs.pages.mine.util.apiService
+import com.mredrock.cyxbs.common.utils.extensions.doOnErrorWithDefaultErrorHandler
+import com.mredrock.cyxbs.common.utils.extensions.mapOrThrowApiException
+import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.launch
 
 
 /**
@@ -63,7 +65,7 @@ class UserViewModel : BaseViewModel() {
      * 用携程异步获取未读的notification数量
      */
     fun getNewNotificationCount() {
-        viewModelScope.launchCatch {
+        viewModelScope.launch(EmptyCoroutineExceptionHandler) {
             val uFieldActivityList = async(Dispatchers.IO) { apiService.getUFieldActivityList() }
             val itineraryList = listOf(
                 async(Dispatchers.IO) { apiService.getSentItinerary() },
@@ -76,9 +78,6 @@ class UserViewModel : BaseViewModel() {
                 getNewItineraryCount(itineraryList.awaitAll())
             }
             _newNotificationCount.value = (newUFieldActivityCount.await() + newItineraryCount.await())
-        }.catch {
-            it.printStackTrace()
-//            "获取最新消息失败,请检查网络连接".toast()
         }
     }
 
@@ -140,7 +139,7 @@ class UserViewModel : BaseViewModel() {
     }
 
     fun getUserUncheckedPraiseCount() {
-        val sp = appContext.defaultSharedPreferences
+        val sp = defaultSp
         val lastCheckTimeStamp = sp.getLong(UNCHECK_PRAISE_KEY, 0L)
         if (lastCheckTimeStamp == 0L) return
         apiService.getUncheckedPraiseCount(lastCheckTimeStamp)
@@ -157,7 +156,7 @@ class UserViewModel : BaseViewModel() {
     }
 
     fun getUserUncheckedCommentCount() {
-        val sp = appContext.defaultSharedPreferences
+        val sp = defaultSp
         val lastCheckTimeStamp = sp.getLong(UNCHECK_COMMENT_KEY, 0L)
         if (lastCheckTimeStamp == 0L) return
         apiService.getUncheckedCommentCount(lastCheckTimeStamp)

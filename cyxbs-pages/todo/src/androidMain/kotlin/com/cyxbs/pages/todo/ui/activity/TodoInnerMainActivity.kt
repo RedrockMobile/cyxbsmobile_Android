@@ -1,6 +1,7 @@
 package com.cyxbs.pages.todo.ui.activity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,16 +12,13 @@ import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
-import com.cyxbs.components.config.route.DISCOVER_TODO_MAIN
 import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.route.DISCOVER_TODO_MAIN
 import com.cyxbs.components.utils.adapter.FragmentVpAdapter
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.color
 import com.cyxbs.components.utils.extensions.getSp
+import com.cyxbs.components.utils.extensions.lazyUnlock
 import com.cyxbs.pages.todo.R
 import com.cyxbs.pages.todo.model.bean.TodoListPushWrapper
 import com.cyxbs.pages.todo.ui.dialog.AddTodoDialog
@@ -29,7 +27,10 @@ import com.cyxbs.pages.todo.ui.fragment.TodoLifeFragment
 import com.cyxbs.pages.todo.ui.fragment.TodoOtherFragment
 import com.cyxbs.pages.todo.ui.fragment.TodoStudyFragment
 import com.cyxbs.pages.todo.viewmodel.TodoViewModel
-import com.cyxbs.components.utils.extensions.lazyUnlock
+import com.g985892345.provider.api.annotation.KClassProvider
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlin.properties.Delegates
 
 /**
@@ -37,7 +38,7 @@ import kotlin.properties.Delegates
  * author: sanhuzhen
  * date: 2024/8/20 17:31
  */
-@Route(path = DISCOVER_TODO_MAIN)
+@KClassProvider(clazz = Activity::class, name = DISCOVER_TODO_MAIN)
 class TodoInnerMainActivity : BaseActivity() {
 
     //在详情页面是否有做出修改的flag

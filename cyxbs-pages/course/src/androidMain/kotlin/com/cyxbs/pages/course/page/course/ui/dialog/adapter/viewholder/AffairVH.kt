@@ -5,13 +5,13 @@ import android.content.DialogInterface
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import com.cyxbs.pages.affair.api.IAffairService
-import com.cyxbs.pages.course.R
-import com.cyxbs.pages.course.page.course.data.AffairData
 import com.cyxbs.components.base.utils.safeSubscribeBy
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.toast
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.pages.affair.api.IAffairService
+import com.cyxbs.pages.course.R
+import com.cyxbs.pages.course.page.course.data.AffairData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 
 /**
@@ -44,7 +44,7 @@ class AffairVH(
   init {
     mBtnDelete.setOnSingleClickListener {
       val data = mData ?: return@setOnSingleClickListener
-      IAffairService::class.impl
+      IAffairService::class.impl()
         .deleteAffair(data.onlyId)
         .observeOn(AndroidSchedulers.mainThread())
         .safeSubscribeBy(mBtnDelete) {
@@ -54,7 +54,7 @@ class AffairVH(
     }
     mBtnChange.setOnSingleClickListener {
       val data = mData ?: return@setOnSingleClickListener
-      IAffairService::class.impl
+      IAffairService::class.impl()
         .startActivityForEditActivity(data.onlyId)
       dialog.dismiss() // 因为修改过后数据会发生变动，所以这里直接取消 dialog 显示
     }

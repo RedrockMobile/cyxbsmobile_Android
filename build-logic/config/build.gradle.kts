@@ -20,7 +20,7 @@ val generateLibsTask = tasks.register("generateLibs") {
     it.replace(".", "-") to versionCatalogs.findVersion(it).get().toString()
   }
   val pluginsList = versionCatalogs.pluginAliases.map {
-    it.replace(".", "-") to versionCatalogs.findPlugin(it).get().get().toString()
+    it.replace(".", "-") to versionCatalogs.findPlugin(it).get().get().pluginId
   }
   val bundleList = versionCatalogs.bundleAliases.map {
     it.replace(".", "-") to versionCatalogs.findBundle(it).get().get().map { it.toString() }

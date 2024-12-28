@@ -10,7 +10,9 @@ import android.provider.MediaStore
 import android.widget.FrameLayout
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import com.alibaba.android.arouter.facade.annotation.Route
+import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.route.COURSE_POS_TO_MAP
+import com.cyxbs.components.config.route.DISCOVER_MAP
 import com.cyxbs.pages.map.R
 import com.cyxbs.pages.map.model.DataSet
 import com.cyxbs.pages.map.ui.fragment.AllPictureFragment
@@ -20,9 +22,7 @@ import com.cyxbs.pages.map.util.KeyboardController
 import com.cyxbs.pages.map.viewmodel.MapViewModel
 import com.cyxbs.pages.map.widget.GlideProgressDialog
 import com.cyxbs.pages.map.widget.ProgressDialog
-import com.cyxbs.components.config.route.COURSE_POS_TO_MAP
-import com.cyxbs.components.config.route.DISCOVER_MAP
-import com.cyxbs.components.base.ui.BaseActivity
+import com.g985892345.provider.api.annotation.KClassProvider
 import top.limuyang2.photolibrary.LPhotoHelper
 
 /**
@@ -32,7 +32,7 @@ import top.limuyang2.photolibrary.LPhotoHelper
  */
 
 
-@Route(path = DISCOVER_MAP)
+@KClassProvider(clazz = Activity::class, name = DISCOVER_MAP)
 class MapActivity : BaseActivity() {
 
     private val viewModel by viewModels<MapViewModel>()

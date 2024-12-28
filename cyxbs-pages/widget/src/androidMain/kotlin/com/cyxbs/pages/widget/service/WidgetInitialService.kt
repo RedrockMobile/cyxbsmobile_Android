@@ -4,22 +4,22 @@ import android.content.ComponentName
 import android.content.Intent
 import android.graphics.Color
 import androidx.core.content.edit
-import com.cyxbs.pages.affair.api.IAffairService
-import com.google.auto.service.AutoService
-import com.cyxbs.pages.course.api.ILessonService
-import com.cyxbs.pages.course.api.utils.getStartRow
 import com.cyxbs.components.config.config.SchoolCalendar
 import com.cyxbs.components.init.InitialManager
 import com.cyxbs.components.init.InitialService
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.pages.affair.api.IAffairService
+import com.cyxbs.pages.course.api.ILessonService
+import com.cyxbs.pages.course.api.utils.getStartRow
 import com.cyxbs.pages.widget.repo.database.AffairDatabase
 import com.cyxbs.pages.widget.repo.database.LessonDatabase
 import com.cyxbs.pages.widget.repo.database.LessonDatabase.Companion.MY_STU_NUM
 import com.cyxbs.pages.widget.repo.database.LessonDatabase.Companion.OTHERS_STU_NUM
 import com.cyxbs.pages.widget.util.defaultSp
 import com.cyxbs.pages.widget.util.getMyLessons
+import com.g985892345.provider.api.annotation.ImplProvider
 import com.ndhzs.widget.CourseWidget
 import com.ndhzs.widget.data.IWidgetItem
 import com.ndhzs.widget.data.IWidgetRank
@@ -34,13 +34,13 @@ import io.reactivex.rxjava3.schedulers.Schedulers
  * email : 1446157077@qq.com
  * date : 2022/8/3 15:22
  */
-@AutoService(InitialService::class)
-class WidgetInitialService : InitialService {
+@ImplProvider(clazz = InitialService::class, name = "WidgetInitialService")
+object WidgetInitialService : InitialService {
 
     override fun onMainProcess(manager: InitialManager) {
         super.onMainProcess(manager)
-        val lessonService = ILessonService::class.impl
-        val affairService = IAffairService::class.impl
+        val lessonService = ILessonService::class.impl()
+        val affairService = IAffairService::class.impl()
         Observable.combineLatest(
             lessonService.observeSelfLesson(), // 自己课的观察流
             lessonService.observeLinkLesson(), // 关联人课的观察流

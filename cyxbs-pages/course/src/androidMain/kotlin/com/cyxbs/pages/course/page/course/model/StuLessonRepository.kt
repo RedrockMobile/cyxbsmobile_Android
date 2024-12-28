@@ -3,19 +3,22 @@ package com.cyxbs.pages.course.page.course.model
 import androidx.annotation.WorkerThread
 import androidx.core.content.edit
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.pages.course.api.ILessonService
-import com.cyxbs.pages.course.page.course.bean.StuLessonBean
-import com.cyxbs.pages.course.page.course.room.LessonDataBase
-import com.cyxbs.pages.course.page.course.room.StuLessonEntity
-import com.cyxbs.pages.course.page.course.network.CourseApiServices
-import com.cyxbs.components.utils.network.api
-import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.config.config.SchoolCalendar
 import com.cyxbs.components.config.sp.defaultSp
-import com.cyxbs.components.utils.extensions.*
+import com.cyxbs.components.utils.extensions.interceptException
+import com.cyxbs.components.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.toastLong
+import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
+import com.cyxbs.components.utils.network.api
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.utils.utils.judge.NetworkUtil
-import io.reactivex.rxjava3.core.*
+import com.cyxbs.pages.course.api.ILessonService
+import com.cyxbs.pages.course.page.course.bean.StuLessonBean
+import com.cyxbs.pages.course.page.course.network.CourseApiServices
+import com.cyxbs.pages.course.page.course.room.LessonDataBase
+import com.cyxbs.pages.course.page.course.room.StuLessonEntity
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.rx3.asObservable
@@ -62,7 +65,7 @@ object StuLessonRepository {
   fun observeSelfLesson(
     isToast: Boolean = false,
   ): Observable<List<StuLessonEntity>> {
-    return IAccountService::class.impl
+    return IAccountService::class.impl()
       .getUserService()
       .observeStuNumState()
       .observeOn(Schedulers.io())

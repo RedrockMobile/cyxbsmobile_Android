@@ -1,15 +1,13 @@
 package com.cyxbs.pages.course.service
 
-import android.content.Context
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.pages.course.api.COURSE_LESSON
+import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.utils.judge.NetworkUtil
 import com.cyxbs.pages.course.api.ILessonService
 import com.cyxbs.pages.course.page.course.model.StuLessonRepository
 import com.cyxbs.pages.course.page.course.room.StuLessonEntity
 import com.cyxbs.pages.course.page.link.model.LinkRepository
-import com.cyxbs.components.utils.service.ServiceManager
-import com.cyxbs.components.utils.utils.judge.NetworkUtil
+import com.g985892345.provider.api.annotation.ImplProvider
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import kotlinx.coroutines.flow.flow
@@ -21,10 +19,10 @@ import kotlinx.coroutines.rx3.asObservable
  * @email 2767465918@qq.com
  * @date 2022/5/14 17:09
  */
-@Route(path = COURSE_LESSON, name = COURSE_LESSON)
-class LessonServiceImpl : ILessonService {
+@ImplProvider
+object LessonServiceImpl : ILessonService {
   
-  private val mAccountService = ServiceManager(IAccountService::class)
+  private val mAccountService = IAccountService::class.impl()
 
   override fun refreshLesson(
     stuNum: String,
@@ -61,37 +59,32 @@ class LessonServiceImpl : ILessonService {
     return observeLinkLessonInternal().map { it.toLesson() }
   }
 
-  override fun init(context: Context) {
+  fun observeSelfLessonInternal(
+    isToast: Boolean = false,
+  ): Observable<List<StuLessonEntity>> {
+    return StuLessonRepository.observeSelfLesson(isToast = isToast)
   }
 
-  companion object {
-    fun observeSelfLessonInternal(
-      isToast: Boolean = false,
-    ): Observable<List<StuLessonEntity>> {
-      return StuLessonRepository.observeSelfLesson(isToast = isToast)
-    }
-
-    fun observeLinkLessonInternal(): Observable<List<StuLessonEntity>> {
-      return LinkRepository.observeLinkStudent()
-        .switchMap { entity ->
-          // 没得关联人和不显示关联课程时发送空数据
-          if (entity.isNull() || !entity.isShowLink) Observable.just(emptyList()) else {
-            flow {
-              if (!ILessonService.isUseLocalSaveLesson) {
-                // 如果不允许使用本地数据就挂起直到网络连接成功
-                NetworkUtil.suspendUntilAvailable()
-              }
-              emit(Unit)
-            }.asObservable()
-              .flatMap {
-                // 在没有连接网络时 StuLessonRepository.getLesson() 方法会抛出异常
-                StuLessonRepository.getLesson(entity.linkNum).toObservable()
-              }.onErrorReturn {
-                emptyList()
-              }
-          }
+  fun observeLinkLessonInternal(): Observable<List<StuLessonEntity>> {
+    return LinkRepository.observeLinkStudent()
+      .switchMap { entity ->
+        // 没得关联人和不显示关联课程时发送空数据
+        if (entity.isNull() || !entity.isShowLink) Observable.just(emptyList()) else {
+          flow {
+            if (!ILessonService.isUseLocalSaveLesson) {
+              // 如果不允许使用本地数据就挂起直到网络连接成功
+              NetworkUtil.suspendUntilAvailable()
+            }
+            emit(Unit)
+          }.asObservable()
+            .flatMap {
+              // 在没有连接网络时 StuLessonRepository.getLesson() 方法会抛出异常
+              StuLessonRepository.getLesson(entity.linkNum).toObservable()
+            }.onErrorReturn {
+              emptyList()
+            }
         }
-    }
+      }
   }
 }
 

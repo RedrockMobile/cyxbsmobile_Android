@@ -2,8 +2,7 @@ plugins {
   id("manager.lib")
 }
 
-useARouter()
-useAutoService()
+useKtProvider()
 
 kotlin {
   sourceSets {

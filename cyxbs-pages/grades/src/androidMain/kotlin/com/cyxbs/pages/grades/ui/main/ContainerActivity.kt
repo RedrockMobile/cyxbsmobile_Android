@@ -1,6 +1,7 @@
 package com.cyxbs.pages.grades.ui.main
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
@@ -15,13 +16,17 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.bumptech.glide.Glide
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.account.api.IUserService
+import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.base.webView.LiteJsWebView
 import com.cyxbs.components.config.route.DISCOVER_GRADES
 import com.cyxbs.components.config.view.JToolbar
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.visible
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.grades.R
 import com.cyxbs.pages.grades.bean.Exam
 import com.cyxbs.pages.grades.bean.analyze.isSuccessful
@@ -29,12 +34,8 @@ import com.cyxbs.pages.grades.ui.adapter.ExamAdapter
 import com.cyxbs.pages.grades.ui.fragment.GPAFragment
 import com.cyxbs.pages.grades.ui.fragment.NoDataFragment
 import com.cyxbs.pages.grades.ui.viewModel.ContainerViewModel
-import com.cyxbs.components.base.ui.BaseActivity
-import com.cyxbs.components.utils.extensions.gone
-import com.cyxbs.components.utils.extensions.setOnSingleClickListener
-import com.cyxbs.components.utils.extensions.visible
-import com.cyxbs.components.base.webView.LiteJsWebView
-import com.cyxbs.components.utils.service.ServiceManager
+import com.g985892345.provider.api.annotation.KClassProvider
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 
 /**
@@ -43,13 +44,13 @@ import com.cyxbs.components.utils.service.ServiceManager
  * @CreateAt:2018/9/16
  */
 
-@Route(path = DISCOVER_GRADES)
+@KClassProvider(clazz = Activity::class, name= DISCOVER_GRADES)
 class ContainerActivity : BaseActivity() {
 
     private val viewModel by viewModels<ContainerViewModel>()
 
     private val user: IUserService by lazy {
-        ServiceManager(IAccountService::class).getUserService()
+        IAccountService::class.impl().getUserService()
     }
     private lateinit var mAdapter: ExamAdapter
     private val data = mutableListOf<Exam>()
@@ -88,7 +89,7 @@ class ContainerActivity : BaseActivity() {
     }
 
     private fun init() {
-        if (!ServiceManager(IAccountService::class).getVerifyService().isLogin()) {
+        if (!IAccountService::class.impl().getVerifyService().isLogin()) {
             return
         }
         initExam()

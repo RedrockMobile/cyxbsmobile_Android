@@ -15,7 +15,7 @@ import com.cyxbs.components.utils.service.impl
  * 如果没有登录则会引导去登录界面
  */
 fun BaseUi.doIfLogin(msg: String? = "此功能", next: (() -> Unit)? = null) {
-  val verifyService = IAccountService::class.impl.getVerifyService()
+  val verifyService = IAccountService::class.impl().getVerifyService()
   if (verifyService.isLogin()) {
     next?.invoke()
   } else {

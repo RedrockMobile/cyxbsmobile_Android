@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
-import com.google.auto.service.AutoService
+import com.cyxbs.components.base.pages.SecretActivity
 import com.cyxbs.components.init.InitialManager
 import com.cyxbs.components.init.InitialService
-import com.cyxbs.components.base.pages.SecretActivity
 import com.cyxbs.components.utils.utils.impl.ActivityLifecycleCallbacksImpl
+import com.g985892345.provider.api.annotation.ImplProvider
 import tech.linjiang.pandora.Pandora
 import tech.linjiang.pandora.util.SensorDetector
 
@@ -20,8 +20,8 @@ import tech.linjiang.pandora.util.SensorDetector
  * @email guo985892345@foxmail.com
  * @date 2022/7/20 23:52
  */
-@AutoService(InitialService::class)
-class PandoraInitialService: InitialService, SensorDetector.Callback {
+@ImplProvider(clazz = InitialService::class, name = "PandoraInitialService")
+object PandoraInitialService: InitialService, SensorDetector.Callback {
   
   override fun onMainProcess(manager: InitialManager) {
     super.onMainProcess(manager)

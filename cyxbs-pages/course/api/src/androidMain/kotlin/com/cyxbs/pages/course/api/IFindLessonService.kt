@@ -1,7 +1,6 @@
 package com.cyxbs.pages.course.api
 
 import android.content.Context
-import com.alibaba.android.arouter.facade.template.IProvider
 
 /**
  * 打开查找他人课表界面的服务类
@@ -9,7 +8,7 @@ import com.alibaba.android.arouter.facade.template.IProvider
  * @author 985892345
  * @date 2022/9/22 15:50
  */
-interface IFindLessonService : IProvider {
+interface IFindLessonService {
   
   /**
    * 直接打开查找他人课表的 Activity

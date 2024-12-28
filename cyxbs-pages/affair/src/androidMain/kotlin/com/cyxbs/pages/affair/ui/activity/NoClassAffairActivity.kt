@@ -6,15 +6,15 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.viewModels
-import com.cyxbs.pages.affair.R
-import com.cyxbs.pages.affair.ui.fragment.NoClassAffairFragment
-import com.cyxbs.pages.affair.ui.viewmodel.activity.NoClassAffairActivityViewModel
-import com.cyxbs.pages.affair.api.NoClassBean
-import com.cyxbs.components.config.route.NOTIFICATION_HOME
 import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.route.NOTIFICATION_HOME
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
-import com.cyxbs.components.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.startActivity
+import com.cyxbs.pages.affair.R
+import com.cyxbs.pages.affair.api.NoClassBean
+import com.cyxbs.pages.affair.ui.fragment.NoClassAffairFragment
+import com.cyxbs.pages.affair.ui.viewmodel.activity.NoClassAffairActivityViewModel
 
 class NoClassAffairActivity : BaseActivity() {
 
@@ -70,8 +70,8 @@ class NoClassAffairActivity : BaseActivity() {
 
                 3 -> {
                     // 发送成功之后跳转到消息中心
-                    ServiceManager.activity(NOTIFICATION_HOME){
-                        withInt("MsgType", 2)
+                    startActivity(NOTIFICATION_HOME) {
+                        putExtra("MsgType", 2)
                     }
                     finishAfterTransition()
                 }

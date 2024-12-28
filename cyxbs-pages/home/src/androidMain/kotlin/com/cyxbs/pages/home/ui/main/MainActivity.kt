@@ -5,26 +5,24 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.pages.login.api.ILoginService
-import com.cyxbs.functions.update.api.IAppUpdateService
-import com.cyxbs.components.config.route.DISCOVER_SCHOOL_CAR
-import com.cyxbs.components.config.route.MAIN_MAIN
-import com.cyxbs.components.config.sp.SP_COURSE_SHOW_STATE
-import com.cyxbs.components.config.sp.defaultSp
 import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.base.utils.Umeng
+import com.cyxbs.components.config.route.DISCOVER_EMPTY_ROOM
+import com.cyxbs.components.config.route.DISCOVER_GRADES
+import com.cyxbs.components.config.route.DISCOVER_SCHOOL_CAR
+import com.cyxbs.components.config.sp.SP_COURSE_SHOW_STATE
+import com.cyxbs.components.config.sp.defaultSp
 import com.cyxbs.components.utils.extensions.launch
 import com.cyxbs.components.utils.extensions.processLifecycleScope
 import com.cyxbs.components.utils.logger.TrackingUtils
 import com.cyxbs.components.utils.logger.event.ClickEvent
-import com.cyxbs.components.utils.service.ServiceManager
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.service.startActivity
 import com.cyxbs.components.utils.utils.judge.NetworkUtil
+import com.cyxbs.functions.update.api.IAppUpdateService
 import com.cyxbs.pages.home.viewmodel.MainViewModel
-import com.cyxbs.components.config.route.DISCOVER_EMPTY_ROOM
-import com.cyxbs.components.config.route.DISCOVER_GRADES
+import com.cyxbs.pages.login.api.ILoginService
 import kotlinx.coroutines.launch
 
 /**
@@ -37,12 +35,11 @@ import kotlinx.coroutines.launch
  * @email guo985892345@foxmail.com
  * @date 2022/9/14 20:49
  */
-@Route(path = MAIN_MAIN)
 class MainActivity : BaseActivity() {
   
   private val mViewModel by viewModels<MainViewModel>()
   
-  private val mAccountService = IAccountService::class.impl
+  private val mAccountService = IAccountService::class.impl()
 
   private var mIsLogin = false
   
@@ -69,7 +66,7 @@ class MainActivity : BaseActivity() {
       // 不是游客模式
       if (!mAccountService.getVerifyService().isLogin() || mAccountService.getVerifyService().isRefreshTokenExpired()) {
         // 未登录 和 refreshToken 过期时 需要跳转到登录界面
-        ILoginService::class.impl
+        ILoginService::class.impl()
           .startLoginActivityReboot()
         finish()
         return null
@@ -108,14 +105,14 @@ class MainActivity : BaseActivity() {
       // 因政策问题暂时关闭
       DESKTOP_SHORTCUT_EXAM -> {
         if (mIsLogin) {
-          ServiceManager.activity(DISCOVER_GRADES)
+          startActivity(DISCOVER_GRADES)
         }
       }
       DESKTOP_SHORTCUT_SCHOOL_CAR -> {
-        ServiceManager.activity(DISCOVER_SCHOOL_CAR)
+        startActivity(DISCOVER_SCHOOL_CAR)
       }
       DESKTOP_SHORTCUT_EMPTY_ROOM -> {
-        ServiceManager.activity(DISCOVER_EMPTY_ROOM)
+        startActivity(DISCOVER_EMPTY_ROOM)
       }
       else -> {
         if (mIsLogin && defaultSp.getBoolean(SP_COURSE_SHOW_STATE, false)) {
@@ -173,7 +170,7 @@ class MainActivity : BaseActivity() {
   }
 
   private fun initUpdate() {
-    IAppUpdateService::class.impl.tryNoticeUpdate(this)
+    IAppUpdateService::class.impl().tryNoticeUpdate(this)
   }
   
   companion object {

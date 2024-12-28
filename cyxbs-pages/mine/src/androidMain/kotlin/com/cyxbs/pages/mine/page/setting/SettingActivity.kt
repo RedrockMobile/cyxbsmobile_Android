@@ -8,28 +8,26 @@ import android.widget.Button
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
-import androidx.core.view.postDelayed
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.pages.login.api.ILoginService
-import com.mredrock.cyxbs.common.config.COURSE_SHOW_STATE
-import com.mredrock.cyxbs.common.config.SP_WIDGET_NEED_FRESH
-import com.mredrock.cyxbs.common.config.WIDGET_COURSE
-import com.cyxbs.components.utils.service.ServiceManager
-import com.mredrock.cyxbs.common.service.impl
-import com.cyxbs.components.config.sp.defaultSp
-import com.cyxbs.components.config.view.JToolbar
 import com.cyxbs.components.base.dailog.ChooseDialog
 import com.cyxbs.components.base.operations.doIfLogin
 import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.sp.defaultSp
+import com.cyxbs.components.config.view.JToolbar
 import com.cyxbs.components.utils.extensions.launch
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.utils.utils.config.PhoneCalendar
 import com.cyxbs.components.utils.utils.judge.NetworkUtil
+import com.cyxbs.pages.login.api.ILoginService
 import com.cyxbs.pages.mine.R
 import com.cyxbs.pages.mine.page.security.activity.SecurityActivity
 import com.cyxbs.pages.mine.util.ui.CourseMaxWeekDialog
 import com.cyxbs.pages.mine.util.ui.WarningDialog
 import com.cyxbs.pages.mine.util.widget.SwitchPlus
+import com.mredrock.cyxbs.common.config.COURSE_SHOW_STATE
+import com.mredrock.cyxbs.common.config.SP_WIDGET_NEED_FRESH
+import com.mredrock.cyxbs.common.config.WIDGET_COURSE
 
 class SettingActivity : BaseActivity() {
     private val mSwitch by R.id.mine_setting_switch.view<SwitchPlus>()
@@ -177,14 +175,10 @@ class SettingActivity : BaseActivity() {
     private fun jumpToLoginActivity() {
         cleanData()
         //清除user信息，必须要在LoginStateChangeEvent之前
-        ServiceManager(IAccountService::class).getVerifyService()
+        IAccountService::class.impl().getVerifyService()
             .logout(this@SettingActivity)
-        window.decorView.postDelayed(20) {
-            // 延迟打开，保证前面的 logout 有时间清空数据
-            ILoginService::class.impl
-                .startLoginActivityReboot()
-            finish()
-        }
+        ILoginService::class.impl().startLoginActivityReboot()
+        finishAndRemoveTask()
     }
 
     private fun cleanData() {

@@ -4,10 +4,9 @@ import android.app.Dialog
 import android.content.Context
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
-import com.alibaba.android.arouter.facade.template.IProvider
-import com.cyxbs.pages.affair.api.IAffairService
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.getSp
+import com.cyxbs.pages.affair.api.IAffairService
 
 /**
  * ...
@@ -15,7 +14,7 @@ import com.cyxbs.components.utils.extensions.getSp
  * @email 2767465918@qq.com
  * @date 2022/2/9 16:39
  */
-interface ICourseService : IProvider {
+interface ICourseService {
   
   companion object {
     /**

@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.alibaba.android.arouter.launcher.ARouter
 import com.cyxbs.components.config.route.UFIELD_DETAIL_ENTRY
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.service.startActivity
 import com.cyxbs.pages.notification.R
 import com.cyxbs.pages.notification.bean.UfieldMsgBean
 import com.cyxbs.pages.notification.viewmodel.NotificationViewModel
@@ -66,12 +66,9 @@ class ActivityUfieldRVAdapter(
             clickDetail.setOnSingleClickListener {
                     viewmodel.changeUfieldMsgStatus(currentList[absoluteAdapterPosition].messageId)
                     getItem(absoluteAdapterPosition).run {
-                        ARouter.getInstance().build(UFIELD_DETAIL_ENTRY)
-                            .withInt(
-                                "actID",
-                                currentList[absoluteAdapterPosition].activityInfo.activityId
-                            )
-                            .navigation(context.activity?.application?.applicationContext)
+                        startActivity(UFIELD_DETAIL_ENTRY) {
+                            putExtra("actID", currentList[absoluteAdapterPosition].activityInfo.activityId)
+                        }
                     }
 
             }

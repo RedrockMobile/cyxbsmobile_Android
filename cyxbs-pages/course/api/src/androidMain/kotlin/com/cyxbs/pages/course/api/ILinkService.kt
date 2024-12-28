@@ -1,6 +1,5 @@
 package com.cyxbs.pages.course.api
 
-import com.alibaba.android.arouter.facade.template.IProvider
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import java.io.Serializable
@@ -12,7 +11,7 @@ import java.io.Serializable
  * @email guo985892345@foxmail.com
  * @date 2022/9/3 12:42
  */
-interface ILinkService : IProvider {
+interface ILinkService {
   
   /**
    * 得到关联人

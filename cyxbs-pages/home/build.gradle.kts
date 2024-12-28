@@ -1,5 +1,6 @@
 plugins {
-  id("manager.composeLib")
+  id("manager.lib")
+  id("kmp.compose")
 }
 
 // 测试使用，设置 module_main 暂时不依赖的模块
@@ -7,7 +8,7 @@ val excludeList = mutableListOf<String>(
 
 )
 
-useARouter()
+useKtProvider()
 
 kotlin {
   sourceSets {

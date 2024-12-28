@@ -1,16 +1,16 @@
 package com.cyxbs.pages.schoolcar
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.*
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
@@ -18,20 +18,25 @@ import com.amap.api.maps.AMap
 import com.amap.api.maps.AMapUtils
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.MapsInitializer
-import com.amap.api.maps.model.*
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.cyxbs.pages.schoolcar.export.SchoolCarInterface
-import com.cyxbs.pages.schoolcar.adapter.CarIconAdapter
-import com.cyxbs.pages.schoolcar.adapter.CarSiteAdapter
-import com.cyxbs.pages.schoolcar.bean.SchoolCarLocation
-import com.cyxbs.pages.schoolcar.widget.SchoolCarsSmoothMove
-import com.cyxbs.pages.schoolcar.databinding.SchoolcarActivitySchoolcarBinding
+import com.amap.api.maps.model.BitmapDescriptor
+import com.amap.api.maps.model.BitmapDescriptorFactory
+import com.amap.api.maps.model.CustomMapStyleOptions
+import com.amap.api.maps.model.LatLng
+import com.amap.api.maps.model.MyLocationStyle
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.config.route.DISCOVER_SCHOOL_CAR
 import com.cyxbs.components.config.sp.defaultSp
-import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.components.utils.extensions.px2dp
 import com.cyxbs.components.utils.network.ApiWrapper
+import com.cyxbs.pages.schoolcar.adapter.CarIconAdapter
+import com.cyxbs.pages.schoolcar.adapter.CarSiteAdapter
+import com.cyxbs.pages.schoolcar.bean.SchoolCarLocation
+import com.cyxbs.pages.schoolcar.databinding.SchoolcarActivitySchoolcarBinding
+import com.cyxbs.pages.schoolcar.export.SchoolCarInterface
+import com.cyxbs.pages.schoolcar.widget.SchoolCarsSmoothMove
+import com.g985892345.provider.api.annotation.KClassProvider
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.Disposable
@@ -44,7 +49,7 @@ import java.util.concurrent.TimeUnit
  *
  */
 const val IS_MAP_SAVED = "isMapSaved"
-@Route(path = DISCOVER_SCHOOL_CAR)
+@KClassProvider(clazz = Activity::class, name = DISCOVER_SCHOOL_CAR)
 class SchoolCarActivity: BaseActivity() {
   companion object {
     const val ADD_TIMER: Long = 3

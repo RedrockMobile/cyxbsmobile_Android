@@ -1,5 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
+rootProject.name = "CyxbsMobile"
 // 开启模块的简化依赖方式，例如：module.course.api.course
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 

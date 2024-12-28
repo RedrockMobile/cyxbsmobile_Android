@@ -3,20 +3,17 @@ package com.mredrock.cyxbs.common.ui
 import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
-import androidx.annotation.CallSuper
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.config.view.JToolbar
+import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.utils.BindView
 import com.mredrock.cyxbs.common.R
 import com.mredrock.cyxbs.common.mark.ActionLoginStatusSubscriber
 import com.mredrock.cyxbs.common.mark.EventBusLifecycleSubscriber
-import com.mredrock.cyxbs.common.service.ServiceManager
-import com.mredrock.cyxbs.common.utils.LogUtils
 import com.mredrock.cyxbs.common.utils.extensions.getDarkModeStatus
-import com.cyxbs.components.config.view.JToolbar
-import com.cyxbs.components.utils.utils.BindView
 import org.greenrobot.eventbus.EventBus
 
 
@@ -31,10 +28,6 @@ abstract class BaseActivity : AppCompatActivity() {
      */
     protected open var isOpenLifeCycleLog = false
 
-    //当然，你要定义自己的TAG方便在Log里面找也可以重写这个
-    protected open var TAG: String = this::class.java.simpleName
-
-
     // 只在这里做封装处理
     private var baseBundle: Bundle? = null
 
@@ -48,7 +41,6 @@ abstract class BaseActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         initFlag()
-        lifeCycleLog("onCreate")
     }
 
     // 在setContentView之后进行操作
@@ -56,7 +48,7 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun setContentView(layoutResID: Int) { super.setContentView(layoutResID);notificationInit() }
     private fun notificationInit() {
 
-            val verifyService = ServiceManager(IAccountService::class).getVerifyService()
+            val verifyService = IAccountService::class.impl().getVerifyService()
             if (this is ActionLoginStatusSubscriber) {
                 if (verifyService.isLogin()) initOnLoginMode(baseBundle)
                 if (verifyService.isTouristMode()) initOnTouristMode(baseBundle)
@@ -90,61 +82,25 @@ abstract class BaseActivity : AppCompatActivity() {
         init(this@BaseActivity, title, withSplitLine, icon, titleOnLeft, listener)
     }
 
-    override fun onRestart() {
-        super.onRestart()
-        lifeCycleLog("onRestart")
-    }
-
     override fun onStart() {
         super.onStart()
         if (this is EventBusLifecycleSubscriber) {
             EventBus.getDefault().register(this)
         }
-        lifeCycleLog("onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        lifeCycleLog("onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        lifeCycleLog("onPause")
     }
 
     override fun onStop() {
         super.onStop()
         if (this is EventBusLifecycleSubscriber && EventBus.getDefault().isRegistered(this)) EventBus.getDefault().unregister(this)
-        lifeCycleLog("onStop")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        lifeCycleLog("onDestroy")
-        val verifyService = ServiceManager(IAccountService::class).getVerifyService()
+        val verifyService = IAccountService::class.impl().getVerifyService()
         if (this is ActionLoginStatusSubscriber) {
             if (verifyService.isLogin()) destroyOnLoginMode()
             if (verifyService.isTouristMode()) destroyOnTouristMode()
             if (verifyService.isLogin()||verifyService.isTouristMode()) destroyPage(verifyService.isLogin())
-        }
-    }
-
-    @CallSuper
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        lifeCycleLog("onSaveInstanceState")
-    }
-
-    @CallSuper
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onRestoreInstanceState(savedInstanceState, persistentState)
-        lifeCycleLog("onRestoreInstanceState")
-    }
-
-    private fun lifeCycleLog(message: String) {
-        if (isOpenLifeCycleLog) {
-            LogUtils.d(TAG, "${this::class.java.simpleName}\$\$${message}")
         }
     }
 

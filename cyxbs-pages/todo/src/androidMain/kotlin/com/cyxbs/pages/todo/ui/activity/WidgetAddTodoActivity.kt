@@ -1,19 +1,20 @@
 package com.cyxbs.pages.todo.ui.activity
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.activity.viewModels
-import com.alibaba.android.arouter.facade.annotation.Route
+import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.route.TODO_ADD_TODO_BY_WIDGET
+import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.getSp
 import com.cyxbs.pages.todo.R
 import com.cyxbs.pages.todo.model.bean.TodoListPushWrapper
 import com.cyxbs.pages.todo.ui.dialog.AddTodoDialog
 import com.cyxbs.pages.todo.viewmodel.TodoViewModel
-import com.cyxbs.components.config.route.TODO_ADD_TODO_BY_WIDGET
-import com.cyxbs.components.base.ui.BaseActivity
-import com.cyxbs.components.utils.extensions.appContext
-import com.cyxbs.components.utils.extensions.getSp
+import com.g985892345.provider.api.annotation.KClassProvider
 
-@Route(path = TODO_ADD_TODO_BY_WIDGET)
+@KClassProvider(clazz = Activity::class, name = TODO_ADD_TODO_BY_WIDGET)
 class WidgetAddTodoActivity : BaseActivity() {
 
     private val mViewModel by viewModels<TodoViewModel>()

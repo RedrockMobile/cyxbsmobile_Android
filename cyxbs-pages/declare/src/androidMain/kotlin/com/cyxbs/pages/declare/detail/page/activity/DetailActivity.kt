@@ -5,15 +5,15 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.cyxbs.pages.store.api.IStoreService
+import com.cyxbs.components.base.ui.BaseBindActivity
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.visible
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.declare.databinding.DeclareActivityDetailBinding
 import com.cyxbs.pages.declare.detail.bean.VoteData
 import com.cyxbs.pages.declare.detail.page.adapter.DetailRvAdapter
 import com.cyxbs.pages.declare.detail.page.viewmodel.DetailViewModel
-import com.cyxbs.components.base.ui.BaseBindActivity
-import com.cyxbs.components.utils.extensions.gone
-import com.cyxbs.components.utils.extensions.visible
-import com.cyxbs.components.utils.service.ServiceManager
+import com.cyxbs.pages.store.api.IStoreService
 
 class DetailActivity : BaseBindActivity<DeclareActivityDetailBinding>() {
     companion object {
@@ -83,7 +83,7 @@ class DetailActivity : BaseBindActivity<DeclareActivityDetailBinding>() {
                 votedList.add(VoteData(it.voted, data.choice, data.percent))
             }
             declareDetailRvAdapter.submitList(votedList)
-            ServiceManager(IStoreService::class).postTask(
+            IStoreService::class.impl().postTask(
                 IStoreService.Task.JOIN_DECLARE,
                 "",
                 "今日已完成表态一次，获得10邮票"

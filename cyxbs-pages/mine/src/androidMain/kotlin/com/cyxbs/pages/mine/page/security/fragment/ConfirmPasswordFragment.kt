@@ -8,16 +8,16 @@ import android.widget.EditText
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
-import com.cyxbs.pages.login.api.ILoginService
-import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.base.ui.BaseBindFragment
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.pages.login.api.ILoginService
 import com.cyxbs.pages.mine.R
 import com.cyxbs.pages.mine.databinding.MineFragmentFindPasswordIdsConfirmBinding
 import com.cyxbs.pages.mine.page.security.util.IdsFindPasswordDialog
 import com.cyxbs.pages.mine.page.security.viewmodel.FindPasswordByIdsViewModel
+import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 
 /**
  * @author : why
@@ -51,7 +51,7 @@ class ConfirmPasswordFragment : BaseBindFragment<MineFragmentFindPasswordIdsConf
      * 但 dialog 有个确认按钮，点击就会立马跳转，所以需要防止重复调用
      */
     private val mReLoginRunnable = Runnable {
-        ILoginService::class.impl
+        ILoginService::class.impl()
             .startLoginActivityReboot()
         requireActivity().finish()
     }

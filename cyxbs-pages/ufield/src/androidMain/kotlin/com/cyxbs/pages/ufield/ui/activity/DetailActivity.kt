@@ -1,6 +1,7 @@
 package com.cyxbs.pages.ufield.ui.activity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.ImageView
@@ -8,26 +9,27 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.cyxbs.pages.store.api.IStoreService
-import com.cyxbs.components.config.route.DISCOVER_MAP
-import com.cyxbs.components.config.route.UFIELD_DETAIL_ENTRY
 import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.base.ui.viewModelBy
+import com.cyxbs.components.config.route.DISCOVER_MAP
+import com.cyxbs.components.config.route.UFIELD_DETAIL_ENTRY
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.setImageFromUrl
-import com.cyxbs.components.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.service.startActivity
+import com.cyxbs.pages.store.api.IStoreService
 import com.cyxbs.pages.ufield.R
 import com.cyxbs.pages.ufield.bean.RemindMode
 import com.cyxbs.pages.ufield.bean.Todo
 import com.cyxbs.pages.ufield.viewmodel.DetailViewModel
+import com.g985892345.provider.api.annotation.KClassProvider
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import kotlin.math.floor
 import kotlin.properties.Delegates
 
-@Route(path = UFIELD_DETAIL_ENTRY)
+@KClassProvider(clazz = Activity::class, name = UFIELD_DETAIL_ENTRY)
 class DetailActivity : BaseActivity() {
     private var id by Delegates.notNull<Int>()
     private val tvSee by R.id.ufield_tv_wantsee.view<TextView>()
@@ -95,7 +97,7 @@ class DetailActivity : BaseActivity() {
                     tvSee.layoutParams = getConstrainLayoutParams()
                     ivAdd.gone()
                     //上传活动进度，获取邮票
-                    ServiceManager(IStoreService::class).postTask(
+                    IStoreService::class.impl().postTask(
                         IStoreService.Task.JOIN_UFIELD,
                         "",
                         "已参加活动一次，获得50邮票"
@@ -137,7 +139,7 @@ class DetailActivity : BaseActivity() {
     @SuppressLint("SetTextI18n")
     private fun initView() {
         layoutMap.setOnClickListener {
-            ServiceManager.activity(DISCOVER_MAP)
+            startActivity(DISCOVER_MAP)
         }
 
         ivBack.setOnClickListener {

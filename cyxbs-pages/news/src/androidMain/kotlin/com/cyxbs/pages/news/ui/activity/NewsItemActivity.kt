@@ -1,5 +1,6 @@
 package com.cyxbs.pages.news.ui.activity
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
@@ -19,25 +20,25 @@ import androidx.lifecycle.Observer
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItemsMultiChoice
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
-import com.alibaba.android.arouter.facade.annotation.Route
+import com.cyxbs.components.base.pages.PhotoViewerActivity
+import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.route.DISCOVER_NEWS_ITEM
+import com.cyxbs.components.config.view.JToolbar
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.showFile
 import com.cyxbs.pages.news.R
 import com.cyxbs.pages.news.bean.NewsAttachment
 import com.cyxbs.pages.news.utils.FileTypeHelper
 import com.cyxbs.pages.news.utils.TimeFormatHelper
 import com.cyxbs.pages.news.viewmodel.NewsItemViewModel
-import com.cyxbs.components.config.route.DISCOVER_NEWS_ITEM
-import com.cyxbs.components.config.view.JToolbar
-import com.cyxbs.components.base.pages.PhotoViewerActivity
-import com.cyxbs.components.base.ui.BaseActivity
-import com.cyxbs.components.utils.extensions.setOnSingleClickListener
-import com.cyxbs.components.utils.extensions.showFile
+import com.g985892345.provider.api.annotation.KClassProvider
 import com.tbruyelle.rxpermissions3.RxPermissions
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 
-@Route(path = DISCOVER_NEWS_ITEM)
+@KClassProvider(clazz = Activity::class, name = DISCOVER_NEWS_ITEM)
 class NewsItemActivity : BaseActivity(), NewsItemViewModel.NewsDownloadListener {
 
     private val viewModel by viewModels<NewsItemViewModel>()
@@ -202,7 +203,7 @@ class NewsItemActivity : BaseActivity(), NewsItemViewModel.NewsDownloadListener 
             }
         })
 
-        intent.getStringExtra("id").let {
+        intent.getStringExtra("newId").let {
             if (it.isNullOrBlank()) {
                 toast(R.string.news_init_error)
                 finish()

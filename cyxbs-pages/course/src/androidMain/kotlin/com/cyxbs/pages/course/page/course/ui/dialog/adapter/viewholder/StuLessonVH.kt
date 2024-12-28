@@ -7,14 +7,14 @@ import android.widget.TextView
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.config.route.COURSE_POS_TO_MAP
 import com.cyxbs.components.config.route.DISCOVER_MAP
-import com.cyxbs.pages.course.R
-import com.cyxbs.pages.course.page.course.data.StuLessonData
-import com.cyxbs.pages.course.page.find.ui.find.activity.FindLessonActivity
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.visible
-import com.cyxbs.components.utils.service.ServiceManager
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.service.startActivity
+import com.cyxbs.pages.course.R
+import com.cyxbs.pages.course.page.course.data.StuLessonData
+import com.cyxbs.pages.course.page.find.ui.find.activity.FindLessonActivity
 
 /**
  *
@@ -48,7 +48,7 @@ class StuLessonVH(
     mTvTime.text = "${data.weekdayStr} ${data.durationStr}"
     mTvType.text = data.course.type
     if (isShowLink) {
-      if (data.stuNum != IAccountService::class.impl.getUserService().getStuNum()) {
+      if (data.stuNum != IAccountService::class.impl().getUserService().getStuNum()) {
         mIvLink.visible()
       } else {
         mIvLink.gone()
@@ -60,8 +60,8 @@ class StuLessonVH(
     mTvClassroom.setOnSingleClickListener {
       val data = mData ?: return@setOnSingleClickListener
       // 跳转至地图界面
-      ServiceManager.activity(DISCOVER_MAP) {
-        withString(COURSE_POS_TO_MAP, data.course.classroom)
+      startActivity(DISCOVER_MAP) {
+        putExtra(COURSE_POS_TO_MAP, data.course.classroom)
       }
     }
   

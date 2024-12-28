@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/config_cl_default_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/config_default_page_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="10dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/config_ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/config_iv_default_page"
+        android:layout_width="171dp"
+        android:layout_height="111dp"
+        android:src="@drawable/config_ic_empty_holder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/config_tv_default_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="服务升级ing...敬请期待"
+        android:textColor="@color/config_level_one_font_color"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/config_iv_default_page"
+        app:layout_constraintStart_toStartOf="@+id/config_iv_default_page"
+        app:layout_constraintTop_toBottomOf="@+id/config_iv_default_page" />
+</androidx.constraintlayout.widget.ConstraintLayout>

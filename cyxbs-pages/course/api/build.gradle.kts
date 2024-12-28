@@ -2,8 +2,6 @@ plugins {
   id("manager.lib")
 }
 
-useARouter()
-
 kotlin {
   sourceSets {
     commonMain.dependencies {
@@ -11,6 +9,7 @@ kotlin {
       implementation(projects.cyxbsPages.affair.api)
     }
     androidMain.dependencies {
+      implementation(libs.androidx.appcompat)
       implementation(libs.rxjava)
     }
   }

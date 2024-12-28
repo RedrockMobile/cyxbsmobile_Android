@@ -8,12 +8,11 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.annotation.CallSuper
-import com.alibaba.android.arouter.launcher.ARouter
+import com.cyxbs.components.base.crash.CrashMonitor
+import com.cyxbs.components.base.utils.InitialManagerImpl
 import com.cyxbs.components.init.appActivities
 import com.cyxbs.components.init.appApplication
 import com.cyxbs.components.init.appTopActivity
-import com.cyxbs.components.base.crash.CrashMonitor
-import com.cyxbs.components.base.utils.InitialManagerImpl
 import com.cyxbs.components.utils.utils.impl.ActivityLifecycleCallbacksImpl
 import java.lang.ref.WeakReference
 
@@ -23,7 +22,7 @@ import java.lang.ref.WeakReference
  * @email 2767465918@qq.com
  * @date 2022/5/26 14:01
  */
-open class BaseApp : Application() {
+abstract class BaseApp : Application() {
   companion object {
     @SuppressLint("StaticFieldLeak")
     lateinit var baseApp: BaseApp
@@ -57,26 +56,20 @@ open class BaseApp : Application() {
     baseApp = this
     appApplication = this
     CrashMonitor.install()
+    initProvider()
   }
   
   @CallSuper
   override fun onCreate() {
     super.onCreate()
-    initARouter()
     initInitialService()
     initActivityManger()
   }
-  
+
   /**
-   * 在单模块调试时也需要该 ARouter，所以直接在这里初始化
+   * 初始化服务提供框架
    */
-  private fun initARouter() {
-    if (BuildConfig.DEBUG) {
-      ARouter.openDebug()
-      ARouter.openLog()
-    }
-    ARouter.init(this)
-  }
+  abstract fun initProvider()
   
   private fun initInitialService() {
     mInitialManager = InitialManagerImpl(this)

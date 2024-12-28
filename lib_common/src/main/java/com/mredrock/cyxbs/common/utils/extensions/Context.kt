@@ -7,11 +7,11 @@ import android.os.Build
 import android.view.View
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
-import com.cyxbs.components.utils.service.ServiceManager
 import com.cyxbs.components.account.api.IAccountService
-import com.mredrock.cyxbs.common.utils.Internals
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.toastLong
+import com.cyxbs.components.utils.service.impl
+import com.mredrock.cyxbs.common.utils.Internals
 
 /**
  * Created by anriku on 2018/8/14.
@@ -59,10 +59,10 @@ fun longToast(res: Int) = toastLong(appContext.resources.getText(res))
 
 @Deprecated("使用 base 中 OperationUi#doIfLogin() 替换", replaceWith = ReplaceWith(""))
 fun Context.doIfLogin(msg: String? = "此功能", next: () -> Unit) {
-    if (ServiceManager(IAccountService::class).getVerifyService().isLogin()) {
+    if (IAccountService::class.impl().getVerifyService().isLogin()) {
         next()
     } else {
-        ServiceManager(IAccountService::class).getVerifyService().askLogin(this, "请先登录才能使用${msg}哦~")
+        IAccountService::class.impl().getVerifyService().askLogin(this, "请先登录才能使用${msg}哦~")
     }
 }
 

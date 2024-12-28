@@ -1,7 +1,6 @@
 package com.cyxbs.pages.login.api
 
 import android.content.Context
-import com.alibaba.android.arouter.facade.template.IProvider
 
 /**
  * .
@@ -9,7 +8,7 @@ import com.alibaba.android.arouter.facade.template.IProvider
  * @author 985892345
  * @date 2024/12/23
  */
-interface ILegalNoticeService : IProvider {
+interface ILegalNoticeService {
 
   /**
    * 跳转到用户协议页面

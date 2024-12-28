@@ -1,6 +1,8 @@
 plugins {
-  id("manager.composeApp")
+  id("manager.app")
 }
+
+useKtProvider()
 
 kotlin {
   sourceSets {

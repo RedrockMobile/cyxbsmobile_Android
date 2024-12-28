@@ -1,6 +1,7 @@
 import com.android.build.api.dsl.ApplicationBuildFeatures
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryBuildFeatures
+import com.g985892345.provider.plugin.gradle.extensions.KtProviderExtensions
 import com.google.devtools.ksp.gradle.KspExtension
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
@@ -10,30 +11,26 @@ import org.gradle.kotlin.dsl.dependencies
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
+
 /**
- * 使用 ARouter
- *
+ * 使用 KtProvider
+ * 985892345 的 KMP 多平台服务提供框架
  * 单独给每个模块都添加而不是直接在 build-logic 中全部添加的原因:
- * - 为了按需引入 kapt
- * - 部分 lib 模块只使用依赖，不包含注解
- *
- * @param isNeedKsp 是否需要处理注解，对于非实现模块是不需要处理注解的，比如 api 模块
+ * - 为了按需引入 ksp
+ * - 部分 lib 模块只使用依赖，不包含注解，只需要依赖
  */
-fun Project.useARouter(isNeedKsp: Boolean = !name.startsWith("api")) {
+fun Project.useKtProvider(isNeedKsp: Boolean = !name.startsWith("api")) {
   if (isNeedKsp) {
     // kapt 按需引入
     apply(plugin = "com.google.devtools.ksp")
-    extensions.configure<KspExtension> {
-      arg("AROUTER_MODULE_NAME", project.name)
-    }
-    dependencies {
-      "kspAndroid"(libsEx.`arouter-compiler`)
-    }
+    apply(plugin = libsEx.plugins.ktProvider)
+    val ktProvider = extensions.getByName("ktProvider") as KtProviderExtensions
+    kspMultiplatform(ktProvider.ksp)
   }
   extensions.configure<KotlinMultiplatformExtension> {
     extensions.configure<NamedDomainObjectContainer<KotlinSourceSet>> {
-      androidMain.dependencies {
-        implementation(libsEx.`arouter`)
+      commonMain.dependencies {
+        implementation(libsEx.`kmp-ktProvider-api`)
       }
     }
   }
@@ -62,28 +59,6 @@ fun Project.useDataBinding(isNeedKapt: Boolean = !name.startsWith("api")) {
       androidMain.dependencies {
         implementation(libsEx.`androidx-databinding`)
         implementation(libsEx.`androidx-databinding-ktx`)
-      }
-    }
-  }
-}
-
-/**
- * 使用 AutoService
- * todo 感觉可以切换为我的 KtProvider https://github.com/985892345/KtProvider
- */
-fun Project.useAutoService(isNeedKapt: Boolean = !name.startsWith("api")) {
-  if (isNeedKapt) {
-    // kapt 按需引入
-    apply(plugin = "org.jetbrains.kotlin.kapt")
-    dependencies {
-      "kapt"(libsEx.`autoService-compiler`)
-    }
-  }
-  extensions.configure<KotlinMultiplatformExtension> {
-    extensions.configure<NamedDomainObjectContainer<KotlinSourceSet>> {
-      androidMain.dependencies {
-        // 谷歌官方的一种动态加载库 https://github.com/google/auto/tree/main/service
-        compileOnly(libsEx.autoService)
       }
     }
   }
@@ -122,5 +97,22 @@ fun Project.useRoom(
   }
   dependencies {
     "kspAndroid"(libsEx.`androidx-room-compiler`)
+  }
+}
+
+private fun Project.kspMultiplatform(dependencyNotation: Any) {
+  dependencies {
+    "kspAndroid"(dependencyNotation)
+    if (Multiplatform.enableIOS(project)) {
+      "kspIosX64"(dependencyNotation)
+      "kspIosArm64"(dependencyNotation)
+      "kspIosSimulatorArm64"(dependencyNotation)
+    }
+    if (Multiplatform.enableWasm(project)) {
+      "kspWasmJs"(dependencyNotation)
+    }
+    if (Multiplatform.enableDesktop(project)) {
+      "kspDesktop"(dependencyNotation)
+    }
   }
 }

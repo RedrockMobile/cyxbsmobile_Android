@@ -9,7 +9,7 @@ import com.cyxbs.components.utils.extensions.toast
 
 /**
  * 传入的实现类应该继承 IAndroidWebView,如果仅使用这个自定义类的话，生命周期回调是没有效果的
- * 这个仅支持简单的使用(参考IAndroidWebView),arouter跳转,toast,得到学号,黑夜模式,执行Js代码
+ * 这个仅支持简单的使用(参考IAndroidWebView),KtProvider 跳转,toast,得到学号,黑夜模式,执行Js代码
  * 其余参考RollerViewActivity实现
  * 一定要调用init方法
  */

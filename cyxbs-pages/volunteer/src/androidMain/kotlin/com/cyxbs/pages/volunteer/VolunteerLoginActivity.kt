@@ -1,5 +1,6 @@
 package com.cyxbs.pages.volunteer
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
@@ -9,21 +10,21 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.iterator
-import com.alibaba.android.arouter.facade.annotation.Route
+import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER
+import com.cyxbs.pages.volunteer.event.VolunteerLoginEvent
+import com.cyxbs.pages.volunteer.viewmodel.VolunteerLoginViewModel
+import com.cyxbs.pages.volunteer.widget.EncryptPassword
+import com.g985892345.provider.api.annotation.KClassProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.mredrock.cyxbs.common.component.CyxbsToast
-import com.mredrock.cyxbs.common.config.DISCOVER_VOLUNTEER
 import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
 import com.mredrock.cyxbs.common.utils.extensions.gone
 import com.mredrock.cyxbs.common.utils.extensions.invisible
 import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.common.utils.extensions.visible
-import com.cyxbs.pages.volunteer.event.VolunteerLoginEvent
-import com.cyxbs.pages.volunteer.viewmodel.VolunteerLoginViewModel
-import com.cyxbs.pages.volunteer.widget.EncryptPassword
 import org.greenrobot.eventbus.EventBus
 
-@Route(path = DISCOVER_VOLUNTEER)
+@KClassProvider(clazz = Activity::class, name = DISCOVER_VOLUNTEER)
 class VolunteerLoginActivity : BaseViewModelActivity<VolunteerLoginViewModel>() {
 
     private val btn_volunteer_login by R.id.btn_volunteer_login.view<Button>()

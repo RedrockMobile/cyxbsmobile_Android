@@ -1,6 +1,5 @@
 package com.cyxbs.pages.course.api
 
-import com.alibaba.android.arouter.facade.template.IProvider
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import java.io.Serializable
@@ -11,7 +10,7 @@ import java.io.Serializable
  * @email 2767465918@qq.com
  * @date 2022/5/14 17:05
  */
-interface ILessonService : IProvider {
+interface ILessonService {
   
   companion object {
   

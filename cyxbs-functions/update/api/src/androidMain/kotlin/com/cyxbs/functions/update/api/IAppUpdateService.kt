@@ -2,12 +2,11 @@ package com.cyxbs.functions.update.api
 
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
-import com.alibaba.android.arouter.facade.template.IProvider
 
 /**
  * Create By Hosigus at 2020/5/3
  */
-interface IAppUpdateService : IProvider {
+interface IAppUpdateService {
     // 订阅更新状态
     fun getUpdateStatus(): LiveData<AppUpdateStatus>
     // 检查更新

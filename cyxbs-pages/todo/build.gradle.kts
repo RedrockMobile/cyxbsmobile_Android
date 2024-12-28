@@ -1,8 +1,9 @@
 plugins {
-  id("manager.composeLib")
+  id("manager.lib")
+  id("kmp.compose")
 }
 
-useARouter()
+useKtProvider()
 useRoom()
 
 kotlin {

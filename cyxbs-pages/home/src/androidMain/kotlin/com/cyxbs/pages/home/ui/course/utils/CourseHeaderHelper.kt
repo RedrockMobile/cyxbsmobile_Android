@@ -2,6 +2,11 @@ package com.cyxbs.pages.home.ui.course.utils
 
 import android.util.Log
 import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.config.config.SchoolCalendar
+import com.cyxbs.components.utils.extensions.isDebuggableBuild
+import com.cyxbs.components.utils.extensions.toast
+import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.utils.judge.NetworkUtil
 import com.cyxbs.pages.affair.api.IAffairService
 import com.cyxbs.pages.course.api.ICourseService
 import com.cyxbs.pages.course.api.ILessonService
@@ -12,18 +17,14 @@ import com.cyxbs.pages.course.api.utils.getShowTimeStr
 import com.cyxbs.pages.course.api.utils.getStartRow
 import com.cyxbs.pages.course.api.utils.getStartTimeMinute
 import com.cyxbs.pages.course.api.utils.parseClassRoom
-import com.cyxbs.components.utils.service.impl
-import com.cyxbs.components.config.config.SchoolCalendar
-import com.cyxbs.components.utils.extensions.isDebuggableBuild
-import com.cyxbs.components.utils.extensions.toast
-import com.cyxbs.components.utils.utils.judge.NetworkUtil
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.rx3.asObservable
 import okhttp3.internal.filterList
-import java.util.*
+import java.util.Calendar
+import java.util.TreeSet
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
@@ -38,9 +39,9 @@ object CourseHeaderHelper {
 
   private const val TAG = "CourseHeaderHelper"
 
-  private val lessonService = ILessonService::class.impl
-  private val linkService = ILinkService::class.impl
-  private val affairService = IAffairService::class.impl
+  private val lessonService = ILessonService::class.impl()
+  private val linkService = ILinkService::class.impl()
+  private val affairService = IAffairService::class.impl()
 
   /**
    * 观察课表头的变化
@@ -70,7 +71,7 @@ object CourseHeaderHelper {
    */
   private fun observeHeaderOnVacation(): Observable<Header> {
     val textOnVacation = "享受假期吧～"
-    return IAccountService::class.impl
+    return IAccountService::class.impl()
       .getUserService()
       .observeStuNumState()
       .switchMap {

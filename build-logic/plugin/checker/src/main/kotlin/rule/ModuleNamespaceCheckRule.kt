@@ -1,5 +1,6 @@
 package rule
 
+import ProjectChecker
 import org.gradle.api.Project
 import java.io.File
 
@@ -9,7 +10,7 @@ import java.io.File
  * @author 985892345
  * 2022/12/20 17:42
  */
-object ModuleNamespaceCheckRule : AndroidProjectChecker.ICheckRule {
+object ModuleNamespaceCheckRule : ProjectChecker.ICheckRule {
 
   /**
    * 得到正确的 namespace

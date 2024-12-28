@@ -1,7 +1,7 @@
 package com.cyxbs.components.utils.utils
 
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.components.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.impl
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -93,7 +93,7 @@ class LogLocalHelper(
 
     private fun getPassword(): String {
         var password = "1234567890123456"
-        val stuNum = ServiceManager(IAccountService::class)
+        val stuNum = IAccountService::class.impl()
             .getUserService().getStuNum()
         if (stuNum.length < 16) {
             password = stuNum

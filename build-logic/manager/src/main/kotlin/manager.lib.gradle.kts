@@ -1,12 +1,11 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import rule.ModuleNamespaceCheckRule
 
 plugins {
   id("com.android.library")
-  kotlin("multiplatform") // 为了让 compose 插件好引入该插件，所以这里不使用 kotlin("android")
+  id("kmp.base")
 }
 
-AndroidProjectChecker.config(project) // 项目检查工具
+ProjectChecker.config(project) // 项目检查工具
 
 android {
   namespace = ModuleNamespaceCheckRule.getCorrectNamespace(project)
@@ -34,13 +33,5 @@ android {
   }
   buildFeatures {
     buildConfig = true
-  }
-}
-
-kotlin {
-  androidTarget {
-    compilerOptions {
-      jvmTarget.set(JvmTarget.fromTarget(libsEx.versions.kotlinJvmTarget))
-    }
   }
 }

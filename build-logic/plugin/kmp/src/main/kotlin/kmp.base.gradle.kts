@@ -51,7 +51,11 @@ kotlin {
     commonMain.dependencies {
       implementation(libsEx.`kotlinx-coroutines`)
       implementation(libsEx.`kotlinx-collections`)
+      implementation(libsEx.`kotlinx-serialization`) // 想要序列化还需要引入 alias(libs.plugins.kotlinSerialization) 插件
       implementation(libsEx.`kmp-uri`)
+      implementation(libsEx.`kmp-settings-core`)
+      implementation(libsEx.`kmp-settings-serialization`)
+      implementation(libsEx.`kmp-settings-serialization`)
     }
     if (Multiplatform.enableDesktop(project)) {
       val desktopMain by getting {
@@ -63,6 +67,7 @@ kotlin {
     androidMain {
       dependencies {
         implementation(libsEx.`kotlinx-coroutines-android`)
+        implementation(libsEx.`androidx-appcompat`)
       }
     }
   }

@@ -228,7 +228,7 @@ abstract class BaseActivity : AppCompatActivity, BaseUi {
    * 这样写会在 intent 中寻找名字叫 key 的参数
    * ```
    *
-   * 但对于使用 ARouter 时该写法并不能起到很大的帮助，但我个人不是很推荐需要传参的 ARouter 启动，不如直接 api 模块
+   * 但对于使用 ARouter/KtProvider 时该写法并不能起到很大的帮助，但我个人不是很推荐需要传参的 ARouter 启动，不如直接 api 模块
    */
   inline fun <reified T : Any> intent() = IntentHelper(T::class.java) { intent }
 

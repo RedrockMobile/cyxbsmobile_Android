@@ -11,8 +11,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.view.*
-import android.widget.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
@@ -23,12 +27,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItems
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.account.api.IUserService
-import com.cyxbs.components.config.route.MINE_EDIT_INFO
-import com.cyxbs.components.config.view.JToolbar
 import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.view.JToolbar
 import com.cyxbs.components.utils.extensions.doPermissionAction
 import com.cyxbs.components.utils.extensions.setAvatarImageFromUrl
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
@@ -48,7 +50,6 @@ import java.io.IOException
  * Created by zzzia on 2018/8/14.
  * 编辑个人信息
  */
-@Route(path = MINE_EDIT_INFO)
 class EditInfoActivity : BaseActivity() {
 
     private val mine_et_name by R.id.mine_tv_name.view<TextView>()
@@ -61,7 +62,7 @@ class EditInfoActivity : BaseActivity() {
     private val viewModel by lazy { ViewModelProvider(this)[EditViewModel::class.java] }
 
     private val userService: IUserService by lazy {
-        IAccountService::class.impl.getUserService()
+        IAccountService::class.impl().getUserService()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -128,7 +129,7 @@ class EditInfoActivity : BaseActivity() {
         viewModel.upLoadImageEvent.observe {
             if (it) {
                 //更新显示的头像
-                IAccountService::class.impl.getUserService().refreshInfo()
+                IAccountService::class.impl().getUserService().refreshInfo()
                 mine_edit_et_avatar.postDelayed(500) {
                     refreshUserInfo()
                 }

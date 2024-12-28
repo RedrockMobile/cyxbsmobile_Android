@@ -1,5 +1,6 @@
 package com.cyxbs.pages.mine.page.security.activity
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -7,14 +8,14 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.mredrock.cyxbs.common.config.MINE_FORGET_PASSWORD
-import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
-import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.config.route.MINE_FORGET_PASSWORD
 import com.cyxbs.pages.mine.R
 import com.cyxbs.pages.mine.page.security.viewmodel.ForgetPasswordViewModel
 import com.cyxbs.pages.mine.util.ui.ChooseFindTypeDialog
 import com.cyxbs.pages.mine.util.ui.DefaultPasswordHintDialog
+import com.g985892345.provider.api.annotation.KClassProvider
+import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
+import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 
 /**
  * Author: SpreadWater
@@ -23,7 +24,7 @@ import com.cyxbs.pages.mine.util.ui.DefaultPasswordHintDialog
  * 执行输入学号检测是否是原始密码的功能，
  * 剩余的找回密码的逻辑由FindPasswordActivity执行
  */
-@Route(path = MINE_FORGET_PASSWORD)
+@KClassProvider(clazz = Activity::class, name = MINE_FORGET_PASSWORD)
 class ForgetPasswordActivity : BaseViewModelActivity<ForgetPasswordViewModel>() {
     private var stuNumber = ""
     private var canClick = true

@@ -8,13 +8,9 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
-import com.google.android.material.tabs.TabLayout
-import com.google.gson.Gson
-import com.mredrock.cyxbs.common.config.DISCOVER_VOLUNTEER
-import com.mredrock.cyxbs.common.config.DISCOVER_VOLUNTEER_RECORD
-import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
+import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER
+import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER_RECORD
+import com.cyxbs.components.utils.service.startActivity
 import com.cyxbs.pages.volunteer.adapter.VolunteerMainFragmentAdapter
 import com.cyxbs.pages.volunteer.bean.VolunteerTime
 import com.cyxbs.pages.volunteer.event.VolunteerLogoutEvent
@@ -22,10 +18,14 @@ import com.cyxbs.pages.volunteer.fragment.VolunteerAffairFragment
 import com.cyxbs.pages.volunteer.fragment.VolunteerRecordFragment
 import com.cyxbs.pages.volunteer.viewmodel.VolunteerRecordViewModel
 import com.cyxbs.pages.volunteer.widget.LogoutDialog
+import com.g985892345.provider.api.annotation.KClassProvider
+import com.google.android.material.tabs.TabLayout
+import com.google.gson.Gson
+import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
 import org.greenrobot.eventbus.EventBus
 
 
-@Route(path = DISCOVER_VOLUNTEER_RECORD)
+@KClassProvider(clazz = Activity::class, name = DISCOVER_VOLUNTEER_RECORD)
 class VolunteerRecordActivity : BaseViewModelActivity<VolunteerRecordViewModel>() {
 
     private val vp_volunteer_category by R.id.vp_volunteer_category.view<ViewPager>()
@@ -76,7 +76,7 @@ class VolunteerRecordActivity : BaseViewModelActivity<VolunteerRecordViewModel>(
         tv_volunteer_logout.setOnClickListener {
             LogoutDialog.show(this, {}, {
                 viewModel.unBindAccount()
-                ARouter.getInstance().build(DISCOVER_VOLUNTEER).navigation()
+                startActivity(DISCOVER_VOLUNTEER)
                 EventBus.getDefault().postSticky(VolunteerLogoutEvent())
                 finish()
             })

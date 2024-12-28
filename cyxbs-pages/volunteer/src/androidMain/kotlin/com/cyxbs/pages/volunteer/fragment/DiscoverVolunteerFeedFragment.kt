@@ -3,11 +3,13 @@ package com.cyxbs.pages.volunteer.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
-import com.google.gson.Gson
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.account.api.IUserStateService
+import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER
+import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER_RECORD
+import com.cyxbs.components.utils.extensions.GsonDefault
+import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.service.startActivity
 import com.cyxbs.pages.volunteer.R
 import com.cyxbs.pages.volunteer.adapter.VolunteerFeedAdapter
 import com.cyxbs.pages.volunteer.adapter.VolunteerFeedUnbindAdapter
@@ -17,10 +19,6 @@ import com.cyxbs.pages.volunteer.viewmodel.DiscoverVolunteerFeedViewModel
 import com.mredrock.cyxbs.common.mark.EventBusLifecycleSubscriber
 import com.mredrock.cyxbs.common.ui.BaseFeedFragment
 import com.mredrock.cyxbs.common.utils.extensions.doIfLogin
-import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER
-import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER_FEED
-import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER_RECORD
-import com.cyxbs.components.utils.service.ServiceManager
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.rx3.asFlow
@@ -28,14 +26,12 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-
-@Route(path = DISCOVER_VOLUNTEER_FEED)
 class DiscoverVolunteerFeedFragment : BaseFeedFragment<DiscoverVolunteerFeedViewModel>(), EventBusLifecycleSubscriber {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val verifyService = ServiceManager(IAccountService::class).getVerifyService()
+        val verifyService = IAccountService::class.impl().getVerifyService()
         //对登录状态判断
         if (verifyService.isLogin()) {
             setAdapter(VolunteerFeedUnbindAdapter())
@@ -81,10 +77,11 @@ class DiscoverVolunteerFeedFragment : BaseFeedFragment<DiscoverVolunteerFeedView
                 if (!viewModel.isQuerying) {
                     if (viewModel.volunteerData.value != null) {
                         EventBus.getDefault().postSticky(VolunteerLoginEvent(viewModel.volunteerData.value!!))
-                        ARouter.getInstance().build(DISCOVER_VOLUNTEER_RECORD)
-                                .withString("volunteerTime", Gson().toJson(viewModel.volunteerData.value)).navigation()
+                        startActivity(DISCOVER_VOLUNTEER_RECORD) {
+                            putExtra("volunteerTime", GsonDefault.toJson(viewModel.volunteerData.value))
+                        }
                     } else {
-                        ARouter.getInstance().build(DISCOVER_VOLUNTEER).navigation()
+                        startActivity(DISCOVER_VOLUNTEER)
                     }
                 }
             }
@@ -96,7 +93,7 @@ class DiscoverVolunteerFeedFragment : BaseFeedFragment<DiscoverVolunteerFeedView
     //onResume
     override fun onRefresh() {
         //首先判断是否登录，没登录，那直接return
-        if (!ServiceManager(IAccountService::class).getVerifyService().isLogin()) {
+        if (!IAccountService::class.impl().getVerifyService().isLogin()) {
             return
         }
         //再判断vm是否有数据，有数据直接加载，再return

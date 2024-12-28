@@ -1,6 +1,7 @@
 package com.cyxbs.applications.test
 
 import com.cyxbs.components.base.BaseApp
+import com.g985892345.provider.cyxbsmobile.cyxbsapplications.test.TestKtProviderInitializer
 
 /**
  * .
@@ -9,4 +10,7 @@ import com.cyxbs.components.base.BaseApp
  * @date 2024/12/15
  */
 class TestApp : BaseApp() {
+  override fun initProvider() {
+    TestKtProviderInitializer.tryInitKtProvider()
+  }
 }

@@ -3,10 +3,14 @@ package com.cyxbs.pages.course.page.course.ui.home.utils
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.edit
+import com.cyxbs.components.config.config.SchoolCalendar
+import com.cyxbs.components.utils.extensions.getSp
+import com.cyxbs.components.utils.extensions.launch
+import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.utils.judge.NetworkUtil
 import com.cyxbs.pages.affair.api.IAffairService
 import com.cyxbs.pages.course.api.ILessonService
 import com.cyxbs.pages.course.api.utils.getBeginLesson
-import com.cyxbs.components.config.config.SchoolCalendar
 import com.cyxbs.pages.course.page.course.ui.home.HomeSemesterFragment
 import com.cyxbs.pages.course.page.course.ui.home.HomeWeekFragment
 import com.cyxbs.pages.course.page.course.ui.home.IHomePageFragment
@@ -19,10 +23,6 @@ import com.cyxbs.pages.course.widget.helper.affair.expose.ITouchCallback
 import com.cyxbs.pages.course.widget.internal.item.IItem
 import com.cyxbs.pages.course.widget.internal.item.IItemContainer
 import com.cyxbs.pages.course.widget.internal.view.course.ICourseViewGroup
-import com.cyxbs.components.utils.extensions.getSp
-import com.cyxbs.components.utils.extensions.launch
-import com.cyxbs.components.utils.service.impl
-import com.cyxbs.components.utils.utils.judge.NetworkUtil
 import com.ndhzs.netlayout.touch.multiple.event.IPointerEvent
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 
@@ -118,7 +118,7 @@ class PageFragmentHelper<T> where T: IHomePageFragment, T: CoursePageFragment {
     // 事务的点击监听
     dispatcher.setOnClickListener {
       // 打开编辑事务详细的界面
-      IAffairService::class.impl
+      IAffairService::class.impl()
         .startActivityForAddAffair(week, lp.weekNum - 1, getBeginLesson(lp.startRow), lp.length)
       cancelShow()
     }

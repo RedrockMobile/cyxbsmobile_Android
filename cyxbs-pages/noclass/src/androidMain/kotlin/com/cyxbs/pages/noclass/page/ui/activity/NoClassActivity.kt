@@ -13,13 +13,9 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.config.route.DISCOVER_NO_CLASS
 import com.cyxbs.components.config.sp.defaultSp
-import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.adapter.FragmentVpAdapter
 import com.cyxbs.pages.noclass.R
 import com.cyxbs.pages.noclass.bean.NoClassSpareTime
@@ -28,8 +24,12 @@ import com.cyxbs.pages.noclass.page.ui.dialog.IsCreateSolidDialog
 import com.cyxbs.pages.noclass.page.ui.fragment.NoClassCourseVpFragment
 import com.cyxbs.pages.noclass.page.ui.fragment.NoClassSolidFragment
 import com.cyxbs.pages.noclass.page.ui.fragment.NoClassTemporaryFragment
-import com.cyxbs.pages.noclass.page.viewmodel.other.CourseViewModel
 import com.cyxbs.pages.noclass.page.viewmodel.activity.NoClassViewModel
+import com.cyxbs.pages.noclass.page.viewmodel.other.CourseViewModel
+import com.g985892345.provider.api.annotation.KClassProvider
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 /**
  *
@@ -43,7 +43,7 @@ import com.cyxbs.pages.noclass.page.viewmodel.activity.NoClassViewModel
  * @Description:    没课约主界面
  */
 
-@Route(path = DISCOVER_NO_CLASS)
+@KClassProvider(clazz = Activity::class, name = DISCOVER_NO_CLASS)
 class NoClassActivity : BaseActivity() {
 
     // 点击批量添加之后和固定分组fragment通信(3G)

@@ -6,15 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.components.utils.service.ServiceManager
-import com.mredrock.cyxbs.common.ui.BaseFeedFragment
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.volunteer.R
+import com.mredrock.cyxbs.common.ui.BaseFeedFragment
 
 class VolunteerFeedUnbindAdapter : BaseFeedFragment.Adapter() {
     override fun onCreateView(context: Context, parent: ViewGroup): View =
         LayoutInflater.from(context)
             .inflate(R.layout.volunteer_discover_feed_unbound, parent, false).apply {
-            if (!ServiceManager(IAccountService::class).getVerifyService().isLogin()) {
+            if (!IAccountService::class.impl().getVerifyService().isLogin()) {
                 findViewById<AppCompatTextView>(R.id.tv_volunteer_no_account).text =
                     context.getString(R.string.volunteer_ask_login_string)
             }
