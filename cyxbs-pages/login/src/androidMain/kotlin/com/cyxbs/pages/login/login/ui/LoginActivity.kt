@@ -28,7 +28,6 @@ import com.airbnb.lottie.LottieAnimationView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.functions.update.api.IAppUpdateService
-import com.cyxbs.components.config.route.MAIN_MAIN
 import com.cyxbs.components.config.route.MINE_FORGET_PASSWORD
 import com.cyxbs.components.config.sp.SP_PRIVACY_AGREED
 import com.cyxbs.components.config.sp.defaultSp
@@ -149,10 +148,7 @@ class LoginActivity : BaseActivity() {
         IAccountService::class.impl
           .getVerifyService()
           .loginByTourist()
-        ServiceManager.activity(MAIN_MAIN) {
-          addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK) // 游客模式也需要清空 Activity 栈
-        }
-        finish()
+        rebootApp()
       }
     }
     //跳转到忘记密码模块
@@ -213,19 +209,26 @@ class LoginActivity : BaseActivity() {
     mViewModel.loginEvent.collectLaunch {
       if (it) {
         if (mIsReboot) {
-          ServiceManager.activity(MAIN_MAIN) {
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK) //清空 Activity 栈
-          }
+          rebootApp()
         } else {
           if (mSuccessIntent != null) {
             startActivity(mSuccessIntent)
           }
+          finish()
         }
-        finish()
       } else {
         changeUiState()
       }
     }
+  }
+
+  private fun rebootApp() {
+    val rebootIntent = appContext.packageManager
+      .getLaunchIntentForPackage(appContext.packageName)!!
+      .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+      .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+    startActivity(rebootIntent)
+    finish()
   }
 
   private fun loginAction() {
