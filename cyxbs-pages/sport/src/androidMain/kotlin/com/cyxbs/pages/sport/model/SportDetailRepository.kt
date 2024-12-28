@@ -2,8 +2,11 @@ package com.cyxbs.pages.sport.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.account.api.IUserStateService
 import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
 import com.cyxbs.components.utils.network.mapOrInterceptException
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.sport.model.network.SportDetailApiService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -20,8 +23,8 @@ object SportDetailRepository {
   /**
    * 观测体育打卡详情界面数据的LiveData
    */
-  val sportData: LiveData<Result<SportDetailBean>> get() = _sportData
-  private val _sportData = MutableLiveData<Result<SportDetailBean>>()
+  val sportData: LiveData<Result<SportDetailBean>?> get() = _sportData
+  private val _sportData = MutableLiveData<Result<SportDetailBean>?>()
 
   private var mIsRefresh = false
 
@@ -48,6 +51,14 @@ object SportDetailRepository {
   }
 
   init {
-    refresh()
+    IAccountService::class.impl.getVerifyService()
+      .observeUserStateState()
+      .unsafeSubscribeBy {
+        when (it) {
+          IUserStateService.UserState.LOGIN -> refresh()
+          IUserStateService.UserState.NOT_LOGIN -> _sportData.postValue(null)
+          else -> Unit
+        }
+      }
   }
 }

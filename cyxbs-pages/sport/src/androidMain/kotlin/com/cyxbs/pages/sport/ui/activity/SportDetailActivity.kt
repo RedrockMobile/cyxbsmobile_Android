@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.cyxbs.components.base.operations.doIfLogin
 import com.cyxbs.components.config.config.SchoolCalendar
 import com.cyxbs.components.config.route.DISCOVER_SPORT
 import com.cyxbs.components.base.ui.BaseBindActivity
@@ -54,14 +55,18 @@ class SportDetailActivity : BaseBindActivity<SportActivitySportDetailBinding>() 
             } else {
                 sportSrlDetailList.setEnableRefresh(true)
                 sportSrlDetailList.setOnRefreshListener {
-                    SportDetailRepository.refresh() // 刷新新数据
+                    doIfLogin {
+                        SportDetailRepository.refresh() // 刷新数据
+                    }
                 }
             }
         }
         //添加数据
         SportDetailRepository.sportData.observe { result ->
             binding.sportSrlDetailList.finishRefresh()
-            result.onSuccess {
+            if (result == null) {
+                showError()
+            } else result.onSuccess {
                 loadData(it)
             }.onFailure {
                 if (!mIsHoliday) {
