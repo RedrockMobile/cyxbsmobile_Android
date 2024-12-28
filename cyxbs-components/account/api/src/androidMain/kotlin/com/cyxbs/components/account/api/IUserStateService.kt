@@ -31,6 +31,7 @@ interface IUserStateService {
 
     fun loginByTourist()
 
+    @WorkerThread
     @Throws(Exception::class)
     fun refresh()
 

@@ -85,7 +85,7 @@ internal class AccountService : IAccountService {
                 ) {
                     val userInfo = response.body()?.data //如果为空就不更新
                     userInfo?.let {
-                        defaultSp.edit {
+                        defaultSp.edit(commit = true) {
                             putString(SP_KEY_USER_INFO, mUserInfoEncryption.encrypt(GsonDefault.toJson(userInfo)))
                         }
                         this@AccountService.user = userInfo
@@ -194,6 +194,8 @@ internal class AccountService : IAccountService {
             }
             notifyAllStateListeners(state)
         }
+
+        @WorkerThread
         override fun refresh() {
             val refreshToken = tokenWrapper?.refreshToken ?: error("refreshToken初始值为空，请尝试重新登录")
             val response = ApiGenerator.getCommonApiService(ApiService::class)
@@ -204,17 +206,17 @@ internal class AccountService : IAccountService {
                 if (body.status == 20004) {
                     toast("用户认证刷新失败，请重新登录")
                     // 直接将 refreshToken 过期时间清零，用户下次打开就会直接跳转至重新登录
-                    defaultSp.edit { putLong(SP_KEY_REFRESH_TOKEN_EXPIRED, 0) }
+                    defaultSp.edit(commit = true) { putLong(SP_KEY_REFRESH_TOKEN_EXPIRED, 0) }
                     error("用户认证刷新失败，请重新登录！")
                 }
             } else error("用户认证刷新失败，请尝试重新登录\nhttp code = ${response.code()}")
             body.data.let { data ->
                 bind(data)
                 isTouristMode = false
-                defaultSp.edit {
+                defaultSp.edit(commit = true) {
                     putBoolean(SP_IS_TOURIST, isTouristMode)
                 }
-                defaultSp.edit {
+                defaultSp.edit(commit = true) {
                     putLong(
                         SP_KEY_REFRESH_TOKEN_EXPIRED,
                         System.currentTimeMillis() + SP_REFRESH_DAY
@@ -286,10 +288,10 @@ internal class AccountService : IAccountService {
             if (apiWrapper?.data != null) {
                 bind(apiWrapper.data)
                 isTouristMode = false
-                defaultSp.edit {
+                defaultSp.edit(commit = true) {
                     putBoolean(SP_IS_TOURIST, isTouristMode)
                 }
-                defaultSp.edit {
+                defaultSp.edit(commit = true) {
                     putString(
                         SP_KEY_USER_V2,
                         mUserInfoEncryption.encrypt(GsonDefault.toJson(apiWrapper.data))
@@ -312,7 +314,7 @@ internal class AccountService : IAccountService {
         }
 
         override fun logout(context: Context) {
-            defaultSp.edit {
+            defaultSp.edit(commit = true) {
                 putString(SP_KEY_USER_V2, "")
                 putString(SP_KEY_USER_INFO, "")
                 putLong(SP_KEY_REFRESH_TOKEN_EXPIRED, 0)
@@ -328,7 +330,7 @@ internal class AccountService : IAccountService {
         //游客模式
         override fun loginByTourist() {
             isTouristMode = true
-            defaultSp.edit {
+            defaultSp.edit(commit = true) {
                 putBoolean(SP_IS_TOURIST, isTouristMode)
             }
             notifyAllStateListeners(IUserStateService.UserState.TOURIST)
@@ -345,13 +347,13 @@ internal class AccountService : IAccountService {
         }
 
         override fun refreshTokenExpired() {
-            defaultSp.edit {
+            defaultSp.edit(commit = true) {
                 putLong(SP_KEY_REFRESH_TOKEN_EXPIRED, 0)
             }
         }
 
         override fun tokenExpired() {
-            defaultSp.edit {
+            defaultSp.edit(commit = true) {
                 putLong(SP_KEY_TOKEN_EXPIRED, 0)
             }
         }
