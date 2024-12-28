@@ -47,7 +47,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 /**
  * note：请放在有UI操作的操作符前（map等操作符后）, 否则将抛出异常，原因：{@see <a href="https://www.jianshu.com/p/3e5d53e891db"/>}
  */
-@Deprecated("使用 lib_utils 中 setSchedulers() 代替", ReplaceWith(""))
+@Deprecated("使用 utils 中 setSchedulers() 代替", ReplaceWith(""))
 @CheckReturnValue
 fun <T: Any> Observable<T>.setSchedulers(
     subscribeOn: Scheduler = Schedulers.io(),
@@ -57,11 +57,11 @@ fun <T: Any> Observable<T>.setSchedulers(
     .unsubscribeOn(unsubscribeOn)
     .observeOn(observeOn)
 
-@Deprecated("使用 lib_utils 中的 mapOrThrowApiException() 代替", ReplaceWith(""))
+@Deprecated("使用 utils 中的 mapOrThrowApiException() 代替", ReplaceWith(""))
 fun <T: Any> Observable<RedrockApiWrapper<T>>.mapOrThrowApiException(): Observable<T> =
     map { it.nextOrError() }
 
-@Deprecated("使用 lib_utils 中的 throwApiExceptionIfFail() 代替", ReplaceWith(""))
+@Deprecated("使用 utils 中的 throwApiExceptionIfFail() 代替", ReplaceWith(""))
 fun Observable<RedrockApiStatus>.checkError(): Observable<RedrockApiStatus> = map {
     if (it.isSuccessful) {
         it
@@ -70,7 +70,7 @@ fun Observable<RedrockApiStatus>.checkError(): Observable<RedrockApiStatus> = ma
     }
 }
 
-@Deprecated("使用 lib_utils 中的 IApiStatus#throwApiExceptionIfFail() 代替", ReplaceWith(""))
+@Deprecated("使用 utils 中的 IApiStatus#throwApiExceptionIfFail() 代替", ReplaceWith(""))
 fun <T> RedrockApiWrapper<T>.nextOrError() =
     if (isSuccessful) {
         data ?: throw RedrockApiIllegalStateException()
@@ -97,7 +97,7 @@ fun <T : Any> Observable<T>.errorHandler(errorHandler: ErrorHandler = DefaultErr
 /**
  * 未实现onError时不会抛出[io.reactivex.exceptions.OnErrorNotImplementedException]异常
  */
-@Deprecated("使用 lib_base 中 BaseViewModel、BaseActivity、BaseFragment 的 safeSubscribeBy() 代替", ReplaceWith(""))
+@Deprecated("使用 base 中 BaseViewModel、BaseActivity、BaseFragment 的 safeSubscribeBy() 代替", ReplaceWith(""))
 fun <T : Any> Observable<T>.unsafeSubscribeBy(
     onError: (Throwable) -> Unit = {},
     onComplete: () -> Unit = {},

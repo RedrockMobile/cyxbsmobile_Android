@@ -22,7 +22,7 @@ import com.cyxbs.components.utils.extensions.setOnSingleClickListener
  * Created by roger on 2020/2/2
  */
 @Deprecated(
-    "不规范的 Fragment 使用，不能暴露接口出来给外部设置，建议使用 lib_base 中 ChooseDialog 代替",
+    "不规范的 Fragment 使用，不能暴露接口出来给外部设置，建议使用 base 中 ChooseDialog 代替",
     ReplaceWith("ChooseDialog", "com.cyxbs.components.base.dailog")
 )
 class CommonDialogFragment() : DialogFragment() {

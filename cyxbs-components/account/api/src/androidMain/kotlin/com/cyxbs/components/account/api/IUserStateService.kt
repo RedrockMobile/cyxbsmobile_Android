@@ -31,6 +31,7 @@ interface IUserStateService {
 
     fun loginByTourist()
 
+    @WorkerThread
     @Throws(Exception::class)
     fun refresh()
 
@@ -59,18 +60,13 @@ interface IUserStateService {
      *
      * 旧模块中推荐转换为 Flow 然后配合生命周期，旧模块的使用方式：
      * ```
-     * // build.gradle.kts 需要先依赖
-     * dependCoroutinesRx3()
-     *
      * // 使用例子如下
      * IAccountService::class.impl
      *     .getUserService()
      *     .observeStuNumEvent()
      *     .asFlow() // asFlow() 将 Observable 装换为 Flow
      *     .onEach {
-     *         it.nullUnless {
-     *             initFragment()
-     *         }
+     *         // ...
      *     }.launchIn(lifecycleScope) // 这里请注意 Fragment 中要使用 viewLifecycleOwner.lifecycleScope
      * ```
      *

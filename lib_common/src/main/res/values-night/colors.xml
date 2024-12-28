@@ -4,7 +4,7 @@
 <!--
 TODO 以后不要再把颜色写在这里面 ！！！
  写到自己的模块里面去，该文件将逐步分离这些颜色
- 如果你正在重构某个模块，请把这个里面对应的颜色删除后移到你的模块里，但如果是共用的颜色，放在 lib_config 中 (使用 Alt + F7 可以查看被哪些模块引用)
+ 如果你正在重构某个模块，请把这个里面对应的颜色删除后移到你的模块里，但如果是共用的颜色，放在 config 中 (使用 Alt + F7 可以查看被哪些模块引用)
 -->
 
     <!--    整体灰色背景-->
@@ -16,13 +16,14 @@ TODO 以后不要再把颜色写在这里面 ！！！
     <!--    纯白色背景和纯白色字体-->
     <!--替换为 config_white_black-->
     <color name="common_white_background">#000000</color>
+    <!--替换为 @android:color/white-->
     <color name="common_white_font_color">#ffffff</color>
     <!--    启动页颜色-->
     <color name="common_start_page_white_color">#333333</color>
     <color name="common_transparent_background">#00000000</color>
 
 
-    <!--TODO 这个字体颜色已移植到 lib_config 中，common 模块中该颜色不再使用！！！-->
+    <!--TODO 这个字体颜色已移植到 config 中，common 模块中该颜色不再使用！！！-->
     <!--主要字体颜色分以下四种，下列按照蓝色由深到浅排序，要用自取-->
     <!--一级字体颜色-->
     <color name="common_level_one_font_color">#ffffff</color>
@@ -55,13 +56,11 @@ TODO 以后不要再把颜色写在这里面 ！！！
     <color name="common_blue_sign_text_color">#839BFA</color>
     <!--    分割线颜色-->
     <color name="common_sever_view_color">#35F8F9FC</color>
-    <color name="common_blue_button">#2921D1</color>
 
     <!--    按钮颜色-->
     <color name="common_grey_button">#E1DFE0</color>
     <color name="common_grey_button_text">#C3C0C1</color>
     <color name="common_grey_text">#C4C2C2</color>
-    <color name="common_switch_off">#5A5A5A</color>
 
     <!--    tab_layout颜色-->
     <color name="common_mine_tab_layout_text_unselected">#9AF0F0F2</color>
@@ -120,7 +119,7 @@ TODO 以后不要再把颜色写在这里面 ！！！
     <!--    找回密码的灰色字体-->
     <color name="common_log_in_to_the_gray_font_below">#ABBCD8</color>
 
-    <!--不是课表背景，而是整个应用主页的背景色，目前该值已经移植到 lib_config 中，名字为：config_common_background_color-->
+    <!--不是课表背景，而是整个应用主页的背景色，目前该值已经移植到 config 中，名字为：config_common_background_color-->
     <color name="common_curriculum_background_color">#2D2D2D</color>
 
     <color name="common_transaction_background_stripe_color">#4d4b4c</color>

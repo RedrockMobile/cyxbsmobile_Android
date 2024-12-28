@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.cyxbs.components.account.utils
+package com.cyxbs.components.utils.utils.secret
 
 /**
  * Stripped-down version of the SHA1PRNG provided by the Crypto provider.

@@ -37,7 +37,7 @@
     <!--视觉要的若隐若现阴影的 endColor，在 drawable/config_layer_looming_shadow 中使用-->
     <color name="config_layer_looming_shadow_end_color">#FBFCFF</color>
 
-    <!--lib_base 中公用的 BaseDialog 的按钮颜色-->
+    <!--base 中公用的 BaseDialog 的按钮颜色-->
     <color name="config_choose_dialog_btn_positive">#4A44E4</color>
     <color name="config_choose_dialog_btn_negative">#C3D4EE</color>
 
@@ -61,4 +61,6 @@
     <!--    图片选择器状态栏和toolbar颜色-->
     <color name="config_photo_select_status_color">#788EFA</color>
 
+    <color name="config_blue_button">#465FFF</color>
+    <color name="config_switch_off">#C3D4EE</color>
 </resources>

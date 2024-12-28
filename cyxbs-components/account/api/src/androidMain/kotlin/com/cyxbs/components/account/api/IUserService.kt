@@ -1,6 +1,5 @@
 package com.cyxbs.components.account.api
 
-import com.cyxbs.components.account.api.utils.Value
 import io.reactivex.rxjava3.core.Observable
 
 interface IUserService {
@@ -35,18 +34,13 @@ interface IUserService {
      *
      * 旧模块中推荐转换为 Flow 然后配合生命周期
      * ```
-     * // build.gradle.kts 需要先依赖
-     * dependCoroutinesRx3()
-     *
      * // 使用例子如下
      * IAccountService::class.impl
      *     .getUserService()
      *     .observeStuNumEvent()
      *     .asFlow() // asFlow() 将 Observable 装换为 Flow
      *     .onEach {
-     *         it.nullUnless {
-     *             initFragment()
-     *         }
+     *         // ...
      *     }.launchIn(lifecycleScope)
      * ```
      *
@@ -62,25 +56,21 @@ interface IUserService {
      *   .observeOn(Schedulers.io()) // 注意：你需要使用 observeOn 才能切换线程，subscribeOn 无法切换发送源的线程
      *   .switchMap { value ->
      *     // switchMap 可以在上游发送新的数据时自动关闭上一次数据生成的 Observable
-     *     value.nullUnless(Observable.never()) {
-     *       if (stuNum.isEmpty()) Observable.never()
-     *       else LessonDataBase.INSTANCE.getStuLessonDao() // 数据库
-     *         .observeAllLesson(stuNum) // 观察数据库的数据变动，这是 Room 的响应式编程
-     *         .distinctUntilChanged() // 必加，因为 Room 每次修改都会回调，所以需要加这个去重
+     *     if (it.isEmpty()) Observable.just(emptyList()) else {
+     *       LessonDataBase.INSTANCE.getStuLessonDao()              // 数据库
+     *         .observeAllLesson(stuNum)                            // 观察数据库的数据变动，这是 Room 的响应式编程
+     *         .distinctUntilChanged()                              // 必加，因为 Room 每次修改都会回调，所以需要加这个去重
      *         .doOnSubscribe {
-     *           getLesson(stuNum, isNeedOldList).safeSubscribeBy() // 在开始订阅时请求一次云端数据
+     *           getLesson(stuNum, isNeedOldList).safeSubscribeBy()
      *         }.map { StuResult(stuNum, it) }
      *         .subscribeOn(Schedulers.io())
      *     }
      *   }
      * ```
      *
-     * ### 3、为什么使用 Value 包裹 ?
-     * 因为 Rxjava 不允许数据为空值，所以使用 Value 包裹了一层
-     *
      * - 更多注意事项请看 [observeStuNumEvent]
      */
-    fun observeStuNumState(): Observable<Value<String>>
+    fun observeStuNumState(): Observable<String>
     
     /**
      * 观察学号的改变（事件）
@@ -89,5 +79,5 @@ interface IUserService {
      *
      * ## 更多注意事项请看 [observeStuNumState]
      */
-    fun observeStuNumEvent(): Observable<Value<String>>
+    fun observeStuNumEvent(): Observable<String>
 }

@@ -73,8 +73,8 @@ object CourseHeaderHelper {
     return IAccountService::class.impl
       .getUserService()
       .observeStuNumState()
-      .switchMap { value ->
-        value.nullUnless(Observable.empty()) {
+      .switchMap {
+        if (it.isEmpty()) Observable.empty() else {
           lessonService.refreshLesson(it)
             .toObservable()
             .flatMap { Observable.empty<Header>() }

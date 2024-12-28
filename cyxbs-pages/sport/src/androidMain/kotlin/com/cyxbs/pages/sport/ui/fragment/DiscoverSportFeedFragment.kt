@@ -13,7 +13,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.base.operations.doIfLogin
 import com.cyxbs.components.config.route.DISCOVER_SPORT_FEED
 import com.cyxbs.components.base.ui.BaseBindFragment
 import com.cyxbs.components.utils.extensions.gone
@@ -78,15 +78,13 @@ class DiscoverSportFeedFragment :
             }
         }
         //进入首页后对登录和绑定状态进行判断
-        if (!IAccountService::class.impl.getVerifyService().isLogin()) {
-            notLogin()
-        } else {
-            SportDetailRepository.sportData.observe {
-                it.onSuccess {
-                    showData(it)
-                }.onFailure {
-                    showError()
-                }
+        SportDetailRepository.sportData.observe { result ->
+            if (result == null) {
+                notLogin()
+            } else result.onSuccess {
+                showData(it)
+            }.onFailure {
+                showError()
             }
         }
     }
@@ -148,6 +146,9 @@ class DiscoverSportFeedFragment :
             sportTvFeedAwardHint.gone()
             sportTvFeedHint.text = "登录后才能查看体育打卡哦"
             sportTvFeedHint.visible()
+            sportClFeed.setOnSingleClickListener {
+                doIfLogin("体育打卡")
+            }
         }
     }
 
@@ -168,6 +169,7 @@ class DiscoverSportFeedFragment :
             sportTvFeedAwardHint.gone()
             sportTvFeedHint.text = "当前数据错误，正在努力修复中"
             sportTvFeedHint.visible()
+            sportClFeed.setOnClickListener(null)
         }
     }
 }

@@ -17,7 +17,7 @@ import com.cyxbs.components.utils.extensions.toastLong
  * Created by anriku on 2018/8/14.
  */
 
-@Deprecated("使用 lib_utils 中 screenWidth 替换", replaceWith = ReplaceWith(""))
+@Deprecated("使用 utils 中 screenWidth 替换", replaceWith = ReplaceWith(""))
 fun Context.getScreenWidth(): Int {
     return resources.displayMetrics.widthPixels
 }
@@ -38,26 +38,26 @@ fun Activity.setFullScreen() {
             or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
 }
 
-@Deprecated("使用 lib_utils 中 toast() 替换", replaceWith = ReplaceWith("com.cyxbs.components.utils.extensions.toast(message)"))
+@Deprecated("使用 utils 中 toast() 替换", replaceWith = ReplaceWith("com.cyxbs.components.utils.extensions.toast(message)"))
 fun toast(message: CharSequence) = com.cyxbs.components.utils.extensions.toast(message)
 
-@Deprecated("使用 lib_utils 中 toast() 替换", replaceWith = ReplaceWith("com.cyxbs.components.utils.extensions.toast(res)"))
+@Deprecated("使用 utils 中 toast() 替换", replaceWith = ReplaceWith("com.cyxbs.components.utils.extensions.toast(res)"))
 fun toast(res: Int) = com.cyxbs.components.utils.extensions.toast(appContext.resources.getText(res))
 
-@Deprecated("使用 lib_utils 中 isDarkMode() 替换")
+@Deprecated("使用 utils 中 isDarkMode() 替换")
 fun Context.getDarkModeStatus(): Boolean {
     val mode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
     return mode == Configuration.UI_MODE_NIGHT_YES
 }
 
-@Deprecated("使用 lib_utils 中 toastLong() 替换", replaceWith = ReplaceWith(""))
+@Deprecated("使用 utils 中 toastLong() 替换", replaceWith = ReplaceWith(""))
 fun longToast(message: CharSequence) = toastLong(message)
 
-@Deprecated("使用 lib_utils 中 toastLong() 替换", replaceWith = ReplaceWith(""))
+@Deprecated("使用 utils 中 toastLong() 替换", replaceWith = ReplaceWith(""))
 fun longToast(res: Int) = toastLong(appContext.resources.getText(res))
 
 
-@Deprecated("使用 lib_base 中 OperationUi#doIfLogin() 替换", replaceWith = ReplaceWith(""))
+@Deprecated("使用 base 中 OperationUi#doIfLogin() 替换", replaceWith = ReplaceWith(""))
 fun Context.doIfLogin(msg: String? = "此功能", next: () -> Unit) {
     if (ServiceManager(IAccountService::class).getVerifyService().isLogin()) {
         next()
@@ -69,23 +69,23 @@ fun Context.doIfLogin(msg: String? = "此功能", next: () -> Unit) {
 
 //anko-bridge
 //anko不再维护，删除anko，一些从anko拿过来的扩展方法
-@Deprecated("使用 lib_utils 中 dp2px 替换", replaceWith = ReplaceWith(""))
+@Deprecated("使用 utils 中 dp2px 替换", replaceWith = ReplaceWith(""))
 fun Context.dp2px(dpValue: Float) = (dpValue * resources.displayMetrics.density + 0.5f).toInt()
 
 //returns dip(dp) dimension value in pixels
-@Deprecated("使用 lib_utils 中 dp2px 替换", replaceWith = ReplaceWith(""))
+@Deprecated("使用 utils 中 dp2px 替换", replaceWith = ReplaceWith(""))
 fun Context.dip(value: Int): Int = (value * resources.displayMetrics.density).toInt()
-@Deprecated("使用 lib_utils 中 dp2px 替换", replaceWith = ReplaceWith(""))
+@Deprecated("使用 utils 中 dp2px 替换", replaceWith = ReplaceWith(""))
 fun Context.dip(value: Float): Int = (value * resources.displayMetrics.density).toInt()
 
 //return sp dimension value in pixels
-@Deprecated("使用 lib_utils 中 dp2sp 替换", replaceWith = ReplaceWith(""))
+@Deprecated("使用 utils 中 dp2sp 替换", replaceWith = ReplaceWith(""))
 fun Context.sp(value: Int): Int = (value * resources.displayMetrics.scaledDensity).toInt()
-@Deprecated("使用 lib_utils 中 dp2sp 替换", replaceWith = ReplaceWith(""))
+@Deprecated("使用 utils 中 dp2sp 替换", replaceWith = ReplaceWith(""))
 fun Context.sp(value: Float): Int = (value * resources.displayMetrics.scaledDensity).toInt()
 
 //converts px value into dip or sp
-@Deprecated("使用 lib_utils 中 px2dp 替换", replaceWith = ReplaceWith(""))
+@Deprecated("使用 utils 中 px2dp 替换", replaceWith = ReplaceWith(""))
 fun Context.px2dip(px: Int): Float = px.toFloat() / resources.displayMetrics.density
 
 @Deprecated("不建议使用，请被启动的 Activity 单独提供静态方法，而不是这样随意传参！！！", replaceWith = ReplaceWith(""))

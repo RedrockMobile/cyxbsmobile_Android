@@ -8,6 +8,6 @@
     <solid android:color="@color/common_white_font_color" />
     <stroke
         android:width="2dp"
-        android:color="@color/common_blue_button" />
+        android:color="@color/config_blue_button" />
 
 </shape>

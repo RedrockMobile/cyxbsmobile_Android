@@ -8,10 +8,11 @@ import retrofit2.Retrofit
 /**
  * 已被废弃的 lib_common 模块中的网络请求工具类
  *
- * 网络请求的示例代码请看 lib_utils 模块中的 ApiGenerator
+ * 网络请求的示例代码请看 utils 模块中的 ApiGenerator
  *
  * Created by AceMurder on 2018/1/24.
  */
+@Deprecated("使用 utils 模块中的 ApiGenerator 代替", ReplaceWith("com.cyxbs.components.utils.network.ApiGenerator"))
 object ApiGenerator {
 
 

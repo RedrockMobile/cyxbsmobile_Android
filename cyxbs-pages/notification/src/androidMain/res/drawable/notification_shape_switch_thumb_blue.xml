@@ -5,9 +5,9 @@
         android:width="30dp"
         android:height="30dp" />
 
-    <solid android:color="@color/common_white_font_color" />
+    <solid android:color="@android:color/white" />
     <stroke
         android:width="2dp"
-        android:color="@color/common_blue_button" />
+        android:color="@color/config_blue_button" />
 
 </shape>

@@ -40,7 +40,7 @@ doPermissionAction(Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAL
 // you just add a flag called:isShowCancelNotice = true
 // but there, show never notice and show cancel notice are opposite, and priority : never notice > cancel notice
 */
-@Deprecated("使用 lib_utils 中的 PermissionActionBuilder")
+@Deprecated("使用 utils 中的 PermissionActionBuilder")
 class PermissionActionBuilder {
     var doAfterGranted: () -> Unit = {}
         private set
@@ -118,7 +118,7 @@ private fun performRequestPermission(
     }
 }
 
-@Deprecated("使用 lib_utils 中的 FragmentActivity#doPermissionAction()")
+@Deprecated("使用 utils 中的 FragmentActivity#doPermissionAction()")
 fun AppCompatActivity.doPermissionAction(
     vararg permissionsRequired: String,
     actionBuilder: PermissionActionBuilder.() -> Unit
@@ -131,7 +131,7 @@ fun AppCompatActivity.doPermissionAction(
     )
 }
 
-@Deprecated("使用 lib_utils 中的 Fragment#doPermissionAction()")
+@Deprecated("使用 utils 中的 Fragment#doPermissionAction()")
 fun Fragment.doPermissionAction(
     vararg permissionsRequired: String,
     actionBuilder: PermissionActionBuilder.() -> Unit

@@ -55,7 +55,7 @@
         android:background="@drawable/mine_shape_dialog_tip_positive"
         android:text="@string/mine_dialog_tip_positive_text"
         android:gravity="center"
-        android:textColor="@color/map_dialog_tip_positive_text_color"
+        android:textColor="@android:color/white"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

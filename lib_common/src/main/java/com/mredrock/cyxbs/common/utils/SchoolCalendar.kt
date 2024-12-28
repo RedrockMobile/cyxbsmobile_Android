@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
  * 学校日历工具类
  * Created by cc on 15/8/23.
  */
-@Deprecated("使用 lib_config 中的 SchoolCalendar 进行替换")
+@Deprecated("使用 config 中的 SchoolCalendar 进行替换")
 open class SchoolCalendar {
     var firstDay: Calendar = GregorianCalendar(2015, Calendar.SEPTEMBER, 7)
     var calendar: Calendar
@@ -163,7 +163,7 @@ open class SchoolCalendar {
         private const val FIRST_MON_DAY = "first_day"
         
         /*
-        * TODO 目前该类已经移植到 lib_config 中的 SchoolCalendarUtils 中
+        * TODO 目前该类已经移植到 config 中的 SchoolCalendarUtils 中
         *  所以不再提供 set 方法，只提供 get 方法用于兼容旧模块
         * */
         
@@ -174,7 +174,7 @@ open class SchoolCalendar {
          *
          * # 注意：存在返回负数的情况！！！
          */
-        @Deprecated("使用 lib_config 中的 SchoolCalendar 进行替换")
+        @Deprecated("使用 config 中的 SchoolCalendar 进行替换")
         fun getDayOfTerm(): Int? {
             return checkFirstDay {
                 val diff = System.currentTimeMillis() - mFirstMonDayCalendar.timeInMillis
@@ -191,7 +191,7 @@ open class SchoolCalendar {
          *
          * # 注意：存在返回负数的情况！！！
          */
-        @Deprecated("使用 lib_config 中的 SchoolCalendar 进行替换")
+        @Deprecated("使用 config 中的 SchoolCalendar 进行替换")
         fun getWeekOfTerm(): Int? {
             val dayOfTerm = getDayOfTerm() ?: return null
             return if (dayOfTerm >= 0) dayOfTerm / 7 + 1 else dayOfTerm / 7
