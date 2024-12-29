@@ -3,7 +3,7 @@ plugins {
   id("kmp.compose")
 }
 
-useKtProvider(false) // base 模块不包含实现类，不需要处理注解
+useKtProvider()
 useDataBinding(false) // base 模块只依赖 DataBinding 但不开启 DataBinding
 
 kotlin {

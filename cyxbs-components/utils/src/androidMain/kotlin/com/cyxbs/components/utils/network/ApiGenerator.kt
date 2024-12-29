@@ -10,11 +10,13 @@ import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.defaultJson
 import com.cyxbs.components.utils.service.allImpl
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.service.implOrNull
 import com.cyxbs.components.utils.utils.LogLocal
 import com.cyxbs.components.utils.utils.LogUtils
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
+import okhttp3.Dispatcher
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -26,6 +28,9 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
+import java.util.concurrent.SynchronousQueue
+import java.util.concurrent.ThreadFactory
+import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
@@ -85,6 +90,22 @@ object ApiGenerator {
     private var commonRetrofit: Retrofit // 未添加token到header
 
     private val mAccountService = IAccountService::class.impl()
+
+    // 手动创建 okhttp 的线程分发器，规避 协程 + Retrofit 在子线程请求被 cancel 后的异常问题
+    private val OkHttpDispatcher = Dispatcher(
+        ThreadPoolExecutor(
+            0, 64, 60, TimeUnit.SECONDS,
+            SynchronousQueue(),
+            ThreadFactory {
+                Thread(it, "ApiGenerator OkHttp Dispatcher").apply {
+                    // 这里设置线程的异常处理器，默认给 base 模块的 CrashMonitor
+                    setUncaughtExceptionHandler(
+                        Thread.UncaughtExceptionHandler::class.implOrNull()
+                    )
+                }
+            }
+        )
+    )
 
     //init对两种公共的retrofit进行配置
     init {
@@ -237,6 +258,7 @@ object ApiGenerator {
     private fun OkHttpClient.Builder.defaultConfig() {
         this.connectTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
         this.readTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
+        dispatcher(OkHttpDispatcher)
     }
 
 
