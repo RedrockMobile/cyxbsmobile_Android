@@ -1,22 +1,23 @@
 package com.cyxbs.pages.declare.main.page.activity
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.alibaba.android.arouter.facade.annotation.Route
+import com.cyxbs.components.base.ui.BaseBindActivity
 import com.cyxbs.components.config.route.DECLARE_ENTRY
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.setOnDoubleClickListener
+import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.pages.declare.databinding.DeclareActivityHomeBinding
 import com.cyxbs.pages.declare.detail.page.activity.DetailActivity
 import com.cyxbs.pages.declare.main.page.adapter.HomeRvAdapter
 import com.cyxbs.pages.declare.main.page.viewmodel.HomeViewModel
-import com.cyxbs.components.base.ui.BaseBindActivity
-import com.cyxbs.components.utils.extensions.gone
-import com.cyxbs.components.utils.extensions.setOnDoubleClickListener
-import com.cyxbs.components.utils.extensions.visible
+import com.g985892345.provider.api.annotation.KClassProvider
 
-@Route(path = DECLARE_ENTRY)
+@KClassProvider(clazz = Activity::class, name = DECLARE_ENTRY)
 class HomeActivity : BaseBindActivity<DeclareActivityHomeBinding>() {
     companion object {
         /**

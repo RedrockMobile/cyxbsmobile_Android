@@ -1,7 +1,7 @@
 package com.cyxbs.components.base.crash
 
-import com.google.auto.service.AutoService
 import com.cyxbs.components.utils.network.INetworkConfigService
+import com.g985892345.provider.api.annotation.ImplProvider
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -13,13 +13,11 @@ import java.util.concurrent.CopyOnWriteArrayList
  * @author 985892345
  * @date 2024/2/16 19:24
  */
-@AutoService(INetworkConfigService::class)
-class CrashNetworkConfigService : INetworkConfigService {
+@ImplProvider(clazz = INetworkConfigService::class, name = "CrashNetworkConfigService")
+object CrashNetworkConfigService : INetworkConfigService {
 
-  companion object {
-    val apiResultList by lazy {
-      CopyOnWriteArrayList<ApiResult>()
-    }
+  val apiResultList by lazy {
+    CopyOnWriteArrayList<ApiResult>()
   }
 
   override fun onCreateOkHttp(builder: OkHttpClient.Builder) {

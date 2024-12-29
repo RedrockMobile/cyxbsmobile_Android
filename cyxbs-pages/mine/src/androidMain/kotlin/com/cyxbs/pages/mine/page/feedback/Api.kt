@@ -1,6 +1,6 @@
 package com.cyxbs.pages.mine.page.feedback
 
-import com.mredrock.cyxbs.common.network.ApiGenerator
+import com.cyxbs.components.utils.network.ApiGenerator
 import com.cyxbs.pages.mine.page.feedback.network.bean.ApiService
 
 /**

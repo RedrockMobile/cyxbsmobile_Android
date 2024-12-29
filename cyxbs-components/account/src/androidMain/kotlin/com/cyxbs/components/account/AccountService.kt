@@ -5,27 +5,26 @@ import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.core.content.edit
 import com.afollestad.materialdialogs.MaterialDialog
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.cyxbs.components.account.api.ACCOUNT_SERVICE
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.account.api.IUserService
 import com.cyxbs.components.account.api.IUserStateService
 import com.cyxbs.components.account.api.IUserTokenService
+import com.cyxbs.components.account.bean.ErrorMsg
 import com.cyxbs.components.account.bean.LoginParams
 import com.cyxbs.components.account.bean.RefreshParams
 import com.cyxbs.components.account.bean.TokenWrapper
-import com.cyxbs.components.utils.utils.secret.Secret
-import com.cyxbs.components.utils.extensions.Value
-import com.cyxbs.components.account.bean.ErrorMsg
 import com.cyxbs.components.account.bean.UserInfo
-import com.cyxbs.pages.login.api.ILoginService
 import com.cyxbs.components.config.sp.defaultSp
 import com.cyxbs.components.utils.extensions.GsonDefault
+import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.toast
 import com.cyxbs.components.utils.network.ApiException
 import com.cyxbs.components.utils.network.ApiGenerator
 import com.cyxbs.components.utils.network.ApiWrapper
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.utils.secret.Secret
+import com.cyxbs.pages.login.api.ILoginService
+import com.g985892345.provider.api.annotation.ImplProvider
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.subjects.PublishSubject
@@ -37,22 +36,46 @@ import retrofit2.Response
 /**
  * Created By jay68 on 2019-11-12.
  */
-@Route(path = ACCOUNT_SERVICE, name = ACCOUNT_SERVICE)
-internal class AccountService : IAccountService {
+@ImplProvider
+internal object AccountService : IAccountService {
 
-    private val mUserService: IUserService = UserService()
-    private val mUserStateService: IUserStateService = UserStateService()
-    private val mUserTokenSerVice: IUserTokenService = UserTokenSerVice()
+    // 是否是游客模式
+    const val SP_IS_TOURIST = "is_tourist"
+
+    //UserToken信息存储key
+    const val SP_KEY_USER_V2 = "cyxbsmobile_user_v2"
+
+    //User信息存储key
+    const val SP_KEY_USER_INFO = "cyxbsmobile_user_info"
+
+    //token失效时间
+    const val SP_KEY_TOKEN_EXPIRED = "user_token_expired_time"
+
+    //token 后端规定token2h过期，客户端规定1h55分过期，以防错误，时间戳
+    const val SP_TOKEN_TIME = 6900000
+
+    //refreshToken失效时间
+    const val SP_KEY_REFRESH_TOKEN_EXPIRED = "user_refresh_token_expired_time"
+
+    //refreshToken 后端规定45天过期，客户端规定44天过期，以防错误，时间戳
+    const val SP_REFRESH_DAY = 3801600000
+
+    private val mUserService: IUserService
+        get() = UserService
+    private val mUserStateService: IUserStateService
+        get() = UserStateService
+    private val mUserTokenSerVice: IUserTokenService
+        get() = UserTokenSerVice
+
     private val mUserInfoEncryption = Secret()
 
     private var user: UserInfo? = null
     @Volatile
     private var tokenWrapper: TokenWrapper? = null
     private var isTouristMode = false
-    private lateinit var mContext: Context
-    override fun init(context: Context) {
-        this.mContext = context
-        (mUserStateService as UserStateService).loginFromCache(context)
+
+    init {
+        (mUserStateService as UserStateService).loginFromCache(appContext)
         isTouristMode = defaultSp.getBoolean(SP_IS_TOURIST, false)
     }
 
@@ -100,7 +123,7 @@ internal class AccountService : IAccountService {
             })
     }
 
-    inner class UserService : IUserService {
+    object UserService : IUserService {
         override fun getUsername(): String = user?.username.orEmpty()
 
         override fun getStuNum() = user?.stuNum.orEmpty()
@@ -135,7 +158,7 @@ internal class AccountService : IAccountService {
         }
     }
 
-    inner class UserStateService : IUserStateService {
+    object UserStateService : IUserStateService {
         
         private val userStateState = BehaviorSubject.create<IUserStateService.UserState>()
         private val userStateEvent = PublishSubject.create<IUserStateService.UserState>()
@@ -242,8 +265,7 @@ internal class AccountService : IAccountService {
                 message(text = reason)
                 positiveButton(R.string.account_login_now) {
                     if (!isLogin()) {
-                        ILoginService::class.impl
-                            .startLoginActivityReboot()
+                        ILoginService::class.impl().startLoginActivityReboot()
                     }
                 }
                 negativeButton(R.string.account_login_later) {
@@ -337,7 +359,7 @@ internal class AccountService : IAccountService {
         }
     }
 
-    inner class UserTokenSerVice : IUserTokenService {
+    object UserTokenSerVice : IUserTokenService {
         override fun getRefreshToken(): String {
             return tokenWrapper?.refreshToken ?: ""
         }
@@ -358,27 +380,6 @@ internal class AccountService : IAccountService {
             }
         }
     }
-    
-    companion object {
-        // 是否是游客模式
-        const val SP_IS_TOURIST = "is_tourist"
-    
-        //UserToken信息存储key
-        const val SP_KEY_USER_V2 = "cyxbsmobile_user_v2"
-    
-        //User信息存储key
-        const val SP_KEY_USER_INFO = "cyxbsmobile_user_info"
-    
-        //token失效时间
-        const val SP_KEY_TOKEN_EXPIRED = "user_token_expired_time"
-    
-        //token 后端规定token2h过期，客户端规定1h55分过期，以防错误，时间戳
-        const val SP_TOKEN_TIME = 6900000
-    
-        //refreshToken失效时间
-        const val SP_KEY_REFRESH_TOKEN_EXPIRED = "user_refresh_token_expired_time"
-    
-        //refreshToken 后端规定45天过期，客户端规定44天过期，以防错误，时间戳
-        const val SP_REFRESH_DAY = 3801600000
-    }
+
+
 }

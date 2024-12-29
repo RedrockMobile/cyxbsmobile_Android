@@ -1,5 +1,6 @@
 package com.cyxbs.pages.notification.widget
 
+import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -12,10 +13,10 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.cyxbs.pages.mine.api.IGetDaySignClassService
-import com.cyxbs.components.utils.service.ServiceManager
+import com.cyxbs.components.config.route.MINE_CHECK_IN
+import com.cyxbs.components.utils.service.implClass
 import com.cyxbs.pages.notification.util.Constant.NOTIFY_TAG
-import java.util.*
+import java.util.Calendar
 import java.util.concurrent.TimeUnit
 
 /**
@@ -90,8 +91,7 @@ class NotifySignWorker(
         //系统状态栏显示的小图标
         builder.setSmallIcon(com.cyxbs.components.config.R.drawable.config_ic_app_notifacation)
         //下拉显示的大图标
-        val intent = Intent(ctx, ServiceManager(IGetDaySignClassService::class)
-            .getDaySignClassService())
+        val intent = Intent(ctx, Activity::class.implClass(MINE_CHECK_IN).java)
         val pIntent = PendingIntent.getActivity(ctx, 1, intent, PendingIntent.FLAG_IMMUTABLE)
         builder.setContentIntent(pIntent)
         builder.setDefaults(NotificationCompat.DEFAULT_ALL)

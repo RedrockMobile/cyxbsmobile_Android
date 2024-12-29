@@ -1,16 +1,19 @@
 plugins {
-  id("manager.composeLib")
+  id("manager.lib")
+  id("kmp.compose")
 }
 
-useARouter(false) // utils 模块不包含实现类，不需要处理注解
+useKtProvider(false) // utils 模块不包含实现类，不需要处理注解
 
 kotlin {
   sourceSets {
-    androidMain.dependencies {
+    commonMain.dependencies {
       implementation(projects.cyxbsComponents.init)
       implementation(projects.cyxbsComponents.config)
       implementation(projects.cyxbsComponents.account.api)
-
+      implementation(libs.kmp.ktProvider.manager)
+    }
+    androidMain.dependencies {
       implementation(libs.bundles.projectBase)
       implementation(libs.bundles.views)
       implementation(libs.bundles.network)

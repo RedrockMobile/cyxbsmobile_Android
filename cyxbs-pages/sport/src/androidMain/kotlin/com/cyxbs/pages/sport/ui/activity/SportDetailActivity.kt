@@ -1,21 +1,22 @@
 package com.cyxbs.pages.sport.ui.activity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.components.base.operations.doIfLogin
+import com.cyxbs.components.base.ui.BaseBindActivity
 import com.cyxbs.components.config.config.SchoolCalendar
 import com.cyxbs.components.config.route.DISCOVER_SPORT
-import com.cyxbs.components.base.ui.BaseBindActivity
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.setOnDoubleClickListener
 import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.pages.sport.R
 import com.cyxbs.pages.sport.databinding.SportActivitySportDetailBinding
 import com.cyxbs.pages.sport.model.SportDetailBean
-import com.cyxbs.pages.sport.ui.adapter.SportRvAdapter
 import com.cyxbs.pages.sport.model.SportDetailRepository
+import com.cyxbs.pages.sport.ui.adapter.SportRvAdapter
+import com.g985892345.provider.api.annotation.KClassProvider
 import java.util.Calendar
 
 /**
@@ -24,7 +25,7 @@ import java.util.Calendar
  * @bless  : God bless my code
  * @description : 体育打卡点击进入后的详情页面
  */
-@Route(path = DISCOVER_SPORT)
+@KClassProvider(clazz = Activity::class, name = DISCOVER_SPORT)
 class SportDetailActivity : BaseBindActivity<SportActivitySportDetailBinding>() {
     
     /**

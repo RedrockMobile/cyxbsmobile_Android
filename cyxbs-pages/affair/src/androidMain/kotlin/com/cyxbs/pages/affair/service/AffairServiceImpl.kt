@@ -1,14 +1,12 @@
 package com.cyxbs.pages.affair.service
 
-import android.content.Context
-import com.alibaba.android.arouter.facade.annotation.Route
+import com.cyxbs.pages.affair.api.IAffairService
+import com.cyxbs.pages.affair.api.NoClassBean
 import com.cyxbs.pages.affair.model.AffairRepository
 import com.cyxbs.pages.affair.room.AffairEntity
 import com.cyxbs.pages.affair.ui.activity.AffairActivity
 import com.cyxbs.pages.affair.ui.activity.NoClassAffairActivity
-import com.cyxbs.pages.affair.api.AFFAIR_SERVICE
-import com.cyxbs.pages.affair.api.IAffairService
-import com.cyxbs.pages.affair.api.NoClassBean
+import com.g985892345.provider.api.annotation.ImplProvider
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
@@ -19,8 +17,8 @@ import io.reactivex.rxjava3.core.Single
  * @email 2767465918@qq.com
  * @date 2022/5/14 17:13
  */
-@Route(path = AFFAIR_SERVICE, name = AFFAIR_SERVICE)
-class AffairServiceImpl : IAffairService {
+@ImplProvider
+object AffairServiceImpl : IAffairService {
   
   override fun getAffair(): Single<List<IAffairService.Affair>> {
     return AffairRepository.getAffair()
@@ -75,9 +73,6 @@ class AffairServiceImpl : IAffairService {
     NoClassAffairActivity.startForNoClass(noClassBean)
   }
 
-  override fun init(context: Context) {
-  }
-  
   private fun List<AffairEntity>.toAffair(): List<IAffairService.Affair> {
     return buildList {
       this@toAffair.forEach { entity ->

@@ -1,15 +1,20 @@
 package com.cyxbs.pages.store.utils
 
 import android.content.Context
-import com.alibaba.android.arouter.launcher.ARouter
-import com.cyxbs.pages.store.api.IStoreService.Task.*
 import com.cyxbs.components.config.route.DECLARE_ENTRY
-import com.cyxbs.components.config.route.DEFAULT_PAGE
 import com.cyxbs.components.config.route.DISCOVER_NO_CLASS
+import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER
 import com.cyxbs.components.config.route.FOOD_ENTRY
 import com.cyxbs.components.config.route.MINE_CHECK_IN
 import com.cyxbs.components.config.route.UFIELD_MAIN_ENTRY
 import com.cyxbs.components.utils.extensions.toast
+import com.cyxbs.components.utils.service.startActivity
+import com.cyxbs.pages.store.api.IStoreService.Task.DAILY_SIGN
+import com.cyxbs.pages.store.api.IStoreService.Task.JOIN_DECLARE
+import com.cyxbs.pages.store.api.IStoreService.Task.JOIN_FOOD
+import com.cyxbs.pages.store.api.IStoreService.Task.JOIN_NOCLASS
+import com.cyxbs.pages.store.api.IStoreService.Task.JOIN_UFIELD
+import com.cyxbs.pages.store.api.IStoreService.Task.LOGIN_VOLUNTEER
 import com.cyxbs.pages.store.bean.StampCenter
 
 /**
@@ -28,23 +33,22 @@ class StoreType {
     fun jumpOtherUi(context: Context, task: StampCenter.Task) {
       when (task.title) {
         DAILY_SIGN.title -> {
-          ARouter.getInstance().build(MINE_CHECK_IN).navigation()
+          startActivity(MINE_CHECK_IN)
         }
-        JOIN_FOOD.title->{
-          ARouter.getInstance().build(FOOD_ENTRY).navigation()
+        JOIN_FOOD.title-> {
+          startActivity(FOOD_ENTRY)
         }
-        JOIN_NOCLASS.title->{
-          ARouter.getInstance().build(DISCOVER_NO_CLASS).navigation()
+        JOIN_NOCLASS.title-> {
+          startActivity(DISCOVER_NO_CLASS)
         }
-        JOIN_DECLARE.title->{
-          ARouter.getInstance().build(DECLARE_ENTRY).navigation()
+        JOIN_DECLARE.title-> {
+          startActivity(DECLARE_ENTRY)
         }
-        JOIN_UFIELD.title->{
-          ARouter.getInstance().build(UFIELD_MAIN_ENTRY).navigation()
+        JOIN_UFIELD.title-> {
+          startActivity(UFIELD_MAIN_ENTRY)
         }
         LOGIN_VOLUNTEER.title -> {
-          ARouter.getInstance().build(DEFAULT_PAGE).navigation()
-//          ARouter.getInstance().build(DISCOVER_VOLUNTEER).navigation()
+          startActivity(DISCOVER_VOLUNTEER)
         }
         /*
         * 注意, 如果后面接手的学弟要添加新的任务, 目前(2021/9/11)对于任务进度是要我们自己完成后向后端发送请求的

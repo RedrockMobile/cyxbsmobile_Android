@@ -12,14 +12,11 @@ import android.widget.TextView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.components.base.operations.doIfLogin
-import com.cyxbs.components.config.route.DISCOVER_SPORT_FEED
 import com.cyxbs.components.base.ui.BaseBindFragment
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.visible
-import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.sport.R
 import com.cyxbs.pages.sport.databinding.SportFragmentDiscoverFeedBinding
 import com.cyxbs.pages.sport.model.SportDetailBean
@@ -33,9 +30,7 @@ import com.cyxbs.pages.sport.ui.activity.SportDetailActivity
  * @bless  : God bless my code
  * @description: 首页展示体育打卡数据的fragment
  */
-@Route(path = DISCOVER_SPORT_FEED)
-class DiscoverSportFeedFragment :
-    BaseBindFragment<SportFragmentDiscoverFeedBinding>() {
+class DiscoverSportFeedFragment : BaseBindFragment<SportFragmentDiscoverFeedBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 

@@ -1,13 +1,13 @@
 package com.cyxbs.applications.pro.sdks
 
-import com.google.auto.service.AutoService
 import com.cyxbs.applications.pro.BuildConfig
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.components.init.InitialManager
-import com.cyxbs.components.init.InitialService
 import com.cyxbs.components.base.BaseApp
 import com.cyxbs.components.base.crash.CrashMonitor
+import com.cyxbs.components.init.InitialManager
+import com.cyxbs.components.init.InitialService
 import com.cyxbs.components.utils.service.impl
+import com.g985892345.provider.api.annotation.ImplProvider
 import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.vasdolly.helper.ChannelReaderUtil
 
@@ -19,8 +19,8 @@ import com.tencent.vasdolly.helper.ChannelReaderUtil
  * @time 2022/3/24  19:40
  * @signature 我将追寻并获取我想要的答案
  */
-@AutoService(InitialService::class)
-class BuglyInitialService : InitialService {
+@ImplProvider(clazz = InitialService::class, name = "BuglyInitialService")
+object BuglyInitialService : InitialService {
     
     // bugly 会读取 Android id
     override fun onPrivacyAgreed(manager: InitialManager) {
@@ -47,7 +47,7 @@ class BuglyInitialService : InitialService {
         }
         
         CrashReport.setUserId(
-            IAccountService::class.impl.getUserService().getStuNum()
+            IAccountService::class.impl().getUserService().getStuNum()
         )
 
         //初始化bugly

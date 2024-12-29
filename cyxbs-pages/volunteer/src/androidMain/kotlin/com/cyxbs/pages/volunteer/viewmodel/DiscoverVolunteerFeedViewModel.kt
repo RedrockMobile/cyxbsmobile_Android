@@ -1,16 +1,16 @@
 package com.cyxbs.pages.volunteer.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.mredrock.cyxbs.common.network.ApiGenerator
-import com.mredrock.cyxbs.common.network.exception.RedrockApiIllegalStateException
-import com.mredrock.cyxbs.common.service.ServiceManager
-import com.mredrock.cyxbs.common.utils.extensions.unsafeSubscribeBy
-import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
-import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
-import com.mredrock.cyxbs.common.viewmodel.event.SingleLiveEvent
+import com.cyxbs.components.utils.network.ApiGenerator
+import com.cyxbs.components.utils.service.impl
+import com.cyxbs.pages.store.api.IStoreService
 import com.cyxbs.pages.volunteer.bean.VolunteerTime
 import com.cyxbs.pages.volunteer.network.ApiService
-import com.cyxbs.pages.store.api.IStoreService
+import com.mredrock.cyxbs.common.network.exception.RedrockApiIllegalStateException
+import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
+import com.mredrock.cyxbs.common.utils.extensions.unsafeSubscribeBy
+import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
+import com.mredrock.cyxbs.common.viewmodel.event.SingleLiveEvent
 
 class DiscoverVolunteerFeedViewModel : BaseViewModel() {
     val volunteerData = MutableLiveData<VolunteerTime?>()
@@ -42,7 +42,7 @@ class DiscoverVolunteerFeedViewModel : BaseViewModel() {
                     isQuerying = false
 
                     // 登录了就更新积分商城的任务, 后端已做重复处理
-                  ServiceManager(IStoreService::class)
+                  IStoreService::class.impl()
                     .postTask(IStoreService.Task.LOGIN_VOLUNTEER, "")
                 }.lifeCycle()
     }

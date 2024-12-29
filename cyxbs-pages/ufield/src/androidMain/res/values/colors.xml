@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <color name="uField_black_white">#000000</color>
     <color name="uField_white_black_111111">#FFFFFFFF</color>
     <color name="uField_text_phone">#ED535C</color>
@@ -25,4 +25,6 @@
     <color name="uField_activity_hint_color">#6615315B</color>
     <color name="uField_text_haveadd">#C4C4C4</color>
     <color name="uField_text_add">#524FEC</color>
+    <!--    游乐园描述字体颜色-->
+    <color name="ufield_fairground_describe_color">#8015315B</color>
 </resources>

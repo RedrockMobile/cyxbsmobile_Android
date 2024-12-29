@@ -7,37 +7,39 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.util.Pair
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
 import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.base.operations.doIfLogin
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.config.route.MINE_ENTRY
 import com.cyxbs.components.config.route.NOTIFICATION_HOME
 import com.cyxbs.components.config.route.STORE_ENTRY
 import com.cyxbs.components.config.route.UFIELD_CENTER_ENTRY
-import com.mredrock.cyxbs.common.utils.extensions.loadAvatar
-import com.cyxbs.components.base.operations.doIfLogin
-import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.processLifecycleScope
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.components.utils.logger.TrackingUtils
 import com.cyxbs.components.utils.logger.event.ClickEvent
-import com.cyxbs.components.utils.service.ServiceManager
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.service.startActivity
 import com.cyxbs.pages.mine.noyification.NotificationUtils
 import com.cyxbs.pages.mine.page.about.AboutActivity
 import com.cyxbs.pages.mine.page.edit.EditInfoActivity
 import com.cyxbs.pages.mine.page.feedback.center.ui.FeedbackCenterActivity
 import com.cyxbs.pages.mine.page.setting.SettingActivity
 import com.cyxbs.pages.mine.page.sign.DailySignActivity
+import com.g985892345.provider.api.annotation.ImplProvider
+import com.mredrock.cyxbs.common.utils.extensions.loadAvatar
 import kotlinx.coroutines.launch
 
 /**
@@ -46,7 +48,7 @@ import kotlinx.coroutines.launch
  * 这个类的代码不要格式化了吧 否则initView里面的代码会很凌乱
  */
 @SuppressLint("SetTextI18n")
-@Route(path = MINE_ENTRY)
+@ImplProvider(clazz = Fragment::class, name = MINE_ENTRY)
 class UserFragment : BaseFragment() {
 
     private val viewModel by viewModels<UserViewModel>()
@@ -80,7 +82,7 @@ class UserFragment : BaseFragment() {
                         TrackingUtils.trackClickEvent(ClickEvent.CLICK_YLC_YPZX_ENTRY)
                     }
 
-                    jump(STORE_ENTRY)
+                    startActivity(STORE_ENTRY)
                 }
             }
             mine_user_iv_center_feedback.setOnSingleClickListener {
@@ -156,14 +158,14 @@ class UserFragment : BaseFragment() {
             }
 
             mine_user_iv_center_notification.setOnSingleClickListener {
-                if (IAccountService::class.impl.getVerifyService().isLogin()) {
+                if (IAccountService::class.impl().getVerifyService().isLogin()) {
                     // 消息中心入口点击埋点
                     processLifecycleScope.launch {
                         TrackingUtils.trackClickEvent(ClickEvent.CLICK_YLC_XXZX_ENTRY)
                     }
                 }
 
-                ARouter.getInstance().build(NOTIFICATION_HOME).navigation()
+                startActivity(NOTIFICATION_HOME)
                 // 进入消息中心，移除红点
                 mine_user_tv_center_notification_count.gone()
             }
@@ -173,8 +175,7 @@ class UserFragment : BaseFragment() {
                     processLifecycleScope.launch {
                         TrackingUtils.trackClickEvent(ClickEvent.CLICK_YLC_HDZX_ENTRY)
                     }
-
-                    ARouter.getInstance().build(UFIELD_CENTER_ENTRY).navigation()
+                    startActivity(UFIELD_CENTER_ENTRY)
                 }
             }
             mine_user_avatar.setOnSingleClickListener {
@@ -278,12 +279,12 @@ class UserFragment : BaseFragment() {
         // 发送签到的通知
         NotificationUtils.tryNotificationSign(viewModel.status.value?.isChecked ?: false)
         // 更新最新未读消息数量
-        viewModel.getNewNotificationCount()
+//        viewModel.getNewNotificationCount()
     }
 
     override fun onResume() {
         super.onResume()
-        if (ServiceManager(IAccountService::class).getVerifyService().isLogin()) {
+        if (IAccountService::class.impl().getVerifyService().isLogin()) {
             fetchInfo()
         }
     }
@@ -296,7 +297,7 @@ class UserFragment : BaseFragment() {
 
     //刷新和User信息有关的界面
     private fun refreshUserLayout() {
-        val userService = ServiceManager(IAccountService::class).getUserService()
+        val userService = IAccountService::class.impl().getUserService()
         context?.loadAvatar(userService.getAvatarImgUrl(), mine_user_avatar)
         mine_user_username.text = userService.getUsername()
     }
@@ -307,9 +308,4 @@ class UserFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? =
         inflater.inflate(R.layout.mine_fragment_main_new, container, false)
-
-    private fun jump(path: String) {
-        ARouter.getInstance().build(path).navigation()
-    }
-
 }

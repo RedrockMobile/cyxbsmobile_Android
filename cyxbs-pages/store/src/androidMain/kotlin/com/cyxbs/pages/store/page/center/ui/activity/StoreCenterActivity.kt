@@ -1,6 +1,7 @@
 package com.cyxbs.pages.store.page.center.ui.activity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
@@ -9,11 +10,8 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.widget.ViewPager2
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
-import com.cyxbs.components.config.route.STORE_ENTRY
 import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.route.STORE_ENTRY
 import com.cyxbs.components.utils.adapter.FragmentVpAdapter
 import com.cyxbs.components.utils.extensions.color
 import com.cyxbs.components.utils.extensions.dp2pxF
@@ -25,6 +23,9 @@ import com.cyxbs.pages.store.page.center.viewmodel.StoreCenterViewModel
 import com.cyxbs.pages.store.page.record.ui.activity.StampDetailActivity
 import com.cyxbs.pages.store.utils.widget.SlideUpLayout
 import com.cyxbs.pages.store.utils.widget.TextRollView
+import com.g985892345.provider.api.annotation.KClassProvider
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.ndhzs.slideshow.viewpager.transformer.ScaleInTransformer
 
 /**
@@ -34,7 +35,7 @@ import com.ndhzs.slideshow.viewpager.transformer.ScaleInTransformer
  * @email 2767465918@qq.com
  * @date 2021/8/7
  */
-@Route(path = STORE_ENTRY)
+@KClassProvider(clazz = Activity::class, name = STORE_ENTRY)
 class StoreCenterActivity : BaseActivity() {
   
   private val mViewModel by viewModels<StoreCenterViewModel>()

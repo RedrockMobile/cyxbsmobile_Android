@@ -1,24 +1,25 @@
 package com.cyxbs.pages.news.ui.activity
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.alibaba.android.arouter.facade.annotation.Route
+import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.route.DISCOVER_NEWS
+import com.cyxbs.components.config.view.JToolbar
 import com.cyxbs.pages.news.R
 import com.cyxbs.pages.news.ui.adapter.NewsAdapter
 import com.cyxbs.pages.news.viewmodel.NewsListViewModel
-import com.cyxbs.components.config.route.DISCOVER_NEWS
-import com.cyxbs.components.config.view.JToolbar
-import com.cyxbs.components.base.ui.BaseActivity
+import com.g985892345.provider.api.annotation.KClassProvider
 
 /**
  * @author zixuan
  * 2019/11/20
  */
-@Route(path = DISCOVER_NEWS)
+@KClassProvider(clazz = Activity::class, name = DISCOVER_NEWS)
 class NewsListActivity : BaseActivity() {
 
     private val viewModel by viewModels<NewsListViewModel>()

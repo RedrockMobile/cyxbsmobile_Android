@@ -1,13 +1,13 @@
 package com.cyxbs.applications.pro.sdks
 
 import android.content.Context
-import com.google.auto.service.AutoService
 import com.cyxbs.applications.pro.BuildConfig
+import com.cyxbs.components.base.utils.Umeng
 import com.cyxbs.components.init.InitialManager
 import com.cyxbs.components.init.InitialService
-import com.cyxbs.components.base.utils.Umeng
 import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
 import com.cyxbs.components.utils.utils.LogUtils
+import com.g985892345.provider.api.annotation.ImplProvider
 import com.tencent.vasdolly.helper.ChannelReaderUtil
 import com.umeng.analytics.MobclickAgent
 import com.umeng.commonsdk.UMConfigure
@@ -33,8 +33,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers
  * @time 2022/3/24  19:42
  * @signature 我将追寻并获取我想要的答案
  */
-@AutoService(InitialService::class)
-class UmengInitialService : InitialService {
+@ImplProvider(clazz = InitialService::class, name = "UmengInitialService")
+object UmengInitialService : InitialService {
 
     override fun onMainProcess(manager: InitialManager) {
         //debug包开启log

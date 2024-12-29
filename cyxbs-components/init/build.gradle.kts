@@ -1,12 +1,7 @@
 plugins {
-  id("manager.composeLib")
+  id("manager.lib")
+  id("kmp.compose")
 }
 
-kotlin {
-  sourceSets {
-    androidMain.dependencies {
-      implementation(libs.autoService)
-    }
-  }
-}
+
 

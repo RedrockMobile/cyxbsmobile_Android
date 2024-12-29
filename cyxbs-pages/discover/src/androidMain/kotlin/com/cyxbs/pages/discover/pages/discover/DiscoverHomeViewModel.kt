@@ -3,17 +3,18 @@ package com.cyxbs.pages.discover.pages.discover
 import android.os.Parcelable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.cyxbs.pages.discover.bean.NewsListItem
-import com.cyxbs.pages.discover.network.RollerViewInfo
-import com.cyxbs.pages.discover.network.ApiServices
 import com.cyxbs.components.base.ui.BaseViewModel
-import com.cyxbs.components.utils.extensions.launchCatch
+import com.cyxbs.components.utils.extensions.EmptyCoroutineExceptionHandler
 import com.cyxbs.components.utils.extensions.setSchedulers
 import com.cyxbs.components.utils.network.ApiGenerator
 import com.cyxbs.components.utils.network.mapOrThrowApiException
+import com.cyxbs.pages.discover.bean.NewsListItem
+import com.cyxbs.pages.discover.network.ApiServices
+import com.cyxbs.pages.discover.network.RollerViewInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 /**
@@ -77,7 +78,7 @@ class DiscoverHomeViewModel : BaseViewModel() {
    * 用携程异步获取未读的(新的)notification数量
    */
   fun getNotificationUnReadStatus() {
-    viewModelScope.launchCatch {
+    viewModelScope.launch(EmptyCoroutineExceptionHandler) {
       val uFieldActivityList = async(Dispatchers.IO) {
         apiServices.getUFieldActivityList() }
       val itineraryList = listOf(
@@ -87,24 +88,20 @@ class DiscoverHomeViewModel : BaseViewModel() {
       uFieldActivityList.await().apply {
         if (isSuccess() && data.any { !it.clicked }){
           hasUnread.value = true
-          return@launchCatch
+          return@launch
         }
       }
       itineraryList.awaitAll().apply {
         if (this[0].isSuccess() && (this[0].data?.any { !it.hasRead } == true)) {
           hasUnread.value = true
-          return@launchCatch
+          return@launch
         }
         if (this[1].isSuccess() && (this[1].data?.any { !it.hasRead } == true)) {
           hasUnread.value = true
-          return@launchCatch
+          return@launch
         }
       }
       hasUnread.value = false
-
-    }.catch {
-      it.printStackTrace()
-//      "获取最新消息失败,请检查网络连接".toast()
     }
   }
 }

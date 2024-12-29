@@ -4,12 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cyxbs.components.base.ui.BaseViewModel
-import com.cyxbs.components.utils.extensions.launchCatch
+import com.cyxbs.components.utils.extensions.EmptyCoroutineExceptionHandler
 import com.cyxbs.components.utils.network.api
 import com.cyxbs.pages.home.network.NotificationApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.launch
 
 /**
  * ...
@@ -41,7 +42,7 @@ class MainViewModel : BaseViewModel() {
    * 用携程异步获取未读的(新的)notification数量
    */
   fun getNotificationUnReadStatus() {
-    viewModelScope.launchCatch {
+    viewModelScope.launch(EmptyCoroutineExceptionHandler) {
       val uFieldActivityList = async(Dispatchers.IO) {
         notificationApi.getUFieldActivityList() }
       val itineraryList = listOf(
@@ -51,23 +52,20 @@ class MainViewModel : BaseViewModel() {
       uFieldActivityList.await().apply {
         if (isSuccess() && data.any { !it.clicked }){
           _hasUnReadNotification.postValue(true)
-          return@launchCatch
+          return@launch
         }
       }
       itineraryList.awaitAll().apply {
         if (this[0].isSuccess() && (this[0].data?.any { !it.hasRead } == true)) {
           _hasUnReadNotification.postValue(true)
-          return@launchCatch
+          return@launch
         }
         if (this[1].isSuccess() && (this[1].data?.any { !it.hasRead } == true)) {
           _hasUnReadNotification.postValue(true)
-          return@launchCatch
+          return@launch
         }
       }
       _hasUnReadNotification.postValue(false)
-    }.catch {
-      it.printStackTrace()
-      "获取最新消息失败,请检查网络连接".toast()
     }
   }
 }

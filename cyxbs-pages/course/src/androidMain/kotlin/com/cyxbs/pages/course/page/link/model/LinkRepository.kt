@@ -1,15 +1,15 @@
 package com.cyxbs.pages.course.page.link.model
 
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.pages.course.page.link.network.LinkApiServices
-import com.cyxbs.pages.course.page.link.room.LinkDataBase
-import com.cyxbs.pages.course.page.link.room.LinkStuEntity
 import com.cyxbs.components.utils.extensions.lazyUnlock
 import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
 import com.cyxbs.components.utils.network.api
 import com.cyxbs.components.utils.network.mapOrThrowApiException
 import com.cyxbs.components.utils.network.throwApiExceptionIfFail
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.pages.course.page.link.network.LinkApiServices
+import com.cyxbs.pages.course.page.link.room.LinkDataBase
+import com.cyxbs.pages.course.page.link.room.LinkStuEntity
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
@@ -37,7 +37,7 @@ object LinkRepository {
    * 只要开始订阅，就一定会发送数据下来，但是否有关联人请通过 [LinkStuEntity.isNull] 来判断
    */
   fun observeLinkStudent(): Observable<LinkStuEntity> {
-    return IAccountService::class.impl
+    return IAccountService::class.impl()
       .getUserService()
       .observeStuNumState()
       .observeOn(Schedulers.io())
@@ -58,7 +58,7 @@ object LinkRepository {
    * 只是单纯的刷新数据，如果要观察请使用 [observeLinkStudent]
    */
   fun refreshLinkStudent(): Single<LinkStuEntity> {
-    val selfNum = IAccountService::class.impl.getUserService().getStuNum()
+    val selfNum = IAccountService::class.impl().getUserService().getStuNum()
     if (selfNum.isBlank()) return Single.error(IllegalStateException("学号为空！"))
     return LinkApiServices::class.api
       .getLinkStudent()
@@ -92,7 +92,7 @@ object LinkRepository {
    * - 网络连接失败时会返回本地数据，本地数据为 null 时会返回一个空的 [LinkStuEntity]，但会包含自己的学号
    */
   fun getLinkStudent(): Single<LinkStuEntity> {
-    val selfNum = IAccountService::class.impl.getUserService().getStuNum()
+    val selfNum = IAccountService::class.impl().getUserService().getStuNum()
     if (selfNum.isBlank()) return Single.error(IllegalStateException("学号为空！"))
     return refreshLinkStudent()
       .onErrorReturn {
@@ -102,7 +102,7 @@ object LinkRepository {
   }
   
   fun deleteLinkStudent(): Completable {
-    val selfNum = IAccountService::class.impl.getUserService().getStuNum()
+    val selfNum = IAccountService::class.impl().getUserService().getStuNum()
     if (selfNum.isEmpty()) return Completable.error(IllegalStateException("学号为空！"))
     return LinkApiServices::class.api
       .deleteLinkStudent()
@@ -127,7 +127,7 @@ object LinkRepository {
   }
   
   fun changeLinkStuVisible(visible: Boolean): Completable {
-    val selfNum = IAccountService::class.impl.getUserService().getStuNum()
+    val selfNum = IAccountService::class.impl().getUserService().getStuNum()
     if (selfNum.isEmpty()) return Completable.error(IllegalStateException("学号为空！"))
     return Completable.create {
       val linkStuEntity = mLinkStuDB.getLinkStu(selfNum)

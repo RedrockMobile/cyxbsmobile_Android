@@ -4,17 +4,17 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
-import com.google.gson.Gson
-import com.google.gson.annotations.SerializedName
-import com.google.gson.reflect.TypeToken
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.utils.BuildConfig
 import com.cyxbs.components.utils.extensions.JsonDefault
 import com.cyxbs.components.utils.extensions.appContext
-import com.cyxbs.components.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.allImpl
 import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.utils.utils.LogLocal
 import com.cyxbs.components.utils.utils.LogUtils
+import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
+import com.google.gson.reflect.TypeToken
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -26,7 +26,6 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
-import java.util.ServiceLoader
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
@@ -85,11 +84,12 @@ object ApiGenerator {
     private var retrofit: Retrofit //统一添加了token到header
     private var commonRetrofit: Retrofit // 未添加token到header
 
-    private val mAccountService = IAccountService::class.impl
+    private val mAccountService = IAccountService::class.impl()
 
     //init对两种公共的retrofit进行配置
     init {
-        val networkConfigs = ServiceLoader.load(INetworkConfigService::class.java)
+        val networkConfigs = INetworkConfigService::class.allImpl()
+            .map { it.value.get() }
         //添加监听得到登录后的token和refreshToken,应用于初次登录或重新登录
         retrofit = Retrofit.Builder().apply {
             this.defaultConfig()
@@ -343,11 +343,12 @@ object ApiGenerator {
             // 除了登录和部分接口使用的 CommonApiService 以外，他们不会跑进 tokenInterceptor
             var response: Response? = null
             val exception: Exception
+            val request = chain.request()
             try {
-                response = chain.proceed(chain.request())
+                response = chain.proceed(request)
                 return response // 这里不能检查 code，因为部分老接口会返回 http 状态码 500
             } catch (e: Exception) {
-                exception = e
+                exception = BackupException(request, e)
             }
 
             // 分不同的环境触发不同的容灾请求
@@ -374,7 +375,7 @@ object ApiGenerator {
                     response = useBackupUrl(url, chain)
                 }
 
-                else -> throw RuntimeException("未知请求头！")
+                else -> throw IllegalStateException("未知请求头！")
             }
 
             if (response == null) {
@@ -427,15 +428,20 @@ object ApiGenerator {
             @SerializedName("base_url")
             val baseUrl: String
         )
+
+        private class BackupException(
+            request: Request,
+            exception: Exception,
+        ) : RuntimeException("BackupInterceptor: url = ${request.url}, method = ${request.method}", exception)
     }
 
     //是否是游客模式
     private fun isTouristMode() =
-        ServiceManager(IAccountService::class).getVerifyService().isTouristMode()
+        IAccountService::class.impl().getVerifyService().isTouristMode()
 
     //检查token是否过期
     private fun isTokenExpired() =
-        ServiceManager(IAccountService::class).getVerifyService().isExpired()
+        IAccountService::class.impl().getVerifyService().isExpired()
 }
 
 /**

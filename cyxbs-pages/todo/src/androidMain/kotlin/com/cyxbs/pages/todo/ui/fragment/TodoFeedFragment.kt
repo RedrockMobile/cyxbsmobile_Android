@@ -10,22 +10,20 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
-import com.cyxbs.pages.todo.R
-import com.cyxbs.pages.todo.adapter.TodoFeedAdapter
-import com.cyxbs.pages.todo.model.bean.Todo
-import com.cyxbs.pages.todo.viewmodel.TodoViewModel
-import com.cyxbs.components.config.route.DISCOVER_TODO_FEED
-import com.cyxbs.components.config.route.DISCOVER_TODO_MAIN
 import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.getSp
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.visible
+import com.cyxbs.components.utils.service.startActivity
+import com.cyxbs.pages.todo.R
+import com.cyxbs.pages.todo.adapter.TodoFeedAdapter
 import com.cyxbs.pages.todo.model.bean.DelPushWrapper
 import com.cyxbs.pages.todo.model.bean.RemindMode
+import com.cyxbs.pages.todo.model.bean.Todo
 import com.cyxbs.pages.todo.model.bean.TodoListPushWrapper
+import com.cyxbs.pages.todo.ui.activity.TodoInnerMainActivity
+import com.cyxbs.pages.todo.viewmodel.TodoViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -35,7 +33,6 @@ import java.util.Locale
  * author: sanhuzhen
  * date: 2024/8/20 17:30
  */
-@Route(path = DISCOVER_TODO_FEED)
 class TodoFeedFragment : BaseFragment() {
 
 
@@ -61,7 +58,7 @@ class TodoFeedFragment : BaseFragment() {
     @SuppressLint("SetTextI18n")
     private fun initView() {
         mCl.setOnClickListener {
-            ARouter.getInstance().build(DISCOVER_TODO_MAIN).navigation()
+            startActivity(TodoInnerMainActivity::class)
         }
         mRv.apply {
             layoutManager = LinearLayoutManager(context)

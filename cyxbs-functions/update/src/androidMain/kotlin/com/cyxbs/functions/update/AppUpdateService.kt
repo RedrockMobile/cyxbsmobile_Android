@@ -7,18 +7,17 @@ import androidx.core.content.edit
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import com.afollestad.materialdialogs.MaterialDialog
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.cyxbs.functions.update.bean.UpdateInfo
-import com.cyxbs.functions.update.api.APP_UPDATE_SERVICE
 import com.cyxbs.functions.update.api.AppUpdateStatus
 import com.cyxbs.functions.update.api.IAppUpdateService
+import com.cyxbs.functions.update.bean.UpdateInfo
+import com.g985892345.provider.api.annotation.ImplProvider
 import java.util.concurrent.TimeUnit
 
 /**
  * Create By Hosigus at 2020/5/2
  */
-@Route(path = APP_UPDATE_SERVICE, name = APP_UPDATE_SERVICE)
-internal class AppUpdateService : IAppUpdateService {
+@ImplProvider
+internal object AppUpdateService : IAppUpdateService {
     override fun getUpdateStatus(): LiveData<AppUpdateStatus> = AppUpdateModel.status
 
     override fun checkUpdate() {
@@ -81,6 +80,4 @@ internal class AppUpdateService : IAppUpdateService {
             noticeUpdateInternal(activity, info)
         }
     }
-    
-    override fun init(context: Context) {}
 }

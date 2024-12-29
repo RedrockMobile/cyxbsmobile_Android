@@ -10,25 +10,25 @@ import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.commit
-import com.cyxbs.pages.home.R
-import com.cyxbs.pages.home.ui.course.utils.CourseHeaderHelper
-import com.cyxbs.pages.home.ui.main.MainActivity
-import com.cyxbs.pages.home.viewmodel.MainViewModel
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.pages.course.api.ICourseService
-import com.cyxbs.components.config.route.COURSE_POS_TO_MAP
-import com.cyxbs.components.config.route.DISCOVER_MAP
 import com.cyxbs.components.base.crash.CrashDialog
 import com.cyxbs.components.base.utils.Umeng
 import com.cyxbs.components.base.utils.safeSubscribeBy
+import com.cyxbs.components.config.route.COURSE_POS_TO_MAP
+import com.cyxbs.components.config.route.DISCOVER_MAP
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.invisible
 import com.cyxbs.components.utils.extensions.lazyUnlock
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.visible
-import com.cyxbs.components.utils.service.ServiceManager
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.service.startActivity
+import com.cyxbs.pages.course.api.ICourseService
+import com.cyxbs.pages.home.R
+import com.cyxbs.pages.home.ui.course.utils.CourseHeaderHelper
+import com.cyxbs.pages.home.ui.main.MainActivity
+import com.cyxbs.pages.home.viewmodel.MainViewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import kotlin.math.max
 
@@ -48,8 +48,8 @@ class HomeCourseLayout(context: Context, attrs: AttributeSet?) : FrameLayout(con
 
   private val mActivityViewModel by mActivity.viewModels<MainViewModel>()
 
-  private val mCourseService = ICourseService::class.impl
-  private val mAccountService = IAccountService::class.impl
+  private val mCourseService = ICourseService::class.impl()
+  private val mAccountService = IAccountService::class.impl()
 
   init {
     addView(
@@ -140,8 +140,8 @@ class HomeCourseLayout(context: Context, attrs: AttributeSet?) : FrameLayout(con
                 mTvHeaderPlace.text = header.content
                 mTvHeaderPlace.setOnSingleClickListener {
                   // 跳转至地图界面
-                  ServiceManager.activity(DISCOVER_MAP) {
-                    withString(COURSE_POS_TO_MAP, header.content)
+                  startActivity(DISCOVER_MAP) {
+                    putExtra(COURSE_POS_TO_MAP, header.content)
                   }
                 }
                 mTvHeaderTitle.setOnSingleClickListener {

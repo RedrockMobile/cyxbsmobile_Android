@@ -1,6 +1,5 @@
 package com.cyxbs.pages.affair.api
 
-import com.alibaba.android.arouter.facade.template.IProvider
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
@@ -11,7 +10,7 @@ import io.reactivex.rxjava3.core.Single
  * date: 2022/9/6
  * description:
  */
-interface IAffairService : IProvider {
+interface IAffairService {
 
   /**
    * 得到当前登录人的事务

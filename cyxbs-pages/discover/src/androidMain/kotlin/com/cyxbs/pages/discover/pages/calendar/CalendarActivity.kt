@@ -1,6 +1,11 @@
 package com.cyxbs.pages.discover.pages.calendar
 
-import android.graphics.*
+import android.app.Activity
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
+import android.graphics.Paint
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -9,19 +14,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.bumptech.glide.request.transition.Transition
-import com.cyxbs.components.config.route.DISCOVER_CALENDAR
-import com.cyxbs.pages.discover.R
 import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.route.DISCOVER_CALENDAR
 import com.cyxbs.components.utils.extensions.isDarkMode
 import com.cyxbs.components.utils.network.getBaseUrl
+import com.cyxbs.pages.discover.R
+import com.g985892345.provider.api.annotation.KClassProvider
 
-@Route(path = DISCOVER_CALENDAR)
+@KClassProvider(clazz = Activity::class, name = DISCOVER_CALENDAR)
 class CalendarActivity : BaseActivity() {
 
     private val mProgressBar by R.id.calendar_progress_bar.view<ProgressBar>()

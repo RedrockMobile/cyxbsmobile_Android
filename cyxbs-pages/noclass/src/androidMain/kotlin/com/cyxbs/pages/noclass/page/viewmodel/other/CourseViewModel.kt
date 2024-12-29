@@ -2,14 +2,13 @@ package com.cyxbs.pages.noclass.page.viewmodel.other
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.cyxbs.pages.course.api.ILessonService
-import com.cyxbs.pages.store.api.IStoreService
 import com.cyxbs.components.base.ui.BaseViewModel
-import com.cyxbs.components.utils.service.ServiceManager
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.pages.course.api.ILessonService
 import com.cyxbs.pages.noclass.bean.NoClassSpareTime
 import com.cyxbs.pages.noclass.bean.Student
 import com.cyxbs.pages.noclass.bean.toSpareTime
+import com.cyxbs.pages.store.api.IStoreService
 import io.reactivex.rxjava3.core.Observable
 
 /**
@@ -36,7 +35,7 @@ class CourseViewModel : BaseViewModel(){
 
     private fun getLessons(stuNumList: List<String>, stuNameById: Map<String, String>) {
         if (stuNumList.isEmpty() || stuNameById.isEmpty() || stuNumList.size != stuNameById.size) return
-        val lessonService = ILessonService::class.impl
+        val lessonService = ILessonService::class.impl()
         val observables = stuNumList.map { stuNum ->
             lessonService.getStuLesson(stuNum)
                 .map { stuNum to it as StuLessons }
@@ -55,7 +54,7 @@ class CourseViewModel : BaseViewModel(){
             _noclassData.postValue(map.toSpareTime().onEach {
                 it.value.mIdToNameMap = HashMap(stuNameById)
             })
-            ServiceManager(IStoreService::class).postTask(IStoreService.Task.JOIN_NOCLASS,"","今日已使用没课约一次，获得10邮票")
+            IStoreService::class.impl().postTask(IStoreService.Task.JOIN_NOCLASS,"","今日已使用没课约一次，获得10邮票")
         }
     }
 }

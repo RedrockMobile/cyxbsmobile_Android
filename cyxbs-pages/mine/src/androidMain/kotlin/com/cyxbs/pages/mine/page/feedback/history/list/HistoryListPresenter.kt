@@ -1,9 +1,6 @@
 package com.cyxbs.pages.mine.page.feedback.history.list
 
-import com.mredrock.cyxbs.common.BaseApp.Companion.appContext
-import com.mredrock.cyxbs.common.utils.extensions.unsafeSubscribeBy
-import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
-import com.mredrock.cyxbs.common.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.pages.mine.page.feedback.api
 import com.cyxbs.pages.mine.page.feedback.base.presenter.BasePresenter
 import com.cyxbs.pages.mine.page.feedback.history.list.bean.History
@@ -11,6 +8,9 @@ import com.cyxbs.pages.mine.page.feedback.network.bean.HistoryFeedback
 import com.cyxbs.pages.mine.page.feedback.utils.DateUtils
 import com.cyxbs.pages.mine.page.feedback.utils.change
 import com.cyxbs.pages.mine.page.feedback.utils.getPointStateSharedPreference
+import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
+import com.mredrock.cyxbs.common.utils.extensions.toast
+import com.mredrock.cyxbs.common.utils.extensions.unsafeSubscribeBy
 
 /**
  *@author ZhiQiang Tu

@@ -2,7 +2,6 @@ package com.cyxbs.pages.login.api
 
 import android.app.Activity
 import android.content.Intent
-import com.alibaba.android.arouter.facade.template.IProvider
 
 /**
  * ...
@@ -10,7 +9,7 @@ import com.alibaba.android.arouter.facade.template.IProvider
  * @email guo985892345@foxmail.com
  * @date 2022/8/7 21:03
  */
-interface ILoginService : IProvider {
+interface ILoginService {
   
   /**
    * 登录成功后直接返回上一个 Activity 界面

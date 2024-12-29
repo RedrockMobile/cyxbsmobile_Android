@@ -1,11 +1,7 @@
 package com.cyxbs.pages.store.service
 
-import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.cyxbs.pages.store.api.IStoreService
-import com.cyxbs.pages.store.api.STORE_SERVICE
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.getSp
 import com.cyxbs.components.utils.extensions.toast
@@ -14,6 +10,8 @@ import com.cyxbs.components.utils.network.ApiStatus
 import com.cyxbs.components.utils.network.IApi
 import com.cyxbs.components.utils.network.api
 import com.cyxbs.components.utils.network.throwOrInterceptException
+import com.cyxbs.pages.store.api.IStoreService
+import com.g985892345.provider.api.annotation.ImplProvider
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -21,7 +19,8 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 /**
  * ...
@@ -29,8 +28,8 @@ import java.util.*
  * @email guo985892345@foxmail.com
  * @date 2022/8/6 15:51
  */
-@Route(path = STORE_SERVICE)
-class StoreServiceImpl : IStoreService {
+@ImplProvider
+object StoreServiceImpl : IStoreService {
 
   override fun postTask(task: IStoreService.Task, onlyTag: String?,toast: String?) {
 
@@ -75,7 +74,18 @@ class StoreServiceImpl : IStoreService {
     }
   }
 
-  override fun init(context: Context) {
+  // 上一次发送任务的时间, 用于清空每日任务
+  private var lastSaveDate: String
+    get() = dateSp.getString("last_save_date", null) ?: ""
+    set(value) {
+      dateSp.edit { putString("last_save_date", value) }
+    }
+  private val dateSp = appContext.getSp("StoreServiceImpl_date")
+  private val baseSp = appContext.getSp("StoreServiceImpl_base")
+  private val moreSp = appContext.getSp("StoreServiceImpl_more")
+  private val onlyTagSp = appContext.getSp("StoreServiceImpl_onlyTag")
+
+  init {
     // Base 任务是每天刷新的, 不相等时就先清空所有本地保存的 sharedPreferences
     val nowDate = SimpleDateFormat("yyyy.M.d", Locale.CHINA).format(Date())
     if (lastSaveDate != nowDate) {
@@ -83,17 +93,6 @@ class StoreServiceImpl : IStoreService {
       baseSp.edit { clear() }
     }
   }
-
-  // 上一次发送任务的时间, 用于清空每日任务
-  private var lastSaveDate: String
-    get() = dateSp.getString("last_save_date", null) ?: ""
-    set(value) {
-      dateSp.edit { putString("last_save_date", value) }
-    }
-  private val dateSp = appContext.getSp(this::class.java.simpleName + "_date")
-  private val baseSp = appContext.getSp(this::class.java.simpleName + "_base")
-  private val moreSp = appContext.getSp(this::class.java.simpleName + "_more")
-  private val onlyTagSp = appContext.getSp(this::class.java.simpleName + "_onlyTag")
 
   // 发送请求, 该网络请求私有
   private fun postTask(

@@ -14,12 +14,12 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.cyxbs.pages.login.api.ILegalNoticeService
 import com.cyxbs.components.base.dailog.ChooseDialog
 import com.cyxbs.components.utils.extensions.color
 import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.components.utils.extensions.wrapByNoLeak
-import com.cyxbs.components.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.impl
+import com.cyxbs.pages.login.api.ILegalNoticeService
 
 /**
  * 用户协议的 Dialog
@@ -90,7 +90,7 @@ class UserAgreementDialog private constructor(
     //设置用户协议和隐私政策点击事件
     val userAgreementClickSpan = object : ClickableSpan() {
       override fun onClick(widget: View) {
-        ServiceManager(ILegalNoticeService::class).startUserAgreementActivity(context)
+        ILegalNoticeService::class.impl().startUserAgreementActivity(context)
       }
       
       override fun updateDrawState(ds: TextPaint) {
@@ -102,7 +102,7 @@ class UserAgreementDialog private constructor(
     }.wrapByNoLeak(view) // 防止内存泄漏
     val privacyClickSpan = object : ClickableSpan() {
       override fun onClick(widget: View) {
-        ServiceManager(ILegalNoticeService::class).startPrivacyPolicyActivity(context)
+        ILegalNoticeService::class.impl().startPrivacyPolicyActivity(context)
       }
       
       override fun updateDrawState(ds: TextPaint) {

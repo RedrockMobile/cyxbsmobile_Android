@@ -13,15 +13,15 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.components.utils.service.ServiceManager
-import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
-import com.mredrock.cyxbs.common.utils.extensions.dp2px
-import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.utils.Jump2QQHelper
 import com.cyxbs.pages.mine.R
 import com.cyxbs.pages.mine.databinding.MineActivityFindPasswordBinding
 import com.cyxbs.pages.mine.page.security.util.AnswerTextWatcher
-import com.cyxbs.components.utils.utils.Jump2QQHelper
 import com.cyxbs.pages.mine.page.security.viewmodel.FindPasswordViewModel
+import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
+import com.mredrock.cyxbs.common.utils.extensions.dp2px
+import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 
 /**
  * Author: RayleighZ
@@ -31,7 +31,7 @@ import com.cyxbs.pages.mine.page.security.viewmodel.FindPasswordViewModel
 class FindPasswordActivity : BaseViewModelActivity<FindPasswordViewModel>() {
     //在此activity以及ViewModel中统一使用这个stuNumber来获取学号，以方便整体修改
     private var stuNumber =
-        ServiceManager(IAccountService::class).getUserService().getStuNum()
+        IAccountService::class.impl().getUserService().getStuNum()
 
     //是否来自登陆界面
     private var isFromLogin = false

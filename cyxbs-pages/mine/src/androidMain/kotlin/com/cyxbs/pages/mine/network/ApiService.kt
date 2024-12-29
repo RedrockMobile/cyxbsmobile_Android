@@ -1,7 +1,11 @@
 package com.cyxbs.pages.mine.network
 
+import com.cyxbs.components.utils.network.ApiStatus
+import com.cyxbs.components.utils.network.ApiWrapper
+import com.cyxbs.components.utils.network.IApi
 import com.cyxbs.pages.mine.network.model.BindingResponse
 import com.cyxbs.pages.mine.network.model.ConfirmCode
+import com.cyxbs.pages.mine.network.model.ConfirmQuestion
 import com.cyxbs.pages.mine.network.model.Email
 import com.cyxbs.pages.mine.network.model.EmailCode
 import com.cyxbs.pages.mine.network.model.IdsGetCode
@@ -14,15 +18,19 @@ import com.cyxbs.pages.mine.network.model.UserCount
 import com.cyxbs.pages.mine.network.model.UserUncheckCount
 import com.mredrock.cyxbs.common.bean.RedrockApiStatus
 import com.mredrock.cyxbs.common.bean.RedrockApiWrapper
-import com.cyxbs.components.utils.network.ApiStatus
-import com.cyxbs.components.utils.network.ApiWrapper
-import com.cyxbs.components.utils.network.IApi
-import com.cyxbs.pages.mine.network.model.ConfirmQuestion
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.Multipart
+import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Part
+import retrofit2.http.Query
 
 /**
  * Created by zia on 2018/8/15.
@@ -245,10 +253,6 @@ interface ApiService:IApi {
     fun getUncheckedCommentCount(
         @Query("time") timeStamp: Long
     ): Observable<RedrockApiWrapper<UserUncheckCount>>
-
-    //获取活动的数量
-    @GET("/magipoke-ufield/message/list/")
-    fun getUFieldActivity(): Observable<ApiWrapper<List<UfieldMsgBean>>>
 
     @GET("/magipoke-ufield/message/list/")
     suspend fun getUFieldActivityList(): ApiWrapper<List<UfieldMsgBean>>

@@ -8,20 +8,24 @@ import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.utils.service.impl
+import com.cyxbs.pages.mine.R
+import com.cyxbs.pages.mine.page.security.viewmodel.ChangePasswordViewModel
+import com.cyxbs.pages.mine.util.ui.ChooseFindTypeDialog
 import com.mredrock.cyxbs.common.component.CyxbsToast
-import com.mredrock.cyxbs.common.service.ServiceManager
 import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
 import com.mredrock.cyxbs.common.utils.LogUtils
 import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.common.utils.extensions.toast
-import com.cyxbs.pages.mine.R
-import com.cyxbs.pages.mine.page.security.viewmodel.ChangePasswordViewModel
-import com.cyxbs.pages.mine.util.ui.ChooseFindTypeDialog
 
 /**
  * Author: SpreadWater
@@ -76,7 +80,7 @@ class ChangePasswordActivity : BaseViewModelActivity<ChangePasswordViewModel>() 
 
     private var originPassword = ""//用来保存旧密码
 
-    private var stuNum = ServiceManager(IAccountService::class).getUserService()
+    private var stuNum = IAccountService::class.impl().getUserService()
         .getStuNum()//获取当前用户的学号
 
     private var isFromLogin = false//是否来自登陆界面

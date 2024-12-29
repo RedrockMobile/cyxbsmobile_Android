@@ -18,14 +18,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.cyxbs.pages.todo.R
-import com.google.gson.Gson
-import com.cyxbs.components.config.route.TODO_TODO_DETAIL
 import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.toastWithYOffset
 import com.cyxbs.components.utils.extensions.visible
+import com.cyxbs.pages.todo.R
 import com.cyxbs.pages.todo.adapter.RepeatTimeRvAdapter
 import com.cyxbs.pages.todo.model.bean.RemindMode
 import com.cyxbs.pages.todo.model.bean.Todo
@@ -36,6 +33,7 @@ import com.cyxbs.pages.todo.ui.dialog.SelectCategoryDialog
 import com.cyxbs.pages.todo.ui.dialog.SelectRepeatDialog
 import com.cyxbs.pages.todo.util.transformRepeat
 import com.cyxbs.pages.todo.viewmodel.TodoViewModel
+import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
 /**
@@ -43,7 +41,6 @@ import kotlinx.coroutines.launch
  * author: sanhuzhen
  * date: 2024/8/20 17:31
  */
-@Route(path = TODO_TODO_DETAIL)
 class TodoDetailActivity : BaseActivity() {
     lateinit var todo: Todo
     private val repeatTimeAdapter by lazy { RepeatTimeRvAdapter(1) }

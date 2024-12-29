@@ -1,11 +1,10 @@
 package com.cyxbs.components.utils.network
 
-import com.google.gson.annotations.SerializedName
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.components.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.impl
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 import java.util.concurrent.atomic.AtomicBoolean
-import kotlin.jvm.Throws
 
 /**
  * [ApiWrapper] 里面封装了 [data]、[status]、[info] 字段，是为了统一网络请求数据的最外层结构
@@ -93,5 +92,5 @@ interface IApiStatus : Serializable {
 private val checkRefreshTokenExpired = AtomicBoolean(false)
 private var checkTokenExpired = AtomicBoolean(false)
 private val userTokenService by lazy {
-  ServiceManager.invoke(IAccountService::class).getUserTokenService()
+  IAccountService::class.impl().getUserTokenService()
 }

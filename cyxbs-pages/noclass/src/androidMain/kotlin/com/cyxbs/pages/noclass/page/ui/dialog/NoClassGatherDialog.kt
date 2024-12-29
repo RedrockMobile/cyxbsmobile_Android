@@ -9,14 +9,13 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.viewpager2.widget.ViewPager2
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.pages.affair.api.DateJson
-import com.cyxbs.pages.affair.api.IAffairService
-import com.cyxbs.pages.affair.api.NoClassBean
 import com.cyxbs.components.utils.adapter.FragmentVpAdapter
 import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.components.utils.extensions.gone
-import com.cyxbs.components.utils.service.ServiceManager
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.pages.affair.api.DateJson
+import com.cyxbs.pages.affair.api.IAffairService
+import com.cyxbs.pages.affair.api.NoClassBean
 import com.cyxbs.pages.noclass.R
 import com.cyxbs.pages.noclass.page.ui.fragment.NoClassBusyPageFragment
 import com.cyxbs.pages.noclass.util.BaseBottomSheetDialogFragment
@@ -87,14 +86,14 @@ class NoClassGatherDialog: BaseBottomSheetDialogFragment() {
     dialog.findViewById<Button>(R.id.noclass_btn_arrange_plan).apply {
       setOnClickListener {
         //跳转到安排行程模块,这里将自己去掉了
-        val mUserId =  ServiceManager.invoke(IAccountService::class).getUserService().getStuNum()
+        val mUserId =  IAccountService::class.impl().getUserService().getStuNum()
         val idIsSparePair = ArrayList<Pair<String,Boolean>>()
         mNumNameIsSpare.forEach { (idName, isSpare) ->
           if (idName.first != mUserId){
             idIsSparePair.add(idName.first to isSpare)
           }
         }
-        IAffairService::class.impl.startActivityForNoClass(NoClassBean(idIsSparePair,mDateJson))
+        IAffairService::class.impl().startActivityForNoClass(NoClassBean(idIsSparePair,mDateJson))
       }
     }
     mIndicator = dialog.findViewById(R.id.noclass_indicator_gathering)

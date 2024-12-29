@@ -1,5 +1,6 @@
 package rule
 
+import ProjectChecker
 import org.gradle.api.Project
 import org.gradle.api.artifacts.ProjectDependency
 
@@ -9,7 +10,7 @@ import org.gradle.api.artifacts.ProjectDependency
  * @author 985892345
  * @date 2024/11/10
  */
-object ModuleDependCheckRule : AndroidProjectChecker.ICheckRule {
+object ModuleDependCheckRule : ProjectChecker.ICheckRule {
 
   // TODO 用于特殊情况时忽略 api 模块检查，正常情况下就应该依赖 api 模块而不是实现模块
   // 以下模块在依赖其他模块时忽略检查

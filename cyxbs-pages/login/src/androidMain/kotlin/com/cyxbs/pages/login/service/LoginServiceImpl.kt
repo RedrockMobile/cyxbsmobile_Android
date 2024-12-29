@@ -1,12 +1,10 @@
 package com.cyxbs.pages.login.service
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.pages.login.api.ILoginService
-import com.cyxbs.pages.login.api.LOGIN_SERVICE
 import com.cyxbs.pages.login.login.ui.LoginActivity
+import com.g985892345.provider.api.annotation.ImplProvider
 
 /**
  * ...
@@ -14,8 +12,8 @@ import com.cyxbs.pages.login.login.ui.LoginActivity
  * @email guo985892345@foxmail.com
  * @date 2022/8/7 21:11
  */
-@Route(path = LOGIN_SERVICE)
-class LoginServiceImpl : ILoginService {
+@ImplProvider
+object LoginServiceImpl : ILoginService {
   
   override fun startLoginActivity(intent: (Intent.() -> Unit)?) {
     LoginActivity.start(intent)
@@ -30,8 +28,5 @@ class LoginServiceImpl : ILoginService {
   
   override fun startLoginActivityReboot(intent: (Intent.() -> Unit)?) {
     LoginActivity.startReboot(intent)
-  }
-  
-  override fun init(context: Context) {
   }
 }

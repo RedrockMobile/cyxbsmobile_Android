@@ -1,13 +1,12 @@
 import org.gradle.kotlin.dsl.get
 import release.CyxbsReleaseTask
-import kotlin.collections.plusAssign
 
 plugins {
-  id("manager.composeApp")
+  id("manager.app")
   alias(libs.plugins.vasdolly) // 腾讯打包插件 https://github.com/Tencent/VasDolly
 }
 
-useAutoService()
+useKtProvider()
 
 kotlin {
   sourceSets {

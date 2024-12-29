@@ -1,22 +1,21 @@
 package com.cyxbs.pages.discover.utils
 
 import android.content.Context
-import com.alibaba.android.arouter.launcher.ARouter
 import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.config.route.DISCOVER_CALENDAR
+import com.cyxbs.components.config.route.DISCOVER_EMPTY_ROOM
+import com.cyxbs.components.config.route.DISCOVER_GRADES
 import com.cyxbs.components.config.route.DISCOVER_MAP
-import com.cyxbs.components.config.route.DISCOVER_MORE_FUNCTION
 import com.cyxbs.components.config.route.DISCOVER_NO_CLASS
 import com.cyxbs.components.config.route.DISCOVER_OTHER_COURSE
 import com.cyxbs.components.config.route.DISCOVER_SCHOOL_CAR
-import com.cyxbs.components.config.route.DISCOVER_TODO_MAIN
-import com.cyxbs.components.config.route.DISCOVER_CALENDAR
 import com.cyxbs.components.config.route.DISCOVER_SPORT
-import com.cyxbs.components.config.route.DISCOVER_EMPTY_ROOM
-import com.cyxbs.components.config.route.DISCOVER_GRADES
+import com.cyxbs.components.config.route.DISCOVER_TODO_MAIN
 import com.cyxbs.components.config.sp.defaultSp
-import com.cyxbs.pages.discover.R
 import com.cyxbs.components.utils.logger.event.ClickEvent
-import com.cyxbs.components.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.service.startActivity
+import com.cyxbs.pages.discover.R
 import java.lang.ref.SoftReference
 
 /**
@@ -38,7 +37,7 @@ object MoreFunctionProvider {
             Function(R.drawable.discover_ic_todo,R.string.discover_title_todo, R.string.discover_detail_todo, StartActivityImpl(DISCOVER_TODO_MAIN), ClickEvent.CLICK_YZQD_ENTRY),
             Function(R.drawable.discover_ic_sport, R.string.discover_title_sport, R.string.discover_detail_sport, StartActivityAfterLogin("体育打卡", DISCOVER_SPORT), ClickEvent.CLICK_YLC_TYDK_ENTRY),
             Function(R.drawable.discover_ic_my_exam, R.string.discover_title_my_exam, R.string.discover_detail_my_exam, StartActivityAfterLogin("我的考试", DISCOVER_GRADES), ClickEvent.CLICK_YLC_WDKS_ENTRY),
-            Function(R.drawable.discover_ic_more_function, R.string.discover_title_more_function, R.string.discover_detail_more_function, StartActivityImpl(DISCOVER_MORE_FUNCTION)))
+            Function(R.drawable.discover_ic_more_function, R.string.discover_title_more_function, R.string.discover_detail_more_function, null))
 
     //当有缓存时直接从缓存中获取，没有时从sp中拿
     fun getHomePageFunctions(): List<Function> {
@@ -73,23 +72,23 @@ object MoreFunctionProvider {
     }
 
 
-    class Function(var resource: Int, val title: Int, val detail: Int, val activityStarter: StartActivityAble, val clickEvent: ClickEvent? = null)
+    class Function(var resource: Int, val title: Int, val detail: Int, val activityStarter: StartActivityAble?, val clickEvent: ClickEvent? = null)
     interface StartActivityAble {
         fun startActivity(context: Context)
     }
 
     class StartActivityImpl(private val routing: String) : StartActivityAble {
         override fun startActivity(context: Context) {
-            ARouter.getInstance().build(routing).navigation(context)
+            startActivity(routing)
         }
     }
 
     class StartActivityAfterLogin(private val msg: String, private val routing: String) : StartActivityAble {
         override fun startActivity(context: Context) {
-            if (ServiceManager(IAccountService::class).getVerifyService().isLogin()) {
-                ARouter.getInstance().build(routing).navigation()
+            if (IAccountService::class.impl().getVerifyService().isLogin()) {
+                startActivity(routing)
             } else {
-                ServiceManager(IAccountService::class).getVerifyService().askLogin(context, "请先登录才能使用${msg}哦~")
+                IAccountService::class.impl().getVerifyService().askLogin(context, "请先登录才能使用${msg}哦~")
             }
         }
 

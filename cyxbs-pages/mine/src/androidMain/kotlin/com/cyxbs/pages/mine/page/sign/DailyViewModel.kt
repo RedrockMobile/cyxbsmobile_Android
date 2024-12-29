@@ -2,14 +2,14 @@ package com.cyxbs.pages.mine.page.sign
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mredrock.cyxbs.common.service.ServiceManager
-import com.mredrock.cyxbs.common.utils.extensions.unsafeSubscribeBy
-import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
-import com.mredrock.cyxbs.common.viewmodel.event.SingleLiveEvent
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.mine.network.model.ScoreStatus
 import com.cyxbs.pages.mine.util.apiService
 import com.cyxbs.pages.mine.util.extension.normalWrapper
 import com.cyxbs.pages.store.api.IStoreService
+import com.mredrock.cyxbs.common.utils.extensions.unsafeSubscribeBy
+import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
+import com.mredrock.cyxbs.common.viewmodel.event.SingleLiveEvent
 import io.reactivex.rxjava3.functions.Function
 
 /**
@@ -56,7 +56,7 @@ class DailyViewModel : BaseViewModel() {
                 .unsafeSubscribeBy(
                         onNext = {
                             _status.postValue(it)
-                          ServiceManager(IStoreService::class)
+                          IStoreService::class.impl()
                             .postTask(IStoreService.Task.DAILY_SIGN, "")
                         },
                         onError = {

@@ -4,6 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.cyxbs.components.base.ui.BaseViewModel
+import com.cyxbs.components.utils.extensions.asFlow
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.affair.api.IAffairService
 import com.cyxbs.pages.course.api.ICourseService
 import com.cyxbs.pages.course.page.course.data.AffairData
@@ -15,9 +18,6 @@ import com.cyxbs.pages.course.page.link.model.LinkRepository
 import com.cyxbs.pages.course.page.link.room.LinkStuEntity
 import com.cyxbs.pages.course.service.CourseServiceImpl
 import com.cyxbs.pages.course.service.LessonServiceImpl
-import com.cyxbs.components.base.ui.BaseViewModel
-import com.cyxbs.components.utils.extensions.asFlow
-import com.cyxbs.components.utils.service.impl
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -60,7 +60,8 @@ class HomeCourseViewModel : BaseViewModel() {
   private val _showLinkEvent = MutableSharedFlow<Boolean>()
   val showLinkEvent: SharedFlow<Boolean> get() = _showLinkEvent
 
-  val courseService = ICourseService::class.impl as CourseServiceImpl
+  val courseService
+    get() = CourseServiceImpl
 
   // Vp2 的 currentItem
   val currentItem = MutableLiveData<Int>()
@@ -109,7 +110,7 @@ class HomeCourseViewModel : BaseViewModel() {
     return Observable.combineLatest(
       LessonServiceImpl.observeSelfLessonInternal(isToast = isToast), // 自己课的观察流
       LessonServiceImpl.observeLinkLessonInternal(), // 关联人课的观察流
-      IAffairService::class.impl.observeSelfAffair(), // 事务的观察流
+      IAffairService::class.impl().observeSelfAffair(), // 事务的观察流
     ) { self, link, affair ->
       // 装换为 data 数据类
       HomePageResultImpl.flatMap(

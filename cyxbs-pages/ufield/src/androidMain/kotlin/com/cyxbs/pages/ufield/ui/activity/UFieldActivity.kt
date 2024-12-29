@@ -1,5 +1,6 @@
 package com.cyxbs.pages.ufield.ui.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -8,11 +9,8 @@ import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.cardview.widget.CardView
 import androidx.viewpager2.widget.ViewPager2
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
-import com.cyxbs.components.config.route.UFIELD_MAIN_ENTRY
 import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.route.UFIELD_MAIN_ENTRY
 import com.cyxbs.components.utils.adapter.FragmentVpAdapter
 import com.cyxbs.pages.ufield.R
 import com.cyxbs.pages.ufield.ui.fragment.ufieldfragment.AllFragment
@@ -20,6 +18,9 @@ import com.cyxbs.pages.ufield.ui.fragment.ufieldfragment.CultureFragment
 import com.cyxbs.pages.ufield.ui.fragment.ufieldfragment.EducationFragment
 import com.cyxbs.pages.ufield.ui.fragment.ufieldfragment.SportsFragment
 import com.cyxbs.pages.ufield.viewmodel.UFieldViewModel
+import com.g985892345.provider.api.annotation.KClassProvider
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 /**
  * description ：最初从中心模块跳转到这个activity
@@ -28,7 +29,7 @@ import com.cyxbs.pages.ufield.viewmodel.UFieldViewModel
  * date : 2023/8/7 19:49
  * version: 1.0
  */
-@Route(path = UFIELD_MAIN_ENTRY)
+@KClassProvider(clazz = Activity::class, name = UFIELD_MAIN_ENTRY)
 class UFieldActivity : BaseActivity() {
 
     private val mBack: ImageView by R.id.uField_back.view()

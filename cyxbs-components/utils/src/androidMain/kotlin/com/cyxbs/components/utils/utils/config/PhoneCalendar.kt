@@ -7,16 +7,20 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.icu.util.TimeZone
-import android.provider.CalendarContract.*
+import android.provider.CalendarContract.CALLER_IS_SYNCADAPTER
+import android.provider.CalendarContract.Calendars
+import android.provider.CalendarContract.Events
+import android.provider.CalendarContract.Reminders
 import androidx.annotation.IntRange
 import androidx.fragment.app.FragmentActivity
-import com.cyxbs.components.init.appApplication
 import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.init.appApplication
 import com.cyxbs.components.utils.extensions.doPermissionAction
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.utils.config.PhoneCalendar.Event
 import io.reactivex.rxjava3.core.Completable
 import kotlinx.coroutines.suspendCancellableCoroutine
-import java.util.*
+import java.util.Calendar
 import kotlin.coroutines.resume
 
 /**
@@ -56,7 +60,7 @@ object PhoneCalendar {
    * 注意：ACCOUNT_NAME 和 ACCOUNT_TYPE 是一个人日历账户的唯一标识
    */
   fun getAccountName(): String {
-    return IAccountService::class.impl.getUserService().getStuNum()
+    return IAccountService::class.impl().getUserService().getStuNum()
   }
   
   // 账户类型。这个不会显示给用户

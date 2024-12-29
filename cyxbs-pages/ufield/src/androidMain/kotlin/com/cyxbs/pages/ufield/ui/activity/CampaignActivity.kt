@@ -1,5 +1,6 @@
 package com.cyxbs.pages.ufield.ui.activity
 
+import android.app.Activity
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,11 +9,8 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
-import com.cyxbs.components.config.route.UFIELD_CENTER_ENTRY
 import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.route.UFIELD_CENTER_ENTRY
 import com.cyxbs.components.utils.adapter.FragmentVpAdapter
 import com.cyxbs.components.utils.extensions.color
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
@@ -22,8 +20,12 @@ import com.cyxbs.pages.ufield.ui.fragment.campaignfragment.JoinFragment
 import com.cyxbs.pages.ufield.ui.fragment.campaignfragment.PublishFragment
 import com.cyxbs.pages.ufield.ui.fragment.campaignfragment.WatchFragment
 import com.cyxbs.pages.ufield.viewmodel.MessageViewModel
+import com.g985892345.provider.api.annotation.KClassProvider
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlin.properties.Delegates
-@Route(path = UFIELD_CENTER_ENTRY)
+
+@KClassProvider(clazz = Activity::class, name = UFIELD_CENTER_ENTRY)
 class CampaignActivity : BaseActivity() {
 
 

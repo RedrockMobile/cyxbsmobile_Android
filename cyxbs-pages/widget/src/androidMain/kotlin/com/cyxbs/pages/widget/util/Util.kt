@@ -7,21 +7,18 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.widget.Toast
 import androidx.annotation.IdRes
-import com.google.gson.Gson
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.components.base.BaseApp
-import com.cyxbs.components.utils.extensions.CyxbsToast
 import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.toast
 import com.cyxbs.components.utils.service.impl
-import com.cyxbs.pages.widget.repo.bean.LessonEntity
-import com.cyxbs.pages.widget.repo.database.LessonDatabase
 import com.cyxbs.pages.widget.activity.InfoActivity
 import com.cyxbs.pages.widget.repo.bean.AffairEntity
+import com.cyxbs.pages.widget.repo.bean.LessonEntity
 import com.cyxbs.pages.widget.repo.database.AffairDatabase
-import java.util.*
-import kotlin.collections.ArrayList
+import com.cyxbs.pages.widget.repo.database.LessonDatabase
+import com.google.gson.Gson
+import java.util.Calendar
 
 
 /**
@@ -98,11 +95,11 @@ fun filterClassRoom(classRoom: String): String {
 }
 
 fun startOperation(lesson: LessonEntity) {
-    if (IAccountService::class.impl.getVerifyService().isLogin()) {
-        CyxbsToast.show(BaseApp.baseApp, "请登录之后再点击查看详细信息", Toast.LENGTH_SHORT)
+    if (IAccountService::class.impl().getVerifyService().isLogin()) {
+        toast("请登录之后再点击查看详细信息")
     } else {
-/*        ARouter.getInstance().build(MAIN_MAIN).navigation()
 //        Todo,此处等郭神提供课表的接口*/
+        // todo 小组件待重构
     }
 }
 

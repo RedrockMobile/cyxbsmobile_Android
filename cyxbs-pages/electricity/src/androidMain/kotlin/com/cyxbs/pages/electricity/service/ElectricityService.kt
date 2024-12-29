@@ -1,24 +1,17 @@
 package com.cyxbs.pages.electricity.service
 
-import android.content.Context
 import androidx.fragment.app.Fragment
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
-import com.cyxbs.pages.electricity.api.ELECTRICITY_SERVICE
-import com.cyxbs.pages.electricity.api.IElectricityService
 import com.cyxbs.components.config.route.DISCOVER_ELECTRICITY_FEED
+import com.cyxbs.components.utils.service.impl
+import com.cyxbs.pages.electricity.api.IElectricityService
+import com.g985892345.provider.api.annotation.ImplProvider
 
 /**
  * Created by yyfbe, Date on 2020/8/31.
  */
-@Route(path = ELECTRICITY_SERVICE, name = ELECTRICITY_SERVICE)
-class ElectricityService : IElectricityService {
-    private var mContext: Context? = null
+@ImplProvider
+object ElectricityService : IElectricityService {
     override fun getElectricityFeed(): Fragment {
-        return ARouter.getInstance().build(DISCOVER_ELECTRICITY_FEED).navigation() as Fragment
-    }
-
-    override fun init(context: Context?) {
-        this.mContext = context
+        return Fragment::class.impl(DISCOVER_ELECTRICITY_FEED)
     }
 }

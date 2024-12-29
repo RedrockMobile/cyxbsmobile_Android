@@ -2,7 +2,7 @@ plugins {
   id("manager.lib")
 }
 
-useARouter()
+useKtProvider()
 useRoom(rxjava = true)
 
 kotlin {

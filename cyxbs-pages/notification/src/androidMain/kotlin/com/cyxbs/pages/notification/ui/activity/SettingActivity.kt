@@ -1,5 +1,6 @@
 package com.cyxbs.pages.notification.ui.activity
 
+import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -16,10 +17,11 @@ import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.alibaba.android.arouter.facade.annotation.Route
+import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.route.MINE_CHECK_IN
+import com.cyxbs.components.config.route.NOTIFICATION_SETTING
 import com.cyxbs.components.utils.extensions.visible
-import com.cyxbs.pages.mine.api.IGetDaySignClassService
-import com.cyxbs.components.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.implClass
 import com.cyxbs.pages.notification.BuildConfig
 import com.cyxbs.pages.notification.R
 import com.cyxbs.pages.notification.util.Constant.IS_SWITCH1_SELECT
@@ -28,9 +30,8 @@ import com.cyxbs.pages.notification.util.Constant.NOTIFY_TAG
 import com.cyxbs.pages.notification.util.NotificationSp
 import com.cyxbs.pages.notification.viewmodel.NotificationViewModel
 import com.cyxbs.pages.notification.widget.NotifySignWorker
-import com.cyxbs.components.config.route.NOTIFICATION_SETTING
-import com.cyxbs.components.base.ui.BaseActivity
-import java.util.*
+import com.g985892345.provider.api.annotation.KClassProvider
+import java.util.Calendar
 import kotlin.properties.Delegates
 
 /**
@@ -39,7 +40,7 @@ import kotlin.properties.Delegates
  *
  */
 //考虑到通知设置页以后可能会有其它渠道进入，故配置一个路由
-@Route(path = NOTIFICATION_SETTING)
+@KClassProvider(clazz = Activity::class, name = NOTIFICATION_SETTING)
 class SettingActivity : BaseActivity() {
 
     private val viewModel by viewModels<NotificationViewModel>()
@@ -111,8 +112,7 @@ class SettingActivity : BaseActivity() {
             //下拉显示的大图标
             val intent = Intent(
                 this,
-                ServiceManager(IGetDaySignClassService::class)
-                    .getDaySignClassService()
+                Activity::class.implClass(MINE_CHECK_IN).java
             )
             val pIntent = PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_IMMUTABLE)
             builder.setContentIntent(pIntent)

@@ -1,6 +1,7 @@
 package com.cyxbs.pages.food.ui.activity
 
 import android.animation.ObjectAnimator
+import android.app.Activity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -10,23 +11,28 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.animation.addListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.cyxbs.pages.store.api.IStoreService
+import com.cyxbs.components.base.dailog.BaseChooseDialog
+import com.cyxbs.components.base.dailog.ChooseDialog
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.config.route.FOOD_ENTRY
+import com.cyxbs.components.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.setImageFromUrl
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.visible
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.food.R
 import com.cyxbs.pages.food.ui.adapters.FoodMainRvAdapter
 import com.cyxbs.pages.food.ui.view.FoodDetailDialog
 import com.cyxbs.pages.food.ui.view.FoodMainDialog
 import com.cyxbs.pages.food.viewmodel.FoodMainViewModel
-import com.cyxbs.components.base.dailog.BaseChooseDialog
-import com.cyxbs.components.base.dailog.ChooseDialog
-import com.cyxbs.components.base.ui.BaseActivity
-import com.cyxbs.components.utils.extensions.*
+import com.cyxbs.pages.store.api.IStoreService
+import com.g985892345.provider.api.annotation.KClassProvider
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
 
-@Route(path = FOOD_ENTRY)
+@KClassProvider(clazz = Activity::class, name = FOOD_ENTRY)
 class FoodMainActivity : BaseActivity() {
     private val viewModel by lazy { ViewModelProvider(this)[FoodMainViewModel::class.java] }
     private val mRvRegion by R.id.food_main_rv_canteen_region.view<RecyclerView>()
@@ -139,7 +145,7 @@ class FoodMainActivity : BaseActivity() {
                 ).setPositiveClick {
                     this.dismiss()
                 }.show()
-                com.cyxbs.components.utils.service.ServiceManager(IStoreService::class)
+                IStoreService::class.impl()
                     .postTask(IStoreService.Task.JOIN_FOOD,"","今日已使用美食咨询处一次，获得10邮票")
             }
         }

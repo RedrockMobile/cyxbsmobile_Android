@@ -1,6 +1,7 @@
 package com.cyxbs.pages.emptyroom.ui
 
 import android.animation.ObjectAnimator
+import android.app.Activity
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -15,9 +16,13 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.google.android.material.tabs.TabLayout
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.config.config.SchoolCalendar
+import com.cyxbs.components.config.route.DISCOVER_EMPTY_ROOM
+import com.cyxbs.components.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.pages.emptyroom.R
 import com.cyxbs.pages.emptyroom.ui.adapter.EmptyRoomResultAdapter
 import com.cyxbs.pages.emptyroom.ui.adapter.StringAdapter
@@ -29,16 +34,12 @@ import com.cyxbs.pages.emptyroom.viewmodel.EmptyRoomViewModel.Companion.DEFAULT
 import com.cyxbs.pages.emptyroom.viewmodel.EmptyRoomViewModel.Companion.ERROR
 import com.cyxbs.pages.emptyroom.viewmodel.EmptyRoomViewModel.Companion.FINISH
 import com.cyxbs.pages.emptyroom.viewmodel.EmptyRoomViewModel.Companion.LOADING
-import java.util.*
-import com.cyxbs.components.config.route.DISCOVER_EMPTY_ROOM
-import com.cyxbs.components.base.ui.BaseActivity
-import com.cyxbs.components.utils.extensions.dp2px
-import com.cyxbs.components.utils.extensions.gone
-import com.cyxbs.components.utils.extensions.setOnSingleClickListener
-import com.cyxbs.components.utils.extensions.visible
+import com.g985892345.provider.api.annotation.KClassProvider
+import com.google.android.material.tabs.TabLayout
+import java.util.Calendar
 
 
-@Route(path = DISCOVER_EMPTY_ROOM)
+@KClassProvider(clazz = Activity::class, name = DISCOVER_EMPTY_ROOM)
 class EmptyRoomActivity : BaseActivity(), OnItemSelectedChangeListener {
 
     private val viewModel by viewModels<EmptyRoomViewModel>()

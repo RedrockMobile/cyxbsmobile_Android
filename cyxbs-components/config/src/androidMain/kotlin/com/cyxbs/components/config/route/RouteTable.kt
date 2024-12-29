@@ -12,18 +12,14 @@ package com.cyxbs.components.config.route
  *
  * TODO 由于目前没有完全迁移 lib_common，所以有些看起来没有使用的变量，可能以后需要使用，所以暂时不要删除
  *
- * 其余配置：缺省页拦截器[DefaultPageInterceptor]
+ * 其余配置：缺省页拦截在 [ActivityInterceptor]
  */
-const val MAIN_MAIN = "/main/entry"
 
 //缺省页
 const val DEFAULT_PAGE = "/main/default"
-const val DEFAULT_FRAGMENT_PAGE = "/main/default2"
 
-const val COURSE_ENTRY = "/course/entry"
 const val DISCOVER_ENTRY = "/discover/entry"
 const val MINE_ENTRY = "/mine/entry"
-const val CENTER_ENTRY = "/center/entry"
 
 const val DISCOVER_OTHER_COURSE = "/other_course/discover/entry"
 const val DISCOVER_NO_CLASS = "/no_class/discover/entry"
@@ -35,22 +31,11 @@ const val DISCOVER_VOLUNTEER = "/volunteer/discover/entry"
 const val DISCOVER_VOLUNTEER_RECORD = "/volunteer/discover/record"
 const val DISCOVER_SCHOOL_CAR = "/school_car/discover/entry"
 const val DISCOVER_NEWS = "/news/discover/entry"
-const val DISCOVER_MORE_FUNCTION = "/more_function/discover/entry"
 const val DISCOVER_TODO_MAIN = "/todo/discover/entry"
 const val DISCOVER_SPORT = "/sport/discover/entry"
 
-//志愿服务在发现页的展示信息
-const val DISCOVER_VOLUNTEER_FEED = "/volunteer/discover/feed"
-
 //查电费在发现页面的展示信息
 const val DISCOVER_ELECTRICITY_FEED = "/electricity/discover/feed"
-
-//todo在发现页面展示信息
-const val DISCOVER_TODO_FEED = "/todo/discover/feed"
-
-//体育打卡在发现页面的展示信息
-const val DISCOVER_SPORT_FEED = "/sport/discover/feed"
-
 
 //教务新闻子项入口
 const val DISCOVER_NEWS_ITEM = "/news/discover/item"
@@ -67,24 +52,11 @@ const val NOTIFICATION_SETTING = "/notification/setting"
 // 个人界面的确认密码模块
 const val MINE_FORGET_PASSWORD = "/forget_password/mine/entry"
 
-// 个人界面的绑定邮箱模块
-const val MINE_BIND_EMAIL = "/bind_email/mine/entry"
-
-// 个人界面的编辑个人信息界面
-const val MINE_EDIT_INFO = "/edit_info/mine/entry"
-
-//todo模块
-//跳转到TODO的详情页
-const val TODO_TODO_DETAIL = "/todo/todo_detail/entry"
-
 //小组件用，增加todo
 const val TODO_ADD_TODO_BY_WIDGET = "/widget/todo/entry"
 
 // module_store 邮票中心页
 const val STORE_ENTRY = "/store/entry"
-
-//绑定教务在线ids页面
-const val LOGIN_BIND_IDS = "/login/bind_ids/entry"
 
 //课表上课地点跳转到地图key
 const val COURSE_POS_TO_MAP = "COURSE_POS_TO_MAP"

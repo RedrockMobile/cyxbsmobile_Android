@@ -43,5 +43,6 @@
     <application>
         <!--  华为/oppo 折叠屏  -->
         <meta-data android:name="EasyGoClient" android:value="true" />
+        <activity android:name=".route.defaultpage.DefaultPageActivity"/>
     </application>
 </manifest>

@@ -1,5 +1,6 @@
 package com.cyxbs.pages.course.page.find.ui.find.activity
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,20 +9,20 @@ import android.widget.FrameLayout
 import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.config.route.DISCOVER_OTHER_COURSE
+import com.cyxbs.components.utils.adapter.FragmentVpAdapter
+import com.cyxbs.components.utils.extensions.lazyUnlock
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.course.R
 import com.cyxbs.pages.course.page.find.ui.course.stu.FindStuCourseFragment
 import com.cyxbs.pages.course.page.find.ui.course.tea.FindTeaCourseFragment
 import com.cyxbs.pages.course.page.find.ui.find.fragment.FindStuFragment
 import com.cyxbs.pages.course.page.find.viewmodel.activity.FindLessonViewModel
-import com.cyxbs.components.base.ui.BaseActivity
-import com.cyxbs.components.utils.adapter.FragmentVpAdapter
-import com.cyxbs.components.utils.extensions.lazyUnlock
-import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.g985892345.provider.api.annotation.KClassProvider
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 /**
  * ...
@@ -29,7 +30,7 @@ import com.cyxbs.components.utils.extensions.setOnSingleClickListener
  * @email 2767465918@qq.com
  * @date 2022/2/8 15:40
  */
-@Route(path = DISCOVER_OTHER_COURSE)
+@KClassProvider(clazz = Activity::class, name = DISCOVER_OTHER_COURSE)
 class FindLessonActivity : BaseActivity() {
   
   companion object {

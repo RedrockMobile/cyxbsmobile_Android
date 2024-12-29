@@ -1,9 +1,9 @@
 plugins {
-  id("manager.composeLib")
+  id("manager.lib")
+  id("kmp.compose")
 }
 
-useARouter()
-useAutoService()
+useKtProvider()
 
 kotlin {
   sourceSets {

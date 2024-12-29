@@ -5,12 +5,13 @@ package com.cyxbs.components.init
  *
  * 在自己的模块中参考以下写法即可实现注入：
  * ```
- * 添加依赖：
- * dependApiInit() // 已包含 AutoService
+ * 添加配置：
+ * useKtProvider()
  *
  * 实现接口：
- * @AutoService(InitialService::class)
- * class XXXInitialService : InitialService
+ * @ImplProvider(clazz = InitialService::class, name = "XXXInitialService")
+ * object XXXInitialService : InitialService
+ * // 建议使用 object 单例
  * ```
  *
  * @author ZhiQiang Tu

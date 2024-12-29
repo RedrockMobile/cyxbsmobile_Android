@@ -10,14 +10,14 @@ import android.widget.TextView
 import androidx.core.view.postDelayed
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.toast
-import com.cyxbs.components.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.noclass.R
 import com.cyxbs.pages.noclass.page.viewmodel.dialog.CreateGroupViewModel
 import com.cyxbs.pages.noclass.util.startShake
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 /**
  *
@@ -102,7 +102,7 @@ class CreateGroupDialog(
      * 初始化用户信息
      */
     private fun initUserInfo() {
-        ServiceManager.invoke(IAccountService::class).getUserService().apply {
+        IAccountService::class.impl().getUserService().apply {
             mUserName = this.getUsername()
             mUserId = this.getStuNum()
         }

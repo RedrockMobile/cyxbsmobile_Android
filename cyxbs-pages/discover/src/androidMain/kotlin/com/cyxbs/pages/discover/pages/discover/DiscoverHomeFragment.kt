@@ -20,37 +20,36 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.pages.electricity.api.IElectricityService
-import com.cyxbs.pages.sport.api.ISportService
-import com.cyxbs.pages.todo.api.ITodoService
-import com.cyxbs.pages.discover.utils.SpacesHorizontalItemDecoration
+import com.cyxbs.components.base.operations.doIfLogin
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.config.config.SchoolCalendar
 import com.cyxbs.components.config.route.DISCOVER_ENTRY
 import com.cyxbs.components.config.route.DISCOVER_NEWS
 import com.cyxbs.components.config.route.DISCOVER_NEWS_ITEM
 import com.cyxbs.components.config.route.MINE_CHECK_IN
 import com.cyxbs.components.config.route.NOTIFICATION_HOME
-import com.cyxbs.pages.discover.R
-import com.cyxbs.pages.discover.pages.discover.adapter.DiscoverMoreFunctionRvAdapter
-import com.cyxbs.pages.discover.pages.discover.adapter.RollerViewInfoAdapter
-import com.cyxbs.pages.discover.utils.IS_SWITCH1_SELECT
-import com.cyxbs.pages.discover.utils.MoreFunctionProvider
-import com.cyxbs.pages.discover.utils.NotificationSp
-import com.cyxbs.pages.discover.widget.IndicatorView
-import com.cyxbs.components.base.operations.doIfLogin
-import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.processLifecycleScope
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.components.utils.logger.TrackingUtils
-import com.cyxbs.components.utils.service.ServiceManager
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.service.startActivity
 import com.cyxbs.components.utils.utils.get.Num2CN
+import com.cyxbs.pages.discover.R
+import com.cyxbs.pages.discover.pages.discover.adapter.DiscoverMoreFunctionRvAdapter
+import com.cyxbs.pages.discover.pages.discover.adapter.RollerViewInfoAdapter
+import com.cyxbs.pages.discover.utils.IS_SWITCH1_SELECT
+import com.cyxbs.pages.discover.utils.MoreFunctionProvider
+import com.cyxbs.pages.discover.utils.NotificationSp
+import com.cyxbs.pages.discover.utils.SpacesHorizontalItemDecoration
+import com.cyxbs.pages.discover.widget.IndicatorView
+import com.cyxbs.pages.electricity.api.IElectricityService
+import com.cyxbs.pages.sport.api.ISportService
+import com.cyxbs.pages.todo.api.ITodoService
+import com.g985892345.provider.api.annotation.ImplProvider
 import com.ndhzs.slideshow.SlideShow
 import com.ndhzs.slideshow.viewpager.transformer.ScaleInTransformer
 import kotlinx.coroutines.launch
@@ -62,7 +61,7 @@ import java.util.Calendar
  * 2019/11/20
  */
 
-@Route(path = DISCOVER_ENTRY)
+@ImplProvider(clazz = Fragment::class, name = DISCOVER_ENTRY)
 class DiscoverHomeFragment : BaseFragment() {
 
     private val viewModel by viewModels<DiscoverHomeViewModel>()
@@ -94,7 +93,7 @@ class DiscoverHomeFragment : BaseFragment() {
         initHasUnread()
         view.findViewById<View>(R.id.iv_check_in).setOnSingleClickListener {
             doIfLogin("签到") {
-                ARouter.getInstance().build(MINE_CHECK_IN).navigation()
+                startActivity(MINE_CHECK_IN)
             }
         }
     }
@@ -103,7 +102,7 @@ class DiscoverHomeFragment : BaseFragment() {
      * 从老课表那里移过来的代码
      */
     private fun initTvDay() {
-        if (!IAccountService::class.impl.getVerifyService().isLogin()) {
+        if (!IAccountService::class.impl().getVerifyService().isLogin()) {
             tv_day.text = "登录解锁更多功能~"
         } else {
             val nowWeek = SchoolCalendar.getWeekOfTerm()
@@ -132,7 +131,7 @@ class DiscoverHomeFragment : BaseFragment() {
         iv_discover_msg.setBackgroundResource(R.drawable.discover_ic_home_msg)
         doIfLogin {
             iv_discover_msg.setOnClickListener {
-                ARouter.getInstance().build(NOTIFICATION_HOME).navigation()
+                startActivity(NOTIFICATION_HOME)
             }
         }
         viewModel.hasUnread.observe {
@@ -201,7 +200,9 @@ class DiscoverHomeFragment : BaseFragment() {
         }
     
         mVfDetail.setOnSingleClickListener {
-            ARouter.getInstance().build(DISCOVER_NEWS_ITEM).withString("id", mVfDetail.focusedChild.tag as String).navigation()
+            startActivity(DISCOVER_NEWS_ITEM) {
+                putExtra("newId", mVfDetail.focusedChild.tag as String)
+            }
         }
     
         mVfDetail.flipInterval = 6000
@@ -209,7 +210,7 @@ class DiscoverHomeFragment : BaseFragment() {
         mVfDetail.setOutAnimation(context, R.anim.discover_text_out_anim)
 
         frameLayout.setOnSingleClickListener {
-            ARouter.getInstance().build(DISCOVER_NEWS).navigation()
+            startActivity(DISCOVER_NEWS)
         }
     }
 
@@ -222,7 +223,9 @@ class DiscoverHomeFragment : BaseFragment() {
             setTextColor(ContextCompat.getColor(context, R.color.discover_menu_font_color_found))
             textSize = 15f
             setOnSingleClickListener {
-                ARouter.getInstance().build(DISCOVER_NEWS_ITEM).withString("id", id).navigation()
+                startActivity(DISCOVER_NEWS_ITEM) {
+                    putExtra("newId", id)
+                }
             }
         }
     }
@@ -241,7 +244,7 @@ class DiscoverHomeFragment : BaseFragment() {
                 if (it == functions.size - 1) {
                     getString(R.string.discover_more_function_notice_text).toast()
                 } else {
-                    if (IAccountService::class.impl.getVerifyService().isLogin()) {
+                    if (IAccountService::class.impl().getVerifyService().isLogin()) {
                         // 发现首页横排按钮点击埋点
                         functions[it].clickEvent?.let {  clickEvent ->
                             processLifecycleScope.launch {
@@ -250,7 +253,7 @@ class DiscoverHomeFragment : BaseFragment() {
                         }
                     }
 
-                    functions[it].activityStarter.startActivity(context)
+                    functions[it].activityStarter?.startActivity(context)
                 }
             }
             this.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -266,11 +269,11 @@ class DiscoverHomeFragment : BaseFragment() {
     }
 
     private fun initFeeds() {
-        addFeedFragment(ISportService::class.impl.getSportFeed())
-        addFeedFragment(ServiceManager(ITodoService::class).getTodoFeed())
-        addFeedFragment(ServiceManager(IElectricityService::class).getElectricityFeed())
+        addFeedFragment(ISportService::class.impl().getSportFeed())
+        addFeedFragment(ITodoService::class.impl().getTodoFeed())
+        addFeedFragment(IElectricityService::class.impl().getElectricityFeed())
         // 临时关闭服务，待后续网校使用正规渠道拿到数据后再开启
-//        addFeedFragment(ServiceManager(IVolunteerService::class).getVolunteerFeed())
+//        addFeedFragment(IVolunteerService::class.impl().getVolunteerFeed())
         //处理手机屏幕过长导致feed无法填充满下方的情况
         ll_discover_feeds.post {
             context?.let {

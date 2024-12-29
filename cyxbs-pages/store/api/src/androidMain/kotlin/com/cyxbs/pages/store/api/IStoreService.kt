@@ -1,14 +1,12 @@
 package com.cyxbs.pages.store.api
 
-import com.alibaba.android.arouter.facade.template.IProvider
-
 /**
  * ...
  * @author 985892345 (Guo Xiangrui)
  * @email guo985892345@foxmail.com
  * @date 2022/8/6 15:49
  */
-interface IStoreService : IProvider {
+interface IStoreService {
   
   /**
    * 用于向后端发送任务更新的请求(接手改积分商城项目的后端老哥后面也承认任务进度该他们做)

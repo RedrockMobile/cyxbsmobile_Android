@@ -1,35 +1,38 @@
 package com.cyxbs.pages.affair.model
 
 import android.annotation.SuppressLint
-import com.google.gson.Gson
+import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.config.config.SchoolCalendar
+import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
+import com.cyxbs.components.utils.network.throwApiExceptionIfFail
+import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.utils.config.PhoneCalendar
+import com.cyxbs.components.utils.utils.judge.NetworkUtil
 import com.cyxbs.pages.affair.bean.TodoListPushWrapper
 import com.cyxbs.pages.affair.bean.toAffairDateBean
 import com.cyxbs.pages.affair.net.AffairApiService
-import com.cyxbs.pages.affair.room.*
+import com.cyxbs.pages.affair.room.AffairCalendarEntity
 import com.cyxbs.pages.affair.room.AffairDataBase
 import com.cyxbs.pages.affair.room.AffairEntity
 import com.cyxbs.pages.affair.room.AffairEntity.Companion.LocalRemoteId
-import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.pages.affair.room.AffairIncompleteEntity
+import com.cyxbs.pages.affair.room.LocalAddAffairEntity
+import com.cyxbs.pages.affair.room.LocalDeleteAffairEntity
+import com.cyxbs.pages.affair.room.LocalUpdateAffairEntity
 import com.cyxbs.pages.course.api.ICourseService
 import com.cyxbs.pages.course.api.utils.getEndRow
 import com.cyxbs.pages.course.api.utils.getEndTimeMinute
 import com.cyxbs.pages.course.api.utils.getStartRow
 import com.cyxbs.pages.course.api.utils.getStartTimeMinute
-import com.cyxbs.components.utils.utils.config.PhoneCalendar
-import com.cyxbs.components.config.config.SchoolCalendar
-import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
-import com.cyxbs.components.utils.network.throwApiExceptionIfFail
-import com.cyxbs.components.utils.service.ServiceManager
-import com.cyxbs.components.utils.utils.judge.NetworkUtil
+import com.google.gson.Gson
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.internal.functions.Functions
 import io.reactivex.rxjava3.schedulers.Schedulers
-import java.util.*
+import java.util.Calendar
 import java.util.concurrent.TimeUnit
-import kotlin.IllegalStateException
 
 /**
  * ...
@@ -64,7 +67,7 @@ object AffairRepository {
    * - 上游不会抛出错误到下游
    */
   fun observeAffair(): Observable<List<AffairEntity>> {
-    return ServiceManager(IAccountService::class)
+    return IAccountService::class.impl()
       .getUserService()
       .observeStuNumState()
       .observeOn(Schedulers.io())
@@ -85,7 +88,7 @@ object AffairRepository {
    * 刷新事务
    */
   fun refreshAffair(): Single<List<AffairEntity>> {
-    val selfNum: String = ServiceManager(IAccountService::class).getUserService().getStuNum()
+    val selfNum: String = IAccountService::class.impl().getUserService().getStuNum()
     if (selfNum.isBlank()) return Single.just(emptyList())
     // 先上传本地临时数据，只有本地临时数据全部上传后才能下载新的数据，防止数据混乱
     return uploadLocalAffair(selfNum)
@@ -104,7 +107,7 @@ object AffairRepository {
    * 永远不会给下游抛出异常
    */
   fun getAffair(): Single<List<AffairEntity>> {
-    val selfNum: String = ServiceManager(IAccountService::class).getUserService().getStuNum()
+    val selfNum: String = IAccountService::class.impl().getUserService().getStuNum()
     if (selfNum.isBlank()) return Single.just(emptyList())
     return refreshAffair().onErrorReturn {
       // 上游失败了就取本地数据，可能是网络失败，也可能是本地临时上传事务失败
@@ -121,7 +124,7 @@ object AffairRepository {
     content: String,
     atWhatTime: List<AffairEntity.AtWhatTime>,
   ): Completable {
-    val stuNum = ServiceManager(IAccountService::class).getUserService().getStuNum()
+    val stuNum = IAccountService::class.impl().getUserService().getStuNum()
     if (stuNum.isBlank()) return Completable.error(IllegalStateException("学号为空！"))
     val dateJson = atWhatTime.toPostDateJson()
     return Single.create {
@@ -159,7 +162,7 @@ object AffairRepository {
     content: String,
     atWhatTime: List<AffairEntity.AtWhatTime>,
   ): Completable {
-    val stuNum = ServiceManager(IAccountService::class).getUserService().getStuNum()
+    val stuNum = IAccountService::class.impl().getUserService().getStuNum()
     if (stuNum.isBlank()) return Completable.error(IllegalStateException("学号为空"))
     return updateAffairInternal(stuNum, onlyId, time, title, content, atWhatTime)
       .doOnComplete {
@@ -222,7 +225,7 @@ object AffairRepository {
    * 删除事务，请使用 [observeAffair] 进行观察数据
    */
   fun deleteAffair(onlyId: Int): Completable {
-    val stuNum = ServiceManager(IAccountService::class).getUserService().getStuNum()
+    val stuNum = IAccountService::class.impl().getUserService().getStuNum()
     if (stuNum.isEmpty()) return Completable.error(IllegalStateException("学号为空"))
     return deleteAffairInternal(stuNum, onlyId)
       .doOnComplete {
@@ -428,7 +431,7 @@ object AffairRepository {
     NetworkUtil.state
       .filter { it }
       .doOnNext {
-        uploadLocalAffair(ServiceManager(IAccountService::class).getUserService().getStuNum())
+        uploadLocalAffair(IAccountService::class.impl().getUserService().getStuNum())
           .subscribeOn(Schedulers.io())
           .subscribe(Functions.EMPTY_ACTION, Functions.emptyConsumer())
       }.subscribe()

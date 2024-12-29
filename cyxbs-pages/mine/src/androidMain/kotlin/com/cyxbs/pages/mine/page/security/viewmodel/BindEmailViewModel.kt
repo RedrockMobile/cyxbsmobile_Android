@@ -1,12 +1,12 @@
 package com.cyxbs.pages.mine.page.security.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.mredrock.cyxbs.common.network.ApiGenerator
-import com.mredrock.cyxbs.common.utils.extensions.doOnErrorWithDefaultErrorHandler
-import com.mredrock.cyxbs.common.utils.extensions.unsafeSubscribeBy
-import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
-import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
+import com.cyxbs.components.utils.network.ApiGenerator
 import com.cyxbs.pages.mine.network.ApiService
+import com.mredrock.cyxbs.common.utils.extensions.doOnErrorWithDefaultErrorHandler
+import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
+import com.mredrock.cyxbs.common.utils.extensions.unsafeSubscribeBy
+import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
 
 class BindEmailViewModel : BaseViewModel() {
     var code = 0

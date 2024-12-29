@@ -4,18 +4,18 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.imageview.ShapeableImageView
-import com.google.android.material.shape.ShapeAppearanceModel
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.pages.discover.R
-import com.cyxbs.pages.discover.network.RollerViewInfo
-import com.cyxbs.pages.discover.pages.RollerViewActivity
 import com.cyxbs.components.utils.extensions.dp2pxF
 import com.cyxbs.components.utils.extensions.processLifecycleScope
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.logger.TrackingUtils
 import com.cyxbs.components.utils.logger.event.ClickEvent
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.pages.discover.R
+import com.cyxbs.pages.discover.network.RollerViewInfo
+import com.cyxbs.pages.discover.pages.RollerViewActivity
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.shape.ShapeAppearanceModel
 import kotlinx.coroutines.launch
 
 /**
@@ -30,7 +30,7 @@ class RollerViewInfoAdapter(
   inner class VHolder(val iv: ShapeableImageView) : RecyclerView.ViewHolder(iv) {
     init {
       iv.setOnSingleClickListener {
-        if (IAccountService::class.impl.getVerifyService().isLogin()) {
+        if (IAccountService::class.impl().getVerifyService().isLogin()) {
           // banner位的点击埋点
           processLifecycleScope.launch {
             TrackingUtils.trackClickEvent(ClickEvent.CLICK_YLC_BANNER_ENTRY)

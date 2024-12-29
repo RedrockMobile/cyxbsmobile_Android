@@ -133,14 +133,7 @@ umeng-asms = "1.8.4"
 umeng-push = "6.6.8"
 # https://github.com/Tencent/VasDolly
 vasdolly = "3.0.6"
-# https://github.com/alibaba/ARouter
-arouter = "1.5.2"
-# https://github.com/JailedBird/ArouterKspCompiler
-# ARouter 的第三方 ksp 实现
-arouter-ksp = "1.9.22-1.0.7"
-# https://github.com/google/auto
-autoService = "1.1.1"
-# 具体参考自官方文档 https://bugly.qq.com/v2/index
+# 具体a参考自官方文档 https://bugly.qq.com/v2/index
 # 其中掌邮接入了 异常上报 和 应用升级 两个功能，注意看完官网文档
 bugly = "4.1.9.3"
 # https://github.com/greenrobot/EventBus
@@ -257,6 +250,7 @@ kmp-settings-serialization = { module = "com.russhwolf:multiplatform-settings-se
 kmp-settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "kmp-settings" }
 kmp-ktProvider-gradlePlugin = { module = "io.github.985892345:provider-plugin-gradle", version.ref = "kmp-ktProvider" }
 kmp-ktProvider-manager = { module = "io.github.985892345:provider-manager", version.ref = "kmp-ktProvider" }
+kmp-ktProvider-api = { module = "io.github.985892345:provider-api", version.ref = "kmp-ktProvider" }
 
 ####################################################################################################
 #                                              Compose
@@ -286,10 +280,6 @@ alicloud-httpdns = { module = "com.aliyun.ams:alicloud-android-httpdns", version
 codeLocator-core = { module = "com.bytedance.tools.codelocator:codelocator-core", version.ref = "codelocator" }
 
 ####################################### 公有依赖，大部分模块使用 #######################################
-arouter = { module = "com.alibaba:arouter-api", version.ref = "arouter" }
-arouter-compiler = { module = "com.github.JailedBird:ArouterKspCompiler", version.ref = "arouter-ksp" }
-autoService = { module = "com.google.auto.service:auto-service-annotations", version.ref = "autoService" }
-autoService-compiler = { module = "com.google.auto.service:auto-service", version.ref = "autoService" }
 eventBus = { module = "org.greenrobot:eventbus", version.ref = "eventBus" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
@@ -313,6 +303,7 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 vasdolly = { id = "com.tencent.vasdolly" }
+ktProvider = { id = "io.github.985892345.KtProvider", version.ref = "kmp-ktProvider" }
 
 [bundles]
 projectBase = [
@@ -335,14 +326,10 @@ projectBase = [
     "kotlinx-coroutines-android",
     "kotlinx-coroutines-rx3",
     "kotlinx-collections",
-    "kotlinx-serialization", # 想要序列化还需要引入 kotlin-serialization 插件
     # rxjava 所有模块都需要
     "rxjava",
     "rxjava-android",
     "rxjava-kotlin",
-    # 路由及服务提供所有模块都需要
-    "arouter",
-    "autoService"
 ]
 
 views = [

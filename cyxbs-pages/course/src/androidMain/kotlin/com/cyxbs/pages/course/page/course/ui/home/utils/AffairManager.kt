@@ -1,6 +1,8 @@
 package com.cyxbs.pages.course.page.course.ui.home.utils
 
 import android.view.View
+import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
+import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.affair.api.IAffairService
 import com.cyxbs.pages.course.page.course.data.AffairData
 import com.cyxbs.pages.course.page.course.data.toAffair
@@ -8,8 +10,6 @@ import com.cyxbs.pages.course.page.course.item.affair.AffairItem
 import com.cyxbs.pages.course.page.course.item.affair.IAffairManager
 import com.cyxbs.pages.course.page.course.ui.home.IHomePageFragment
 import com.cyxbs.pages.course.widget.fragment.page.ICoursePage
-import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
-import com.cyxbs.components.utils.service.impl
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 
 /**
@@ -87,7 +87,7 @@ class AffairManager(
     // 当然也是可以不修改的，只是如果不修改的话，会因为差分比对出数据发生改变而重新添加 item 导致出现闪动
     fragment.affairContainerProxy.replaceDataFromOldList(oldData, newData)
     incCount()
-    IAffairService::class.impl
+    IAffairService::class.impl()
       .updateAffair(newData.toAffair())
       .observeOn(AndroidSchedulers.mainThread())
       .doOnTerminate {

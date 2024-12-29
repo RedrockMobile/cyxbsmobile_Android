@@ -3,10 +3,10 @@ package com.cyxbs.components.utils.network
 import com.alibaba.sdk.android.httpdns.HttpDns
 import com.alibaba.sdk.android.httpdns.InitConfig
 import com.alibaba.sdk.android.httpdns.RequestIpType
-import com.google.auto.service.AutoService
 import com.cyxbs.components.init.InitialManager
 import com.cyxbs.components.init.InitialService
 import com.cyxbs.components.utils.extensions.appContext
+import com.g985892345.provider.api.annotation.ImplProvider
 import okhttp3.Dns
 import java.net.InetAddress
 
@@ -63,8 +63,8 @@ object OkHttpDnsService {
   }
 }
 
-@AutoService(InitialService::class)
-class OkHttpDnsInitialService : InitialService {
+@ImplProvider(clazz = InitialService::class, name = "OkHttpDnsInitialService")
+object OkHttpDnsInitialService : InitialService {
   override fun onMainProcess(manager: InitialManager) {
     super.onMainProcess(manager)
     OkHttpDnsService.dns // 触发类初始化，让域名提前解析

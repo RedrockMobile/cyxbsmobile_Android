@@ -3,10 +3,10 @@ package com.cyxbs.components.base.webView
 import android.os.Handler
 import android.os.Message
 import android.webkit.JavascriptInterface
-import com.alibaba.android.arouter.launcher.ARouter
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.utils.extensions.appContext
-import com.cyxbs.components.utils.service.ServiceManager
+import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.service.startActivity
 
 /**
  * 新增的AndroidWebView直接继承这个类
@@ -53,12 +53,12 @@ abstract class IAndroidWebView(
     }
 
     /**
-     * 通过@Arouter进行端内跳转
+     * 通过 KtProvider 进行端内跳转
      * 传入 RouteTable.kt 表中的路徑
      */
     @JavascriptInterface
-    open fun jumpARouter(arouterPath: String) {
-        ARouter.getInstance().build(arouterPath).navigation()
+    open fun jump(path: String) {
+        startActivity(path)
     }
 
     /**
@@ -82,7 +82,7 @@ abstract class IAndroidWebView(
      */
     @JavascriptInterface
     open fun getStu(): String {
-        return ServiceManager(IAccountService::class).getUserService().getStuNum()
+        return IAccountService::class.impl().getUserService().getStuNum()
     }
 
     @JavascriptInterface

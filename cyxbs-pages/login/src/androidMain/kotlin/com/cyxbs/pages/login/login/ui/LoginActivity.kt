@@ -25,21 +25,20 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.core.view.get
 import com.airbnb.lottie.LottieAnimationView
-import com.alibaba.android.arouter.launcher.ARouter
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.functions.update.api.IAppUpdateService
+import com.cyxbs.components.base.BaseApp
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.config.route.MINE_FORGET_PASSWORD
 import com.cyxbs.components.config.sp.SP_PRIVACY_AGREED
 import com.cyxbs.components.config.sp.defaultSp
-import com.cyxbs.components.base.BaseApp
-import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.launch
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.wrapByNoLeak
-import com.cyxbs.components.utils.service.ServiceManager
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.service.startActivity
 import com.cyxbs.components.utils.utils.judge.NetworkUtil
+import com.cyxbs.functions.update.api.IAppUpdateService
 import com.cyxbs.pages.login.R
 import com.cyxbs.pages.login.api.ILegalNoticeService
 import com.cyxbs.pages.login.login.viewmodel.LoginViewModel
@@ -145,15 +144,13 @@ class LoginActivity : BaseActivity() {
       if (!mViewModel.userAgreementIsCheck) {
         agreeToUserAgreement()
       } else {
-        IAccountService::class.impl
-          .getVerifyService()
-          .loginByTourist()
+        IAccountService::class.impl().getVerifyService().loginByTourist()
         rebootApp()
       }
     }
     //跳转到忘记密码模块
     mTvForget.setOnSingleClickListener {
-      ARouter.getInstance().build(MINE_FORGET_PASSWORD).navigation()
+      startActivity(MINE_FORGET_PASSWORD)
     }
 
     if (!mViewModel.userAgreementIsCheck) {
@@ -170,7 +167,7 @@ class LoginActivity : BaseActivity() {
     //设置用户协议和隐私政策点击事件
     val userAgreementClickSpan = object : ClickableSpan() {
       override fun onClick(widget: View) {
-          ServiceManager(ILegalNoticeService::class).startUserAgreementActivity(this@LoginActivity)
+          ILegalNoticeService::class.impl().startUserAgreementActivity(this@LoginActivity)
       }
 
       override fun updateDrawState(ds: TextPaint) {
@@ -182,7 +179,7 @@ class LoginActivity : BaseActivity() {
     }.wrapByNoLeak(mTvUserAgreement) // 防止内存泄漏
     val privacyClickSpan = object : ClickableSpan() {
       override fun onClick(widget: View) {
-        ServiceManager(ILegalNoticeService::class).startPrivacyPolicyActivity(this@LoginActivity)
+        ILegalNoticeService::class.impl().startPrivacyPolicyActivity(this@LoginActivity)
       }
 
       override fun updateDrawState(ds: TextPaint) {
@@ -228,7 +225,7 @@ class LoginActivity : BaseActivity() {
       .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
       .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
     startActivity(rebootIntent)
-    finish()
+    finishAndRemoveTask()
   }
 
   private fun loginAction() {
@@ -297,7 +294,7 @@ class LoginActivity : BaseActivity() {
   }
 
   private fun initUpdate() {
-    IAppUpdateService::class.impl.tryNoticeUpdate(this, true)
+    IAppUpdateService::class.impl().tryNoticeUpdate(this, true)
   }
 
   private fun initCheckNetWork() {

@@ -5,9 +5,7 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.cyxbs.pages.affair.api.IAffairService
-import com.cyxbs.pages.course.api.COURSE_SERVICE
 import com.cyxbs.pages.course.api.ICourseService
 import com.cyxbs.pages.course.api.ILessonService
 import com.cyxbs.pages.course.page.course.data.AffairData
@@ -15,6 +13,7 @@ import com.cyxbs.pages.course.page.course.data.LessonData
 import com.cyxbs.pages.course.page.course.data.StuLessonData
 import com.cyxbs.pages.course.page.course.ui.dialog.CourseBottomDialog
 import com.cyxbs.pages.course.page.course.ui.home.HomeCourseVpFragment
+import com.g985892345.provider.api.annotation.ImplProvider
 
 /**
  * ...
@@ -22,8 +21,8 @@ import com.cyxbs.pages.course.page.course.ui.home.HomeCourseVpFragment
  * @email 2767465918@qq.com
  * @date 2022/5/4 15:31
  */
-@Route(path = COURSE_SERVICE, name = COURSE_SERVICE)
-class CourseServiceImpl : ICourseService {
+@ImplProvider
+object CourseServiceImpl : ICourseService {
 
   override fun createHomeCourseFragment(): Fragment {
     return HomeCourseVpFragment()
@@ -91,7 +90,4 @@ class CourseServiceImpl : ICourseService {
   
   private val _bottomSheetSlideOffset = MutableLiveData<Float>()
   val bottomSheetSlideOffset: LiveData<Float> get() = _bottomSheetSlideOffset
-  
-  override fun init(context: Context) {
-  }
 }
