@@ -1,7 +1,7 @@
 package com.cyxbs.components.utils.service
 
 import com.g985892345.provider.api.init.wrapper.ImplProviderWrapper
-import com.g985892345.provider.manager.KtProviderManager
+import com.g985892345.provider.manager.KtProvider
 import kotlin.reflect.KClass
 
 /**
@@ -81,7 +81,11 @@ import kotlin.reflect.KClass
  * ```
  */
 fun <T : Any> KClass<T>.impl(name: String = ""): T {
-  return KtProviderManager.getImplOrThrow(this, name)
+  return KtProvider.impl(this, name)
+}
+
+fun <T : Any> KClass<T>.implOrNull(name: String = ""): T? {
+  return KtProvider.implOrNull(this, name)
 }
 
 /**
@@ -91,7 +95,7 @@ fun <T : Any> KClass<T>.impl(name: String = ""): T {
  * ```
  */
 fun <T : Any> KClass<out T>.allImpl(): Map<String, ImplProviderWrapper<T>> {
-  return KtProviderManager.getAllImpl(this)
+  return KtProvider.allImpl(this)
 }
 
 /**
@@ -108,6 +112,6 @@ fun <T : Any> KClass<out T>.allImpl(): Map<String, ImplProviderWrapper<T>> {
  * ```
  */
 fun <T : Any> KClass<T>.implClass(name: String): KClass<out T> {
-  return KtProviderManager.getKClassOrThrow(this, name)
+  return KtProvider.clazz(this, name)
 }
 

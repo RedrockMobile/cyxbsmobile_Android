@@ -1,6 +1,7 @@
-package com.cyxbs.components.utils.extensions
+package com.cyxbs.components.utils.coroutine
 
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
 import kotlin.coroutines.cancellation.CancellationException
 
 /**
@@ -9,6 +10,11 @@ import kotlin.coroutines.cancellation.CancellationException
  * @author 985892345
  * @date 2024/12/28
  */
+
+/**
+ * 应用级别的协程作用域
+ */
+expect val appCoroutineScope: CoroutineScope
 
 /**
  * 默认协程异常处理

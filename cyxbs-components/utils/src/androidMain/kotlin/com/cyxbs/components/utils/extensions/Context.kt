@@ -2,10 +2,9 @@ package com.cyxbs.components.utils.extensions
 
 import android.content.Context
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.ProcessLifecycleOwner
-import androidx.lifecycle.coroutineScope
 import com.cyxbs.components.init.appApplication
+import com.cyxbs.components.utils.coroutine.appCoroutineScope
 
 /**
  * ...
@@ -24,12 +23,8 @@ val appContext: Context
  * - ON_START、ON_RESUME 在应用程序进入前台时回调
  * - ON_PAUSE、ON_STOP 在应用程序进入后台时回调
  * - ON_DESTROY 永远不会回调
+ *
+ * 如果需要使用对应协程作用域，请直接使用 [appCoroutineScope]
  */
-val processLifecycle: Lifecycle
+val appLifecycle: Lifecycle
   get() = ProcessLifecycleOwner.get().lifecycle
-
-/**
- * 应用程序的生命周期内的协程，代替 GlobalScope 的最好方式
- */
-val processLifecycleScope: LifecycleCoroutineScope
-  get() = processLifecycle.coroutineScope

@@ -1,10 +1,9 @@
 package com.cyxbs.components.utils.extensions
 
-import io.reactivex.rxjava3.core.Maybe
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.rx3.asFlow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.FlowCollector
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
 
 /**
  * ...
@@ -105,15 +104,3 @@ fun <T> Flow<T>.interceptException(
 fun <T> Flow<T>.interceptExceptionByResult(
   action: suspend ExceptionResult<FlowCollector<Result<T>>>.(Throwable) -> Unit
 ) : Flow<Result<T>> = map { Result.success(it) }.interceptException(action)
-
-fun <T : Any> Observable<T>.asFlow(): Flow<T> {
-  return asFlow()
-}
-
-fun <T : Any> Single<T>.asFlow(): Flow<T> {
-  return toObservable().asFlow()
-}
-
-fun <T : Any> Maybe<T>.asFlow(): Flow<T> {
-  return toObservable().asFlow()
-}

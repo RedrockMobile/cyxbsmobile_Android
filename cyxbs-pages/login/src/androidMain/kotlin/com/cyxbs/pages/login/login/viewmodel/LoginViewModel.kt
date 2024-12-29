@@ -67,6 +67,7 @@ class LoginViewModel : BaseViewModel() {
 
           else -> {
             toast(it.message)
+            android.util.Log.d("ggg", "(${Error().stackTrace[0].run { "$fileName:$lineNumber" }}) -> ${it.stackTraceToString()}")
           }
         }
         viewModelScope.launch {

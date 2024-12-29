@@ -69,8 +69,8 @@ object Config {
   }
 
   fun getBaseName(project: Project): String {
-    return project.path.split(Pattern.compile("-|:")).joinToString("") {
-      it.uppercase()
+    return project.path.split(Pattern.compile("-|:|_")).joinToString("") { name ->
+      name.replaceFirstChar { it.uppercaseChar() }
     }
   }
 }

@@ -25,7 +25,7 @@ import com.cyxbs.components.config.route.NOTIFICATION_HOME
 import com.cyxbs.components.config.route.STORE_ENTRY
 import com.cyxbs.components.config.route.UFIELD_CENTER_ENTRY
 import com.cyxbs.components.utils.extensions.gone
-import com.cyxbs.components.utils.extensions.processLifecycleScope
+import com.cyxbs.components.utils.coroutine.appCoroutineScope
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.components.utils.logger.TrackingUtils
@@ -78,7 +78,7 @@ class UserFragment : BaseFragment() {
             mine_user_iv_center_stamp.setOnSingleClickListener {
                 doIfLogin {
                     // “邮票中心”点击埋点
-                    processLifecycleScope.launch {
+                    appCoroutineScope.launch {
                         TrackingUtils.trackClickEvent(ClickEvent.CLICK_YLC_YPZX_ENTRY)
                     }
 
@@ -88,7 +88,7 @@ class UserFragment : BaseFragment() {
             mine_user_iv_center_feedback.setOnSingleClickListener {
                 doIfLogin {
                     // “反馈中心”点击埋点
-                    processLifecycleScope.launch {
+                    appCoroutineScope.launch {
                         TrackingUtils.trackClickEvent(ClickEvent.CLICK_YLC_FKZX_ENTRY)
                     }
 
@@ -160,7 +160,7 @@ class UserFragment : BaseFragment() {
             mine_user_iv_center_notification.setOnSingleClickListener {
                 if (IAccountService::class.impl().getVerifyService().isLogin()) {
                     // 消息中心入口点击埋点
-                    processLifecycleScope.launch {
+                    appCoroutineScope.launch {
                         TrackingUtils.trackClickEvent(ClickEvent.CLICK_YLC_XXZX_ENTRY)
                     }
                 }
@@ -172,7 +172,7 @@ class UserFragment : BaseFragment() {
             mine_user_iv_center_activity.setOnSingleClickListener {
                 doIfLogin {
                     // “活动中心”点击埋点
-                    processLifecycleScope.launch {
+                    appCoroutineScope.launch {
                         TrackingUtils.trackClickEvent(ClickEvent.CLICK_YLC_HDZX_ENTRY)
                     }
                     startActivity(UFIELD_CENTER_ENTRY)

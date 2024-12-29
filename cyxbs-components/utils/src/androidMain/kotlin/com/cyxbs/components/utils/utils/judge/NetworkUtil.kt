@@ -6,7 +6,7 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.wifi.WifiManager
 import com.cyxbs.components.utils.extensions.appContext
-import com.cyxbs.components.utils.extensions.processLifecycleScope
+import com.cyxbs.components.utils.coroutine.appCoroutineScope
 import com.cyxbs.components.utils.network.ApiStatus
 import com.cyxbs.components.utils.network.IApi
 import com.cyxbs.components.utils.network.commonApi
@@ -15,7 +15,6 @@ import io.reactivex.rxjava3.subjects.BehaviorSubject
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.TimeoutCancellationException
-import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withTimeout
@@ -190,7 +189,7 @@ object NetworkUtil {
 
           override fun onAvailable(network: Network) {
             // 注意：这里回调了 onAvailable 也不代表可用，只是表明连上了网络
-            job = processLifecycleScope.launch {
+            job = appCoroutineScope.launch {
               when (tryPingNetWork()?.isSuccess) {
                 true -> _state.onNext(true)
                 false -> _state.onNext(false) // 后端服务问题

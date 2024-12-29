@@ -7,7 +7,7 @@ import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.account.api.IUserStateService
 import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER
 import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER_RECORD
-import com.cyxbs.components.utils.extensions.GsonDefault
+import com.cyxbs.components.utils.extensions.defaultGson
 import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.utils.service.startActivity
 import com.cyxbs.pages.volunteer.R
@@ -78,7 +78,7 @@ class DiscoverVolunteerFeedFragment : BaseFeedFragment<DiscoverVolunteerFeedView
                     if (viewModel.volunteerData.value != null) {
                         EventBus.getDefault().postSticky(VolunteerLoginEvent(viewModel.volunteerData.value!!))
                         startActivity(DISCOVER_VOLUNTEER_RECORD) {
-                            putExtra("volunteerTime", GsonDefault.toJson(viewModel.volunteerData.value))
+                            putExtra("volunteerTime", defaultGson.toJson(viewModel.volunteerData.value))
                         }
                     } else {
                         startActivity(DISCOVER_VOLUNTEER)

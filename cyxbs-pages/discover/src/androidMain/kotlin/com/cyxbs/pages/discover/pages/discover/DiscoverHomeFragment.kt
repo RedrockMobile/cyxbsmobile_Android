@@ -31,7 +31,7 @@ import com.cyxbs.components.config.route.MINE_CHECK_IN
 import com.cyxbs.components.config.route.NOTIFICATION_HOME
 import com.cyxbs.components.utils.extensions.dp2px
 import com.cyxbs.components.utils.extensions.gone
-import com.cyxbs.components.utils.extensions.processLifecycleScope
+import com.cyxbs.components.utils.coroutine.appCoroutineScope
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.components.utils.logger.TrackingUtils
@@ -247,7 +247,7 @@ class DiscoverHomeFragment : BaseFragment() {
                     if (IAccountService::class.impl().getVerifyService().isLogin()) {
                         // 发现首页横排按钮点击埋点
                         functions[it].clickEvent?.let {  clickEvent ->
-                            processLifecycleScope.launch {
+                            appCoroutineScope.launch {
                                 TrackingUtils.trackClickEvent(clickEvent)
                             }
                         }

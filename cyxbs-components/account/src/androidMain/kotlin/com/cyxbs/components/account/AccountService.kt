@@ -15,7 +15,7 @@ import com.cyxbs.components.account.bean.RefreshParams
 import com.cyxbs.components.account.bean.TokenWrapper
 import com.cyxbs.components.account.bean.UserInfo
 import com.cyxbs.components.config.sp.defaultSp
-import com.cyxbs.components.utils.extensions.GsonDefault
+import com.cyxbs.components.utils.extensions.defaultGson
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.toast
 import com.cyxbs.components.utils.network.ApiException
@@ -95,7 +95,7 @@ internal object AccountService : IAccountService {
         defaultSp.edit {
             putString(
                 SP_KEY_USER_V2,
-                mUserInfoEncryption.encrypt(GsonDefault.toJson(tokenWrapper))
+                mUserInfoEncryption.encrypt(defaultGson.toJson(tokenWrapper))
             )
         }
         //每次刷新的时候拿token请求一次个人信息，覆盖原来的
@@ -109,7 +109,7 @@ internal object AccountService : IAccountService {
                     val userInfo = response.body()?.data //如果为空就不更新
                     userInfo?.let {
                         defaultSp.edit(commit = true) {
-                            putString(SP_KEY_USER_INFO, mUserInfoEncryption.encrypt(GsonDefault.toJson(userInfo)))
+                            putString(SP_KEY_USER_INFO, mUserInfoEncryption.encrypt(defaultGson.toJson(userInfo)))
                         }
                         this@AccountService.user = userInfo
                         // 通知 StuNum 更新
@@ -201,7 +201,7 @@ internal object AccountService : IAccountService {
             val encryptedTokenJson = defaultSp.getString(SP_KEY_USER_V2, null) ?: ""
             val userInfo = defaultSp.getString(SP_KEY_USER_INFO, "")
             userInfo?.let {
-                user = GsonDefault
+                user = defaultGson
                     .fromJson(mUserInfoEncryption.decrypt(userInfo), UserInfo::class.java)
                 // 这里是从本地拿取数据，是第一次通知 StuNum 更新
                 (mUserService as UserService).emitStuNum(user?.stuNum)
@@ -290,7 +290,7 @@ internal object AccountService : IAccountService {
                 // 该异常已与下游约定，不可更改！！！
                 //请求失败目前分两种 40004为次数过多，20004为账号密码错误，返回值需json解析
                 val errorBody = response.errorBody()?.string()
-                val errorMsg:ErrorMsg? = GsonDefault.fromJson(errorBody, ErrorMsg::class.java)
+                val errorMsg:ErrorMsg? = defaultGson.fromJson(errorBody, ErrorMsg::class.java)
                 if (errorMsg != null) {
                     when (errorMsg.status) {
                         40004 -> throw IllegalStateException("tried too many times")
@@ -316,7 +316,7 @@ internal object AccountService : IAccountService {
                 defaultSp.edit(commit = true) {
                     putString(
                         SP_KEY_USER_V2,
-                        mUserInfoEncryption.encrypt(GsonDefault.toJson(apiWrapper.data))
+                        mUserInfoEncryption.encrypt(defaultGson.toJson(apiWrapper.data))
                     )
                     putLong(
                         SP_KEY_REFRESH_TOKEN_EXPIRED,

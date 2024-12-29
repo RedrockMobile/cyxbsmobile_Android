@@ -9,4 +9,4 @@ import com.google.gson.Gson
  * @date 2024/11/10
  */
 
-val GsonDefault = Gson()
+val defaultGson = Gson()

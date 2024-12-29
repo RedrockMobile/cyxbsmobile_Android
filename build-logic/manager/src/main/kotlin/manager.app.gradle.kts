@@ -1,5 +1,6 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import rule.ModuleNamespaceCheckRule
 
 plugins {
@@ -83,11 +84,6 @@ kotlin {
   if (Multiplatform.enableWasm(project)) {
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-      browser {
-        commonWebpackConfig {
-          outputFileName = "${Config.getBaseName(project)}.js"
-        }
-      }
       binaries.executable()
     }
   }
@@ -96,7 +92,7 @@ kotlin {
 if (Multiplatform.enableDesktop(project)) {
   compose.desktop {
     application {
-      mainClass = "com.test.MainKt" // todo 待补充 desktop 的 main Class
+      mainClass = "CyxbsDesktopAppKt"
       nativeDistributions {
         targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
         packageName = Config.getApplicationId(project)

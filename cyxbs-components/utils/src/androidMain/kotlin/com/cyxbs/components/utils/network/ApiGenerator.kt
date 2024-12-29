@@ -6,8 +6,8 @@ import android.util.Log
 import android.widget.Toast
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.utils.BuildConfig
-import com.cyxbs.components.utils.extensions.JsonDefault
 import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.utils.extensions.defaultJson
 import com.cyxbs.components.utils.service.allImpl
 import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.utils.utils.LogLocal
@@ -224,7 +224,7 @@ object ApiGenerator {
         }))
             .addConverterFactory(GsonConverterFactory.create())
             // https://github.com/square/retrofit/tree/trunk/retrofit-converters/kotlinx-serialization
-            .addConverterFactory(JsonDefault.asConverterFactory("application/json; charset=UTF8".toMediaType()))
+            .addConverterFactory(defaultJson.asConverterFactory("application/json; charset=UTF8".toMediaType()))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.createSynchronous())
     }
 

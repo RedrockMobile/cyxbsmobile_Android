@@ -11,7 +11,7 @@ import kotlinx.serialization.json.Json
  */
 
 @OptIn(ExperimentalSerializationApi::class)
-val JsonDefault = Json {
+val defaultJson = Json {
   encodeDefaults = false // 需要编码默认值
   ignoreUnknownKeys = true // 忽略未知键
   isLenient = true // 宽松模式，允许键和字符串值不带引号
