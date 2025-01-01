@@ -18,14 +18,14 @@
 
 
 [versions]
-javaTarget = "17" # 17 目前 R8 还不支持 sealed，暂时不升级
+javaTarget = "17"
 kotlinJvmTarget = "17"
 ####################################################################################################
 #                                            Android
 ####################################################################################################
 agp = "8.7.3"
 android-compileSdk = "35"
-android-minSdk = "24"
+android-minSdk = "26"
 android-targetSdk = "35"
 # https://developer.android.com/jetpack/androidx/releases/appcompat
 androidx-appcompat = "1.7.0"
@@ -123,6 +123,10 @@ compose-navigation = "2.8.0-alpha11"
 # https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-lifecycle.html
 # 看 compose 发布时给出的版本
 compose-lifecycle = "2.8.4"
+# 多平台版本，非官方 https://github.com/Lavmee/constraintlayout-compose-multiplatform
+compose-constraintLayout = "0.5.0"
+# https://github.com/alexzhirkevich/compottie
+compose-lottie = "2.0.0-rc02"
 
 ####################################################################################################
 #                                               三方库
@@ -258,6 +262,8 @@ compose-gradlePlugin = { module = "org.jetbrains.compose:compose-gradle-plugin",
 compose-compiler-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "compose-navigation" }
 compose-lifecycle = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "compose-lifecycle" }
+compose-constraintLayout = { module = "tech.annexflow.compose:constraintlayout-compose-multiplatform", version.ref = "compose-constraintLayout" }
+compose-lottie = { module = "io.github.alexzhirkevich:compottie", version.ref = "compose-lottie" }
 
 ####################################################################################################
 #                                               三方库

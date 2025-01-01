@@ -15,6 +15,7 @@ import com.cyxbs.pages.grades.bean.analyze.isSuccessful
 import com.cyxbs.pages.grades.network.ApiService
 import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.extensions.setSchedulers
+import com.cyxbs.components.utils.extensions.toast
 import com.cyxbs.components.utils.network.ApiGenerator
 import com.cyxbs.components.utils.network.mapOrInterceptException
 import io.reactivex.rxjava3.core.Observable

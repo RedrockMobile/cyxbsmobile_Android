@@ -32,7 +32,7 @@ public class CyxbsToast {
                                  @NonNull CharSequence text, int duration) {
         Toast result = new Toast(context);
         if (BuildConfig.DEBUG) {
-            // 以下逻辑与 utils 模块中的 Toast.kt 保持一致，注释请看那个类
+            // 以下逻辑与 utils 模块中的 Toast.android.kt 保持一致，注释请看那个类
             Throwable throwable = new Throwable();
             StackTraceElement[] array = throwable.getStackTrace();
             ArrayList<StackTraceElement> list = new ArrayList<>();

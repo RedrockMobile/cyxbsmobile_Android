@@ -1,12 +1,7 @@
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.ComposeViewport
+import com.cyxbs.pages.login.ui.LoginCompose
 import com.g985892345.provider.cyxbsmobile.cyxbsapplications.test.TestKtProviderInitializer
 import kotlinx.browser.document
 
@@ -26,9 +21,7 @@ fun main() {
     MaterialTheme(
       typography = createTypography(),
     ) {
-      Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "网上重邮", fontSize = 20.sp)
-      }
+      LoginCompose()
     }
   }
 }

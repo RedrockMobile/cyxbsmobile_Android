@@ -17,6 +17,7 @@ import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.extensions.doPermissionAction
 import com.cyxbs.components.utils.extensions.interceptException
+import com.cyxbs.components.utils.extensions.toast
 import com.cyxbs.components.utils.network.ApiGenerator
 import com.cyxbs.components.utils.network.CommonApiService
 import com.cyxbs.components.utils.network.DownMessageParams

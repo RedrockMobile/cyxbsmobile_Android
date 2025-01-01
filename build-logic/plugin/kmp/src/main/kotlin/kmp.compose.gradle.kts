@@ -18,6 +18,7 @@ kotlin {
       implementation(compose.materialIconsExtended)
       implementation(libsEx.`compose-navigation`)
       implementation(libsEx.`compose-lifecycle`)
+      implementation(libsEx.`compose-constraintLayout`)
     }
 
     androidMain.dependencies {
