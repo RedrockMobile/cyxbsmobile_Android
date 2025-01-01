@@ -38,7 +38,7 @@ fun Project.useKtProvider(isNeedKsp: Boolean = !name.startsWith("api")) {
  */
 @Deprecated("不再建议使用 DataBinding，因为强依赖了 kapt，官方也未提供 ksp 支持。使用 Int.view() 或者 findViewById() 代替")
 fun Project.useDataBinding(isNeedKapt: Boolean = !name.startsWith("api")) {
-  if (!Multiplatform.runAndroid(project)) return // 其他平台不引入 kapt 插件
+//  if (!Multiplatform.runAndroid(project)) return // 其他平台不引入 kapt 插件
   if (isNeedKapt) {
     // kapt 按需引入
     apply(plugin = "org.jetbrains.kotlin.kapt")
