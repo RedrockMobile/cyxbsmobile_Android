@@ -4,7 +4,6 @@ plugins {
 }
 
 useKtProvider()
-useDataBinding()
 useRoom(rxjava = true)
 
 kotlin {
