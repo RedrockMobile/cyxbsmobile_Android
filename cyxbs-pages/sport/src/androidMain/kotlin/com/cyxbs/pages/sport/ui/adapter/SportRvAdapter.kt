@@ -1,7 +1,10 @@
 package com.cyxbs.pages.sport.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -9,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.pages.sport.R
-import com.cyxbs.pages.sport.databinding.SportItemRvDetailListBinding
 import com.cyxbs.pages.sport.model.SportDetailItemData
 
 /**
@@ -42,8 +44,15 @@ class SportRvAdapter : ListAdapter<SportDetailItemData, SportRvAdapter.VH>(
         ): Any = ""
     }
 ) {
-    inner class VH(val binding: SportItemRvDetailListBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        val sportDetailItemTvDate = itemView.findViewById<TextView>(R.id.sport_detail_item_tv_date)
+        val sportDetailItemIvValid = itemView.findViewById<ImageView>(R.id.sport_detail_item_iv_valid)
+        val sportDetailItemIvAward = itemView.findViewById<ImageView>(R.id.sport_detail_item_iv_award)
+        val sportDetailItemTvTime = itemView.findViewById<TextView>(R.id.sport_detail_item_tv_time)
+        val sportDetailItemTvType = itemView.findViewById<TextView>(R.id.sport_detail_item_tv_type)
+        val sportDetailItemTvSpot = itemView.findViewById<TextView>(R.id.sport_detail_item_tv_spot)
+
         //懒加载获取是否有效的两个图标，便于后续加载
         val valid by lazy(LazyThreadSafetyMode.NONE) {
             AppCompatResources.getDrawable(itemView.context, R.drawable.sport_ic_valid)
@@ -59,14 +68,14 @@ class SportRvAdapter : ListAdapter<SportDetailItemData, SportRvAdapter.VH>(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        val binding =
-            SportItemRvDetailListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return VH(binding)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.sport_item_rv_detail_list, parent, false)
+        return VH(view)
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = getItem(position)
-        holder.binding.run {
+        holder.run {
             sportDetailItemTvDate.text = item.date      //日期
             //是否有效 分别设置图片
             if (item.valid) {
