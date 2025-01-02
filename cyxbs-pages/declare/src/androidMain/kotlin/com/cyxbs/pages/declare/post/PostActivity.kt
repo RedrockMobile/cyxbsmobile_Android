@@ -5,85 +5,91 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputFilter.LengthFilter
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
-import com.cyxbs.pages.declare.R
-import com.cyxbs.pages.declare.databinding.DeclareActivityPostBinding
-import com.cyxbs.pages.declare.databinding.DeclareLayoutDialogEditBinding
-import com.cyxbs.pages.declare.databinding.DeclareLayoutDialogSubmitBinding
-import com.cyxbs.pages.declare.post.adapter.PostSectionRvAdapter
-import com.cyxbs.components.base.ui.BaseBindActivity
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.dp2px
+import com.cyxbs.pages.declare.R
+import com.cyxbs.pages.declare.post.adapter.PostSectionRvAdapter
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
-import java.util.Optional
 import kotlin.coroutines.resume
 
-class PostActivity : BaseBindActivity<DeclareActivityPostBinding>() {
+class PostActivity : BaseActivity() {
 
     override val isCancelStatusBar: Boolean
         get() = false
 
     private val viewModel by viewModels<PostViewModel>()
-    private lateinit var submitDialogLayoutBinding: DeclareLayoutDialogSubmitBinding
-    private lateinit var editDialogLayoutBinding: DeclareLayoutDialogEditBinding
-    private lateinit var submitDialog: MaterialDialog
-    private lateinit var editDialog: MaterialDialog
+    private lateinit var submitDialogManager: SubmitDialogManager
+    private lateinit var editDialogManager: EditDialogManager
     private lateinit var sectionAdapter: PostSectionRvAdapter
+
+    private val rvTopic by R.id.rv_topic.view<RecyclerView>()
+    private val pageBtnSubmit by R.id.btn_submit.view<AppCompatButton>()
+    private val etTopic by R.id.et_topic.view<TextInputEditText>()
+    private val declareIvToolbarArrowLeft by R.id.declare_iv_toolbar_arrow_left.view<View>()
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setSupportActionBar(binding.toolbar)
+        setContentView(R.layout.declare_activity_post)
+        setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.title = null
         initDialog()
-        binding.rvTopic.apply {
+        rvTopic.apply {
             layoutManager = LinearLayoutManager(this@PostActivity)
             adapter = PostSectionRvAdapter(
                 onItemTouch = { list, position, et ->
                     lifecycleScope.launch {
                         // 长度限制15
-                        openEdit(15, list[position]).ifPresent {
+                        openEdit(15, list[position])?.let {
                             if (list.any { s -> it == s }) {
                                 toast("不允许存在多个相同的选项哦")
-                                return@ifPresent
+                                return@let
                             }
                             et.setText(it)
                             list[position] = it
                             // 更新主页按钮状态
-                            binding.btnSubmit.active()
+                            pageBtnSubmit.active()
                         }
                     }
                 },
-                onItemUpdate = { binding.btnSubmit.active() }
+                onItemUpdate = { pageBtnSubmit.active() }
             ).also { sectionAdapter = it }
         }
-        binding.btnSubmit.setOnClickListener {
+        pageBtnSubmit.setOnClickListener {
             if (isPublishable()) {
                 // 弹出Dialog
-                submitDialog.show()
+                submitDialogManager.dialog.show()
             }
         }
-        binding.etTopic.setOnClickListener {
+        etTopic.setOnClickListener {
             lifecycleScope.launch {
-                openEdit(30, binding.etTopic.text.toString()).ifPresent {
-                    binding.etTopic.setText(it)
-                    binding.btnSubmit.active()
+                openEdit(30, etTopic.text.toString())?.let {
+                    etTopic.setText(it)
+                    pageBtnSubmit.active()
                 }
             }
         }
-        binding.etTopic.isFocusable = false
-        binding.declareIvToolbarArrowLeft.setOnClickListener {
+        etTopic.isFocusable = false
+        declareIvToolbarArrowLeft.setOnClickListener {
             finish()
         }
         lifecycleScope.launch {
             viewModel.postResultFlow.collectLaunch {
-                if (it.isSuccess()) {
+                if (it == null) {
                     toast("发布成功")
                     finish()
                 } else {
@@ -94,30 +100,23 @@ class PostActivity : BaseBindActivity<DeclareActivityPostBinding>() {
     }
 
     private fun initDialog() {
-        submitDialogLayoutBinding = DeclareLayoutDialogSubmitBinding.inflate(layoutInflater)
-        editDialogLayoutBinding = DeclareLayoutDialogEditBinding.inflate(layoutInflater)
-        submitDialog = MaterialDialog(this)
-            .customView(view = submitDialogLayoutBinding.root)
-            .cornerRadius(literalDp = 8f)
-            .maxWidth(literal = 300.dp2px)
-        editDialog = MaterialDialog(this)
-            .customView(view = editDialogLayoutBinding.root)
-            .cornerRadius(literalDp = 8f)
-            .maxWidth(literal = 300.dp2px)
-        submitDialogLayoutBinding.btnCancel.setOnClickListener {
-            submitDialog.hide()
+        submitDialogManager = SubmitDialogManager()
+        editDialogManager = EditDialogManager()
+
+        submitDialogManager.btnCancel.setOnClickListener {
+            submitDialogManager.dialog.hide()
         }
-        submitDialogLayoutBinding.btnSubmit.setOnClickListener {
+        submitDialogManager.btnSubmit.setOnClickListener {
             lifecycleScope.launch {
                 // 空白选项不能发
-                viewModel.post(binding.etTopic.text.toString(), sectionAdapter.list)
+                viewModel.post(etTopic.text.toString(), sectionAdapter.list)
             }
-            submitDialog.hide()
+            submitDialogManager.dialog.hide()
         }
     }
 
-    private suspend fun openEdit(maxLen: Int, originText: String = ""): Optional<String> = suspendCancellableCoroutine  { co ->
-        editDialogLayoutBinding.apply {
+    private suspend fun openEdit(maxLen: Int, originText: String = ""): String? = suspendCancellableCoroutine  { co ->
+        editDialogManager.apply {
             // 重置edittext状态
             et.setText(originText)
             et.filters = arrayOf(LengthFilter(maxLen))
@@ -132,33 +131,34 @@ class PostActivity : BaseBindActivity<DeclareActivityPostBinding>() {
                 et.removeTextChangedListener(textWatcher)
             }
             btnCancel.setOnClickListener {
-                editDialog.cancel()
+                dialog.cancel()
                 resetListeners()
-                co.resume(Optional.empty())
+                co.resume(null)
             }
             btnSubmit.setOnClickListener {
                 val str = et.text.toString().replace("\n"," ")
                 if (str.isNotBlank()) {
-                    editDialog.hide()
+                    dialog.hide()
                     resetListeners()
-                    co.resume(Optional.of(str))
+                    co.resume(str)
                 }
             }
             co.invokeOnCancellation {
-                editDialog.cancel()
+                dialog.cancel()
                 resetListeners()
             }
-        }
-        editDialog.apply {
-            setOnCancelListener { co.cancel() }
-            show()
+            dialog.apply {
+                setOnCancelListener { co.cancel() }
+                show()
+                et.requestFocus() // 弹起键盘
+            }
         }
     }
 
     // 发布前的预检
     private fun isPublishable(): Boolean {
         return sectionAdapter.list.all { s -> s.isNotBlank() }
-                && !binding.etTopic.text?.toString().isNullOrBlank()
+                && !etTopic.text?.toString().isNullOrBlank()
                 && sectionAdapter.list.size >= 2
                 && sectionAdapter.list.distinct().size == sectionAdapter.list.size
     }
@@ -169,6 +169,29 @@ class PostActivity : BaseBindActivity<DeclareActivityPostBinding>() {
         } else {
             setBackgroundResource(R.drawable.declare_ic_btn_background_inactive)
         }
+    }
+
+    inner class EditDialogManager {
+        val layout = LayoutInflater.from(this@PostActivity).inflate(R.layout.declare_layout_dialog_edit, null)
+        val dialog = MaterialDialog(this@PostActivity)
+            .customView(view = layout)
+            .cornerRadius(literalDp = 8f)
+            .maxWidth(literal = 300.dp2px)
+        val textInputLayout = layout.findViewById<TextInputLayout>(R.id.text_input_layout)
+        val et = layout.findViewById<EditText>(R.id.et)
+        val btnCancel = layout.findViewById<AppCompatButton>(R.id.btn_cancel)
+        val btnSubmit = layout.findViewById<AppCompatButton>(R.id.btn_submit)
+    }
+
+    inner class SubmitDialogManager {
+        val layout = LayoutInflater.from(this@PostActivity).inflate(R.layout.declare_layout_dialog_submit, null)
+        val dialog = MaterialDialog(this@PostActivity)
+            .customView(view = layout)
+            .cornerRadius(literalDp = 8f)
+            .maxWidth(literal = 300.dp2px)
+        val btnCancel = layout.findViewById<AppCompatButton>(R.id.btn_cancel)
+        val btnSubmit = layout.findViewById<AppCompatButton>(R.id.btn_submit)
+
     }
 
     companion object {

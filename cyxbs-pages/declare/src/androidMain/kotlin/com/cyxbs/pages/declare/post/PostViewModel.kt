@@ -3,7 +3,8 @@ package com.cyxbs.pages.declare.post
 import com.cyxbs.pages.declare.post.net.PostApiService
 import com.cyxbs.components.base.ui.BaseViewModel
 import com.cyxbs.components.utils.extensions.asFlow
-import com.cyxbs.components.utils.network.ApiStatus
+import com.cyxbs.components.utils.extensions.interceptException
+import com.cyxbs.components.utils.network.throwApiExceptionIfFail
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -18,8 +19,8 @@ import kotlinx.coroutines.flow.SharedFlow
  */
 class PostViewModel : BaseViewModel() {
     // livedata 是粘性事件，不适合在这里使用，所以直接使用 SharedFlow
-    private val _postResultFlow: MutableSharedFlow<ApiStatus> = MutableSharedFlow()
-    val postResultFlow: SharedFlow<ApiStatus>
+    private val _postResultFlow: MutableSharedFlow<String?> = MutableSharedFlow()
+    val postResultFlow: SharedFlow<String?>
         get() = _postResultFlow
 
     fun post(title: String, choices: List<String>) {
@@ -27,8 +28,12 @@ class PostViewModel : BaseViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .asFlow()
+            .throwApiExceptionIfFail()
+            .interceptException {
+                _postResultFlow.emit(it.message)
+            }
             .collectLaunch {
-                _postResultFlow.emit(it)
+                _postResultFlow.emit(null)
             }
     }
 }
