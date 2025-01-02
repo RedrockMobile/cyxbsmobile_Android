@@ -5,22 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.cyxbs.components.base.ui.BaseFragment
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.map.R
-import com.cyxbs.pages.map.databinding.MapFragmentFavoriteEditBinding
+import com.cyxbs.pages.map.component.FavoriteEditText
 import com.cyxbs.pages.map.viewmodel.MapViewModel
 import com.cyxbs.pages.map.widget.MapDialog
 import com.cyxbs.pages.map.widget.OnSelectListener
 import com.cyxbs.pages.map.widget.ProgressDialog
-import com.cyxbs.pages.map.component.FavoriteEditText
-import com.cyxbs.components.base.ui.BaseFragment
-import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 
 
 class FavoriteEditFragment : BaseFragment() {
     private lateinit var viewModel: MapViewModel
-    private lateinit var mBinding: MapFragmentFavoriteEditBinding
 
     private val mTvFavoriteCancel by R.id.map_tv_favorite_cancel.view<TextView>()
     private val mTvFavoriteCancelFavorite by R.id.map_tv_favorite_cancel_favorite.view<TextView>()
@@ -29,8 +26,7 @@ class FavoriteEditFragment : BaseFragment() {
     private val mTvFavoritePlaceName by R.id.map_tv_favorite_place_name.view<TextView>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.map_fragment_favorite_edit, container, false)
-        return mBinding.root
+        return inflater.inflate(R.layout.map_fragment_favorite_edit, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

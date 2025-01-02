@@ -5,14 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.databinding.ObservableArrayList
-import androidx.databinding.ObservableList
 import androidx.recyclerview.widget.RecyclerView
 import com.cyxbs.pages.map.R
 import com.cyxbs.pages.map.bean.PlaceItem
 import com.cyxbs.pages.map.model.DataSet
 import com.cyxbs.pages.map.viewmodel.MapViewModel
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.pages.map.util.ObservableArrayList
 
 /**
  *@author zhangzhe
@@ -32,29 +31,28 @@ class SearchResultAdapter(context: Context, private val viewModel: MapViewModel)
 
     init {
         viewModel.searchResult.addOnListChangedCallback(
-                object : ObservableList.OnListChangedCallback<ObservableArrayList<PlaceItem>>() {
-                    override fun onChanged(sender: ObservableArrayList<PlaceItem>?) {
-                        notifyDataSetChanged()
-                    }
-
-                    override fun onItemRangeRemoved(sender: ObservableArrayList<PlaceItem>?, positionStart: Int, itemCount: Int) {
+                object : ObservableArrayList.OnListChangedCallback<PlaceItem>() {
+                    override fun onItemRangeRemoved(
+                        sender: ObservableArrayList<PlaceItem>,
+                        positionStart: Int,
+                        itemCount: Int
+                    ) {
                         notifyItemRangeChanged(positionStart, itemCount)
-                        notifyDataSetChanged()
                     }
 
-                    override fun onItemRangeMoved(sender: ObservableArrayList<PlaceItem>?, fromPosition: Int, toPosition: Int, itemCount: Int) {
-                        if (itemCount == 1) {
-                            notifyItemMoved(fromPosition, toPosition)
-                        } else {
-                            notifyDataSetChanged()
-                        }
-                    }
-
-                    override fun onItemRangeInserted(sender: ObservableArrayList<PlaceItem>?, positionStart: Int, itemCount: Int) {
+                    override fun onItemRangeInserted(
+                        sender: ObservableArrayList<PlaceItem>,
+                        positionStart: Int,
+                        itemCount: Int
+                    ) {
                         notifyItemRangeInserted(positionStart, itemCount)
                     }
 
-                    override fun onItemRangeChanged(sender: ObservableArrayList<PlaceItem>?, positionStart: Int, itemCount: Int) {
+                    override fun onItemRangeChanged(
+                        sender: ObservableArrayList<PlaceItem>,
+                        positionStart: Int,
+                        itemCount: Int
+                    ) {
                         notifyItemRangeChanged(positionStart, itemCount)
                     }
                 }

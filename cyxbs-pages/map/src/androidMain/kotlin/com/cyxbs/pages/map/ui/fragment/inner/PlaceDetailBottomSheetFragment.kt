@@ -6,33 +6,30 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.flexbox.FlexWrap
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.cyxbs.components.base.operations.doIfLogin
+import com.cyxbs.components.base.ui.BaseFragment
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.pages.map.R
 import com.cyxbs.pages.map.bean.FavoritePlace
 import com.cyxbs.pages.map.component.BannerIndicator
 import com.cyxbs.pages.map.component.BannerView
-import com.cyxbs.pages.map.databinding.MapFragmentPlaceDetailContainerBinding
 import com.cyxbs.pages.map.ui.adapter.BannerViewAdapter
 import com.cyxbs.pages.map.ui.adapter.DetailAttributeRvAdapter
 import com.cyxbs.pages.map.ui.adapter.DetailTagRvAdapter
 import com.cyxbs.pages.map.util.BannerPageTransformer
 import com.cyxbs.pages.map.viewmodel.MapViewModel
-import com.cyxbs.components.base.operations.doIfLogin
-import com.cyxbs.components.base.ui.BaseFragment
-import com.cyxbs.components.utils.extensions.gone
-import com.cyxbs.components.utils.extensions.visible
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 
 class PlaceDetailBottomSheetFragment : BaseFragment() {
     private lateinit var viewModel: MapViewModel
-    private lateinit var mBinding: MapFragmentPlaceDetailContainerBinding
     private var isFavoritePlace = false
 
     private val mBannerDetailImage by R.id.map_banner_detail_image.view<BannerView>()
@@ -43,13 +40,13 @@ class PlaceDetailBottomSheetFragment : BaseFragment() {
     private val mTvDetailPlaceNickname by R.id.map_tv_detail_place_nickname.view<TextView>()
     private val mTvDetailMore by R.id.map_tv_detail_more.view<TextView>()
     private val mTvDetailShare by R.id.map_tv_detail_share.view<TextView>()
+    private val mapTvDetailAboutText by R.id.map_tv_detail_about_text.view<TextView>()
+    private val mapTvDetailPlaceName by R.id.map_tv_detail_place_name.view<TextView>()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.map_fragment_place_detail_container, container, false)
-//        mBinding.lifecycleOwner = viewLifecycleOwner
-        return mBinding.root
+        return inflater.inflate(R.layout.map_fragment_place_detail_container, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -87,8 +84,7 @@ class PlaceDetailBottomSheetFragment : BaseFragment() {
         viewModel.placeDetails.observe(
                 viewLifecycleOwner,
                 Observer { t ->
-                    //数据绑定
-                    mBinding.placeDetails = t
+                    mapTvDetailPlaceName.text = t.placeName
                     //数据传给adapter
                     if (bannerViewAdapter != null) {
                         if (t.images != null) {
@@ -104,12 +100,12 @@ class PlaceDetailBottomSheetFragment : BaseFragment() {
                         }
                     }
                     if (t.tags != null) {
-                        mBinding.mapTvDetailAboutText.visible()
-                        mBinding.mapRvDetailAboutList.visible()
+                        mapTvDetailAboutText.visible()
+                        mRvDetailAboutList.visible()
                         tagAdapter.submitList(t.tags ?: emptyList())
                     } else {
-                        mBinding.mapTvDetailAboutText.gone()
-                        mBinding.mapRvDetailAboutList.gone()
+                        mapTvDetailAboutText.gone()
+                        mRvDetailAboutList.gone()
                     }
                     
                     if (attributeAdapter != null) {
