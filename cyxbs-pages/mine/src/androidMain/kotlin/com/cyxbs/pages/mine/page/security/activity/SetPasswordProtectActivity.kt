@@ -3,19 +3,16 @@ package com.cyxbs.pages.mine.page.security.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
-import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
-import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.common.utils.extensions.toast
+import androidx.activity.viewModels
+import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.view.JToolbar
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.mine.R
-import com.cyxbs.pages.mine.databinding.MineActivitySetPasswordProtectBinding
 import com.cyxbs.pages.mine.page.security.util.AnswerTextWatcher
 import com.cyxbs.pages.mine.page.security.viewmodel.SetPasswordProtectViewModel
 import com.cyxbs.pages.mine.util.ui.SelQuestionDialog
@@ -25,7 +22,10 @@ import com.cyxbs.pages.mine.util.ui.SelQuestionDialog
  * Time: 2020-10-29 15:06
  * describe: 设置密保的活动
  */
-class SetPasswordProtectActivity : BaseViewModelActivity<SetPasswordProtectViewModel>() {
+class SetPasswordProtectActivity : BaseActivity() {
+
+    private val viewModel by viewModels<SetPasswordProtectViewModel>()
+
     lateinit var selQuestionDialog: SelQuestionDialog
 
     var canClick = false
@@ -34,6 +34,7 @@ class SetPasswordProtectActivity : BaseViewModelActivity<SetPasswordProtectViewM
     private val mLlSelQuestionShow by R.id.mine_ll_sel_question_show.view<LinearLayout>()
     private val mEtSecurityAnswer by R.id.mine_edt_security_answer.view<EditText>()
     private val mBtnSecuritySetProtectconfirm by R.id.mine_bt_security_set_protectconfirm.view<Button>()
+    private val mTvPasswordProtectTips by R.id.tc_password_protect_tips.view<TextView>()
 
     companion object {
         fun actionStart(context: Context) {
@@ -43,26 +44,13 @@ class SetPasswordProtectActivity : BaseViewModelActivity<SetPasswordProtectViewM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.inflate<MineActivitySetPasswordProtectBinding>(
-            LayoutInflater.from(this),
-            R.layout.mine_activity_set_password_protect, null, false
-        )
-        binding.viewModel = viewModel
-        setContentView(binding.root)
+        setContentView(R.layout.mine_activity_set_password_protect)
 
-        //设置toolBar
-        common_toolbar.apply {
-            setBackgroundColor(
-                ContextCompat.getColor(
-                    this.context,
-                    com.mredrock.cyxbs.common.R.color.common_white_background
-                )
-            )
-            initWithSplitLine(
-                getString(R.string.mine_security_set_password_protect),
-                true
-            )
-        }
+        findViewById<JToolbar>(com.cyxbs.components.config.R.id.toolbar).init(
+            activity = this,
+            title = getString(R.string.mine_security_set_password_protect),
+            withSplitLine = true,
+        )
 
         //网络请求获取密保问题
         viewModel.getSecurityQuestions {
@@ -74,8 +62,8 @@ class SetPasswordProtectActivity : BaseViewModelActivity<SetPasswordProtectViewM
                 setBackGroundShadowOrShadow()
             }
 
-            mTvSecurityQuestion.text = viewModel.listOfSecurityQuestion[0].content
-            viewModel.securityQuestionId = viewModel.listOfSecurityQuestion[0].id
+            mTvSecurityQuestion.hint = "请点击选择一个密保问题"
+            viewModel.securityQuestionId = null
 
             selQuestionDialog.setOnCancelListener {
                 setBackGroundShadowOrShadow()
@@ -99,9 +87,13 @@ class SetPasswordProtectActivity : BaseViewModelActivity<SetPasswordProtectViewM
 
         //确定设置密保的点击事件
         mBtnSecuritySetProtectconfirm.setOnSingleClickListener {
-            viewModel.setSecurityQA {
+            viewModel.setSecurityQA(mEtSecurityAnswer.text.toString()) {
                 finish()
             }
+        }
+
+        viewModel.tipForInputNum.observe {
+            mTvPasswordProtectTips.text = it
         }
     }
 

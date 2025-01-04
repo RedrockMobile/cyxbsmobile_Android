@@ -89,7 +89,7 @@ class FeedbackCenterActivity : BaseActivity() {
     }
 
     /**
-     * 每个item的监听事件 通过dataBinding传递
+     * 每个item的监听事件
      */
     inner class EventHandler {
         var position: Int = 0

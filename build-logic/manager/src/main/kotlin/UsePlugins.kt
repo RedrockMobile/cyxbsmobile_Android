@@ -1,6 +1,3 @@
-import com.android.build.api.dsl.ApplicationBuildFeatures
-import com.android.build.api.dsl.CommonExtension
-import com.android.build.api.dsl.LibraryBuildFeatures
 import com.g985892345.provider.plugin.gradle.extensions.KtProviderExtensions
 import com.google.devtools.ksp.gradle.KspExtension
 import org.gradle.api.Project
@@ -28,33 +25,6 @@ fun Project.useKtProvider(isNeedKsp: Boolean = !name.startsWith("api")) {
   extensions.configure<KotlinMultiplatformExtension> {
     sourceSets.commonMain.dependencies {
       implementation(libsEx.`kmp-ktProvider-api`)
-    }
-  }
-}
-
-/**
- * 使用 DataBinding
- * @param isNeedKapt 是否只依赖而不开启 DataBinding，默认开启 DataBinding
- */
-@Deprecated("不再建议使用 DataBinding，因为强依赖了 kapt，官方也未提供 ksp 支持。使用 Int.view() 或者 findViewById() 代替")
-fun Project.useDataBinding(isNeedKapt: Boolean = !name.startsWith("api")) {
-//  if (!Multiplatform.runAndroid(project)) return // 其他平台不引入 kapt 插件
-  if (isNeedKapt) {
-    // kapt 按需引入
-    apply(plugin = "org.jetbrains.kotlin.kapt")
-    extensions.configure(CommonExtension::class.java) {
-      buildFeatures {
-        when (this) {
-          is LibraryBuildFeatures -> dataBinding = true // com.android.library 插件的配置
-          is ApplicationBuildFeatures -> dataBinding = true // com.android.application 插件的配置
-        }
-      }
-    }
-  }
-  extensions.configure<KotlinMultiplatformExtension> {
-    sourceSets.androidMain.dependencies {
-      implementation(libsEx.`androidx-databinding`)
-      implementation(libsEx.`androidx-databinding-ktx`)
     }
   }
 }

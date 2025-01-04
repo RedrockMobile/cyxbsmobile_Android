@@ -4,14 +4,14 @@ import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
-import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
-import com.cyxbs.components.base.ui.BaseBindFragment
+import com.cyxbs.components.base.ui.BaseFragment
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.mine.R
-import com.cyxbs.pages.mine.databinding.MineFragmentFindPasswordIdsLoginBinding
 import com.cyxbs.pages.mine.page.security.activity.FindPasswordByIdsActivity
 import com.cyxbs.pages.mine.page.security.util.IdsFindPasswordDialog
 import com.cyxbs.pages.mine.page.security.viewmodel.FindPasswordByIdsViewModel
@@ -24,7 +24,7 @@ import org.json.JSONObject
  * @time   : 2022/8/21 22:32
  * @bless  : God bless my code
  */
-class LoginIdsFragment : BaseBindFragment<MineFragmentFindPasswordIdsLoginBinding>() {
+class LoginIdsFragment : BaseFragment() {
 
     /**
      * activity的viewModel
@@ -49,6 +49,11 @@ class LoginIdsFragment : BaseBindFragment<MineFragmentFindPasswordIdsLoginBindin
      */
     private var mClickable: Drawable? = null
 
+    private val mineBtnFindPasswordIdsCheck by R.id.mine_btn_find_password_ids_check.view<Button>()
+    private val mineEtFindPasswordIdsStuNum by R.id.mine_et_find_password_ids_stuNum.view<EditText>()
+    private val mineEtFindPasswordIdsAccount by R.id.mine_et_find_password_ids_account.view<EditText>()
+    private val mineEtFindPasswordIdsPassword by R.id.mine_et_find_password_ids_password.view<EditText>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         /**
          * 提示用的dialog
@@ -68,20 +73,20 @@ class LoginIdsFragment : BaseBindFragment<MineFragmentFindPasswordIdsLoginBindin
             R.drawable.mine_shape_bg_find_password_ids_button
         )
         //刚进入页面时按钮设置为灰色,且不可点击
-        binding.mineBtnFindPasswordIdsCheck.background = mUnClickable
-        binding.mineBtnFindPasswordIdsCheck.isEnabled = false
-        binding.mineEtFindPasswordIdsStuNum.addTextChangedListener()
-        binding.mineEtFindPasswordIdsAccount.addTextChangedListener()
-        binding.mineEtFindPasswordIdsPassword.addTextChangedListener()
+        mineBtnFindPasswordIdsCheck.background = mUnClickable
+        mineBtnFindPasswordIdsCheck.isEnabled = false
+        mineEtFindPasswordIdsStuNum.addTextChangedListener()
+        mineEtFindPasswordIdsAccount.addTextChangedListener()
+        mineEtFindPasswordIdsPassword.addTextChangedListener()
         mViewModel.isGetCodeSuccess.observe {
             if (!it) {
-                binding.mineBtnFindPasswordIdsCheck.text = "验证"
-                binding.mineBtnFindPasswordIdsCheck.isEnabled = true
+                mineBtnFindPasswordIdsCheck.text = "验证"
+                mineBtnFindPasswordIdsCheck.isEnabled = true
                 //若出错则弹出dialog提示
                 dialog.show()
             } else {
                 //若成功获取验证码，则保存学号并进入修改密码界面
-                mViewModel.stuNum = binding.mineEtFindPasswordIdsStuNum.text.toString()
+                mViewModel.stuNum = mineEtFindPasswordIdsStuNum.text.toString()
                 (requireActivity() as FindPasswordByIdsActivity).replace { ConfirmPasswordFragment() }
             }
         }
@@ -95,31 +100,31 @@ class LoginIdsFragment : BaseBindFragment<MineFragmentFindPasswordIdsLoginBindin
         doOnTextChanged { _, _, _, _ ->
             //若三个输入栏中的内容均不为空，则背景设置为正常颜色，且可以点击
             if (
-                binding.mineEtFindPasswordIdsStuNum.text.toString() != "" &&
-                binding.mineEtFindPasswordIdsAccount.text.toString() != "" &&
-                binding.mineEtFindPasswordIdsPassword.text.toString() != ""
+                mineEtFindPasswordIdsStuNum.text.toString() != "" &&
+                mineEtFindPasswordIdsAccount.text.toString() != "" &&
+                mineEtFindPasswordIdsPassword.text.toString() != ""
             ) {
                 //设置按钮背景颜色为正常的渐变蓝
-                binding.mineBtnFindPasswordIdsCheck.background = mClickable
+                mineBtnFindPasswordIdsCheck.background = mClickable
                 //设置按钮可点击，并设置点击事件
-                binding.mineBtnFindPasswordIdsCheck.isEnabled = true
-                binding.mineBtnFindPasswordIdsCheck.setOnSingleClickListener {
+                mineBtnFindPasswordIdsCheck.isEnabled = true
+                mineBtnFindPasswordIdsCheck.setOnSingleClickListener {
                     //设置按钮的文字为Loading
-                    binding.mineBtnFindPasswordIdsCheck.text = "Loading..."
-                    binding.mineBtnFindPasswordIdsCheck.isEnabled = false
+                    mineBtnFindPasswordIdsCheck.text = "Loading..."
+                    mineBtnFindPasswordIdsCheck.isEnabled = false
                     //发送获取验证码的请求
                     val jsonBody = JSONObject().apply {
-                        put("stu_num", binding.mineEtFindPasswordIdsStuNum.text.toString())
-                        put("ids_num", binding.mineEtFindPasswordIdsAccount.text.toString())
-                        put("password", binding.mineEtFindPasswordIdsPassword.text.toString())
+                        put("stu_num", mineEtFindPasswordIdsStuNum.text.toString())
+                        put("ids_num", mineEtFindPasswordIdsAccount.text.toString())
+                        put("password", mineEtFindPasswordIdsPassword.text.toString())
                     }
                     mViewModel.getCode(jsonBody.toString().toRequestBody(jsonType))
                 }
             } else {
                 //设置按钮背景颜色为灰色
-                binding.mineBtnFindPasswordIdsCheck.background = mUnClickable
+                mineBtnFindPasswordIdsCheck.background = mUnClickable
                 //设置按钮不可点击
-                binding.mineBtnFindPasswordIdsCheck.isEnabled = false
+                mineBtnFindPasswordIdsCheck.isEnabled = false
             }
         }
     }

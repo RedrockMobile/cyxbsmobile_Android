@@ -12,26 +12,26 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.view.JToolbar
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.mine.R
 import com.cyxbs.pages.mine.page.security.viewmodel.ChangePasswordViewModel
 import com.cyxbs.pages.mine.util.ui.ChooseFindTypeDialog
-import com.mredrock.cyxbs.common.component.CyxbsToast
-import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
-import com.mredrock.cyxbs.common.utils.LogUtils
-import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.common.utils.extensions.toast
 
 /**
  * Author: SpreadWater
  * Time: 2020-10-29 15:06
  */
-class ChangePasswordActivity : BaseViewModelActivity<ChangePasswordViewModel>() {
+class ChangePasswordActivity : BaseActivity() {
+
+    private val viewModel by viewModels<ChangePasswordViewModel>()
 
     private val mEtSecuritySecondInputPassword by R.id.mine_security_secondinput_password.view<AppCompatEditText>()
     private val mIvSecurityChangePasswordLine1Eye by R.id.mine_iv_security_change_paswword_line1_eye.view<ImageView>()
@@ -44,6 +44,7 @@ class ChangePasswordActivity : BaseViewModelActivity<ChangePasswordViewModel>() 
     private val mTvForgetPassword by R.id.mine_security_tv_forget_password.view<TextView>()
     private val mBtnSecurityChangePasswordConfirm by R.id.mine_bt_security_change_password_confirm.view<Button>()
     private val mPbSecurityChangePassword by R.id.mine_pb_security_change_password.view<ProgressBar>()
+    private val toolbar by com.cyxbs.components.config.R.id.toolbar.view<JToolbar>()
 
     companion object {
         //下面的常量是转化页面形态的标识量
@@ -108,7 +109,6 @@ class ChangePasswordActivity : BaseViewModelActivity<ChangePasswordViewModel>() 
                 changePageType(TYPE_NEW_PASSWORD)
                 changeButtonColorType(TYPE_COLOR_LIGHT_BUTTON)
                 setToolBar(TYPE_NEW_PASSWORD)
-                LogUtils.d("zt", stuNum)
                 initEvent()
             }
             //表示自登陆界面跳转到这里，由于没有登陆，所以需要自intent中获取
@@ -171,37 +171,23 @@ class ChangePasswordActivity : BaseViewModelActivity<ChangePasswordViewModel>() 
     private fun setToolBar(type: Int) {
         when (type) {
             TYPE_OLD_PASSWORDS -> {
-                common_toolbar.apply {
-                    setBackgroundColor(
-                        ContextCompat.getColor(
-                            this@ChangePasswordActivity,
-                            com.mredrock.cyxbs.common.R.color.common_white_background
-                        )
+                toolbar.apply {
+                    init(
+                        activity = this@ChangePasswordActivity,
+                        title = "修改密码",
+                        withSplitLine = false,
+                        titleOnLeft = true,
                     )
-                    initWithSplitLine("修改密码",
-                        false,
-                        R.drawable.mine_ic_arrow_left,
-                        View.OnClickListener {
-                            finishAfterTransition()
-                        })
-                    setTitleLocationAtLeft(true)
                 }
             }
             TYPE_NEW_PASSWORD -> {
-                common_toolbar.apply {
-                    setBackgroundColor(
-                        ContextCompat.getColor(
-                            this@ChangePasswordActivity,
-                            com.mredrock.cyxbs.common.R.color.common_white_background
-                        )
+                toolbar.apply {
+                    init(
+                        activity = this@ChangePasswordActivity,
+                        title = "重设密码",
+                        withSplitLine = false,
+                        titleOnLeft = true,
                     )
-                    initWithSplitLine("重设密码",
-                        false,
-                        R.drawable.mine_ic_arrow_left,
-                        View.OnClickListener {
-                            finishAfterTransition()
-                        })
-                    setTitleLocationAtLeft(true)
                 }
             }
         }
@@ -340,8 +326,7 @@ class ChangePasswordActivity : BaseViewModelActivity<ChangePasswordViewModel>() 
         //检查新密码是否上传成功！
         viewModel.inputNewPasswordCorrect.observe(this, Observer {
             if (it) {
-                CyxbsToast.makeText(this, "重置密码成功！由于账号互通，重邮帮小程序的密码也会一起更改哦~", Toast.LENGTH_SHORT)
-                    .show()
+                toast("重置密码成功！由于账号互通，重邮帮小程序的密码也会一起更改哦~")
                 finish()
             } else {
                 if (viewModel.inputNewPasswordFormat == INPUT_NEW_PASSWORD_FORMAT_IS_CORRECT) {

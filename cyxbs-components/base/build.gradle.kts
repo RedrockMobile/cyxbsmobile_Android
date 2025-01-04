@@ -4,7 +4,6 @@ plugins {
 }
 
 useKtProvider()
-useDataBinding(false) // base 模块只依赖 DataBinding 但不开启 DataBinding
 
 kotlin {
   sourceSets {

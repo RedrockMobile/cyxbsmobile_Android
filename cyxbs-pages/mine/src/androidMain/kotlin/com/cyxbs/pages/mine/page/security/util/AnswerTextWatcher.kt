@@ -5,7 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Button
 import androidx.core.content.ContextCompat
-import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import com.cyxbs.pages.mine.R
 
 /**
@@ -13,7 +13,7 @@ import com.cyxbs.pages.mine.R
  * Time: 2020-11-19 21:34
  * Describe: 本模块输入问题的答案的泛用性TextWatcher
  */
-open class AnswerTextWatcher(private val tipOF: ObservableField<String>, val button: Button, val context: Context) : TextWatcher {
+open class AnswerTextWatcher(private val tipOF: MutableLiveData<String>, val button: Button, val context: Context) : TextWatcher {
     open val min = 2
     open val max = 16
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -26,14 +26,14 @@ open class AnswerTextWatcher(private val tipOF: ObservableField<String>, val but
         s?.let {
             when {
                 it.length < min -> {
-                    tipOF.set("请至少输入2个字符")
+                    tipOF.postValue("请至少输入2个字符")
                     button.background = ContextCompat.getDrawable(context, R.drawable.mine_shape_round_corner_light_blue)
                 }
                 it.length >= max -> {
-                    tipOF.set("输入已达上限")
+                    tipOF.postValue("输入已达上限")
                 }
                 else -> {
-                    tipOF.set("")
+                    tipOF.postValue("")
                     button.background = ContextCompat.getDrawable(context, R.drawable.mine_shape_round_corner_purple_blue)
                 }
             }

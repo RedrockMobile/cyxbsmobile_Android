@@ -1,20 +1,21 @@
 package com.cyxbs.pages.mine.page.security.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
-import com.cyxbs.components.base.ui.BaseBindActivity
+import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.mine.R
-import com.cyxbs.pages.mine.databinding.MineActivityFindPasswordIdsBinding
 import com.cyxbs.pages.mine.page.security.fragment.LoginIdsFragment
 
-class FindPasswordByIdsActivity :
-    BaseBindActivity<MineActivityFindPasswordIdsBinding>() {
+class FindPasswordByIdsActivity : BaseActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.mine_activity_find_password_ids)
         replaceFragment(R.id.mine_fcv_find_password_ids_container) { LoginIdsFragment() }
-        binding.mineBtnFindPasswordIdsTopBack.setOnSingleClickListener {
+        findViewById<View>(R.id.mine_btn_find_password_ids_top_back).setOnSingleClickListener {
             finish()
         }
     }

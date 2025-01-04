@@ -1,10 +1,8 @@
 package com.cyxbs.pages.mine.page.security.viewmodel
 
-import androidx.databinding.ObservableField
-import com.mredrock.cyxbs.common.utils.extensions.doOnErrorWithDefaultErrorHandler
-import com.mredrock.cyxbs.common.utils.extensions.unsafeSubscribeBy
-import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
-import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
+import androidx.lifecycle.MutableLiveData
+import com.cyxbs.components.base.ui.BaseViewModel
+import com.cyxbs.components.utils.extensions.setSchedulers
 import com.cyxbs.pages.mine.network.model.SecurityQuestion
 import com.cyxbs.pages.mine.util.apiService
 
@@ -14,18 +12,15 @@ import com.cyxbs.pages.mine.util.apiService
  */
 class FindPasswordViewModel : BaseViewModel() {
     //获取验证码部分的text，含有倒计时提醒
-    val timerText = ObservableField<String>()
-
-    //输入框内部的字符
-    val inputText = ObservableField<String>()
+    val timerText = MutableLiveData<String>()
 
     //在输入框下面的第一个提示的内容
-    val firstTipText = ObservableField<String>()
+    val firstTipText = MutableLiveData<String>()
 
     lateinit var email: String
 
     //用户的邮箱地址，同时这一行也展示用户的密保问题
-    val emailAddressOrQuestion = ObservableField<String>()
+    val emailAddressOrQuestion = MutableLiveData<String>()
 
     //是否允许用户点击发送验证码
     private var canClickSendCode = true
@@ -50,11 +45,10 @@ class FindPasswordViewModel : BaseViewModel() {
         Runnable {
             //在倒计时过程中不允许点击
             canClickSendCode = false
-            //使用dataBinding，不需要进行线程调度
             lastTime = 30
             while (lastTime > -1) {
 
-                timerText.set("正在发送(${lastTime})")
+                timerText.postValue("正在发送(${lastTime})")
                 try {
                     lastTime--
                     Thread.sleep(1000)
@@ -63,7 +57,7 @@ class FindPasswordViewModel : BaseViewModel() {
                 }
             }
             //届时倒计时已经为0
-            timerText.set("重新发送")
+            timerText.postValue("重新发送")
             canClickSendCode = true
         }
     }
@@ -75,75 +69,61 @@ class FindPasswordViewModel : BaseViewModel() {
         //如果用户已经登陆，则使用个人界面的接口
         if (canClickSendCode) {
             apiService.getEmailFindPasswordCode(
-                    //用户的学号
-                    stuNumber
-            )
-                    .setSchedulers()
-                    .doOnErrorWithDefaultErrorHandler {
-                        toast("对不起，验证码发送失败，原因为:$it")
-                        true
+                //用户的学号
+                stuNumber
+            ).setSchedulers().doOnError {
+                toast("对不起，验证码发送失败，原因为:$it")
+            }.safeSubscribeBy {
+                when (it.status) {
+                    10000 -> {
+                        //发送成功
+                        expiredTime = it.data.expired_time
+                        toast("已向你的邮箱发送了一条验证码")
+                        Thread(clockRunnable).start()
                     }
-                    .unsafeSubscribeBy {
-                        when (it.status) {
-                            10000 -> {
-                                //发送成功
-                                expiredTime = it.data.expired_time
-                                toast("已向你的邮箱发送了一条验证码")
-                                Thread(clockRunnable).start()
-                            }
-                            10008 -> {
-                                toast("邮箱信息错误")
-                            }
-                            10009 -> {
-                                toast("发送次数已达上限，请十分钟后再次尝试")
-                            }
-                        }
+                    10008 -> {
+                        toast("邮箱信息错误")
                     }
-
+                    10009 -> {
+                        toast("发送次数已达上限，请十分钟后再次尝试")
+                    }
+                }
+            }
         }
     }
 
+    // todo 这种写法会内存泄漏，别学习老登写法
     //校验找回邮箱的验证码
-    fun confirmCode(onSuccess: (code: Int) -> Unit, onField: () -> Unit) {
+    fun confirmCode(inputText: String, onSuccess: (code: Int) -> Unit, onField: () -> Unit) {
         if (canClickNext) {
             if (expiredTime < System.currentTimeMillis() / 1000) {
                 toast("验证码过期")
                 return
             }
-            if (inputText.get() == null) {
+            if (inputText.isEmpty()) {
                 //输入验证码为空，弹出提示
                 toast("验证码错误")
                 return
             }
             canClickNext = false
-            inputText.get()?.let {
+            inputText.let {
                 apiService.confirmCodeWithoutLogin(
-                        stuNumber,
-                        email,
-                        it.toInt()
-                )
-                        .setSchedulers()
-                        .doOnErrorWithDefaultErrorHandler { error ->
-                            toast("验证失败，原因为$error")
-                            canClickNext = true
-                            true
-                        }
-                        .unsafeSubscribeBy(
-                                onError = {
-
-                                },
-                                onNext = { cq ->
-                                    if (cq.status == 10000) {
-                                        //回调
-                                        onSuccess(cq.data.code)
-                                        //因为这里下一步就要去跳转页面了，没有必要再将canClickNext设置为true
-                                    } else if (cq.status == 10007) {
-                                        toast("验证码错误")
-                                        onField()
-                                        canClickNext = true
-                                    }
-                                }
-                        )
+                    stuNumber,
+                    email,
+                    it.toInt()
+                ).setSchedulers().doOnError {
+                    toast("验证失败，原因为${it.message}")
+                }.safeSubscribeBy { cq ->
+                    if (cq.status == 10000) {
+                        //回调
+                        onSuccess(cq.data.code)
+                        //因为这里下一步就要去跳转页面了，没有必要再将canClickNext设置为true
+                    } else if (cq.status == 10007) {
+                        toast("验证码错误")
+                        onField()
+                        canClickNext = true
+                    }
+                }
             }
         }
     }
@@ -151,57 +131,54 @@ class FindPasswordViewModel : BaseViewModel() {
     //获取用户的绑定邮箱，虽然不需要在其他接口中使用，但需要给用户展示
     fun getBindingEmail() {
         apiService.getUserEmail(stuNumber)
-                .setSchedulers()
-                .doOnErrorWithDefaultErrorHandler {
-                    toast("获取邮箱信息失败，原因为$it")
-                    true
-                }
-                .unsafeSubscribeBy {
-                    if (it.status == 10000) {
-                        email = it.data.email
-                        if (email == null || email == "") {
-                            toast("返回邮箱为空")
-                        } else {
-                            //下面是抄的齐哥的邮箱加密策略
-                            val atLocation = email.indexOf("@")
-                            var showUserEmail = email
-                            when {
-                                atLocation in 2..4 -> {
-                                    showUserEmail = showUserEmail.substring(0, 1) + "*" + showUserEmail.substring(2, showUserEmail.length)
-                                }
-                                atLocation == 5 -> {
-                                    showUserEmail = showUserEmail.substring(0, 2) + "**" + showUserEmail.substring(4, showUserEmail.length)
-                                }
-                                atLocation > 5 -> {
-                                    var starString = ""
-                                    for (i in 0 until atLocation - 4) starString += "*"
-                                    showUserEmail = showUserEmail.substring(0, 2) + starString + showUserEmail.substring(atLocation - 2, showUserEmail.length)
-                                }
+            .setSchedulers()
+            .doOnError {
+                toast("获取邮箱信息失败，原因为$it")
+            }.safeSubscribeBy {
+                if (it.status == 10000) {
+                    email = it.data.email
+                    if (email == null || email == "") {
+                        toast("返回邮箱为空")
+                    } else {
+                        //下面是抄的齐哥的邮箱加密策略
+                        val atLocation = email.indexOf("@")
+                        var showUserEmail = email
+                        when {
+                            atLocation in 2..4 -> {
+                                showUserEmail = showUserEmail.substring(0, 1) + "*" + showUserEmail.substring(2, showUserEmail.length)
                             }
-                            emailAddressOrQuestion.set(showUserEmail)
-                            canClickNext = true//数据加载完毕，允许用户点击next
+                            atLocation == 5 -> {
+                                showUserEmail = showUserEmail.substring(0, 2) + "**" + showUserEmail.substring(4, showUserEmail.length)
+                            }
+                            atLocation > 5 -> {
+                                var starString = ""
+                                for (i in 0 until atLocation - 4) starString += "*"
+                                showUserEmail = showUserEmail.substring(0, 2) + starString + showUserEmail.substring(atLocation - 2, showUserEmail.length)
+                            }
                         }
-                    } else if (it.status == 10024) {
-                        toast("你尚未绑定邮箱")
+                        emailAddressOrQuestion.postValue(showUserEmail)
+                        canClickNext = true//数据加载完毕，允许用户点击next
                     }
+                } else if (it.status == 10024) {
+                    toast("你尚未绑定邮箱")
                 }
+            }
     }
 
     //获取用户的密保问题信息
     fun getUserQuestion() {
         apiService.getUserQuestion(stuNumber)
                 .setSchedulers()
-                .doOnErrorWithDefaultErrorHandler {
+                .doOnError {
                     toast("服务器君打盹了,$it")
-                    true
                 }
-                .unsafeSubscribeBy {
+                .safeSubscribeBy {
                     if (it.status == 10000) {
                         //目前仅仅有一个密保问题
                         //后端为了拓展将这里的返回值设计成了一个集合
                         //就目前而言这个集合应该之后一个值
                         question = it.data[0]
-                        emailAddressOrQuestion.set(it.data[0].content)
+                        emailAddressOrQuestion.postValue(it.data[0].content)
                         canClickNext = true//数据加载完毕，允许用户点击下一步
                     } else {
                         toast("您还没有设置密保")
@@ -210,20 +187,21 @@ class FindPasswordViewModel : BaseViewModel() {
 
     }
 
+    // todo 这种写法会内存泄漏，别学习老登写法
     //验证用户输入的密保问题是否正确
-    fun confirmAnswer(onSuccess: (code: Int) -> Unit) {
+    fun confirmAnswer(inputText: String, onSuccess: (code: Int) -> Unit) {
         if (canClickNext) {
-            if (inputText.get() == null) {
+            if (inputText.isEmpty()) {
                 //展示最少输入两个字符
-                firstTipText.set("请至少输入两个字符")
+                firstTipText.postValue("请至少输入两个字符")
                 return
             }
-            inputText.get()?.let {
+            inputText.let {
                 if (it.length < 2) {
-                    firstTipText.set("请至少输入两个字符")
+                    firstTipText.postValue("请至少输入两个字符")
                     return
                 } else if (it.length >= 16) {
-                    firstTipText.set("输入已达上限")
+                    firstTipText.postValue("输入已达上限")
                     return
                 }
                 //输入情况正常以后，允许进行正常的网络请求
@@ -234,12 +212,11 @@ class FindPasswordViewModel : BaseViewModel() {
                         it
                 )
                         .setSchedulers()
-                        .doOnErrorWithDefaultErrorHandler { exception ->
+                        .doOnError { exception ->
                             toast("验证密保问题失败，原因为:$exception")
                             canClickNext = true
-                            true
                         }
-                        .unsafeSubscribeBy { cq ->
+                        .safeSubscribeBy { cq ->
                             when (cq.status) {
                                 10006 -> {//用户尝试次数已经达到上限
                                     toast("输入次数已达上限，请10分钟后再次尝试")
@@ -253,7 +230,7 @@ class FindPasswordViewModel : BaseViewModel() {
                                     onSuccess(cq.data.code)
                                 }
                             }
-                        }.lifeCycle()
+                        }
             }
         }
     }
