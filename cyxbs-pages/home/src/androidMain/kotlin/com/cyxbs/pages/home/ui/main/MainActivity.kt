@@ -21,6 +21,7 @@ import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.utils.service.startActivity
 import com.cyxbs.components.utils.utils.judge.NetworkUtil
 import com.cyxbs.functions.update.api.IAppUpdateService
+import com.cyxbs.pages.home.viewmodel.BottomNavViewModel
 import com.cyxbs.pages.home.viewmodel.MainViewModel
 import com.cyxbs.pages.login.api.ILoginService
 import kotlinx.coroutines.launch
@@ -38,6 +39,7 @@ import kotlinx.coroutines.launch
 class MainActivity : BaseActivity() {
   
   private val mViewModel by viewModels<MainViewModel>()
+  private val mBottomNavViewModel by viewModels<BottomNavViewModel>()
   
   private val mAccountService = IAccountService::class.impl()
 
@@ -87,7 +89,7 @@ class MainActivity : BaseActivity() {
     initNotification()
     initUpdate()
     setContent {
-      MainCompose()
+      MainPage()
     }
   }
 
@@ -124,22 +126,19 @@ class MainActivity : BaseActivity() {
   }
   
   private fun initBottomNav() {
-    if (!mIsActivityRebuilt) {
-      BottomNavState.select(BottomNavState.discoverItem) // 非重建 activity 时底部按钮默认为发现页
-    }
     mViewModel.courseBottomSheetOffset.observe {
       // 底部按钮跟随课表展开而变化
-      BottomNavState.offsetYRadio.floatValue = it
-      BottomNavState.alpha.floatValue = 1 - it
+      mBottomNavViewModel.offsetYRadio.floatValue = it
+      mBottomNavViewModel.alpha.floatValue = 1 - it
     }
-    BottomNavState.selectedItem.collectLaunch {
+    mBottomNavViewModel.selectedItem.collectLaunch {
       when (it) {
-        BottomNavState.discoverItem, BottomNavState.mineItem -> {
+        mBottomNavViewModel.discoverItem, mBottomNavViewModel.mineItem -> {
           if (mViewModel.courseBottomSheetExpand.value == null) {
             mViewModel.courseBottomSheetExpand.value = false
           }
         }
-        BottomNavState.fairgroundItem -> {
+        mBottomNavViewModel.fairgroundItem -> {
           mViewModel.courseBottomSheetExpand.value = null
           if (mIsLogin) {
             // “邮乐园” 按钮点击事件埋点
@@ -151,13 +150,13 @@ class MainActivity : BaseActivity() {
       }
       
       // Umeng 埋点统计
-      Umeng.sendEvent(Umeng.Event.ClickBottomTab(BottomNavState.items.indexOf(it)))
+      Umeng.sendEvent(Umeng.Event.ClickBottomTab(mBottomNavViewModel.items.indexOf(it)))
     }
   }
 
   private fun initNotification() {
     mViewModel.hasUnReadNotification.observe {
-      BottomNavState.mineItem.setRedDot(it)
+      mBottomNavViewModel.mineItem.setRedDot(it)
     }
     lifecycle.addObserver(object : DefaultLifecycleObserver {
       override fun onResume(owner: LifecycleOwner) {

@@ -1,8 +1,10 @@
 package com.cyxbs.pages.login.login.ui
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.core.content.edit
@@ -17,7 +19,7 @@ import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.utils.service.startActivity
 import com.cyxbs.functions.update.api.IAppUpdateService
 import com.cyxbs.pages.login.api.ILegalNoticeService
-import com.cyxbs.pages.login.ui.LoginCompose
+import com.cyxbs.pages.login.ui.LoginPage
 import com.cyxbs.pages.login.ui.UserAgreementDialog
 import com.cyxbs.pages.login.viewmodel.LoginViewModel
 
@@ -73,6 +75,9 @@ class LoginActivity : BaseActivity() {
     }
   }
 
+  override val isPortraitScreen: Boolean
+    get() = false
+
   private val mIsReboot by intent<Boolean>()
   private val mSuccessIntent by intentNullable<Intent?>()
 
@@ -80,7 +85,7 @@ class LoginActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContent { LoginCompose() }
+    setContent { LoginPage() }
     initView()
     initObserveEvent()
     initUpdate()
@@ -100,6 +105,7 @@ class LoginActivity : BaseActivity() {
         LoginViewModel.Event.ClickPrivacyPolicy -> onClickPrivacyPolicy()
         LoginViewModel.Event.ClickUserAgreement -> onClickUserAgreement()
         is LoginViewModel.Event.Login -> onLoginEvent(it)
+        LoginViewModel.Event.HideSoftInput -> hideSoftInput()
       }
     }
   }
@@ -135,6 +141,16 @@ class LoginActivity : BaseActivity() {
       false -> { // 登录失败
 
       }
+    }
+  }
+
+
+  private fun hideSoftInput() {
+    //放下键盘
+    val inputMethodManager =
+      appContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    if (inputMethodManager.isActive) {
+      inputMethodManager.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
     }
   }
 

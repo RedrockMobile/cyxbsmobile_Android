@@ -3,10 +3,8 @@ package com.cyxbs.pages.login.viewmodel
 import android.os.SystemClock
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.base.BaseApp
-import com.cyxbs.components.config.route.MINE_FORGET_PASSWORD
 import com.cyxbs.components.utils.coroutine.runCatchingCoroutine
 import com.cyxbs.components.utils.service.impl
-import com.cyxbs.components.utils.service.startActivity
 import com.cyxbs.components.utils.utils.judge.NetworkUtil
 import com.cyxbs.pages.login.bean.DeviceInfoParams
 import com.cyxbs.pages.login.network.LoginApiService
@@ -43,16 +41,18 @@ actual class LoginViewModel : CommonLoginViewModel() {
   }
 
   override suspend fun login() {
+    _event.emit(Event.HideSoftInput)
     if (!mIsServerAvailable) {
       toast("当前后端服务不可用，可能无法正常登录")
     }
+    val startTime = SystemClock.elapsedRealtime().milliseconds
     runCatchingCoroutine {
-      val startTime = SystemClock.elapsedRealtime().milliseconds
       withContext(Dispatchers.IO) {
         IAccountService::class.impl()
           .getVerifyService()
           .login(appContext, username.value, password.value)
       }
+    }.also {
       // 网络太快会闪一下，像bug，就让它最少待两秒吧
       delay(2.seconds + startTime - SystemClock.elapsedRealtime().milliseconds)
     }.onFailure {
@@ -79,7 +79,6 @@ actual class LoginViewModel : CommonLoginViewModel() {
     launch {
       _event.emit(Event.ClickForgetPassword)
     }
-    startActivity(MINE_FORGET_PASSWORD) // 跳转到忘记密码模块
   }
 
   override fun clickUserAgreement() {
@@ -125,7 +124,11 @@ actual class LoginViewModel : CommonLoginViewModel() {
     }
   }
 
+  /**
+   * 登录界面所有事件收口处
+   */
   sealed interface Event {
+    data object HideSoftInput: Event
     data class Login(val result: Boolean?) : Event
     data object ClickForgetPassword : Event
     data object ClickUserAgreement : Event

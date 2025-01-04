@@ -117,7 +117,7 @@ class NoClassActivity : BaseActivity() {
     /**
      * 取消状态栏
      */
-    override val isCancelStatusBar: Boolean
+    override val enableEdgeToEdge: Boolean
         get() = true
 
     override fun onCreate(savedInstanceState: Bundle?) {

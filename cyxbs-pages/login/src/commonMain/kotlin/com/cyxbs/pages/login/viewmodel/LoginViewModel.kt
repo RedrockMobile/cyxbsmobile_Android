@@ -26,6 +26,8 @@ abstract class CommonLoginViewModel : BaseViewModel() {
     if (isLoginAnim.value) return
     if (!isCheckUserArgument.value) {
       toast("请先同意用户协议吧")
+    } else if (username.value.isEmpty()) {
+      toast("请输入学号")
     } else if (password.value.length < 6) {
       toast("请检查一下密码吧，似乎有点问题")
     } else {

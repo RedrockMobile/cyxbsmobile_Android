@@ -125,6 +125,8 @@ compose-navigation = "2.8.0-alpha11"
 compose-lifecycle = "2.8.4"
 # 多平台版本，非官方 https://github.com/Lavmee/constraintlayout-compose-multiplatform
 compose-constraintLayout = "0.5.0"
+# 官方约束布局，但只有安卓版本 https://developer.android.com/develop/ui/compose/layouts/constraintlayout
+compose-constraintLayout-android = "1.1.0"
 # https://github.com/alexzhirkevich/compottie
 compose-lottie = "2.0.0-rc02"
 
@@ -191,7 +193,6 @@ androidx-core-animation = { module = "androidx.core:core-animation", version.ref
 androidx-collection-ktx = { module = "androidx.collection:collection-ktx", version.ref = "androidx-collection-ktx" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx-fragment" }
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
-androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 
 ######################################## 特殊依赖，少量模块引入 ########################################
 android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -260,9 +261,11 @@ kmp-ktProvider-api = { module = "io.github.985892345:provider-api", version.ref 
 ####################################################################################################
 compose-gradlePlugin = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "compose-multiplatform" }
 compose-compiler-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+compose-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "compose-navigation" }
 compose-lifecycle = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "compose-lifecycle" }
 compose-constraintLayout = { module = "tech.annexflow.compose:constraintlayout-compose-multiplatform", version.ref = "compose-constraintLayout" }
+compose-constraintLayout-android = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "compose-constraintLayout-android" }
 compose-lottie = { module = "io.github.alexzhirkevich:compottie", version.ref = "compose-lottie" }
 
 ####################################################################################################

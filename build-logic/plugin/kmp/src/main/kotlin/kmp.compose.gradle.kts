@@ -23,7 +23,7 @@ kotlin {
 
     androidMain.dependencies {
       implementation(compose.preview)
-      implementation(libsEx.`androidx-activity-compose`)
+      implementation(libsEx.`compose-activity`)
     }
 
     if (Multiplatform.enableDesktop(project)) {
@@ -41,6 +41,18 @@ plugins.withId("com.android.base") {
   }
   dependencies {
     add("debugImplementation", compose.uiTooling)
+  }
+  configurations.getByName("androidMainImplementation") {
+    // 目前第三方的 constraintlayout 在安卓上的实现与 constraintlayout-core 存在依赖冲突
+    // 所以这里 exclude 掉对应的 -android 依赖，然后下面在安卓上单独依赖官方的 constraintlayout-compose
+    exclude(group = "tech.annexflow.compose", module = "constraintlayout-compose-multiplatform-android")
+  }
+  kotlin {
+    sourceSets {
+      androidMain.dependencies {
+        implementation(libsEx.`compose-constraintLayout-android`)
+      }
+    }
   }
 }
 

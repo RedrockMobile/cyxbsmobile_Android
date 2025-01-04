@@ -2,9 +2,9 @@ package com.cyxbs.components.base.ui
 
 import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.activity.enableEdgeToEdge
 import androidx.annotation.CallSuper
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
@@ -93,19 +93,19 @@ abstract class BaseActivity : AppCompatActivity, BaseUi {
    * 是否沉浸式状态栏
    *
    * ## 注意
-   * 沉浸式后，状态栏不会再有东西占位，界面会默认上移，
-   * 可以给布局加上 android:fitsSystemWindows=true (但不建议给根布局加，一般是给第二个布局加)，
-   * 不同布局该属性效果不同，请给合适的布局添加
-   * 
-   * ## 比如
-   * - 大部分情况下是给第二层布局添加 fitsSystemWindows=true，因为最外层布局需要提供背景给状态栏，而第二层布局需要下移状态栏
-   * - 如果你使用了 BottomSheet，那么大概率需要给 BottomSheet 加上 fitsSystemWindows=true。
-   *   (注意: CoordinatorLayout 设置 fitsSystemWindows 无效，但可以在外面包一层 FrameLayout，给它加上 fitsSystemWindows，具体可以看 main 模块里面的课表写法)
-   * - 
+   * 沉浸式后，状态栏和导航栏不会再有东西占位，界面会默认上移，
+   * 可以使用 ViewCompat.setOnApplyWindowInsetsListener(View) 给对应的 View 进行状态栏或者导航栏偏移
+   *
+   * 但注意：OnApplyWindowInsets 给父布局消耗后子布局就不会回调
+   * 如果在 Fragment 场景，则可以使用：
+   * WindowInsetsCompat.toWindowInsetsCompat(requireActivity().window.decorView.rootWindowInsets).getInsets()
+   * 来获取状态栏高度然后单独设置 padding
+   *
+   * 详细可看：https://juejin.cn/post/7395866692772085800
    */
-  protected open val isCancelStatusBar: Boolean
+  protected open val enableEdgeToEdge: Boolean
     get() = true
-  
+
   /**
    * 是否处于转屏或异常重建后的 Activity 状态
    */
@@ -116,31 +116,24 @@ abstract class BaseActivity : AppCompatActivity, BaseUi {
   @SuppressLint("SourceLockedOrientationActivity")
   override fun onCreate(savedInstanceState: Bundle?) {
     mIsActivityRebuilt = savedInstanceState != null
+    if (enableEdgeToEdge) { // 沉浸式状态栏
+      configEdgeToEdge()
+    }
     super.onCreate(savedInstanceState)
     if (isPortraitScreen) { // 锁定竖屏
       requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
-    
-    if (isCancelStatusBar) { // 沉浸式状态栏
-      cancelStatusBar()
-    }
   }
   
-  private fun cancelStatusBar() {
+  private fun configEdgeToEdge() {
+    enableEdgeToEdge()
     val window = this.window
     val decorView = window.decorView
-    
-    // 这是 Android 做了兼容的 Compat 包
-    // 注意，使用了下面这个方法后，状态栏不会再有东西占位，
-    // 可以给根布局加上 android:fitsSystemWindows=true
-    // 不同布局该属性效果不同，请给合适的布局添加
-    WindowCompat.setDecorFitsSystemWindows(window, false)
     val windowInsetsController = WindowCompat.getInsetsController(window, decorView)
     // 如果你要白色的状态栏字体，请在你直接的 Activity 中单独设置 isAppearanceLightStatusBars，这里不提供方法
     windowInsetsController.isAppearanceLightStatusBars = isDaytimeMode()
-    window.statusBarColor = Color.TRANSPARENT //把状态栏颜色设置成透明
   }
-  
+
   /**
    * 替换 Fragment 的正确用法。
    * 如果不按照正确方式使用，会造成 ViewModel 失效，

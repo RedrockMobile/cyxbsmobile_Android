@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_marginStart="-25dp"
-            android:layout_marginTop="-22dp"
+            android:layout_marginTop="-40dp"
             android:layout_marginEnd="-25dp"
             android:background="@drawable/mine_ic_info_header">
 

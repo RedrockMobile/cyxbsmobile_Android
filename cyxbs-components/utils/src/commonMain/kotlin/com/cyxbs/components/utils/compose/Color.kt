@@ -2,6 +2,7 @@ package com.cyxbs.components.utils.compose
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import com.cyxbs.components.config.compose.theme.LocalAppDark
 
 /**
  * .
@@ -20,24 +21,20 @@ fun Long.color(): Color {
 
 @Composable
 fun Int.dark(darkColor: Int): Color {
-  // todo
-  return Color(this)
+  return if (!LocalAppDark.current) Color(this) else Color(darkColor)
 }
 
 @Composable
 fun Int.dark(darkColor: Color): Color {
-  // todo
-  return Color(this)
+  return if (!LocalAppDark.current) Color(this) else darkColor
 }
 
 @Composable
 fun Long.dark(darkColor: Long): Color {
-  // todo
-  return Color(this)
+  return if (!LocalAppDark.current) Color(this) else Color(darkColor)
 }
 
 @Composable
 fun Long.dark(darkColor: Color): Color {
-  // todo
-  return Color(this)
+  return if (!LocalAppDark.current) Color(this) else darkColor
 }

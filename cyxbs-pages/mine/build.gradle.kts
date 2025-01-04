@@ -35,6 +35,5 @@ kotlin {
       // https://github.com/kyleduo/SwitchButton
       implementation("com.kyleduo.switchbutton:library:2.1.0")
     }
-
   }
 }

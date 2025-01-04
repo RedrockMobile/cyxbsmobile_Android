@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,7 +20,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -37,10 +37,12 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TransformedText
@@ -52,12 +54,12 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.Visibility
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.cyxbs.components.config.color.LocalAppColors
-import com.cyxbs.components.utils.compose.clickableCardIndicator
+import com.cyxbs.components.config.compose.appName
+import com.cyxbs.components.config.compose.theme.AppTheme
+import com.cyxbs.components.config.compose.theme.LocalAppColors
 import com.cyxbs.components.utils.compose.clickableNoIndicator
 import com.cyxbs.components.utils.compose.dark
 import com.cyxbs.components.utils.compose.getWindowScreenSize
-import com.cyxbs.components.utils.extensions.logg
 import com.cyxbs.pages.login.viewmodel.LoginViewModel
 import cyxbsmobile.cyxbs_pages.login.generated.resources.Res
 import cyxbsmobile.cyxbs_pages.login.generated.resources.login_ic_password
@@ -70,7 +72,6 @@ import io.github.alexzhirkevich.compottie.rememberLottieComposition
 import io.github.alexzhirkevich.compottie.rememberLottiePainter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.filter
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import kotlin.time.Duration.Companion.seconds
@@ -93,23 +94,27 @@ private enum class Element {
 }
 
 @Composable
-fun LoginCompose() {
+fun LoginPage() {
   viewModel { LoginViewModel() } // wasm 无法反射 new 对象，这里需要提供 factory
-  ConstraintLayout(
-    modifier = Modifier.fillMaxSize().systemBarsPadding(),
-    constraintSet = createConstraintSet(),
-    animateChangesSpec = spring(
-      stiffness = Spring.StiffnessMediumLow,
-    ),
-  ) {
-    TitleCompose(modifier = Modifier.layoutId(Element.Title))
-    SubTitleCompose(modifier = Modifier.layoutId(Element.SubTitle))
-    UsernamePasswordCompose(modifier = Modifier.layoutId(Element.UsernamePassword))
-    UserAgreementCompose(modifier = Modifier.layoutId(Element.UserAgreement))
-    ForgetPasswordCompose(modifier = Modifier.layoutId(Element.ForgetPassword))
-    LoginBtnCompose(modifier = Modifier.layoutId(Element.LoginBtn))
-    TouristModeCompose(modifier = Modifier.layoutId(Element.TouristMode))
-    LoginAnimCompose(modifier = Modifier.layoutId(Element.LoginAnim))
+  AppTheme {
+    ConstraintLayout(
+      constraintSet = createConstraintSet(),
+      modifier = Modifier.fillMaxSize()
+        .background(LocalAppColors.current.whiteBlack)
+        .systemBarsPadding(),
+      animateChangesSpec = spring(
+        stiffness = Spring.StiffnessMediumLow,
+      ),
+    ) {
+      TitleCompose(modifier = Modifier.layoutId(Element.Title))
+      SubTitleCompose(modifier = Modifier.layoutId(Element.SubTitle))
+      UsernamePasswordCompose(modifier = Modifier.layoutId(Element.UsernamePassword))
+      UserAgreementCompose(modifier = Modifier.layoutId(Element.UserAgreement))
+      ForgetPasswordCompose(modifier = Modifier.layoutId(Element.ForgetPassword))
+      LoginBtnCompose(modifier = Modifier.layoutId(Element.LoginBtn))
+      TouristModeCompose(modifier = Modifier.layoutId(Element.TouristMode))
+      LoginAnimCompose(modifier = Modifier.layoutId(Element.LoginAnim))
+    }
   }
 }
 
@@ -203,7 +208,7 @@ private fun TitleCompose(modifier: Modifier = Modifier) {
 private fun SubTitleCompose(modifier: Modifier = Modifier) {
   Text(
     modifier = modifier,
-    text = "您好鸭，欢迎来到桌上重邮~",
+    text = "您好鸭，欢迎来到$appName~",
     fontSize = 18.sp,
     color = LocalAppColors.current.tvLv2.copy(alpha = 0.6F),
   )
@@ -213,7 +218,7 @@ private fun SubTitleCompose(modifier: Modifier = Modifier) {
 private fun UsernamePasswordCompose(modifier: Modifier = Modifier) {
   MaterialTheme(
     typography = MaterialTheme.typography.copy( // OutlinedTextField 的 label 需要通过这个才能修改字体大小
-      caption = MaterialTheme.typography.caption.copy(fontSize = 10.sp),
+      caption = MaterialTheme.typography.caption.copy(fontSize = 12.sp),
       subtitle1 = MaterialTheme.typography.subtitle1.copy(fontSize = 14.sp)
     )
   ) {
@@ -250,6 +255,10 @@ private fun UsernameCompose(modifier: Modifier = Modifier) {
           maxLines = 1,
         )
       },
+      keyboardOptions = KeyboardOptions(
+        keyboardType = KeyboardType.Text,
+        imeAction = ImeAction.Next,
+      ),
       colors = TextFieldDefaults.outlinedTextFieldColors(
         textColor = 0xFF333333.dark(Color.White),
         focusedLabelColor = 0xFF788EFA.dark(Color.White),
@@ -320,8 +329,8 @@ private fun PasswordCompose(modifier: Modifier = Modifier) {
       },
       trailingIcon = {
         var isVisible by remember { mutableStateOf(false) }
-        Icon(
-          modifier = Modifier.clickableCardIndicator {
+        Image(
+          modifier = Modifier.clickableNoIndicator {
             isVisible = !isVisible
             if (isVisible) {
               visualTransformation.value = VisualTransformation.None
@@ -331,12 +340,16 @@ private fun PasswordCompose(modifier: Modifier = Modifier) {
           },
           imageVector = if (isVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
           contentDescription = null,
+          colorFilter = ColorFilter.tint(Color.Black.copy(alpha = 0.5F))
         )
       },
       keyboardActions = KeyboardActions {
         viewModel.clickLogin()
       },
-      keyboardOptions = KeyboardOptions(imeAction = ImeAction.Go),
+      keyboardOptions = KeyboardOptions(
+        keyboardType = KeyboardType.Password,
+        imeAction = ImeAction.Go,
+      ),
       colors = TextFieldDefaults.outlinedTextFieldColors(
         textColor = 0xFF333333.dark(Color.White),
         focusedLabelColor = 0xFF788EFA.dark(Color.White),
@@ -349,11 +362,11 @@ private fun PasswordCompose(modifier: Modifier = Modifier) {
     )
   }
   LaunchedEffect(Unit) {
-    snapshotFlow { visualTransformation.value }.filter {
-      it === visualTransformationLast
-    }.collectLatest {
-      delay(1.seconds) // 延迟一秒后自动隐藏密码
-      visualTransformation.value = visualTransformationAll
+    snapshotFlow { visualTransformation.value }.collectLatest {
+      if (it === visualTransformationLast) {
+        delay(1.seconds) // 延迟一秒后自动隐藏密码
+        visualTransformation.value = visualTransformationAll
+      }
     }
   }
 }
@@ -363,7 +376,7 @@ private fun PasswordCompose(modifier: Modifier = Modifier) {
 private fun UserAgreementCompose(modifier: Modifier = Modifier) {
   Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
     UserAgreementCheckCompose()
-    UserAgreementTextCompose(modifier = Modifier.padding(start = 6.dp))
+    UserAgreementTextCompose(modifier = Modifier.padding(start = 12.dp))
   }
 }
 
@@ -392,13 +405,12 @@ private fun UserAgreementCheckCompose(modifier: Modifier = Modifier) {
   LaunchedEffect(Unit) {
     checkLottie.await()
     snapshotFlow { viewModel.isCheckUserArgument.value }.collectLatest {
-      logg("boolean: $it, progress: ${progress.progress}")
       if (it) {
         progress.animate(
           composition = checkLottie.value,
           clipSpec = LottieClipSpec.Progress(progress.progress, 1F)
         )
-      } else  {
+      } else {
         progress.animate(
           composition = checkLottie.value,
           clipSpec = LottieClipSpec.Progress(0F, 0.39F) // 0.39 为刚好画完一圈的进度
@@ -416,14 +428,13 @@ private fun UserAgreementTextCompose(modifier: Modifier = Modifier) {
       text = "同意",
       color = Color(0xFFABBCD8),
       fontSize = 11.sp,
-      modifier = Modifier,
     )
     Text(
       text = "《用户协议》", color = Color(0xFF2CDEFF), fontSize = 11.sp,
-      modifier = Modifier.padding(horizontal = 2.dp)
-        .clickableCardIndicator(4.dp) {
+      modifier = Modifier
+        .clickable {
           viewModel.clickUserAgreement()
-        }.padding(vertical = 1.dp)
+        }
     )
     Text(
       text = "和",
@@ -432,10 +443,9 @@ private fun UserAgreementTextCompose(modifier: Modifier = Modifier) {
     )
     Text(
       text = "《隐私政策》", color = Color(0xFF2CDEFF), fontSize = 11.sp,
-      modifier = Modifier.padding(horizontal = 2.dp)
-        .clickableCardIndicator(4.dp) {
-          viewModel.clickPrivacyPolicy()
-        }.padding(vertical = 1.dp)
+      modifier = Modifier.clickable {
+        viewModel.clickPrivacyPolicy()
+      }
     )
   }
 }
@@ -444,10 +454,11 @@ private fun UserAgreementTextCompose(modifier: Modifier = Modifier) {
 private fun ForgetPasswordCompose(modifier: Modifier = Modifier) {
   val viewModel = viewModel(LoginViewModel::class)
   Text(
-    modifier = modifier.clickableCardIndicator(4.dp) {
-      viewModel.clickForgetPassword()
-    }.padding(start = 6.dp, top = 2.dp, bottom = 2.dp),
-    text = "忘记密码？",
+    modifier = modifier.padding(start = 6.dp, top = 2.dp, bottom = 2.dp)
+      .clickable {
+        viewModel.clickForgetPassword()
+      },
+    text = "忘记密码?",
     fontSize = 12.sp,
     color = Color(0xFFABBCD8)
   )
@@ -499,7 +510,7 @@ private fun TouristModeCompose(modifier: Modifier = Modifier) {
       text = "游客模式吧",
       color = LocalAppColors.current.tvLv4,
       fontSize = 13.sp,
-      modifier = Modifier.clickableCardIndicator(4.dp) {
+      modifier = Modifier.clickable {
         viewModel.clickTouristMode()
       }.padding(horizontal = 3.dp, vertical = 1.dp)
     )
@@ -510,6 +521,7 @@ private fun TouristModeCompose(modifier: Modifier = Modifier) {
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 private fun LoginAnimCompose(modifier: Modifier = Modifier) {
+  val viewModel = viewModel(LoginViewModel::class)
   val loginLottie = rememberLottieComposition {
     LottieCompositionSpec.JsonString(
       Res.readBytes("files/lottie_login_anim.json").decodeToString()
@@ -517,7 +529,7 @@ private fun LoginAnimCompose(modifier: Modifier = Modifier) {
   }
   val progress = rememberLottieAnimatable()
   Image(
-    modifier = Modifier.fillMaxSize(),
+    modifier = modifier.fillMaxSize(),
     painter = rememberLottiePainter(
       composition = loginLottie.value,
       progress = { progress.progress },
@@ -525,9 +537,14 @@ private fun LoginAnimCompose(modifier: Modifier = Modifier) {
     contentDescription = "登录动画"
   )
   LaunchedEffect(Unit) {
-    progress.animate(
-      composition = loginLottie.value,
-      iterations = Compottie.IterateForever,
-    )
+    loginLottie.await()
+    snapshotFlow { viewModel.isLoginAnim.value }.collectLatest {
+      if (it) {
+        progress.animate(
+          composition = loginLottie.value,
+          iterations = Compottie.IterateForever,
+        )
+      }
+    }
   }
 }

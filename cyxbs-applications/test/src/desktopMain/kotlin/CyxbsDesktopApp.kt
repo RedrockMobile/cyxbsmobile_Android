@@ -4,7 +4,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.launchApplication
 import androidx.compose.ui.window.rememberWindowState
 import com.cyxbs.components.utils.coroutine.runApp
-import com.cyxbs.pages.login.ui.LoginCompose
+import com.cyxbs.pages.login.ui.LoginPage
 import com.g985892345.provider.cyxbsmobile.cyxbsapplications.test.TestKtProviderInitializer
 
 /**
@@ -28,7 +28,7 @@ fun main() = runApp {
       remember {
         this.window.minimumSize = java.awt.Dimension(300, 600)
       }
-      LoginCompose()
+      LoginPage()
     }
   }
 }

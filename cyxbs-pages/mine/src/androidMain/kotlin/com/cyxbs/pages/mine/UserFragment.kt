@@ -15,6 +15,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.util.Pair
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.cyxbs.components.account.api.IAccountService
@@ -68,6 +69,12 @@ class UserFragment : BaseFragment() {
     private val mine_user_tv_center_notification_count by R.id.mine_user_tv_center_notification_count.view<TextView>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // 偏移状态栏
+        // 因为外层是 Compose 会默认消耗 OnApplyWindowInsets，所以这里只能单独获取状态栏高度
+        val statusBarsInsets =
+            WindowInsetsCompat.toWindowInsetsCompat(requireActivity().window.decorView.rootWindowInsets)
+                .getInsets(WindowInsetsCompat.Type.statusBars())
+        view.setPadding(statusBarsInsets.left, statusBarsInsets.top, statusBarsInsets.right, statusBarsInsets.bottom)
         addObserver()
         initView()
     }
