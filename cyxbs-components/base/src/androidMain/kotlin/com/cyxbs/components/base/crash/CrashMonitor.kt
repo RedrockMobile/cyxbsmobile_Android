@@ -6,7 +6,9 @@ import android.util.Log
 import com.cyxbs.components.base.BuildConfig
 import com.cyxbs.components.base.crash.CrashActivity.Companion.NetworkApiResult
 import com.cyxbs.components.base.pages.SecretActivity
+import com.g985892345.provider.api.annotation.ImplProvider
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
+import java.lang.Thread.UncaughtExceptionHandler
 
 /**
  * .
@@ -14,12 +16,15 @@ import io.reactivex.rxjava3.plugins.RxJavaPlugins
  * @author 985892345
  * @date 2024/12/25
  */
-object CrashMonitor {
+@ImplProvider // 提供给其他模块使用，比如 ApiGenerator 中的 OkHttp Dispatcher
+object CrashMonitor : UncaughtExceptionHandler {
 
   // 提供给 application 模块向外暴露异常用于上报
   var crashReport: ((Throwable) -> Unit)? = null
 
   private var lastThrowableTime = 0L
+
+  private val mainThread = Looper.getMainLooper().thread
 
   fun install() {
     installThreadHandler()
@@ -27,16 +32,15 @@ object CrashMonitor {
   }
 
   private fun installThreadHandler() {
-    Thread.setDefaultUncaughtExceptionHandler { t, e ->
-      if (t === Looper.getMainLooper().thread) {
-        if (BuildConfig.DEBUG) {
-          Log.d("crash", e.stackTraceToString())
-        }
-        handleMainThread(t, e)
-        crashReport?.invoke(e)
-      } else {
-        handleOtherThread(t, e)
+    // 这里的 ExceptionHandler 优先级会高于 DefaultUncaughtExceptionHandler
+    mainThread.setUncaughtExceptionHandler(this)
+    Thread.setDefaultUncaughtExceptionHandler(this)
+    Looper.getMainLooper().queue.addIdleHandler {
+      // 我们需要确保 DefaultUncaughtExceptionHandler 没有被其他 sdk 覆盖掉
+      if (Thread.getDefaultUncaughtExceptionHandler() !== this) {
+        Thread.setDefaultUncaughtExceptionHandler(this)
       }
+      true
     }
   }
 
@@ -46,11 +50,14 @@ object CrashMonitor {
     }
   }
 
-  private fun handleOtherThread(thread: Thread, throwable: Throwable) {
+  private fun handleOtherThread(throwable: Throwable) {
     // 其他线程不处理
+    if (BuildConfig.DEBUG) {
+      Log.d("OtherThread", throwable.stackTraceToString())
+    }
   }
 
-  private fun handleMainThread(thread: Thread, throwable: Throwable) {
+  private fun handleMainThread(throwable: Throwable) {
     CrashDialog.Builder(
       RuntimeException(
         "触发了一次来自主线程的异常, ${throwable.message}",
@@ -65,7 +72,7 @@ object CrashMonitor {
     // 主线程崩溃后 loop 会停掉，这里重启 loop
     try {
       Looper.loop()
-    } catch (e: Exception) {
+    } catch (e: Throwable) {
       e.printStackTrace()
       if (SystemClock.elapsedRealtime() - lastThrowableTime < 1000) {
         // 短时间内再次崩溃，则直接打开 CrashActivity
@@ -84,6 +91,18 @@ object CrashMonitor {
         lastThrowableTime = SystemClock.elapsedRealtime()
         tryLoop(e)
       }
+    }
+  }
+
+  override fun uncaughtException(t: Thread, e: Throwable) {
+    if (t === mainThread) {
+      if (BuildConfig.DEBUG) {
+        Log.d("crash", e.stackTraceToString())
+      }
+      handleMainThread(e)
+      crashReport?.invoke(e)
+    } else {
+      handleOtherThread(e)
     }
   }
 }

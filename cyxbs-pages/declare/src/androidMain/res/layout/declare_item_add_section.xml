@@ -1,36 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:paddingVertical="10dp"
+    android:gravity="center_vertical"
+    android:layout_height="wrap_content">
 
-    <data>
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/siv_add"
+        android:layout_marginEnd="18dp"
+        app:shapeAppearance="@style/ConfigShapeableImageViewCircleStyle"
+        app:srcCompat="@drawable/declare_ic_add"
+        android:layout_gravity="center"
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
 
-    </data>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:paddingVertical="10dp"
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:includeFontPadding="false"
+        android:layout_gravity="center_vertical"
+        android:textSize="18sp"
         android:gravity="center_vertical"
-        android:layout_height="wrap_content">
+        android:textColor="#4A44E4"
+        android:text="@string/declare_add_section" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/siv_add"
-            android:layout_marginEnd="18dp"
-            app:shapeAppearance="@style/ConfigShapeableImageViewCircleStyle"
-            app:srcCompat="@drawable/declare_ic_add"
-            android:layout_gravity="center"
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
+</androidx.appcompat.widget.LinearLayoutCompat>
 
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:includeFontPadding="false"
-            android:layout_gravity="center_vertical"
-            android:textSize="18sp"
-            android:gravity="center_vertical"
-            android:textColor="#4A44E4"
-            android:text="@string/declare_add_section" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-</layout>

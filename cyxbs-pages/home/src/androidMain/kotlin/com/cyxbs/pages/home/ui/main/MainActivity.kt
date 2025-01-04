@@ -14,7 +14,7 @@ import com.cyxbs.components.config.route.DISCOVER_SCHOOL_CAR
 import com.cyxbs.components.config.sp.SP_COURSE_SHOW_STATE
 import com.cyxbs.components.config.sp.defaultSp
 import com.cyxbs.components.utils.extensions.launch
-import com.cyxbs.components.utils.extensions.processLifecycleScope
+import com.cyxbs.components.utils.coroutine.appCoroutineScope
 import com.cyxbs.components.utils.logger.TrackingUtils
 import com.cyxbs.components.utils.logger.event.ClickEvent
 import com.cyxbs.components.utils.service.impl
@@ -143,7 +143,7 @@ class MainActivity : BaseActivity() {
           mViewModel.courseBottomSheetExpand.value = null
           if (mIsLogin) {
             // “邮乐园” 按钮点击事件埋点
-            processLifecycleScope.launch {
+            appCoroutineScope.launch {
               TrackingUtils.trackClickEvent(ClickEvent.CLICK_YLC_ENTRY)
             }
           }

@@ -1,21 +1,20 @@
 package com.cyxbs.pages.mine.page.security.activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.view.JToolbar
+import com.cyxbs.components.utils.extensions.gone
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.components.utils.utils.Jump2QQHelper
 import com.cyxbs.pages.mine.R
 import com.cyxbs.pages.mine.page.security.viewmodel.BindEmailViewModel
-import com.mredrock.cyxbs.common.component.CyxbsToast
-import com.mredrock.cyxbs.common.ui.BaseActivity
-import com.mredrock.cyxbs.common.utils.extensions.gone
-import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.common.utils.extensions.toast
-import com.mredrock.cyxbs.common.utils.extensions.visible
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import java.util.concurrent.TimeUnit
@@ -23,6 +22,7 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class BindEmailActivity : BaseActivity() {
+
     private val viewModel by lazy { ViewModelProvider(this).get(BindEmailViewModel::class.java) }
     var email = ""
 
@@ -32,6 +32,7 @@ class BindEmailActivity : BaseActivity() {
     private val et_bind_email by R.id.et_bind_email.view<EditText>()
     private val tv_bind_email_top_tips by R.id.tv_bind_email_top_tips.view<TextView>()
     private val tv_bind_email_tips by R.id.tv_bind_email_tips.view<TextView>()
+    private val common_toolbar by com.cyxbs.components.config.R.id.toolbar.view<JToolbar>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +40,10 @@ class BindEmailActivity : BaseActivity() {
 
         viewModel.mldConfirmIsSucceed.observe(this, Observer<Boolean> {
             if (it) {
-                CyxbsToast.makeText(this, getString(R.string.mine_security_bind_email_bind_succeed), Toast.LENGTH_SHORT).show()
+                toast(getString(R.string.mine_security_bind_email_bind_succeed))
                 finish()
             } else {
-                CyxbsToast.makeText(this, getString(R.string.mine_security_bind_email_bind_failed), Toast.LENGTH_SHORT).show()
+                toast(getString(R.string.mine_security_bind_email_bind_failed))
             }
         })
 
@@ -50,9 +51,7 @@ class BindEmailActivity : BaseActivity() {
             btn_bind_email_next.isEnabled = true
         })
 
-        common_toolbar.apply {
-            initWithSplitLine("绑定邮箱")
-        }
+        common_toolbar.init(activity = this@BindEmailActivity, title = "绑定邮箱")
 
         tv_bind_email_contact_us.setOnSingleClickListener {
             Jump2QQHelper.onFeedBackClick()
@@ -67,16 +66,17 @@ class BindEmailActivity : BaseActivity() {
                 sendCode()
             } else if (btn_bind_email_next.text == getString(R.string.mine_security_confirm)) {
                 if (et_bind_email.text.toString() == "") {
-                    CyxbsToast.makeText(this, getString(R.string.mine_security_please_type_new_words), Toast.LENGTH_SHORT).show()
+                    toast(getString(R.string.mine_security_please_type_new_words))
                 } else if (System.currentTimeMillis() / 1000 <= viewModel.expireTime) {
                     viewModel.confirmCode(email, et_bind_email.text.toString())
                 } else {
-                    CyxbsToast.makeText(this, getString(R.string.mine_security_bind_email_code_expire), Toast.LENGTH_SHORT).show()
+                    toast(getString(R.string.mine_security_bind_email_code_expire))
                 }
             }
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun sendCode() {
         val userEmail: String = et_bind_email.text.toString()
         var showUserEmail = userEmail
@@ -111,7 +111,7 @@ class BindEmailActivity : BaseActivity() {
                     .doOnComplete {
                         tv_bind_email_send_code.isEnabled = true
                         tv_bind_email_send_code.text = getString(R.string.mine_security_resend)
-                    }.subscribe {
+                    }.safeSubscribeBy {
                         tv_bind_email_send_code.text = "正在发送(${60 - it})"
                     }
             }

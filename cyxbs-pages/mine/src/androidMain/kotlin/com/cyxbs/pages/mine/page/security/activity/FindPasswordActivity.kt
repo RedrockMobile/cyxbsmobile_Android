@@ -4,31 +4,33 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.view.JToolbar
+import com.cyxbs.components.utils.extensions.dp2px
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.utils.utils.Jump2QQHelper
 import com.cyxbs.pages.mine.R
-import com.cyxbs.pages.mine.databinding.MineActivityFindPasswordBinding
 import com.cyxbs.pages.mine.page.security.util.AnswerTextWatcher
 import com.cyxbs.pages.mine.page.security.viewmodel.FindPasswordViewModel
-import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
-import com.mredrock.cyxbs.common.utils.extensions.dp2px
-import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 
 /**
  * Author: RayleighZ
  * Time: 2020-10-29 15:06
  * describe: 找回密码的活动
  */
-class FindPasswordActivity : BaseViewModelActivity<FindPasswordViewModel>() {
+class FindPasswordActivity : BaseActivity() {
+
+    private val viewModel by viewModels<FindPasswordViewModel>()
+
     //在此activity以及ViewModel中统一使用这个stuNumber来获取学号，以方便整体修改
     private var stuNumber =
         IAccountService::class.impl().getUserService().getStuNum()
@@ -43,6 +45,8 @@ class FindPasswordActivity : BaseViewModelActivity<FindPasswordViewModel>() {
     private val mTvSecuritySecondTitle by R.id.mine_tv_security_second_title.view<TextView>()
     private val mTvSecurityFindSendConfirmCode by R.id.mine_tv_security_find_send_confirm_code.view<TextView>()
     private val mBtnSecurityFindNext by R.id.mine_bt_security_find_next.view<Button>()
+    private val mTvSecurityFindFirstContent by R.id.mine_tv_security_find_first_content.view<TextView>()
+    private val mTvSecurityFindFirstTip by R.id.mine_tv_security_find_first_tip.view<TextView>()
 
     companion object {
         //自登陆界面而来
@@ -70,18 +74,10 @@ class FindPasswordActivity : BaseViewModelActivity<FindPasswordViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //dataBinding
-        val binding = DataBindingUtil.inflate<MineActivityFindPasswordBinding>(
-            LayoutInflater.from(this),
-            R.layout.mine_activity_find_password, null, false
-        )
-        binding.viewModel = viewModel
-        setContentView(binding.root)
+        setContentView(R.layout.mine_activity_find_password)
         //设置toolBar
-        common_toolbar.apply {
-            this.initWithSplitLine(
-                context.getString(R.string.mine_security_find_password)
-            )
+        findViewById<JToolbar>(com.cyxbs.components.config.R.id.toolbar).apply {
+            this.init(this@FindPasswordActivity, context.getString(R.string.mine_security_find_password))
         }
 
         //首先判断是否是自登陆界面来到的这里，如果是，就刷新当前的stuNumber
@@ -99,6 +95,19 @@ class FindPasswordActivity : BaseViewModelActivity<FindPasswordViewModel>() {
         mTvSecurityFindContractUs.setOnSingleClickListener {
             Jump2QQHelper.onFeedBackClick()
         }
+        initObserve()
+    }
+
+    private fun initObserve() {
+        viewModel.emailAddressOrQuestion.observe {
+            mTvSecurityFindFirstContent.text = it
+        }
+        viewModel.timerText.observe {
+            mTvSecurityFindSendConfirmCode.text = it
+        }
+        viewModel.firstTipText.observe {
+            mTvSecurityFindFirstTip.text = it
+        }
     }
 
     private fun turnPageType(type: Int) {
@@ -109,7 +118,7 @@ class FindPasswordActivity : BaseViewModelActivity<FindPasswordViewModel>() {
                 //将页面变更为为按照邮箱进行查找
                 //首先设置inputBox(ll)的高度
                 mClSecurityFindPasswordInputBox.apply {
-                    this.layoutParams.height = context.dp2px(41f)
+                    this.layoutParams.height = 41f.dp2px
                 }
                 //更改title和hint的提示字符
                 mEtSecurityFind.hint =
@@ -118,7 +127,7 @@ class FindPasswordActivity : BaseViewModelActivity<FindPasswordViewModel>() {
                     getString(R.string.mine_security_click_to_get_confirm_code)
                 mTvSecuritySecondTitle.visibility = View.GONE
                 //设置点击获取验证码的text
-                viewModel.timerText.set(getString(R.string.mine_security_get_confirm_code))
+                viewModel.timerText.postValue(getString(R.string.mine_security_get_confirm_code))
                 //接下来配置页面的点击事件以及相关逻辑
                 //点击获取验证码(内部含有倒计时)
                 mTvSecurityFindSendConfirmCode.setOnSingleClickListener {
@@ -150,12 +159,13 @@ class FindPasswordActivity : BaseViewModelActivity<FindPasswordViewModel>() {
                 //点击下一步以判断验证码是否正确
                 mBtnSecurityFindNext.setOnSingleClickListener {
                     viewModel.confirmCode(
+                        inputText = mEtSecurityFind.text.toString(),
                         onSuccess = {
                             ChangePasswordActivity.startFormLogin(this, stuNumber, it)
                             finish()
                         },
                         onField = {
-                            viewModel.firstTipText.set("验证码有误或过期，请重新获取")
+                            viewModel.firstTipText.postValue("验证码有误或过期，请重新获取")
                         }
                     )
                 }
@@ -169,7 +179,9 @@ class FindPasswordActivity : BaseViewModelActivity<FindPasswordViewModel>() {
                     AnswerTextWatcher(viewModel.firstTipText, mBtnSecurityFindNext, this)
                 )
                 mBtnSecurityFindNext.setOnSingleClickListener {
-                    viewModel.confirmAnswer {
+                    viewModel.confirmAnswer(
+                        inputText = mEtSecurityFind.text.toString(),
+                    ) {
                         ChangePasswordActivity.startFormLogin(this, stuNumber, it)
                         finish()
                     }

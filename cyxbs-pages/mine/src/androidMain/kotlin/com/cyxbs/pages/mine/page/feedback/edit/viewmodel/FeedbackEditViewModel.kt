@@ -1,12 +1,21 @@
 package com.cyxbs.pages.mine.page.feedback.edit.viewmodel
 
+import android.content.Intent
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
-import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
-import com.mredrock.cyxbs.common.viewmodel.event.SingleLiveEvent
-import com.cyxbs.pages.mine.page.feedback.edit.presenter.FeedbackEditContract
+import com.cyxbs.components.base.ui.BaseViewModel
+import com.cyxbs.components.utils.extensions.setSchedulers
+import com.cyxbs.pages.mine.page.feedback.api
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import top.limuyang2.photolibrary.LPhotoHelper
+import java.io.File
 
 /**
  * @Date : 2021/8/23   20:59
@@ -14,26 +23,7 @@ import com.cyxbs.pages.mine.page.feedback.edit.presenter.FeedbackEditContract
  * @Usage :
  * @Request : God bless my code
  **/
-class FeedbackEditViewModel:BaseViewModel(),FeedbackEditContract.IVM {
-    /**
-     * 内容详情的字数
-     */
-    private val _editDesNum = MutableLiveData<Int>(0)
-    val editDesNum : LiveData<Int>
-        get() = _editDesNum
-    override fun setEditDesNum(value:Int){
-        _editDesNum.value = value
-    }
-
-    /**
-     * 标题剩余能写的数字
-     */
-    private val _editTitleNum = MutableLiveData<Int>(12)
-    val editTitleNum:LiveData<Int>
-        get() = _editTitleNum
-    override fun setEditTitleNum(value: Int){
-        _editTitleNum.value = value
-    }
+class FeedbackEditViewModel: BaseViewModel() {
 
     /**
      * Add
@@ -41,25 +31,64 @@ class FeedbackEditViewModel:BaseViewModel(),FeedbackEditContract.IVM {
      */
     private val _uris: MutableLiveData<List<Uri>> = MutableLiveData(listOf())
     val uris: LiveData<List<Uri>>
-    get() = _uris
-    override fun setUris(value: List<Uri>) {
-        _uris.value = value
-    }
+        get() = _uris
 
-    private val _position = MutableLiveData<Int>()
-    val position: LiveData<Int>
-    get() = _position
-    fun setPosition(position:Int){
-        _position.value = position
-    }
-
-
-    //图片的展示个数
-    val picCount:LiveData<Int> = _uris.map{it.size}
-
+    private val _finishEvent = MutableSharedFlow<Unit>()
     //finish
-    val finish:SingleLiveEvent<Unit> = SingleLiveEvent()
-    fun sendFinishEvent(){
-        finish.value = Unit
+    val finishEvent: SharedFlow<Unit> get() = _finishEvent
+
+    /**
+     * Post数据
+     */
+    fun postFeedbackInfo(productId:String, type:String, title:String, content:String, file: List<File>){
+        val productIdRB = productId.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+        val typeRB = type.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+        val titleRB = title.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+        val contentRB = content.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+        val map = HashMap<String, RequestBody>()
+        map.apply {
+            put("product_id", productIdRB)
+            put("type", typeRB)
+            put("title", titleRB)
+            put("content", contentRB)
+        }
+        val fileBody = if (file.isNotEmpty()){
+            (file.indices).map {
+                MultipartBody.Part.createFormData("file", file[it].name, file[it].asRequestBody("multipart/form-data".toMediaTypeOrNull()))
+            }
+        }else{
+            null
+        }
+        api.postFeedbackInfo(map,fileBody)
+            .setSchedulers()
+            .doOnError {
+                toast("提交失败：${it.message}")
+            }
+            .safeSubscribeBy {
+                toast("提交成功  我们会尽快回复")
+                launch {
+                    _finishEvent.emit(Unit)
+                }
+            }
+    }
+
+    /**
+     * 处理ActivityResult返回的图片
+     */
+    fun dealPic(data: Intent?) {
+        //获取选择的图片
+        val selectImageUris = ArrayList(LPhotoHelper.getSelectedPhotos(data))
+        //把图片地址存入vm中
+        if (selectImageUris.size != 0) {
+            _uris.value = selectImageUris
+        }
+    }
+
+    /**
+     * 当移除图片的按钮被点击的时候移除对应的图片
+     */
+    fun removePic(uri: Uri) {
+        val urls = uris.value ?: return
+        _uris.value = urls.filter { it != uri }
     }
 }

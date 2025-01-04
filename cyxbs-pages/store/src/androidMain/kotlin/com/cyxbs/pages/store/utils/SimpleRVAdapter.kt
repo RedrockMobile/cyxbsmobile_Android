@@ -4,8 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_ID
@@ -93,25 +91,6 @@ import androidx.recyclerview.widget.RecyclerView.NO_ID
  * 开发邮票商城项目时间: 2021-8
  */
 class SimpleRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    /**
-     * 点击传入的类查看注解
-     *
-     * **WARNING:** 使用后记得使用 [show] 方法来开始加载
-     * ```
-     * 给方法传入一个泛型, 这个泛型的生命周期只能在方法内, 但我把泛型给了一个全局的对象, 则该泛型生命周期提高至全局
-     * ```
-     */
-    fun <DB: ViewDataBinding, T> addItem(
-        dataBindingItem: DBItem<DB, T>
-    ): SimpleRvAdapter {
-        dataBindingItem.adapter = this
-        val call = BindingCallBack(dataBindingItem)
-        // 一个 for 循环用于遍历全部 item 数量调用 isInHere 回调，添加进 mPositionsWithCallback 数组
-        // 向上转型存进数组(能够解决泛型擦除的主要原因并不在这里,主要原因在于接口回调的强转写法)
-        mLayoutIdWithCallback[dataBindingItem.layoutId] = call
-        return this
-    }
 
     /**
      * 点击传入的类查看注解
@@ -316,9 +295,6 @@ class SimpleRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return NO_ID
     }
 
-    class BindingVH(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
-
-
 
     /*
     * ===============================================================================================================
@@ -387,59 +363,6 @@ class SimpleRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         abstract fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder)
         abstract fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder)
         abstract fun onViewRecycled(holder: RecyclerView.ViewHolder)
-    }
-
-    /**
-     * 该类使用了装饰器模式: 将原始对象作为一个参数传入给装饰者的构造器
-     */
-    private class BindingCallBack<DB: ViewDataBinding, T>(
-        private val DBItem: DBItem<DB, T>
-    ) : Callback<T>(DBItem) {
-        override fun createNewViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-            return BindingVH(
-                DataBindingUtil.inflate(
-                    LayoutInflater.from(parent.context),
-                    DBItem.layoutId, parent, false
-                )
-            )
-        }
-
-        override fun create(holder: RecyclerView.ViewHolder) {
-            val binding = (holder as BindingVH).binding as DB
-            DBItem.onCreate(binding, holder, DBItem.__newMap)
-        }
-
-        override fun refactor(
-            holder: RecyclerView.ViewHolder,
-            position: Int
-        ) {
-            val binding = (holder as BindingVH).binding as DB
-            DBItem.onRefactor(binding, holder, position, DBItem.__newMap.getValue(position))
-            binding.executePendingBindings() // 必须调用, 原因: https://stackoom.com/question/3yD45
-        }
-
-        override fun specialRefresh(
-            holder: RecyclerView.ViewHolder,
-            position: Int
-        ) {
-            val binding = (holder as BindingVH).binding as DB
-            DBItem.onSpecialRefresh(binding, holder, position, DBItem.__newMap.getValue(position))
-        }
-
-        override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
-            val binding = (holder as BindingVH).binding as DB
-            DBItem.onViewAttachedToWindow(binding, holder)
-        }
-
-        override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
-            val binding = (holder as BindingVH).binding as DB
-            DBItem.onViewDetachedFromWindow(binding, holder)
-        }
-
-        override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
-            val binding = (holder as BindingVH).binding as DB
-            DBItem.onViewRecycled(binding, holder)
-        }
     }
 
     /**
@@ -628,83 +551,6 @@ class SimpleRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             startPosition: Int,
             refreshMode: Mode = Mode.REFACTOR_MILD
         ) { refreshSelfMap(listToMap(list, startPosition), refreshMode) }
-    }
-
-    /**
-     * 用于添加 DataBinding 的 item
-     * @param map position 与 T 的键值对关系, 其中 position 是在布局中的位置
-     *
-     * **WARNING:**
-     * ```
-     * 注意严厉禁止 map 设置为 val 让内部可读, 在内部想使用时回调都会给你最新 map 中对应的值
-     * (不让直接用的原因在与内部的差分刷新会使用到这个 map, 刷新后不会改变)
-     * ```
-     */
-    abstract class DBItem<DB: ViewDataBinding, T> : Item<T> {
-        constructor(map: Map<Int, T>, @LayoutRes layoutId: Int) : super(map, layoutId)
-        constructor(list: List<T>, startPosition: Int, @LayoutRes layoutId: Int) : super(list, startPosition, layoutId)
-        /**
-         * 在 item 创建时的回调, 建议在此处进行一些只需进行一次的操作, 如: 设置点击监听、设置用于 item 整个生命周期的对象
-         *
-         * **WARNING:** ***禁止在这里使用 kotlin 的扩展插件只使用 layoutId 得到 View***
-         *
-         * **WARNING:** 在该方法中并**不能直接** 得到当前 item 的 ***position***, 但对于设置**点击事件等回调除外**,
-         * 可以使用 ***holder.adapterPosition*** 或者 ***holder.layoutPosition*** 得到
-         *
-         * ```
-         * (简单插一句, 对于 holder.adapterPosition 与 holder.layoutPosition 的区别
-         * 可以查看: https://blog.csdn.net/u013467495/article/details/109078905?utm_
-         * medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogComme
-         * ndFromBaidu%7Edefault-10.pc_relevant_baidujshouduan&depth_1-utm_sour
-         * ce=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFr
-         * omBaidu%7Edefault-10.pc_relevant_baidujshouduan)
-         * ```
-         */
-        abstract fun onCreate(binding: DB, holder: BindingVH, map: Map<Int, T>)
-
-        /**
-         * 用于设置当前 item **每次进入屏幕** 显示的数据(包括离开屏幕又回到屏幕)
-         *
-         * **NOTE:** 会在第一次创建 item 或者当前 item 离开屏幕再回到屏幕后回调, 相当于 onBindViewHolder()。
-         *
-         * **WARNING:** ***禁止在这里使用 kotlin 的扩展插件只使用 layoutId 得到 View***
-         *
-         * **WARNING:** **禁止在这里写点击事件等延时回调, 且不建议在此处创建任何新的对象**,
-         * ```
-         * 原因 1: https://blog.csdn.net/weixin_28318011/article/details/112872952
-         * 原因 2: onBindViewHolder() 会重复回调, 设置点击监听就会重复生成匿名内部类
-         * 设置点击监听(会生成匿名内部类)、设置只需用于 item 整个生命周期的对象等其他需要创建对象的做法,
-         * ```
-         * ***->> 这些做法应写在 [onCreate] 中 <<-***
-         *
-         * **上方 WARNING 原因请了解 RecyclerView 的真正回调流程**
-         */
-        abstract fun onRefactor(binding: DB, holder: BindingVH, position: Int, value: T)
-
-        /**
-         * 特殊刷新, 使用 [Mode.REFRESH] 后刷新当前 item 的回调
-         *
-         * **NOTE:** 它的修改周期只会在屏幕内, 离开后可能就会还原.
-         * ```
-         * 因为离开后再回来就只会回调 refactor(), 解决办法是数据修改后就更改全局数组, 在 refactor() 中直接取数组中的值
-         * ```
-         */
-        open fun onSpecialRefresh(binding: DB, holder: BindingVH, position: Int, value: T) {}
-
-        /**
-         * 当这个 holder 显示在屏幕上时
-         */
-        open fun onViewAttachedToWindow(binding: DB, holder: BindingVH) {}
-
-        /**
-         * 当这个 holder 从屏幕离开时
-         */
-        open fun onViewDetachedFromWindow(binding: DB, holder: BindingVH) {}
-
-        /**
-         * 当这个 holder 被回收时(一般在离开屏幕的位置较远时回调)
-         */
-        open fun onViewRecycled(binding: DB, holder: BindingVH) {}
     }
 
     /**

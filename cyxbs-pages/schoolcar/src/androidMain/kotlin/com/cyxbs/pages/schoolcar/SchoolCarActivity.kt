@@ -7,16 +7,21 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import com.amap.api.maps.AMap
 import com.amap.api.maps.AMapUtils
 import com.amap.api.maps.CameraUpdateFactory
+import com.amap.api.maps.MapView
 import com.amap.api.maps.MapsInitializer
 import com.amap.api.maps.model.BitmapDescriptor
 import com.amap.api.maps.model.BitmapDescriptorFactory
@@ -32,7 +37,6 @@ import com.cyxbs.components.utils.network.ApiWrapper
 import com.cyxbs.pages.schoolcar.adapter.CarIconAdapter
 import com.cyxbs.pages.schoolcar.adapter.CarSiteAdapter
 import com.cyxbs.pages.schoolcar.bean.SchoolCarLocation
-import com.cyxbs.pages.schoolcar.databinding.SchoolcarActivitySchoolcarBinding
 import com.cyxbs.pages.schoolcar.export.SchoolCarInterface
 import com.cyxbs.pages.schoolcar.widget.SchoolCarsSmoothMove
 import com.g985892345.provider.api.annotation.KClassProvider
@@ -59,7 +63,6 @@ class SchoolCarActivity: BaseActivity() {
   //是否显示车辆
   private var showCarIcon = false
   private val vm by viewModels<SchoolCarViewModel>()
-  private lateinit var binding: SchoolcarActivitySchoolcarBinding
   //是否显示定位
   private var ifLocation = true
   //定位client
@@ -72,6 +75,26 @@ class SchoolCarActivity: BaseActivity() {
   private var savedInstanceState:Bundle ?=null
   //是否已经滑动
   var isBeginning = true
+
+  private val schoolCarMvMap by R.id.school_car_mv_map.view<MapView>()
+  private val schoolCarCvOut by R.id.school_car_cv_out.view<CardView>()
+  private val schoolCarCvExpand by R.id.school_car_cv_expand.view<CardView>()
+  private val schoolCarCvPositioning by R.id.school_car_cv_positioning.view<CardView>()
+  private val schoolCarIvBack by R.id.school_car_iv_back.view<View>()
+  private val schoolCarBts by R.id.school_car_bts.view<View>()
+  private val schoolCarCvPositioningIv by R.id.school_car_cv_positioning_iv.view<ImageView>()
+  private val schoolCarTvTitleBts by R.id.school_car_tv_title_bts.view<TextView>()
+  private val schoolCarTvTimeBts by R.id.school_car_tv_time_bts.view<TextView>()
+  private val schoolCarCardRunTypeBts by R.id.school_car_card_run_type_bts.view<TextView>()
+  private val schoolCarCardLineTypeBts by R.id.school_car_card_line_type_bts.view<TextView>()
+  private val schoolCarSiteRvBts by R.id.school_car_site_rv_bts.view<RecyclerView>()
+  private val schoolCarRvBts by R.id.school_car_rv_bts.view<RecyclerView>()
+  private val schoolCarCardTvChangeBts by R.id.school_car_card_tv_change_bts.view<TextView>()
+  private val schoolCarCardIvChangeBts by R.id.school_car_card_iv_change_bts.view<ImageView>()
+  private val schoolCarCardChangeBts by R.id.school_car_card_change_bts.view<View>()
+  private val schoolCarCardRunTypeBtsCard by R.id.school_car_card_run_type_bts_card.view<CardView>()
+  private val schoolCarCardLineTypeBtsCard by R.id.school_car_card_line_type_bts_card.view<CardView>()
+
   @Override
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -80,12 +103,11 @@ class SchoolCarActivity: BaseActivity() {
     MapsInitializer.updatePrivacyShow(this, true, true)
     MapsInitializer.updatePrivacyAgree(this, true)
 
-    binding = SchoolcarActivitySchoolcarBinding.inflate(layoutInflater)
-    setContentView(binding.root)
+    setContentView(R.layout.schoolcar_activity_schoolcar)
 
     if (checkActivityPermission()) {
       locationClient = AMapLocationClient(applicationContext)
-      binding.schoolcarMvMap.onCreate(savedInstanceState)
+      schoolCarMvMap.onCreate(savedInstanceState)
       initView()
     }
   }
@@ -106,7 +128,7 @@ class SchoolCarActivity: BaseActivity() {
       ifLocation = false
     } else {
       locationClient = AMapLocationClient(applicationContext)
-      binding.schoolcarMvMap.onCreate(savedInstanceState)
+      schoolCarMvMap.onCreate(savedInstanceState)
       locationClient = AMapLocationClient(applicationContext)
       initView()
     }
@@ -114,17 +136,17 @@ class SchoolCarActivity: BaseActivity() {
 
   private fun initView(){
     //放大缩小
-    binding.schoolCarCvOut.setOnClickListener {
+    schoolCarCvOut.setOnClickListener {
       val update = CameraUpdateFactory.zoomOut()
       aMap.animateCamera(update)
     }
 
-    binding.schoolCarCvExpand.setOnClickListener {
+    schoolCarCvExpand.setOnClickListener {
       val update = CameraUpdateFactory.zoomIn()
       aMap.animateCamera(update)
     }
     //回到自己定位位置
-    binding.schoolCarCvPositioning.setOnClickListener {
+    schoolCarCvPositioning.setOnClickListener {
       vm.chooseCar(-2)
       aMap.myLocation?.let { location->
         location.longitude.let {
@@ -140,11 +162,11 @@ class SchoolCarActivity: BaseActivity() {
         }
       }
     }
-    binding.schoolCarIvBack.setOnClickListener {
+    schoolCarIvBack.setOnClickListener {
       finishAfterTransition()
     }
 
-    aMap = binding.schoolcarMvMap.map
+    aMap = schoolCarMvMap.map
     //如果用户同意定位权限，则开启定位和初始化定位用到的类
     if (ifLocation) {
       initData()
@@ -187,7 +209,7 @@ class SchoolCarActivity: BaseActivity() {
   }
   //这里保证第一次显示最近的
   private fun initBottomSheetBehavior(){
-    val behavior = BottomSheetBehavior.from(binding.schoolcarBts)
+    val behavior = BottomSheetBehavior.from(schoolCarBts)
     behavior.addBottomSheetCallback(object :BottomSheetBehavior.BottomSheetCallback(){
       var cvHeight:Float = 0.0F
       var ivHeight:Float = 0.0F
@@ -200,15 +222,15 @@ class SchoolCarActivity: BaseActivity() {
       }
       override fun onSlide(bottomSheet: View, slideOffset: Float) {
         if (cvHeight == 0.0F && ivHeight == 0.0F) {
-          cvHeight = binding.schoolCarCvPositioning.y
-          ivHeight = binding.schoolCarCvPositioningIv.y
-          val top = binding.schoolCarCvOut.bottom
-          val bottom = binding.schoolCarCvPositioning.top
+          cvHeight = schoolCarCvPositioning.y
+          ivHeight = schoolCarCvPositioningIv.y
+          val top = schoolCarCvOut.bottom
+          val bottom = schoolCarCvPositioning.top
           realPath = bottom - top
           path = realPath.px2dp - 18F
         }
-        binding.schoolCarCvPositioning.y = cvHeight-(path*slideOffset).dp2px
-        binding.schoolCarCvPositioningIv.y = ivHeight-(path*slideOffset).dp2px
+        schoolCarCvPositioning.y = cvHeight-(path*slideOffset).dp2px
+        schoolCarCvPositioningIv.y = ivHeight-(path*slideOffset).dp2px
       }
     })
 
@@ -255,21 +277,19 @@ class SchoolCarActivity: BaseActivity() {
             if (isIcon){
               changeSiteView(false)
             }
-            binding.apply {
-              if (isIcon){
-                schoolCarTvTitleBts.text = mapLines.lines[position].name
-              }
-              schoolCarTvTimeBts.text = "运行时间: ${mapLines.lines[position].runTime}"
-              schoolCarCardRunTypeBts.text = mapLines.lines[position].runType
-              schoolCarCardLineTypeBts.text = mapLines.lines[position].sendType
+            if (isIcon){
+              schoolCarTvTitleBts.text = mapLines.lines[position].name
             }
+            schoolCarTvTimeBts.text = "运行时间: ${mapLines.lines[position].runTime}"
+            schoolCarCardRunTypeBts.text = mapLines.lines[position].runType
+            schoolCarCardLineTypeBts.text = mapLines.lines[position].sendType
             vm.bsbShow()
             if (isIcon){
               vm.changeLine(mapLines.lines[position].id)
             }
             siteAdapter = CarSiteAdapter(this,mapLines.lines[position].stations,mapLines.lines[position].id)
 
-            binding.schoolCarSiteRvBts.apply {
+            schoolCarSiteRvBts.apply {
               this.adapter = siteAdapter
               this.layoutManager = LinearLayoutManager(this@SchoolCarActivity).apply {
                 orientation = LinearLayoutManager.HORIZONTAL
@@ -289,7 +309,7 @@ class SchoolCarActivity: BaseActivity() {
             }
           }
         }
-        binding.schoolCarRvBts.apply {
+        schoolCarRvBts.apply {
           adapter = carIconAdapter
           layoutManager = LinearLayoutManager(this@SchoolCarActivity).apply {
             orientation = LinearLayoutManager.HORIZONTAL
@@ -315,7 +335,7 @@ class SchoolCarActivity: BaseActivity() {
       vm.mapInfo.value?.lines?.forEach { line ->
         line.stations.forEachIndexed { index, station ->
           if (station.id == it){
-            binding.schoolCarTvTitleBts.text = station.name
+            schoolCarTvTitleBts.text = station.name
           }
         }
       }
@@ -327,10 +347,10 @@ class SchoolCarActivity: BaseActivity() {
       if (arrays.size == 1){
         vm.mapInfo.value?.lines?.forEach { line ->
           if (line.id == arrays[0]) {
-            binding.schoolCarCardTvChangeBts.text = line.name
-            binding.schoolCarCardTvChangeBts.setTextColor(resources.getColor(com.cyxbs.components.config.R.color.config_level_one_font_color))
-            binding.schoolCarCardIvChangeBts.setImageResource(R.drawable.schoolcar_bts_btn_change)
-            binding.schoolCarCardChangeBts.setBackgroundResource(R.drawable.schoolcar_bts_btn_change_shape)
+            schoolCarCardTvChangeBts.text = line.name
+            schoolCarCardTvChangeBts.setTextColor(resources.getColor(com.cyxbs.components.config.R.color.config_level_one_font_color))
+            schoolCarCardIvChangeBts.setImageResource(R.drawable.schoolcar_bts_btn_change)
+            schoolCarCardChangeBts.setBackgroundResource(R.drawable.schoolcar_bts_btn_change_shape)
           }
         }
           vm.bsbShow()
@@ -342,29 +362,29 @@ class SchoolCarActivity: BaseActivity() {
             adapter.choose(arrays[0])
           }
         }
-        binding.schoolCarCardChangeBts.isClickable = false
+        schoolCarCardChangeBts.isClickable = false
         return@observe
       }
 
-      binding.schoolCarCardChangeBts.isClickable = true
+      schoolCarCardChangeBts.isClickable = true
 
       var choose = arrays[i]
       if (i < arrays.size-1) i++ else i = 0
       var next = arrays[i]
       vm.mapInfo.value?.lines?.forEach { line ->
         if (line.id == choose) {
-            binding.schoolCarCardTvChangeBts.text = line.name
-            binding.schoolCarCardTvChangeBts.setTextColor(0xffffff)
-            binding.schoolCarCardChangeBts.setBackgroundResource(R.drawable.schoolcar_bts_btn_change_shape_select)
-            binding.schoolCarCardIvChangeBts.setImageResource(R.drawable.schoolcar_bts_btn_change_select)
+            schoolCarCardTvChangeBts.text = line.name
+            schoolCarCardTvChangeBts.setTextColor(0xffffff)
+            schoolCarCardChangeBts.setBackgroundResource(R.drawable.schoolcar_bts_btn_change_shape_select)
+            schoolCarCardIvChangeBts.setImageResource(R.drawable.schoolcar_bts_btn_change_select)
         }
       }
       vm.bsbShow()
       changeSiteView()
-      binding.schoolCarCardChangeBts.setOnClickListener {
+      schoolCarCardChangeBts.setOnClickListener {
         vm.mapInfo.value?.lines?.forEach { line ->
           if (line.id == next) {
-            binding.schoolCarCardTvChangeBts.text = line.name
+            schoolCarCardTvChangeBts.text = line.name
             carIconAdapter?.let { adapter ->
               adapter.choose(choose)
             }
@@ -442,35 +462,29 @@ class SchoolCarActivity: BaseActivity() {
 
   private fun changeSiteView(show:Boolean = true){
       if (show){
-        binding.schoolCarCardChangeBts.visibility = View.VISIBLE
-        binding.apply {
-          schoolCarCardLineTypeBts.visibility = View.INVISIBLE
-          schoolCarCardRunTypeBts.visibility = View.INVISIBLE
-          schoolCarCardRunTypeBtsCard.visibility = View.INVISIBLE
-          schoolCarCardLineTypeBtsCard.visibility = View.INVISIBLE
-          schoolCarTvTimeBts.visibility = View.INVISIBLE
-        }
+        schoolCarCardChangeBts.visibility = View.VISIBLE
+        schoolCarCardLineTypeBts.visibility = View.INVISIBLE
+        schoolCarCardRunTypeBts.visibility = View.INVISIBLE
+        schoolCarCardRunTypeBtsCard.visibility = View.INVISIBLE
+        schoolCarCardLineTypeBtsCard.visibility = View.INVISIBLE
+        schoolCarTvTimeBts.visibility = View.INVISIBLE
       }else{
-        binding.schoolCarCardChangeBts.visibility = View.GONE
-        binding.apply {
-          schoolCarCardLineTypeBts.visibility = View.VISIBLE
-          schoolCarCardRunTypeBts.visibility = View.VISIBLE
-          schoolCarCardRunTypeBtsCard.visibility = View.VISIBLE
-          schoolCarCardLineTypeBtsCard.visibility = View.VISIBLE
-          schoolCarTvTimeBts.visibility = View.VISIBLE
-        }
+        schoolCarCardChangeBts.visibility = View.GONE
+        schoolCarCardLineTypeBts.visibility = View.VISIBLE
+        schoolCarCardRunTypeBts.visibility = View.VISIBLE
+        schoolCarCardRunTypeBtsCard.visibility = View.VISIBLE
+        schoolCarCardLineTypeBtsCard.visibility = View.VISIBLE
+        schoolCarTvTimeBts.visibility = View.VISIBLE
       }
   }
 
   private fun goneSiteView(){
-    binding.apply {
-      schoolCarCardChangeBts.visibility = View.GONE
-      schoolCarCardLineTypeBts.visibility = View.INVISIBLE
-      schoolCarCardRunTypeBts.visibility = View.INVISIBLE
-      schoolCarCardRunTypeBtsCard.visibility = View.INVISIBLE
-      schoolCarCardLineTypeBtsCard.visibility = View.INVISIBLE
-      schoolCarTvTimeBts.visibility = View.INVISIBLE
-    }
+    schoolCarCardChangeBts.visibility = View.GONE
+    schoolCarCardLineTypeBts.visibility = View.INVISIBLE
+    schoolCarCardRunTypeBts.visibility = View.INVISIBLE
+    schoolCarCardRunTypeBtsCard.visibility = View.INVISIBLE
+    schoolCarCardLineTypeBtsCard.visibility = View.INVISIBLE
+    schoolCarTvTimeBts.visibility = View.INVISIBLE
   }
 
   private fun timer(name: String) {
@@ -518,7 +532,7 @@ class SchoolCarActivity: BaseActivity() {
     if (checkActivityPermission()) {
       locationClient.onDestroy()
     }
-    binding.schoolcarMvMap.onDestroy()
+    schoolCarMvMap.onDestroy()
     if (disposable != null) {
       disposable!!.dispose()
     }
@@ -529,7 +543,7 @@ class SchoolCarActivity: BaseActivity() {
 
   override fun onPause() {
     super.onPause()
-    binding.schoolcarMvMap.onPause()
+    schoolCarMvMap.onPause()
     if (smoothMoveData != null) {
       smoothMoveData!!.clearAllList()
     }
@@ -537,7 +551,7 @@ class SchoolCarActivity: BaseActivity() {
 
   override fun onResume() {
     super.onResume()
-    binding.schoolcarMvMap.onResume()
+    schoolCarMvMap.onResume()
 
     vm.bsbHide(isBeginning)
     if (smoothMoveData != null) {

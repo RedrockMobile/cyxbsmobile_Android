@@ -1,13 +1,10 @@
 package com.cyxbs.pages.mine.page.feedback.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.cyxbs.pages.mine.R
-import com.cyxbs.pages.mine.databinding.MineFeedbackRecycleItemDetailBinding
 import com.cyxbs.pages.mine.page.feedback.history.list.bean.History
 
 /**
@@ -32,14 +29,14 @@ class RvListAdapter : ListAdapter<History, HistoryItemHolder>(diff) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryItemHolder {
-        val binding =
-            DataBindingUtil.inflate<MineFeedbackRecycleItemDetailBinding>(LayoutInflater.from(parent.context),
-                R.layout.mine_feedback_recycle_item_detail, parent, false)
-        return HistoryItemHolder(binding)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.mine_feedback_recycle_item_detail, parent, false)
+        return HistoryItemHolder(view) {
+            itemClickListener?.clicked(currentList[it])
+        }
     }
 
     override fun onBindViewHolder(holder: HistoryItemHolder, position: Int) {
-        itemClickListener?.let { holder.bind(currentList[position], it) }
+        holder.bind(currentList[position])
     }
 
     fun setOnItemClickListener(listener: ItemClickListener) {
@@ -47,7 +44,7 @@ class RvListAdapter : ListAdapter<History, HistoryItemHolder>(diff) {
     }
 
     interface ItemClickListener {
-        fun clicked(view: View, id: History)
+        fun clicked(data: History)
     }
 
 }

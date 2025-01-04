@@ -6,13 +6,14 @@ useKtProvider()
 
 kotlin {
   sourceSets {
-    androidMain.dependencies {
+    commonMain.dependencies {
       implementation(projects.cyxbsComponents.init)
       implementation(projects.cyxbsComponents.base)
       implementation(projects.cyxbsComponents.utils)
       implementation(projects.cyxbsComponents.config)
       implementation(projects.cyxbsComponents.account.api)
-
+    }
+    androidMain.dependencies {
       // 依赖 LeakCanary，检查内存泄漏 https://github.com/square/leakcanary
       implementation(libs.leakcanary)
 

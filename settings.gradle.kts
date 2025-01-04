@@ -20,9 +20,8 @@ pluginManagement {
   }
 }
 dependencyResolutionManagement {
-  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+  repositoriesMode.set(RepositoriesMode.PREFER_PROJECT) // wasmJs 会单独声明仓库，这里需要放开限制
   repositories {
-    maven("$rootDir/build/maven") // 本地模块缓存文件夹
     google()
     mavenCentral() // 优先 MavenCentral，一是：github CI 下不了 aliyun 依赖；二是：开 VPN 访问 aliyun 反而变慢了
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
@@ -32,12 +31,15 @@ dependencyResolutionManagement {
     maven("https://s01.oss.sonatype.org/content/repositories/snapshots/") // compose multiplatform
     maven("https://maven.aliyun.com/repository/public")
     maven("https://maven.aliyun.com/repository/google")
-    mavenLocal() // maven 默认的本地依赖位置：用户名/.m2/repository 中
   }
 }
 
 // 测试使用，排除掉不需要的模块，记得还原！！！
 val excludeList = setOf<String>(
+//  "cyxbs-components",
+//  "cyxbs-functions",
+//  "cyxbs-pages",
+//  "lib_common",
 )
 
 fun includeModule(topName: String, file: File) {

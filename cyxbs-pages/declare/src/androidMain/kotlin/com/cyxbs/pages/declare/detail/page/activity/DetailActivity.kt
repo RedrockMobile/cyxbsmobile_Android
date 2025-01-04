@@ -3,19 +3,22 @@ package com.cyxbs.pages.declare.detail.page.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.cyxbs.components.base.ui.BaseBindActivity
+import androidx.recyclerview.widget.RecyclerView
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.components.utils.service.impl
-import com.cyxbs.pages.declare.databinding.DeclareActivityDetailBinding
+import com.cyxbs.pages.declare.R
 import com.cyxbs.pages.declare.detail.bean.VoteData
 import com.cyxbs.pages.declare.detail.page.adapter.DetailRvAdapter
 import com.cyxbs.pages.declare.detail.page.viewmodel.DetailViewModel
 import com.cyxbs.pages.store.api.IStoreService
 
-class DetailActivity : BaseBindActivity<DeclareActivityDetailBinding>() {
+class DetailActivity : BaseActivity() {
     companion object {
         /**
          * 启动投票详情页面
@@ -31,26 +34,33 @@ class DetailActivity : BaseBindActivity<DeclareActivityDetailBinding>() {
 
     private val mViewModel by viewModels<DetailViewModel>()
 
+    private val declareDetailRecyclerview by R.id.declare_detail_recyclerview.view<RecyclerView>()
+    private val declareDetailIvToolbarArrowLeft by R.id.declare_detail_iv_toolbar_arrow_left.view<View>()
+    private val declareDetailTitle by R.id.declare_detail_title.view<TextView>()
+    private val declareDetailCl by R.id.declare_detail_cl.view<View>()
+    private val declareDetailNoNet by R.id.declare_detail_no_net.view<View>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.declare_activity_detail)
         val id = intent.getIntExtra("id", -1)
         //因为投票后返回的是个map，map是无序的，所以这里用个list记下未投票之前的选项排布顺序
         val voteDataList = mutableListOf<VoteData>()
 
         val declareDetailRvAdapter = DetailRvAdapter()
 
-        binding.declareDetailRecyclerview.run {
+        declareDetailRecyclerview.run {
             layoutManager = LinearLayoutManager(this@DetailActivity)
             adapter = declareDetailRvAdapter
         }
 
-        binding.declareDetailIvToolbarArrowLeft.setOnClickListener {
+        declareDetailIvToolbarArrowLeft.setOnClickListener {
             finish()
         }
 
         mViewModel.detailLiveData.observe {
             voteDataList.clear()
-            binding.declareDetailTitle.text = it.title
+            declareDetailTitle.text = it.title
             val votedList = mutableListOf<VoteData>()//差分刷新要求 源数据集和新数据集 不是同一个对象才能生效
 
             if (it.choices != null) {//防止后端返回个没有选项的投票
@@ -104,11 +114,11 @@ class DetailActivity : BaseBindActivity<DeclareActivityDetailBinding>() {
 
         mViewModel.errorLiveData.observe {
             if (it) {
-                binding.declareDetailCl.gone()
-                binding.declareDetailNoNet.visible()
+                declareDetailCl.gone()
+                declareDetailNoNet.visible()
             } else {
-                binding.declareDetailCl.visible()
-                binding.declareDetailNoNet.gone()
+                declareDetailCl.visible()
+                declareDetailNoNet.gone()
             }
         }
 

@@ -1,57 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:id="@+id/constraint"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:background="?android:attr/selectableItemBackground"
+    android:layout_height="57dp">
 
-    <data>
-        <variable
-            name="eventHandler"
-            type="com.cyxbs.pages.mine.page.feedback.center.ui.FeedbackCenterActivity.EventHandler" />
-        <variable
-            name="data"
-            type="com.cyxbs.pages.mine.page.feedback.network.bean.NormalFeedback.Data" />
-    </data>
+    <TextView
+        android:id="@+id/tv_center_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="12dp"
+        android:textColor="@color/mine_item_center_title"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint"
-        android:fitsSystemWindows="true"
-        android:layout_width="match_parent"
-        android:background="?android:attr/selectableItemBackground"
-        android:onClick="@{(view)->eventHandler.onItemClick(view,data.title,data.content)}"
-        android:layout_height="57dp">
+    <ImageView
+        android:id="@+id/iv_center_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_center_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_center_title"
+        app:srcCompat="@drawable/mine_ic_feedback_center_arrow" />
 
-        <TextView
-            android:id="@+id/tv_center_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="12dp"
-            android:text="@{data.title}"
-            android:textColor="@color/mine_item_center_title"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <ImageView
-            android:id="@+id/iv_center_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="18dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_center_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_center_title"
-            app:srcCompat="@drawable/mine_ic_feedback_center_arrow" />
-
-        <View
-            android:id="@+id/v_underline"
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:background="@color/mine_feedback_divider_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+    <View
+        android:id="@+id/v_underline"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/mine_feedback_divider_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

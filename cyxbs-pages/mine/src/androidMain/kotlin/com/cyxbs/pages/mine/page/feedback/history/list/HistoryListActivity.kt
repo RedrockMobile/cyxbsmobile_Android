@@ -1,19 +1,22 @@
 package com.cyxbs.pages.mine.page.feedback.history.list
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.LiveData
+import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
+import androidx.recyclerview.widget.RecyclerView
+import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.mine.R
-import com.cyxbs.pages.mine.databinding.MineActivityHistoryListBinding
 import com.cyxbs.pages.mine.page.feedback.adapter.RvListAdapter
-import com.cyxbs.pages.mine.page.feedback.base.ui.BaseMVPVMActivity
 import com.cyxbs.pages.mine.page.feedback.history.detail.HistoryDetailActivity
 import com.cyxbs.pages.mine.page.feedback.history.list.bean.History
 
-class HistoryListActivity :
-    BaseMVPVMActivity<HistoryListViewModel, MineActivityHistoryListBinding, HistoryListPresenter>() {
+class HistoryListActivity : BaseActivity() {
+
+    private val viewModel by viewModels<HistoryListViewModel>()
 
     /**
      * rv_history_list
@@ -23,56 +26,52 @@ class HistoryListActivity :
         RvListAdapter()
     }
 
-    /**
-     * 获取P层
-     */
-    override fun createPresenter(): HistoryListPresenter = HistoryListPresenter()
+    private val rvHistoryList by R.id.rv_history_list.view<RecyclerView>()
+    private val tvTitle by R.id.tv_title.view<TextView>()
+    private val btnBack by R.id.btn_back.view<View>()
+    private val tvNoneHistory by R.id.tv_none_history.view<View>()
+    private val ivNoneHistory by R.id.mine_appcompatimageview.view<View>()
 
-    /**
-     * 获取布局Id
-     * 获取布局信息
-     */
-    override fun getLayoutId(): Int = R.layout.mine_activity_history_list
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.mine_activity_history_list)
+        initView()
+        initListener()
+        observeData()
+    }
 
     /**
      * 初始化视图
      */
-    override fun initView() {
-        binding?.vm = viewModel
+    private fun initView() {
         //初始化Rv配置
-        binding?.rvHistoryList?.apply {
+        rvHistoryList.apply {
             adapter = rvAdapter
             layoutManager = LinearLayoutManager(this@HistoryListActivity)
         }
 
-        binding?.includeToolBar?.tvTitle?.text = resources.getText(R.string.mine_feedback_toolbar_text)
+        tvTitle.text = resources.getText(R.string.mine_feedback_toolbar_text)
 
     }
 
     /**
      * 初始化listener
      */
-    override fun initListener() {
+    private fun initListener() {
         //RecyclerView的Item点击
         rvAdapter.setOnItemClickListener(
             object : RvListAdapter.ItemClickListener {
-                var tag: Long = 0L
-                override fun clicked(view: View, data: History) {
-                    //防止多次点击
-                    val current = System.currentTimeMillis()
-                    if (current - tag < 500) return
-                    tag = current
-                    presenter?.savedState(data)
+                override fun clicked(data: History) {
+                    viewModel.savedState(data)
                     val intentExtra = Intent(this@HistoryListActivity,
-                        HistoryDetailActivity::class.java).putExtra("id", data.id).putExtra("isReply",data.replyOrNot)
+                        HistoryDetailActivity::class.java).putExtra("historyId", data.id)
                     startActivity(intentExtra)
                 }
-
             }
         )
 
         //返回键的点击监听
-        binding?.includeToolBar?.btnBack?.setOnSingleClickListener {
+        btnBack.setOnSingleClickListener {
             finish()
         }
     }
@@ -80,20 +79,13 @@ class HistoryListActivity :
     /**
      * 观察vm数据变化
      */
-    override fun observeData() {
-        viewModel.apply {
-            observeRvList(listData)
-        }
-    }
-
-
-    /**
-     * Rv的数据
-     */
-    private fun observeRvList(listData: LiveData<List<History>>) {
-        listData.observe {
+    private fun observeData() {
+        viewModel.listData.observe {
             rvAdapter.submitList(it)
+            val hasHistory = it.isNotEmpty()
+            rvHistoryList.visibility = if (hasHistory) View.VISIBLE else View.GONE
+            tvNoneHistory.visibility = if (hasHistory) View.GONE else View.VISIBLE
+            ivNoneHistory.visibility = if (hasHistory) View.GONE else View.VISIBLE
         }
     }
-
 }

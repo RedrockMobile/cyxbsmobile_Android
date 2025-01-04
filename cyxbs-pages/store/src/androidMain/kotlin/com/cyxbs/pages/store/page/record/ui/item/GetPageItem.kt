@@ -1,10 +1,13 @@
 package com.cyxbs.pages.store.page.record.ui.item
 
+import android.annotation.SuppressLint
+import android.view.View
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.cyxbs.pages.store.R
-import com.cyxbs.pages.store.utils.SimpleRvAdapter
 import com.cyxbs.pages.store.bean.StampGetRecord
-import com.cyxbs.pages.store.databinding.StoreRecyclerItemRecordGetBinding
 import com.cyxbs.pages.store.utils.Date
+import com.cyxbs.pages.store.utils.SimpleRvAdapter
 
 /**
  * ...
@@ -15,11 +18,17 @@ import com.cyxbs.pages.store.utils.Date
 class GetPageItem(
     list: List<StampGetRecord>,
     startPosition: Int
-) : SimpleRvAdapter.DBItem<StoreRecyclerItemRecordGetBinding, StampGetRecord>(
+) : SimpleRvAdapter.VHItem<GetPageItem.VH, StampGetRecord>(
     list,
     startPosition,
     R.layout.store_recycler_item_record_get
 ) {
+
+    class VH(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val storeItemGetRecordTvEvent = itemView.findViewById<TextView>(R.id.store_item_get_record_tv_event)
+        val storeItemGetRecordTvCount = itemView.findViewById<TextView>(R.id.store_item_get_record_tv_count)
+        val storeItemGetRecordTvDate = itemView.findViewById<TextView>(R.id.store_item_get_record_tv_date)
+    }
 
     /**
      * 用于传入新数据使用差分刷新
@@ -35,21 +44,17 @@ class GetPageItem(
         )
     }
 
-    override fun onCreate(
-        binding: StoreRecyclerItemRecordGetBinding,
-        holder: SimpleRvAdapter.BindingVH,
-        map: Map<Int, StampGetRecord>
-    ) {
+    override fun getNewViewHolder(itemView: View): VH {
+        return VH(itemView)
     }
 
-    override fun onRefactor(
-        binding: StoreRecyclerItemRecordGetBinding,
-        holder: SimpleRvAdapter.BindingVH,
-        position: Int,
-        value: StampGetRecord
-    ) {
-        binding.data = value
-        //单独处理时间
-        binding.storeItemGetRecordTvDate.text = Date.getTime(value.date)
+    override fun onCreate(holder: VH, map: Map<Int, StampGetRecord>) {
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onRefactor(holder: VH, position: Int, value: StampGetRecord) {
+        holder.storeItemGetRecordTvEvent.text = value.taskName
+        holder.storeItemGetRecordTvCount.text = "+${value.taskIncome}"
+        holder.storeItemGetRecordTvDate.text = Date.getTime(value.date)
     }
 }

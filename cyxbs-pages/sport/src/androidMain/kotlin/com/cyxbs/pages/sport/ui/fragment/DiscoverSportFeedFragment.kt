@@ -13,12 +13,11 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.cyxbs.components.base.operations.doIfLogin
-import com.cyxbs.components.base.ui.BaseBindFragment
+import com.cyxbs.components.base.ui.BaseFragment
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.pages.sport.R
-import com.cyxbs.pages.sport.databinding.SportFragmentDiscoverFeedBinding
 import com.cyxbs.pages.sport.model.SportDetailBean
 import com.cyxbs.pages.sport.model.SportDetailRepository
 import com.cyxbs.pages.sport.model.SportNoticeRepository
@@ -30,7 +29,20 @@ import com.cyxbs.pages.sport.ui.activity.SportDetailActivity
  * @bless  : God bless my code
  * @description: 首页展示体育打卡数据的fragment
  */
-class DiscoverSportFeedFragment : BaseBindFragment<SportFragmentDiscoverFeedBinding>() {
+class DiscoverSportFeedFragment : BaseFragment(R.layout.sport_fragment_discover_feed) {
+
+    private val sportIvFeedTips by R.id.sport_iv_feed_tips.view<View>()
+    private val sportTvFeedHint by R.id.sport_tv_feed_hint.view<TextView>()
+    private val sportTvFeedRunNeed by R.id.sport_tv_feed_run_need.view<TextView>()
+    private val sportTvFeedRunTimes by R.id.sport_tv_feed_run_times.view<TextView>()
+    private val sportTvFeedOtherNeed by R.id.sport_tv_feed_other_need.view<TextView>()
+    private val sportTvFeedOtherTimes by R.id.sport_tv_feed_other_times.view<TextView>()
+    private val sportTvFeedAward by R.id.sport_tv_feed_award.view<TextView>()
+    private val sportTvFeedAwardTimes by R.id.sport_tv_feed_award_times.view<TextView>()
+    private val sportTvFeedRunNeedHint by R.id.sport_tv_feed_run_need_hint.view<TextView>()
+    private val sportTvFeedOtherNeedHint by R.id.sport_tv_feed_other_need_hint.view<TextView>()
+    private val sportTvFeedAwardHint by R.id.sport_tv_feed_award_hint.view<TextView>()
+    private val sportClFeed by R.id.sport_cl_feed.view<View>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -61,7 +73,7 @@ class DiscoverSportFeedFragment : BaseBindFragment<SportFragmentDiscoverFeedBind
                 }
             }
 
-        binding.sportIvFeedTips.setOnSingleClickListener {
+        sportIvFeedTips.setOnSingleClickListener {
             MaterialDialog(requireActivity()).show {
                 customView(view=feedDialogCustomView)
                 getCustomView().apply {
@@ -88,38 +100,36 @@ class DiscoverSportFeedFragment : BaseBindFragment<SportFragmentDiscoverFeedBind
      * 加载数据
      */
     private fun showData(beam: SportDetailBean) {
-        binding.run {
-            //隐藏提示
-            sportTvFeedHint.gone()
-            //显示数据
-            sportTvFeedRunNeed.visible()
-            sportTvFeedRunTimes.visible()
-            sportTvFeedOtherNeed.visible()
-            sportTvFeedOtherTimes.visible()
-            sportTvFeedAward.visible()
-            sportTvFeedAwardTimes.visible()
-            sportTvFeedRunNeedHint.visible()
-            sportTvFeedOtherNeedHint.visible()
-            sportTvFeedAwardHint.visible()
-            //跑步剩余次数 = 所需跑步次数 - 已跑步次数， 剩余次数需要 >= 0
-            sportTvFeedRunNeed.text =
-                if (beam.runTotal - beam.runDone >= 0) (beam.runTotal - beam.runDone).toString() else "0"
-            //其他 剩余次数
-            val other = if (beam.runTotal - beam.runDone > 0) {
-                //剩余跑步次数大于零时，其他次数 = 所需其他次数 - 已打卡次数
-                beam.otherTotal - beam.otherDone
-            } else {
-                //剩余跑步次数 <= 0 时，其他次数 = 所需总次数 - 已打卡其他次数 - 已跑步次数
-                (beam.runTotal + beam.otherTotal) - beam.otherDone - beam.runDone
-            }
-            //其他剩余次数必须 >= 0
-            sportTvFeedOtherNeed.text = if (other >= 0) other.toString() else "0"
-            //奖励次数
-            sportTvFeedAward.text = beam.award.toString()
-            //设置点击跳转进详情页
-            sportClFeed.setOnSingleClickListener {
-                startActivity(Intent(requireContext(), SportDetailActivity::class.java))
-            }
+        //隐藏提示
+        sportTvFeedHint.gone()
+        //显示数据
+        sportTvFeedRunNeed.visible()
+        sportTvFeedRunTimes.visible()
+        sportTvFeedOtherNeed.visible()
+        sportTvFeedOtherTimes.visible()
+        sportTvFeedAward.visible()
+        sportTvFeedAwardTimes.visible()
+        sportTvFeedRunNeedHint.visible()
+        sportTvFeedOtherNeedHint.visible()
+        sportTvFeedAwardHint.visible()
+        //跑步剩余次数 = 所需跑步次数 - 已跑步次数， 剩余次数需要 >= 0
+        sportTvFeedRunNeed.text =
+            if (beam.runTotal - beam.runDone >= 0) (beam.runTotal - beam.runDone).toString() else "0"
+        //其他 剩余次数
+        val other = if (beam.runTotal - beam.runDone > 0) {
+            //剩余跑步次数大于零时，其他次数 = 所需其他次数 - 已打卡次数
+            beam.otherTotal - beam.otherDone
+        } else {
+            //剩余跑步次数 <= 0 时，其他次数 = 所需总次数 - 已打卡其他次数 - 已跑步次数
+            (beam.runTotal + beam.otherTotal) - beam.otherDone - beam.runDone
+        }
+        //其他剩余次数必须 >= 0
+        sportTvFeedOtherNeed.text = if (other >= 0) other.toString() else "0"
+        //奖励次数
+        sportTvFeedAward.text = beam.award.toString()
+        //设置点击跳转进详情页
+        sportClFeed.setOnSingleClickListener {
+            startActivity(Intent(requireContext(), SportDetailActivity::class.java))
         }
     }
 
@@ -128,22 +138,20 @@ class DiscoverSportFeedFragment : BaseBindFragment<SportFragmentDiscoverFeedBind
      */
     private fun notLogin() {
         //游客模式则不显示数据，显示需要先登录
-        binding.run {
-            //隐藏用于显示数据的控件
-            sportTvFeedRunNeed.gone()
-            sportTvFeedRunTimes.gone()
-            sportTvFeedOtherNeed.gone()
-            sportTvFeedOtherTimes.gone()
-            sportTvFeedAward.gone()
-            sportTvFeedAwardTimes.gone()
-            sportTvFeedRunNeedHint.gone()
-            sportTvFeedOtherNeedHint.gone()
-            sportTvFeedAwardHint.gone()
-            sportTvFeedHint.text = "登录后才能查看体育打卡哦"
-            sportTvFeedHint.visible()
-            sportClFeed.setOnSingleClickListener {
-                doIfLogin("体育打卡")
-            }
+        //隐藏用于显示数据的控件
+        sportTvFeedRunNeed.gone()
+        sportTvFeedRunTimes.gone()
+        sportTvFeedOtherNeed.gone()
+        sportTvFeedOtherTimes.gone()
+        sportTvFeedAward.gone()
+        sportTvFeedAwardTimes.gone()
+        sportTvFeedRunNeedHint.gone()
+        sportTvFeedOtherNeedHint.gone()
+        sportTvFeedAwardHint.gone()
+        sportTvFeedHint.text = "登录后才能查看体育打卡哦"
+        sportTvFeedHint.visible()
+        sportClFeed.setOnSingleClickListener {
+            doIfLogin("体育打卡")
         }
     }
 
@@ -151,20 +159,18 @@ class DiscoverSportFeedFragment : BaseBindFragment<SportFragmentDiscoverFeedBind
      * 展示错误提示
      */
     private fun showError() {
-        binding.run {
-            //隐藏用于显示数据的控件
-            sportTvFeedRunNeed.gone()
-            sportTvFeedRunTimes.gone()
-            sportTvFeedOtherNeed.gone()
-            sportTvFeedOtherTimes.gone()
-            sportTvFeedAward.gone()
-            sportTvFeedAwardTimes.gone()
-            sportTvFeedRunNeedHint.gone()
-            sportTvFeedOtherNeedHint.gone()
-            sportTvFeedAwardHint.gone()
-            sportTvFeedHint.text = "当前数据错误，正在努力修复中"
-            sportTvFeedHint.visible()
-            sportClFeed.setOnClickListener(null)
-        }
+        //隐藏用于显示数据的控件
+        sportTvFeedRunNeed.gone()
+        sportTvFeedRunTimes.gone()
+        sportTvFeedOtherNeed.gone()
+        sportTvFeedOtherTimes.gone()
+        sportTvFeedAward.gone()
+        sportTvFeedAwardTimes.gone()
+        sportTvFeedRunNeedHint.gone()
+        sportTvFeedOtherNeedHint.gone()
+        sportTvFeedAwardHint.gone()
+        sportTvFeedHint.text = "当前数据错误，正在努力修复中"
+        sportTvFeedHint.visible()
+        sportClFeed.setOnClickListener(null)
     }
 }

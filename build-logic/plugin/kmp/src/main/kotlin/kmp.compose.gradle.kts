@@ -1,9 +1,9 @@
 import com.android.build.gradle.BaseExtension
 
 plugins {
+  id("kmp.base")
   id("org.jetbrains.kotlin.plugin.compose")
   id("org.jetbrains.compose")
-  id("kmp.base")
 }
 
 kotlin {
@@ -11,7 +11,7 @@ kotlin {
     commonMain.dependencies {
       implementation(compose.runtime)
       implementation(compose.foundation)
-      implementation(compose.material3)
+      implementation(compose.material)
       implementation(compose.ui)
       implementation(compose.components.resources)
       implementation(compose.components.uiToolingPreview)

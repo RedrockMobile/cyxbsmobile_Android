@@ -1,10 +1,14 @@
 package com.cyxbs.pages.store.page.center.ui.item
 
+import android.annotation.SuppressLint
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.cyxbs.components.utils.extensions.setImageFromUrl
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.store.R
 import com.cyxbs.pages.store.bean.StampCenter
-import com.cyxbs.pages.store.databinding.StoreRecyclerItemSmallShopProductBinding
 import com.cyxbs.pages.store.page.exchange.ui.activity.ProductExchangeActivity
 import com.cyxbs.pages.store.utils.SimpleRvAdapter
 
@@ -17,9 +21,17 @@ import com.cyxbs.pages.store.utils.SimpleRvAdapter
 class SmallShopProductItem(
   shopMap: HashMap<Int, StampCenter.Shop>,
   private var stampCount: Int
-) : SimpleRvAdapter.DBItem<StoreRecyclerItemSmallShopProductBinding, StampCenter.Shop>(
+) : SimpleRvAdapter.VHItem<SmallShopProductItem.VH, StampCenter.Shop>(
   shopMap, R.layout.store_recycler_item_small_shop_product
 ) {
+
+  class VH(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    val storeCvStampSmallShop = itemView.findViewById<View>(R.id.store_cv_stamp_small_shop)
+    val storeIvSmallShopProduct = itemView.findViewById<ImageView>(R.id.store_iv_small_shop_product)
+    val storeTvSmallShopProductName = itemView.findViewById<TextView>(R.id.store_tv_small_shop_product_name)
+    val storeTvSmallShopProductStock = itemView.findViewById<TextView>(R.id.store_tv_small_shop_product_stock)
+    val storeTvSmallShopPrice = itemView.findViewById<TextView>(R.id.store_tv_small_shop_price)
+  }
   
   /**
    * 该方法调用了 [diffRefreshAllItemMap] 用于自动刷新
@@ -39,28 +51,26 @@ class SmallShopProductItem(
         oldData == newData // 这个是判断其他数据是否相等
       })
   }
-  
-  override fun onCreate(
-    binding: StoreRecyclerItemSmallShopProductBinding,
-    holder: SimpleRvAdapter.BindingVH,
-    map: Map<Int, StampCenter.Shop>
-  ) {
+
+  override fun getNewViewHolder(itemView: View): VH {
+    return VH(itemView)
+  }
+
+  override fun onCreate(holder: VH, map: Map<Int, StampCenter.Shop>) {
     //设置跳转到兑换界面
-    binding.storeCvStampSmallShop.setOnSingleClickListener {
+    holder.storeCvStampSmallShop.setOnSingleClickListener {
       val shop = map[holder.layoutPosition]
       if (shop != null) {
         ProductExchangeActivity.activityStart(it.context, shop.id, stampCount, shop.isPurchased)
       }
     }
   }
-  
-  override fun onRefactor(
-    binding: StoreRecyclerItemSmallShopProductBinding,
-    holder: SimpleRvAdapter.BindingVH,
-    position: Int,
-    value: StampCenter.Shop
-  ) {
-    binding.storeIvSmallShopProduct.setImageFromUrl(value.url)
-    binding.shop = value // 设置 xml 中 binding 了的属性
+
+  @SuppressLint("SetTextI18n")
+  override fun onRefactor(holder: VH, position: Int, value: StampCenter.Shop) {
+    holder.storeIvSmallShopProduct.setImageFromUrl(value.url)
+    holder.storeTvSmallShopProductName.text = value.title
+    holder.storeTvSmallShopProductStock.text = "库存: ${value.amount}"
+    holder.storeTvSmallShopPrice.text = "${value.price}"
   }
 }

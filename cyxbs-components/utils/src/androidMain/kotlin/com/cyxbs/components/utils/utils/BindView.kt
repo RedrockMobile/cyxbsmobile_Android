@@ -38,7 +38,7 @@ import kotlin.reflect.KProperty
  * ViewBinding 是给所有布局都默认开启的，大项目会严重拖垮编译速度
  * ```
  * **NOTE:** kt 直接通过 id 获取 View 的插件已经被废弃，禁止再使用！
- *
+ * **NOTE:** DataBinding 因 Kapt 与多平台问题，禁止再使用！
  *
  *
  *

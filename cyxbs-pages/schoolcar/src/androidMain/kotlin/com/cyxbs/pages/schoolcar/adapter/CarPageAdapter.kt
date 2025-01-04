@@ -2,12 +2,14 @@ package com.cyxbs.pages.schoolcar.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.cyxbs.pages.schoolcar.bean.Line
 import com.cyxbs.pages.schoolcar.R
-import com.cyxbs.pages.schoolcar.databinding.SchoolcarItemCarPageBinding
+import com.cyxbs.pages.schoolcar.bean.Line
 
 /**
  *@Author:SnowOwlet
@@ -16,23 +18,28 @@ import com.cyxbs.pages.schoolcar.databinding.SchoolcarItemCarPageBinding
  */
 class CarPageAdapter(val context: Context?, val lines:List<Line>): RecyclerView.Adapter<CarPageAdapter.ViewHolder>() {
 
-  inner class ViewHolder(val binding: SchoolcarItemCarPageBinding) : RecyclerView.ViewHolder(binding.root) {
-    val rv = binding.schoolCarDetailSiteRv.apply {
+  inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    val rv = itemView.findViewById<RecyclerView>(R.id.school_car_detail_site_rv).apply {
       this.layoutManager = LinearLayoutManager(context).apply {
         orientation = LinearLayoutManager.HORIZONTAL
       }
     }
+    val schoolCarDetailIv = itemView.findViewById<ImageView>(R.id.school_car_detail_iv)
+    val schoolCarDetailCardLineTvType = itemView.findViewById<TextView>(R.id.school_car_detail_card_line_tv_type)
+    val schoolCarDetailCardRunTvType = itemView.findViewById<TextView>(R.id.school_car_detail_card_run_tv_type)
+    val schoolCarDetailTvTime = itemView.findViewById<TextView>(R.id.school_car_detail_tv_time)
+    val schoolCarDetailTvTitle = itemView.findViewById<TextView>(R.id.school_car_detail_tv_title)
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-    val binding = SchoolcarItemCarPageBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-    return ViewHolder(binding)
+    val view = LayoutInflater.from(parent.context).inflate(R.layout.schoolcar_item_car_page,parent,false)
+    return ViewHolder(view)
   }
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     val line = lines[position]
     holder.rv.adapter = CarPageSiteAdapter(context, line.stations,line.id)
-    holder.binding.apply {
+    holder.apply {
       schoolCarDetailIv.setImageResource(getIcon(line.id))
       schoolCarDetailCardLineTvType.text = line.sendType
       schoolCarDetailCardRunTvType.text = line.runType

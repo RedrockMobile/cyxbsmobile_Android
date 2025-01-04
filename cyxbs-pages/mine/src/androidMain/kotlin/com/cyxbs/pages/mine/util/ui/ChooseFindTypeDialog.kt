@@ -1,13 +1,13 @@
 package com.cyxbs.pages.mine.util.ui
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.view.Gravity
 import android.widget.TextView
-import com.mredrock.cyxbs.common.ui.BaseActivity
-import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.common.utils.extensions.toast
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
+import com.cyxbs.components.utils.extensions.toast
 import com.cyxbs.pages.mine.R
 import com.cyxbs.pages.mine.page.security.activity.FindPasswordActivity
 import com.cyxbs.pages.mine.page.security.activity.FindPasswordActivity.Companion.FIND_PASSWORD_BY_EMAIL
@@ -21,7 +21,7 @@ import com.cyxbs.pages.mine.page.security.activity.FindPasswordByIdsActivity
 class ChooseFindTypeDialog(context: Context, theme: Int) : Dialog(context, theme) {
     companion object {
         //此处函数将来可以优化，目前必须要传递一个学号进来
-        fun showDialog(context: Context?, hasEmailBinding: Boolean, hasSecurityQuestion: Boolean, activity: BaseActivity, isFromLogin: Boolean, stuNumber: String) {
+        fun showDialog(context: Context?, hasEmailBinding: Boolean, hasSecurityQuestion: Boolean, activity: Activity, isFromLogin: Boolean, stuNumber: String) {
             if (context == null) return
             val chooseFindTypeDialog = ChooseFindTypeDialog(context, R.style.transparent_dialog)
             chooseFindTypeDialog.setContentView(R.layout.mine_dialog_choose_find_type)

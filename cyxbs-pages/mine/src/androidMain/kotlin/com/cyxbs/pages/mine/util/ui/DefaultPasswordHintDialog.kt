@@ -1,9 +1,9 @@
 package com.cyxbs.pages.mine.util.ui
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.widget.Button
-import com.mredrock.cyxbs.common.ui.BaseActivity
 import com.cyxbs.pages.mine.R
 
 /**
@@ -14,7 +14,7 @@ import com.cyxbs.pages.mine.R
  */
 class DefaultPasswordHintDialog(context: Context, them: Int) : Dialog(context, them) {
     companion object {
-        fun show(context: Context?, activity: BaseActivity) {
+        fun show(context: Context?, activity: Activity) {
             if (context == null) return
             val defaultPasswordHintDialog = DefaultPasswordHintDialog(context, R.style.transparent_dialog)
             defaultPasswordHintDialog.setContentView(R.layout.mine_dialog_default_password_hint)

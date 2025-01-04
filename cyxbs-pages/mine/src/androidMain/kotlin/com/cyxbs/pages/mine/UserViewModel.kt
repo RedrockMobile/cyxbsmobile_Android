@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cyxbs.components.config.sp.defaultSp
-import com.cyxbs.components.utils.extensions.EmptyCoroutineExceptionHandler
+import com.cyxbs.components.utils.coroutine.EmptyCoroutineExceptionHandler
 import com.cyxbs.components.utils.extensions.setSchedulers
 import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
 import com.cyxbs.components.utils.network.ApiWrapper

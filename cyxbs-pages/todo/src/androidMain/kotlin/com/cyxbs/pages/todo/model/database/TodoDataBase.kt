@@ -8,12 +8,10 @@ import com.cyxbs.pages.todo.model.bean.Todo
 import com.google.gson.Gson
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.getSp
-import com.cyxbs.components.utils.extensions.processLifecycleScope
+import com.cyxbs.components.utils.coroutine.appCoroutineScope
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.concurrent.Executors
 
 /**
  * description:
@@ -60,7 +58,7 @@ abstract class TodoDatabase : RoomDatabase() {
                     Todo(2, "左滑可置顶或者删除", "", 0, generateDefaultRemindMode(), System.currentTimeMillis(), "", "", 0, 0),
                     Todo(3, "点击查看代办详情", "", 0, generateDefaultRemindMode(), System.currentTimeMillis(), "", "", 0, 0)
                 )
-                Completable.fromAction { processLifecycleScope.launch {
+                Completable.fromAction { appCoroutineScope.launch {
                     database.todoDao().insertAll(defaultTodos) }
                 }.subscribeOn(Schedulers.io()).subscribe()
             }

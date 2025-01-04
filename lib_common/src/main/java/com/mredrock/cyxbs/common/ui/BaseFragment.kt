@@ -78,7 +78,7 @@ open class BaseFragment : Fragment() {
     
 
     /**
-     * 在简单界面，使用这种方式来得到 View，避免使用 DataBinding 大材小用
+     * 在简单界面，使用这种方式来得到 View，kae 插件 和 DataBinding/ViewBinding 已不被允许使用
      * ```
      * 使用方法：
      *    val mTvNum: TextView by R.id.xxx.view()

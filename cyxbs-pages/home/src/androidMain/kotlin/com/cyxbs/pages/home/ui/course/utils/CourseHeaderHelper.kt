@@ -3,8 +3,8 @@ package com.cyxbs.pages.home.ui.course.utils
 import android.util.Log
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.config.config.SchoolCalendar
-import com.cyxbs.components.utils.extensions.isDebuggableBuild
 import com.cyxbs.components.utils.extensions.toast
+import com.cyxbs.components.utils.isDebug
 import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.utils.utils.judge.NetworkUtil
 import com.cyxbs.pages.affair.api.IAffairService
@@ -80,7 +80,7 @@ object CourseHeaderHelper {
             .toObservable()
             .flatMap { Observable.empty<Header>() }
             .doOnError {
-              if (isDebuggableBuild) {
+              if (isDebug()) {
                 toast("课表崩了，长按课表头显示")
               }
             }.onErrorReturn { throwable ->

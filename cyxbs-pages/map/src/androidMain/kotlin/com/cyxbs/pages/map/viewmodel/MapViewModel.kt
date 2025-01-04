@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
-import androidx.databinding.ObservableArrayList
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -23,6 +22,7 @@ import com.cyxbs.components.utils.network.CommonApiService
 import com.cyxbs.components.utils.network.DownMessageParams
 import com.cyxbs.components.utils.network.mapOrInterceptException
 import com.cyxbs.components.utils.network.mapOrThrowApiException
+import com.cyxbs.pages.map.util.ObservableArrayList
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import okhttp3.MediaType.Companion.toMediaTypeOrNull

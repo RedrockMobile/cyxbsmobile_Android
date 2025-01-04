@@ -3,7 +3,7 @@ package com.cyxbs.pages.map.model
 import androidx.core.content.edit
 import com.google.gson.reflect.TypeToken
 import com.cyxbs.pages.map.bean.*
-import com.cyxbs.components.utils.extensions.GsonDefault
+import com.cyxbs.components.utils.extensions.defaultGson
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.extensions.getSp
 
@@ -16,7 +16,7 @@ import com.cyxbs.components.utils.extensions.getSp
 
 object DataSet {
     private val sharedPreferences by lazy { appContext.getSp("map_cache") }
-    private val gson = GsonDefault
+    private val gson = defaultGson
 
     // data/data/包名/files 下的 map_image 文件
     val mapImageFile = appContext.filesDir.resolve("map_image")

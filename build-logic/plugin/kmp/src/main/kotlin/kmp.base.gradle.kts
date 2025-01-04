@@ -31,10 +31,12 @@ kotlin {
   if (Multiplatform.enableWasm(project)) {
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
+      moduleName = Config.getBaseName(project)
       browser {
         val rootDirPath = project.rootDir.path
         val projectDirPath = project.projectDir.path
         commonWebpackConfig {
+          outputFileName = "${Config.getBaseName(project)}.js"
           devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
             static = (static ?: mutableListOf()).apply {
               // Serve sources to debug inside browser
@@ -52,22 +54,19 @@ kotlin {
       implementation(libsEx.`kotlinx-coroutines`)
       implementation(libsEx.`kotlinx-collections`)
       implementation(libsEx.`kotlinx-serialization`) // 想要序列化还需要引入 alias(libs.plugins.kotlinSerialization) 插件
+//      implementation(libsEx.`kotlinx-datetime`)
       implementation(libsEx.`kmp-uri`)
-      implementation(libsEx.`kmp-settings-core`)
-      implementation(libsEx.`kmp-settings-serialization`)
-      implementation(libsEx.`kmp-settings-serialization`)
+//      implementation(libsEx.`kmp-settings-core`)
+//      implementation(libsEx.`kmp-settings-serialization`)
+    }
+    androidMain.dependencies {
+      implementation(libsEx.`kotlinx-coroutines-android`)
+      implementation(libsEx.`androidx-appcompat`)
     }
     if (Multiplatform.enableDesktop(project)) {
-      val desktopMain by getting {
-        dependencies {
-          implementation(libsEx.`kotlinx-coroutines-swing`)
-        }
-      }
-    }
-    androidMain {
-      dependencies {
-        implementation(libsEx.`kotlinx-coroutines-android`)
-        implementation(libsEx.`androidx-appcompat`)
+      val desktopMain by getting
+      desktopMain.dependencies {
+        implementation(libsEx.`kotlinx-coroutines-swing`)
       }
     }
   }

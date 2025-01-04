@@ -1,11 +1,12 @@
 package com.cyxbs.pages.schoolcar
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.cyxbs.pages.schoolcar.adapter.CarPageAdapter
-import com.cyxbs.pages.schoolcar.databinding.SchoolcarActivityDetailSchoolcarBinding
+import androidx.recyclerview.widget.RecyclerView
 import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.pages.schoolcar.adapter.CarPageAdapter
 
 /**
  *@Author:SnowOwlet
@@ -13,20 +14,23 @@ import com.cyxbs.components.base.ui.BaseActivity
  *
  */
 class SchoolDetailActivity: BaseActivity(){
-  private lateinit var binding: SchoolcarActivityDetailSchoolcarBinding
+
   private val vm by viewModels<SchoolDetailViewModel>()
+
+  private val schoolCarDetailRv by R.id.school_car_detail_rv.view<RecyclerView>()
+  private val schoolCarDetailIv by R.id.school_car_detail_iv.view<View>()
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    binding = SchoolcarActivityDetailSchoolcarBinding.inflate(layoutInflater)
-    setContentView(binding.root)
+    setContentView(R.layout.schoolcar_activity_detail_schoolcar)
     vm.mapInfo.observe(this){
-      binding.schoolCarDetailRv.apply {
+      schoolCarDetailRv.apply {
         layoutManager = LinearLayoutManager(this@SchoolDetailActivity)
         this.adapter = CarPageAdapter(this@SchoolDetailActivity,it.lines)
       }
     }
     vm.initMapInfo()
-    binding.schoolCarDetailIv.setOnClickListener {
+    schoolCarDetailIv.setOnClickListener {
       finish()
     }
   }

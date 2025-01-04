@@ -3,10 +3,10 @@ package com.cyxbs.pages.mine.page.feedback.center.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.mine.R
-import com.cyxbs.pages.mine.databinding.MineItemQuestionBinding
 import com.cyxbs.pages.mine.page.feedback.center.ui.FeedbackCenterActivity
 import com.cyxbs.pages.mine.page.feedback.network.bean.NormalFeedback
 
@@ -24,21 +24,27 @@ class FeedbackCenterAdapter : RecyclerView.Adapter<FeedbackCenterAdapter.InnerVi
         mutableListOf<NormalFeedback.Data>()
     }
 
-    inner class InnerViewHolder(itemView:View,val itemBinding:MineItemQuestionBinding):RecyclerView.ViewHolder(itemView){}
+    inner class InnerViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
+        val title = itemView.findViewById<TextView>(R.id.tv_center_title)
+
+        init {
+          itemView.setOnSingleClickListener {
+              eventHandler?.onItemClick(it, mContentList[bindingAdapterPosition].title, mContentList[bindingAdapterPosition].content)
+          }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InnerViewHolder {
-        val itemBinding = DataBindingUtil.inflate<MineItemQuestionBinding>(
-                LayoutInflater.from(parent.context),
+        val view = LayoutInflater.from(parent.context).inflate(
                 R.layout.mine_item_question,
                 parent,
                 false
         )
-        return InnerViewHolder(itemBinding.root,itemBinding)
+        return InnerViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: InnerViewHolder, position: Int) {
-        holder.itemBinding.eventHandler = eventHandler
-        holder.itemBinding.data = mContentList[position]
+        holder.title.text = mContentList[position].title
     }
 
     override fun getItemCount(): Int {

@@ -6,16 +6,17 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
-import androidx.core.content.ContextCompat
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.config.route.MINE_FORGET_PASSWORD
+import com.cyxbs.components.config.view.JToolbar
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.mine.R
 import com.cyxbs.pages.mine.page.security.viewmodel.ForgetPasswordViewModel
 import com.cyxbs.pages.mine.util.ui.ChooseFindTypeDialog
 import com.cyxbs.pages.mine.util.ui.DefaultPasswordHintDialog
 import com.g985892345.provider.api.annotation.KClassProvider
-import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
-import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 
 /**
  * Author: SpreadWater
@@ -25,7 +26,10 @@ import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
  * 剩余的找回密码的逻辑由FindPasswordActivity执行
  */
 @KClassProvider(clazz = Activity::class, name = MINE_FORGET_PASSWORD)
-class ForgetPasswordActivity : BaseViewModelActivity<ForgetPasswordViewModel>() {
+class ForgetPasswordActivity : BaseActivity() {
+
+    private val viewModel by viewModels<ForgetPasswordViewModel>()
+
     private var stuNumber = ""
     private var canClick = true
 
@@ -38,16 +42,12 @@ class ForgetPasswordActivity : BaseViewModelActivity<ForgetPasswordViewModel>() 
         setContentView(R.layout.mine_activity_forget_password)
         mPbSecurityForget.visibility = View.GONE
         //配置toolBar
-        common_toolbar.apply {
-            setBackgroundColor(ContextCompat.getColor(this@ForgetPasswordActivity, com.mredrock.cyxbs.common.R.color.common_white_background))
-            initWithSplitLine("忘记密码",
-                    false,
-                    R.drawable.mine_ic_arrow_left,
-                    View.OnClickListener {
-                        finishAfterTransition()
-                    })
-            setTitleLocationAtLeft(true)
-        }
+        findViewById<JToolbar>(com.cyxbs.components.config.R.id.toolbar).init(
+            activity = this,
+            title = "忘记密码",
+            withSplitLine = false,
+            titleOnLeft = true,
+        )
         //监听是否为默认密码
         viewModel.defaultPassword.observe(this, Observer {
             canClick = true//允许进行点击事件

@@ -2,13 +2,12 @@ package com.cyxbs.pages.declare.post.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
-import com.cyxbs.pages.declare.databinding.DeclareItemAddSectionBinding
-import com.cyxbs.pages.declare.databinding.DeclareItemSectionBinding
 import com.cyxbs.components.utils.extensions.toast
+import com.cyxbs.pages.declare.R
 
 
 /**
@@ -28,63 +27,64 @@ class PostSectionRvAdapter(
     )
 
     @SuppressLint("ClickableViewAccessibility")
-    inner class Holder(val binding: ViewBinding) : RecyclerView.ViewHolder(binding.root) {
+    sealed class Holder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+    inner class DeclareItemSectionHolder(parent: ViewGroup) : Holder(
+        LayoutInflater.from(parent.context).inflate(R.layout.declare_item_section, parent, false)
+    ) {
+        val sivRm = itemView.findViewById<View>(R.id.siv_rm)
+        val et = itemView.findViewById<EditText>(R.id.et)
         init {
-            if (binding is DeclareItemSectionBinding) {
-                binding.sivRm.setOnClickListener {
-                    list.removeAt(bindingAdapterPosition)
-                    notifyItemRemoved(bindingAdapterPosition)
-                    // 刷新下面所有的item，让选项号保持顺序
-                    (bindingAdapterPosition..list.size).forEach {
-                        notifyItemChanged(it)
-                    }
-                    onItemUpdate(list)
+            sivRm.setOnClickListener {
+                list.removeAt(bindingAdapterPosition)
+                notifyItemRemoved(bindingAdapterPosition)
+                // 刷新下面所有的item，让选项号保持顺序
+                (bindingAdapterPosition..list.size).forEach {
+                    notifyItemChanged(it)
                 }
-                binding.et.isFocusable = false
-                binding.et.setOnClickListener {
-                    onItemTouch(list, bindingAdapterPosition, binding.et)
+                onItemUpdate(list)
+            }
+            et.isFocusable = false
+            et.setOnClickListener {
+                onItemTouch(list, bindingAdapterPosition, et)
+            }
+        }
+    }
+
+    inner class DeclareItemAddSectionHolder(parent: ViewGroup) : Holder(
+        LayoutInflater.from(parent.context).inflate(R.layout.declare_item_add_section, parent, false)
+    ) {
+        val sivAdd = itemView.findViewById<View>(R.id.siv_add)
+        init {
+            sivAdd.setOnClickListener {
+                if (list.size == 10) {
+                    toast("最多仅可以添加10个选项")
+                    return@setOnClickListener
                 }
-            } else if (binding is DeclareItemAddSectionBinding) {
-                binding.sivAdd.setOnClickListener {
-                    if (list.size == 10) {
-                        toast("最多仅可以添加10个选项")
-                        return@setOnClickListener
-                    }
-                    list.add("")
-                    notifyItemInserted(list.size - 1)
-                    onItemUpdate(list)
-                }
+                list.add("")
+                notifyItemInserted(list.size - 1)
+                onItemUpdate(list)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        return Holder(
-            if (viewType == TYPE_TAIL) {
-                DeclareItemAddSectionBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
-            } else {
-                DeclareItemSectionBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
-            }
-        )
+        return if (viewType == TYPE_TAIL) {
+            DeclareItemAddSectionHolder(parent)
+        } else {
+            DeclareItemSectionHolder(parent)
+        }
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         when (getItemViewType(position)) {
             TYPE_NORMAL -> {
-                val binding = holder.binding as DeclareItemSectionBinding
+                holder as DeclareItemSectionHolder
                 val content = list[position]
-                if (binding.et.hint != "选项${position + 1}") {
-                    binding.root.post {
-                        binding.et.hint = "选项${position + 1}"
-                        binding.et.setText(content)
+                if (holder.et.hint != "选项${position + 1}") {
+                    holder.itemView.post {
+                        holder.et.hint = "选项${position + 1}"
+                        holder.et.setText(content)
                     }
                 }
             }

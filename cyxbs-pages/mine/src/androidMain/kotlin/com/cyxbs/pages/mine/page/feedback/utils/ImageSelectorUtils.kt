@@ -19,7 +19,7 @@ fun FragmentActivity.selectImageFromAlbum(maxCount: Int, list: List<Uri>) {
         doAfterGranted {
             LPhotoHelper.Builder()
                 .maxChooseCount(maxCount) //最多选几个
-                .selectedPhotos(ArrayList(list.map { it.path!! }))
+                .selectedPhotos(ArrayList(list) as ArrayList<String>) // 这里他应该是写错类型了，实际需要的是 ArrayList<Uri>，所以通过强转放进去
                 .columnsNumber(3) //每行显示几列图片
                 .imageType(LPPImageType.ofAll()) // 文件类型
                 .pauseOnScroll(false) // 是否滑动暂停加载图片显示
