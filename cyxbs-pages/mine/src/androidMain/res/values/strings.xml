@@ -175,8 +175,6 @@
     <string name="mine_feedback_center_btn_tv">意见反馈</string>
     <string name="mine_feedback_center_qq_tv">点击跳转QQ反馈群：</string>
     <string name="mine_feedback_edit_title_num">12</string>
-    <string name="mine_feedback_edit_description_num">%d/200</string>
-    <string name="mine_feedback_edit_pic_num">%d/3</string>
 
     <!--    详情页-->
     <string name="mine_feedback_detail_toolbar_title">怎么才能把我的课表放到桌面鸭</string>
@@ -190,9 +188,7 @@
     <string name="mine_feedback_feedback_date_text">2021/07/25 13:44</string>
     <string name="mine_feedback_cards_title">参与买一送一活动</string>
     <string name="mine_feedback_reply_date_test_text">2021/07/25 15:44</string>
-    <string name="mine_feedback_reply_content_text">回复：%s</string>
     <string name="mine_feedback_none_reply_text_content">还没有收到回复哦~再等等吧！</string>
-    <string name="mine_feedback_label_text">#%s</string>
     <string name="mine_feedback_feedback_content_text">今天喝了脉动呐，吃了果冻呐，打了电动呐， 还是挡不住对你的心动呐~</string>
     <string name="mine_feedback_none_history_text">你还没有提交过反馈意见哦~</string>
     <string name="mine_about_user_protocol">《用户协议》</string>

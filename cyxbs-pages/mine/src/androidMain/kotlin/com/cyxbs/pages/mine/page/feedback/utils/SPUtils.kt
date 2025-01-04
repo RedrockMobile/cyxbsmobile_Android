@@ -12,7 +12,3 @@ object SPUtils {
 fun Context.getPointStateSharedPreference(): SharedPreferences? {
     return getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE)
 }
-
-fun SharedPreferences.change(block: SharedPreferences.Editor.() -> Unit) {
-    edit().apply(block).apply()
-}

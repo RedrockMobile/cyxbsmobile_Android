@@ -1,40 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="4dp">
 
-    <data>
+    <com.cyxbs.pages.mine.page.feedback.widget.RightTopDrawableLayout
+        android:id="@+id/rtdl_banner_pic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <variable
-            name="data"
-            type="com.cyxbs.pages.mine.page.feedback.history.list.bean.Pic" />
-    </data>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="0dp">
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="4dp">
-
-        <com.cyxbs.pages.mine.page.feedback.widget.RightTopDrawableLayout
-            android:id="@+id/rtdl_banner_pic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <androidx.cardview.widget.CardView
+            <com.cyxbs.pages.mine.page.feedback.widget.SquareImageView
+                android:id="@+id/iv_banner_pic"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="0dp">
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/mine_ic_feedback_reply_image_holder" />
 
-                <com.cyxbs.pages.mine.page.feedback.widget.SquareImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    app:localImage="@{data.picUri}"
-                    app:srcCompat="@drawable/mine_ic_feedback_reply_image_holder" />
+        </androidx.cardview.widget.CardView>
 
-            </androidx.cardview.widget.CardView>
+    </com.cyxbs.pages.mine.page.feedback.widget.RightTopDrawableLayout>
 
-        </com.cyxbs.pages.mine.page.feedback.widget.RightTopDrawableLayout>
-
-    </FrameLayout>
-</layout>
+</FrameLayout>

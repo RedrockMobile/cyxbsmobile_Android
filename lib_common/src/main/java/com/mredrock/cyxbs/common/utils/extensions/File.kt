@@ -18,7 +18,3 @@ val File.uri: Uri
     } else {
         Uri.fromFile(this)
     }
-
-fun File.getRequestBody(): RequestBody {
-    return this.asRequestBody("multipart/form-data".toMediaTypeOrNull())
-}

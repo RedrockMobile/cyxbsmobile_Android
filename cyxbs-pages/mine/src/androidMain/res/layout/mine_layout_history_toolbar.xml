@@ -17,11 +17,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
+            android:id="@+id/btn_back"
             android:padding="3dp"
             android:layout_width="27dp"
             android:layout_height="27dp"
             android:layout_gravity="center_vertical"
-            android:id="@+id/btn_back"
             android:scaleType="fitCenter"
             android:layout_marginStart="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"

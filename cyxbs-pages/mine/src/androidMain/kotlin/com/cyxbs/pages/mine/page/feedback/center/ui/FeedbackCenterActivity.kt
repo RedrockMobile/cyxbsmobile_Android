@@ -1,14 +1,16 @@
 package com.cyxbs.pages.mine.page.feedback.center.ui
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
+import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.cyxbs.pages.mine.base.ui.BaseMVPVMActivity
-import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
+import androidx.recyclerview.widget.RecyclerView
+import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.pages.mine.R
-import com.cyxbs.pages.mine.databinding.MineActivityFeedbackCenterBinding
 import com.cyxbs.pages.mine.page.feedback.center.adapter.FeedbackCenterAdapter
-import com.cyxbs.pages.mine.page.feedback.center.presenter.FeedbackCenterPresenter
 import com.cyxbs.pages.mine.page.feedback.center.viewmodel.FeedbackCenterViewModel
 import com.cyxbs.pages.mine.page.feedback.edit.ui.FeedbackEditActivity
 import com.cyxbs.pages.mine.page.feedback.history.list.HistoryListActivity
@@ -20,8 +22,10 @@ import com.cyxbs.components.utils.utils.Jump2QQHelper
  * @Usage :
  * @Request : God bless my code
  **/
-class FeedbackCenterActivity :
-    BaseMVPVMActivity<FeedbackCenterViewModel, MineActivityFeedbackCenterBinding, FeedbackCenterPresenter>() {
+class FeedbackCenterActivity : BaseActivity() {
+
+    private val viewModel by viewModels<FeedbackCenterViewModel>()
+
     /**
      * 初始化adapter
      */
@@ -29,26 +33,26 @@ class FeedbackCenterActivity :
         FeedbackCenterAdapter()
     }
 
-    /**
-     * 获取P层
-     */
-    override fun createPresenter(): FeedbackCenterPresenter {
-        return FeedbackCenterPresenter()
-    }
+    private val mineRecyclerview by R.id.mine_recyclerview.view<RecyclerView>()
+    private val fabCenterBack by R.id.fab_center_back.view<View>()
+    private val btnQuestion by R.id.btn_question.view<View>()
+    private val ivHistory by R.id.iv_history.view<View>()
+    private val tvQqTwo by R.id.tv_qq_two.view<TextView>()
 
-    /**
-     * 获取布局信息
-     */
-    override fun getLayoutId(): Int {
-        return R.layout.mine_activity_feedback_center
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.mine_activity_feedback_center)
+        initView()
+        observeData()
+        initListener()
     }
 
     /**
      * 初始化view
      */
-    override fun initView() {
+    private fun initView() {
         mAdapter.setEventHandler(EventHandler())
-        binding?.mineRecyclerview?.run {
+        mineRecyclerview.run {
             layoutManager = LinearLayoutManager(context)
             adapter = mAdapter
         }
@@ -57,7 +61,7 @@ class FeedbackCenterActivity :
     /**
      * 监听数据
      */
-    override fun observeData() {
+    private fun observeData() {
         viewModel.apply {
             contentList.observe{
                 mAdapter.setData(it)
@@ -68,22 +72,19 @@ class FeedbackCenterActivity :
     /**
      * 初始化listener
      */
-    override fun initListener() {
-        binding?.apply {
-            fabCenterBack.setOnSingleClickListener {
-                onBackPressed()
-            }
-            btnQuestion.setOnClickListener {
-                startActivity(Intent(this@FeedbackCenterActivity, FeedbackEditActivity::class.java))
-            }
-            ivHistory.setOnSingleClickListener {
-                startActivity(Intent(this@FeedbackCenterActivity, HistoryListActivity::class.java))
-            }
-            tvQqTwo.text = Jump2QQHelper.FEED_BACK_QQ_GROUP
-            tvQqTwo.setOnSingleClickListener {
-                Jump2QQHelper.onFeedBackClick()
-            }
-            fabCenterBack.setOnSingleClickListener { finish() }
+    private fun initListener() {
+        fabCenterBack.setOnSingleClickListener {
+            finish()
+        }
+        btnQuestion.setOnSingleClickListener {
+            startActivity(Intent(this@FeedbackCenterActivity, FeedbackEditActivity::class.java))
+        }
+        ivHistory.setOnSingleClickListener {
+            startActivity(Intent(this@FeedbackCenterActivity, HistoryListActivity::class.java))
+        }
+        tvQqTwo.text = Jump2QQHelper.FEED_BACK_QQ_GROUP
+        tvQqTwo.setOnSingleClickListener {
+            Jump2QQHelper.onFeedBackClick()
         }
     }
 

@@ -15,11 +15,8 @@ class SquareImageView @JvmOverloads constructor(
 ) : AppCompatImageView(context, attrs) {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        val measuredWidth:Int = measuredWidth
-        val measuredHeight:Int = measuredHeight
-        val size = min(measuredHeight,measuredWidth)
-        setMeasuredDimension(size,size)
+        // 因为用的 GridLayoutManager，这里宽度会是 rv 给的固定宽度，所以直接使用宽度即可
+        super.onMeasure(widthMeasureSpec, widthMeasureSpec)
     }
 
 }

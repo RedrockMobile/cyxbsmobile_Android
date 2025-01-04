@@ -1,13 +1,14 @@
 package com.cyxbs.pages.mine.page.feedback.history.detail
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.cyxbs.pages.mine.R
-import com.cyxbs.pages.mine.databinding.MineRecycleItemReplyBannerBinding
 
 /**
  *@author ZhiQiang Tu
@@ -29,8 +30,7 @@ class ReplyBannerAdapter : ListAdapter<String, ReplyBannerViewHolder>(diff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReplyBannerViewHolder {
         return ReplyBannerViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
+            LayoutInflater.from(parent.context).inflate(
                 R.layout.mine_recycle_item_reply_banner,
                 parent, false
             )
@@ -38,15 +38,19 @@ class ReplyBannerAdapter : ListAdapter<String, ReplyBannerViewHolder>(diff) {
     }
 
     override fun onBindViewHolder(holder: ReplyBannerViewHolder, position: Int) {
-        holder.bind(currentList[position], position)
+        holder.bind(currentList[position])
     }
-
 }
 
-class ReplyBannerViewHolder(val binding: MineRecycleItemReplyBannerBinding) :
-    RecyclerView.ViewHolder(binding.root) {
-    fun bind(s: String?, position: Int) {
-        binding.url = s
-    }
+class ReplyBannerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+    private val ivReplyBanner = itemView.findViewById<ImageView>(R.id.iv_reply_banner)
+
+    fun bind(s: String?) {
+        Glide.with(ivReplyBanner)
+            .load(s)
+            .placeholder(R.drawable.mine_ic_feedback_reply_image_holder)
+            .skipMemoryCache(true)
+            .into(ivReplyBanner)
+    }
 }

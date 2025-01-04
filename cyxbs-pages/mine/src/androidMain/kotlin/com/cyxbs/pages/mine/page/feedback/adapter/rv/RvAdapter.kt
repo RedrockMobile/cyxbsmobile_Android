@@ -1,47 +1,53 @@
 package com.cyxbs.pages.mine.page.feedback.adapter.rv
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.cyxbs.pages.mine.R
+import com.cyxbs.pages.mine.page.feedback.history.list.adapter.PicBannerBinderAdd
+import com.cyxbs.pages.mine.page.feedback.history.list.adapter.PicBannerBinderPic
 
 /**
  *@author ZhiQiang Tu
  *@time 2021/8/11  11:19
  *@signature 我们不明前路，却已在路上
  */
-class RvAdapter() : ListAdapter<RvBinder<*>, RvHolder>(diff) {
+class RvAdapter(
+    val onAddClick: (() -> Unit)? = null,
+    val onRemoveClick: ((Uri) -> Unit)? = null,
+    val onContentClick: ((Uri) -> Unit)? = null,
+) : ListAdapter<Uri?, RvHolder>(diff) {
 
     companion object {
-        private val diff = object : DiffUtil.ItemCallback<RvBinder<*>>() {
-            override fun areItemsTheSame(oldItem: RvBinder<*>, newItem: RvBinder<*>): Boolean =
-                oldItem.itemId == newItem.itemId
+        private val diff = object : DiffUtil.ItemCallback<Uri?>() {
+            override fun areItemsTheSame(oldItem: Uri, newItem: Uri): Boolean = oldItem == newItem
 
-            override fun areContentsTheSame(oldItem: RvBinder<*>, newItem: RvBinder<*>): Boolean =
-                /*oldItem.hashCode() == newItem.hashCode() &&*/ oldItem.areContentsTheSame(newItem)
+            // areItemsTheSame 返回 true 时才会回调 areContentsTheSame，这里直接返回 true 即可
+            override fun areContentsTheSame(oldItem: Uri, newItem: Uri): Boolean = true
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RvHolder {
-        val holder = RvHolder(parent.inflateBinding(viewType))
-//        holder.setIsRecyclable(false)
-        return holder
+        val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
+        return if (viewType == R.layout.mine_recycle_item_banner_add) {
+            PicBannerBinderAdd(view, onAddClick)
+        } else PicBannerBinderPic(view, onRemoveClick, onContentClick)
     }
 
     override fun onBindViewHolder(holder: RvHolder, position: Int) {
-        val binder = currentList[position] as RvBinder<ViewDataBinding>
-        holder.bind(binder)
+        holder.onBind(currentList[position])
     }
 
-    override fun submitList(list: MutableList<RvBinder<*>>?) {
-        super.submitList(if (list != null) ArrayList(list) else null)
+    override fun submitList(list: MutableList<Uri?>?) {
+        super.submitList(list)
     }
 
-    override fun getItemViewType(position: Int): Int = currentList[position].layoutId()
-
-    private fun <T : ViewDataBinding> ViewGroup.inflateBinding(layoutId: Int): T =
-        DataBindingUtil.inflate(LayoutInflater.from(context), layoutId, this, false)
-
+    override fun getItemViewType(position: Int): Int = if (currentList[position] == null) {
+        R.layout.mine_recycle_item_banner_add
+    } else {
+        R.layout.mine_recycle_item_banner_pic
+    }
 }
+

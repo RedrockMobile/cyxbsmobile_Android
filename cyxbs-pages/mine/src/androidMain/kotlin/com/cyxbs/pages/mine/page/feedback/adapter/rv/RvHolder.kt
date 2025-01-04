@@ -1,7 +1,7 @@
 package com.cyxbs.pages.mine.page.feedback.adapter.rv
 
-import android.util.Log
-import androidx.databinding.ViewDataBinding
+import android.net.Uri
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -9,12 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
  *@time 2021/8/11  11:20
  *@signature 我们不明前路，却已在路上
  */
-class RvHolder(private val binding: ViewDataBinding) :
-    RecyclerView.ViewHolder(binding.root) {
-    fun bind(binder: RvBinder<ViewDataBinding>) {
-        //讲View绑定入Data
-        Log.e("TAG", "bind: ")
-        binder.binding = binding
-        binder.onBind(this)
-    }
+abstract class RvHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    abstract fun onBind(uri: Uri?)
 }

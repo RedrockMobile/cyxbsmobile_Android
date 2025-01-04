@@ -34,6 +34,6 @@ kotlin {
 }
 
 dependencies {
-//  debugImplementation(projects.cyxbsFunctions.debug)
+  debugImplementation(projects.cyxbsFunctions.debug)
 }
 

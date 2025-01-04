@@ -18,6 +18,12 @@ class RightTopPointButton @JvmOverloads constructor(
 ) : androidx.appcompat.widget.AppCompatTextView(context, attrs) {
 
      var pointVisible: Boolean = false
+         set(value) {
+             field = value
+             if (field != value) {
+                 invalidate()
+             }
+         }
      var pointSize: Float = 0f
      var pointColor: Int = 0
      private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
