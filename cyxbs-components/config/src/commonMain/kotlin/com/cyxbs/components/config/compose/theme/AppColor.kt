@@ -21,11 +21,8 @@ open class AppColor(
   val tvLv3: Color = Color(0xFF15315B),
   val tvLv4: Color = Color(0xFF2A4E84),
   val whiteBlack: Color = Color.White,
-  val red: Color = Color(0xFFD50000),
-  val blue: Color = Color(0xFF1C71FF),
-  val green: Color = Color(0xFF00C853),
-  val yellow: Color = Color(0xFFFFAB00),
-  val orange : Color = Color(0xFFFF6D00),
+  val positive: Color = Color(0xFF4A44E4),
+  val negative: Color = Color(0xFFC3D4EE),
 ) {
   companion object : AppColor()
 }
@@ -36,4 +33,6 @@ object AppDarkColor : AppColor(
   tvLv3 = Color(0xFFFFFFFF),
   tvLv4 = Color(0xFFFFFFFF),
   whiteBlack = Color.Black,
+  positive = Color(0xFF4A44E4),
+  negative = Color(0xCC5A5A5A),
 )

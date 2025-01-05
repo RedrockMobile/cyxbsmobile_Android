@@ -98,7 +98,13 @@ abstract class BaseActivity : AppCompatActivity, BaseUi {
    *
    * 但注意：OnApplyWindowInsets 给父布局消耗后子布局就不会回调
    * 如果在 Fragment 场景，则可以使用：
-   * WindowInsetsCompat.toWindowInsetsCompat(requireActivity().window.decorView.rootWindowInsets).getInsets()
+   * ```
+   * requireActivity().window.decorView.doOnAttach {
+   *   val statusBarsInsets = WindowInsetsCompat.toWindowInsetsCompat(it.rootWindowInsets)
+   *       .getInsets(WindowInsetsCompat.Type.statusBars())
+   *   view.setPadding(statusBarsInsets.left, statusBarsInsets.top, statusBarsInsets.right, statusBarsInsets.bottom)
+   * }
+   * ```
    * 来获取状态栏高度然后单独设置 padding
    *
    * 详细可看：https://juejin.cn/post/7395866692772085800

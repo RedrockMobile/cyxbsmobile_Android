@@ -99,6 +99,12 @@ actual class LoginViewModel : CommonLoginViewModel() {
     }
   }
 
+  override fun clickDisagreeUserAgreement() {
+    launch {
+      _event.emit(Event.ClickDisagreeUserAgreement)
+    }
+  }
+
   private fun postDeviceInfo() {
     /**
      * 登录后向后端发送一次登录时的设备信息以及wifi的ip（如果连接了wifi并且能获取到）
@@ -133,5 +139,6 @@ actual class LoginViewModel : CommonLoginViewModel() {
     data object ClickForgetPassword : Event
     data object ClickUserAgreement : Event
     data object ClickPrivacyPolicy : Event
+    data object ClickDisagreeUserAgreement : Event
   }
 }

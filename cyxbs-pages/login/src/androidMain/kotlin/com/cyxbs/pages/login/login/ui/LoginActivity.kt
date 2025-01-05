@@ -86,16 +86,9 @@ class LoginActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent { LoginPage() }
-    initView()
     initObserveEvent()
     initUpdate()
-  }
-
-  private fun initView() {
-    if (!mViewModel.isCheckUserArgument.value && !mIsActivityRebuilt) {
-      // 显示用户协议 dialog
-      showUserAgreement()
-    }
+    initPrivacyAgree()
   }
 
   private fun initObserveEvent() {
@@ -105,7 +98,8 @@ class LoginActivity : BaseActivity() {
         LoginViewModel.Event.ClickPrivacyPolicy -> onClickPrivacyPolicy()
         LoginViewModel.Event.ClickUserAgreement -> onClickUserAgreement()
         is LoginViewModel.Event.Login -> onLoginEvent(it)
-        LoginViewModel.Event.HideSoftInput -> hideSoftInput()
+        LoginViewModel.Event.HideSoftInput -> onHideSoftInput()
+        LoginViewModel.Event.ClickDisagreeUserAgreement -> onDisagreeUserAgreement()
       }
     }
   }
@@ -127,6 +121,7 @@ class LoginActivity : BaseActivity() {
       null -> { // 游客模式
         IAccountService::class.impl().getVerifyService().loginByTourist()
         rebootApp()
+        BaseApp.baseApp.tryPrivacyAgree()
       }
       true -> { // 登录成功
         if (mIsReboot) {
@@ -137,6 +132,7 @@ class LoginActivity : BaseActivity() {
           }
           finish()
         }
+        BaseApp.baseApp.tryPrivacyAgree()
       }
       false -> { // 登录失败
 
@@ -145,13 +141,17 @@ class LoginActivity : BaseActivity() {
   }
 
 
-  private fun hideSoftInput() {
+  private fun onHideSoftInput() {
     //放下键盘
     val inputMethodManager =
       appContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     if (inputMethodManager.isActive) {
       inputMethodManager.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
     }
+  }
+
+  private fun onDisagreeUserAgreement() {
+    finishAndRemoveTask()
   }
 
   private fun rebootApp() {
@@ -163,25 +163,11 @@ class LoginActivity : BaseActivity() {
     finishAndRemoveTask()
   }
 
-  private fun showUserAgreement() {
-    UserAgreementDialog.Builder(this)
-      .setPositiveClick {
-        mViewModel.isCheckUserArgument.value = true
-        BaseApp.baseApp.privacyAgree()
-        dismiss()
-        defaultSp.edit {
-          putBoolean(SP_PRIVACY_AGREED, true)
-        }
-      }.setNegativeClick {
-        mViewModel.isCheckUserArgument.value = false
-        BaseApp.baseApp.privacyDenied()
-        dismiss()
-        finish()
-      }.show()
-  }
-
-
   private fun initUpdate() {
     IAppUpdateService::class.impl().tryNoticeUpdate(this, true)
+  }
+
+  private fun initPrivacyAgree() {
+    BaseApp.baseApp.cancelPrivacyAgree() // 重新登录时取消之前已保存的隐私政策同意状态
   }
 }

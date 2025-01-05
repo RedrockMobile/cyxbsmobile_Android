@@ -20,6 +20,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -37,7 +38,6 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
@@ -51,8 +51,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
-import androidx.constraintlayout.compose.Dimension
-import androidx.constraintlayout.compose.Visibility
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.cyxbs.components.config.compose.appName
 import com.cyxbs.components.config.compose.theme.AppTheme
@@ -82,17 +80,6 @@ import kotlin.time.Duration.Companion.seconds
  * @author 985892345
  * @date 2024/12/30
  */
-private enum class Element {
-  Title,
-  SubTitle,
-  UsernamePassword,
-  UserAgreement,
-  ForgetPassword,
-  LoginBtn,
-  TouristMode,
-  LoginAnim,
-}
-
 @Composable
 fun LoginPage() {
   viewModel { LoginViewModel() } // wasm 无法反射 new 对象，这里需要提供 factory
@@ -115,82 +102,20 @@ fun LoginPage() {
       TouristModeCompose(modifier = Modifier.layoutId(Element.TouristMode))
       LoginAnimCompose(modifier = Modifier.layoutId(Element.LoginAnim))
     }
+    UserAgreementDialog()
   }
 }
 
-/**
- * 所有控件的位置由该函数统一调整
- */
 @Composable
 private fun createConstraintSet(): ConstraintSet {
   val viewModel = viewModel(LoginViewModel::class)
   val windowSize = getWindowScreenSize()
   return ConstraintSet {
-    val title = createRefFor(Element.Title)
-    val subTitle = createRefFor(Element.SubTitle)
-    val usernamePassword = createRefFor(Element.UsernamePassword)
-    val userAgreement = createRefFor(Element.UserAgreement)
-    val forgetPassword = createRefFor(Element.ForgetPassword)
-    val loginBtn = createRefFor(Element.LoginBtn)
-    val touristMode = createRefFor(Element.TouristMode)
-    val loginAnim = createRefFor(Element.LoginAnim)
-    constrain(title) {
-      visibility = if (viewModel.isLoginAnim.value) Visibility.Gone else Visibility.Visible
-      linkTo(parent.top, parent.bottom)
-      if (windowSize.height < windowSize.width * 1.5F) {
-        verticalBias = 0.15F
-        centerHorizontallyTo(parent)
-      } else {
-        verticalBias = 0.19F
-        start.linkTo(parent.start, 16.dp)
-      }
-    }
-    constrain(subTitle) {
-      visibility = if (viewModel.isLoginAnim.value) Visibility.Gone else Visibility.Visible
-      top.linkTo(title.bottom, 16.dp)
-      if (windowSize.height < windowSize.width * 1.5F) {
-        centerHorizontallyTo(parent)
-      } else {
-        start.linkTo(parent.start, 16.dp)
-      }
-    }
-    constrain(usernamePassword) {
-      visibility = if (viewModel.isLoginAnim.value) Visibility.Gone else Visibility.Visible
-      top.linkTo(subTitle.bottom, 16.dp)
-      if (windowSize.height < windowSize.width * 1.5F) {
-        centerHorizontallyTo(parent)
-        width = Dimension.preferredValue(300.dp)
-      } else {
-        linkTo(parent.start, parent.end, 16.dp, 4.dp)
-        width = Dimension.fillToConstraints
-      }
-    }
-    constrain(userAgreement) {
-      visibility = if (viewModel.isLoginAnim.value) Visibility.Gone else Visibility.Visible
-      start.linkTo(usernamePassword.start)
-      top.linkTo(usernamePassword.bottom, 8.dp)
-    }
-    constrain(forgetPassword) {
-      visibility = if (viewModel.isLoginAnim.value) Visibility.Gone else Visibility.Visible
-      end.linkTo(usernamePassword.end, 6.dp)
-      centerVerticallyTo(userAgreement)
-    }
-    constrain(loginBtn) {
-      visibility = if (viewModel.isLoginAnim.value) Visibility.Gone else Visibility.Visible
-      linkTo(parent.start, parent.end, 16.dp, 16.dp)
-      linkTo(userAgreement.bottom, parent.bottom, 16.dp, 16.dp)
-      verticalBias = 0.2F
-      width = Dimension.preferredValue(300.dp)
-    }
-    constrain(touristMode) {
-      visibility = if (viewModel.isLoginAnim.value) Visibility.Gone else Visibility.Visible
-      centerHorizontallyTo(parent)
-      linkTo(loginBtn.bottom, parent.bottom)
-      verticalBias = 0.85F
-    }
-    constrain(loginAnim) {
-      visibility = if (viewModel.isLoginAnim.value) Visibility.Visible else Visibility.Gone
-    }
+    LoginConstraintSet(
+      scope = this,
+      viewModel = viewModel,
+      windowSize = windowSize,
+    ).createConstrain() // 所有控件的位置由该函数统一调整
   }
 }
 
@@ -329,7 +254,7 @@ private fun PasswordCompose(modifier: Modifier = Modifier) {
       },
       trailingIcon = {
         var isVisible by remember { mutableStateOf(false) }
-        Image(
+        Icon(
           modifier = Modifier.clickableNoIndicator {
             isVisible = !isVisible
             if (isVisible) {
@@ -340,7 +265,6 @@ private fun PasswordCompose(modifier: Modifier = Modifier) {
           },
           imageVector = if (isVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
           contentDescription = null,
-          colorFilter = ColorFilter.tint(Color.Black.copy(alpha = 0.5F))
         )
       },
       keyboardActions = KeyboardActions {

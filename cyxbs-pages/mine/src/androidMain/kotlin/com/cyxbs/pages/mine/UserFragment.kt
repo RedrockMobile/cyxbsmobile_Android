@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.util.Pair
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.doOnAttach
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.cyxbs.components.account.api.IAccountService
@@ -71,10 +72,11 @@ class UserFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         // 偏移状态栏
         // 因为外层是 Compose 会默认消耗 OnApplyWindowInsets，所以这里只能单独获取状态栏高度
-        val statusBarsInsets =
-            WindowInsetsCompat.toWindowInsetsCompat(requireActivity().window.decorView.rootWindowInsets)
+        requireActivity().window.decorView.doOnAttach {
+            val statusBarsInsets = WindowInsetsCompat.toWindowInsetsCompat(it.rootWindowInsets)
                 .getInsets(WindowInsetsCompat.Type.statusBars())
-        view.setPadding(statusBarsInsets.left, statusBarsInsets.top, statusBarsInsets.right, statusBarsInsets.bottom)
+            view.setPadding(statusBarsInsets.left, statusBarsInsets.top, statusBarsInsets.right, statusBarsInsets.bottom)
+        }
         addObserver()
         initView()
     }
