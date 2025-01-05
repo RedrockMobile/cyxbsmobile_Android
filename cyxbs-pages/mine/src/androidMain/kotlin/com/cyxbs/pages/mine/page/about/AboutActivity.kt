@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.service.impl
+import com.cyxbs.components.utils.utils.get.getAppVersionName
 import com.cyxbs.functions.update.api.AppUpdateStatus
 import com.cyxbs.functions.update.api.BuildConfig
 import com.cyxbs.functions.update.api.IAppUpdateService
@@ -34,7 +35,6 @@ import com.mredrock.cyxbs.common.config.ICP_WEBSITE
 import com.mredrock.cyxbs.common.config.OKHTTP_LOCAL_LOG
 import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
 import com.mredrock.cyxbs.common.utils.extensions.toast
-import com.mredrock.cyxbs.common.utils.getAppVersionName
 import java.io.File
 import java.util.Calendar
 
@@ -144,7 +144,7 @@ class AboutActivity : BaseViewModelActivity<AboutViewModel>() {
         rv_content.layoutManager = LinearLayoutManager(this@AboutActivity)
         if (viewModel.featureIntroList.isNotEmpty()) loader.visibility = View.GONE
         materialDialog.show()
-        getAppVersionName(this@AboutActivity)?.let {
+        getAppVersionName().let {
             val name = "zscy-feature-intro-${it}"
             viewModel.getFeatureIntro(name,
                 successCallBack = {
@@ -191,7 +191,7 @@ class AboutActivity : BaseViewModelActivity<AboutViewModel>() {
 
     private fun setAppVersionName() {
         mine_about_version.text =
-            StringBuilder("Version ").append(getAppVersionName(this@AboutActivity))
+            StringBuilder("Version ").append(getAppVersionName())
     }
 
     private var selfUpdateCheck = false
