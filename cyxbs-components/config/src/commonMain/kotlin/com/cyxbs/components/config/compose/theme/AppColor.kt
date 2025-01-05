@@ -16,22 +16,28 @@ val LocalAppColors: ProvidableCompositionLocal<AppColor> = staticCompositionLoca
 }
 
 open class AppColor(
-  val tvLv1: Color = Color(0xFF112C54),
-  val tvLv2: Color = Color(0xFF112C57),
+  val tvLv1: Color = Color(0xFF112C54),       // 1号字体颜色，常用于页面顶部标题栏
+  val tvLv2: Color = Color(0xFF112C57),       // 2号字体颜色，常用于页面普通字体
   val tvLv3: Color = Color(0xFF15315B),
   val tvLv4: Color = Color(0xFF2A4E84),
+  val bottomBg: Color = Color(0xFFF2F3F8),    // 底部背景色，常用于页面最底部的颜色
+  val middleBg: Color = Color(0xFFF9FAFD),    // 中间背景色，常用于页面浮层
+  val topBg: Color = Color.White,                   // 顶部背景色，常用于 dialog
   val whiteBlack: Color = Color.White,
-  val positive: Color = Color(0xFF4A44E4),
-  val negative: Color = Color(0xFFC3D4EE),
+  val positive: Color = Color(0xFF4A44E4),    // 确定按钮颜色
+  val negative: Color = Color(0xFFC3D4EE),    // 取消按钮颜色
 ) {
   companion object : AppColor()
 }
 
 object AppDarkColor : AppColor(
-  tvLv1 = Color(0xFFFFFFFF),
-  tvLv2 = Color(0xFFFFFFFF),
-  tvLv3 = Color(0xFFFFFFFF),
-  tvLv4 = Color(0xFFFFFFFF),
+  tvLv1 = Color.White,
+  tvLv2 = Color.White,
+  tvLv3 = Color.White,
+  tvLv4 = Color.White,
+  bottomBg = Color.Black,
+  middleBg = Color(0xFF1D1D1D),
+  topBg = Color(0xFF2D2D2D),
   whiteBlack = Color.Black,
   positive = Color(0xFF4A44E4),
   negative = Color(0xCC5A5A5A),

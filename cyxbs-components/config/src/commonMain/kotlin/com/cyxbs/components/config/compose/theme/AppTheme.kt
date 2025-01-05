@@ -59,8 +59,8 @@ fun AppTheme(
   }
 }
 
-// 目前 XML 界面中的颜色值
-private val windowBackgroundColor = 0xFFF2F3F8 and 0xFFFFFFFF
+// 目前 XML 界面中常见的颜色值
+private val windowBackgroundColor = 0xFFF2F3F8 and 0xFF000000
 private val discoverCardColor = 0xFFF8F9FC and 0xFF1D1D1D
 private val mineCardColor = 0xFFFCFDFF and 0xFF1D1D1D
 private val storeCardColor = 0xFFFBFCFF and 0xFF1D1D1D
@@ -71,8 +71,8 @@ internal val LightColor = lightColors(
   primaryVariant = Color(0xFFF2F3F8),     // 主要变体颜色用于使用主要颜色区分应用程序的两个元素，例如顶部应用程序栏和系统栏
   secondary = Color(0xFF788EFA),          // 辅助色提供了更多方式来强调和区分您的产品。次要颜色最适合：浮动操作按钮、选择控件，例如复选框和单选按钮、突出显示选定的文本、链接和标题
   secondaryVariant = Color(0xFF4A44E4),   // 次要变体颜色用于使用次要颜色区分应用程序的两个元素
-  background = Color(0xFFFBFCFF),         // 背景颜色出现在可滚动内容后面
-  surface = Color.White,                        // 表面颜色用于组件的表面，例如卡片、工作表和菜单
+  background = AppColor.bottomBg,               // 背景颜色出现在可滚动内容后面
+  surface = AppColor.middleBg,                  // 表面颜色用于组件的表面，例如卡片、工作表和菜单
   error = Color(0xFFB00020),              // 错误颜色用于指示组件内的错误，例如文本字段
   onPrimary = AppColor.tvLv1,                   // 用于显示在主颜色之上的文本和图标的颜色
   onSecondary = AppColor.tvLv2,                 // 用于显示在辅助颜色之上的文本和图标的颜色
@@ -86,8 +86,8 @@ internal val DarkColor = darkColors(
   primaryVariant = Color.White,                 // 主要变体颜色用于使用主要颜色区分应用程序的两个元素，例如顶部应用程序栏和系统栏
   secondary = Color(0xFF788EFA),          // 辅助色提供了更多方式来强调和区分您的产品。次要颜色最适合：浮动操作按钮、选择控件，例如复选框和单选按钮、突出显示选定的文本、链接和标题
   secondaryVariant = Color(0xFF4A44E4),   // 次要变体颜色用于使用次要颜色区分应用程序的两个元素
-  background = Color(0xFF1D1D1D),         // 背景颜色出现在可滚动内容后面
-  surface = Color(0xFF2D2D2D),            // 表面颜色用于组件的表面，例如卡片、工作表和菜单
+  background = AppDarkColor.bottomBg,           // 背景颜色出现在可滚动内容后面
+  surface = AppDarkColor.middleBg,              // 表面颜色用于组件的表面，例如卡片、工作表和菜单
   error = Color(0xFFCF6679),              // 错误颜色用于指示组件内的错误，例如文本字段
   onPrimary = AppDarkColor.tvLv1,               // 用于显示在主颜色之上的文本和图标的颜色
   onSecondary = AppDarkColor.tvLv2,             // 用于显示在辅助颜色之上的文本和图标的颜色
