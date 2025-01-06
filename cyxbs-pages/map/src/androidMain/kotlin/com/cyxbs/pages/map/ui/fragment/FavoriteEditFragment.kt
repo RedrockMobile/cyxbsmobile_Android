@@ -60,7 +60,7 @@ class FavoriteEditFragment : BaseFragment() {
 
                 viewModel.addCollect(mEtFavoriteNickname.text.toString(), viewModel.showingPlaceId)
             } else {
-                toast(R.string.map_favorite_edit_length_not_enough)
+                toast(getString(R.string.map_favorite_edit_length_not_enough))
             }
         }
 

@@ -9,11 +9,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.RemoteViews
-import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.core.content.edit
 import com.google.gson.Gson
-import com.cyxbs.components.utils.extensions.CyxbsToast
+import com.cyxbs.components.utils.extensions.toast
 import com.cyxbs.pages.widget.R
 import com.cyxbs.pages.widget.repo.bean.LessonEntity
 import com.cyxbs.pages.widget.repo.database.LessonDatabase
@@ -108,7 +107,7 @@ class NormalWidget : AppWidgetProvider() {
                     }
                 }
                 if (isDoubleClick()) {
-                    CyxbsToast.show(context, "提示：点击星期返回今日", Toast.LENGTH_SHORT)
+                    toast("提示：点击星期返回今日", context)
                 }
             }
             ACTION_CLICK -> {

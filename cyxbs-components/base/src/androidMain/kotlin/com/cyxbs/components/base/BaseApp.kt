@@ -76,16 +76,16 @@ abstract class BaseApp : Application() {
     mInitialManager.init()
   }
   
-  //隐私策略同意了
-  fun privacyAgree() {
-    mInitialManager.privacyAgree()
+  // 隐私策略同意，在登录后调用
+  fun tryPrivacyAgree() {
+    mInitialManager.tryPrivacyAgree()
   }
-  
-  //没同意
-  fun privacyDenied() {
-    mInitialManager.privacyDenied()
+
+  // 取消同意隐私策略，用于重新登录
+  fun cancelPrivacyAgree() {
+    mInitialManager.cancelPrivacyAgree()
   }
-  
+
   private fun initActivityManger() {
     registerActivityLifecycleCallbacks(
       object : ActivityLifecycleCallbacksImpl {

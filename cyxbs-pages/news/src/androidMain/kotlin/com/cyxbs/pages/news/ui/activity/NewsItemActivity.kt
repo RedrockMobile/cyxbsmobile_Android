@@ -26,6 +26,7 @@ import com.cyxbs.components.config.route.DISCOVER_NEWS_ITEM
 import com.cyxbs.components.config.view.JToolbar
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.showFile
+import com.cyxbs.components.utils.extensions.toast
 import com.cyxbs.pages.news.R
 import com.cyxbs.pages.news.bean.NewsAttachment
 import com.cyxbs.pages.news.utils.FileTypeHelper

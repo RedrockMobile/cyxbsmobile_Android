@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.utils.extensions.gone
-import com.cyxbs.components.utils.extensions.toastWithYOffset
 import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.pages.todo.R
 import com.cyxbs.pages.todo.adapter.RepeatTimeRvAdapter
@@ -208,7 +207,7 @@ class TodoDetailActivity : BaseActivity() {
     private fun initClick() {
         if (todo.isChecked == 1) {
             //已经check，不允许修改
-            getString(R.string.todo_string_cant_modify).toastWithYOffset(67)
+            getString(R.string.todo_string_cant_modify).toast()
             etTitle.apply {
                 isFocusable = false
                 isFocusableInTouchMode = false
@@ -225,7 +224,7 @@ class TodoDetailActivity : BaseActivity() {
                 viewModel.setChangeState(judge())
                 if (it != null) {
                     if (it.length == 100) {
-                        "已超100字，无法再输入".toastWithYOffset(line.top)
+                        "已超100字，无法再输入".toast()
                     }
                 }
             }
@@ -292,7 +291,7 @@ class TodoDetailActivity : BaseActivity() {
         tvSave.setOnClickListener {
             //如果没输入标题，就ban掉
             if (etTitle.text.toString().isEmpty()) {
-                "掌友，标题不能为空哦".toastWithYOffset(67)
+                "掌友，标题不能为空哦".toast()
                 return@setOnClickListener
             }
             todo.title = etTitle.text.toString()
@@ -373,7 +372,7 @@ class TodoDetailActivity : BaseActivity() {
     private fun onClickProxy(onClick: () -> Unit) {
         if (todo.isChecked == 1) {
             //已经check，不允许修改
-            getString(R.string.todo_string_cant_modify).toastWithYOffset(67)
+            getString(R.string.todo_string_cant_modify).toast()
         } else {
             onClick.invoke()
         }

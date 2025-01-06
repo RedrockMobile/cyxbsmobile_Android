@@ -14,6 +14,7 @@ kotlin {
       implementation(projects.cyxbsComponents.utils)
       implementation(projects.cyxbsFunctions.update.api)
       implementation(projects.cyxbsComponents.account.api)
+      implementation(libs.compose.lottie)
     }
     androidMain.dependencies {
       implementation(libs.bundles.projectBase)

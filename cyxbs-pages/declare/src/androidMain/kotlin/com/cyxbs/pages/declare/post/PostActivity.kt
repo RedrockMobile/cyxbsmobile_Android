@@ -28,7 +28,7 @@ import kotlin.coroutines.resume
 
 class PostActivity : BaseActivity() {
 
-    override val isCancelStatusBar: Boolean
+    override val enableEdgeToEdge: Boolean
         get() = false
 
     private val viewModel by viewModels<PostViewModel>()

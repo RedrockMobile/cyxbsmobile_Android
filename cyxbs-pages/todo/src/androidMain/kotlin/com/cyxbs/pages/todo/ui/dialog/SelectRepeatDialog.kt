@@ -15,7 +15,7 @@ import com.cyxbs.pages.todo.model.bean.RemindMode
 import com.cyxbs.pages.todo.util.addWithoutRepeat
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.cyxbs.components.utils.extensions.gone
-import com.cyxbs.components.utils.extensions.toastWithYOffset
+import com.cyxbs.components.utils.extensions.toast
 import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.pages.todo.model.bean.Todo
 import com.cyxbs.pages.todo.util.transformRepeat
@@ -205,7 +205,7 @@ class SelectRepeatDialog(
                 }
             }
         } else {
-            "只能选择一种重复模式哦！".toastWithYOffset(1000)
+            "只能选择一种重复模式哦！".toast()
         }
 
 

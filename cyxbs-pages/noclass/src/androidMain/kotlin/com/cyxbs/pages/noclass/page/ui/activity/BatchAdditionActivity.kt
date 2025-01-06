@@ -56,7 +56,7 @@ class BatchAdditionActivity : BaseActivity() {
     private lateinit var mCourseSheetBehavior: BottomSheetBehavior<FrameLayout>
 
     // 取消顶部状态栏
-    override val isCancelStatusBar: Boolean
+    override val enableEdgeToEdge: Boolean
         get() = true
 
     // 批量添加 已经检查好的学生list 的缓冲list

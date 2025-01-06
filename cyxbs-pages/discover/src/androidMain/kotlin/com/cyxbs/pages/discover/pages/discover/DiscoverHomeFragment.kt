@@ -16,6 +16,9 @@ import android.widget.ViewFlipper
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.doOnAttach
+import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -83,6 +86,13 @@ class DiscoverHomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // 偏移状态栏
+        // 因为外层是 Compose 会默认消耗 OnApplyWindowInsets，所以这里只能单独获取状态栏高度
+        requireActivity().window.decorView.doOnAttach {
+            val statusBarsInsets = WindowInsetsCompat.toWindowInsetsCompat(it.rootWindowInsets)
+                .getInsets(WindowInsetsCompat.Type.statusBars())
+            view.setPadding(statusBarsInsets.left, statusBarsInsets.top, statusBarsInsets.right, statusBarsInsets.bottom)
+        }
 
         if (savedInstanceState == null) {
             initFeeds()

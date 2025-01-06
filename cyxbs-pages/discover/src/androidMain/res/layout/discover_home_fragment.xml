@@ -17,7 +17,7 @@
             android:id="@+id/tv_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:alpha="0.65"
             android:textColor="@color/discover_menu_font_color_found"
             android:textSize="14sp"

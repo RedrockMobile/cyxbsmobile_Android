@@ -1,6 +1,7 @@
 package com.cyxbs.components.base.utils
 
 import android.app.Application
+import androidx.core.content.edit
 import com.cyxbs.components.config.sp.SP_PRIVACY_AGREED
 import com.cyxbs.components.config.sp.defaultSp
 import com.cyxbs.components.init.InitialManager
@@ -17,6 +18,8 @@ import com.cyxbs.components.utils.service.allImpl
 internal class InitialManagerImpl(
   override val application: Application
 ) : InitialManager {
+
+  private var hasPrivacyAgree = false
 
   private val initialServices by lazy {
     InitialService::class.allImpl().map {
@@ -55,23 +58,26 @@ internal class InitialManagerImpl(
     }
     //同意了隐私策略
     if (defaultSp.getBoolean(SP_PRIVACY_AGREED, false) && isMainProcess) {
-      initialServices.forEach {
-        it.onPrivacyAgreed(this)
-      }
+      tryPrivacyAgree()
     }
   }
 
-  //隐私策略同意了
-  fun privacyAgree(){
+  // 隐私策略同意了，在登录后调用
+  fun tryPrivacyAgree() {
+    if (hasPrivacyAgree) return
+    hasPrivacyAgree = true
+    defaultSp.edit(commit = true) {
+      putBoolean(SP_PRIVACY_AGREED, true)
+    }
     initialServices.forEach {
       it.onPrivacyAgreed(this)
     }
   }
 
-  //没同意
-  fun privacyDenied(){
-    initialServices.forEach {
-      it.onPrivacyDenied(this)
+  // 取消同意隐私策略，用于重新登录
+  fun cancelPrivacyAgree() {
+    defaultSp.edit(commit = true) {
+      putBoolean(SP_PRIVACY_AGREED, false)
     }
   }
 }

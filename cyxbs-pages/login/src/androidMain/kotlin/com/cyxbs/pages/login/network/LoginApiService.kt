@@ -1,9 +1,7 @@
 package com.cyxbs.pages.login.network
 
 import com.cyxbs.components.utils.network.ApiGenerator
-import com.cyxbs.components.utils.network.ApiStatus
 import com.cyxbs.pages.login.bean.DeviceInfoParams
-import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -23,5 +21,5 @@ interface LoginApiService {
      * 登录时上传设备信息以及wifi的ip地址
      */
     @POST("/magipoke/token/record")
-    fun recordDeviceInfo(@Body deviceInfoParams: DeviceInfoParams):Single<ApiStatus>
+    suspend fun recordDeviceInfo(@Body deviceInfoParams: DeviceInfoParams)
 }
