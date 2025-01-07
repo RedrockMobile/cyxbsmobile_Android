@@ -18,8 +18,6 @@ data class LinkStudent(
   val name: String,
   @SerializedName("selfNum")
   val selfNum: String, // 自身的学号
-  @SerializedName("gender")
-  val gender: String, // 关联人性别
 ) : Serializable {
   
   fun isEmpty(): Boolean {

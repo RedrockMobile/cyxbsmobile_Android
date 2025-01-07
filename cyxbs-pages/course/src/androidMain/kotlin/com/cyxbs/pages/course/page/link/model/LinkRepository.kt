@@ -73,7 +73,7 @@ object LinkRepository {
         }
         // 这里说明与远端的关联人不一样，需要修改数据库
         // 但注意后端对应没有关联人时会返回空串，所以需要使用 it.isNotEmpty()
-        val newLinkStu = LinkStuEntity(it, it.isNotEmpty(), it.gender == "男")
+        val newLinkStu = LinkStuEntity(it, it.isNotEmpty())
         mLinkStuDB.insertLinkStu(newLinkStu)
         newLinkStu
       }.doOnError {
@@ -120,7 +120,7 @@ object LinkRepository {
       .changeLinkStudent(linkNum)
       .mapOrThrowApiException()
       .map {
-        LinkStuEntity(it, true, it.gender == "男")
+        LinkStuEntity(it, true)
       }.doOnSuccess {
         mLinkStuDB.insertLinkStu(it)
       }.subscribeOn(Schedulers.io())
