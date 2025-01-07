@@ -17,11 +17,11 @@ import com.ndhzs.netlayout.touch.multiple.event.IPointerEvent
 interface IMovableItemConfig : ILongPressItemConfig {
   
   /**
-   * 新位置是否允许与 [view] 重叠
+   * 新位置是否允许与 [other] 重叠
    *
    * 如果允许的话，则可以认为该 item 可以与 View 重叠显示，正常情况是不重叠显示的
    */
-  fun isAllowOverlap(page: ICoursePage, view: View): Boolean = false
+  fun isAllowOverlap(page: ICoursePage, item: ITouchItem, self: View, other: View): Boolean = false
   
   override fun isLongPress(
     event: IPointerEvent,

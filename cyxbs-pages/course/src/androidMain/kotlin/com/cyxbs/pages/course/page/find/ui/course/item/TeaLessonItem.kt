@@ -137,4 +137,8 @@ class TeaLessonItem(
       setText(data.course.course, parseClassRoom(data.course.classroom))
     }
   }
+
+  override fun toString(): String {
+    return "TeaLessonItem(data=$data)"
+  }
 }

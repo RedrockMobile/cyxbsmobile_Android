@@ -77,4 +77,8 @@ class AffairItem(
       AffairTouchHelper(iAffairManager)
     )
   }
+
+  override fun toString(): String {
+    return "AffairItem(data=$affairData)"
+  }
 }
