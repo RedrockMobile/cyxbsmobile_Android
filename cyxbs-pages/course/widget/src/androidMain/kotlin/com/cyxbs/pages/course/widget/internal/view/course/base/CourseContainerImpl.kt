@@ -83,7 +83,14 @@ abstract class CourseContainerImpl @JvmOverloads constructor(
       mItemByView[view] = item
       mViewByItem[item] = view
       // 此时才能添加进课表
-      super.addNetChild(view, item.lp)
+      try {
+        super.addNetChild(view, item.lp)
+      } catch (e: Exception) {
+        throw IllegalStateException(
+          "课表添加 View 失败，item=${item}, item.lp=${item.lp}, ",
+          e
+        )
+      }
     }
     mOnItemExistListeners.forEachReversed { it.onItemAddedAfter(item, view) }
   }

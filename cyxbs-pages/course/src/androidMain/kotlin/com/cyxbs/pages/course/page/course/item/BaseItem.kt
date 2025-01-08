@@ -42,4 +42,9 @@ abstract class BaseItem<V> : TouchItemImpl()
   override fun compareTo(other: IOverlapItem): Int {
     return if (other is ISingleDayRank) compareToInternal(other) else 1
   }
+
+  /**
+   * 强制性覆盖 toString 输出内容，用于内部抛异常时输出具体数据
+   */
+  abstract override fun toString(): String
 }

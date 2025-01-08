@@ -7,20 +7,16 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.core.content.edit
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.base.BaseApp
 import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.config.route.MINE_FORGET_PASSWORD
-import com.cyxbs.components.config.sp.SP_PRIVACY_AGREED
-import com.cyxbs.components.config.sp.defaultSp
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.utils.service.startActivity
 import com.cyxbs.functions.update.api.IAppUpdateService
 import com.cyxbs.pages.login.api.ILegalNoticeService
 import com.cyxbs.pages.login.ui.LoginPage
-import com.cyxbs.pages.login.ui.UserAgreementDialog
 import com.cyxbs.pages.login.viewmodel.LoginViewModel
 
 /**
@@ -28,7 +24,7 @@ import com.cyxbs.pages.login.viewmodel.LoginViewModel
  *
  * 目前登录界面使用了多平台的 compose
  * 数据流方向: LoginCompose -> LoginViewModel -> LoginActivity
- * 由于 CommonLoginViewModel 抽了一层多平台通用逻辑后，LoginActivity 更多的逻辑是处理跳转，所以感觉有点代码有点少
+ * 由于 CommonLoginViewModel 抽了一层多平台通用逻辑后，LoginActivity 更多的逻辑是处理跳转，所以感觉代码有点少
  * 但如果后续是全界面上 Compose 的话，那个时候跳转就放到 Compose 层，目前因为跳转需要强耦合 activity，所以变成了这样
  *
  */

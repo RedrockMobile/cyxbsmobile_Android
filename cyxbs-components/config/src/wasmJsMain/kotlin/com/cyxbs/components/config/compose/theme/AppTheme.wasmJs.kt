@@ -37,6 +37,8 @@ internal actual fun ConfigAppThemeAfter(
   content()
 }
 
+// 思源黑体 https://github.com/adobe-fonts/source-han-sans/tree/release
+// 压缩教程 https://moyuscript.github.io/MoyuScript/2022/10/26/font-compress/
 @Composable
 internal actual fun getFontFamily(): FontFamily = FontFamily(
   Font(

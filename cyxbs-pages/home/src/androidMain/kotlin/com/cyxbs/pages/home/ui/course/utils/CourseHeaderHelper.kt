@@ -133,7 +133,6 @@ object CourseHeaderHelper {
             nowWeek,
             linkData.selfNum,
             if (linkData.isShowLink) linkData.linkNum else "",
-            linkData.isBoy
           )
         }
       }
@@ -146,7 +145,6 @@ object CourseHeaderHelper {
     nowWeek: Int,
     selfNum: String,
     linkNum: String,
-    isBoy: Boolean
   ): Observable<Header> {
     // 这里不需要调用 observeSelfLesson()，因为外面的 observeSelfLinkStu() 有观察 self 的作用
     val selfSingle = lessonService.getStuLesson(selfNum)
@@ -172,7 +170,6 @@ object CourseHeaderHelper {
             nowWeek,
             self + link,
             affair,
-            isBoy
           )
         }
     }
@@ -183,7 +180,6 @@ object CourseHeaderHelper {
     nowWeek: Int,
     lessonList: List<ILessonService.Lesson>,
     affairList: List<IAffairService.Affair>,
-    linkIsBoy: Boolean
   ): Header {
     val calendar = Calendar.getInstance()
     /*
@@ -253,7 +249,6 @@ object CourseHeaderHelper {
       }.map { AffairItem(it) }
     )
     val nowTime = calendar.get(Calendar.HOUR_OF_DAY) * 60 + calendar.get(Calendar.MINUTE)
-    val heOrShe = if (linkIsBoy) "他" else "她"
     val iterator = treeSet.iterator()
     while (iterator.hasNext()) {
       val item = iterator.next()
@@ -261,7 +256,7 @@ object CourseHeaderHelper {
         if (nowTime < item.startTime) {
           return when (item) {
             is LessonItem -> ShowHeader(
-              if (item.isSelf) "下节课" else "${heOrShe}的下节课",
+              if (item.isSelf) "下节课" else "Ta的下节课",
               item.lesson.course,
               getShowTimeStr(item.lesson.beginLesson, item.lesson.period),
               parseClassRoom(item.lesson.classroom),
@@ -279,7 +274,7 @@ object CourseHeaderHelper {
         } else if (nowTime < item.endTime) {
           return when (item) {
             is LessonItem -> ShowHeader(
-              if (item.isSelf) "进行中..." else "${heOrShe}的课进行中...",
+              if (item.isSelf) "进行中..." else "Ta的课进行中...",
               item.lesson.course,
               getShowTimeStr(item.lesson.beginLesson, item.lesson.period),
               parseClassRoom(item.lesson.classroom),

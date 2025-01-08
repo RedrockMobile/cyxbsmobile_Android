@@ -84,4 +84,8 @@ class LinkLessonItem(private var lessonData: StuLessonData) :
       LinkLessonMovableHelper()
     )
   }
+
+  override fun toString(): String {
+    return "LinkLessonItem(data=$lessonData)"
+  }
 }

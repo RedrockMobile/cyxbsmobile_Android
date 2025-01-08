@@ -37,7 +37,6 @@ interface ILinkService {
     val linkMajor: String, // 关联人的专业
     val linkName: String, // 关联人的姓名
     val isShowLink: Boolean, // 是否显示
-    val isBoy: Boolean, // 关联人性别
   ) : Serializable {
     
     fun isNull(): Boolean {

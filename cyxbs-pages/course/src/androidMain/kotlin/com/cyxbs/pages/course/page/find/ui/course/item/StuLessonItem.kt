@@ -137,4 +137,8 @@ class StuLessonItem(
       setText(data.course.course, parseClassRoom(data.course.classroom))
     }
   }
+
+  override fun toString(): String {
+    return "StuLessonItem(data=$data)"
+  }
 }

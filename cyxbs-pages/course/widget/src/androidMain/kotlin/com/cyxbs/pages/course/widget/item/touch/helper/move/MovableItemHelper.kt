@@ -133,7 +133,7 @@ class MovableItemHelper(
         var newLocation: LocationUtil.Location? = null // 需要移动到的新位置
         if (!isCancel) {
           val location = LocationUtil.getLocation(child, course) {
-            config.isAllowOverlap(page, child)
+            config.isAllowOverlap(page, item, child, it)
           }
           if (location != null) {
             if (config.isMovableToNewLocation(page, item, child, location)) {

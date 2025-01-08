@@ -28,6 +28,6 @@ object LinkServiceImpl : ILinkService {
   }
 
   private fun LinkStuEntity.toLinkStu(): ILinkService.LinkStu {
-    return ILinkService.LinkStu(selfNum, linkNum, linkMajor, linkName, isShowLink, isBoy)
+    return ILinkService.LinkStu(selfNum, linkNum, linkMajor, linkName, isShowLink)
   }
 }
