@@ -5,8 +5,8 @@ package com.mredrock.cyxbs.common.ui
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
+import com.cyxbs.components.base.ui.BaseFragment
 import com.mredrock.cyxbs.common.component.CyxbsToast
 import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
 import com.mredrock.cyxbs.common.viewmodel.event.ProgressDialogEvent
@@ -54,9 +54,6 @@ abstract class BaseViewModelFragment<T : BaseViewModel> : BaseFragment() {
     }
 
     protected open fun getViewModelFactory(): ViewModelProvider.Factory? = null
-
-    inline fun <T> LiveData<T>.observe(crossinline onChange: (T) -> Unit) = observe(viewLifecycleOwner
-    ) { onChange(it) }
     
     override fun onDestroyView() {
         super.onDestroyView()

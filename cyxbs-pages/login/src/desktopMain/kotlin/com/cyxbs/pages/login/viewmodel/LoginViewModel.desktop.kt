@@ -10,9 +10,6 @@ import kotlin.time.Duration.Companion.seconds
  * @date 2024/12/31
  */
 actual class LoginViewModel : CommonLoginViewModel() {
-  override suspend fun login() {
-    delay(3.seconds)
-  }
 
   override fun clickForgetPassword() {
   }

@@ -31,6 +31,8 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.internal.functions.Functions
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.rx3.asObservable
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
 
@@ -67,9 +69,9 @@ object AffairRepository {
    * - 上游不会抛出错误到下游
    */
   fun observeAffair(): Observable<List<AffairEntity>> {
-    return IAccountService::class.impl()
-      .getUserService()
-      .observeStuNumState()
+    return IAccountService::class.impl().userInfo
+      .map { it?.stuNum.orEmpty() }
+      .asObservable()
       .observeOn(Schedulers.io())
       .switchMap {
         // 使用 switchMap 可以停止之前学号的订阅
@@ -88,7 +90,7 @@ object AffairRepository {
    * 刷新事务
    */
   fun refreshAffair(): Single<List<AffairEntity>> {
-    val selfNum: String = IAccountService::class.impl().getUserService().getStuNum()
+    val selfNum: String = IAccountService::class.impl().stuNum.orEmpty()
     if (selfNum.isBlank()) return Single.just(emptyList())
     // 先上传本地临时数据，只有本地临时数据全部上传后才能下载新的数据，防止数据混乱
     return uploadLocalAffair(selfNum)
@@ -107,7 +109,7 @@ object AffairRepository {
    * 永远不会给下游抛出异常
    */
   fun getAffair(): Single<List<AffairEntity>> {
-    val selfNum: String = IAccountService::class.impl().getUserService().getStuNum()
+    val selfNum: String = IAccountService::class.impl().stuNum.orEmpty()
     if (selfNum.isBlank()) return Single.just(emptyList())
     return refreshAffair().onErrorReturn {
       // 上游失败了就取本地数据，可能是网络失败，也可能是本地临时上传事务失败
@@ -124,7 +126,7 @@ object AffairRepository {
     content: String,
     atWhatTime: List<AffairEntity.AtWhatTime>,
   ): Completable {
-    val stuNum = IAccountService::class.impl().getUserService().getStuNum()
+    val stuNum = IAccountService::class.impl().stuNum.orEmpty()
     if (stuNum.isBlank()) return Completable.error(IllegalStateException("学号为空！"))
     val dateJson = atWhatTime.toPostDateJson()
     return Single.create {
@@ -162,7 +164,7 @@ object AffairRepository {
     content: String,
     atWhatTime: List<AffairEntity.AtWhatTime>,
   ): Completable {
-    val stuNum = IAccountService::class.impl().getUserService().getStuNum()
+    val stuNum = IAccountService::class.impl().stuNum.orEmpty()
     if (stuNum.isBlank()) return Completable.error(IllegalStateException("学号为空"))
     return updateAffairInternal(stuNum, onlyId, time, title, content, atWhatTime)
       .doOnComplete {
@@ -225,7 +227,7 @@ object AffairRepository {
    * 删除事务，请使用 [observeAffair] 进行观察数据
    */
   fun deleteAffair(onlyId: Int): Completable {
-    val stuNum = IAccountService::class.impl().getUserService().getStuNum()
+    val stuNum = IAccountService::class.impl().stuNum.orEmpty()
     if (stuNum.isEmpty()) return Completable.error(IllegalStateException("学号为空"))
     return deleteAffairInternal(stuNum, onlyId)
       .doOnComplete {
@@ -431,7 +433,7 @@ object AffairRepository {
     NetworkUtil.state
       .filter { it }
       .doOnNext {
-        uploadLocalAffair(IAccountService::class.impl().getUserService().getStuNum())
+        uploadLocalAffair(IAccountService::class.impl().stuNum.orEmpty())
           .subscribeOn(Schedulers.io())
           .subscribe(Functions.EMPTY_ACTION, Functions.emptyConsumer())
       }.subscribe()

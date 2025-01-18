@@ -21,14 +21,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.core.view.postDelayed
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItems
+import com.cyxbs.components.account.api.IAccountEditService
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.components.account.api.IUserService
 import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.config.view.JToolbar
 import com.cyxbs.components.utils.extensions.doPermissionAction
@@ -38,6 +38,9 @@ import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.mine.R
 import com.cyxbs.pages.mine.util.ui.DynamicRVAdapter
 import com.yalantis.ucrop.UCrop
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.mapNotNull
+import kotlinx.coroutines.flow.onEach
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -60,10 +63,6 @@ class EditInfoActivity : BaseActivity() {
     private val mine_edit_iv_agreement by R.id.mine_edit_iv_agreement.view<ImageView>()
     val common_toolbar by com.cyxbs.components.config.R.id.toolbar.view<JToolbar>()
     private val viewModel by lazy { ViewModelProvider(this)[EditViewModel::class.java] }
-
-    private val userService: IUserService by lazy {
-        IAccountService::class.impl().getUserService()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         window.setBackgroundDrawableResource(android.R.color.transparent)
@@ -104,7 +103,7 @@ class EditInfoActivity : BaseActivity() {
     }
 
     private fun initViewAndData() {
-        refreshUserInfo()
+        observeUserInfo()
 
         //点击更换头像
         mine_edit_et_avatar.setOnSingleClickListener { changeAvatar() }
@@ -114,25 +113,26 @@ class EditInfoActivity : BaseActivity() {
         }
     }
 
-    private fun refreshUserInfo() {
-        mine_edit_et_avatar.setAvatarImageFromUrl(userService.getAvatarImgUrl())
-        /*
-        * 如果返回的数据为空格，则表示数据为空，昵称除外
-        * */
-        mine_et_name.text = userService.getUsername()
-        mine_et_stunum.text = userService.getStuNum()
-        mine_et_gender.text = userService.getGender()
-        mine_et_college.text = userService.getCollege()
+    private fun observeUserInfo() {
+        IAccountService::class.impl().userInfo
+            .mapNotNull { it }
+            .onEach {
+                mine_edit_et_avatar.setAvatarImageFromUrl(it.photoSrc)
+                /*
+                * 如果返回的数据为空格，则表示数据为空，昵称除外
+                * */
+                mine_et_name.text = it.username
+                mine_et_stunum.text = it.stuNum
+                mine_et_gender.text = it.gender
+                mine_et_college.text = it.college
+            }.launchIn(lifecycleScope)
     }
 
     private fun initObserver() {
         viewModel.upLoadImageEvent.observe {
             if (it) {
                 //更新显示的头像
-                IAccountService::class.impl().getUserService().refreshInfo()
-                mine_edit_et_avatar.postDelayed(500) {
-                    refreshUserInfo()
-                }
+                IAccountEditService::class.impl().refreshInfo()
                 toast("修改头像成功")
             } else {
                 toast("修改头像失败")
@@ -158,7 +158,7 @@ class EditInfoActivity : BaseActivity() {
     }
 
     private val cameraImageFile by lazy { File(getExternalFilesDir(Environment.DIRECTORY_DCIM)?.absolutePath + File.separator + System.currentTimeMillis() + ".png") }
-    private val destinationFile by lazy { File(getExternalFilesDir(Environment.DIRECTORY_DCIM)?.absolutePath + File.separator + userService.getStuNum() + ".png") }
+    private val destinationFile by lazy { File(getExternalFilesDir(Environment.DIRECTORY_DCIM)?.absolutePath + File.separator + IAccountService::class.impl().stuNum + ".png") }
 
     /**
      * 用于跳转至拍照界面获取头像
@@ -256,7 +256,7 @@ class EditInfoActivity : BaseActivity() {
             )
 
             val numBody =
-                userService.getStuNum().toRequestBody("multipart/form-data".toMediaTypeOrNull())
+                IAccountService::class.impl().stuNum.orEmpty().toRequestBody("multipart/form-data".toMediaTypeOrNull())
             viewModel.uploadAvatar(numBody, fileBody)
         } catch (e: IOException) {
             e.printStackTrace()

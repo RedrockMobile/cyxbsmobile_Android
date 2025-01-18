@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.components.account.api.IUserService
 import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.base.webView.LiteJsWebView
 import com.cyxbs.components.config.route.DISCOVER_GRADES
@@ -49,9 +48,6 @@ class ContainerActivity : BaseActivity() {
 
     private val viewModel by viewModels<ContainerViewModel>()
 
-    private val user: IUserService by lazy {
-        IAccountService::class.impl().getUserService()
-    }
     private lateinit var mAdapter: ExamAdapter
     private val data = mutableListOf<Exam>()
 
@@ -89,7 +85,7 @@ class ContainerActivity : BaseActivity() {
     }
 
     private fun init() {
-        if (!IAccountService::class.impl().getVerifyService().isLogin()) {
+        if (!IAccountService::class.impl().isLogin()) {
             return
         }
         initExam()
@@ -139,7 +135,7 @@ class ContainerActivity : BaseActivity() {
     }
 
     private fun loadExam() {
-        viewModel.loadData(user.getStuNum())
+        viewModel.loadData(IAccountService::class.impl().stuNum.orEmpty())
     }
 
     private fun initBottomSheet() {
@@ -147,9 +143,10 @@ class ContainerActivity : BaseActivity() {
     }
 
     private fun initHeader() {
-        Glide.with(this).load(user.getAvatarImgUrl()).into(mIvGradesAvatar)
-        mTvGradesStuNum.text = user.getStuNum()
-        mTvGradesName.text = user.getUsername()
+        val userInfo = IAccountService::class.impl().userInfo.value ?: return
+        Glide.with(this).load(userInfo.photoSrc).into(mIvGradesAvatar)
+        mTvGradesStuNum.text = userInfo.stuNum
+        mTvGradesName.text = userInfo.username
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -186,7 +183,7 @@ class ContainerActivity : BaseActivity() {
             mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
             mediaPlaybackRequiresUserGesture = false
         }
-        val stuNum = user.getStuNum()
+        val stuNum = IAccountService::class.impl().stuNum
         val uiType =
             if (
                 this.resources.configuration.uiMode

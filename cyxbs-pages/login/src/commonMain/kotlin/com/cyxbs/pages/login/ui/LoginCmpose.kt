@@ -95,7 +95,7 @@ fun LoginPage() {
     ) {
       TitleCompose(modifier = Modifier.layoutId(Element.Title))
       SubTitleCompose(modifier = Modifier.layoutId(Element.SubTitle))
-      UsernamePasswordCompose(modifier = Modifier.layoutId(Element.UsernamePassword))
+      StuNumPasswordCompose(modifier = Modifier.layoutId(Element.StuNumPassword))
       UserAgreementCompose(modifier = Modifier.layoutId(Element.UserAgreement))
       ForgetPasswordCompose(modifier = Modifier.layoutId(Element.ForgetPassword))
       LoginBtnCompose(modifier = Modifier.layoutId(Element.LoginBtn))
@@ -140,7 +140,7 @@ private fun SubTitleCompose(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun UsernamePasswordCompose(modifier: Modifier = Modifier) {
+private fun StuNumPasswordCompose(modifier: Modifier = Modifier) {
   MaterialTheme(
     typography = MaterialTheme.typography.copy( // OutlinedTextField 的 label 需要通过这个才能修改字体大小
       caption = MaterialTheme.typography.caption.copy(fontSize = 12.sp),
@@ -148,14 +148,14 @@ private fun UsernamePasswordCompose(modifier: Modifier = Modifier) {
     )
   ) {
     Column(modifier = modifier) {
-      UsernameCompose()
+      StuNumCompose()
       PasswordCompose()
     }
   }
 }
 
 @Composable
-private fun UsernameCompose(modifier: Modifier = Modifier) {
+private fun StuNumCompose(modifier: Modifier = Modifier) {
   val viewModel = viewModel(LoginViewModel::class)
   Row(
     modifier = modifier,
@@ -168,10 +168,10 @@ private fun UsernameCompose(modifier: Modifier = Modifier) {
     )
     OutlinedTextField(
       modifier = Modifier.fillMaxWidth(),
-      value = viewModel.username.value,
+      value = viewModel.stuNum.value,
       singleLine = true,
       onValueChange = {
-        viewModel.username.value = it
+        viewModel.stuNum.value = it
       },
       textStyle = TextStyle(fontSize = 14.sp),
       label = {

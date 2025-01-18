@@ -1,7 +1,7 @@
 package com.cyxbs.pages.discover.utils
 
-import android.content.Context
-import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.base.operations.doIfLogin
+import com.cyxbs.components.base.ui.BaseUi
 import com.cyxbs.components.config.route.DISCOVER_CALENDAR
 import com.cyxbs.components.config.route.DISCOVER_EMPTY_ROOM
 import com.cyxbs.components.config.route.DISCOVER_GRADES
@@ -13,7 +13,6 @@ import com.cyxbs.components.config.route.DISCOVER_SPORT
 import com.cyxbs.components.config.route.DISCOVER_TODO_MAIN
 import com.cyxbs.components.config.sp.defaultSp
 import com.cyxbs.components.utils.logger.event.ClickEvent
-import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.utils.service.startActivity
 import com.cyxbs.pages.discover.R
 import java.lang.ref.SoftReference
@@ -74,21 +73,19 @@ object MoreFunctionProvider {
 
     class Function(var resource: Int, val title: Int, val detail: Int, val activityStarter: StartActivityAble?, val clickEvent: ClickEvent? = null)
     interface StartActivityAble {
-        fun startActivity(context: Context)
+        fun startActivity(baseUi: BaseUi)
     }
 
     class StartActivityImpl(private val routing: String) : StartActivityAble {
-        override fun startActivity(context: Context) {
+        override fun startActivity(baseUi: BaseUi) {
             startActivity(routing)
         }
     }
 
     class StartActivityAfterLogin(private val msg: String, private val routing: String) : StartActivityAble {
-        override fun startActivity(context: Context) {
-            if (IAccountService::class.impl().getVerifyService().isLogin()) {
+        override fun startActivity(baseUi: BaseUi) {
+            baseUi.doIfLogin(msg) {
                 startActivity(routing)
-            } else {
-                IAccountService::class.impl().getVerifyService().askLogin(context, "请先登录才能使用${msg}哦~")
             }
         }
 

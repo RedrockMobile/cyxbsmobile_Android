@@ -57,16 +57,6 @@ fun longToast(message: CharSequence) = toastLong(message)
 fun longToast(res: Int) = toastLong(appContext.resources.getText(res))
 
 
-@Deprecated("使用 base 中 OperationUi#doIfLogin() 替换", replaceWith = ReplaceWith(""))
-fun Context.doIfLogin(msg: String? = "此功能", next: () -> Unit) {
-    if (IAccountService::class.impl().getVerifyService().isLogin()) {
-        next()
-    } else {
-        IAccountService::class.impl().getVerifyService().askLogin(this, "请先登录才能使用${msg}哦~")
-    }
-}
-
-
 //anko-bridge
 //anko不再维护，删除anko，一些从anko拿过来的扩展方法
 @Deprecated("使用 utils 中 dp2px 替换", replaceWith = ReplaceWith(""))

@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.account.api.IAccountEditService
 import com.cyxbs.components.base.BaseApp
 import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.config.route.MINE_FORGET_PASSWORD
@@ -30,10 +30,12 @@ import com.cyxbs.pages.login.viewmodel.LoginViewModel
  */
 class LoginActivity : BaseActivity() {
   companion object {
+    // 登录成功后直接返回上一个 Activity 界面
     fun start(intent: (Intent.() -> Unit)? = null) {
       startInternal(false, null, intent)
     }
 
+    // 登录成功后打开指定的 Activity
     fun start(
       successActivity: Class<out Activity>,
       intent: (Intent.() -> Unit)? = null
@@ -41,6 +43,7 @@ class LoginActivity : BaseActivity() {
       startInternal(false, successActivity, intent)
     }
 
+    // 登录成功后重新打开应用，会清空之前的所有 Activity
     fun startReboot(intent: (Intent.() -> Unit)?) {
       startInternal(true, null, intent)
     }
@@ -115,7 +118,7 @@ class LoginActivity : BaseActivity() {
   private fun onLoginEvent(event: LoginViewModel.Event.Login) {
     when (event.result) {
       null -> { // 游客模式
-        IAccountService::class.impl().getVerifyService().loginByTourist()
+        IAccountEditService::class.impl().onTouristMode()
         rebootApp()
         BaseApp.baseApp.tryPrivacyAgree()
       }

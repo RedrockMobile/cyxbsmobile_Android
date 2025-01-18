@@ -47,7 +47,7 @@ object BuglyInitialService : InitialService {
         }
         
         CrashReport.setUserId(
-            IAccountService::class.impl().getUserService().getStuNum()
+            IAccountService::class.impl().stuNum.orEmpty()
         )
 
         //初始化bugly

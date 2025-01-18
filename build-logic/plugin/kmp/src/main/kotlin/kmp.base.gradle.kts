@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
   kotlin("multiplatform")
+  id(libsEx.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -53,11 +54,11 @@ kotlin {
     commonMain.dependencies {
       implementation(libsEx.`kotlinx-coroutines`)
       implementation(libsEx.`kotlinx-collections`)
-      implementation(libsEx.`kotlinx-serialization`) // 想要序列化还需要引入 alias(libs.plugins.kotlinSerialization) 插件
-//      implementation(libsEx.`kotlinx-datetime`)
+      implementation(libsEx.`kotlinx-serialization`)
+      implementation(libsEx.`kotlinx-datetime`)
       implementation(libsEx.`kmp-uri`)
-//      implementation(libsEx.`kmp-settings-core`)
-//      implementation(libsEx.`kmp-settings-serialization`)
+      implementation(libsEx.`kmp-settings-core`)
+      implementation(libsEx.`kmp-settings-serialization`)
     }
     androidMain.dependencies {
       implementation(libsEx.`kotlinx-coroutines-android`)

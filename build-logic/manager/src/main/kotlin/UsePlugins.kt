@@ -63,6 +63,20 @@ fun Project.useRoom(
   }
 }
 
+/**
+ * 使用 Ktorfit
+ */
+fun Project.useKtorfit() {
+  // ksp 按需引入
+  apply(plugin = "com.google.devtools.ksp")
+  apply(plugin = libsEx.plugins.ktorfit)
+  extensions.configure<KotlinMultiplatformExtension> {
+    sourceSets.commonMain.dependencies {
+      implementation(libsEx.`kmp-ktorfit`)
+    }
+  }
+}
+
 private fun Project.kspMultiplatform(dependencyNotation: Any) {
   dependencies {
     "kspAndroid"(dependencyNotation)

@@ -33,7 +33,7 @@ class FindPasswordActivity : BaseActivity() {
 
     //在此activity以及ViewModel中统一使用这个stuNumber来获取学号，以方便整体修改
     private var stuNumber =
-        IAccountService::class.impl().getUserService().getStuNum()
+        IAccountService::class.impl().stuNum.orEmpty()
 
     //是否来自登陆界面
     private var isFromLogin = false

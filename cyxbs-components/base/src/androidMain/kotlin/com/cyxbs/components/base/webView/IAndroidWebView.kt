@@ -82,7 +82,7 @@ abstract class IAndroidWebView(
      */
     @JavascriptInterface
     open fun getStu(): String {
-        return IAccountService::class.impl().getUserService().getStuNum()
+        return IAccountService::class.impl().stuNum.orEmpty()
     }
 
     @JavascriptInterface

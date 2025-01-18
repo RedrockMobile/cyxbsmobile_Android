@@ -9,6 +9,4 @@ dependencies {
   api(libs.compose.gradlePlugin)
   api(libs.compose.compiler.gradlePlugin)
   api(libs.kotlinx.serialization.gradlePlugin)
-  api(libs.kmp.ktProvider.gradlePlugin)
-  api(libs.ksp.gradlePlugin)
 }

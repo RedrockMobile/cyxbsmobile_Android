@@ -15,6 +15,7 @@ import com.g985892345.provider.api.annotation.ImplProvider
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import retrofit2.HttpException
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -105,7 +106,7 @@ object StoreServiceImpl : IStoreService {
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
       .throwOrInterceptException {
-        HttpExceptionBody(500) {
+        if (it is HttpException && it.code() == 500) {
           // 在任务进度大于最大进度时, 后端返回 http 的错误码 500 导致回调到 onError 方法 所以这里手动拿到返回的 bean 类
           /*
           * todo 如果以后要改这里接口，我想说以下几点：

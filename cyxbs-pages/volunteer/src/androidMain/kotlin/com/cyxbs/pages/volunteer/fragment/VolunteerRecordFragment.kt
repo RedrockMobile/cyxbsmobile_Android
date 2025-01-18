@@ -20,8 +20,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.mredrock.cyxbs.common.mark.EventBusLifecycleSubscriber
-import com.mredrock.cyxbs.common.ui.BaseFragment
+import com.cyxbs.components.base.ui.BaseFragment
 import com.mredrock.cyxbs.common.utils.extensions.dp2px
 import com.cyxbs.pages.volunteer.R
 import com.cyxbs.pages.volunteer.adapter.PopupWindowRvAdapter
@@ -30,14 +29,14 @@ import com.cyxbs.pages.volunteer.bean.VolunteerTime
 import com.cyxbs.pages.volunteer.event.VolunteerLoginEvent
 import com.cyxbs.pages.volunteer.utils.DateUtils
 import com.cyxbs.pages.volunteer.viewmodel.VolunteerRecordViewModel
+import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
 /**
  * Created by yyfbe, Date on 2020/9/4.
  */
-class VolunteerRecordFragment : BaseFragment(), EventBusLifecycleSubscriber,
-    ViewSwitcher.ViewFactory {
+class VolunteerRecordFragment : BaseFragment(), ViewSwitcher.ViewFactory {
 
     //last当前，first最早的一年
     private val firstYear by lazy(LazyThreadSafetyMode.NONE) { mutableListOf<VolunteerTime.RecordBean>() }
@@ -92,9 +91,15 @@ class VolunteerRecordFragment : BaseFragment(), EventBusLifecycleSubscriber,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        EventBus.getDefault().register(this) // 不建议使用 EventBus
         initView()
         initSwitch()
         initObserve()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        EventBus.getDefault().unregister(this) // 不建议使用 EventBus
     }
 
     private fun recyclerViewListener() {

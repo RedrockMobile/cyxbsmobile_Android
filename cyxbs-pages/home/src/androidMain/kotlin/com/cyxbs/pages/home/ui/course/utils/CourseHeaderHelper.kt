@@ -21,6 +21,7 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.rx3.asObservable
 import okhttp3.internal.filterList
 import java.util.Calendar
@@ -71,9 +72,9 @@ object CourseHeaderHelper {
    */
   private fun observeHeaderOnVacation(): Observable<Header> {
     val textOnVacation = "享受假期吧～"
-    return IAccountService::class.impl()
-      .getUserService()
-      .observeStuNumState()
+    return IAccountService::class.impl().userInfo
+      .map { it?.stuNum.orEmpty() }
+      .asObservable()
       .switchMap {
         if (it.isEmpty()) Observable.empty() else {
           lessonService.refreshLesson(it)

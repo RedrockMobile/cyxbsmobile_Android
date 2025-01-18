@@ -48,7 +48,7 @@ class StuLessonVH(
     mTvTime.text = "${data.weekdayStr} ${data.durationStr}"
     mTvType.text = data.course.type
     if (isShowLink) {
-      if (data.stuNum != IAccountService::class.impl().getUserService().getStuNum()) {
+      if (data.stuNum != IAccountService::class.impl().stuNum) {
         mIvLink.visible()
       } else {
         mIvLink.gone()

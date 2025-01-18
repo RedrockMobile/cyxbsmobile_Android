@@ -42,7 +42,7 @@ class EditAffairViewModel : BaseViewModel() {
   }
 
   fun findAffairEntity(onlyId: Int) {
-    val stuNum = IAccountService::class.impl().getUserService().getStuNum()
+    val stuNum = IAccountService::class.impl().stuNum.orEmpty()
     if (stuNum.isNotEmpty()) {
       AffairDataBase.INSTANCE.getAffairDao()
         .findAffairByOnlyId(stuNum, onlyId)

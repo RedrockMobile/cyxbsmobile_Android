@@ -3,6 +3,7 @@ plugins {
   id("kmp.compose")
 }
 
+useKtorfit()
 useKtProvider(false) // utils 模块不包含实现类，不需要处理注解
 
 kotlin {
@@ -27,6 +28,38 @@ kotlin {
       // 阿里云 dns 解析工具
       // https://help.aliyun.com/document_detail/434554.html?spm=a2c4g.435252.0.0.1da95979yyEzm3
       implementation(libs.alicloud.httpdns)
+    }
+  }
+}
+
+
+// 网络请求相关依赖配置
+kotlin {
+  sourceSets {
+    commonMain.dependencies {
+      implementation(libs.kmp.ktorfit)
+      api(libs.ktor.core)
+      implementation(libs.ktor.json)
+      implementation(libs.ktor.contentNegotiation)
+    }
+    androidMain.dependencies {
+      implementation(libs.ktor.client.okhttp)
+    }
+    if (Multiplatform.enableDesktop(project)) {
+      val desktopMain by getting
+      desktopMain.dependencies {
+        implementation(libs.ktor.client.okhttp)
+      }
+    }
+    if (Multiplatform.enableIOS(project)) {
+      iosMain.dependencies {
+        implementation(libs.ktor.client.darwin)
+      }
+    }
+    if (Multiplatform.enableWasm(project)) {
+      wasmJsMain.dependencies {
+        implementation(libs.ktor.client.js)
+      }
     }
   }
 }

@@ -20,7 +20,7 @@ class SecurityActivityViewModel : BaseViewModel() {
 
     fun checkBinding(onSuccess: () -> Unit) {
         apiService.checkBinding(
-                IAccountService::class.impl().getUserService().getStuNum()
+                IAccountService::class.impl().stuNum.orEmpty()
         )
                 .setSchedulers()
                 .doOnErrorWithDefaultErrorHandler {

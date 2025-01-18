@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.account.api.ITokenService
 import com.cyxbs.components.base.ui.BaseActivity
 import com.cyxbs.components.base.utils.Umeng
 import com.cyxbs.components.config.route.DISCOVER_EMPTY_ROOM
@@ -13,13 +14,14 @@ import com.cyxbs.components.config.route.DISCOVER_GRADES
 import com.cyxbs.components.config.route.DISCOVER_SCHOOL_CAR
 import com.cyxbs.components.config.sp.SP_COURSE_SHOW_STATE
 import com.cyxbs.components.config.sp.defaultSp
-import com.cyxbs.components.utils.extensions.launch
 import com.cyxbs.components.utils.coroutine.appCoroutineScope
+import com.cyxbs.components.utils.extensions.launch
+import com.cyxbs.components.utils.extensions.logg
 import com.cyxbs.components.utils.logger.TrackingUtils
 import com.cyxbs.components.utils.logger.event.ClickEvent
 import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.utils.service.startActivity
-import com.cyxbs.components.utils.utils.judge.NetworkUtil
+import com.cyxbs.components.utils.utils.judge.RedrockNetwork
 import com.cyxbs.functions.update.api.IAppUpdateService
 import com.cyxbs.pages.home.viewmodel.BottomNavViewModel
 import com.cyxbs.pages.home.viewmodel.MainViewModel
@@ -55,8 +57,9 @@ class MainActivity : BaseActivity() {
       initUI()
       if (mIsLogin) {
         launch {
-          NetworkUtil.tryPingNetWork()?.onFailure {
+          RedrockNetwork.tryPingNetWork()?.onFailure {
             toast("后端服务暂不可用")
+            logg("tryPingNetWork: ${it.stackTraceToString()}")
           }
         }
       }
@@ -64,12 +67,11 @@ class MainActivity : BaseActivity() {
   }
 
   private fun checkIsLogin(): Boolean? {
-    if (!mAccountService.getVerifyService().isTouristMode()) {
+    if (!mAccountService.isTouristMode()) {
       // 不是游客模式
-      if (!mAccountService.getVerifyService().isLogin() || mAccountService.getVerifyService().isRefreshTokenExpired()) {
+      if (!mAccountService.isLogin() || ITokenService::class.impl().isRefreshTokenExpired()) {
         // 未登录 和 refreshToken 过期时 需要跳转到登录界面
-        ILoginService::class.impl()
-          .startLoginActivityReboot()
+        ILoginService::class.impl().jumpToLoginPage()
         finish()
         return null
       }

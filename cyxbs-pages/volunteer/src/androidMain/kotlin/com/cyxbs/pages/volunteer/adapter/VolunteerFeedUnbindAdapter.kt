@@ -14,7 +14,7 @@ class VolunteerFeedUnbindAdapter : BaseFeedFragment.Adapter() {
     override fun onCreateView(context: Context, parent: ViewGroup): View =
         LayoutInflater.from(context)
             .inflate(R.layout.volunteer_discover_feed_unbound, parent, false).apply {
-            if (!IAccountService::class.impl().getVerifyService().isLogin()) {
+            if (!IAccountService::class.impl().isLogin()) {
                 findViewById<AppCompatTextView>(R.id.tv_volunteer_no_account).text =
                     context.getString(R.string.volunteer_ask_login_string)
             }

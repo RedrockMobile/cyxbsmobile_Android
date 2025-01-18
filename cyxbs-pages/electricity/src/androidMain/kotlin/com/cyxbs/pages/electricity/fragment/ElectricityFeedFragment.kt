@@ -96,7 +96,7 @@ class ElectricityFeedFragment : BaseFragment() {
     }
 
     private fun onRefresh() {
-        if (!IAccountService::class.impl().getVerifyService().isLogin()) {
+        if (!IAccountService::class.impl().isLogin()) {
             return
         }
         if (viewModel.chargeInfo.value != null) {

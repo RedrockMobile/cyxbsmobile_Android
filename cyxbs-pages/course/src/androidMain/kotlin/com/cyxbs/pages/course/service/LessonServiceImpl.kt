@@ -37,7 +37,7 @@ object LessonServiceImpl : ILessonService {
   }
   
   override fun getSelfLesson(): Single<List<ILessonService.Lesson>> {
-    val stuNum = mAccountService.getUserService().getStuNum()
+    val stuNum = mAccountService.stuNum.orEmpty()
     return if (stuNum.isBlank()) Single.error(IllegalStateException("未登录"))
     else getStuLesson(stuNum)
   }

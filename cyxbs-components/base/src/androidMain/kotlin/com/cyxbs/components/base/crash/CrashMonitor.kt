@@ -53,7 +53,7 @@ object CrashMonitor : UncaughtExceptionHandler {
   private fun handleOtherThread(throwable: Throwable) {
     // 其他线程不处理
     if (BuildConfig.DEBUG) {
-      Log.d("OtherThread", throwable.stackTraceToString())
+      Log.d("crash", throwable.stackTraceToString())
     }
   }
 

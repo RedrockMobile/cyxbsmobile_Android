@@ -6,15 +6,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
-import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.config.view.JToolbar
-import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.utils.utils.BindView
 import com.mredrock.cyxbs.common.R
-import com.mredrock.cyxbs.common.mark.ActionLoginStatusSubscriber
-import com.mredrock.cyxbs.common.mark.EventBusLifecycleSubscriber
 import com.mredrock.cyxbs.common.utils.extensions.getDarkModeStatus
-import org.greenrobot.eventbus.EventBus
 
 
 /**
@@ -43,21 +38,6 @@ abstract class BaseActivity : AppCompatActivity() {
         initFlag()
     }
 
-    // 在setContentView之后进行操作
-    override fun setContentView(view: View?) { super.setContentView(view); notificationInit() }
-    override fun setContentView(layoutResID: Int) { super.setContentView(layoutResID);notificationInit() }
-    private fun notificationInit() {
-
-            val verifyService = IAccountService::class.impl().getVerifyService()
-            if (this is ActionLoginStatusSubscriber) {
-                if (verifyService.isLogin()) initOnLoginMode(baseBundle)
-                if (verifyService.isTouristMode()) initOnTouristMode(baseBundle)
-                if (verifyService.isLogin() || verifyService.isTouristMode()) initPage(verifyService.isLogin(), baseBundle)
-            }
-
-
-    }
-
     private fun initFlag() {
         if (getDarkModeStatus()) {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -80,28 +60,6 @@ abstract class BaseActivity : AppCompatActivity() {
                                              listener: View.OnClickListener? = View.OnClickListener { finish() },
                                              titleOnLeft: Boolean = true) {
         init(this@BaseActivity, title, withSplitLine, icon, titleOnLeft, listener)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        if (this is EventBusLifecycleSubscriber) {
-            EventBus.getDefault().register(this)
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        if (this is EventBusLifecycleSubscriber && EventBus.getDefault().isRegistered(this)) EventBus.getDefault().unregister(this)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        val verifyService = IAccountService::class.impl().getVerifyService()
-        if (this is ActionLoginStatusSubscriber) {
-            if (verifyService.isLogin()) destroyOnLoginMode()
-            if (verifyService.isTouristMode()) destroyOnTouristMode()
-            if (verifyService.isLogin()||verifyService.isTouristMode()) destroyPage(verifyService.isLogin())
-        }
     }
 
     /**

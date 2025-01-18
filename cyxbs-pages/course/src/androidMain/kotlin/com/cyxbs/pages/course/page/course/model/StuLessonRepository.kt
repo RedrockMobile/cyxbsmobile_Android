@@ -21,6 +21,7 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.rx3.asObservable
 import java.util.concurrent.TimeUnit
 
@@ -65,9 +66,9 @@ object StuLessonRepository {
   fun observeSelfLesson(
     isToast: Boolean = false,
   ): Observable<List<StuLessonEntity>> {
-    return IAccountService::class.impl()
-      .getUserService()
-      .observeStuNumState()
+    return IAccountService::class.impl().userInfo
+      .map { it?.stuNum.orEmpty() }
+      .asObservable()
       .observeOn(Schedulers.io())
       .switchMap { stuNum ->
         // 使用 switchMap 可以停止之前学号的订阅
