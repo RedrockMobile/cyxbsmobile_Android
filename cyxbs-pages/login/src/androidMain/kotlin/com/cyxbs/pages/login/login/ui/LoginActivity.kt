@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import com.cyxbs.components.account.api.IAccountEditService
 import com.cyxbs.components.base.BaseApp
 import com.cyxbs.components.base.ui.BaseActivity
+import com.cyxbs.components.config.compose.theme.AppTheme
 import com.cyxbs.components.config.route.MINE_FORGET_PASSWORD
 import com.cyxbs.components.utils.extensions.appContext
 import com.cyxbs.components.utils.service.impl
@@ -84,7 +85,7 @@ class LoginActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContent { LoginPage() }
+    setContent { AppTheme { LoginPage() } }
     initObserveEvent()
     initUpdate()
     initPrivacyAgree()

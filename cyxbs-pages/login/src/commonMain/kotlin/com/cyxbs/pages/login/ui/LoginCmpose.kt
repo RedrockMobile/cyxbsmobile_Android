@@ -53,7 +53,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.cyxbs.components.config.compose.appName
-import com.cyxbs.components.config.compose.theme.AppTheme
 import com.cyxbs.components.config.compose.theme.LocalAppColors
 import com.cyxbs.components.utils.compose.clickableNoIndicator
 import com.cyxbs.components.utils.compose.dark
@@ -83,27 +82,25 @@ import kotlin.time.Duration.Companion.seconds
 @Composable
 fun LoginPage() {
   viewModel { LoginViewModel() } // wasm 无法反射 new 对象，这里需要提供 factory
-  AppTheme {
-    ConstraintLayout(
-      constraintSet = createConstraintSet(),
-      modifier = Modifier.fillMaxSize()
-        .background(LocalAppColors.current.whiteBlack)
-        .systemBarsPadding(),
-      animateChangesSpec = spring(
-        stiffness = Spring.StiffnessMediumLow,
-      ),
-    ) {
-      TitleCompose(modifier = Modifier.layoutId(Element.Title))
-      SubTitleCompose(modifier = Modifier.layoutId(Element.SubTitle))
-      StuNumPasswordCompose(modifier = Modifier.layoutId(Element.StuNumPassword))
-      UserAgreementCompose(modifier = Modifier.layoutId(Element.UserAgreement))
-      ForgetPasswordCompose(modifier = Modifier.layoutId(Element.ForgetPassword))
-      LoginBtnCompose(modifier = Modifier.layoutId(Element.LoginBtn))
-      TouristModeCompose(modifier = Modifier.layoutId(Element.TouristMode))
-      LoginAnimCompose(modifier = Modifier.layoutId(Element.LoginAnim))
-    }
-    UserAgreementDialog()
+  ConstraintLayout(
+    constraintSet = createConstraintSet(),
+    modifier = Modifier.fillMaxSize()
+      .background(LocalAppColors.current.whiteBlack)
+      .systemBarsPadding(),
+    animateChangesSpec = spring(
+      stiffness = Spring.StiffnessMediumLow,
+    ),
+  ) {
+    TitleCompose(modifier = Modifier.layoutId(Element.Title))
+    SubTitleCompose(modifier = Modifier.layoutId(Element.SubTitle))
+    StuNumPasswordCompose(modifier = Modifier.layoutId(Element.StuNumPassword))
+    UserAgreementCompose(modifier = Modifier.layoutId(Element.UserAgreement))
+    ForgetPasswordCompose(modifier = Modifier.layoutId(Element.ForgetPassword))
+    LoginBtnCompose(modifier = Modifier.layoutId(Element.LoginBtn))
+    TouristModeCompose(modifier = Modifier.layoutId(Element.TouristMode))
+    LoginAnimCompose(modifier = Modifier.layoutId(Element.LoginAnim))
   }
+  UserAgreementDialog()
 }
 
 @Composable

@@ -1,10 +1,15 @@
 package com.cyxbs.components.utils.extensions
 
-/**
- * Android：已自带处于其他线程时自动切换至主线程发送
- */
+import com.cyxbs.components.config.compose.toast.PlatformToast
+
 actual fun toast(s: CharSequence?) {
+  if (s != null) {
+    PlatformToast(s, 2000L).show()
+  }
 }
 
 actual fun toastLong(s: CharSequence?) {
+  if (s != null) {
+    PlatformToast(s, 3500L).show()
+  }
 }

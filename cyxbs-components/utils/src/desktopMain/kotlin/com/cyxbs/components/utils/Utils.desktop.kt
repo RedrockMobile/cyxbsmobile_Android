@@ -7,5 +7,5 @@ package com.cyxbs.components.utils
  * @date 2024/12/29
  */
 actual fun isDebug(): Boolean {
-  TODO("Not yet implemented")
+  return true // todo 后续再配置，考虑使用 buildConfig 插件生成 https://github.com/gmazzo/gradle-buildconfig-plugin
 }

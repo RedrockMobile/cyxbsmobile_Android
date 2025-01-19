@@ -5,6 +5,7 @@ import com.cyxbs.components.utils.network.plugin.BackupPlugin
 import com.cyxbs.components.utils.network.plugin.TokenPlugin
 import de.jensklingenberg.ktorfit.Ktorfit
 import io.ktor.client.HttpClient
+import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.HttpTimeout
@@ -56,8 +57,10 @@ fun createHttpClient(
     // http 状态码处理，3XX 抛出 RedirectResponseException，4XX 抛出 ClientRequestException，5XX 抛出 ServerResponseException
     expectSuccess = true
     addDefaultResponseValidation()
+    platformConfigHttpClient()
   }
 }
 
 internal expect fun createHttpClientEngine(): HttpClientEngine
+internal expect fun HttpClientConfig<*>.platformConfigHttpClient()
 

@@ -1,5 +1,6 @@
 package com.cyxbs.components.utils.network
 
+import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.darwin.Darwin
 
@@ -11,4 +12,7 @@ import io.ktor.client.engine.darwin.Darwin
  */
 internal actual fun createHttpClientEngine(): HttpClientEngine = Darwin.create {
 
+}
+
+internal actual fun HttpClientConfig<*>.platformConfigHttpClient() {
 }
