@@ -20,6 +20,7 @@ internal actual fun createHttpClientEngine(): HttpClientEngine = OkHttp.create {
   config {
     dispatcher(OkHttpDispatcher)
     dns(OkHttpDnsService.dns)
+    ApiGenerator.networkConfigs.forEach { it.onCreateOkHttp(this) }
   }
 }
 

@@ -21,6 +21,7 @@ fun Project.useKtProvider(isNeedKsp: Boolean = !name.startsWith("api")) {
     apply(plugin = libsEx.plugins.ktProvider)
     val ktProvider = extensions.getByName("ktProvider") as KtProviderExtensions
     kspMultiplatform(ktProvider.ksp)
+    ktProvider.configurations.add("debugImplementation") // debug 模块需要单独添加配置
   }
   extensions.configure<KotlinMultiplatformExtension> {
     sourceSets.commonMain.dependencies {

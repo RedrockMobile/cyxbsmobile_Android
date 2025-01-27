@@ -84,10 +84,11 @@ object ApiGenerator {
 
     private val mAccountService = IAccountService::class.impl()
 
+    val networkConfigs = INetworkConfigService::class.allImpl()
+        .map { it.value.get() }
+
     //init对两种公共的retrofit进行配置
     init {
-        val networkConfigs = INetworkConfigService::class.allImpl()
-            .map { it.value.get() }
         //添加监听得到登录后的token和refreshToken,应用于初次登录或重新登录
         retrofit = Retrofit.Builder().apply {
             this.defaultConfig()

@@ -57,6 +57,7 @@ fun createHttpClient(
     // http 状态码处理，3XX 抛出 RedirectResponseException，4XX 抛出 ClientRequestException，5XX 抛出 ServerResponseException
     expectSuccess = true
     addDefaultResponseValidation()
+    // 平台相关配置
     platformConfigHttpClient()
   }
 }
