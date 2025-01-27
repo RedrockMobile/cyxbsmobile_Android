@@ -1,4 +1,6 @@
 import org.gradle.api.Project
+import org.gradle.internal.extensions.core.extra
+import java.util.Properties
 
 /**
  * .
@@ -8,15 +10,18 @@ import org.gradle.api.Project
  */
 object Multiplatform {
   fun enableIOS(project: Project): Boolean {
-    return project.rootProject.properties["cyxbs.multiplatform.ios"] == "true"
+    val key = "cyxbs.multiplatform.ios"
+    return (project.localProperties[key] ?: project.rootProject.properties[key]) == "true"
   }
 
   fun enableWasm(project: Project): Boolean {
-    return project.rootProject.properties["cyxbs.multiplatform.wasm"] == "true"
+    val key = "cyxbs.multiplatform.wasm"
+    return (project.localProperties[key] ?: project.rootProject.properties[key]) == "true"
   }
 
   fun enableDesktop(project: Project): Boolean {
-    return project.rootProject.properties["cyxbs.multiplatform.desktop"] == "true"
+    val key = "cyxbs.multiplatform.desktop"
+    return (project.localProperties[key] ?: project.rootProject.properties[key]) == "true"
   }
 
   // 运行 Android 的任务
@@ -44,4 +49,21 @@ object Multiplatform {
       it.contains("wasmJs")
     }
   }
+
+
+  private val Project.localProperties: Properties
+    get() {
+      val key = "Project.localProperties"
+      if (rootProject.extra.has(key)) {
+        return rootProject.extra.get(key) as Properties
+      } else {
+        val properties = Properties()
+        val localPropertiesFile = rootProject.rootDir.resolve("local.properties")
+        if (localPropertiesFile.exists()) {
+          properties.load(localPropertiesFile.inputStream())
+        }
+        rootProject.extra.set(key, properties)
+        return properties
+      }
+    }
 }
