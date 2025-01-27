@@ -65,7 +65,7 @@ internal object UserInfoProvider {
         }
       }.onSuccess {
         _stateFlow.value = it
-        defaultSettings.getStringOrNull(secretEncrypt(defaultJson.encodeToString(it)))
+        defaultSettings.putString(KEY, secretEncrypt(defaultJson.encodeToString(it)))
       }
     }
   }

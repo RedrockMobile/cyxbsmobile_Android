@@ -283,7 +283,7 @@ class UserFragment : BaseFragment() {
     private fun refreshUserLayout() {
         val userInfo = IAccountService::class.impl().userInfo.value ?: return
         mine_user_avatar.setAvatarImageFromUrl(userInfo.photoSrc)
-        mine_user_username.text = userInfo.stuNum
+        mine_user_username.text = userInfo.username
     }
 
     override fun onCreateView(
