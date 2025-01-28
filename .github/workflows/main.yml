@@ -96,7 +96,7 @@ jobs:
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: CyxbsMobile-test.apk
+          name: CyxbsMobile-test
           path: cyxbs-applications/test/build/outputs/apk/release/test-release-unsigned.apk
           retention-days: 15
           
