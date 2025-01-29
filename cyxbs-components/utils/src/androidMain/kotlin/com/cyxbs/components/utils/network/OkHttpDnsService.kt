@@ -5,7 +5,7 @@ import com.alibaba.sdk.android.httpdns.InitConfig
 import com.alibaba.sdk.android.httpdns.RequestIpType
 import com.cyxbs.components.init.InitialManager
 import com.cyxbs.components.init.InitialService
-import com.cyxbs.components.utils.extensions.appContext
+import com.cyxbs.components.init.appContext
 import com.g985892345.provider.api.annotation.ImplProvider
 import okhttp3.Dns
 import java.net.InetAddress
