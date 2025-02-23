@@ -10,6 +10,7 @@ import com.cyxbs.components.base.crash.CrashDialog
 import com.cyxbs.components.utils.extensions.toast
 import com.cyxbs.components.utils.extensions.toastLong
 import com.cyxbs.components.utils.network.IApiWrapper
+import com.cyxbs.pages.course.api.utils.checkCourseItem
 import java.io.Serializable
 
 /**
@@ -70,7 +71,22 @@ data class StuLessonBean(
   fun toStuLessonEntity(): List<StuLessonEntity> {
     var isNotified = false
     return buildList {
-      data.forEach {
+      data.filter {
+        // 检查数据是否存在越界
+        // debug 版查他课表就会自动显示异常原因弹窗
+        if (checkCourseItem(it.beginLesson, it.period)) {
+          true
+        } else {
+          if (BuildConfig.DEBUG) {
+            // debug 版查他人课表直接显示异常原因
+            toast("发生课表数据越界！")
+            CrashDialog.Builder(RuntimeException("lesson=$it")).show()
+          } else {
+            toastLong("课表数据存在越界，请向我们反馈")
+          }
+          false
+        }
+      }.forEach {
         try {
           add(
             StuLessonEntity(
@@ -98,14 +114,12 @@ data class StuLessonBean(
           // 就打开 debug 版查他课表就会自动显示异常原因弹窗
           if (!isNotified) {
             isNotified = true
-            Handler(Looper.getMainLooper()).post {
-              if (BuildConfig.DEBUG) {
-                // debug 版查他人课表直接显示异常原因
-                toast("发生课表数据异常！")
-                CrashDialog.Builder(e).show()
-              } else {
-                toastLong("课表数据可能存在异常，请向我们反馈")
-              }
+            if (BuildConfig.DEBUG) {
+              // debug 版查他人课表直接显示异常原因
+              toast("发生课表数据异常！")
+              CrashDialog.Builder(RuntimeException("lesson=$it", e)).show()
+            } else {
+              toastLong("课表数据可能存在异常，请向我们反馈")
             }
           }
         }

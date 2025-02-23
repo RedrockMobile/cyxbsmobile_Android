@@ -75,4 +75,8 @@ class SelfLessonItem(private var lessonData: StuLessonData) :
       SelfLessonMovableHelper()
     )
   }
+
+  override fun toString(): String {
+    return "SelfLessonItem(data=$data)"
+  }
 }

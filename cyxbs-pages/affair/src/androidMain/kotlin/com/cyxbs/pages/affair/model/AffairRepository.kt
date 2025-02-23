@@ -20,6 +20,7 @@ import com.cyxbs.pages.affair.room.LocalAddAffairEntity
 import com.cyxbs.pages.affair.room.LocalDeleteAffairEntity
 import com.cyxbs.pages.affair.room.LocalUpdateAffairEntity
 import com.cyxbs.pages.course.api.ICourseService
+import com.cyxbs.pages.course.api.utils.checkCourseItem
 import com.cyxbs.pages.course.api.utils.getEndRow
 import com.cyxbs.pages.course.api.utils.getEndTimeMinute
 import com.cyxbs.pages.course.api.utils.getStartRow
@@ -128,6 +129,9 @@ object AffairRepository {
   ): Completable {
     val stuNum = IAccountService::class.impl().stuNum.orEmpty()
     if (stuNum.isBlank()) return Completable.error(IllegalStateException("学号为空！"))
+    if (atWhatTime.any { !checkCourseItem(it.beginLesson, it.period) }) {
+      return Completable.error(IllegalArgumentException("事务越界：$atWhatTime"))
+    }
     val dateJson = atWhatTime.toPostDateJson()
     return Single.create {
       // 先使用 LocalRemoteId 保存进本地数据库，后续网络请求后再更新

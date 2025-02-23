@@ -13,17 +13,15 @@ import io.ktor.client.request.bearerAuth
  * @date 2025/1/19
  */
 internal val TokenPlugin = createClientPlugin(
- "TokenPlugin",
+  "TokenPlugin",
 ) {
- val tokenService = ITokenService::class.impl()
- on(Send) { request ->
-  val token = tokenService.getOrRequestToken()
-  if (token == null) {
-   // 未登录时也允许请求，端上不好判断该请求是否强依赖登录状态，需要依靠 server 进行拦截
-   return@on proceed(request)
-  } else {
-   request.bearerAuth(token) // 添加 token
+  val tokenService = ITokenService::class.impl()
+  on(Send) { request ->
+    val token = tokenService.getOrRequestToken()
+    if (token != null) {
+      request.bearerAuth(token) // 添加 token
+      // 未登录时也允许请求，端上不好判断该请求是否强依赖登录状态，需要依靠 server 进行拦截
+    }
+    proceed(request)
   }
-  proceed(request)
- }
 }

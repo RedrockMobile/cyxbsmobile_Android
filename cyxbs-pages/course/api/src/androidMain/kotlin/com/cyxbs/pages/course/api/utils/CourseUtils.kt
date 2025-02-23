@@ -10,6 +10,19 @@ import java.util.regex.Pattern
  * @date 2022/6/12 16:42
  */
 
+// 课表最大能显示的 endRow
+val MaxCourseEndRow = 13 // 12 节课 + 1(中午) + 1(傍晚) - 1(从 0 开始计数)
+
+fun checkCourseItem(beginLesson: Int, period: Int): Boolean {
+  val startRow = try {
+    getStartRow(beginLesson)
+  } catch (e: Exception) {
+    return false
+  }
+  val endRow = getEndRow(beginLesson, period)
+  return startRow >= 0 && endRow in startRow .. MaxCourseEndRow
+}
+
 /**
  * 把 [beginLesson] 转换成对应的 row
  */

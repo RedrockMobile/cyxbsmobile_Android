@@ -24,10 +24,6 @@ kotlin {
       implementation(libs.retrofit.converter.gson)
       implementation(libs.retrofit.converter.kotlinxSerialization)
       implementation(libs.retrofit.adapter.rxjava)
-
-      // 阿里云 dns 解析工具
-      // https://help.aliyun.com/document_detail/434554.html?spm=a2c4g.435252.0.0.1da95979yyEzm3
-      implementation(libs.alicloud.httpdns)
     }
   }
 }
