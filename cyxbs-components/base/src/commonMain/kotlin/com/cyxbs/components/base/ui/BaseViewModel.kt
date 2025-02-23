@@ -12,7 +12,7 @@ import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
 /**
- * commonMain 下的 ViewModel
+ * commonMain 下的 BaseViewModel，用于写一些多平台的通用逻辑
  *
  * @author 985892345
  * @date 2024/12/31
