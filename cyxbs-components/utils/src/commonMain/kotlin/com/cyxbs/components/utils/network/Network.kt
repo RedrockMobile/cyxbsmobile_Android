@@ -52,7 +52,9 @@ fun createHttpClient(
     // 超时处理 https://ktor.io/docs/client-timeout.html#configure_plugin
     // 超时会抛出 HttpRequestTimeoutException
     install(HttpTimeout) {
-      requestTimeoutMillis = 5.seconds.inWholeMilliseconds
+      requestTimeoutMillis = 10.seconds.inWholeMilliseconds
+      connectTimeoutMillis = 10.seconds.inWholeMilliseconds
+      socketTimeoutMillis = 10.seconds.inWholeMilliseconds
     }
     // http 状态码处理，3XX 抛出 RedirectResponseException，4XX 抛出 ClientRequestException，5XX 抛出 ServerResponseException
     expectSuccess = true
