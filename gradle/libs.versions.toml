@@ -176,9 +176,6 @@ rxpermissions = "0.12" # 作者 20 年已停止维护
 leakcanary = "2.13"
 # https://www.wanandroid.com/blog/show/2526
 pandora = "androidx_v2.1.0"
-# https://help.aliyun.com/document_detail/434554.html?spm=a2c4g.435252.0.0.1da95979yyEzm3
-# 阿里云httpdns依赖
-alicloud-httpdns = "2.5.0"
 # 字节很好用调试工具 https://github.com/bytedance/CodeLocator
 codelocator = "2.0.4"
 
@@ -298,7 +295,6 @@ ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop" }         
 rxpermissions = { module = "com.github.tbruyelle:rxpermissions", version.ref = "rxpermissions" }        # 权限申请
 leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" }      # 内存泄漏
 pandora = { module = "com.github.whataa:pandora", version.ref = "pandora" }         # 很牛逼的 debug 检测工具，debug 模式下摇一摇手机或者按三次手机中间顶部区域触发
-alicloud-httpdns = { module = "com.aliyun.ams:alicloud-android-httpdns", version.ref = "alicloud-httpdns" }     # 阿里云httpdns依赖
 codeLocator-core = { module = "com.bytedance.tools.codelocator:codelocator-core", version.ref = "codelocator" }
 
 ####################################### 公有依赖，大部分模块使用 #######################################

@@ -19,9 +19,7 @@ kotlin {
 
       implementation(libs.umeng)
       implementation(libs.umeng.asms)
-      implementation(libs.umeng.push.get().toString()) {
-        exclude(group = "com.umeng.umsdk", module = "alicloud-httpdns")
-      }
+      implementation(libs.umeng.push)
 
       implementation(libs.vasdolly)
       implementation(libs.bugly.crash)
