@@ -6,8 +6,9 @@ kotlin {
   sourceSets {
     commonMain.dependencies {
       implementation(projects.cyxbsComponents.init)
-      implementation(projects.cyxbsComponents.config)
+      implementation(projects.cyxbsComponents.base)
       implementation(projects.cyxbsComponents.utils)
+      implementation(projects.cyxbsComponents.config)
       implementation(projects.cyxbsComponents.account.api)
       implementation(projects.cyxbsPages.login.api)
     }
@@ -15,7 +16,6 @@ kotlin {
       implementation(libs.bundles.projectBase)
       implementation(libs.bundles.views)
       implementation(libs.bundles.network)
-      implementation(libs.eventBus)
       implementation(libs.glide)
       implementation(libs.rxpermissions)
       implementation(libs.lPhotoPicker)

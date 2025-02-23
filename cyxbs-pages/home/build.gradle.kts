@@ -13,6 +13,7 @@ useKtProvider()
 kotlin {
   sourceSets {
     commonMain.dependencies {
+      implementation(libsEx.`kmp-ktorfit`)
       // 根 gradle 中包含的所有子模块
       project.rootProject.subprojects.filter {
         it.name !in excludeList

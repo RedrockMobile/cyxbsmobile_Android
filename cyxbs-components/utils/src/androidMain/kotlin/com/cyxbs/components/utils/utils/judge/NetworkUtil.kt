@@ -149,34 +149,6 @@ object NetworkUtil {
     return null
   }
 
-  /**
-   * 用于 ping 一下网校后端的网络，用于测试当前后端是否寄掉
-   *
-   * @return 如果返回 null，则说明是网络连接异常，此时无法确认后端是否寄掉
-   */
-  suspend fun tryPingNetWork(timeOut: Long = 5000L): Result<ApiStatus>? {
-    try {
-      val result = withTimeout(timeOut) {
-        ApiServer::class.commonApi.pingMagipoke()
-      }
-      result.throwApiExceptionIfFail() // 如果 status 状态码不成功将抛出异常
-      return Result.success(result)
-    } catch (e: TimeoutCancellationException) {
-      return Result.failure(TimeoutException("请求超时"))
-    } catch (e: CancellationException) {
-      throw e
-    } catch (e: Exception) {
-      // 无网返回 UnknownHostException
-      // 有网但无法连接网络时也返回 UnknownHostException
-      if (e is UnknownHostException) {
-        // 如果 Exception 是 UnknownHostException，则说明是无法连接网络，而不是后端问题
-        // 但也可能是运维问题，比如学校经常崩 DNS 解析
-        return null
-      }
-      return Result.failure(e)
-    }
-  }
-
   private val _state = BehaviorSubject.create<Boolean>()
 
   init {
@@ -190,7 +162,7 @@ object NetworkUtil {
           override fun onAvailable(network: Network) {
             // 注意：这里回调了 onAvailable 也不代表可用，只是表明连上了网络
             job = appCoroutineScope.launch {
-              when (tryPingNetWork()?.isSuccess) {
+              when (RedrockNetwork.tryPingNetWork()?.isSuccess) {
                 true -> _state.onNext(true)
                 false -> _state.onNext(false) // 后端服务问题
                 null -> _state.onNext(false) // 连上了网络，但是网络不可用

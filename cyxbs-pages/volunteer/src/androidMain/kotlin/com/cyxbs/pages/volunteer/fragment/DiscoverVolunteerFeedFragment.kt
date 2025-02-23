@@ -3,8 +3,9 @@ package com.cyxbs.pages.volunteer.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import com.cyxbs.components.account.api.AccountState
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.components.account.api.IUserStateService
+import com.cyxbs.components.base.operations.doIfLogin
 import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER
 import com.cyxbs.components.config.route.DISCOVER_VOLUNTEER_RECORD
 import com.cyxbs.components.utils.extensions.defaultGson
@@ -16,37 +17,37 @@ import com.cyxbs.pages.volunteer.adapter.VolunteerFeedUnbindAdapter
 import com.cyxbs.pages.volunteer.event.VolunteerLoginEvent
 import com.cyxbs.pages.volunteer.event.VolunteerLogoutEvent
 import com.cyxbs.pages.volunteer.viewmodel.DiscoverVolunteerFeedViewModel
-import com.mredrock.cyxbs.common.mark.EventBusLifecycleSubscriber
 import com.mredrock.cyxbs.common.ui.BaseFeedFragment
-import com.mredrock.cyxbs.common.utils.extensions.doIfLogin
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.rx3.asFlow
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-class DiscoverVolunteerFeedFragment : BaseFeedFragment<DiscoverVolunteerFeedViewModel>(), EventBusLifecycleSubscriber {
+class DiscoverVolunteerFeedFragment : BaseFeedFragment<DiscoverVolunteerFeedViewModel>() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val verifyService = IAccountService::class.impl().getVerifyService()
+        EventBus.getDefault().register(this) // 不建议使用 EventBus
+        val accountService = IAccountService::class.impl()
         //对登录状态判断
-        if (verifyService.isLogin()) {
+        if (accountService.isLogin()) {
             setAdapter(VolunteerFeedUnbindAdapter())
         }
-        verifyService
-            .observeUserStateEvent()
-            .asFlow()
+        accountService.state
             .onEach {
-                if (it == IUserStateService.UserState.LOGIN) {
+                if (it == AccountState.Login) {
                     setAdapter(VolunteerFeedUnbindAdapter())
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
         init()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        EventBus.getDefault().unregister(this) // 不建议使用 EventBus
+    }
 
     private fun init() {
         setTitle(getString(R.string.volunteer_service_inquire_string))
@@ -73,7 +74,7 @@ class DiscoverVolunteerFeedFragment : BaseFeedFragment<DiscoverVolunteerFeedView
             }
         }
         setOnClickListener {
-            context?.doIfLogin(getString(R.string.volunteer_service_inquire_string)) {
+            doIfLogin(getString(R.string.volunteer_service_inquire_string)) {
                 if (!viewModel.isQuerying) {
                     if (viewModel.volunteerData.value != null) {
                         EventBus.getDefault().postSticky(VolunteerLoginEvent(viewModel.volunteerData.value!!))
@@ -93,7 +94,7 @@ class DiscoverVolunteerFeedFragment : BaseFeedFragment<DiscoverVolunteerFeedView
     //onResume
     override fun onRefresh() {
         //首先判断是否登录，没登录，那直接return
-        if (!IAccountService::class.impl().getVerifyService().isLogin()) {
+        if (!IAccountService::class.impl().isLogin()) {
             return
         }
         //再判断vm是否有数据，有数据直接加载，再return

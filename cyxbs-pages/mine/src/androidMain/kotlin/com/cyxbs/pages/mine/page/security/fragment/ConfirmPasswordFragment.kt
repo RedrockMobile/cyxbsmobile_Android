@@ -51,8 +51,7 @@ class ConfirmPasswordFragment : BaseFragment() {
      * 但 dialog 有个确认按钮，点击就会立马跳转，所以需要防止重复调用
      */
     private val mReLoginRunnable = Runnable {
-        ILoginService::class.impl()
-            .startLoginActivityReboot()
+        ILoginService::class.impl().jumpToLoginPage()
         requireActivity().finish()
     }
 

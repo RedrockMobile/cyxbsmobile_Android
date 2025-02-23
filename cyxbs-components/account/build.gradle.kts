@@ -2,6 +2,7 @@ plugins {
   id("manager.lib")
 }
 
+useKtorfit()
 useKtProvider()
 
 kotlin {

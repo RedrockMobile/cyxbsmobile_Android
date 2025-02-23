@@ -60,7 +60,7 @@ object PhoneCalendar {
    * 注意：ACCOUNT_NAME 和 ACCOUNT_TYPE 是一个人日历账户的唯一标识
    */
   fun getAccountName(): String {
-    return IAccountService::class.impl().getUserService().getStuNum()
+    return IAccountService::class.impl().stuNum.orEmpty()
   }
   
   // 账户类型。这个不会显示给用户

@@ -1,22 +1,13 @@
 package com.cyxbs.pages.login.viewmodel
 
-import android.os.SystemClock
-import com.cyxbs.components.account.api.IAccountService
+import androidx.compose.runtime.snapshotFlow
 import com.cyxbs.components.base.BaseApp
-import com.cyxbs.components.utils.coroutine.runCatchingCoroutine
-import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.utils.utils.judge.NetworkUtil
 import com.cyxbs.pages.login.bean.DeviceInfoParams
+import com.cyxbs.pages.login.bean.LoginBean
 import com.cyxbs.pages.login.network.LoginApiService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.withContext
-import retrofit2.HttpException
-import java.io.IOException
-import kotlin.time.Duration.Companion.milliseconds
-import kotlin.time.Duration.Companion.seconds
 
 /**
  * .
@@ -24,55 +15,28 @@ import kotlin.time.Duration.Companion.seconds
  * @author 985892345
  * @date 2024/12/31
  */
-actual class LoginViewModel : CommonLoginViewModel() {
+actual class LoginViewModel actual constructor(): CommonLoginViewModel() {
 
   private val _event = MutableSharedFlow<Event>()
   val event: SharedFlow<Event> get() = _event
 
-  // 后端服务是否可用
-  private var mIsServerAvailable = true
-
   init {
-    launch {
-      NetworkUtil.tryPingNetWork()?.onFailure {
-        mIsServerAvailable = false
+    snapshotFlow { isLoginAnim.value }.collectLaunch {
+      if (it) {
+        _event.emit(Event.HideSoftInput)
       }
     }
   }
 
-  override suspend fun login() {
-    _event.emit(Event.HideSoftInput)
-    if (!mIsServerAvailable) {
-      toast("当前后端服务不可用，可能无法正常登录")
-    }
-    val startTime = SystemClock.elapsedRealtime().milliseconds
-    runCatchingCoroutine {
-      withContext(Dispatchers.IO) {
-        IAccountService::class.impl()
-          .getVerifyService()
-          .login(appContext, username.value, password.value)
-      }
-    }.also {
-      // 网络太快会闪一下，像bug，就让它最少待两秒吧
-      delay(2.seconds + startTime - SystemClock.elapsedRealtime().milliseconds)
-    }.onFailure {
-      when (it) {
-        is IOException -> toast("网络中断，请检查您的网络状态") // Retrofit 对于网络无法连接将抛出 IOException
-        is HttpException -> toast("登录服务暂时不可用")
-        is IllegalStateException -> when (it.message) {
-          "tried too many times" -> toast("登录过于频繁，请15分钟后再试")
-          "authentication error" -> toast("登录失败：学号或者密码错误,请检查输入")
-          "Internet error" -> toast("尚未注册，账号是学号，初始密码是统一验证码后六位")
-        }
-        else -> toast(it.message)
-      }
-    }.onFailure {
-      _event.emit(Event.Login(false))
-    }.onSuccess {
-      _event.emit(Event.Login(true))
-    }.onSuccess {
-      postDeviceInfo()
-    }
+  override suspend fun onLoginSuccess(username: String, bean: LoginBean) {
+    super.onLoginSuccess(username, bean)
+    _event.emit(Event.Login(true))
+    postDeviceInfo()
+  }
+
+  override suspend fun onLoginFailure(throwable: Throwable) {
+    super.onLoginFailure(throwable)
+    _event.emit(Event.Login(false))
   }
 
   override fun clickForgetPassword() {
@@ -107,7 +71,7 @@ actual class LoginViewModel : CommonLoginViewModel() {
 
   private fun postDeviceInfo() {
     /**
-     * 登录后向后端发送一次登录时的设备信息以及wifi的ip（如果连接了wifi并且能获取到）
+     * 登录后向后端发送一次登录时的设备信息以及wifi的ip，用于在校园网登录时能进行定位，防止有人乱登录搞出事故
      * 如果连接方式为流量或者无法获取到wifi的ip，则直接上传 null 即可
      */
     var ipAddress: String? = null

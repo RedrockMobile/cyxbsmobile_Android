@@ -157,9 +157,9 @@ class NoClassTemporaryFragment : BaseFragment(R.layout.noclass_fragment_temporar
      * 初始化用户信息
      */
     private fun initUserInfo() {
-        IAccountService::class.impl().getUserService().apply {
-            mUserName = this.getUsername()
-            mUserId = this.getStuNum()
+        IAccountService::class.impl().userInfo.value?.apply {
+            mUserName = username
+            mUserId = stuNum
         }
     }
 

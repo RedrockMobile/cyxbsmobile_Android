@@ -81,8 +81,8 @@ class ChangePasswordActivity : BaseActivity() {
 
     private var originPassword = ""//用来保存旧密码
 
-    private var stuNum = IAccountService::class.impl().getUserService()
-        .getStuNum()//获取当前用户的学号
+    private var stuNum = IAccountService::class.impl()
+        .stuNum.orEmpty() //获取当前用户的学号
 
     private var isFromLogin = false//是否来自登陆界面
 

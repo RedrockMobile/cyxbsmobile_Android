@@ -23,7 +23,7 @@ internal actual fun ConfigAppThemeBefore(
   content: @Composable () -> Unit
 ) {
   CompositionLocalProvider(
-    LocalAppDark provides false, // 桌面端暂时不开启黑夜模式
+    LocalAppDark provides false, // 网页端暂时不开启黑夜模式
     LocalSystemTheme provides SystemTheme.Light,
   ) {
     content()

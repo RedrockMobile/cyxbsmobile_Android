@@ -17,7 +17,8 @@
 * */
 
 val hooksFile = rootDir.absoluteFile.resolve("hooks")
-val gitHookFile = rootDir.absoluteFile.resolve(".git").resolve("hooks")
+val gitFilr = rootDir.absoluteFile.resolve(".git")
+val gitHookFile = gitFilr.resolve("hooks")
 
 fun moveHookFile(action: ((File) -> Unit)? = null) {
   hooksFile.listFiles()?.forEach { file ->
@@ -37,20 +38,21 @@ fun moveHookFile(action: ((File) -> Unit)? = null) {
   }
 }
 
-// 将 根目录下的 hooks 移动到 .git/hooks 的 task
-// 已生成了 group 为 hook，名字叫 git-hook-move 的任务
-val task = tasks.register("git-hook-move") {
-  group = "hook"
-  inputs.dir(hooksFile) // gradle 任务缓存设置
-  outputs.dir(gitHookFile) // gradle 任务缓存设置
-  doFirst {
-    println("正在移动 git 钩子文件：")
-    moveHookFile {
-      println("${it.name} 已复制到 .git/hooks 文件下")
+if (gitFilr.isDirectory) { // 如果使用了 worktree 时则 .git 为普通文件而非文件夹
+  // 将 根目录下的 hooks 移动到 .git/hooks 的 task
+  // 已生成了 group 为 hook，名字叫 git-hook-move 的任务
+  val task = tasks.register("git-hook-move") {
+    group = "cyxbs-hook"
+    inputs.dir(hooksFile) // gradle 任务缓存设置
+    outputs.dir(gitHookFile) // gradle 任务缓存设置
+    doFirst {
+      println("正在移动 git 钩子文件：")
+      moveHookFile {
+        println("${it.name} 已复制到 .git/hooks 文件下")
+      }
+      println("git 钩子文件移动完毕")
     }
-    println("git 钩子文件移动完毕")
   }
+  // 依赖于刷新 gradle 的 task
+  tasks.getByName("prepareKotlinBuildScriptModel").dependsOn(task)
 }
-
-// 依赖于刷新 gradle 的 task
-tasks.getByName("prepareKotlinBuildScriptModel").dependsOn(task)

@@ -3,6 +3,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.launchApplication
 import androidx.compose.ui.window.rememberWindowState
+import com.cyxbs.components.config.compose.theme.AppTheme
+import com.cyxbs.components.config.compose.toast.PlatformToastCompose
 import com.cyxbs.components.utils.coroutine.runApp
 import com.cyxbs.pages.login.ui.LoginPage
 import com.g985892345.provider.cyxbsmobile.cyxbsapplications.test.TestKtProviderInitializer
@@ -28,7 +30,10 @@ fun main() = runApp {
       remember {
         this.window.minimumSize = java.awt.Dimension(360, 600)
       }
-      LoginPage()
+      AppTheme {
+        LoginPage()
+        PlatformToastCompose()
+      }
     }
   }
 }

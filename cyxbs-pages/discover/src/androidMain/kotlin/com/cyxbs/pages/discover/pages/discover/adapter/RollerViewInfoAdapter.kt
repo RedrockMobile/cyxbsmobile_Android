@@ -30,7 +30,7 @@ class RollerViewInfoAdapter(
   inner class VHolder(val iv: ShapeableImageView) : RecyclerView.ViewHolder(iv) {
     init {
       iv.setOnSingleClickListener {
-        if (IAccountService::class.impl().getVerifyService().isLogin()) {
+        if (IAccountService::class.impl().isLogin()) {
           // banner位的点击埋点
           appCoroutineScope.launch {
             TrackingUtils.trackClickEvent(ClickEvent.CLICK_YLC_BANNER_ENTRY)

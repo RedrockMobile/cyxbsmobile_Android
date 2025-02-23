@@ -10,10 +10,8 @@ import android.widget.TextView
 import androidx.core.view.postDelayed
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.toast
-import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.noclass.R
 import com.cyxbs.pages.noclass.page.viewmodel.dialog.CreateGroupViewModel
 import com.cyxbs.pages.noclass.util.startShake
@@ -42,16 +40,6 @@ class CreateGroupDialog(
      * 用来存储成员信息的
      */
     private var mExtraNums: List<String>? = null
-
-    /**
-     * 用户名称
-     */
-    private lateinit var mUserName: String
-
-    /**
-     * 用户id
-     */
-    private lateinit var mUserId: String
 
     /**
      * 输入错误的隐藏文字
@@ -94,18 +82,7 @@ class CreateGroupDialog(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.noclass_sheet_dialog_style)
-        initUserInfo()
         initObserve()
-    }
-
-    /**
-     * 初始化用户信息
-     */
-    private fun initUserInfo() {
-        IAccountService::class.impl().getUserService().apply {
-            mUserName = this.getUsername()
-            mUserId = this.getStuNum()
-        }
     }
 
     @SuppressLint("SetTextI18n")

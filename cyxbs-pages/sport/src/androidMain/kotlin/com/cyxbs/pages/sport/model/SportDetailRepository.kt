@@ -2,14 +2,17 @@ package com.cyxbs.pages.sport.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.cyxbs.components.account.api.AccountState
 import com.cyxbs.components.account.api.IAccountService
-import com.cyxbs.components.account.api.IUserStateService
+import com.cyxbs.components.utils.coroutine.appCoroutineScope
 import com.cyxbs.components.utils.extensions.unsafeSubscribeBy
 import com.cyxbs.components.utils.network.mapOrInterceptException
 import com.cyxbs.components.utils.service.impl
 import com.cyxbs.pages.sport.model.network.SportDetailApiService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 /**
  * 写成 object，解决主页卡片与体育打卡页面跨页数据问题
@@ -51,14 +54,13 @@ object SportDetailRepository {
   }
 
   init {
-    IAccountService::class.impl().getVerifyService()
-      .observeUserStateState()
-      .unsafeSubscribeBy {
+    IAccountService::class.impl().state
+      .onEach {
         when (it) {
-          IUserStateService.UserState.LOGIN -> refresh()
-          IUserStateService.UserState.NOT_LOGIN -> _sportData.postValue(null)
+          AccountState.Login -> refresh()
+          AccountState.Logout -> _sportData.postValue(null)
           else -> Unit
         }
-      }
+      }.launchIn(appCoroutineScope)
   }
 }

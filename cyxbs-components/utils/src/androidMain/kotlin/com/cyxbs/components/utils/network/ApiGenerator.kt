@@ -5,21 +5,18 @@ import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.account.api.ITokenService
 import com.cyxbs.components.utils.BuildConfig
 import com.cyxbs.components.utils.extensions.appContext
-import com.cyxbs.components.utils.extensions.defaultJson
+import com.cyxbs.components.utils.extensions.defaultGson
 import com.cyxbs.components.utils.service.allImpl
 import com.cyxbs.components.utils.service.impl
-import com.cyxbs.components.utils.service.implOrNull
 import com.cyxbs.components.utils.utils.LogLocal
 import com.cyxbs.components.utils.utils.LogUtils
-import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
-import okhttp3.Dispatcher
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -27,10 +24,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.kotlinx.serialization.asConverterFactory
-import java.util.concurrent.SynchronousQueue
-import java.util.concurrent.ThreadFactory
-import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
@@ -91,26 +84,11 @@ object ApiGenerator {
 
     private val mAccountService = IAccountService::class.impl()
 
-    // 手动创建 okhttp 的线程分发器，规避 协程 + Retrofit 在子线程请求被 cancel 后的异常问题
-    private val OkHttpDispatcher = Dispatcher(
-        ThreadPoolExecutor(
-            0, 64, 60, TimeUnit.SECONDS,
-            SynchronousQueue(),
-            ThreadFactory {
-                Thread(it, "ApiGenerator OkHttp Dispatcher").apply {
-                    // 这里设置线程的异常处理器，默认给 base 模块的 CrashMonitor
-                    setUncaughtExceptionHandler(
-                        Thread.UncaughtExceptionHandler::class.implOrNull()
-                    )
-                }
-            }
-        )
-    )
+    val networkConfigs = INetworkConfigService::class.allImpl()
+        .map { it.value.get() }
 
     //init对两种公共的retrofit进行配置
     init {
-        val networkConfigs = INetworkConfigService::class.allImpl()
-            .map { it.value.get() }
         //添加监听得到登录后的token和refreshToken,应用于初次登录或重新登录
         retrofit = Retrofit.Builder().apply {
             this.defaultConfig()
@@ -244,8 +222,6 @@ object ApiGenerator {
             }
         }))
             .addConverterFactory(GsonConverterFactory.create())
-            // https://github.com/square/retrofit/tree/trunk/retrofit-converters/kotlinx-serialization
-            .addConverterFactory(defaultJson.asConverterFactory("application/json; charset=UTF8".toMediaType()))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.createSynchronous())
     }
 
@@ -298,49 +274,24 @@ object ApiGenerator {
 
             interceptors().add(Interceptor {
 
-                if (!mAccountService.getVerifyService().isLogin()) {
+                if (!mAccountService.isLogin()) {
                     // 未登录直接请求，有些人对于不需要 token 的请求也使用了这个
                     return@Interceptor it.proceed(it.request())
                 }
-
-                /**
-                 * 所有请求添加token到header
-                 *
-                 * 在 ApiWrapper 中会根据 status 判断是否过期，过期就会赋值为过期的时间戳，
-                 * 然后这里 isTokenExpired() 会返回 true，最后触发刷新
-                 */
-                if (isTokenExpired()) {
-                    checkRefresh(it, mAccountService.getUserTokenService().getToken())
-                } else it.proceedWithToken()
+                // todo ApiGenerator 先暂时不检查 token 是否过期，后续慢慢迁移到 Network
+                it.proceedWithToken()
             })
         }.build()
-    }
-
-    private val mReentrantLock = ReentrantLock()
-
-    //对token进行刷新
-    private fun checkRefresh(chain: Interceptor.Chain, expiredToken: String): Response {
-        mReentrantLock.withLock {
-            val token = mAccountService.getUserTokenService().getToken()
-            // 判断之前的过期 token 是否跟现在的 token 一样
-            if (expiredToken == token) {
-                // 一样的话说明需要刷新 token
-                mAccountService.getVerifyService().refresh()
-            }
-            // 如果本来网络就是崩的，一堆请求会堵在这里刷新 token，但这种情况本来就会因为网络问题而全部请求失败，
-            // 所以不用管这种情况（万一有个请求刷新成功了?）
-        }
-        return chain.proceedWithToken()
     }
 
     private fun Interceptor.Chain.proceedWithToken(
         block: (Request.Builder.() -> Unit)? = null
     ): Response {
-        val token = mAccountService.getUserTokenService().getToken()
+        val token = ITokenService::class.impl().getToken()
         return proceed(
             request()
                 .newBuilder()
-                .header("Authorization", "Bearer $token")
+                .apply { if (token != null) header("Authorization", "Bearer $token") }
                 .also { block?.invoke(it) }
                 .build()
         )
@@ -427,7 +378,7 @@ object ApiGenerator {
                         .build()
                     val call = okHttpClient.newCall(request)
                     val json = call.execute().body?.string()
-                    val backupUrlStatus = Gson().fromJson<ApiWrapper<BackupUrlStatus>>(
+                    val backupUrlStatus = defaultGson.fromJson<ApiWrapper<BackupUrlStatus>>(
                         json,
                         object : TypeToken<ApiWrapper<BackupUrlStatus>>() {}.type
                     )
@@ -458,12 +409,7 @@ object ApiGenerator {
     }
 
     //是否是游客模式
-    private fun isTouristMode() =
-        IAccountService::class.impl().getVerifyService().isTouristMode()
-
-    //检查token是否过期
-    private fun isTokenExpired() =
-        IAccountService::class.impl().getVerifyService().isExpired()
+    private fun isTouristMode() = IAccountService::class.impl().isTouristMode()
 }
 
 /**

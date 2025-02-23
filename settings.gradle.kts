@@ -16,7 +16,6 @@ pluginManagement {
     google()
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev") // compose multiplatform
     maven("https://jitpack.io")
-    jcenter() // 部分依赖需要
   }
 }
 dependencyResolutionManagement {
@@ -26,7 +25,6 @@ dependencyResolutionManagement {
     mavenCentral() // 优先 MavenCentral，一是：github CI 下不了 aliyun 依赖；二是：开 VPN 访问 aliyun 反而变慢了
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     maven("https://jitpack.io")
-    jcenter() // 部分依赖需要
     // mavenCentral 快照仓库
     maven("https://s01.oss.sonatype.org/content/repositories/snapshots/") // compose multiplatform
     maven("https://maven.aliyun.com/repository/public")
@@ -36,10 +34,6 @@ dependencyResolutionManagement {
 
 // 测试使用，排除掉不需要的模块，记得还原！！！
 val excludeList = setOf<String>(
-//  "cyxbs-components",
-//  "cyxbs-functions",
-//  "cyxbs-pages",
-//  "lib_common",
 )
 
 fun includeModule(topName: String, file: File) {

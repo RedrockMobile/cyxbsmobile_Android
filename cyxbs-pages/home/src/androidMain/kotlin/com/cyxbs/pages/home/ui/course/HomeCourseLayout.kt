@@ -10,6 +10,7 @@ import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.commit
+import androidx.lifecycle.lifecycleScope
 import com.cyxbs.components.account.api.IAccountService
 import com.cyxbs.components.base.crash.CrashDialog
 import com.cyxbs.components.base.utils.Umeng
@@ -30,6 +31,8 @@ import com.cyxbs.pages.home.ui.main.MainActivity
 import com.cyxbs.pages.home.viewmodel.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlin.math.max
 
 /**
@@ -251,13 +254,10 @@ class HomeCourseLayout(context: Context, attrs: AttributeSet?) : FrameLayout(con
         }
       }
     }
-    mAccountService.getUserService()
-      .observeStuNumState()
-      .observeOn(AndroidSchedulers.mainThread())
-      .safeSubscribeBy(mActivity) {
-        // 只有登录了才允许拖动课表
-        mBottomSheet.isDraggable = it.isNotEmpty()
-      }
+    mAccountService.userInfo.onEach {
+      // 只有登录了才允许拖动课表
+      mBottomSheet.isDraggable = it != null
+    }.launchIn(mActivity.lifecycleScope)
   }
   
   /**

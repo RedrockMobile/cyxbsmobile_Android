@@ -7,8 +7,9 @@
 #-------------------------------------------定制化区域----------------------------------------------
 #---------------------------------1.实体类---------------------------------
 #原因：实体类数据，一定不能混淆，忽略了Serializable接口和Parcelable接口,实体类必须实现这两个接口
--keep class * implements java.io.Serializable { *;}
--keep class * implements android.os.Parcelable { *;}
+-keepclassmembers class * implements java.io.Serializable { <fields>; }
+-keepclassmembers class * implements android.os.Parcelable { <fields>; }
+-keepclassmembers class * implements com.cyxbs.components.utils.extensions.GsonDataBean { <fields>; }
 #-------------------------------------------------------------------------
 
 #---------------------------------2.第三方包-------------------------------
@@ -68,6 +69,17 @@
 
 # ===============
 
+## ktor https://github.com/ktorio/ktor
+
+-dontwarn org.slf4j.**
+-dontwarn io.ktor.network.sockets.**
+-dontwarn kotlinx.serialization.internal.**
+-dontwarn org.slf4j.helpers.SubstituteLogger
+
+-keep class io.ktor.serialization.kotlinx.json.KotlinxSerializationJsonExtensionProvider
+
+# ===============
+
 ## OkHttp https://github.com/square/okhttp
 -dontwarn javax.annotation.**
 -adaptresourcefilenames okhttp3/internal/publicsuffix/PublicSuffixDatabase.gz
@@ -104,33 +116,21 @@
 
 # ===============
 
-## Bugly https://bugly.qq.com/docs/
--dontwarn com.tencent.bugly.**
--keep public class com.tencent.bugly.**{*;}
-
+## kotlinx-serialization https://github.com/Kotlin/kotlinx.serialization
+## 官方的混淆规则有点问题，我改了一下
+-keepclasseswithmembers @kotlinx.serialization.Serializable class ** {
+    static *** Companion;
+}
+-if @kotlinx.serialization.Serializable class **
+-keepclasseswithmembers class <1>$Companion {
+    *** serializer();
+}
 
 # ===============
 
-
-
-
-
-
-
-
-## hotfix
-## Sophix https://help.aliyun.com/document_detail/61082.html
-#基线包使用，生成mapping.txt
-#-printmapping mapping.txt # 后面已经生成混淆映射文件
-#生成的mapping.txt在app/build/outputs/mapping/release路径下，移动到/app路径下
-#修复后的项目使用，保证混淆结果一致
-#-applymapping mapping.txt
-#hotfix
--keep class com.taobao.sophix.**{*;}
--keep class com.ta.utdid2.device.**{*;}
--dontwarn com.alibaba.sdk.android.utils.**
-#防止inline
--dontoptimize
+## Bugly https://bugly.qq.com/docs/
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
 
 
 # ===============
@@ -203,8 +203,7 @@
 #-------------------------------------------------------------------------
 
 #---------------------------------3.与js互相调用的类------------------------
-# rhino j2js引擎
--keep class org.mozilla.**{*;}
+
 
 
 #-------------------------------------------------------------------------
@@ -223,11 +222,6 @@
 # 模块：module_store，原因：StoreCenterActivity 的 initTabLayout() 方法中
 -keepclassmembernames class com.google.android.material.badge.BadgeDrawable {
     private final float badgeRadius;
-}
-
-# BaseBindFragment 和 BaseBindActivity 中反射获取 Binding
--keepclassmembers public class * implements androidx.viewbinding.ViewBinding {
-    public static ** inflate(...);
 }
 
 

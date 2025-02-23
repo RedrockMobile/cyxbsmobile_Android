@@ -86,7 +86,7 @@ class NoClassGatherDialog: BaseBottomSheetDialogFragment() {
     dialog.findViewById<Button>(R.id.noclass_btn_arrange_plan).apply {
       setOnClickListener {
         //跳转到安排行程模块,这里将自己去掉了
-        val mUserId =  IAccountService::class.impl().getUserService().getStuNum()
+        val mUserId =  IAccountService::class.impl().stuNum
         val idIsSparePair = ArrayList<Pair<String,Boolean>>()
         mNumNameIsSpare.forEach { (idName, isSpare) ->
           if (idName.first != mUserId){

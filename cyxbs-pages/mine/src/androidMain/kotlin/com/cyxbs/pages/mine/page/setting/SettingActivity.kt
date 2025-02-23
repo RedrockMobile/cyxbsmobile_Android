@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
-import com.cyxbs.components.account.api.IAccountService
+import com.cyxbs.components.account.api.IAccountEditService
 import com.cyxbs.components.base.dailog.ChooseDialog
 import com.cyxbs.components.base.operations.doIfLogin
 import com.cyxbs.components.base.ui.BaseActivity
@@ -18,7 +18,7 @@ import com.cyxbs.components.utils.extensions.launch
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.service.impl
 import com.cyxbs.components.utils.utils.config.PhoneCalendar
-import com.cyxbs.components.utils.utils.judge.NetworkUtil
+import com.cyxbs.components.utils.utils.judge.RedrockNetwork
 import com.cyxbs.pages.login.api.ILoginService
 import com.cyxbs.pages.mine.R
 import com.cyxbs.pages.mine.page.security.activity.SecurityActivity
@@ -134,7 +134,7 @@ class SettingActivity : BaseActivity() {
         }
         mIsInPingNetWork = true
         launch {
-            val result = NetworkUtil.tryPingNetWork()
+            val result = RedrockNetwork.tryPingNetWork()
             if (result != null && result.isSuccess) {
                 //判定magipoke系列接口正常，允许正常退出登陆
                 doExit()
@@ -175,9 +175,8 @@ class SettingActivity : BaseActivity() {
     private fun jumpToLoginActivity() {
         cleanData()
         //清除user信息，必须要在LoginStateChangeEvent之前
-        IAccountService::class.impl().getVerifyService()
-            .logout(this@SettingActivity)
-        ILoginService::class.impl().startLoginActivityReboot()
+        IAccountEditService::class.impl().onLogout()
+        ILoginService::class.impl().jumpToLoginPage()
         finishAndRemoveTask()
     }
 

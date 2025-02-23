@@ -112,7 +112,7 @@ class DiscoverHomeFragment : BaseFragment() {
      * 从老课表那里移过来的代码
      */
     private fun initTvDay() {
-        if (!IAccountService::class.impl().getVerifyService().isLogin()) {
+        if (!IAccountService::class.impl().isLogin()) {
             tv_day.text = "登录解锁更多功能~"
         } else {
             val nowWeek = SchoolCalendar.getWeekOfTerm()
@@ -254,7 +254,7 @@ class DiscoverHomeFragment : BaseFragment() {
                 if (it == functions.size - 1) {
                     getString(R.string.discover_more_function_notice_text).toast()
                 } else {
-                    if (IAccountService::class.impl().getVerifyService().isLogin()) {
+                    if (IAccountService::class.impl().isLogin()) {
                         // 发现首页横排按钮点击埋点
                         functions[it].clickEvent?.let {  clickEvent ->
                             appCoroutineScope.launch {
@@ -263,7 +263,7 @@ class DiscoverHomeFragment : BaseFragment() {
                         }
                     }
 
-                    functions[it].activityStarter?.startActivity(context)
+                    functions[it].activityStarter?.startActivity(this@DiscoverHomeFragment)
                 }
             }
             this.addOnScrollListener(object : RecyclerView.OnScrollListener() {

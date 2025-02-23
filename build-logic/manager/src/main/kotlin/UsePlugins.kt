@@ -21,6 +21,7 @@ fun Project.useKtProvider(isNeedKsp: Boolean = !name.startsWith("api")) {
     apply(plugin = libsEx.plugins.ktProvider)
     val ktProvider = extensions.getByName("ktProvider") as KtProviderExtensions
     kspMultiplatform(ktProvider.ksp)
+    ktProvider.configurations.add("debugImplementation") // debug 模块需要单独添加配置
   }
   extensions.configure<KotlinMultiplatformExtension> {
     sourceSets.commonMain.dependencies {
@@ -60,6 +61,20 @@ fun Project.useRoom(
   }
   dependencies {
     "kspAndroid"(libsEx.`androidx-room-compiler`)
+  }
+}
+
+/**
+ * 使用 Ktorfit
+ */
+fun Project.useKtorfit() {
+  // ksp 按需引入
+  apply(plugin = "com.google.devtools.ksp")
+  apply(plugin = libsEx.plugins.ktorfit)
+  extensions.configure<KotlinMultiplatformExtension> {
+    sourceSets.commonMain.dependencies {
+      implementation(libsEx.`kmp-ktorfit`)
+    }
   }
 }
 

@@ -95,7 +95,7 @@ fun filterClassRoom(classRoom: String): String {
 }
 
 fun startOperation(lesson: LessonEntity) {
-    if (IAccountService::class.impl().getVerifyService().isLogin()) {
+    if (IAccountService::class.impl().isLogin()) {
         toast("请登录之后再点击查看详细信息")
     } else {
 //        Todo,此处等郭神提供课表的接口*/

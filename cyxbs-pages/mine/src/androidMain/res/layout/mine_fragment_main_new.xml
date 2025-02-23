@@ -195,26 +195,11 @@
                     android:layout_height="20dp"
                     android:layout_marginTop="8dp"
                     android:text="活动中心"
-
                     android:textColor="@color/mine_text_setting"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="@+id/mine_user_tv_center_notification"
                     app:layout_constraintTop_toBottomOf="@+id/mine_user_iv_center_activity" />
 
-                <TextView
-                    android:id="@+id/mine_user_tv_unchecked_notification_count"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginStart="88dp"
-                    android:layout_marginTop="14dp"
-                    android:background="@drawable/mine_shape_bg_point_unchecked"
-                    android:gravity="center"
-                    android:text="99"
-                    android:textColor="#FFFFFF"
-                    android:textSize="8sp"
-                    android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <FrameLayout

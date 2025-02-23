@@ -28,6 +28,7 @@ import com.cyxbs.components.config.route.STORE_ENTRY
 import com.cyxbs.components.config.route.UFIELD_CENTER_ENTRY
 import com.cyxbs.components.utils.extensions.gone
 import com.cyxbs.components.utils.coroutine.appCoroutineScope
+import com.cyxbs.components.utils.extensions.setAvatarImageFromUrl
 import com.cyxbs.components.utils.extensions.setOnSingleClickListener
 import com.cyxbs.components.utils.extensions.visible
 import com.cyxbs.components.utils.logger.TrackingUtils
@@ -64,7 +65,6 @@ class UserFragment : BaseFragment() {
     private val mine_user_cl_info by R.id.mine_user_cl_info.view<ConstraintLayout>()
     private val mine_user_iv_center_notification by R.id.mine_user_iv_center_notification.view<ImageView>()
     private val mine_user_avatar by R.id.mine_user_avatar.view<ImageView>()
-    private val mine_user_tv_unchecked_notification_count by R.id.mine_user_tv_unchecked_notification_count.view<TextView>()
     private val mine_user_username by R.id.mine_user_username.view<TextView>()
     private val mine_user_iv_center_activity by R.id.mine_user_iv_center_activity.view<ImageView>()
     private val mine_user_tv_center_notification_count by R.id.mine_user_tv_center_notification_count.view<TextView>()
@@ -167,7 +167,7 @@ class UserFragment : BaseFragment() {
             }
 
             mine_user_iv_center_notification.setOnSingleClickListener {
-                if (IAccountService::class.impl().getVerifyService().isLogin()) {
+                if (IAccountService::class.impl().isLogin()) {
                     // 消息中心入口点击埋点
                     appCoroutineScope.launch {
                         TrackingUtils.trackClickEvent(ClickEvent.CLICK_YLC_XXZX_ENTRY)
@@ -242,31 +242,7 @@ class UserFragment : BaseFragment() {
                 }
             }
         }
-        viewModel.userCount.observe(viewLifecycleOwner) {
-            it?.let {
-                //可能会出现部分number为负数的情况，客户端需要处理（虽然是后端的锅）
-//                //由于视觉给的字体不是等宽的，其中数字"1"的宽度明显小于其他数字的宽度，要对此进行单独的处理
-//                //基本规则是：基础距离是17dp，非1字体+15dp，1则+12dp
-//                viewModel.setLeftMargin(mine_main_tv_uncheck_comment_count, it.commentCount)
-//                viewModel.setLeftMargin(mine_main_tv_uncheck_praise_count, it.praiseCount)
-                //在这里再请求unChecked的红点仅仅是为了好看，让动画显得更加流畅
-                viewModel.getUserUncheckedCommentCount()
-                viewModel.getUserUncheckedPraiseCount()
-            }
-        }
 
-        viewModel.userUncheckCount.observe(viewLifecycleOwner) {
-            it?.let {
-                it.uncheckPraiseCount?.let { uncheckPraise ->
-                    viewModel.setViewWidthAndText(
-                        mine_user_tv_unchecked_notification_count,
-                        99
-                    )
-
-
-                }
-            }
-        }
         // 消息中心的红点显示逻辑
         viewModel.newNotificationCount.observe(viewLifecycleOwner) { value ->
             if (value == 0) {
@@ -293,22 +269,21 @@ class UserFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        if (IAccountService::class.impl().getVerifyService().isLogin()) {
+        if (IAccountService::class.impl().isLogin()) {
             fetchInfo()
         }
     }
 
     private fun fetchInfo() {
         viewModel.getScoreStatus()
-        viewModel.getUserCount()
         refreshUserLayout()
     }
 
     //刷新和User信息有关的界面
     private fun refreshUserLayout() {
-        val userService = IAccountService::class.impl().getUserService()
-        context?.loadAvatar(userService.getAvatarImgUrl(), mine_user_avatar)
-        mine_user_username.text = userService.getUsername()
+        val userInfo = IAccountService::class.impl().userInfo.value ?: return
+        mine_user_avatar.setAvatarImageFromUrl(userInfo.photoSrc)
+        mine_user_username.text = userInfo.username
     }
 
     override fun onCreateView(
