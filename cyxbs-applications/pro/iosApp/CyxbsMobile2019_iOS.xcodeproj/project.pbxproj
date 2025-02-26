@@ -6436,13 +6436,13 @@
 			buildConfigurationList = 1A9B7693235F50A900725937 /* Build configuration list for PBXNativeTarget "CyxbsMobile2019_iOS" */;
 			buildPhases = (
 				9436D3173DF4AA80557C9E35 /* [CP] Check Pods Manifest.lock */,
+				771FC25E2D6B675F004CD87E /* Compile Compose Multiplatform */,
 				1A9B7663235F50A600725937 /* Sources */,
 				1A9B7664235F50A600725937 /* Frameworks */,
 				1A9B7665235F50A600725937 /* Resources */,
 				9D6DE73ED0B00224C261C76A /* [CP] Copy Pods Resources */,
 				ED9CCCACD34909A5C62007B2 /* [CP] Embed Pods Frameworks */,
 				1476CA2E2AFCD1C100635848 /* Embed Foundation Extensions */,
-				771FC25E2D6B675F004CD87E /* Compile Compose Multiplatform */,
 			);
 			buildRules = (
 			);
