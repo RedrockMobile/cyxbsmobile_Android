@@ -15,7 +15,7 @@ object ModuleDependCheckRule : ProjectChecker.ICheckRule {
   // TODO 用于特殊情况时忽略 api 模块检查，正常情况下就应该依赖 api 模块而不是实现模块
   // 以下模块在依赖其他模块时忽略检查
   private val ignoreRootProjectPaths = setOf<String>(
-    ":cyxbs-pages:home"
+    ":cyxbs-application"
   )
 
   // 以下模块在被依赖时忽略检查
@@ -23,7 +23,7 @@ object ModuleDependCheckRule : ProjectChecker.ICheckRule {
   )
 
   override fun onConfig(project: Project) {
-    if (ignoreRootProjectPaths.contains(project.path)) return
+    if (ignoreRootProjectPaths.any { project.path.startsWith(it) }) return
     val regex = Regex("[Ii]mplementation|[Aa]pi")
     project.afterEvaluate {
       configurations.all {
