@@ -1,4 +1,5 @@
 import org.gradle.kotlin.dsl.get
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import release.CyxbsReleaseTask
 
 plugins {
@@ -8,11 +9,24 @@ plugins {
 
 useKtProvider()
 
+// 测试使用，设置 pro 暂时不依赖的模块
+val excludeList = mutableListOf<String>(
+
+)
+
 kotlin {
   sourceSets {
     commonMain.dependencies {
-      // home 模块去依赖了其他模块，所以这里只依赖 home
-      implementation(projects.cyxbsPages.home)
+      // 根 gradle 中包含的所有子模块
+      project.rootProject.subprojects.filter {
+        it.name !in excludeList
+            && it != project
+            && it.name != "debug" // lib_debug 单独依赖
+            && !it.path.contains("cyxbs-applications")
+            && !it.name.startsWith("cyxbs-")
+      }.forEach {
+        api(it)
+      }
     }
     androidMain.dependencies {
       implementation(libs.bundles.projectBase)
@@ -27,7 +41,23 @@ kotlin {
   }
 }
 
-// 密钥相关
+////////////////////////////////////////  导出 iosMain  /////////////////////////////////////////////
+kotlin {
+  listOf(
+    iosX64(),
+    iosArm64(),
+    iosSimulatorArm64()
+  ).forEach { iosTarget ->
+    NativeBuildType.DEFAULT_BUILD_TYPES.forEach { type ->
+      iosTarget.binaries.getFramework(type).apply {
+        // 这里导出会导出很多东西，增加头文件体积，慎重选择导出的模块，能写在 pro iosMain 就尽量不导出
+//        export(projects.)
+      }
+    }
+  }
+}
+
+//////////////////////////////////////////  密钥相关  ////////////////////////////////////////////////
 val secretGradleFile = rootDir.resolve("build-logic")
   .resolve("secret")
   .resolve("secret.gradle")

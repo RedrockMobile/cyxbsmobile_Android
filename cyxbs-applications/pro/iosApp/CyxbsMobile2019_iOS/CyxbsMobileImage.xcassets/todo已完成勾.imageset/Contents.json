@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Union 36*36黑.png",
+      "filename" : "Union 36x36黑 1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,7 +12,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Union 36*36白.png",
+      "filename" : "Union 36x36白.png",
       "idiom" : "universal",
       "scale" : "1x"
     },

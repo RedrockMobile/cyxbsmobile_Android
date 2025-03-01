@@ -3,27 +3,20 @@ plugins {
   id("kmp.compose")
 }
 
-// 测试使用，设置 module_main 暂时不依赖的模块
-val excludeList = mutableListOf<String>(
-
-)
-
 useKtProvider()
 
 kotlin {
   sourceSets {
     commonMain.dependencies {
-      implementation(libsEx.`kmp-ktorfit`)
-      // 根 gradle 中包含的所有子模块
-      project.rootProject.subprojects.filter {
-        it.name !in excludeList
-            && it != project
-            && it.name != "debug" // lib_debug 单独依赖
-            && !it.path.contains("cyxbs-applications")
-            && !it.name.startsWith("cyxbs-")
-      }.forEach {
-        api(it)
-      }
+      implementation(projects.cyxbsComponents.base)
+      implementation(projects.cyxbsComponents.utils)
+      implementation(projects.cyxbsComponents.config)
+      implementation(projects.cyxbsComponents.account.api)
+      implementation(projects.cyxbsFunctions.update.api)
+      implementation(projects.cyxbsPages.login.api)
+      implementation(projects.cyxbsPages.affair.api)
+      implementation(projects.cyxbsPages.course.api)
+      implementation(libs.kmp.ktorfit)
     }
     // 依赖所有模块
     androidMain.dependencies {

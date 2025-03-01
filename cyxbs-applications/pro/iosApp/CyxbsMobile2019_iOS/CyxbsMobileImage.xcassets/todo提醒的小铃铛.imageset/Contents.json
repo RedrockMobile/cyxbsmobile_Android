@@ -17,7 +17,7 @@
       "scale" : "1x"
     },
     {
-      "filename" : "图标-提醒40*42.png",
+      "filename" : "图标-提醒40x42.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -28,12 +28,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "图标-提醒 深色40*42.png",
+      "filename" : "图标-提醒 深色40x42.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "图标-提醒60*63.png",
+      "filename" : "图标-提醒60x63.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -44,7 +44,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "图标-提醒 深色60*63.png",
+      "filename" : "图标-提醒 深色60x63.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

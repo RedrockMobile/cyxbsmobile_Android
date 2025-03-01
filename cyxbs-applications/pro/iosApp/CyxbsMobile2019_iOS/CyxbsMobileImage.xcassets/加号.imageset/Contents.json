@@ -15,7 +15,7 @@
       "scale" : "1x"
     },
     {
-      "filename" : "Group 148*148.png",
+      "filename" : "Group 148x148.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -26,12 +26,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Group 深色 148*148.png",
+      "filename" : "Group 深色 148x148.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Group 276*276.png",
+      "filename" : "Group 276x276.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -42,7 +42,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Group 深色 276*276.png",
+      "filename" : "Group 深色 276x276.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

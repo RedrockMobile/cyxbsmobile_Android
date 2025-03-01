@@ -1,5 +1,6 @@
 import org.gradle.api.Project
 import org.gradle.internal.extensions.core.extra
+import org.gradle.internal.os.OperatingSystem
 import java.util.Properties
 
 /**
@@ -10,6 +11,7 @@ import java.util.Properties
  */
 object Multiplatform {
   fun enableIOS(project: Project): Boolean {
+    if (!OperatingSystem.current().isMacOsX) return false // 目前只有 Mac 系统才能跑起来
     val key = "cyxbs.multiplatform.ios"
     return (project.localProperties[key] ?: project.rootProject.properties[key]) == "true"
   }

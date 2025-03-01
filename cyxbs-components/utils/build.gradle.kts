@@ -34,7 +34,7 @@ kotlin {
   sourceSets {
     commonMain.dependencies {
       implementation(libs.kmp.ktorfit)
-      api(libs.ktor.core)
+      implementation(libs.ktor.core)
       implementation(libs.ktor.json)
       implementation(libs.ktor.contentNegotiation)
     }

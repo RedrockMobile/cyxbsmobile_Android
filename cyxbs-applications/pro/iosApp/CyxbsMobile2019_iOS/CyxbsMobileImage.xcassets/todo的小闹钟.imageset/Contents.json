@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "图标-重复提醒16*18.png",
+      "filename" : "图标-重复提醒16x18.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,12 +12,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "图标-重复提醒 深色16*18.png",
+      "filename" : "图标-重复提醒 深色16x18.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "图标-重复提醒32*36.png",
+      "filename" : "图标-重复提醒32x36.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -28,12 +28,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "图标-重复提醒 深色32*36.png",
+      "filename" : "图标-重复提醒 深色32x36.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "图标-重复提醒48*53.png",
+      "filename" : "图标-重复提醒48x53.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -44,7 +44,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "图标-重复提醒 深色48*53.png",
+      "filename" : "图标-重复提醒 深色48x53.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
